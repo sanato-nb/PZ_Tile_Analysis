@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_tilesandstone_01_3"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="walls_commercial_01_99"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="furniture_seating_outdoor_01_33"/>
+  <tile tile="blends_streetoverlays_01_3"/>
+  <tile tile="walls_commercial_01_97"/>
+  <tile tile="walls_detailing_01_26"/>
+  <tile tile="walls_commercial_01_96"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="walls_commercial_01_98"/>
+  <tile tile="walls_detailing_01_25"/>
+  <tile tile="walls_detailing_01_90"/>
+  <tile tile="walls_detailing_01_88"/>
+  <tile tile="walls_detailing_01_24"/>
+  <tile tile="walls_detailing_01_27"/>
+  <tile tile="walls_detailing_01_89"/>
+  <tile tile="walls_detailing_01_91"/>
+  <tile tile="furniture_seating_outdoor_01_32"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="industry_trucks_01_39"/>
+  <tile tile="overlay_grime_floor_01_37"/>
+  <tile tile="overlay_grime_floor_01_36"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_empty" InternalName="empty" Color="72 82 136" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,2,3,0,4,
+4,5,0,0,6,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+4,7,8,0,9,
+9,0,0,0,4,
+2,2,2,2,10
+  </tiles>
+  <tiles layer="FloorGrime2">
+11,12,13,0,14,
+15,0,0,0,9,
+7,7,7,7,3
+  </tiles>
+  <tiles layer="FloorFurniture">
+16,17,0,0,15,
+14,0,0,0,14,
+17,17,17,17,13
+  </tiles>
+  <tiles layer="Vegetation">
+18,0,0,0,0,
+19,0,0,0,15,
+12,12,12,12,8
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,20
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+21,21,21,21,0,
+21,21,21,21,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,2,2,22,0,
+4,23,23,22,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+2,0,0,2,0,
+23,0,0,23,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

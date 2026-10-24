@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_shop_greenes_01_25"/>
+  <tile tile="location_military_tent_01_103"/>
+  <tile tile="location_military_tent_01_102"/>
+  <tile tile="walls_commercial_02_3"/>
+  <tile tile="location_military_tent_01_101"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="location_military_tent_01_104"/>
+  <tile tile="location_military_tent_01_88"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_grocery" InternalName="grocery" Color="69 190 184" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1
+  </rooms>
+  <tiles layer="FloorOverlay">
+0,0,0,1,0,
+0,0,2,3,4
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,
+0,2,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,0,
+4,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,0,
+5,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+6,6,6,6,7,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+7,8,8,8,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+8,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

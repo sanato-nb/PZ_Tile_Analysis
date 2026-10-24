@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_burnt_01_0"/>
+  <tile tile="walls_burnt_01_15"/>
+  <tile tile="fencing_damaged_01_136"/>
+  <tile tile="walls_burnt_01_1"/>
+  <tile tile="floors_burnt_01_26"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="walls_burnt_01_5"/>
+  <tile tile="walls_burnt_01_0"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="roofs_01_7"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_derelict" InternalName="derelict" Color="191 83 171" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,2,3,4,5,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,6,7,6,8,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,6,0,9,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,10,
+0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

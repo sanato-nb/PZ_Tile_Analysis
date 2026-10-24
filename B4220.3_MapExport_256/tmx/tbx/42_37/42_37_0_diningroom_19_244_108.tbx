@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="8" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_46"/>
+  <tile tile="floors_interior_carpet_01_45"/>
+  <tile tile="floors_interior_carpet_01_40"/>
+  <tile tile="floors_rugs_01_72"/>
+  <tile tile="floors_rugs_01_77"/>
+  <tile tile="floors_rugs_01_73"/>
+  <tile tile="floors_rugs_01_78"/>
+  <tile tile="floors_rugs_01_76"/>
+  <tile tile="floors_rugs_01_79"/>
+  <tile tile="walls_interior_house_04_80"/>
+  <tile tile="walls_interior_house_01_54"/>
+  <tile tile="walls_interior_house_01_63"/>
+  <tile tile="walls_interior_house_01_53"/>
+  <tile tile="walls_interior_house_01_86"/>
+  <tile tile="walls_interior_house_01_95"/>
+  <tile tile="walls_interior_house_01_85"/>
+  <tile tile="walls_exterior_house_01_48"/>
+  <tile tile="walls_interior_house_04_83"/>
+  <tile tile="walls_interior_house_04_81"/>
+  <tile tile="walls_interior_house_15_71"/>
+  <tile tile="walls_exterior_house_01_58"/>
+  <tile tile="walls_interior_house_15_68"/>
+  <tile tile="walls_interior_detailing_01_36"/>
+  <tile tile="walls_interior_detailing_01_38"/>
+  <tile tile="walls_interior_detailing_01_47"/>
+  <tile tile="walls_interior_detailing_01_37"/>
+  <tile tile="lighting_indoor_01_0"/>
+  <tile tile="fixtures_doors_frames_01_9"/>
+  <tile tile="rooftop_furniture_51"/>
+  <tile tile="walls_commercial_03_80"/>
+  <tile tile="walls_interior_detailing_01_39"/>
+  <tile tile="overlay_grime_wall_01_10"/>
+  <tile tile="rooftop_furniture_50"/>
+  <tile tile="furniture_storage_01_37"/>
+  <tile tile="fixtures_doors_01_5"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="walls_interior_house_15_70"/>
+  <tile tile="location_community_church_small_01_23"/>
+  <tile tile="walls_interior_house_15_69"/>
+  <tile tile="fixtures_doors_frames_01_8"/>
+  <tile tile="furniture_storage_02_41"/>
+  <tile tile="industry_02_198"/>
+  <tile tile="fixtures_doors_02_4"/>
+  <tile tile="industry_02_207"/>
+  <tile tile="roofs_accents_01_22"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_30_08_48"/>
+  <tile tile="roofs_30_08_17"/>
+  <tile tile="roofs_30_08_18"/>
+  <tile tile="roofs_30_08_19"/>
+  <tile tile="roofs_30_08_10"/>
+  <tile tile="roofs_30_08_11"/>
+  <tile tile="roofs_30_08_12"/>
+  <tile tile="roofs_30_08_13"/>
+  <tile tile="roofs_30_08_28"/>
+  <tile tile="roofs_30_08_49"/>
+  <tile tile="roofs_30_08_27"/>
+  <tile tile="roofs_30_08_50"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_diningroom" InternalName="diningroom" Color="188 175 71" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,1,1,1,0,
+1,1,2,2,2,3,3,3,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,5,5,5,5,5,5,6,0,
+7,8,8,8,8,8,8,9,0,
+10,0,11,12,13,14,15,16,17
+  </tiles>
+  <tiles layer="FloorGrime">
+18,0,0,0,19,18,20,19,21,
+22,0,0,0,0,0,0,0,17,
+23,0,24,25,26,27,28,29,30
+  </tiles>
+  <tiles layer="FloorGrime2">
+31,0,0,0,26,31,0,26,32,
+0,0,0,0,0,0,0,0,30,
+33,0,27,28,29,34,35,0,36
+  </tiles>
+  <tiles layer="FloorFurniture">
+37,0,0,0,38,39,0,0,40,
+0,0,0,0,0,0,0,0,36,
+0,0,41,35,0,0,0,0,42
+  </tiles>
+  <tiles layer="Vegetation">
+0,0,0,0,0,0,0,0,43,
+0,0,0,0,0,0,0,0,44,
+0,0,0,0,0,0,0,0,45
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,0,0,0,0,0,45,
+0,0,0,0,0,0,0,0,45,
+0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+46,46,46,46,46,46,46,46,0,
+46,46,46,46,46,46,46,46,0,
+46,46,46,46,46,46,46,46,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+47,48,49,50,51,52,53,54,0,
+55,56,49,50,51,52,53,54,0,
+57,57,58,50,51,52,53,54,0
+  </tiles>
+ </floor>
+</building>

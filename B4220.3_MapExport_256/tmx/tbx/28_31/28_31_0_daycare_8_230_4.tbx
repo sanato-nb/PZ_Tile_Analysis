@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floor_carpet_motif_7"/>
+  <tile tile="floors_interior_carpet_01_2"/>
+  <tile tile="walls_interior_house_02_32"/>
+  <tile tile="furniture_tables_low_01_1"/>
+  <tile tile="lighting_indoor_03_20"/>
+  <tile tile="walls_interior_house_04_34"/>
+  <tile tile="furniture_tables_low_01_0"/>
+  <tile tile="lighting_indoor_03_21"/>
+  <tile tile="walls_interior_house_02_33"/>
+  <tile tile="walls_interior_detailing_01_4"/>
+  <tile tile="walls_interior_detailing_01_6"/>
+  <tile tile="walls_interior_detailing_01_5"/>
+  <tile tile="walls_decoration_05_197"/>
+  <tile tile="walls_decoration_02_166"/>
+  <tile tile="walls_decoration_02_94"/>
+  <tile tile="furniture_seating_indoor_02_17"/>
+  <tile tile="furniture_seating_indoor_02_16"/>
+  <tile tile="furniture_seating_indoor_02_5"/>
+  <tile tile="roofs_02_22"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_daycare" InternalName="daycare" Color="156 108 115" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,2,
+1,1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,5,0,6,
+3,7,8,0,9
+  </tiles>
+  <tiles layer="FloorGrime">
+10,0,0,0,11,
+10,0,0,0,12
+  </tiles>
+  <tiles layer="FloorGrime2">
+13,0,0,0,0,
+14,0,0,0,15
+  </tiles>
+  <tiles layer="FloorFurniture">
+16,0,0,0,0,
+17,0,0,0,18
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+19,19,19,19,19,
+19,19,19,19,19
+  </tiles>
+ </floor>
+</building>

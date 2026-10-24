@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="carpentry_02_56"/>
+  <tile tile="fixtures_railings_01_34"/>
+  <tile tile="fixtures_railings_01_35"/>
+  <tile tile="camping_01_9"/>
+  <tile tile="walls_decoration_01_67"/>
+  <tile tile="camping_01_8"/>
+  <tile tile="walls_decoration_01_66"/>
+  <tile tile="walls_decoration_01_64"/>
+  <tile tile="walls_decoration_01_65"/>
+  <tile tile="ceilings_01_0"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_kitchen" InternalName="kitchen" Color="158 139 162" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,0,
+1,1,0,
+1,1,0,
+1,1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,0,
+3,4,0,
+5,6,0,
+7,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+8,9,0,
+7,0,0,
+0,0,0,
+0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+5,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+10,10,0,
+10,10,0,
+10,10,0,
+10,10,0
+  </tiles>
+ </floor>
+</building>

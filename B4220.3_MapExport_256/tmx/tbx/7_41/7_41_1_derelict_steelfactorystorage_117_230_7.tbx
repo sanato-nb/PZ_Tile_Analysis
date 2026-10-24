@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="blends_street_01_53"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="walls_exterior_house_01_54"/>
+  <tile tile="walls_exterior_house_01_53"/>
+  <tile tile="walls_exterior_house_01_52"/>
+  <tile tile="walls_exterior_house_01_55"/>
+  <tile tile="industry_02_245"/>
+  <tile tile="industry_02_236"/>
+  <tile tile="industry_01_37"/>
+  <tile tile="industry_02_243"/>
+  <tile tile="industry_02_238"/>
+  <tile tile="fixtures_railings_01_49"/>
+  <tile tile="blends_street_01_38"/>
+  <tile tile="blends_street_01_37"/>
+  <tile tile="blends_street_01_32"/>
+  <tile tile="blends_street_01_39"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_derelict_steelfactorystorage" InternalName="derelict_steelfactorystorage" Color="107 163 184" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,2,1,3,
+2,1,1,3,
+1,4,1,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,6,6,5,
+7,0,0,7,
+6,6,6,8
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+9,10,10,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,
+0,0,0,0,
+0,9,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+11,11,11,11,
+11,11,11,11,
+6,6,6,8
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,6,6,5,
+7,0,0,7,
+12,13,13,14
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+0,12,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+7,0,0,11,
+7,0,0,11,
+6,6,6,8
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,5,
+0,0,0,7,
+12,13,13,14
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+0,12,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+15,16,17,17,
+17,17,16,17,
+17,18,18,15
+  </tiles>
+ </floor>
+</building>

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_42"/>
+  <tile tile="floors_exterior_tilesandstone_01_5"/>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="street_curbs_01_1"/>
+  <tile tile="walls_interior_house_03_21"/>
+  <tile tile="walls_exterior_house_02_0"/>
+  <tile tile="walls_garage_01_33"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="furniture_shelving_01_30"/>
+  <tile tile="walls_commercial_01_112"/>
+  <tile tile="roofs_01_99"/>
+  <tile tile="roofs_02_7"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_02_5"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_sewingroom" InternalName="sewingroom" Color="71 79 147" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+1,2,
+3,3
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,5,
+4,4
+  </tiles>
+  <tiles layer="FloorGrime">
+6,7,
+8,8
+  </tiles>
+  <tiles layer="FloorGrime2">
+9,10,
+11,11
+  </tiles>
+  <tiles layer="FloorFurniture">
+12,0,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1
+  </rooms>
+  <tiles layer="Floor">
+1,13,
+1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,14,
+0,4
+  </tiles>
+  <tiles layer="FloorGrime">
+6,15,
+0,6
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+16,0,
+16,16
+  </tiles>
+  <tiles layer="FloorOverlay">
+17,0,
+17,0
+  </tiles>
+ </floor>
+</building>

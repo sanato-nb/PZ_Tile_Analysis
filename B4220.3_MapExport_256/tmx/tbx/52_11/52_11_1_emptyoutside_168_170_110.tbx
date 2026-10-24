@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="5" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="blends_street_01_53"/>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="walls_commercial_02_3"/>
+  <tile tile="furniture_tables_high_01_49"/>
+  <tile tile="furniture_tables_high_01_48"/>
+  <tile tile="location_military_tent_01_32"/>
+  <tile tile="appliances_cooking_01_38"/>
+  <tile tile="location_military_tent_01_33"/>
+  <tile tile="fencing_01_88"/>
+  <tile tile="fencing_01_89"/>
+  <tile tile="location_military_tent_01_34"/>
+  <tile tile="location_military_tent_01_48"/>
+  <tile tile="location_military_tent_01_49"/>
+  <tile tile="location_military_tent_01_52"/>
+  <tile tile="location_military_tent_01_53"/>
+  <tile tile="location_military_tent_01_16"/>
+  <tile tile="location_military_tent_01_22"/>
+  <tile tile="location_military_tent_01_23"/>
+  <tile tile="location_military_tent_01_21"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_emptyoutside" InternalName="emptyoutside" Color="66 181 172" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,2,2,2,2,
+2,2,3,2,1,
+4,3,2,3,2,
+4,4,3,4,1,
+1,1,3,3,2,
+2,1,4,3,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,0,0,0,5,
+0,0,0,0,6,
+0,0,0,0,7,
+0,0,0,0,8,
+0,9,9,0,10,
+5,11,12,11,5
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,13,
+0,0,0,0,8,
+0,0,0,0,8,
+0,0,0,0,0,
+0,0,0,0,0,
+12,0,0,0,12
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+14,15,16,17,0,
+18,19,20,21,0,
+18,19,20,21,0,
+18,19,20,21,0,
+18,19,20,21,0,
+14,15,16,17,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+18,19,20,21,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

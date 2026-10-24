@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="9" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_restaurant_pizzawhirled_01_16"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="location_restaurant_pizzawhirled_01_46"/>
+  <tile tile="location_restaurant_pizzawhirled_01_47"/>
+  <tile tile="furniture_seating_indoor_01_54"/>
+  <tile tile="location_restaurant_pizzawhirled_01_44"/>
+  <tile tile="location_restaurant_pizzawhirled_01_45"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="furniture_seating_indoor_01_53"/>
+  <tile tile="location_restaurant_pizzawhirled_01_49"/>
+  <tile tile="furniture_seating_indoor_01_52"/>
+  <tile tile="location_restaurant_pizzawhirled_01_50"/>
+  <tile tile="location_restaurant_pizzawhirled_01_51"/>
+  <tile tile="location_restaurant_pie_01_0"/>
+  <tile tile="walls_commercial_01_112"/>
+  <tile tile="location_restaurant_pie_01_3"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="location_restaurant_pizzawhirled_01_4"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="location_restaurant_pizzawhirled_01_18"/>
+  <tile tile="overlay_grime_wall_01_40"/>
+  <tile tile="floors_exterior_street_01_16"/>
+  <tile tile="fixtures_railings_01_112"/>
+  <tile tile="walls_commercial_03_60"/>
+  <tile tile="overlay_grime_floor_01_13"/>
+  <tile tile="overlay_grime_floor_01_14"/>
+  <tile tile="location_restaurant_pizzawhirled_01_31"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_pizzawhirled" InternalName="pizzawhirled" Color="153 111 184" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,1,1,1,1,2,
+1,1,1,1,1,1,1,1,1,3,
+1,1,1,1,1,1,1,1,1,4
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,0,0,0,0,0,0,6,7,5,
+5,0,0,8,0,0,0,9,10,5,
+11,0,12,13,14,0,0,15,16,5
+  </tiles>
+  <tiles layer="FloorGrime">
+17,0,0,0,0,0,0,0,0,18,
+17,0,0,0,0,0,0,0,0,18,
+19,0,0,0,0,0,0,0,0,18
+  </tiles>
+  <tiles layer="FloorGrime2">
+20,0,0,0,0,0,0,0,0,21,
+20,0,0,0,0,0,0,0,0,21,
+22,0,0,0,0,0,0,0,0,21
+  </tiles>
+  <tiles layer="FloorFurniture">
+23,0,0,0,0,0,0,0,0,24,
+23,0,0,0,0,0,0,0,0,24,
+0,0,0,0,0,0,0,0,0,24
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+25,25,25,25,25,25,25,25,25,26,
+25,25,25,25,25,25,25,25,25,26,
+25,25,25,25,25,25,25,25,25,26
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,0,0,0,0,0,27,
+28,29,0,0,0,0,0,0,0,27,
+0,0,0,0,0,0,0,0,0,27
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,30
+  </tiles>
+ </floor>
+</building>

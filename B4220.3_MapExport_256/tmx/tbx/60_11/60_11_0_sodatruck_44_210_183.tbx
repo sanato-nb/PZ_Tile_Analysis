@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="8" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_street_01_0"/>
+  <tile tile="street_trafficlines_01_25"/>
+  <tile tile="street_trafficlines_01_27"/>
+  <tile tile="street_trafficlines_01_24"/>
+  <tile tile="street_trafficlines_01_28"/>
+  <tile tile="street_trafficlines_01_31"/>
+  <tile tile="street_trafficlines_01_29"/>
+  <tile tile="furniture_storage_02_17"/>
+  <tile tile="furniture_storage_02_18"/>
+  <tile tile="furniture_storage_02_16"/>
+  <tile tile="furniture_storage_02_19"/>
+  <tile tile="furniture_storage_02_26"/>
+  <tile tile="furniture_storage_02_27"/>
+  <tile tile="industry_01_1"/>
+  <tile tile="roofs_04_54"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_sodatruck" InternalName="sodatruck" Color="98 144 171" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1,
+1,1,
+1,1,
+1,1,
+1,1,
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,0,
+4,5,0,
+4,5,0,
+4,5,0,
+4,5,0,
+4,5,0,
+4,5,0,
+6,7,0,
+0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,8,0,
+9,10,0,
+8,11,0,
+10,9,0,
+11,0,0,
+10,0,0,
+9,8,0,
+11,0,0,
+0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,
+0,0,0,
+12,13,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0,
+0,0,
+0,0,
+0,0,
+0,0,
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+14,14,14,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0,
+0,0,
+0,0,
+0,0,
+0,0,
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+15,15,15,
+15,15,15,
+15,15,15,
+15,15,15,
+15,15,15,
+15,15,15,
+15,15,15,
+15,15,15,
+15,15,15
+  </tiles>
+ </floor>
+</building>

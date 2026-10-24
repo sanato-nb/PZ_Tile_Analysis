@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="20" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_carpet_01_13"/>
+  <tile tile="floors_interior_tilesandwood_01_18"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="furniture_tables_high_01_32"/>
+  <tile tile="location_restaurant_pizzawhirled_01_42"/>
+  <tile tile="walls_exterior_wooden_01_24"/>
+  <tile tile="furniture_seating_indoor_02_5"/>
+  <tile tile="walls_exterior_wooden_01_27"/>
+  <tile tile="furniture_seating_indoor_02_4"/>
+  <tile tile="furniture_tables_high_01_34"/>
+  <tile tile="furniture_tables_high_01_35"/>
+  <tile tile="furniture_seating_indoor_02_6"/>
+  <tile tile="walls_commercial_01_41"/>
+  <tile tile="walls_exterior_wooden_01_25"/>
+  <tile tile="walls_interior_house_04_33"/>
+  <tile tile="walls_interior_detailing_01_32"/>
+  <tile tile="walls_interior_house_02_48"/>
+  <tile tile="walls_commercial_01_40"/>
+  <tile tile="walls_interior_detailing_01_35"/>
+  <tile tile="walls_exterior_wooden_01_26"/>
+  <tile tile="walls_interior_detailing_01_33"/>
+  <tile tile="walls_interior_house_02_50"/>
+  <tile tile="location_restaurant_pizzawhirled_01_40"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="walls_interior_detailing_01_34"/>
+  <tile tile="furniture_tables_high_01_33"/>
+  <tile tile="location_restaurant_pizzawhirled_01_43"/>
+  <tile tile="walls_decoration_01_44"/>
+  <tile tile="walls_decoration_01_45"/>
+  <tile tile="vegetation_indoor_01_7"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="furniture_tables_high_01_25"/>
+  <tile tile="location_business_office_generic_01_15"/>
+  <tile tile="location_restaurant_pizzawhirled_01_41"/>
+  <tile tile="location_business_office_generic_01_17"/>
+  <tile tile="appliances_com_01_73"/>
+  <tile tile="furniture_tables_high_01_24"/>
+  <tile tile="lighting_indoor_02_13"/>
+  <tile tile="walls_interior_house_04_34"/>
+  <tile tile="walls_interior_house_04_32"/>
+  <tile tile="roofs_02_103"/>
+  <tile tile="walls_exterior_roofs_02_64"/>
+  <tile tile="roofs_accents_01_17"/>
+  <tile tile="roofs_accents_01_19"/>
+  <tile tile="roofs_02_102"/>
+  <tile tile="walls_exterior_roofs_02_65"/>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="trash_01_1"/>
+  <tile tile="overlay_grime_floor_01_17"/>
+  <tile tile="overlay_grime_floor_01_18"/>
+  <tile tile="rooftop_furniture_1"/>
+  <tile tile="rooftop_furniture_12"/>
+  <tile tile="overlay_grime_floor_01_16"/>
+  <tile tile="overlay_grime_floor_01_19"/>
+  <tile tile="walls_detailing_01_89"/>
+  <tile tile="overlay_grime_floor_01_15"/>
+  <tile tile="walls_detailing_01_88"/>
+  <tile tile="rooftop_furniture_15"/>
+  <tile tile="walls_detailing_01_91"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_restaurantdining" InternalName="restaurantdining" Color="116 150 76" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,
+3,5,6,7,5,6,7,5,6,7,5,6,7,0,8,8,8,8,0,0,3,
+3,0,0,9,0,0,9,0,0,9,0,0,9,10,11,12,11,12,13,0,3,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+4,14,15,15,14,15,15,14,15,15,14,15,16,14,14,16,16,14,14,16,4,
+7,0,0,17,0,0,17,0,0,17,0,0,17,0,0,0,0,0,0,0,18,
+19,0,0,20,0,0,20,0,0,20,0,0,20,0,0,0,0,0,0,0,18,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+21,22,22,7,22,22,7,22,22,7,22,22,7,22,22,22,22,22,22,22,23,
+17,0,0,24,0,0,24,0,0,24,0,0,0,0,0,0,0,0,0,0,25,
+17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+26,27,28,26,27,28,26,27,28,26,27,28,26,0,0,29,30,0,0,31,32,
+24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+35,0,0,35,0,0,35,0,0,35,0,0,31,0,0,0,0,0,0,0,36,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,37,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,38,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+40,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,23,
+41,42,42,43,42,42,43,42,42,43,42,42,43,0,0,0,0,0,0,0,18,
+41,44,44,44,44,44,44,44,44,44,44,44,45,0,0,0,0,0,0,0,18,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+46,46,46,47,46,46,47,46,46,47,46,46,47,0,0,0,0,0,0,0,0,
+42,0,0,42,0,0,42,0,0,42,0,0,0,0,0,0,0,0,0,0,0,
+44,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,46,0,0,46,0,0,46,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,
+48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,
+48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+3,0,0,0,0,0,0,0,49,0,0,0,0,0,0,0,0,50,51,0,0,
+3,0,52,53,0,0,0,0,0,0,0,0,0,0,0,0,0,54,55,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+4,56,56,56,56,56,57,56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+58,0,59,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,53,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+60,0,0,0,0,0,56,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,59,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

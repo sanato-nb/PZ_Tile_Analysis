@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_street_01_0"/>
+  <tile tile="floors_interior_tilesandwood_01_14"/>
+  <tile tile="walls_garage_01_38"/>
+  <tile tile="walls_garage_01_37"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="walls_garage_01_36"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="walls_interior_house_04_83"/>
+  <tile tile="fixtures_escalators_01_51"/>
+  <tile tile="walls_interior_house_04_80"/>
+  <tile tile="walls_interior_house_04_81"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="walls_interior_house_04_82"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="fixtures_escalators_01_50"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="fixtures_escalators_01_57"/>
+  <tile tile="fixtures_railings_01_116"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="walls_exterior_house_02_48"/>
+  <tile tile="roofs_accents_01_17"/>
+  <tile tile="roofs_shallow_01_100"/>
+  <tile tile="walls_exterior_house_low_01_73"/>
+  <tile tile="location_entertainment_theatre_01_154"/>
+  <tile tile="walls_exterior_house_low_01_72"/>
+  <tile tile="walls_exterior_house_low_01_88"/>
+  <tile tile="overlay_grime_floor_01_22"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="3_elevator" InternalName="elevator" Color="126 127 164" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+1,1,1,2,
+2,2,2,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,5,
+6,0,0,5,
+7,8,9,8
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,7,
+0,0,0,10,
+11,12,0,12
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,13,
+0,0,0,14,
+15,16,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,17,
+0,0,0,0,
+18,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,13,
+1,1,1,10,
+2,2,2,8
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,0,
+6,0,0,0,
+7,8,9,19
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+11,12,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,
+0,0,0,0,
+15,16,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,
+0,0,0,0,
+18,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,13,
+1,1,1,10,
+2,2,2,8
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,0,
+6,0,0,0,
+7,8,9,19
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+11,20,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,
+0,0,0,0,
+21,16,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,
+0,0,0,0,
+18,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,22,
+1,1,1,22,
+2,2,2,23
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,5,
+6,0,0,5,
+7,8,9,24
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,7,
+0,0,0,23,
+11,20,0,25
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,23,
+0,0,0,0,
+21,16,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,26,
+0,0,0,0,
+18,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,23,
+1,1,1,23,
+11,11,11,23
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,0,
+6,0,0,0,
+27,27,27,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,28,
+1,1,1,28,
+1,1,1,29
+  </tiles>
+  <tiles layer="FloorOverlay">
+7,7,7,0,
+30,0,0,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+26,26,26,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

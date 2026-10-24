@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="industry_railroad_05_45"/>
+  <tile tile="blends_natural_02_6"/>
+  <tile tile="fixtures_doors_frames_01_32"/>
+  <tile tile="location_community_park_01_29"/>
+  <tile tile="location_trailer_01_17"/>
+  <tile tile="walls_logs_96"/>
+  <tile tile="location_community_church_small_01_68"/>
+  <tile tile="carpentry_03_7"/>
+  <tile tile="crafted_05_51"/>
+  <tile tile="fencing_01_121"/>
+  <tile tile="carpentry_03_18"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_01_0"/>
+  <tile tile="walls_exterior_roofs_06_24"/>
+  <tile tile="walls_exterior_wooden_01_28"/>
+  <tile tile="roofs_01_11"/>
+  <tile tile="roofs_01_5"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_emptyoutside" InternalName="emptyoutside" Color="72 70 161" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+1,1,1,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,0,4,5,
+6,0,4,5
+  </tiles>
+  <tiles layer="FloorGrime">
+7,0,8,0,
+9,0,0,10
+  </tiles>
+  <tiles layer="FloorGrime2">
+11,0,0,0,
+11,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+12,13,13,14,
+12,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+15,0,0,0,
+15,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+16,0,0,0,
+17,0,0,0
+  </tiles>
+ </floor>
+</building>

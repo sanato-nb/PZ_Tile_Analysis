@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="7" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_48"/>
+  <tile tile="location_shop_generic_01_102"/>
+  <tile tile="location_shop_generic_01_15"/>
+  <tile tile="location_shop_generic_01_14"/>
+  <tile tile="location_shop_generic_01_96"/>
+  <tile tile="location_shop_generic_01_13"/>
+  <tile tile="location_shop_generic_01_12"/>
+  <tile tile="location_shop_generic_01_76"/>
+  <tile tile="location_shop_generic_01_77"/>
+  <tile tile="walls_commercial_03_49"/>
+  <tile tile="walls_exterior_house_02_17"/>
+  <tile tile="walls_exterior_house_02_19"/>
+  <tile tile="walls_exterior_house_02_16"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="location_hospitality_sunstarmotel_01_57"/>
+  <tile tile="walls_commercial_01_41"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="furniture_bedding_01_15"/>
+  <tile tile="furniture_bedding_01_13"/>
+  <tile tile="walls_interior_house_04_94"/>
+  <tile tile="lighting_indoor_01_2"/>
+  <tile tile="furniture_storage_01_15"/>
+  <tile tile="walls_commercial_02_41"/>
+  <tile tile="walls_interior_house_04_85"/>
+  <tile tile="walls_interior_house_04_84"/>
+  <tile tile="walls_interior_detailing_01_14"/>
+  <tile tile="walls_interior_house_04_86"/>
+  <tile tile="walls_interior_detailing_01_5"/>
+  <tile tile="walls_interior_detailing_01_4"/>
+  <tile tile="fixtures_doors_frames_01_0"/>
+  <tile tile="walls_interior_detailing_01_6"/>
+  <tile tile="walls_decoration_01_9"/>
+  <tile tile="furniture_bedding_01_14"/>
+  <tile tile="furniture_bedding_01_12"/>
+  <tile tile="walls_decoration_01_6"/>
+  <tile tile="furniture_tables_low_01_3"/>
+  <tile tile="furniture_storage_01_37"/>
+  <tile tile="fixtures_doors_01_0"/>
+  <tile tile="furniture_storage_01_36"/>
+  <tile tile="vegetation_indoor_01_7"/>
+  <tile tile="roofs_05_38"/>
+  <tile tile="roofs_05_53"/>
+  <tile tile="roofs_05_52"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_05_122"/>
+  <tile tile="roofs_05_43"/>
+  <tile tile="roofs_05_32"/>
+  <tile tile="roofs_05_40"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_motelroom" InternalName="motelroom" Color="155 177 68" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,0,
+2,0,0,3,0,
+0,0,0,4,0,
+5,0,0,6,0,
+0,0,0,7,0,
+0,0,0,0,0,
+8,9,0,0,10,
+11,11,11,11,12
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,13,
+14,14,14,14,15
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,16,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,14,
+0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,10,
+11,18,18,11,12
+  </tiles>
+  <tiles layer="FloorOverlay">
+19,20,20,20,19,
+19,21,0,0,19,
+19,22,0,0,19,
+19,0,0,0,19,
+19,0,0,0,23,
+19,0,0,24,19,
+19,0,0,25,13,
+0,26,26,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+20,27,27,27,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,29,
+28,0,0,0,28,
+28,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+30,31,31,31,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,33,
+32,0,0,0,32,
+32,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+34,0,35,0,0,
+36,0,0,0,0,
+37,0,0,0,38,
+39,0,0,0,0,
+40,0,0,0,41,
+42,0,0,0,43,
+43,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+39,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,10,
+11,18,18,11,12
+  </tiles>
+  <tiles layer="FloorOverlay">
+19,20,20,20,19,
+19,21,0,0,19,
+19,22,0,0,19,
+19,0,0,0,19,
+19,0,0,0,23,
+19,0,0,24,19,
+19,0,0,25,13,
+0,26,26,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+20,27,27,27,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,29,
+28,0,0,0,28,
+28,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+30,31,31,31,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,33,
+32,0,0,0,32,
+32,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+34,0,35,0,0,
+36,0,0,0,0,
+37,0,0,0,38,
+39,0,0,0,0,
+40,0,0,0,41,
+42,0,0,0,43,
+43,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+39,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,10,
+11,18,18,11,12
+  </tiles>
+  <tiles layer="FloorOverlay">
+19,20,20,20,19,
+19,21,0,0,19,
+19,22,0,0,19,
+19,0,0,0,19,
+19,0,0,0,23,
+19,0,0,24,19,
+19,0,0,25,13,
+0,26,26,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+20,27,27,27,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,29,
+28,0,0,0,28,
+28,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+30,31,31,31,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,33,
+32,0,0,0,32,
+32,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+34,0,35,0,0,
+36,0,0,0,0,
+37,0,0,0,38,
+39,0,0,0,0,
+40,0,0,0,41,
+42,0,0,0,43,
+43,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+39,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,17,
+17,17,17,17,10,
+11,18,18,11,12
+  </tiles>
+  <tiles layer="FloorOverlay">
+19,20,20,20,19,
+19,21,0,0,19,
+19,22,0,0,19,
+19,0,0,0,19,
+19,0,0,0,23,
+19,0,0,24,19,
+19,0,0,25,13,
+44,26,26,44,45
+  </tiles>
+  <tiles layer="FloorGrime">
+20,27,27,27,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,28,
+28,0,0,0,29,
+28,0,0,0,28,
+28,0,0,0,46,
+0,44,44,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+30,31,31,31,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,32,
+32,0,0,0,33,
+32,0,0,0,32,
+32,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+34,0,35,0,0,
+36,0,0,0,0,
+37,0,0,0,38,
+39,0,0,0,0,
+40,0,0,0,41,
+42,0,0,0,43,
+43,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+39,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+47,47,47,47,47,
+47,47,47,47,47,
+47,47,47,47,47,
+47,47,47,47,47,
+47,47,47,47,47,
+47,47,47,47,47,
+47,47,47,47,0,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+48,48,48,48,48,
+48,48,48,48,48,
+48,48,48,48,48,
+48,48,48,48,48,
+48,48,48,48,48,
+48,48,48,49,50,
+50,50,50,51,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

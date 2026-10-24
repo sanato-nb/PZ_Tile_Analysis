@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="5" height="5" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_17"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="location_trailer_01_21"/>
+  <tile tile="location_trailer_01_17"/>
+  <tile tile="fixtures_counters_01_73"/>
+  <tile tile="fixtures_counters_01_65"/>
+  <tile tile="location_trailer_01_18"/>
+  <tile tile="walls_exterior_wooden_01_25"/>
+  <tile tile="walls_interior_house_03_21"/>
+  <tile tile="walls_interior_house_01_48"/>
+  <tile tile="walls_interior_house_03_20"/>
+  <tile tile="walls_interior_house_03_30"/>
+  <tile tile="location_trailer_01_22"/>
+  <tile tile="roofs_04_38"/>
+  <tile tile="roofs_03_38"/>
+  <tile tile="location_trailer_01_20"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="walls_interior_house_01_51"/>
+  <tile tile="roofs_03_39"/>
+  <tile tile="location_restaurant_bar_01_26"/>
+  <tile tile="overlay_grime_wall_01_26"/>
+  <tile tile="fixtures_counters_01_67"/>
+  <tile tile="fixtures_counters_01_75"/>
+  <tile tile="roofs_04_39"/>
+  <tile tile="fixtures_counters_01_66"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="lighting_indoor_01_1"/>
+  <tile tile="fixtures_doors_01_56"/>
+  <tile tile="location_shop_accessories_01_0"/>
+  <tile tile="roofs_03_53"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_03_61"/>
+  <tile tile="roofs_04_48"/>
+  <tile tile="roofs_03_122"/>
+  <tile tile="roofs_04_37"/>
+  <tile tile="roofs_03_37"/>
+  <tile tile="roofs_03_56"/>
+  <tile tile="roofs_04_32"/>
+  <tile tile="roofs_03_32"/>
+  <tile tile="roofs_03_40"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_dartgame" InternalName="dartgame" Color="182 87 190" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,3,3,3,4,
+2,0,0,0,0,5,
+2,0,0,0,0,5,
+2,0,0,0,0,5,
+2,6,7,6,7,5,
+0,8,0,8,8,0
+  </tiles>
+  <tiles layer="FloorGrime">
+3,9,9,9,10,11,
+12,0,0,0,0,13,
+11,0,0,0,0,11,
+12,0,0,0,0,12,
+11,0,0,0,0,11,
+14,15,8,15,16,17
+  </tiles>
+  <tiles layer="FloorGrime2">
+11,18,18,18,18,19,
+19,0,0,0,0,13,
+19,0,0,0,0,19,
+19,0,0,0,0,19,
+19,0,0,0,0,19,
+20,0,16,0,0,20
+  </tiles>
+  <tiles layer="FloorFurniture">
+10,0,0,0,0,21,
+22,0,0,0,0,23,
+24,0,0,0,0,21,
+25,0,0,0,0,26,
+27,0,0,0,0,21,
+28,0,0,0,0,28
+  </tiles>
+  <tiles layer="Vegetation">
+19,0,0,0,0,0,
+29,0,0,0,0,30,
+31,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+16,0,0,0,0,32
+  </tiles>
+  <tiles layer="Walls">
+18,0,0,0,0,0,
+0,0,0,0,0,26,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+33,33,33,33,33,0,
+33,33,33,33,33,0,
+33,33,33,33,33,0,
+33,33,33,33,33,0,
+33,33,33,33,33,0,
+0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,34,0,
+0,35,36,35,37,0,
+0,36,36,36,38,0,
+0,35,36,35,37,0,
+39,40,41,40,42,0,
+0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

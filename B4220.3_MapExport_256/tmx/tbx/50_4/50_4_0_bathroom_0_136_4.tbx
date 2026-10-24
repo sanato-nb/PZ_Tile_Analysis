@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_21"/>
+  <tile tile="floors_exterior_tilesandstone_01_6"/>
+  <tile tile="walls_exterior_house_02_11"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="location_hospitality_sunstarmotel_02_19"/>
+  <tile tile="overlay_grime_wall_01_27"/>
+  <tile tile="walls_exterior_house_02_1"/>
+  <tile tile="walls_exterior_house_02_48"/>
+  <tile tile="location_hospitality_sunstarmotel_02_8"/>
+  <tile tile="fixtures_doors_02_13"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="fixtures_doors_02_21"/>
+  <tile tile="lighting_indoor_01_4"/>
+  <tile tile="lighting_indoor_01_1"/>
+  <tile tile="floors_interior_tilesandwood_01_49"/>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="walls_exterior_house_low_01_72"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_bathroom" InternalName="bathroom" Color="113 174 89" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,2,
+1,1,2,
+1,1,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,5,
+0,0,5,
+6,5,5
+  </tiles>
+  <tiles layer="FloorGrime">
+7,8,9,
+0,0,9,
+7,10,9
+  </tiles>
+  <tiles layer="FloorGrime2">
+11,12,13,
+0,0,13,
+14,6,13
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,15,0,
+0,0,0,
+0,13,0
+  </tiles>
+  <tiles layer="Vegetation">
+0,0,0,
+0,0,0,
+0,7,0
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,
+0,0,0,
+0,16,0
+  </tiles>
+  <tiles layer="WallTrim">
+0,0,0,
+0,0,0,
+0,14,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+17,17,9,
+17,17,9,
+17,17,9
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+18,18,19,
+18,18,19,
+18,18,19
+  </tiles>
+ </floor>
+</building>

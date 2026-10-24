@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="4" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="blends_street_01_0"/>
+  <tile tile="blends_street_01_53"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="furniture_storage_02_17"/>
+  <tile tile="furniture_storage_02_18"/>
+  <tile tile="furniture_tables_high_01_56"/>
+  <tile tile="furniture_tables_high_01_57"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="industry_trucks_01_7"/>
+  <tile tile="walls_garage_02_5"/>
+  <tile tile="industry_trucks_01_5"/>
+  <tile tile="industry_railroad_05_8"/>
+  <tile tile="industry_trucks_01_4"/>
+  <tile tile="furniture_storage_02_27"/>
+  <tile tile="industry_railroad_05_9"/>
+  <tile tile="industry_railroad_05_11"/>
+  <tile tile="industry_trucks_01_6"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="overlay_graffiti_wall_01_66"/>
+  <tile tile="overlay_graffiti_wall_01_67"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="walls_garage_02_3"/>
+  <tile tile="signs_one-off_02_304"/>
+  <tile tile="trash_01_16"/>
+  <tile tile="location_shop_accessories_01_18"/>
+  <tile tile="furniture_storage_02_16"/>
+  <tile tile="trashcontainers_01_26"/>
+  <tile tile="industry_02_176"/>
+  <tile tile="industry_02_193"/>
+  <tile tile="fixtures_railings_01_35"/>
+  <tile tile="lighting_indoor_01_0"/>
+  <tile tile="trash_01_19"/>
+  <tile tile="furniture_storage_02_26"/>
+  <tile tile="furniture_storage_02_24"/>
+  <tile tile="industry_02_197"/>
+  <tile tile="fencing_01_24"/>
+  <tile tile="industry_01_29"/>
+  <tile tile="trash_01_17"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_03_55"/>
+  <tile tile="overlay_grime_floor_01_36"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_comicstore" InternalName="comicstore" Color="149 133 167" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,2,
+1,1,1,1,2,
+1,1,1,1,2,
+1,1,1,1,2,
+3,3,4,3,5
+  </tiles>
+  <tiles layer="FloorOverlay">
+6,7,7,7,6,
+6,0,0,0,6,
+6,8,0,0,6,
+6,9,10,11,6,
+7,7,7,7,12
+  </tiles>
+  <tiles layer="FloorGrime">
+7,13,14,15,16,
+17,0,0,0,16,
+17,0,0,0,16,
+17,18,0,0,16,
+19,19,19,19,20
+  </tiles>
+  <tiles layer="FloorGrime2">
+21,22,0,23,24,
+25,0,0,0,24,
+25,0,0,0,24,
+25,0,0,0,24,
+26,27,28,26,29
+  </tiles>
+  <tiles layer="FloorFurniture">
+30,31,0,9,32,
+8,0,0,0,33,
+9,0,0,0,34,
+35,0,0,0,36,
+37,26,26,38,39
+  </tiles>
+  <tiles layer="Vegetation">
+40,0,0,0,41,
+42,0,0,0,0,
+43,0,0,0,0,
+43,0,0,0,0,
+44,38,38,44,45
+  </tiles>
+  <tiles layer="Walls">
+9,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,44,44,0,46
+  </tiles>
+  <tiles layer="WallTrim">
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,47,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+48,48,48,48,49,
+48,48,48,48,49,
+48,48,48,48,49,
+48,48,48,48,49,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+49,49,49,49,0,
+49,49,49,49,0,
+49,49,49,49,0,
+49,49,49,49,50,
+0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+50,50,50,50,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="6" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_military_generic_01_8"/>
+  <tile tile="carpentry_01_16"/>
+  <tile tile="walls_commercial_02_3"/>
+  <tile tile="carpentry_01_17"/>
+  <tile tile="location_military_generic_01_10"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="location_military_tent_01_48"/>
+  <tile tile="location_military_tent_01_49"/>
+  <tile tile="location_military_tent_01_50"/>
+  <tile tile="location_military_tent_01_51"/>
+  <tile tile="location_military_tent_01_16"/>
+  <tile tile="location_military_tent_01_17"/>
+  <tile tile="location_military_tent_01_18"/>
+  <tile tile="location_military_tent_01_19"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_storage" InternalName="storage" Color="191 114 135" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="FloorOverlay">
+0,0,0,0,
+0,0,0,1,
+0,0,2,1,
+0,2,2,1,
+0,0,2,0,
+0,0,0,0,
+3,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+3,0,0,0,
+0,0,2,0,
+0,2,0,0,
+0,0,4,5,
+0,2,0,1,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+6,6,6,6,
+6,6,6,6,
+6,6,6,6,
+6,6,6,6,
+6,6,6,6,
+6,6,6,6,
+7,8,9,10
+  </tiles>
+  <tiles layer="FloorOverlay">
+7,8,9,10,
+11,12,13,14,
+11,12,13,14,
+11,12,13,14,
+11,12,13,14,
+11,12,13,14,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+11,12,13,14,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

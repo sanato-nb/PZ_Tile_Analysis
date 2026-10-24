@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="4" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+<property name="WorldX" value="6454"/>
+<property name="WorldY" value="5209"/>
+<property name="SourceCell" value="25_20"/>
+<property name="SourceBuilding" value="28"/>
+</properties>
+ <user_tiles>
+  <tile tile="e_redmapleJUMBOXL_1_2"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="candystore" InternalName="candystore" Color="148 120 129" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,
+0,1,0,
+0,1,0,
+0,0,0
+  </rooms>
+  <tiles layer="FloorGrime">
+0,1,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

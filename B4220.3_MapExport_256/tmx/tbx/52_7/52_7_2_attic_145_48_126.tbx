@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="floors_interior_tilesandwood_01_12"/>
+  <tile tile="floors_interior_tilesandwood_01_42"/>
+  <tile tile="blends_street_01_16"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_39"/>
+  <tile tile="walls_interior_house_03_20"/>
+  <tile tile="lighting_outdoor_01_50"/>
+  <tile tile="overlay_grime_floor_01_69"/>
+  <tile tile="walls_interior_detailing_01_0"/>
+  <tile tile="overlay_grime_floor_01_76"/>
+  <tile tile="lighting_indoor_01_20"/>
+  <tile tile="walls_interior_house_03_39"/>
+  <tile tile="floors_interior_tilesandwood_01_52"/>
+  <tile tile="overlay_grime_floor_01_16"/>
+  <tile tile="overlay_grime_floor_01_19"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_33"/>
+  <tile tile="overlay_grime_floor_01_25"/>
+  <tile tile="overlay_grime_floor_01_32"/>
+  <tile tile="overlay_grime_floor_01_41"/>
+  <tile tile="overlay_grime_floor_01_40"/>
+  <tile tile="fixtures_doors_frames_01_29"/>
+  <tile tile="fixtures_doors_frames_01_28"/>
+  <tile tile="location_community_church_small_01_64"/>
+  <tile tile="location_community_church_small_01_68"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="overlay_grime_floor_01_14"/>
+  <tile tile="walls_exterior_house_01_6"/>
+  <tile tile="walls_exterior_house_01_5"/>
+  <tile tile="walls_exterior_wooden_01_28"/>
+  <tile tile="walls_exterior_house_01_4"/>
+  <tile tile="walls_exterior_roofs_02_2"/>
+  <tile tile="roofs_02_2"/>
+  <tile tile="walls_interior_detailing_01_36"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="roofs_burnt_01_2"/>
+  <tile tile="trash_walls_01_0"/>
+  <tile tile="d_wallcracks_1_18"/>
+  <tile tile="trash_walls_01_4"/>
+  <tile tile="lighting_indoor_01_56"/>
+  <tile tile="overlay_grime_floor_01_13"/>
+  <tile tile="roofs_02_24"/>
+  <tile tile="walls_exterior_roofs_02_0"/>
+  <tile tile="roofs_02_5"/>
+  <tile tile="roofs_02_0"/>
+  <tile tile="roofs_burnt_01_11"/>
+  <tile tile="roofs_burnt_01_0"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="2_attic" InternalName="attic" Color="148 69 76" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,2,2,
+3,1,4,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,6,7,0,
+8,5,9,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,10,0,
+0,0,11,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,12,0,
+0,0,13,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+14,14,14,14,
+14,14,14,14
+  </tiles>
+  <tiles layer="FloorOverlay">
+15,16,17,18,
+19,0,17,20
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,21,0,
+0,0,22,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,23,0,
+0,0,24,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,25,0,
+0,0,26,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+14,14,14,14,
+14,14,27,27
+  </tiles>
+  <tiles layer="FloorOverlay">
+17,0,0,17,
+17,28,29,30
+  </tiles>
+  <tiles layer="FloorGrime">
+31,0,0,32,
+31,0,33,34
+  </tiles>
+  <tiles layer="FloorGrime2">
+35,0,0,36,
+35,0,37,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+38,0,0,39,
+40,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+36,0,0,0,
+36,0,0,0
+  </tiles>
+  <tiles layer="Walls">
+41,0,0,0,
+42,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+27,27,27,27,
+27,27,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+43,44,44,44,
+0,45,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,46,44,44,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,47,48,46,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

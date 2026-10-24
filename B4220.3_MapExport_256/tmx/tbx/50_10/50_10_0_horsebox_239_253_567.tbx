@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="vegetation_farm_01_12"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="walls_exterior_house_02_51"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="walls_interior_detailing_01_87"/>
+  <tile tile="walls_exterior_house_02_48"/>
+  <tile tile="walls_exterior_house_02_50"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="walls_interior_detailing_01_84"/>
+  <tile tile="walls_interior_detailing_01_86"/>
+  <tile tile="fixtures_doors_fences_01_5"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="vegetation_farm_01_8"/>
+  <tile tile="ceilings_01_0"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_horsebox" InternalName="horsebox" Color="91 81 164" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,
+1,1,1,
+1,1,1,
+0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,2,
+2,0,2,
+2,0,2,
+0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+4,5,4,
+6,0,6,
+6,0,6,
+0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+7,8,7,
+9,0,9,
+9,0,9,
+0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+10,11,10,
+12,0,12,
+12,0,12,
+0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+13,0,13,
+0,0,0,
+14,0,0,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+15,15,15,
+15,15,15,
+15,15,15,
+0,0,0
+  </tiles>
+ </floor>
+</building>

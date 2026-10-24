@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="17" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_17"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="blends_street_01_21"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="location_shop_generic_01_78"/>
+  <tile tile="location_shop_generic_01_74"/>
+  <tile tile="blends_street_01_27"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="location_shop_generic_01_79"/>
+  <tile tile="location_shop_generic_01_75"/>
+  <tile tile="walls_interior_house_03_20"/>
+  <tile tile="walls_interior_house_03_23"/>
+  <tile tile="location_hospitality_sunstarmotel_01_24"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="walls_interior_house_04_16"/>
+  <tile tile="floors_exterior_street_01_16"/>
+  <tile tile="walls_detailing_01_88"/>
+  <tile tile="overlay_grime_floor_01_37"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_gigamart" InternalName="gigamart" Color="159 149 109" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,0,0,5,6,0,0,5,6,0,0,5,6,0,0,0,0,7,
+8,0,0,9,10,0,0,9,10,0,0,9,10,0,0,0,0,4
+  </tiles>
+  <tiles layer="FloorGrime">
+11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13
+  </tiles>
+  <tiles layer="FloorGrime2">
+14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,
+15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,18,
+17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,18
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,0
+  </tiles>
+ </floor>
+</building>

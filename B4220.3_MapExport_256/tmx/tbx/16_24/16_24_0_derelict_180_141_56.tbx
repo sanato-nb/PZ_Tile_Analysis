@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_44"/>
+  <tile tile="carpentry_02_57"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="overlay_grime_floor_01_23"/>
+  <tile tile="walls_exterior_house_01_48"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_13"/>
+  <tile tile="overlay_grime_floor_01_14"/>
+  <tile tile="overlay_grime_floor_01_17"/>
+  <tile tile="overlay_grime_floor_01_18"/>
+  <tile tile="walls_interior_house_03_49"/>
+  <tile tile="overlay_graffiti_wall_01_46"/>
+  <tile tile="walls_interior_house_03_48"/>
+  <tile tile="fixtures_sinks_01_30"/>
+  <tile tile="fixtures_bathroom_01_24"/>
+  <tile tile="overlay_graffiti_wall_01_45"/>
+  <tile tile="overlay_graffiti_wall_01_44"/>
+  <tile tile="walls_interior_detailing_01_37"/>
+  <tile tile="d_wallcracks_1_19"/>
+  <tile tile="walls_interior_detailing_01_36"/>
+  <tile tile="d_wallcracks_1_28"/>
+  <tile tile="d_wallcracks_1_45"/>
+  <tile tile="walls_interior_house_03_58"/>
+  <tile tile="d_wallcracks_1_22"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="d_wallcracks_1_18"/>
+  <tile tile="overlay_graffiti_wall_01_21"/>
+  <tile tile="walls_interior_detailing_01_46"/>
+  <tile tile="overlay_grime_wall_01_21"/>
+  <tile tile="overlay_grime_wall_01_5"/>
+  <tile tile="industry_01_42"/>
+  <tile tile="industry_01_41"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="overlay_graffiti_wall_01_22"/>
+  <tile tile="overlay_graffiti_wall_01_23"/>
+  <tile tile="industry_01_40"/>
+  <tile tile="overlay_grime_wall_01_10"/>
+  <tile tile="overlay_grime_wall_01_4"/>
+  <tile tile="lighting_indoor_01_4"/>
+  <tile tile="d_wallcracks_1_59"/>
+  <tile tile="d_wallcracks_1_50"/>
+  <tile tile="fencing_damaged_01_131"/>
+  <tile tile="fixtures_bathroom_01_25"/>
+  <tile tile="fixtures_bathroom_01_3"/>
+  <tile tile="lighting_indoor_01_0"/>
+  <tile tile="fixtures_doors_frames_01_6"/>
+  <tile tile="trash_01_51"/>
+  <tile tile="trash_01_2"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="walls_exterior_roofs_03_2"/>
+  <tile tile="walls_exterior_roofs_03_1"/>
+  <tile tile="walls_exterior_roofs_03_0"/>
+  <tile tile="roofs_03_2"/>
+  <tile tile="roofs_03_1"/>
+  <tile tile="roofs_03_12"/>
+  <tile tile="roofs_03_0"/>
+  <tile tile="roofs_03_4"/>
+  <tile tile="roofs_03_11"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_derelict" InternalName="derelict" Color="66 163 186" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,0,
+1,1,1,0,
+1,1,2,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,3,5,
+6,7,8,5,
+3,9,10,5
+  </tiles>
+  <tiles layer="FloorGrime">
+11,3,11,12,
+13,14,15,16,
+11,3,3,17
+  </tiles>
+  <tiles layer="FloorGrime2">
+18,11,18,19,
+20,0,0,21,
+18,11,11,22
+  </tiles>
+  <tiles layer="FloorFurniture">
+23,18,24,25,
+26,0,0,25,
+27,18,18,25
+  </tiles>
+  <tiles layer="Vegetation">
+28,29,30,31,
+25,0,0,32,
+33,34,35,36
+  </tiles>
+  <tiles layer="Walls">
+37,33,33,0,
+38,0,0,0,
+39,40,41,0
+  </tiles>
+  <tiles layer="WallTrim">
+33,42,43,0,
+44,0,0,0,
+0,30,29,0
+  </tiles>
+  <tiles layer="Walls2">
+45,0,0,0,
+0,0,0,0,
+0,33,33,0
+  </tiles>
+  <tiles layer="WallTrim2">
+46,0,0,0,
+0,0,0,0,
+0,47,48,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+49,49,49,50,
+49,49,49,51,
+49,49,49,52
+  </tiles>
+  <tiles layer="FloorOverlay">
+53,53,53,0,
+54,55,54,0,
+56,57,58,0
+  </tiles>
+ </floor>
+</building>

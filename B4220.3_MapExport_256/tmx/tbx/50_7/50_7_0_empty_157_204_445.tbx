@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_17"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_blood_floor_01_18"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="industry_trucks_01_4"/>
+  <tile tile="industry_trucks_01_5"/>
+  <tile tile="industry_trucks_01_6"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="location_community_medical_01_67"/>
+  <tile tile="roofs_04_54"/>
+  <tile tile="walls_exterior_house_low_01_49"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_empty" InternalName="empty" Color="163 146 124" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,
+1
+  </rooms>
+  <tiles layer="Floor">
+1,1,
+1,1,
+1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,2,
+2,2,
+3,4
+  </tiles>
+  <tiles layer="FloorGrime">
+4,4,
+5,5,
+4,6
+  </tiles>
+  <tiles layer="FloorGrime2">
+7,7,
+8,8,
+6,9
+  </tiles>
+  <tiles layer="FloorFurniture">
+10,10,
+0,0,
+9,11
+  </tiles>
+  <tiles layer="Vegetation">
+0,0,
+0,0,
+11,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,
+0
+  </rooms>
+  <tiles layer="Floor">
+12,12,
+12,12,
+12,12
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,4,
+0,0,
+0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+13,13,
+0,0,
+0,0
+  </tiles>
+ </floor>
+</building>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="8" height="6" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+<property name="WorldX" value="10883"/>
+<property name="WorldY" value="9667"/>
+<property name="SourceCell" value="42_37"/>
+<property name="SourceBuilding" value="49"/>
+</properties>
+ <user_tiles>
+  <tile tile="walls_interior_house_03_23"/>
+  <tile tile="location_military_tent_01_36"/>
+  <tile tile="location_military_tent_01_39"/>
+  <tile tile="location_military_tent_01_38"/>
+  <tile tile="location_military_tent_01_37"/>
+  <tile tile="location_military_tent_01_45"/>
+  <tile tile="location_military_tent_01_29"/>
+  <tile tile="location_military_tent_01_44"/>
+  <tile tile="location_military_tent_01_31"/>
+  <tile tile="location_military_tent_01_41"/>
+  <tile tile="location_military_tent_01_30"/>
+  <tile tile="location_military_tent_01_40"/>
+  <tile tile="location_military_tent_01_24"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="emptyoutside" InternalName="emptyoutside" Color="108 78 72" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="FloorOverlay">
+0,0,0,0,0,0,0,0,0,
+0,1,0,0,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+2,1,3,4,1,3,4,1,0,
+0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,5,0,0,3,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,1,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,
+0,1,1,1,1,1,1,0,
+0,1,1,1,1,1,1,0,
+0,1,1,1,1,1,1,0,
+0,1,1,1,1,1,1,0,
+0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+0,0,0,0,0,0,0,0,0,
+0,6,7,7,7,7,7,6,0,
+0,8,9,9,9,9,9,8,0,
+0,10,11,11,11,11,11,10,0,
+0,12,13,13,13,13,13,12,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,0,0,0,0,0,
+0,7,0,0,0,0,0,0,0,
+0,9,0,0,0,0,0,0,0,
+0,11,0,0,0,0,0,0,0,
+0,13,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

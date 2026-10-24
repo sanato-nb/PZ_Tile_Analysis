@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+<property name="WorldX" value="3370"/>
+<property name="WorldY" value="6470"/>
+<property name="SourceCell" value="13_25"/>
+<property name="SourceBuilding" value="0"/>
+</properties>
+ <user_tiles>
+  <tile tile="overlay_blood_floor_01_1"/>
+  <tile tile="location_community_police_01_11"/>
+  <tile tile="location_community_police_01_3"/>
+  <tile tile="crafted_05_54"/>
+  <tile tile="location_community_police_01_2"/>
+  <tile tile="location_community_police_01_0"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="location_community_police_01_4"/>
+  <tile tile="industry_01_12"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="lobby" InternalName="lobby" Color="160 125 67" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,
+0,1,0,
+0,0,0
+  </rooms>
+  <tiles layer="FloorOverlay">
+0,0,0,0,
+0,1,0,0,
+0,2,3,0,
+0,0,4,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,5,6,0,
+0,7,8,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,
+0,0,0,0,
+0,9,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+0,0,0,0,
+0,10,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

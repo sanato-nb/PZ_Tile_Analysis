@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="4" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_street_01_14"/>
+  <tile tile="blends_street_01_53"/>
+  <tile tile="walls_exterior_house_02_0"/>
+  <tile tile="walls_detailing_01_68"/>
+  <tile tile="walls_exterior_house_02_8"/>
+  <tile tile="walls_detailing_01_64"/>
+  <tile tile="walls_exterior_house_02_10"/>
+  <tile tile="walls_exterior_house_02_3"/>
+  <tile tile="fixtures_railings_01_65"/>
+  <tile tile="fixtures_railings_01_75"/>
+  <tile tile="overlay_grime_wall_01_8"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_10"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="fixtures_windows_01_24"/>
+  <tile tile="lighting_outdoor_01_41"/>
+  <tile tile="fixtures_doors_01_44"/>
+  <tile tile="fixtures_windows_detailing_01_17"/>
+  <tile tile="fixtures_windows_detailing_01_16"/>
+  <tile tile="roofs_01_99"/>
+  <tile tile="roofs_accents_01_18"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_emptyoutside" InternalName="emptyoutside" Color="136 129 143" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,
+0,
+0,
+0
+  </rooms>
+  <tiles layer="Floor">
+1,0,
+1,0,
+1,2,
+1,2,
+1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,
+5,6,
+3,0,
+7,0,
+8,6
+  </tiles>
+  <tiles layer="FloorGrime">
+9,10,
+11,0,
+12,6,
+13,6,
+14,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+12,0,
+15,0,
+16,0,
+17,0,
+0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+18,0,
+18,0,
+19,0,
+0,0,
+0,0
+  </tiles>
+  <tiles layer="Vegetation">
+0,0,
+19,0,
+0,0,
+0,0,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,
+1,
+1,
+1
+  </rooms>
+  <tiles layer="Floor">
+20,21,
+20,21,
+20,21,
+20,21,
+20,21
+  </tiles>
+ </floor>
+</building>

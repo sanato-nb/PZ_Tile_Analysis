@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_restaurant_pizzawhirled_01_16"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="location_restaurant_pizzawhirled_01_2"/>
+  <tile tile="location_restaurant_pizzawhirled_01_1"/>
+  <tile tile="location_restaurant_pizzawhirled_01_10"/>
+  <tile tile="location_restaurant_pizzawhirled_01_0"/>
+  <tile tile="walls_exterior_house_02_53"/>
+  <tile tile="lighting_indoor_01_1"/>
+  <tile tile="furniture_shelving_01_28"/>
+  <tile tile="fixtures_bathroom_01_0"/>
+  <tile tile="fixtures_doors_01_52"/>
+  <tile tile="location_restaurant_pizzawhirled_01_13"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="trash_01_18"/>
+  <tile tile="floors_exterior_street_01_17"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_janitor" InternalName="janitor" Color="73 143 163" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,
+1,1,1,
+2,3,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,5,4,
+6,0,7,
+8,8,8
+  </tiles>
+  <tiles layer="FloorGrime">
+9,10,11,
+12,0,0,
+13,13,13
+  </tiles>
+  <tiles layer="FloorGrime2">
+10,0,0,
+0,0,0,
+14,14,14
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,
+0,0,0,
+0,0,15
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+16,16,16,
+16,16,16,
+0,0,0
+  </tiles>
+ </floor>
+</building>

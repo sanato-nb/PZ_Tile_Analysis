@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_street_01_0"/>
+  <tile tile="walls_garage_01_32"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_2"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="walls_logs_99"/>
+  <tile tile="walls_logs_98"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="floors_exterior_street_01_18"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="blends_street_01_53"/>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="blends_street_01_103"/>
+  <tile tile="blends_street_01_102"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="blends_street_01_101"/>
+  <tile tile="floors_exterior_tilesandstone_01_4"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="street_curbs_01_9"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="-17_cave" InternalName="cave" Color="147 145 119" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,2,
+1,1,1,1,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,0,0,0,
+4,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+5,6,0,0,0,
+6,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+7,8,0,0,0,
+8,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+9,9,9,9,0,
+9,9,9,9,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+10,10,10,10,0,
+10,10,10,10,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+11,12,13,14,15,
+12,16,11,17,17
+  </tiles>
+  <tiles layer="FloorOverlay">
+18,18,18,19,0,
+18,18,18,19,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,20,0,0,
+0,0,20,0,0
+  </tiles>
+ </floor>
+</building>

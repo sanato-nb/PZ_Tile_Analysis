@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="9" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floor_carpet_motif_7"/>
+  <tile tile="floors_interior_carpet_01_2"/>
+  <tile tile="walls_interior_house_02_34"/>
+  <tile tile="walls_commercial_01_33"/>
+  <tile tile="walls_interior_house_02_33"/>
+  <tile tile="walls_interior_house_04_34"/>
+  <tile tile="walls_interior_house_02_32"/>
+  <tile tile="furniture_tables_low_01_0"/>
+  <tile tile="furniture_tables_high_01_15"/>
+  <tile tile="furniture_seating_indoor_03_52"/>
+  <tile tile="walls_interior_house_04_32"/>
+  <tile tile="furniture_seating_indoor_02_7"/>
+  <tile tile="furniture_shelving_01_42"/>
+  <tile tile="furniture_tables_low_01_1"/>
+  <tile tile="lighting_indoor_03_20"/>
+  <tile tile="furniture_seating_indoor_03_53"/>
+  <tile tile="walls_interior_detailing_01_6"/>
+  <tile tile="walls_interior_detailing_01_5"/>
+  <tile tile="walls_interior_detailing_01_4"/>
+  <tile tile="location_community_school_02_36"/>
+  <tile tile="furniture_seating_indoor_02_5"/>
+  <tile tile="furniture_storage_02_1"/>
+  <tile tile="location_community_school_02_34"/>
+  <tile tile="furniture_shelving_01_10"/>
+  <tile tile="furniture_shelving_01_41"/>
+  <tile tile="walls_decoration_05_197"/>
+  <tile tile="walls_decoration_01_51"/>
+  <tile tile="location_community_school_01_18"/>
+  <tile tile="furniture_seating_indoor_02_17"/>
+  <tile tile="furniture_seating_indoor_02_16"/>
+  <tile tile="roofs_02_22"/>
+  <tile tile="industry_01_7"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="overlay_grime_floor_01_17"/>
+  <tile tile="walls_exterior_house_low_01_29"/>
+  <tile tile="rooftop_furniture_22"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_daycare" InternalName="daycare" Color="188 120 91" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,1,1,1,1,2,
+1,1,1,1,1,1,1,1,1,2,
+1,1,1,1,1,1,1,1,1,2,
+1,1,1,1,2,1,1,1,1,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,4,5,4,4,4,5,6,
+7,8,0,0,9,0,0,8,10,11,
+7,0,0,0,12,0,0,0,13,11,
+7,14,15,0,6,7,0,14,16,11
+  </tiles>
+  <tiles layer="FloorGrime">
+17,14,0,0,18,0,0,14,18,17,
+19,0,0,0,0,0,0,0,0,19,
+19,0,0,0,0,0,0,0,0,19,
+19,0,0,0,17,19,0,15,0,19
+  </tiles>
+  <tiles layer="FloorGrime2">
+20,0,0,0,21,0,0,0,16,22,
+23,0,0,0,0,0,0,0,0,24,
+25,0,0,0,0,0,0,0,0,24,
+26,0,0,0,0,27,0,0,0,28
+  </tiles>
+  <tiles layer="FloorFurniture">
+29,0,0,0,0,0,0,0,0,0,
+30,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+29,0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+31,31,31,31,31,31,31,31,31,31,
+31,31,31,31,31,31,31,31,31,31,
+31,31,31,31,31,31,31,31,31,31,
+31,31,31,31,31,31,31,31,31,32
+  </tiles>
+  <tiles layer="FloorOverlay">
+33,33,33,33,33,33,33,33,33,33,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,34
+  </tiles>
+  <tiles layer="FloorGrime">
+35,35,35,35,35,35,35,35,35,35,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,36
+  </tiles>
+ </floor>
+</building>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="walls_exterior_house_01_16"/>
+  <tile tile="street_curbs_01_9"/>
+  <tile tile="walls_interior_detailing_01_100"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="walls_detailing_01_5"/>
+  <tile tile="roofs_01_12"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="2_emptyoutside" InternalName="emptyoutside" Color="66 85 98" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="FloorOverlay">
+1,2,
+1,2
+  </tiles>
+  <tiles layer="FloorGrime">
+3,0,
+3,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+4,0,
+4,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+1,0,
+1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,0,
+5,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1
+  </rooms>
+  <tiles layer="Floor">
+6,0,
+0,0
+  </tiles>
+ </floor>
+</building>

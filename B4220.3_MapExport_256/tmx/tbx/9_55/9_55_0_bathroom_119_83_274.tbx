@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_5"/>
+  <tile tile="walls_interior_house_04_36"/>
+  <tile tile="walls_exterior_house_01_34"/>
+  <tile tile="fixtures_bathroom_01_27"/>
+  <tile tile="walls_exterior_house_01_32"/>
+  <tile tile="walls_exterior_house_01_33"/>
+  <tile tile="walls_exterior_house_01_35"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="fixtures_bathroom_01_26"/>
+  <tile tile="fencing_01_27"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_01_22"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_bathroom" InternalName="bathroom" Color="113 174 89" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,0,
+1,1,0,
+0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,0,3,
+2,4,5,
+6,6,7
+  </tiles>
+  <tiles layer="FloorGrime">
+8,0,9,
+8,0,10,
+11,11,12
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,
+13,0,0,
+0,0,14
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+15,15,0,
+15,15,0,
+0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+16,16,0,
+16,16,0,
+0,0,0
+  </tiles>
+ </floor>
+</building>

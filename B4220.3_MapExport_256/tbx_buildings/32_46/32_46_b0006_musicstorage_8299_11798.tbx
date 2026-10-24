@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="6" height="6" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+<property name="WorldX" value="8299"/>
+<property name="WorldY" value="11798"/>
+<property name="SourceCell" value="32_46"/>
+<property name="SourceBuilding" value="6"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_tilesandstone_01_1"/>
+  <tile tile="floors_interior_tilesandwood_01_41"/>
+  <tile tile="blends_street_01_32"/>
+  <tile tile="blends_street_01_37"/>
+  <tile tile="blends_street_01_39"/>
+  <tile tile="street_curbs_01_40"/>
+  <tile tile="street_curbs_01_43"/>
+  <tile tile="fencing_01_33"/>
+  <tile tile="fencing_01_37"/>
+  <tile tile="fencing_01_121"/>
+  <tile tile="street_curbs_01_45"/>
+  <tile tile="street_curbs_01_42"/>
+  <tile tile="street_curbs_01_2"/>
+  <tile tile="fencing_01_120"/>
+  <tile tile="fencing_01_123"/>
+  <tile tile="fencing_01_36"/>
+  <tile tile="furniture_tables_high_01_53"/>
+  <tile tile="fencing_01_32"/>
+  <tile tile="fencing_01_34"/>
+  <tile tile="fencing_01_35"/>
+  <tile tile="furniture_tables_high_01_52"/>
+  <tile tile="street_curbs_01_blend_medium_grass_7"/>
+  <tile tile="street_curbs_01_blend_medium_grass_6"/>
+  <tile tile="carpentry_03_0"/>
+  <tile tile="carpentry_03_12"/>
+  <tile tile="furniture_tables_high_01_55"/>
+  <tile tile="furniture_tables_high_01_54"/>
+  <tile tile="carpentry_03_8"/>
+  <tile tile="carpentry_03_4"/>
+  <tile tile="location_trailer_01_55"/>
+  <tile tile="location_trailer_01_51"/>
+  <tile tile="location_trailer_01_54"/>
+  <tile tile="location_trailer_01_50"/>
+  <tile tile="location_trailer_01_53"/>
+  <tile tile="location_trailer_01_49"/>
+  <tile tile="location_trailer_01_52"/>
+  <tile tile="location_trailer_01_48"/>
+  <tile tile="location_trailer_01_57"/>
+  <tile tile="location_trailer_01_56"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="musicstorage" InternalName="musicstorage" Color="87 145 142" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,
+0,1,1,1,1,0,
+0,1,1,1,1,0,
+0,1,1,1,1,0,
+0,1,1,1,1,0,
+0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,2,2,2,2,0,0,
+1,2,2,2,2,0,0,
+1,2,2,2,2,0,0,
+1,2,2,2,2,0,0,
+1,2,2,2,2,0,3,
+0,0,0,0,0,0,3,
+0,0,0,0,0,4,5
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,6,0,0,7,0,0,
+0,6,8,9,7,10,0,
+0,6,0,0,7,0,0,
+0,6,0,0,7,10,0,
+0,11,12,12,13,10,0,
+14,14,0,14,14,15,0,
+0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,10,0,
+0,16,17,0,18,0,0,
+0,19,0,0,0,10,0,
+0,20,0,0,0,0,0,
+0,19,0,21,17,0,22,
+0,0,14,0,0,0,23,
+0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,0,0,0,
+0,24,0,0,25,0,0,
+0,26,0,0,0,0,0,
+0,27,0,0,0,0,0,
+0,28,0,0,29,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,0,0,0,
+0,21,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+0,0,0,0,0,0,0,
+0,30,30,30,30,31,0,
+0,32,32,32,32,33,0,
+0,34,34,34,34,35,0,
+0,36,36,36,36,37,0,
+0,38,38,38,38,39,0,
+0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

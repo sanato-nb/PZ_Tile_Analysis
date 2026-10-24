@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="walls_exterior_house_01_48"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="walls_garage_01_33"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="walls_garage_01_32"/>
+  <tile tile="walls_garage_01_35"/>
+  <tile tile="walls_garage_01_34"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="roofs_02_7"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="furniture_storage_02_17"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_02_70"/>
+  <tile tile="roofs_02_4"/>
+  <tile tile="roofs_02_5"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_garage" InternalName="garage" Color="163 187 140" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,0,
+1,1,1,1,0,
+1,1,1,1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,3,3,4,
+2,0,0,0,4,
+5,0,0,0,4
+  </tiles>
+  <tiles layer="FloorGrime">
+3,6,6,6,7,
+8,0,0,0,7,
+9,0,0,0,7
+  </tiles>
+  <tiles layer="FloorGrime2">
+10,11,11,11,12,
+13,0,0,0,12,
+14,0,0,0,12
+  </tiles>
+  <tiles layer="FloorFurniture">
+15,0,0,16,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+17,17,17,17,0,
+17,17,17,17,0,
+17,17,17,17,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,18,19,20,0,
+0,18,19,20,0,
+0,18,19,20,0
+  </tiles>
+ </floor>
+</building>

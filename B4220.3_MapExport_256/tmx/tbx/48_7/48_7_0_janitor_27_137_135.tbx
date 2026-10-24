@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_16"/>
+  <tile tile="location_restaurant_spiffos_01_38"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="location_restaurant_spiffos_01_11"/>
+  <tile tile="location_restaurant_spiffos_01_40"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="location_restaurant_spiffos_01_9"/>
+  <tile tile="overlay_grime_wall_01_27"/>
+  <tile tile="lighting_indoor_01_5"/>
+  <tile tile="location_restaurant_spiffos_01_42"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="fixtures_doors_01_53"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="floors_exterior_street_01_17"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_janitor" InternalName="janitor" Color="151 83 158" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1
+  </rooms>
+  <tiles layer="Floor">
+1,1,
+2,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,3,
+4,5
+  </tiles>
+  <tiles layer="FloorGrime">
+6,7,
+8,9
+  </tiles>
+  <tiles layer="FloorGrime2">
+10,11,
+12,13
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,14,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+15,15,
+15,15
+  </tiles>
+ </floor>
+</building>

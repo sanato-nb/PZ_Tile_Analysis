@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="blends_street_01_16"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="blends_street_01_25"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="blends_street_01_24"/>
+  <tile tile="location_sewer_01_8"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_03_91"/>
+  <tile tile="roofs_02_51"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_derelict" InternalName="derelict" Color="112 121 120" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,2,2,3,
+3,3,2,4
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,5,0,6,
+7,0,0,6
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,8,
+0,0,0,8
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,9,
+0,0,0,9
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+10,10,10,10,
+10,10,10,10
+  </tiles>
+  <tiles layer="FloorOverlay">
+11,11,11,11,
+12,11,11,11
+  </tiles>
+ </floor>
+</building>

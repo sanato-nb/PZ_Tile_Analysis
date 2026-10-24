@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_natural_01_18"/>
+  <tile tile="walls_logs_96"/>
+  <tile tile="walls_logs_97"/>
+  <tile tile="walls_logs_98"/>
+  <tile tile="walls_logs_99"/>
+  <tile tile="f_wallvines_1_34"/>
+  <tile tile="f_wallvines_1_37"/>
+  <tile tile="d_generic_1_22"/>
+  <tile tile="d_generic_1_51"/>
+  <tile tile="blends_street_01_21"/>
+  <tile tile="fencing_01_60"/>
+  <tile tile="fencing_01_57"/>
+  <tile tile="fencing_01_56"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="-1_tunnel" InternalName="tunnel" Color="153 80 82" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+1,1,1,2,
+3,1,1,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,5,0,0,
+2,0,0,0,
+0,2,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+6,0,0,0,
+7,0,0,0,
+0,8,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+9,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+0,0,0,0,
+0,0,0,0,
+10,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,
+0,0,0,0,
+0,11,12,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+0,0,0,13
+  </tiles>
+ </floor>
+</building>

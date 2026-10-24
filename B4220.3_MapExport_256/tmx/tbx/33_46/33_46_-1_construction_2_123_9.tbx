@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_37"/>
+  <tile tile="walls_commercial_01_50"/>
+  <tile tile="walls_commercial_01_48"/>
+  <tile tile="overlay_grime_floor_01_36"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="walls_commercial_01_59"/>
+  <tile tile="fixtures_stairs_01_58"/>
+  <tile tile="fixtures_stairs_01_57"/>
+  <tile tile="fixtures_stairs_01_56"/>
+  <tile tile="overlay_grime_wall_01_27"/>
+  <tile tile="walls_commercial_01_51"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="-1_construction" InternalName="construction" Color="120 113 174" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,4,
+2,3,5,
+6,6,5,
+7,7,7
+  </tiles>
+  <tiles layer="FloorGrime">
+5,0,8,
+5,0,9,
+2,3,9,
+2,10,3
+  </tiles>
+  <tiles layer="FloorGrime2">
+9,0,11,
+9,0,12,
+5,0,13,
+4,14,15
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,
+0,0,0,
+9,0,0,
+8,0,16
+  </tiles>
+ </floor>
+</building>

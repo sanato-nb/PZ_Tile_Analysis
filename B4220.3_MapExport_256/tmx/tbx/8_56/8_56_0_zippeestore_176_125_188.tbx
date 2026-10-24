@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="12" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_shop_zippee_01_7"/>
+  <tile tile="location_shop_zippee_01_6"/>
+  <tile tile="floors_exterior_tilesandstone_01_3"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="location_shop_zippee_01_16"/>
+  <tile tile="overlay_grime_floor_01_17"/>
+  <tile tile="overlay_grime_floor_01_18"/>
+  <tile tile="overlay_grime_floor_01_16"/>
+  <tile tile="overlay_grime_floor_01_19"/>
+  <tile tile="location_shop_zippee_01_9"/>
+  <tile tile="location_shop_zippee_01_10"/>
+  <tile tile="location_shop_zippee_01_11"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="walls_interior_house_03_20"/>
+  <tile tile="walls_exterior_house_02_16"/>
+  <tile tile="location_shop_zippee_01_8"/>
+  <tile tile="walls_commercial_01_40"/>
+  <tile tile="walls_interior_house_03_23"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="location_shop_zippee_01_48"/>
+  <tile tile="walls_commercial_02_40"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="location_shop_zippee_01_17"/>
+  <tile tile="overlay_grime_wall_01_4"/>
+  <tile tile="location_community_school_01_33"/>
+  <tile tile="location_shop_accessories_01_16"/>
+  <tile tile="trashcontainers_01_19"/>
+  <tile tile="overlay_grime_wall_01_40"/>
+  <tile tile="trash_01_16"/>
+  <tile tile="floors_interior_tilesandwood_01_19"/>
+  <tile tile="walls_exterior_house_low_01_48"/>
+  <tile tile="overlay_grime_floor_01_40"/>
+  <tile tile="overlay_grime_floor_01_32"/>
+  <tile tile="overlay_grime_floor_01_24"/>
+  <tile tile="overlay_grime_floor_01_12"/>
+  <tile tile="overlay_grime_floor_01_35"/>
+  <tile tile="overlay_grime_floor_01_27"/>
+  <tile tile="industry_02_142"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_zippeestore" InternalName="zippeestore" Color="155 99 169" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,2,2,2,2,2,2,2,2,2,2,1,3,
+1,2,2,2,2,2,2,2,2,2,2,1,3,
+1,2,2,2,2,2,2,2,2,2,2,1,3
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,5,0,0,6,7,0,0,0,0,0,0,4,
+4,0,0,0,8,9,10,11,12,0,0,0,4,
+13,0,0,0,0,0,0,0,0,0,0,0,4
+  </tiles>
+  <tiles layer="FloorGrime">
+14,0,0,0,0,0,0,0,0,0,0,0,15,
+14,0,0,0,0,16,0,0,0,0,0,0,17,
+18,0,0,0,0,0,0,0,0,0,0,0,17
+  </tiles>
+  <tiles layer="FloorGrime2">
+19,0,0,0,0,0,0,0,0,0,0,0,20,
+19,0,0,0,0,0,0,0,0,0,0,0,21,
+22,0,0,0,0,0,0,0,0,0,0,0,21
+  </tiles>
+  <tiles layer="FloorFurniture">
+23,0,0,0,0,0,0,0,0,0,0,0,19,
+24,0,0,0,0,0,0,0,0,0,0,0,20,
+0,0,0,0,0,0,0,0,0,0,0,0,20
+  </tiles>
+  <tiles layer="Vegetation">
+25,0,0,0,0,0,0,0,0,0,0,0,26,
+27,0,0,0,0,0,0,0,0,0,0,0,28,
+0,0,0,0,0,0,0,0,0,0,0,0,28
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,27,
+0,0,0,0,0,0,0,0,0,0,0,0,29
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+30,30,30,30,30,30,30,30,30,30,30,30,31,
+30,30,30,30,30,30,30,30,30,30,30,30,31,
+30,30,30,30,30,30,30,30,30,30,30,30,31
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,0,32,33,34,0,35,0,0,0,
+0,0,0,0,0,36,37,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,0,38,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

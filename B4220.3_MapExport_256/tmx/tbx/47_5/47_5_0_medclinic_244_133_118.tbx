@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="4" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_17"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="fixtures_counters_01_33"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="walls_interior_house_03_20"/>
+  <tile tile="walls_interior_house_03_21"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="walls_interior_house_03_22"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="location_community_medical_01_54"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="appliances_refrigeration_01_40"/>
+  <tile tile="fixtures_sinks_01_19"/>
+  <tile tile="furniture_storage_02_0"/>
+  <tile tile="floors_exterior_street_01_16"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_medclinic" InternalName="medclinic" Color="151 145 64" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,
+1,1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,0,0,2,
+2,4,2,0,2
+  </tiles>
+  <tiles layer="FloorGrime">
+5,0,0,0,5,
+4,6,5,0,5
+  </tiles>
+  <tiles layer="FloorGrime2">
+7,0,0,0,7,
+8,9,7,0,7
+  </tiles>
+  <tiles layer="FloorFurniture">
+3,0,0,0,10,
+11,12,0,0,10
+  </tiles>
+  <tiles layer="Vegetation">
+13,0,0,0,0,
+14,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+15,15,15,15,15,
+15,15,15,15,15
+  </tiles>
+ </floor>
+</building>

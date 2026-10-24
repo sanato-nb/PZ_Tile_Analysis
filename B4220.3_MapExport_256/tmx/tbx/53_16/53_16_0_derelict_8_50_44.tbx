@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="6" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="carpentry_02_58"/>
+  <tile tile="floors_burnt_01_0"/>
+  <tile tile="overlay_grime_floor_01_16"/>
+  <tile tile="floors_burnt_01_29"/>
+  <tile tile="floors_burnt_01_27"/>
+  <tile tile="overlay_grime_floor_01_32"/>
+  <tile tile="overlay_grime_floor_01_24"/>
+  <tile tile="walls_burnt_01_3"/>
+  <tile tile="floors_burnt_01_31"/>
+  <tile tile="overlay_grime_floor_01_42"/>
+  <tile tile="floors_burnt_01_30"/>
+  <tile tile="fencing_damaged_01_169"/>
+  <tile tile="floors_burnt_01_2"/>
+  <tile tile="floors_burnt_01_28"/>
+  <tile tile="overlay_grime_floor_01_33"/>
+  <tile tile="overlay_grime_floor_01_19"/>
+  <tile tile="overlay_grime_floor_01_40"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="overlay_grime_floor_01_13"/>
+  <tile tile="fencing_damaged_01_171"/>
+  <tile tile="overlay_grime_floor_01_34"/>
+  <tile tile="overlay_grime_floor_01_26"/>
+  <tile tile="overlay_grime_floor_01_41"/>
+  <tile tile="overlay_grime_floor_01_25"/>
+  <tile tile="overlay_grime_floor_01_14"/>
+  <tile tile="overlay_grime_floor_01_35"/>
+  <tile tile="overlay_grime_floor_01_27"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_derelict" InternalName="derelict" Color="84 166 159" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,
+1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,2,2,2,
+1,1,1,1,2,2,2,
+2,2,1,1,1,2,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,5,6,7,8,
+9,9,10,11,12,0,13,
+0,0,14,15,5,0,13
+  </tiles>
+  <tiles layer="FloorGrime">
+0,16,0,17,0,0,18,
+19,20,0,21,22,0,0,
+0,0,23,0,24,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,0,0,0,
+0,25,0,26,27,0,0,
+0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

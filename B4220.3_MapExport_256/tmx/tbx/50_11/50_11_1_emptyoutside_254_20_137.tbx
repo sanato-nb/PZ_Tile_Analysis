@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="industry_01_7"/>
+  <tile tile="location_sewer_01_1"/>
+  <tile tile="industry_01_13"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="roofs_01_35"/>
+  <tile tile="roofs_01_36"/>
+  <tile tile="roofs_01_42"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_emptyoutside" InternalName="emptyoutside" Color="138 128 84" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,0,
+1,1,0,
+1,1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,2,0,
+3,3,0,
+3,3,0
+  </tiles>
+  <tiles layer="FloorGrime">
+4,4,0,
+0,0,0,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+5,6,0,
+5,6,0,
+7,6,0
+  </tiles>
+ </floor>
+</building>

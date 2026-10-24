@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_8"/>
+  <tile tile="location_shop_mall_01_22"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="furniture_seating_indoor_03_2"/>
+  <tile tile="location_restaurant_spiffos_01_9"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="walls_commercial_01_16"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="furniture_seating_indoor_03_3"/>
+  <tile tile="location_shop_mall_01_0"/>
+  <tile tile="location_shop_mall_01_4"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="location_shop_mall_01_25"/>
+  <tile tile="roofs_04_55"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_spiffo_dining" InternalName="spiffo_dining" Color="170 116 103" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,2,
+1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,5,
+3,6,4
+  </tiles>
+  <tiles layer="FloorGrime">
+4,7,8,
+9,0,7
+  </tiles>
+  <tiles layer="FloorGrime2">
+7,10,7,
+0,0,10
+  </tiles>
+  <tiles layer="FloorFurniture">
+9,11,12,
+0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+10,0,13,
+0,0,0
+  </tiles>
+  <tiles layer="Walls">
+0,0,14,
+0,0,0
+  </tiles>
+  <tiles layer="WallTrim">
+0,0,10,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,
+1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,4,4,
+0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,15,15,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0
+  </rooms>
+  <tiles layer="Floor">
+16,16,16,
+16,16,16
+  </tiles>
+ </floor>
+</building>

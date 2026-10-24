@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="blends_street_01_96"/>
+  <tile tile="floors_interior_carpet_01_12"/>
+  <tile tile="blends_street_01_102"/>
+  <tile tile="street_curbs_01_9"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="location_shop_gas2go_01_0"/>
+  <tile tile="location_shop_gas2go_01_2"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="location_shop_fossoil_01_38"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_emptyoutside" InternalName="emptyoutside" Color="72 70 161" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,2,2,3,
+2,4,1,5
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,6,7,
+0,8,6,7
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,9,10,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,
+0,11,12,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,
+0,13,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+0,0,0,0,
+0,4,10,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,
+0,8,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,9,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,
+0,11,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,
+0,13,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+14,14,14,14,
+14,14,14,14
+  </tiles>
+ </floor>
+</building>

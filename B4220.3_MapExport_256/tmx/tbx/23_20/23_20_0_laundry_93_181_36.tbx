@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_0"/>
+  <tile tile="floors_exterior_natural_01_18"/>
+  <tile tile="industry_railroad_05_45"/>
+  <tile tile="floors_exterior_tilesandstone_01_1"/>
+  <tile tile="walls_interior_house_04_66"/>
+  <tile tile="walls_interior_house_04_75"/>
+  <tile tile="walls_interior_house_04_65"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="walls_interior_house_04_64"/>
+  <tile tile="floors_rugs_01_58"/>
+  <tile tile="appliances_laundry_01_25"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="walls_interior_detailing_01_6"/>
+  <tile tile="walls_interior_detailing_01_15"/>
+  <tile tile="walls_interior_detailing_01_5"/>
+  <tile tile="walls_exterior_house_02_76"/>
+  <tile tile="walls_interior_detailing_01_4"/>
+  <tile tile="lighting_indoor_01_3"/>
+  <tile tile="walls_exterior_house_02_68"/>
+  <tile tile="walls_exterior_house_02_79"/>
+  <tile tile="walls_exterior_house_02_69"/>
+  <tile tile="appliances_laundry_01_5"/>
+  <tile tile="fixtures_doors_frames_01_1"/>
+  <tile tile="lighting_indoor_01_4"/>
+  <tile tile="walls_detailing_01_45"/>
+  <tile tile="appliances_laundry_01_13"/>
+  <tile tile="walls_detailing_01_40"/>
+  <tile tile="walls_exterior_house_02_70"/>
+  <tile tile="overlay_grime_wall_01_27"/>
+  <tile tile="walls_detailing_01_41"/>
+  <tile tile="walls_exterior_house_02_71"/>
+  <tile tile="fixtures_doors_01_1"/>
+  <tile tile="fixtures_windows_curtains_02_17"/>
+  <tile tile="overlay_grime_wall_01_24"/>
+  <tile tile="rooftop_furniture_32"/>
+  <tile tile="walls_detailing_01_43"/>
+  <tile tile="walls_detailing_01_46"/>
+  <tile tile="walls_detailing_01_44"/>
+  <tile tile="floors_rugs_01_59"/>
+  <tile tile="fixtures_windows_detailing_01_33"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="walls_detailing_01_47"/>
+  <tile tile="fixtures_doors_01_45"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="walls_detailing_01_55"/>
+  <tile tile="fixtures_windows_detailing_01_32"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="roofs_02_6"/>
+  <tile tile="lighting_outdoor_01_32"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="fixtures_windows_01_24"/>
+  <tile tile="carpentry_03_57"/>
+  <tile tile="vegetation_indoor_01_21"/>
+  <tile tile="fixtures_railings_01_64"/>
+  <tile tile="carpentry_03_42"/>
+  <tile tile="vegetation_indoor_01_7"/>
+  <tile tile="crafted_01_39"/>
+  <tile tile="roofs_02_7"/>
+  <tile tile="roofs_accents_01_22"/>
+  <tile tile="roofs_02_21"/>
+  <tile tile="roofs_02_23"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_laundry" InternalName="laundry" Color="78 122 66" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+1,1,1,2,
+3,3,3,4
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,6,7,8,
+9,10,11,8,
+12,12,12,13
+  </tiles>
+  <tiles layer="FloorGrime">
+14,15,16,17,
+18,0,19,20,
+8,21,22,8
+  </tiles>
+  <tiles layer="FloorGrime2">
+23,24,25,26,
+27,0,0,28,
+29,30,31,32
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,33,34,35,
+36,0,0,26,
+37,24,38,39
+  </tiles>
+  <tiles layer="Vegetation">
+0,40,0,41,
+0,0,0,42,
+43,44,45,46
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,47,
+0,0,0,47,
+48,49,50,51
+  </tiles>
+  <tiles layer="WallTrim">
+0,0,0,52,
+0,0,0,53,
+41,0,54,55
+  </tiles>
+  <tiles layer="Walls2">
+0,0,0,56,
+0,0,0,0,
+57,0,49,58
+  </tiles>
+  <tiles layer="WallTrim2">
+0,0,0,0,
+0,0,0,59,
+60,0,0,61
+  </tiles>
+  <tiles layer="RoofCap">
+0,0,0,59,
+0,0,0,0,
+49,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+62,62,62,0,
+62,62,62,0,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="4" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_19"/>
+  <tile tile="floors_exterior_tilesandstone_01_5"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="location_shop_generic_01_26"/>
+  <tile tile="location_shop_generic_01_23"/>
+  <tile tile="location_shop_generic_01_27"/>
+  <tile tile="location_trailer_01_22"/>
+  <tile tile="location_trailer_01_18"/>
+  <tile tile="walls_interior_house_04_64"/>
+  <tile tile="location_shop_accessories_01_3"/>
+  <tile tile="industry_trucks_01_59"/>
+  <tile tile="industry_trucks_01_49"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="overlay_grime_wall_01_27"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="location_business_office_generic_01_36"/>
+  <tile tile="location_business_office_generic_01_37"/>
+  <tile tile="lighting_indoor_01_1"/>
+  <tile tile="fixtures_doors_01_53"/>
+  <tile tile="lighting_outdoor_01_32"/>
+  <tile tile="furniture_seating_indoor_01_60"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_04_55"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_zippeestore" InternalName="zippeestore" Color="98 133 118" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1,
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,0,
+1,1,0,
+1,1,0,
+1,1,0,
+2,2,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,0,
+3,5,0,
+3,6,0,
+3,4,0,
+7,8,0
+  </tiles>
+  <tiles layer="FloorGrime">
+9,0,0,
+9,10,0,
+9,0,0,
+9,0,0,
+11,12,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+13,0,0,
+13,0,0,
+13,0,0,
+13,0,0,
+14,15,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+16,0,0,
+17,0,0,
+16,0,0,
+18,0,0,
+19,20,0
+  </tiles>
+  <tiles layer="Vegetation">
+21,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0,
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+22,22,0,
+22,22,0,
+22,22,0,
+22,22,0,
+0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+23,23,0,
+23,23,0,
+23,23,0,
+23,23,0,
+0,0,0
+  </tiles>
+ </floor>
+</building>

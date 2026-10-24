@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_6"/>
+  <tile tile="floors_exterior_tilesandstone_01_4"/>
+  <tile tile="walls_interior_house_03_20"/>
+  <tile tile="location_sewer_01_10"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="lighting_indoor_01_1"/>
+  <tile tile="walls_exterior_house_01_33"/>
+  <tile tile="walls_commercial_02_41"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="street_decoration_01_85"/>
+  <tile tile="roofs_01_6"/>
+  <tile tile="location_business_bank_01_67"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="walls_exterior_roofs_03_29"/>
+  <tile tile="roofs_01_5"/>
+  <tile tile="roofs_01_0"/>
+  <tile tile="roofs_accents_01_6"/>
+  <tile tile="roofs_01_11"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_office" InternalName="office" Color="165 145 90" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,2,
+2,2,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,0,4,
+5,5,5
+  </tiles>
+  <tiles layer="FloorGrime">
+6,0,0,
+7,7,7
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,
+8,8,8
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,
+9,9,9
+  </tiles>
+  <tiles layer="Vegetation">
+0,0,0,
+10,11,12
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,
+0,0,11
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0
+  </rooms>
+  <tiles layer="Floor">
+13,13,13,
+14,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+15,16,16,
+17,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+18,0,0,
+0,0,0
+  </tiles>
+ </floor>
+</building>

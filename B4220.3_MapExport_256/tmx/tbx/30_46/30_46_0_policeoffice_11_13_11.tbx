@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="4" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_carpet_01_5"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="floors_interior_tilesandwood_01_18"/>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="walls_commercial_02_2"/>
+  <tile tile="walls_commercial_02_1"/>
+  <tile tile="walls_interior_house_01_85"/>
+  <tile tile="walls_commercial_02_0"/>
+  <tile tile="furniture_seating_indoor_01_49"/>
+  <tile tile="walls_exterior_house_01_52"/>
+  <tile tile="walls_commercial_02_80"/>
+  <tile tile="walls_interior_house_01_84"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="overlay_grime_floor_01_84"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="location_business_office_generic_01_91"/>
+  <tile tile="location_business_office_generic_01_92"/>
+  <tile tile="walls_detailing_01_89"/>
+  <tile tile="walls_detailing_01_45"/>
+  <tile tile="fixtures_doors_01_40"/>
+  <tile tile="walls_detailing_01_88"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="walls_commercial_01_49"/>
+  <tile tile="walls_exterior_house_01_54"/>
+  <tile tile="walls_exterior_house_01_55"/>
+  <tile tile="location_business_office_generic_02_16"/>
+  <tile tile="lighting_indoor_02_10"/>
+  <tile tile="location_business_office_generic_01_93"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="walls_interior_detailing_01_36"/>
+  <tile tile="walls_detailing_01_47"/>
+  <tile tile="walls_detailing_01_55"/>
+  <tile tile="appliances_com_01_72"/>
+  <tile tile="fencing_01_41"/>
+  <tile tile="lighting_indoor_01_5"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="lighting_indoor_01_4"/>
+  <tile tile="lighting_outdoor_01_34"/>
+  <tile tile="fencing_01_48"/>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="walls_exterior_roofs_04_25"/>
+  <tile tile="walls_exterior_roofs_30_04_1"/>
+  <tile tile="walls_exterior_house_low_01_28"/>
+  <tile tile="roofs_03_33"/>
+  <tile tile="roofs_accents_01_29"/>
+  <tile tile="roofs_30_08_1"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="overlay_grime_floor_01_9"/>
+  <tile tile="overlay_grime_floor_01_15"/>
+  <tile tile="walls_exterior_house_low_01_29"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_policeoffice" InternalName="policeoffice" Color="188 170 107" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,2,
+3,3,4,5
+  </tiles>
+  <tiles layer="FloorOverlay">
+6,7,8,0,
+9,10,0,11,
+12,0,0,11,
+13,0,0,0,
+14,14,15,16
+  </tiles>
+  <tiles layer="FloorGrime">
+17,18,19,11,
+0,0,0,20,
+21,0,0,20,
+22,0,0,23,
+24,24,25,26
+  </tiles>
+  <tiles layer="FloorGrime2">
+27,28,29,20,
+0,0,0,30,
+0,0,0,30,
+31,0,0,11,
+19,19,32,33
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,34,30,
+0,0,0,35,
+0,0,0,0,
+36,0,0,20,
+37,37,38,39
+  </tiles>
+  <tiles layer="Vegetation">
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,30,
+0,40,41,0
+  </tiles>
+  <tiles layer="Walls">
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,42,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+43,43,43,44,
+43,43,43,45,
+43,43,43,46,
+43,43,43,46,
+43,43,43,46
+  </tiles>
+  <tiles layer="FloorOverlay">
+47,47,47,48,
+49,49,49,0,
+50,50,50,0,
+0,0,51,0,
+0,52,51,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+53,53,51,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,
+0,0,0,0,
+0,0,53,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

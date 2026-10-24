@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="walls_exterior_house_02_2"/>
+  <tile tile="walls_exterior_house_02_86"/>
+  <tile tile="walls_exterior_house_02_85"/>
+  <tile tile="walls_exterior_house_02_87"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="lighting_outdoor_01_24"/>
+  <tile tile="floors_interior_tilesandwood_01_43"/>
+  <tile tile="floors_rugs_01_17"/>
+  <tile tile="walls_detailing_02_9"/>
+  <tile tile="furniture_shelving_01_42"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="walls_exterior_roofs_04_72"/>
+  <tile tile="roofs_accents_01_17"/>
+  <tile tile="roofs_accents_01_19"/>
+  <tile tile="walls_exterior_roofs_03_64"/>
+  <tile tile="walls_detailing_01_12"/>
+  <tile tile="roofs_01_87"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_empty" InternalName="empty" Color="127 132 153" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1
+  </rooms>
+  <tiles layer="FloorOverlay">
+1,2,
+3,4
+  </tiles>
+  <tiles layer="FloorGrime">
+0,5,
+6,7
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,
+8,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+9,2,
+3,4
+  </tiles>
+  <tiles layer="FloorOverlay">
+10,11,
+0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+12,0,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+13,14,
+15,16
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,0,
+0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+17,0,
+0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+17,0,
+0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+18,0,
+0,0
+  </tiles>
+  <tiles layer="Vegetation">
+19,0,
+0,0
+  </tiles>
+ </floor>
+</building>

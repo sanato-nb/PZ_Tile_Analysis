@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_exterior_street_01_2"/>
+  <tile tile="blends_street_01_48"/>
+  <tile tile="blends_street_01_55"/>
+  <tile tile="blends_street_01_53"/>
+  <tile tile="walls_garage_02_16"/>
+  <tile tile="furniture_storage_02_19"/>
+  <tile tile="furniture_shelving_01_24"/>
+  <tile tile="walls_exterior_house_01_52"/>
+  <tile tile="walls_exterior_house_01_53"/>
+  <tile tile="trash_01_48"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="walls_exterior_house_01_55"/>
+  <tile tile="industry_02_72"/>
+  <tile tile="fencing_01_56"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="floors_exterior_street_01_14"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_toolstore" InternalName="toolstore" Color="115 126 85" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+0,0,3,4
+  </tiles>
+  <tiles layer="FloorOverlay">
+5,6,7,8,
+9,9,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+10,0,0,11,
+12,12,9,13
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,14,
+0,0,12,15
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,0,
+0,0,0,16
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+17,17,17,0,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

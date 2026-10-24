@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="6" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_restaurant_spiffos_01_38"/>
+  <tile tile="location_restaurant_spiffos_01_10"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="fixtures_doors_01_52"/>
+  <tile tile="location_restaurant_spiffos_01_8"/>
+  <tile tile="location_restaurant_spiffos_01_23"/>
+  <tile tile="floors_exterior_street_01_14"/>
+  <tile tile="industry_02_231"/>
+  <tile tile="industry_02_230"/>
+  <tile tile="industry_02_228"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_spiffo_dining" InternalName="spiffo_dining" Color="139 144 79" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,
+1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,0,0,0,0,0,0,
+3,0,0,0,0,0,0,
+4,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+5,0,0,0,0,0,0,
+6,0,0,0,0,0,0,
+7,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,
+0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+8,8,8,8,8,8,0,
+8,8,8,8,8,8,0,
+8,8,8,8,8,8,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,9,0,0,0,
+0,0,0,9,0,0,0,
+10,10,10,11,0,0,0
+  </tiles>
+ </floor>
+</building>

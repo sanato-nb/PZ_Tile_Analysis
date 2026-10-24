@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="2" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_29"/>
+  <tile tile="floors_interior_carpet_01_7"/>
+  <tile tile="walls_interior_house_03_22"/>
+  <tile tile="walls_interior_house_03_20"/>
+  <tile tile="walls_commercial_01_26"/>
+  <tile tile="trashcontainers_01_20"/>
+  <tile tile="lighting_indoor_01_1"/>
+  <tile tile="fixtures_doors_01_40"/>
+  <tile tile="walls_commercial_01_27"/>
+  <tile tile="walls_commercial_01_41"/>
+  <tile tile="walls_commercial_01_40"/>
+  <tile tile="lighting_indoor_01_2"/>
+  <tile tile="walls_interior_house_03_23"/>
+  <tile tile="fixtures_doors_01_41"/>
+  <tile tile="walls_commercial_02_25"/>
+  <tile tile="walls_commercial_02_24"/>
+  <tile tile="location_business_office_generic_01_48"/>
+  <tile tile="walls_commercial_01_33"/>
+  <tile tile="furniture_tables_high_01_36"/>
+  <tile tile="floors_interior_tilesandwood_01_18"/>
+  <tile tile="industry_02_149"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_breakroom" InternalName="breakroom" Color="163 173 84" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+1,1,1,2,
+1,1,1,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,3,
+4,0,0,4,
+5,0,0,5
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,6,
+0,0,0,7,
+8,0,0,8
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,
+1,1,1,1,
+1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,9,10,11,
+4,0,12,11,
+13,0,0,11
+  </tiles>
+  <tiles layer="FloorGrime">
+10,14,15,16,
+0,0,0,16,
+0,0,0,16
+  </tiles>
+  <tiles layer="FloorGrime2">
+15,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+17,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,
+1,1,1,1,
+2,2,2,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,9,10,
+0,0,0,0,
+9,18,18,3
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,14,15,
+0,0,0,0,
+14,0,0,19
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+20,20,20,20,
+20,20,20,20,
+20,20,20,20
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,
+21,21,21,21,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

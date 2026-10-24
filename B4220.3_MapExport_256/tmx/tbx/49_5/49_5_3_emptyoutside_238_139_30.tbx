@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_community_church_small_01_138"/>
+  <tile tile="walls_detailing_01_16"/>
+  <tile tile="location_community_church_small_01_4"/>
+  <tile tile="location_community_church_small_01_124"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="vegetation_ornamental_01_5"/>
+  <tile tile="location_community_church_small_01_130"/>
+  <tile tile="location_community_church_small_01_116"/>
+  <tile tile="walls_exterior_house_02_0"/>
+  <tile tile="roofs_02_2"/>
+  <tile tile="walls_exterior_roofs_09_2"/>
+  <tile tile="roofs_02_0"/>
+  <tile tile="walls_exterior_roofs_09_0"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="3_emptyoutside" InternalName="emptyoutside" Color="86 101 84" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="FloorOverlay">
+1,0,
+0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+2,0,
+3,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+4,0,
+2,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+5,0,
+5,0
+  </tiles>
+  <tiles layer="Vegetation">
+6,0,
+6,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+7,0,
+3,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+8,0,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+0,9,
+10,11
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1
+  </rooms>
+  <tiles layer="Floor">
+12,13,
+0,0
+  </tiles>
+ </floor>
+</building>

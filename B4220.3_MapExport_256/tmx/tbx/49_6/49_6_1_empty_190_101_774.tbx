@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_restaurant_bar_01_24"/>
+  <tile tile="walls_commercial_01_96"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="floors_exterior_street_01_16"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="1_empty" InternalName="empty" Color="91 139 125" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,
+0,
+0
+  </rooms>
+  <tiles layer="Floor">
+1,0,
+1,0,
+1,0,
+1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,2,
+0,2,
+0,2,
+0,2
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,
+1,
+1
+  </rooms>
+  <tiles layer="Floor">
+0,2,
+0,2,
+0,2,
+0,2
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,
+0,
+0
+  </rooms>
+  <tiles layer="Floor">
+3,0,
+3,0,
+3,0,
+3,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,0,
+4,0,
+4,0,
+4,0
+  </tiles>
+ </floor>
+</building>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_41"/>
+  <tile tile="floors_interior_carpet_01_3"/>
+  <tile tile="walls_interior_house_01_1"/>
+  <tile tile="walls_interior_house_04_4"/>
+  <tile tile="walls_interior_house_01_0"/>
+  <tile tile="walls_interior_detailing_01_5"/>
+  <tile tile="walls_interior_detailing_01_16"/>
+  <tile tile="walls_interior_detailing_01_4"/>
+  <tile tile="walls_interior_house_01_10"/>
+  <tile tile="floors_rugs_01_52"/>
+  <tile tile="rooftop_furniture_50"/>
+  <tile tile="walls_decoration_01_9"/>
+  <tile tile="walls_interior_detailing_01_14"/>
+  <tile tile="lighting_indoor_01_3"/>
+  <tile tile="fixtures_doors_frames_01_0"/>
+  <tile tile="fixtures_doors_01_0"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_30_02_27"/>
+  <tile tile="roofs_30_02_26"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_livingroom" InternalName="livingroom" Color="100 131 94" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1
+  </rooms>
+  <tiles layer="Floor">
+1,2,
+1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,
+5,3
+  </tiles>
+  <tiles layer="FloorGrime">
+6,7,
+8,6
+  </tiles>
+  <tiles layer="FloorGrime2">
+9,10,
+11,12
+  </tiles>
+  <tiles layer="FloorFurniture">
+13,14,
+0,0
+  </tiles>
+  <tiles layer="Vegetation">
+15,0,
+0,0
+  </tiles>
+  <tiles layer="Walls">
+16,0,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+17,17,
+17,17
+  </tiles>
+  <tiles layer="FloorOverlay">
+18,18,
+19,19
+  </tiles>
+ </floor>
+</building>

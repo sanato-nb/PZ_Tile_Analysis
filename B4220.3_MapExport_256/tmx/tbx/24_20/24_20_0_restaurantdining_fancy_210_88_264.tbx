@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_6"/>
+  <tile tile="blends_street_01_54"/>
+  <tile tile="walls_interior_house_03_0"/>
+  <tile tile="furniture_seating_indoor_02_1"/>
+  <tile tile="lighting_indoor_01_22"/>
+  <tile tile="walls_interior_house_03_22"/>
+  <tile tile="walls_interior_house_03_3"/>
+  <tile tile="furniture_seating_indoor_02_2"/>
+  <tile tile="walls_interior_house_03_1"/>
+  <tile tile="walls_interior_detailing_01_32"/>
+  <tile tile="furniture_tables_high_01_15"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="walls_interior_detailing_01_35"/>
+  <tile tile="walls_interior_detailing_01_33"/>
+  <tile tile="walls_detailing_01_80"/>
+  <tile tile="walls_detailing_01_83"/>
+  <tile tile="walls_detailing_01_81"/>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="industry_02_148"/>
+  <tile tile="industry_02_149"/>
+  <tile tile="industry_02_147"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_restaurantdining_fancy" InternalName="restaurantdining_fancy" Color="117 91 71" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,5,6,
+7,0,8,9
+  </tiles>
+  <tiles layer="FloorGrime">
+10,0,11,12,
+13,0,0,14
+  </tiles>
+  <tiles layer="FloorGrime2">
+15,0,0,0,
+16,0,0,17
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+18,18,18,18,
+18,18,18,18
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,19,
+20,20,20,21
+  </tiles>
+ </floor>
+</building>

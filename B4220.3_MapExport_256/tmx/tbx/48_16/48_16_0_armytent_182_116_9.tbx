@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="6" height="11" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_18"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="furniture_storage_02_31"/>
+  <tile tile="furniture_bedding_01_59"/>
+  <tile tile="overlay_grime_floor_01_42"/>
+  <tile tile="overlay_grime_floor_01_34"/>
+  <tile tile="overlay_grime_floor_01_26"/>
+  <tile tile="overlay_grime_floor_01_41"/>
+  <tile tile="overlay_grime_floor_01_33"/>
+  <tile tile="overlay_grime_floor_01_25"/>
+  <tile tile="overlay_grime_floor_01_40"/>
+  <tile tile="overlay_grime_floor_01_32"/>
+  <tile tile="overlay_grime_floor_01_24"/>
+  <tile tile="overlay_grime_floor_01_35"/>
+  <tile tile="overlay_grime_floor_01_27"/>
+  <tile tile="furniture_bedding_01_58"/>
+  <tile tile="overlay_grime_floor_01_13"/>
+  <tile tile="overlay_grime_floor_01_14"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="location_military_tent_01_3"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="location_military_tent_01_1"/>
+  <tile tile="location_military_tent_01_0"/>
+  <tile tile="location_military_tent_01_8"/>
+  <tile tile="location_military_tent_01_2"/>
+  <tile tile="furniture_storage_02_28"/>
+  <tile tile="location_military_tent_01_34"/>
+  <tile tile="furniture_storage_02_29"/>
+  <tile tile="location_military_tent_01_32"/>
+  <tile tile="location_military_tent_01_33"/>
+  <tile tile="location_military_tent_01_60"/>
+  <tile tile="location_military_generic_01_8"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="location_military_tent_01_48"/>
+  <tile tile="location_military_tent_01_49"/>
+  <tile tile="location_military_tent_01_50"/>
+  <tile tile="location_military_tent_01_51"/>
+  <tile tile="location_military_tent_01_52"/>
+  <tile tile="location_military_tent_01_53"/>
+  <tile tile="location_military_tent_01_16"/>
+  <tile tile="location_military_tent_01_17"/>
+  <tile tile="location_military_tent_01_18"/>
+  <tile tile="location_military_tent_01_19"/>
+  <tile tile="location_military_tent_01_20"/>
+  <tile tile="location_military_tent_01_21"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_armytent" InternalName="armytent" Color="86 91 122" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1,
+1,1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+1,1,1,1,1,1,0,
+0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,3,3,3,3,4,
+2,0,0,0,0,5,4,
+2,6,0,7,8,9,4,
+2,0,0,10,11,12,4,
+2,6,0,13,14,15,4,
+2,0,0,16,17,5,4,
+2,6,0,0,18,6,4,
+2,0,0,0,0,5,4,
+2,6,0,0,18,6,4,
+2,19,20,0,0,5,4,
+2,6,0,0,18,6,4,
+21,21,22,0,21,21,23
+  </tiles>
+  <tiles layer="FloorGrime">
+3,24,24,24,24,24,25,
+25,0,0,0,0,0,25,
+25,0,0,0,18,6,25,
+26,0,0,0,0,5,26,
+25,0,0,0,18,6,25,
+25,0,0,0,0,0,25,
+25,0,0,0,0,0,25,
+26,0,0,0,0,0,26,
+25,0,0,0,0,0,25,
+25,0,0,0,0,0,25,
+25,0,0,0,0,0,25,
+24,24,0,0,24,24,22
+  </tiles>
+  <tiles layer="FloorGrime2">
+27,6,28,28,18,6,29,
+30,0,0,0,0,0,31,
+18,0,0,0,0,0,32,
+30,0,0,0,0,0,33,
+18,0,0,0,0,0,31,
+30,0,0,0,0,0,31,
+18,0,0,0,0,0,32,
+30,0,0,0,0,0,33,
+18,0,0,0,0,0,31,
+30,0,0,0,0,0,31,
+18,0,0,0,0,0,32,
+34,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+18,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,31,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,31,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+35,35,35,35,35,35,0,
+36,37,38,39,40,41,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+36,37,38,39,40,41,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+42,43,44,45,46,47,0,
+0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+42,43,44,45,46,47,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

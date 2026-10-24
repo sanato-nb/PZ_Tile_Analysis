@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="10" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="carpentry_02_95"/>
+  <tile tile="location_military_generic_01_0"/>
+  <tile tile="furniture_storage_02_16"/>
+  <tile tile="location_military_generic_01_1"/>
+  <tile tile="furniture_tables_high_01_50"/>
+  <tile tile="furniture_tables_high_01_51"/>
+  <tile tile="furniture_storage_02_11"/>
+  <tile tile="furniture_storage_02_9"/>
+  <tile tile="furniture_tables_high_01_52"/>
+  <tile tile="furniture_tables_high_01_53"/>
+  <tile tile="furniture_storage_02_31"/>
+  <tile tile="roofs_03_6"/>
+  <tile tile="roofs_03_38"/>
+  <tile tile="location_military_generic_01_6"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_03_22"/>
+  <tile tile="roofs_03_54"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_gunstorage" InternalName="gunstorage" Color="180 119 64" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1
+  </rooms>
+  <tiles layer="FloorOverlay">
+1,0,0,0,1,0,0,0,0,1,0,
+0,0,0,0,2,0,0,0,0,3,0,
+4,0,5,6,7,8,0,9,10,11,0,
+1,12,12,12,1,12,12,13,12,1,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,0,0,0,0,14,0,
+3,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+13,0,0,0,12,0,0,0,0,12,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+15,15,15,15,15,15,15,15,15,15,0,
+15,15,15,15,15,15,15,15,15,15,0,
+15,15,15,15,15,15,15,15,15,15,0,
+0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+16,16,17,16,16,16,17,17,16,16,0,
+17,16,16,16,16,16,17,17,16,16,0,
+17,16,16,16,16,16,17,17,16,16,0,
+0,0,0,0,0,0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

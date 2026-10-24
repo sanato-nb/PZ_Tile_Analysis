@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="6" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="blends_street_01_21"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="location_military_tent_01_51"/>
+  <tile tile="location_military_tent_01_52"/>
+  <tile tile="location_military_tent_01_19"/>
+  <tile tile="location_military_tent_01_20"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_armystorage" InternalName="armystorage" Color="81 187 130" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,
+1,1,
+1,1,
+1,1,
+1,1,
+1,1
+  </rooms>
+  <tiles layer="Floor">
+0,0,0,
+0,0,0,
+0,0,0,
+1,0,0,
+1,0,0,
+1,0,0,
+1,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,
+0,0,
+0,0,
+0,0,
+0,0,
+0,0
+  </rooms>
+  <tiles layer="Floor">
+2,2,0,
+2,2,0,
+2,2,0,
+2,2,0,
+2,2,0,
+2,2,0,
+3,4,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,0,
+5,6,0,
+5,6,0,
+5,6,0,
+5,6,0,
+5,6,0,
+0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+5,6,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </tiles>
+ </floor>
+</building>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="5" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_carpet_01_12"/>
+  <tile tile="walls_interior_house_02_26"/>
+  <tile tile="walls_interior_house_02_17"/>
+  <tile tile="walls_interior_house_02_27"/>
+  <tile tile="walls_exterior_house_02_0"/>
+  <tile tile="walls_interior_house_02_16"/>
+  <tile tile="overlay_grime_wall_01_26"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_27"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="fixtures_doors_01_0"/>
+  <tile tile="fixtures_doors_01_1"/>
+  <tile tile="roofs_02_7"/>
+  <tile tile="furniture_tables_high_01_21"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="walls_exterior_roofs_04_8"/>
+  <tile tile="roofs_02_90"/>
+  <tile tile="roofs_02_5"/>
+  <tile tile="location_shop_bargNclothes_01_48"/>
+  <tile tile="walls_exterior_roofs_04_9"/>
+  <tile tile="location_shop_bargNclothes_01_49"/>
+  <tile tile="roofs_02_84"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_livingroom" InternalName="livingroom" Color="86 91 79" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,0,
+1,1,1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,0,3,4,3,5,
+6,0,0,0,0,3
+  </tiles>
+  <tiles layer="FloorGrime">
+7,0,8,9,8,10,
+10,0,0,0,0,8
+  </tiles>
+  <tiles layer="FloorGrime2">
+11,0,0,12,0,13,
+0,0,0,0,0,14
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+15,15,15,15,15,16,
+15,15,15,15,15,15
+  </tiles>
+  <tiles layer="FloorOverlay">
+17,17,17,17,18,19,
+17,17,17,17,18,20
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,0,0,
+0,0,0,0,0,21
+  </tiles>
+  <tiles layer="FloorGrime2">
+0,0,0,0,0,0,
+0,0,0,0,0,22
+  </tiles>
+ </floor>
+</building>

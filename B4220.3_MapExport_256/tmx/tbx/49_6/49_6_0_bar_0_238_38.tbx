@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="12" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_46"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="walls_exterior_house_01_52"/>
+  <tile tile="location_restaurant_bar_01_1"/>
+  <tile tile="furniture_seating_indoor_03_45"/>
+  <tile tile="furniture_tables_high_01_23"/>
+  <tile tile="furniture_seating_indoor_03_47"/>
+  <tile tile="furniture_seating_indoor_03_46"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="walls_exterior_house_01_55"/>
+  <tile tile="location_restaurant_bar_01_45"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="walls_commercial_01_113"/>
+  <tile tile="walls_exterior_house_02_5"/>
+  <tile tile="overlay_grime_wall_01_19"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="overlay_grime_wall_01_41"/>
+  <tile tile="walls_exterior_house_01_53"/>
+  <tile tile="location_restaurant_bar_01_29"/>
+  <tile tile="location_restaurant_bar_01_30"/>
+  <tile tile="location_restaurant_bar_01_31"/>
+  <tile tile="vegetation_ornamental_01_4"/>
+  <tile tile="vegetation_ornamental_01_8"/>
+  <tile tile="walls_commercial_01_97"/>
+  <tile tile="furniture_tables_high_01_43"/>
+  <tile tile="furniture_tables_high_01_42"/>
+  <tile tile="furniture_seating_indoor_02_3"/>
+  <tile tile="furniture_seating_indoor_02_2"/>
+  <tile tile="floors_interior_tilesandwood_01_19"/>
+  <tile tile="walls_exterior_house_low_01_28"/>
+  <tile tile="walls_exterior_house_low_01_29"/>
+  <tile tile="walls_exterior_house_low_01_31"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_bar" InternalName="bar" Color="120 170 82" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+1,1,1,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,2,2,3,
+0,0,0,3,
+0,0,0,3,
+0,0,0,0,
+0,0,0,3,
+4,0,0,3,
+0,0,0,3,
+0,0,5,0,
+0,0,6,0,
+0,0,7,3,
+0,0,0,3,
+6,8,0,3,
+9,9,0,10
+  </tiles>
+  <tiles layer="FloorGrime">
+11,11,11,12,
+0,0,0,12,
+0,0,0,12,
+0,0,0,0,
+0,0,0,12,
+0,0,0,12,
+0,0,0,12,
+0,0,0,3,
+0,0,0,3,
+0,0,0,12,
+0,0,0,12,
+0,0,0,12,
+13,14,9,15
+  </tiles>
+  <tiles layer="FloorGrime2">
+16,16,16,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,3,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,12,
+0,0,0,12,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+17,16,18,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+19,20,21,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,12,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+22,22,16,0
+  </tiles>
+  <tiles layer="Vegetation">
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,23,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,3,
+1,1,1,3,
+1,1,1,3,
+1,1,1,3,
+1,1,1,3,
+1,1,1,3,
+1,1,1,3,
+11,11,11,3,
+0,0,0,3,
+0,0,0,3,
+0,0,0,3,
+0,0,0,3,
+24,14,18,10
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,0,
+25,0,0,0,
+26,27,0,0,
+25,27,0,0,
+26,28,0,0,
+28,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+29,29,29,30,
+31,31,31,32
+  </tiles>
+ </floor>
+</building>

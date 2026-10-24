@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="location_shop_greenes_01_33"/>
+  <tile tile="floors_interior_tilesandwood_01_18"/>
+  <tile tile="walls_interior_house_01_96"/>
+  <tile tile="vegetation_indoor_01_9"/>
+  <tile tile="walls_garage_01_34"/>
+  <tile tile="walls_interior_house_01_99"/>
+  <tile tile="walls_interior_house_01_97"/>
+  <tile tile="walls_commercial_03_44"/>
+  <tile tile="walls_commercial_03_47"/>
+  <tile tile="walls_commercial_03_45"/>
+  <tile tile="floors_exterior_street_01_17"/>
+  <tile tile="floors_exterior_street_01_16"/>
+  <tile tile="industry_01_7"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_restaurantdining" InternalName="restaurantdining" Color="153 93 83" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,0,4,5,
+6,0,0,7
+  </tiles>
+  <tiles layer="FloorGrime">
+8,0,0,0,
+9,0,0,10
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+11,12,12,13,
+11,12,12,13
+  </tiles>
+ </floor>
+</building>

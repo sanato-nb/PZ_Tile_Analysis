@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="3" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="industry_01_7"/>
+  <tile tile="walls_detailing_01_91"/>
+  <tile tile="walls_detailing_01_89"/>
+  <tile tile="walls_detailing_01_88"/>
+  <tile tile="walls_detailing_01_90"/>
+  <tile tile="constructedobjects_01_70"/>
+  <tile tile="constructedobjects_01_69"/>
+  <tile tile="constructedobjects_01_68"/>
+  <tile tile="constructedobjects_01_71"/>
+  <tile tile="fixtures_railings_01_59"/>
+  <tile tile="industry_01_38"/>
+  <tile tile="industry_01_37"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="industry_trucks_01_48"/>
+  <tile tile="walls_commercial_01_26"/>
+  <tile tile="furniture_seating_indoor_01_49"/>
+  <tile tile="fixtures_counters_01_63"/>
+  <tile tile="fixtures_counters_01_57"/>
+  <tile tile="fixtures_counters_01_56"/>
+  <tile tile="walls_commercial_01_112"/>
+  <tile tile="walls_commercial_01_113"/>
+  <tile tile="walls_commercial_01_115"/>
+  <tile tile="industry_trucks_01_5"/>
+  <tile tile="fixtures_railings_01_49"/>
+  <tile tile="overlay_grime_wall_01_26"/>
+  <tile tile="appliances_com_01_11"/>
+  <tile tile="industry_trucks_01_6"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="lighting_outdoor_01_33"/>
+  <tile tile="fixtures_doors_01_32"/>
+  <tile tile="overlay_grime_wall_01_18"/>
+  <tile tile="security_01_4"/>
+  <tile tile="fixtures_counters_01_62"/>
+  <tile tile="overlay_grime_wall_01_40"/>
+  <tile tile="location_military_generic_01_22"/>
+  <tile tile="security_01_0"/>
+  <tile tile="lighting_indoor_01_1"/>
+  <tile tile="floors_interior_tilesandwood_01_18"/>
+  <tile tile="overlay_grime_floor_01_37"/>
+  <tile tile="overlay_grime_floor_01_36"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="2_armystorage" InternalName="armystorage" Color="170 189 180" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,
+1,1,1,1,
+1,1,1,1,
+1,1,1,1
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,3,3,4,
+4,0,0,4,
+4,0,0,4,
+3,3,3,5
+  </tiles>
+  <tiles layer="FloorGrime">
+6,7,7,8,
+8,0,0,8,
+8,0,0,8,
+7,7,7,9
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+10,7,7,11,
+8,0,0,11,
+8,0,0,11,
+12,12,12,11
+  </tiles>
+  <tiles layer="FloorOverlay">
+6,0,0,8,
+0,0,0,8,
+0,0,0,8,
+7,7,7,9
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+1,1,1,
+1,1,1,
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,11,
+1,1,1,11,
+1,1,1,11,
+12,12,12,11
+  </tiles>
+  <tiles layer="FloorOverlay">
+13,14,14,15,
+16,17,18,15,
+13,19,20,21,
+22,22,22,23
+  </tiles>
+  <tiles layer="FloorGrime">
+14,24,24,25,
+26,0,27,0,
+21,0,0,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+28,29,29,30,
+31,0,0,0,
+21,0,0,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+32,33,34,0,
+0,0,0,0,
+35,0,0,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+36,37,0,0,
+0,0,0,0,
+19,0,0,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="Walls">
+38,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,
+0,0,0,
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+39,39,39,39,
+39,39,39,39,
+39,39,39,39,
+39,39,39,39
+  </tiles>
+  <tiles layer="FloorOverlay">
+0,0,0,40,
+0,0,0,40,
+0,0,0,40,
+41,41,41,40
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,41
+  </tiles>
+ </floor>
+</building>

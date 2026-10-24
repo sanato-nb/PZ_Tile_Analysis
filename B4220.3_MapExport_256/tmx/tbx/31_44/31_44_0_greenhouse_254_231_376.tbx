@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="2" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_32"/>
+  <tile tile="walls_exterior_wooden_01_24"/>
+  <tile tile="walls_interior_house_01_101"/>
+  <tile tile="walls_detailing_01_88"/>
+  <tile tile="d_plants_1_16"/>
+  <tile tile="walls_interior_detailing_01_37"/>
+  <tile tile="location_business_office_generic_01_38"/>
+  <tile tile="location_business_office_generic_01_39"/>
+  <tile tile="furniture_tables_high_01_34"/>
+  <tile tile="furniture_tables_high_01_35"/>
+  <tile tile="floors_interior_carpet_01_5"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="roofs_30_01_28"/>
+  <tile tile="roofs_30_01_1"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_greenhouse" InternalName="greenhouse" Color="169 86 110" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1
+  </rooms>
+  <tiles layer="Floor">
+0,0,0,
+1,1,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,0,0,
+3,3,0
+  </tiles>
+  <tiles layer="FloorGrime">
+4,5,0,
+6,6,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+5,0,0,
+7,8,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,
+9,10,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0
+  </rooms>
+  <tiles layer="Floor">
+11,11,0,
+11,11,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0
+  </rooms>
+  <tiles layer="Floor">
+12,12,0,
+12,12,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+13,13,0,
+14,14,0
+  </tiles>
+ </floor>
+</building>

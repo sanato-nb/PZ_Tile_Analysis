@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="3" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_47"/>
+  <tile tile="floors_exterior_tilesandstone_01_3"/>
+  <tile tile="walls_commercial_02_55"/>
+  <tile tile="location_shop_generic_01_97"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="lighting_indoor_03_18"/>
+  <tile tile="lighting_indoor_03_17"/>
+  <tile tile="street_curbs_01_41"/>
+  <tile tile="walls_exterior_house_01_35"/>
+  <tile tile="lighting_indoor_03_16"/>
+  <tile tile="walls_detailing_01_4"/>
+  <tile tile="walls_commercial_02_48"/>
+  <tile tile="walls_commercial_02_49"/>
+  <tile tile="walls_commercial_02_50"/>
+  <tile tile="fixtures_railings_01_75"/>
+  <tile tile="industry_railroad_05_46"/>
+  <tile tile="walls_commercial_01_51"/>
+  <tile tile="fixtures_railings_01_65"/>
+  <tile tile="fixtures_railings_01_67"/>
+  <tile tile="walls_detailing_01_6"/>
+  <tile tile="location_trailer_01_1"/>
+  <tile tile="location_trailer_01_9"/>
+  <tile tile="fixtures_railings_01_64"/>
+  <tile tile="location_shop_mall_signs_01_103"/>
+  <tile tile="overlay_grime_wall_01_17"/>
+  <tile tile="walls_detailing_01_3"/>
+  <tile tile="walls_detailing_01_5"/>
+  <tile tile="fixtures_windows_detailing_01_30"/>
+  <tile tile="fixtures_windows_detailing_01_31"/>
+  <tile tile="fixtures_windows_01_9"/>
+  <tile tile="walls_interior_detailing_01_5"/>
+  <tile tile="walls_interior_detailing_01_7"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_jewelrystore" InternalName="jewelrystore" Color="168 98 128" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,2,
+2,2,2,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+3,4,4,5,
+6,6,6,7
+  </tiles>
+  <tiles layer="FloorGrime">
+4,8,9,3,
+10,10,10,11
+  </tiles>
+  <tiles layer="FloorGrime2">
+12,0,0,13,
+14,15,16,17
+  </tiles>
+  <tiles layer="FloorFurniture">
+0,0,0,17,
+17,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+18,18,18,19,
+20,20,20,21
+  </tiles>
+  <tiles layer="FloorOverlay">
+6,6,6,13,
+22,22,22,0
+  </tiles>
+  <tiles layer="FloorGrime">
+23,24,23,25,
+26,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+27,27,28,29,
+0,0,0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+30,30,27,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="Vegetation">
+0,31,31,0,
+0,0,0,0
+  </tiles>
+  <tiles layer="Walls">
+0,32,0,0,
+0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0
+  </rooms>
+  <tiles layer="Floor">
+33,33,33,34,
+0,0,0,0
+  </tiles>
+ </floor>
+</building>

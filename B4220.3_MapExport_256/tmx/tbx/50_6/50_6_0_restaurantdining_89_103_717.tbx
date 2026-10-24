@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="5" height="8" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_tilesandwood_01_21"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="furniture_tables_high_01_19"/>
+  <tile tile="furniture_tables_high_01_20"/>
+  <tile tile="walls_commercial_02_52"/>
+  <tile tile="location_restaurant_bar_01_8"/>
+  <tile tile="location_restaurant_bar_01_9"/>
+  <tile tile="walls_commercial_02_51"/>
+  <tile tile="location_restaurant_bar_01_14"/>
+  <tile tile="location_restaurant_bar_01_15"/>
+  <tile tile="walls_exterior_house_02_64"/>
+  <tile tile="walls_commercial_02_53"/>
+  <tile tile="walls_exterior_house_02_65"/>
+  <tile tile="walls_exterior_house_02_67"/>
+  <tile tile="vegetation_ornamental_01_17"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="overlay_grime_wall_01_16"/>
+  <tile tile="vegetation_ornamental_01_23"/>
+  <tile tile="vegetation_ornamental_01_29"/>
+  <tile tile="vegetation_ornamental_01_30"/>
+  <tile tile="furniture_seating_indoor_03_44"/>
+  <tile tile="furniture_tables_high_01_16"/>
+  <tile tile="furniture_seating_indoor_03_47"/>
+  <tile tile="furniture_seating_indoor_03_45"/>
+  <tile tile="ceilings_01_0"/>
+  <tile tile="walls_exterior_roofs_08_38"/>
+  <tile tile="walls_exterior_roofs_08_24"/>
+  <tile tile="walls_exterior_roofs_08_32"/>
+  <tile tile="walls_exterior_roofs_08_37"/>
+  <tile tile="walls_exterior_roofs_08_36"/>
+  <tile tile="walls_exterior_roofs_08_28"/>
+  <tile tile="walls_exterior_roofs_08_29"/>
+  <tile tile="roofs_02_91"/>
+  <tile tile="roofs_02_4"/>
+  <tile tile="roofs_02_15"/>
+  <tile tile="roofs_02_11"/>
+  <tile tile="roofs_02_5"/>
+  <tile tile="roofs_02_0"/>
+  <tile tile="roofs_02_68"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_restaurantdining" InternalName="restaurantdining" Color="190 137 90" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1,
+1,1,1,1,1
+  </rooms>
+  <tiles layer="Floor">
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+1,1,1,1,1,0,
+0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+2,0,0,3,4,5,
+2,0,0,6,7,8,
+2,0,0,9,10,11,
+2,0,0,3,4,11,
+2,0,0,6,7,12,
+2,0,0,9,10,5,
+2,0,0,3,4,8,
+2,0,0,6,7,11,
+13,13,13,13,13,14
+  </tiles>
+  <tiles layer="FloorGrime">
+11,0,0,0,0,15,
+11,0,0,0,0,15,
+11,0,0,0,0,16,
+11,0,0,0,0,16,
+11,0,0,0,0,15,
+11,0,0,0,0,15,
+11,0,0,0,0,15,
+11,0,0,0,0,16,
+17,17,17,17,17,18
+  </tiles>
+  <tiles layer="FloorGrime2">
+19,0,0,0,0,0,
+19,0,0,0,0,0,
+19,0,0,0,0,20,
+19,0,0,0,0,20,
+19,0,0,0,0,0,
+19,0,0,0,0,0,
+19,0,0,0,0,0,
+19,0,0,0,0,20,
+21,21,21,21,22,22
+  </tiles>
+  <tiles layer="FloorFurniture">
+23,0,0,0,0,0,
+24,0,0,0,0,0,
+25,0,0,0,0,0,
+0,0,0,0,0,0,
+26,0,0,0,0,0,
+24,0,0,0,0,0,
+25,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0,
+0,0,0,0,0
+  </rooms>
+  <tiles layer="Floor">
+27,27,27,27,27,28,
+27,27,27,27,27,29,
+27,27,27,27,27,0,
+27,27,27,27,27,0,
+27,27,27,27,27,30,
+27,27,27,27,27,28,
+27,27,27,27,27,29,
+27,27,27,27,27,0,
+0,31,32,33,34,0
+  </tiles>
+  <tiles layer="FloorOverlay">
+35,35,0,36,37,0,
+35,35,0,36,38,0,
+35,35,0,36,39,0,
+35,35,0,36,39,0,
+35,35,0,36,39,0,
+35,35,0,36,37,0,
+35,35,0,36,38,0,
+40,40,0,36,39,0,
+0,0,0,0,0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+0,0,0,41,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,41,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0,
+0,0,0,0,0,0
+  </tiles>
+ </floor>
+</building>

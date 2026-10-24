@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building version="4" width="1" height="1" ExteriorWall="0" ExteriorWallTrim="0" Door="0" DoorFrame="0" Window="0" Curtains="0" Shutters="0" Stairs="0" RoofCap="0" RoofSlope="0" RoofTop="0" GrimeWall="0">
+<properties>
+<property name="Legend" value="Residential"/>
+</properties>
+ <user_tiles>
+  <tile tile="floors_interior_carpet_01_12"/>
+  <tile tile="blends_street_01_103"/>
+  <tile tile="blends_street_01_96"/>
+  <tile tile="overlay_grime_floor_01_0"/>
+  <tile tile="overlay_grime_floor_01_28"/>
+  <tile tile="overlay_grime_floor_01_29"/>
+  <tile tile="overlay_grime_floor_01_30"/>
+  <tile tile="overlay_grime_floor_01_1"/>
+  <tile tile="location_shop_fossoil_01_6"/>
+  <tile tile="location_shop_fossoil_01_5"/>
+  <tile tile="location_shop_fossoil_01_7"/>
+  <tile tile="location_shop_fossoil_01_4"/>
+  <tile tile="overlay_grime_wall_01_0"/>
+  <tile tile="overlay_grime_wall_01_1"/>
+  <tile tile="overlay_grime_wall_01_3"/>
+  <tile tile="overlay_grime_wall_01_2"/>
+  <tile tile="location_shop_fossoil_01_39"/>
+  <tile tile="location_shop_fossoil_01_38"/>
+ </user_tiles>
+ <used_tiles></used_tiles>
+ <used_furniture></used_furniture>
+ <room Name="0_gasstore" InternalName="gasstore" Color="157 94 119" InteriorWall="0" InteriorWallTrim="0" Floor="0" GrimeFloor="0" GrimeWall="0"/>
+ <floor>
+  <rooms>
+1
+  </rooms>
+  <tiles layer="Floor">
+1,2,
+3,2
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,5,
+6,7
+  </tiles>
+  <tiles layer="FloorGrime">
+8,9,
+10,11
+  </tiles>
+  <tiles layer="FloorGrime2">
+12,13,
+14,15
+  </tiles>
+  <tiles layer="FloorFurniture">
+16,0,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+1,9,
+10,11
+  </tiles>
+  <tiles layer="FloorOverlay">
+4,0,
+0,0
+  </tiles>
+  <tiles layer="FloorGrime">
+8,0,
+0,0
+  </tiles>
+  <tiles layer="FloorGrime2">
+12,0,
+0,0
+  </tiles>
+  <tiles layer="FloorFurniture">
+16,0,
+0,0
+  </tiles>
+ </floor>
+ <floor>
+  <rooms>
+0
+  </rooms>
+  <tiles layer="Floor">
+17,17,
+18,18
+  </tiles>
+ </floor>
+</building>
