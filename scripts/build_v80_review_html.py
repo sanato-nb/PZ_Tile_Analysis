@@ -26,7 +26,7 @@ for r in rows:
  cards.append('<article><h2>'+html.escape(r['tile_set_locator']+'/'+r['local_id'])+'</h2><p>'+html.escape(r['observed_features'])+'</p><p>잠정 정체: '+html.escape(r['identity_candidate'] or '보류')+'</p><p>부품 역할: '+html.escape(r['part_role'])+'</p><p>신뢰도: '+html.escape(r['confidence'])+'</p>'+''.join(one)+'</article>')
 assert len(images)==len(set(images))==100
 page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>v80 B42 타일 20종 직접 검수</title><style>body{font:16px system-ui;background:#f3f4f6;color:#172b38;max-width:1250px;margin:2rem auto}article{background:white;padding:1rem;margin:1rem;border-radius:10px}img{max-width:100%;height:auto}figure{margin:1rem 0}figcaption{font-weight:bold}</style><h1>v80 타일 이미지 검수 20종 · 잠정 19 · 보류 1</h1><p>PNG 원본 A, TMX 조립 B, 한 배치 제거 C, 다른 사용 위치 D, 비교판. 최종 인증 0.</p>'+''.join(cards)+'</html>'
-assert page.count('data:image/jpeg;base64,')==60
+assert page.count('data:image/jpeg;base64,')==100
 out=CP/'v80_이미지내장_검수.html'
 out.write_text(page,encoding='utf8')
 zp=CP/'v80_증거_20종_A_B_C_D.zip'
