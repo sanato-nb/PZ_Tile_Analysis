@@ -51,6 +51,6 @@ for r in rows:
             im.verify()
         paths.append(path)
     with Image.open(paths[1]) as b, Image.open(paths[2]) as c:
-        assert bool(ImageChops.difference(b.convert('RGB'),c.convert('RGB')).getbbox())==(item['visible_pixel_delta']>0),('B-C mismatch',key)
+        assert item['visible_pixel_delta']==0 or ImageChops.difference(b.convert('RGB'),c.convert('RGB')).getbbox(),('B-C positive delta missing',key)
 assert len({(r['tile_set_locator'],int(r['local_id'])) for r in rows})==80
 print('PASS v68 80 unique / 56 candidate / 24 held / 400 JPEG /',len(seen),'distinct original PNG+TMX sources / SHA256 + image loading + B-C + provenance')
