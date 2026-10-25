@@ -100,7 +100,7 @@ s['unified_database']=dict(version='v79',status='VERIFIED',
     v79_git_checkpoint_integrated=True,image_binaries_in_github=True)
 s['status_date']='2026-10-26'
 s['next_actions']=[
-    'v79 통합 DB의 미관찰 1,980종에서 신규 고유 키를 선정해 PNG·TMX A/B/C/D 직접 검수한다.',
+    'v79 통합 DB의 미관찰 1,968종에서 신규 고유 키를 선정해 PNG·TMX A/B/C/D 직접 검수한다.',
     'v78 이하의 보류 타일은 가림·다중 부품 역할을 다른 위치에서 재검수한다.',
     'PNG 물리 높이 불일치 및 TileZed 공식 Local ID 정합을 독립 검증한다.',
     '사용자 수동 검수 80종 및 재검수 자료는 별도 계보로 보존하며 자동 합산하지 않는다.',
