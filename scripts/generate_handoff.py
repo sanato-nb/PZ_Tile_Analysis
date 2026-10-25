@@ -13,6 +13,13 @@ def render(s):
                f"- 중복 제거 누적 관찰: **{latest.get('merged_unique_observed',0):,}/{s['scope']['unique_tiles']:,}종 ({latest.get('merged_observation_percent',0):.2f}%)**.\n"
                f"- 아직 미관찰: **{latest.get('remaining_unobserved',0):,}종**. 최종 인증 {latest.get('approved_final_certifications',0)}종.\n"
                f"- 기록: `{latest.get('delta_repo_path','')}` (v47 원본 DB와 별도로 보존).")
+ unified=s.get("unified_database") or {}
+ unified_notes=("" if unified.get("status")!="VERIFIED" else
+     f"## 최신 물리 통합 SQLite ({unified['version']})\n\n"
+     f"- **v36 전체 원본 SQLite + v46 전체 데이터 테이블 + v47 병합 색인 + v48 신규 30종 기록**을 한 SQLite로 통합했습니다.\n"
+     f"- 단일 테이블 \`tile_catalog\`: **{unified['observed_unique']:,}/{s['scope']['unique_tiles']:,}종 ({unified['observed_percent']:.2f}%)**, 미관찰 {unified['remaining_unobserved']:,}종, 잠정 후보 {unified['auditable_candidates']:,}종, 최종 인증 {unified['certified']}종.\n"
+     f"- SHA-256 검증과 전체 복원 방법: \`{unified['repo_manifest']}\`, \`{unified['restore_script']}\`.\n"
+     f"- 과거 DB는 별도 보존합니다. v48은 GitHub에 저장된 TSV 전체 필드가 통합되었으며, 로컬 v48 원본 SQLite에만 있던 추가 메타데이터와 고해상도 이미지 바이너리는 아직 GitHub 본문에 모두 포함되지 않았습니다.\n\n")
  return f"""# 프로젝트 좀보이드 B42 타일 정체 분석 — 자동 인수인계
 
 > GitHub 기준일: {s["status_date"]}. **이 문서는 PROJECT_STATE.json에서 자동 생성됩니다.**
@@ -56,7 +63,7 @@ def render(s):
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
-## 최신 체크포인트 (v48)
+{unified_notes}## 최신 체크포인트 (v48)
 
 {latest_notes}
 
