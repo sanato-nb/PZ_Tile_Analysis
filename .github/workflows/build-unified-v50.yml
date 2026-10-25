@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PZ-B42-unified-v50-SQLite
-          path: \${{ runner.temp }}/tile_visual_v50_unified.sqlite
+          path: ${{ runner.temp }}/tile_visual_v50_unified.sqlite
           retention-days: 90
           if-no-files-found: error
       - name: Refresh canonical handoff
