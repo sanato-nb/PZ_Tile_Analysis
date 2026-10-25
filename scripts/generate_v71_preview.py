@@ -152,6 +152,18 @@ for prefix, quota in tiers:
         if sprite is None or not sprite.getbbox():continue
         selected.append(key);added+=1
         if added>=quota:break
+# 나머지 범주에서도 충분한 다른 배치가 있는 미관찰 타일을 보충한다.
+for key in eligible:
+    if len(selected)>=20: break
+    if key in selected: continue
+    uses=OCC[key]
+    other=next((p for p in uses[1:] if p['tmx']!=uses[0]['tmx'] or abs(p['x']-uses[0]['x'])+abs(p['y']-uses[0]['y'])>=5),None)
+    if other is None: continue
+    m=MAP_DATA[uses[0]['tmx']]
+    t=next(t for t in m['tilesets'] if t['name']==key[0])
+    sprite,status=crop(t,key[1])
+    if sprite is None or not sprite.getbbox(): continue
+    selected.append(key)
 TARGETS=selected
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
