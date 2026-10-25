@@ -41,29 +41,29 @@
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
-## 최신 물리 통합 SQLite (v64)
+## 최신 물리 통합 SQLite (v65)
 
-- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v64까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
-- 단일 테이블 `tile_catalog`: **3,072/5,409종 (56.79%)**, 미관찰 2,337종, 잠정 후보 2,656종, 최종 인증 0종.
-- SHA-256 검증과 전체 복원 방법: `analysis/current/v64/MANIFEST.json`, `scripts/restore_unified_v64.py`.
+- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v65까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
+- 단일 테이블 `tile_catalog`: **3,120/5,409종 (57.68%)**, 미관찰 2,289종, 잠정 후보 2,693종, 최종 인증 0종.
+- SHA-256 검증과 전체 복원 방법: `analysis/current/v65/MANIFEST.json`, `scripts/restore_unified_v65.py`.
 - 과거 DB는 별도 보존합니다. 최신 체크포인트 이미지의 GitHub 보관 여부: **보관됨**. 이전 버전의 로컬 보조 이미지·메타데이터는 각 버전 안내를 따릅니다.
 
-## 최신 체크포인트 (v64)
+## 최신 체크포인트 (v65)
 
-- 새로 직접 관찰: **12종** (잠정 후보 7, 보류 5).
-- 중복 제거 누적 관찰: **3,072/5,409종 (56.79%)**.
-- 아직 미관찰: **2,337종**. 최종 인증 0종.
-- 기록: `checkpoints/v64/observations.tsv` (이전 통합 DB와 별도로 보존).
+- 새로 직접 관찰: **48종** (잠정 후보 37, 보류 11).
+- 중복 제거 누적 관찰: **3,120/5,409종 (57.68%)**.
+- 아직 미관찰: **2,289종**. 최종 인증 0종.
+- 기록: `checkpoints/v65/observations.tsv` (이전 통합 DB와 별도로 보존).
 
 ## 다음 실제 작업
 
-1. v64 통합 DB의 미관찰 2,337종을 PNG·TMX A/B/C/D 직접 관찰로 이어간다.
-2. v64 보류 fixtures_bathroom_01/40·43, furniture_bedding_01/64·66, vegetation_indoor_01/3의 B-C 변화 0 및 레이어 가림을 재검수한다.
-3. v63 보류 fixtures_bathroom_01/36 및 industry_01/31의 부품 역할을 별도 재검수한다.
+1. v65 통합 DB의 미관찰 2,289종을 PNG·TMX A/B/C/D 직접 관찰로 이어간다.
+2. v65 보류 11종 중 PNG-TMX 근거가 약한 화장실 칸막이, 검은 침대, 조리기 뒷면, 타이어 더미와 버튼식 전화의 해당 배치를 추가 검토한다.
+3. v64 보류와 v63 보류 타일들의 층·레이어 가림 및 PNG 높이 불일치를 별도 재검수한다.
 4. PNG 선언 높이 불일치와 Local ID 매핑을 TileZed에서 검증한다.
 5. 사용자 수동 검수 80종 및 재검수 기록은 별도 계보로 보존하고 자동 합산하지 않는다.
-6. v63 이하 모든 통합 SQLite·체크포인트·원본 PNG·TMX·충돌 기록을 변경하지 않는다.
-7. v64 신규 12종 A/B/C/D+비교판 60장 JPEG를 checkpoints/v64_preview/에 보관한다.
+6. v64 이하 모든 통합 SQLite·체크포인트·원본 PNG·TMX·충돌 기록을 변경하지 않는다.
+7. v65 신규 48종 A/B/C/D+비교판 240장 JPEG를 checkpoints/v65_preview/에 보관한다.
 
 ## 불변 원칙
 
