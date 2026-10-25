@@ -1,22 +1,23 @@
-# 체크포인트 규칙
+# 분석 체크포인트와 작업 이력
 
-각 분석 배치가 **실제로 완료된 경우에만** `checkpoints/vNN.json`과 이미지 증거/CSV를 기록한다. 한 타일셋·Local ID는 고유 타일 한 건으로 집계한다.
+타일 이미지 분석 작업을 마칠 때마다 **새로 관찰한 고유 타일과 검수 결과**를 버전별로 기록합니다.
 
-체크포인트 예시:
-```json
-{
-  "version": "v47",
-  "date": "YYYY-MM-DD",
-  "input_database_sha256": "실제 SHA-256",
-  "new_observed_unique": 0,
-  "new_provisional_unique": 0,
-  "held": 0,
-  "overlap_with_baseline": null,
-  "mapping_verified_unique": 0,
-  "certified_unique": 0,
-  "evidence_paths": [],
-  "status": "not_started"
-}
-```
+| 위치 | 역할 |
+|---|---|
+| `v47.json` | v36·v46 병합 작업의 당시 기록 |
+| `v48/` | 신규 30종 관찰 기록 |
+| `v50/` | 신규 29종 관찰 기록 |
+| `v51/` | 신규 41종 관찰 기록 |
+| `v52/` | **최신 신규 66종 관찰 기록** |
 
-파일 작성 후 실제 DB와 대조해 `PROJECT_STATE.json`에 근거 있는 수치만 반영한다. GitHub Actions는 `PROJECT_STATE.json` 변경 후 인수인계 텍스트 재생성을 수행하도록 설정돼 있다.
+각 체크포인트의 `observations.tsv`에는 타일셋·Local ID, 원본에서 보이는 외형, 정체 후보/보류, 사용한 TMX 좌표 등이 들어 있습니다. `verify_delta.py`는 새로운 키와 판정 수량을 검사합니다.
+
+## 기록 원칙
+
+1. 이전 버전에서 **미관찰**로 기록된 고유 키만 신규 관찰 수에 포함합니다.
+2. 원본 PNG 및 TMX 주변 조립 A/B/C/D 이미지를 실제로 확인한 경우에만 관찰 기록을 생성합니다.
+3. `candidate`는 잠정 정체 후보, `held`는 추가 검증이 필요한 상태입니다.
+4. PNG–TMX Local ID 및 TileZed 검증 전에는 최종 인증으로 집계하지 않습니다.
+5. 작업 종료 후 새 통합 SQLite와 `PROJECT_STATE.json`을 함께 갱신합니다.
+
+최신 기준은 [프로젝트 상태](../PROJECT_STATE.json)에서 확인합니다. **과거 체크포인트를 지우거나 덮어쓰지 않습니다.**
