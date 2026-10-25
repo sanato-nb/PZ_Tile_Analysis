@@ -1,0 +1,54 @@
+name: Verify PZ analysis database archives
+on:
+  push:
+    branches: [main]
+    paths:
+      - "analysis/archive/**"
+      - "analysis/imports/**"
+      - "scripts/restore_source_databases.py"
+      - "scripts/restore_merged_evidence.py"
+      - "PROJECT_STATE.json"
+      - ".github/workflows/verify-analysis-archives.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout source archives and restore scripts
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /analysis/archive/
+            /analysis/imports/
+            /scripts/
+            /PROJECT_STATE.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Recover original v36 and v46 SQLite, with SHA-256 and integrity checks
+        run: python3 scripts/restore_source_databases.py /tmp/pz_originals
+      - name: Recover merged evidence SQLite
+        run: python3 scripts/restore_merged_evidence.py /tmp/pz_merged.sqlite
+      - name: Verify source and reconciliation counts
+        run: |
+          python3 - <<'PY'
+          import json, sqlite3, pathlib
+          s=json.loads(pathlib.Path("PROJECT_STATE.json").read_text())
+          r=s["reconciliation"]
+          assert r["status"] == "VERIFIED"
+          assert s["scope"]["unique_tiles"] == 5409
+          assert r["merged_unique_observed"] == 2584
+          assert r["v36_v46_overlap_count"] == 402
+          assert r["remaining_unobserved"] == 2825
+          assert r["approved_final_certifications"] == 0
+          for n in (36,46):
+              with sqlite3.connect(f"/tmp/pz_originals/tile_visual_v{n}.sqlite") as c:
+                  assert c.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
+          with sqlite3.connect("/tmp/pz_originals/tile_visual_v36.sqlite") as c:
+              assert c.execute("select count(*) from v36_full_scope").fetchone()[0] == 5409
+          with sqlite3.connect("/tmp/pz_merged.sqlite") as c:
+              assert c.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
+          print("PASS: originals restored, SHA-256 OK, merged database intact; 2584 observed, 2825 remaining")
+          PY
