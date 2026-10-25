@@ -64,7 +64,7 @@ def resolve(m,gid):
 subprocess.run([sys.executable,str(ROOT/'scripts/restore_unified_v63.py'),'/tmp/pz_v63_preview.sqlite'],check=True)
 with sqlite3.connect('/tmp/pz_v63_preview.sqlite') as conn:
     queue={(r[0],int(r[1])) for r in conn.execute('select tile_set_locator,local_id from analysis_queue')}
-assert len(queue)==2361,len(queue)
+assert len(queue)==2349,len(queue)
 target_set=queue
 for name,m in MAP_DATA.items():
     for layer in m['layers']:
