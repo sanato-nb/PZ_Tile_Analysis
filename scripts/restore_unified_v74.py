@@ -9,7 +9,7 @@ packed=base64.b64decode(encoded,validate=True)
 assert hashlib.sha256(packed).hexdigest()==m['compressed_sha256']
 raw=zlib.decompress(packed)
 assert hashlib.sha256(raw).hexdigest()==m['sqlite_sha256']
-target=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else root/'analysis/current/tile_visual_v73_unified.sqlite'
+target=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else root/'analysis/current/tile_visual_v74_unified.sqlite'
 target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(raw)
 with sqlite3.connect(target) as c:
  assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
@@ -17,7 +17,7 @@ with sqlite3.connect(target) as c:
   'observed':c.execute('select count(*) from tile_catalog where observed_any=1').fetchone()[0],
   'candidate':c.execute('select count(*) from tile_catalog where provisional_candidate_any_auditable=1').fetchone()[0],
   'remaining':c.execute('select count(*) from analysis_queue').fetchone()[0],
-  'v73review':c.execute('select count(*) from v73_visual_review').fetchone()[0],
+  'v74review':c.execute('select count(*) from v74_visual_review').fetchone()[0],
   'final':c.execute('select count(*) from tile_catalog where identity_final_certified=1').fetchone()[0]}
- assert checks=={'all':5409,'observed':3357,'candidate':2882,'remaining':2052,'v73review':12,'final':0},checks
+ assert checks=={'all':5409,'observed':3357,'candidate':2882,'remaining':2052,'v74review':12,'final':0},checks
 print('PASS SHA256/SQLite v74',str(target),len(raw),'bytes',checks)
