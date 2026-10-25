@@ -24,7 +24,7 @@
 │       ├── v54/
 │       ├── v55/
 │       ├── v56/
-│       └── v57/                 ★ 현재 최신 통합 DB 복원 자료
+│       ├── v57/\n│       └── v58/                 ★ 현재 최신 통합 DB 복원 자료
 │
 ├── 📂 checkpoints/              분석 배치별 진행 기록
 │   ├── v48/
@@ -35,7 +35,7 @@
 │   ├── v54/
 │   ├── v55/
 │   ├── v56/
-│   └── v57/                     ★ 최근 신규 48종 관찰 기록
+│   ├── v57/\n│   ├── v58/                     ★ 신규 6종 관찰 기록\n│   └── v58_preview/             원본 A/B/C/D JPEG 비교판 30개
 │
 ├── 📂 scripts/                  DB 생성·복원·검증 Python 프로그램
 ├── 📂 .github/workflows/        GitHub Actions 자동 검증 및 인수인계
@@ -60,19 +60,19 @@
 ## 2. 최신 작업 진행도
 
 <details>
-<summary>2026년 10월 25일 · v57 검증 완료 당시 기준</summary>
+<summary>2026년 10월 25일 · v58 검증 완료 기준</summary>
 
 | 항목 | 수량 |
 |---|---:|
 | 전체 TMX 고유 타일 | **5,409종** |
-| 이미지 직접 관찰 | **2,994종 (55.35%)** |
-| 아직 관찰하지 않은 타일 | **2,415종** |
-| 감사 가능한 잠정 정체 후보 | **2,596종** |
+| 이미지 직접 관찰 | **3,000종 (55.46%)** |
+| 아직 관찰하지 않은 타일 | **2,409종** |
+| 감사 가능한 잠정 정체 후보 | **2,601종** |
 | 최종 정체 인증 | **0종** |
 
 </details>
 
-**위 표는 v57 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
+**위 표는 v58 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
 
 이미지로 관찰한 타일이나 잠정 정체 후보는 검증된 최종 정체와 다릅니다. PNG–TMX Local ID 대응과 TileZed 렌더 정합성은 아직 검증 대상입니다.
 
@@ -87,15 +87,15 @@
 
 ## 4. 최신 데이터베이스 복원
 
-GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v57 전체 통합 SQLite**를 복원할 수 있습니다.
+GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v58 전체 통합 SQLite**를 복원할 수 있습니다.
 
 ```bash
-python3 scripts/restore_unified_v57.py
+python3 scripts/restore_unified_v58.py
 ```
 
 복원 후 분석 대상 전체는 `tile_catalog`, 미관찰 대상은 `analysis_queue`에서 조회합니다. 구버전과 원본 DB는 그대로 보존합니다.
 
-자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v57/)
+자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v58/)
 
 ## 5. GitHub 커밋 메시지 작성 규칙
 
@@ -112,4 +112,4 @@ python3 scripts/restore_unified_v57.py
 
 ---
 
-**참고:** 현재 고해상도 A/B/C/D 증거판 이미지 전체가 GitHub의 SQLite에 내장된 상태는 아닙니다. 일부 고해상도 시각 증거는 채팅에서 제공한 별도 체크포인트 ZIP에 보존되어 있습니다.
+**참고:** v58 신규 6종의 A/B/C/D 및 비교판 총 30개 JPEG는 [v58 원본 증거](checkpoints/v58_preview/)에 업로드되어 있습니다. 과거 버전의 일부 고해상도 증거는 별도 채팅 체크포인트 ZIP에 남아 있으며 GitHub에 전부 올라온 것은 아닙니다. PNG 높이 불일치 및 TileZed 정합성은 미검증입니다.
