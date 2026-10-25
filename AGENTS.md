@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v72)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v73)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v72: 3,325/5,409종(61.4716%); 미관찰 2,084종; 감사 가능한 잠정 후보 2,855종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v72/`. 복원: `python3 scripts/restore_unified_v72.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v73: 3,345/5,409종(61.8414%); 미관찰 2,064종; 감사 가능한 잠정 후보 2,871종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v73/`. 복원: `python3 scripts/restore_unified_v73.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -16,7 +16,7 @@
 6. 이전에 폐기된 TMX→2D 평면도 엔진을 재사용하지 않는다.
 
 ## 보존·계보
-- v36 원본 전체 SQLite, v46 원본 `v46__` 테이블, v47 병합 `v47__` 및 v48~v72의 누적 테이블을 유지한다.
+- v36 원본 전체 SQLite, v46 원본 `v46__` 테이블, v47 병합 `v47__` 및 v48~v73의 누적 테이블을 유지한다.
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
@@ -65,9 +65,18 @@
 - `analysis/current/v72/MANIFEST.json`: SQLite **84,643,840바이트**, SHA-256 `17f2ca1c42af9f93f6fc4c6cbbe938118cccc1c9b95039f0351aa38278fa500b`. 원본 PNG/TMX SHA-256, JPEG 로딩, B-C 변화, 이전 테이블 보존, 중복 키 0, SQLite 무결성 및 압축 복원 왕복 검증.
 - PNG 물리 높이와 TMX 선언 높이 불일치, 공식 Local ID·TileZed 미검증으로 `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. v36~v71 원본·체크포인트 및 사용자 수동 검수 80종 보존.
 
+## v73 신규 직접 이미지 판독 (2026-10-26)
+- v72 통합 SQLite의 미관찰 **2,084종**에서 중복 없는 신규 20종을 선정했다. GitHub 원본 PNG/TMX로 A/B/C/D 및 비교판 **100 JPEG**를 생성하고 **20개 비교판을 실제 열어 육안 관찰**했다.
+- **잠정 후보 16종, 보류 4종**. 갈색 4패널 여닫이문 2종, 검은 격자·키패드 출입문 1종, 목재·철제 벤치 방향별 조각 3종, 황갈색 야생 풀 오버레이 10종이 잠정 후보.
+- 보류 `blends_grassoverlays_01/57`: B-C 변화 423픽셀·가림. `/59`, `/61`, `/67`: B-C 변화 0픽셀. A 외형과 가시 기여를 구분해 후보 단정을 피했다.
+- 누적 이미지 관찰 **3,345/5,409종(61.8414%)**, 미관찰 **2,064종**, 감사 가능한 잠정 후보 **2,871종**, 최종 인증 **0종**.
+- `checkpoints/v73/observations.tsv`·CSV, `checkpoints/v73_preview/` A/B/C/D 비교판 100 JPEG, `checkpoints/v73/INDEPENDENT_VISUAL_AUDIT.md`, 이미지 내장 HTML·ZIP CRC 보고서를 보존한다.
+- `analysis/current/v73/MANIFEST.json`: 물리 SQLite 84,688,896바이트, SHA-256 `002e8198db76667cb6c73103831e751933d024b50aa98490beab3e4d5acca104`; 압축 7조각 복원·SQLite 무결성·기존 테이블 보존을 검증했다. 기존 원본 DB, 이전 체크포인트, 수동 검수 80종은 변경하지 않는다.
+- PNG 물리 높이 불일치와 TileZed 공식 정합 미검증: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`.
+
 ## 다음 작업
-- v72 `analysis_queue`의 **미관찰 2,084종**에서 중복 없는 신규 키를 선정해 A/B/C/D 직접 시각 검수를 계속한다.
-- v71 이하 보류 타일의 가림·분할 부품 역할을 재검수한다.
+- v73 `analysis_queue`의 **미관찰 2,064종**에서 중복 없는 신규 키를 선정해 A/B/C/D 직접 시각 검수를 계속한다.
+- v72 이하 보류 타일의 가림·분할 부품 역할을 재검수한다.
 - PNG–TMX Local ID 물리 높이 불일치와 TileZed 공식 정합을 독립 검증한다.
 - 기존 원본·체크포인트·사용자 수동 검수 80종을 보존하고 SHA·SQLite 무결성·CRC·중복을 확인한다.
 - GitHub 커밋은 한국어를 기본으로 하고 공개 저장소에 토큰·개인정보·비공개 대화 원문을 올리지 않는다.
