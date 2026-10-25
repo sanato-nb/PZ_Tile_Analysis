@@ -1,0 +1,59 @@
+name: "v64 타일 분석 통합 SQLite 복원·중복·증거 무결성 검증"
+on:
+  push:
+    branches:
+      - work/v64-evidence-20261026
+    paths:
+      - scripts/build_unified_v64.py
+      - scripts/restore_unified_v64.py
+      - checkpoints/v64/observations.tsv
+      - .github/workflows/build-unified-v64.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 검증할 원본 DB와 신규 관찰 기록 가져오기
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v63/*
+            /scripts/*.py
+            /checkpoints/v64/*
+            /checkpoints/v64_preview/*
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+            /.github/workflows/build-unified-v64.yml
+      - name: v63 원본 8천만 바이트 SQLite SHA-256 및 무결성 검사
+        run: python3 scripts/restore_unified_v63.py "$RUNNER_TEMP/v63.sqlite"
+      - name: v64 A/B/C/D 60개 이미지와 12개 고유 키 검증
+        run: python3 checkpoints/v64/verify_delta.py
+      - name: 원본 테이블 보존한 통합 SQLite 생성
+        run: python3 scripts/build_unified_v64.py "$RUNNER_TEMP/v63.sqlite"
+      - name: 전체 복원 왕복 SHA-256·SQLite·중복·수량 검증
+        run: python3 scripts/restore_unified_v64.py "$RUNNER_TEMP/v64_roundtrip.sqlite"
+      - name: 프로젝트 상태 검사 및 인수인계 자동 갱신
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - name: 전체 v64 SQLite 액션 아티팩트 보관
+        uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-unified-v64-SQLite
+          path: ${{ runner.temp }}/tile_visual_v64_unified.sqlite
+          retention-days: 90
+          if-no-files-found: error
+      - name: v64 검증 완료 데이터·체크포인트 갱신
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v64/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "데이터: v64 신규 12종 통합 DB와 검증 인수인계 저장"
+            git push
+          fi
