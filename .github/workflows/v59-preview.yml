@@ -1,0 +1,43 @@
+name: "v59 미관찰 신규 타일 A/B/C/D 증거판 생성"
+on:
+  push:
+    branches:
+      - work/v59-evidence-20261025
+    paths:
+      - scripts/generate_v59_preview.py
+      - .github/workflows/v59-preview.yml
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 원본 PNG·TMX 및 v58 통합 DB 복원 조각 가져오기
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /Tiles/*.png
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v58/*
+            /scripts/restore_unified_v58.py
+            /scripts/generate_v59_preview.py
+            /.github/workflows/v59-preview.yml
+      - name: 원본 이미지 처리 준비
+        run: python3 -m pip install --quiet Pillow
+      - name: 미관찰 대기열 검증 후 A/B/C/D 증거판 생성
+        run: python3 scripts/generate_v59_preview.py
+      - name: 이미지 파일 및 증거 메타데이터 독립 보존
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse checkpoints/v59_preview/
+          if ! git diff --cached --quiet; then
+            git commit -m "증거: v59 미관찰 타일 원본 PNG와 TMX 비교판 생성"
+            git push
+          fi
