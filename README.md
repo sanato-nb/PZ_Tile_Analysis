@@ -60,19 +60,19 @@
 ## 2. 최신 작업 진행도
 
 <details>
-<summary>2026년 10월 25일 · v59 검증 완료 기준</summary>
+<summary>2026년 10월 25일 · v60 검증 완료 기준</summary>
 
 | 항목 | 수량 |
 |---|---:|
 | 전체 TMX 고유 타일 | **5,409종** |
-| 이미지 직접 관찰 | **3,012종 (55.69%)** |
-| 아직 관찰하지 않은 타일 | **2,397종** |
-| 감사 가능한 잠정 정체 후보 | **2,612종** |
+| 이미지 직접 관찰 | **3,024종 (55.91%)** |
+| 아직 관찰하지 않은 타일 | **2,385종** |
+| 감사 가능한 잠정 정체 후보 | **2,621종** |
 | 최종 정체 인증 | **0종** |
 
 </details>
 
-**위 표는 v59 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
+**위 표는 v60 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
 
 이미지로 관찰한 타일이나 잠정 정체 후보는 검증된 최종 정체와 다릅니다. PNG–TMX Local ID 대응과 TileZed 렌더 정합성은 아직 검증 대상입니다.
 
@@ -87,15 +87,15 @@
 
 ## 4. 최신 데이터베이스 복원
 
-GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v59 전체 통합 SQLite**를 복원할 수 있습니다.
+GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v60 전체 통합 SQLite**를 복원할 수 있습니다.
 
 ```bash
-python3 scripts/restore_unified_v59.py
+python3 scripts/restore_unified_v60.py
 ```
 
 복원 후 분석 대상 전체는 `tile_catalog`, 미관찰 대상은 `analysis_queue`에서 조회합니다. 구버전과 원본 DB는 그대로 보존합니다.
 
-자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v59/)
+자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v60/)
 
 ## 5. GitHub 커밋 메시지 작성 규칙
 
@@ -121,3 +121,12 @@ python3 scripts/restore_unified_v59.py
 - [A/B/C/D 증거 ZIP](checkpoints/v59/v59_증거_12종_A_B_C_D.zip) · [ZIP CRC 보고서](checkpoints/v59/ZIP_CRC_REPORT.json) · [60장 이미지 원본](checkpoints/v59_preview/)
 - [v59 SQLite 복원 MANIFEST](analysis/current/v59/MANIFEST.json) · [v59 통합 복원 프로그램](scripts/restore_unified_v59.py)
 - 최종 인증 0종. 공식 PNG–TMX Local ID와 TileZed 정합 검증 전에는 잠정 후보를 확정으로 바꾸지 않습니다.
+
+
+## 7. v60 신규 판독과 증거 다운로드
+
+- **신규 직접 관찰 12종**: 잠정 후보 9종, 보류 3종. 누적 관찰 **3,024/5,409종(55.91%)**, 미관찰 2,385종, 잠정 후보 누적 2,621종.
+- [v60 관찰 결과 CSV](checkpoints/v60/observations.csv) · [TSV](checkpoints/v60/observations.tsv) · [이미지 내장 검수 HTML](checkpoints/v60/v60_이미지내장_검수.html)
+- [A/B/C/D 증거 ZIP](checkpoints/v60/v60_증거_12종_A_B_C_D.zip) · [ZIP CRC 보고서](checkpoints/v60/ZIP_CRC_REPORT.json) · [60장 원본 비교 이미지](checkpoints/v60_preview/)
+- [v60 SQLite 복원 MANIFEST](analysis/current/v60/MANIFEST.json) · [v60 통합 복원 프로그램](scripts/restore_unified_v60.py)
+- B-C 변화가 0인 3종은 **보류**로 유지합니다. 공식 PNG–TMX Local ID 정합과 TileZed 검증이 완료되지 않아 최종 인증은 **0종**입니다.
