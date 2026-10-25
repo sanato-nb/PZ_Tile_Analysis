@@ -15,24 +15,25 @@
 | `current/v52/` | v52 과거 통합 SQLite 복원 자료 |
 | `current/v53/` | 이전 v53 통합 SQLite 복원 자료 |
 | `current/v54/` | 이전 v54 통합 SQLite 복원 자료 |
-| `current/v55/` | **현재 최신 통합 SQLite 복원 자료** |
+| `current/v55/` | 이전 v55 통합 SQLite 복원 자료 |
+| `current/v56/` | **현재 최신 통합 SQLite 복원 자료** |
 
-## 최신 통합 DB (2026년 10월 25일, v55)
+## 최신 통합 DB (2026년 10월 25일, v56)
 
 | 항목 | 수량 |
 |---|---:|
 | 전체 분석 대상 | 5,409종 |
-| 중복 제거한 이미지 관찰 | **2,898종 (53.58%)** |
-| 미관찰 타일 | **2,511종** |
-| 감사 가능한 잠정 정체 후보 | **2,526종** |
+| 중복 제거한 이미지 관찰 | **2,946종 (54.47%)** |
+| 미관찰 타일 | **2,463종** |
+| 감사 가능한 잠정 정체 후보 | **2,559종** |
 | 최종 정체 인증 | **0종** |
 
-> 위 수치는 v55 생성 시점의 기록입니다. 새 버전이 생기면 루트 `PROJECT_STATE.json`의 `unified_database`가 우선입니다.
+> 위 수치는 v56 생성 시점의 기록입니다. 새 버전이 생기면 루트 `PROJECT_STATE.json`의 `unified_database`가 우선입니다.
 
 GitHub에 저장된 압축 조각을 모아 전체 SQLite를 복원합니다.
 
 ```bash
-python3 scripts/restore_unified_v55.py
+python3 scripts/restore_unified_v56.py
 ```
 
 복원 후 `tile_catalog`에서 5,409종을 조회하고, `analysis_queue`에서 미관찰 타일을 선택할 수 있습니다.
