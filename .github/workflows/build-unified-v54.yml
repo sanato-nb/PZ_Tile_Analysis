@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - "checkpoints/v54/**"
+      - ".github/workflows/build-unified-v54.yml"
   workflow_dispatch:
 permissions:
   contents: write
