@@ -1,0 +1,39 @@
+name: "v63 이미지 내장 검수 HTML·증거 ZIP CRC 검증"
+on:
+  push:
+    branches:
+      - work/v63-evidence-20261026
+    paths:
+      - scripts/build_v63_review_html.py
+      - .github/workflows/v63-review-html.yml
+permissions:
+  contents: write
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 검수 원본 PNG 추출 증거와 TSV 확보
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /checkpoints/v63/*
+            /checkpoints/v63_preview/*
+            /scripts/build_v63_review_html.py
+            /.github/workflows/v63-review-html.yml
+      - name: 이미지 유효성 검사 도구 설치
+        run: python3 -m pip install --quiet Pillow
+      - name: HTML 데이터 URI 포함 및 ZIP 압축 CRC 검사
+        run: python3 scripts/build_v63_review_html.py
+      - name: HTML과 원본 이미지 증거 ZIP 보존
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse checkpoints/v63/
+          if ! git diff --cached --quiet; then
+            git commit -m "검수: v63 이미지 내장 HTML 및 증거 ZIP CRC 통과"
+            git push
+          fi
