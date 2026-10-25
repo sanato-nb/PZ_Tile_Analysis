@@ -1,0 +1,57 @@
+name: Build physically unified v50 tile database
+on:
+  push:
+    branches: [main]
+    paths:
+      - "checkpoints/v50/**"
+      - "scripts/build_unified_v50.py"
+      - "scripts/restore_unified_v50.py"
+      - ".github/workflows/build-unified-v50.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout preserved v49 archive and new v50 records
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /analysis/current/
+            /analysis/imports/
+            /scripts/
+            /checkpoints/v50/
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+          sparse-checkout-cone-mode: false
+          persist-credentials: true
+      - name: Recover verified physical v49 database
+        run: python3 scripts/restore_unified_database.py "$RUNNER_TEMP/tile_visual_v49.sqlite"
+      - name: Verify v50 review count and key uniqueness
+        run: python3 checkpoints/v50/verify_delta.py
+      - name: Build new physical v50 database without altering v49
+        run: python3 scripts/build_unified_v50.py "$RUNNER_TEMP/tile_visual_v49.sqlite"
+      - name: Roundtrip SHA-256 and SQLite integrity checks
+        run: python3 scripts/restore_unified_v50.py "$RUNNER_TEMP/v50_roundtrip.sqlite"
+      - name: Upload v50 actual SQLite (90-day Actions artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-unified-v50-SQLite
+          path: \${{ runner.temp }}/tile_visual_v50_unified.sqlite
+          retention-days: 90
+          if-no-files-found: error
+      - name: Refresh canonical handoff
+        run: python3 scripts/generate_handoff.py
+      - name: Commit verified v50 SQLite shards, manifest, and state
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analysis/current/v50/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "data: publish verified complete v50 integrated SQLite"
+            git pull --rebase origin main
+            git push
+          fi
