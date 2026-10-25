@@ -99,12 +99,13 @@ s['unified_database']=dict(version='v60',status='VERIFIED',
     complete_v36_tables=True,complete_v46_tables=True,all_prior_tables_preserved=True,
     v60_git_checkpoint_integrated=True,image_binaries_in_github=True)
 s['next_actions']=[
-    'v60 통합 DB의 미관찰 2,397종을 PNG·TMX A/B/C/D 직접 관찰로 이어간다.',
-    'v60 보류 appliances_com_01/3의 B-C 픽셀 변화 0 원인과 스프라이트 가림을 조사한다.',
-    'v59 보류 appliances_com_01/82와 모든 PNG 높이 불일치의 Local ID 정합을 TileZed에서 검증한다.',
+    'v60 통합 DB의 미관찰 2,385종을 PNG·TMX A/B/C/D 직접 관찰로 이어간다.',
+    'v60 보류 fixtures_bathroom_01/10·14 및 furniture_bedding_01/11의 B-C 변화 0 원인을 재검수한다.',
+    'v59 보류 appliances_com_01/3 및 v58 보류 appliances_com_01/82의 스프라이트 가림을 검토한다.',
+    'PNG 선언 높이 불일치와 Local ID 매핑을 TileZed에서 검증한다.',
     '사용자 수동 검수 80종 및 재검수 기록은 별도 계보로 보존하고 자동 합산하지 않는다.',
-    'v59 이하 통합 원본 SQLite, 모든 타일 PNG·TMX, 모든 과거 관찰/충돌 레코드를 보존한다.',
-    'v60 신규 12종 A/B/C/D+비교판 60장 JPEG를 checkpoints/v60_preview/에 별도 보관한다.'
+    'v59 이하 모든 통합 SQLite·체크포인트·원본 PNG·TMX·충돌 기록을 변경하지 않는다.',
+    'v60 신규 12종 A/B/C/D+비교판 60장 JPEG를 checkpoints/v60_preview/에 보관한다.'
 ]
 statepath.write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS BUILD v60',checks,'sha',manifest['sqlite_sha256'],'parts',len(parts))
