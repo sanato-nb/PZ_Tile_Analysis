@@ -2,7 +2,7 @@ name: "v65 미관찰 신규 타일 A/B/C/D 증거판 생성"
 on:
   push:
     branches:
-      - work/v65-evidence-20261026
+      - work/v65-evidence-batch-20261026
     paths:
       - scripts/generate_v65_preview.py
       - .github/workflows/v65-preview.yml
