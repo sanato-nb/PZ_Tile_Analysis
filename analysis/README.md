@@ -1,14 +1,44 @@
-# 분석 데이터 — 이제 GitHub에서 직접 복구 가능
+# 분석 결과와 통합 데이터베이스
 
-- **통합 카탈로그**: `imports/merged_catalog_5409.csv` — 전체 5,409종, v36·v46 관찰/후보/충돌 상태.
-- **모든 추출 가능한 버전별 개별 관찰**: `imports/all_observation_records.csv`.
-- **추론 후보 용어 충돌**: `imports/conflicting_candidates.csv` (256개 동일 타일에서 서로 다른 잠정 이름).
-- **중복 제거 근거**: `imports/RECONCILIATION_RESULT.json` 및 `imports/README_RECONCILIATION.md`.
-- **가벼운 병합 SQLite**: `python3 scripts/restore_merged_evidence.py /tmp/merged.sqlite`.
-- **실제 원본 v36/v46 SQLite 모두**: `python3 scripts/restore_source_databases.py /tmp/pz_originals`. 아카이브는 `archive/v36`, `archive/v46`에 base64 + xz 분할되어 있으며 SHA-256까지 검증한다.
+이 폴더에는 **원본 분석 데이터, 이전 버전, 최신 통합 SQLite, 중복·충돌 감사 자료**를 보관합니다.
 
-분할 텍스트 파일은 압축 바이너리를 GitHub의 텍스트 API로 저장하기 위한 형식이다. **개별 조각 자체는 SQLite가 아니고**, 스크립트로 모두 복원해야 한다. 원본 TMX 및 PNG 파일은 기존 폴더에서 보존한다.
+## 폴더 구성
 
-검증 수치: v36 2,509종 + 별도 v37~v46 477종 - 중복 402종 = **2,584종**, 관찰 47.77%. 남은 미관찰 2,825종. 최종 정체 인증 0종.
+| 경로 | 내용 |
+|---|---|
+| `archive/v36/` | 기존 v36 원본 SQLite의 복원용 보관 파일 |
+| `archive/v46/` | 기존 v46 원본 SQLite의 복원용 보관 파일 |
+| `imports/` | v36·v46 병합 카탈로그, 출처별 관찰 기록, 후보 표현 충돌 및 검증 결과 |
+| `current/v49/` | 첫 물리 통합 SQLite 복원 자료 |
+| `current/v50/` | v50 누적 데이터베이스 복원 자료 |
+| `current/v51/` | v51 누적 데이터베이스 복원 자료 |
+| `current/v52/` | **현재 최신 통합 SQLite 복원 자료** |
 
-v36의 보고 후보 2,291종 중 원본 시각 증거 키로 재현 가능한 후보는 2,156종이며, 두 계보의 후보 키 합집합 2,302종은 여전히 잠정 정체 후보이다.
+## 최신 통합 DB (2026년 10월 25일, v52)
+
+| 항목 | 수량 |
+|---|---:|
+| 전체 분석 대상 | 5,409종 |
+| 중복 제거한 이미지 관찰 | **2,750종 (50.84%)** |
+| 미관찰 타일 | **2,659종** |
+| 감사 가능한 잠정 정체 후보 | **2,419종** |
+| 최종 정체 인증 | **0종** |
+
+> 위 수치는 v52 생성 시점의 기록입니다. 새 버전이 생기면 루트 `PROJECT_STATE.json`의 `unified_database`가 우선입니다.
+
+GitHub에 저장된 압축 조각을 모아 전체 SQLite를 복원합니다.
+
+```bash
+python3 scripts/restore_unified_v52.py
+```
+
+복원 후 `tile_catalog`에서 5,409종을 조회하고, `analysis_queue`에서 미관찰 타일을 선택할 수 있습니다.
+
+## 기존 기록과 감사 자료
+
+- `imports/merged_catalog_5409.csv` — v47 당시 전체 고유 키의 병합 색인
+- `imports/all_observation_records.csv` — 복원된 원본 계보의 버전별 관찰 기록
+- `imports/conflicting_candidates.csv` — 서로 다른 후보 표현이 있는 타일
+- `imports/RECONCILIATION_RESULT.json` — v36·v46 중복 계산의 근거
+
+v47 당시 2,584종은 **과거 병합 기준**이지 최신 관찰 수가 아닙니다. 이전 DB와 원본 자료는 삭제하거나 덮어쓰지 않습니다. **고해상도 A/B/C/D 이미지 전체는 아직 GitHub 통합 DB에 내장되지 않았으며**, 별도 분석 증거 ZIP에 보존됩니다.
