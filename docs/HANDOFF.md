@@ -41,19 +41,19 @@
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
-## 최신 물리 통합 SQLite (v54)
+## 최신 물리 통합 SQLite (v55)
 
-- **v36 전체 원본 SQLite + v46 전체 데이터 테이블 + v47 병합 색인 + v48·v50·v51·v52·v53·v54·v55 신규 관찰 기록**을 한 SQLite로 통합했습니다.
-- 단일 테이블 `tile_catalog`: **2,850/5,409종 (52.69%)**, 미관찰 2,559종, 잠정 후보 2,491종, 최종 인증 0종.
-- SHA-256 검증과 전체 복원 방법: `analysis/current/v54/MANIFEST.json`, `scripts/restore_unified_v54.py`.
-- 과거 DB는 별도 보존합니다. 신규 체크포인트는 GitHub에 저장된 TSV 필드까지 통합되며, 로컬 보조 SQLite에만 남은 추가 메타데이터와 고해상도 이미지 바이너리는 아직 GitHub 본문에 모두 포함되지 않았습니다.
+- v36 전체 원본 SQLite와 v46 전체 테이블, v47 병합 색인, v48·v50·v51·v52·v53·v54·v55 신규 관찰 기록이 한 SQLite에 통합되어 있습니다.
+- 최신 `tile_catalog`: **2,898 / 5,409종 (53.58%)** 관찰, **2,511종** 미관찰, 감사 가능한 잠정 후보 **2,526종**, 최종 인증 **0종**.
+- SHA-256 검증 가능한 복원 자료: `analysis/current/v55/MANIFEST.json`, 복원 코드: `python3 scripts/restore_unified_v55.py`.
+- v55 신규 A/B/C/D 관찰 **48종(후보 35, 보류 13)**. 고해상도 48개 이미지 증거는 채팅 체크포인트 ZIP에 있으며 GitHub에는 주석과 통합 SQLite가 있습니다.
+- 이전 원본·버전은 변경하지 않았습니다. **사용자 수동 검수 80종은 별도 대기 중이며 공식 관찰 합계에 넣지 않았습니다.**
 
-## 최신 체크포인트 (v54)
+## 최신 체크포인트 (v55)
 
-- 새로 직접 관찰: **50종** (잠정 후보 33, 보류 17).
-- 중복 제거 누적 관찰: **2,850/5,409종 (52.69%)**.
-- 아직 미관찰: **2,559종**. 최종 인증 0종.
-- 기록: `checkpoints/v54/observations.tsv` (이전 통합 DB와 별도로 보존).
+- 신규 직접 이미지 관찰: **48종**, 기존 v54와 중복 **0종**.
+- 누적 **2,898종 (53.58%)**, 미관찰 **2,511종**, 잠정 후보 **2,526종**, 인증 **0종**.
+- 개별 주석: `checkpoints/v55/observations.tsv`; 검증: `checkpoints/v55/verify_delta.py`.
 
 ## 다음 실제 작업
 
