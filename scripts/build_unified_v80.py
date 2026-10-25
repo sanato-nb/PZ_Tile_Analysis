@@ -87,25 +87,25 @@ s=json.loads(statepath.read_text('utf8'))
 assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v79',3441),('v80',3461)}
 s['latest_checkpoint']=dict(version='v80',date='2026-10-26',baseline_reconciliation='v79',
     baseline_unique_observed=3441,new_unique_observed=20,new_provisional_candidates=19,new_held=1,
-    overlap_with_prior=0,merged_unique_observed=3461,merged_observation_percent=round(3461/5409*100,1),
+    overlap_with_prior=0,merged_unique_observed=3461,merged_observation_percent=round(3461/5409*100,4),
     remaining_unobserved=1948,auditable_provisional_candidate_keys=2969,approved_final_certifications=0,
     delta_repo_path='checkpoints/v80/observations.tsv',evidence_repo_path='checkpoints/v80_preview/',
     verification_script='checkpoints/v80/verify_delta.py',png_tmx_mapping_verified=0,
     tilezed_verified=0,high_resolution_evidence_images_in_github=True)
 s['unified_database']=dict(version='v80',status='VERIFIED',
     repo_manifest='analysis/current/v80/MANIFEST.json',restore_script='scripts/restore_unified_v80.py',
-    observed_unique=3461,observed_percent=round(3461/5409*100,1),remaining_unobserved=1948,
+    observed_unique=3461,observed_percent=round(3461/5409*100,4),remaining_unobserved=1948,
     auditable_candidates=2969,certified=0,sqlite_sha256=manifest['sqlite_sha256'],
     complete_v36_tables=True,complete_v46_tables=True,all_prior_tables_preserved=True,
     v80_git_checkpoint_integrated=True,image_binaries_in_github=True)
 s['status_date']='2026-10-26'
 s['next_actions']=[
-    'v80 통합 DB의 미관찰 1,968종에서 신규 고유 키를 선정해 PNG·TMX A/B/C/D 직접 검수한다.',
+    'v80 통합 DB의 미관찰 1,948종에서 신규 고유 키를 선정해 PNG·TMX A/B/C/D 직접 검수한다.',
     'v79 이하의 보류 타일은 가림·다중 부품 역할을 다른 위치에서 재검수한다.',
     'PNG 물리 높이 불일치 및 TileZed 공식 Local ID 정합을 독립 검증한다.',
     '사용자 수동 검수 80종 및 재검수 자료는 별도 계보로 보존하며 자동 합산하지 않는다.',
     'v79 이하 원본 SQLite·체크포인트·원본 PNG·TMX를 삭제하거나 덮어쓰지 않는다.',
-    'v80 신규 20종 A/B/C/D+비교판 60 JPEG를 checkpoints/v80_preview/에 보존한다.'
+    'v80 신규 20종 A/B/C/D+비교판 100 JPEG를 checkpoints/v80_preview/에 보존한다.'
 ]
 statepath.write_text(json.dumps(s,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 print('PASS BUILD v80',checks,'sha',manifest['sqlite_sha256'],'parts',len(parts))
