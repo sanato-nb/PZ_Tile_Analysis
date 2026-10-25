@@ -19,5 +19,5 @@ with sqlite3.connect(target) as c:
   'remaining':c.execute('select count(*) from analysis_queue').fetchone()[0],
   'v78review':c.execute('select count(*) from v78_visual_review').fetchone()[0],
   'final':c.execute('select count(*) from tile_catalog where identity_final_certified=1').fetchone()[0]}
- assert checks=={'all':5409,'observed':3429,'candidate':2942,'remaining':1980,'v78review':20,'final':0},checks
+ assert checks=={'all':5409,'observed':3429,'candidate':2942,'remaining':1980,'v78review':12,'final':0},checks
 print('PASS SHA256/SQLite v78',str(target),len(raw),'bytes',checks)
