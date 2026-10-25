@@ -24,7 +24,7 @@
 │       ├── v54/
 │       ├── v55/
 │       ├── v56/
-│       ├── v57/\n│       └── v58/                 ★ 현재 최신 통합 DB 복원 자료
+│       ├── v57/\n│       ├── v58/                 이전 v58 통합 DB 복원 자료\n│       └── v59/                 ★ 최신 통합 DB
 │
 ├── 📂 checkpoints/              분석 배치별 진행 기록
 │   ├── v48/
@@ -35,7 +35,7 @@
 │   ├── v54/
 │   ├── v55/
 │   ├── v56/
-│   ├── v57/\n│   ├── v58/                     ★ 신규 6종 관찰 기록\n│   └── v58_preview/             원본 A/B/C/D JPEG 비교판 30개
+│   ├── v57/\n│   ├── v58/                     이전 v58 신규 6종 관찰 기록\n│   └── v58_preview/             원본 A/B/C/D JPEG 비교판 30개
 │
 ├── 📂 scripts/                  DB 생성·복원·검증 Python 프로그램
 ├── 📂 .github/workflows/        GitHub Actions 자동 검증 및 인수인계
@@ -60,19 +60,19 @@
 ## 2. 최신 작업 진행도
 
 <details>
-<summary>2026년 10월 25일 · v58 검증 완료 기준</summary>
+<summary>2026년 10월 25일 · v59 검증 완료 기준</summary>
 
 | 항목 | 수량 |
 |---|---:|
 | 전체 TMX 고유 타일 | **5,409종** |
-| 이미지 직접 관찰 | **3,000종 (55.46%)** |
-| 아직 관찰하지 않은 타일 | **2,409종** |
-| 감사 가능한 잠정 정체 후보 | **2,601종** |
+| 이미지 직접 관찰 | **3,012종 (55.69%)** |
+| 아직 관찰하지 않은 타일 | **2,397종** |
+| 감사 가능한 잠정 정체 후보 | **2,612종** |
 | 최종 정체 인증 | **0종** |
 
 </details>
 
-**위 표는 v58 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
+**위 표는 v59 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
 
 이미지로 관찰한 타일이나 잠정 정체 후보는 검증된 최종 정체와 다릅니다. PNG–TMX Local ID 대응과 TileZed 렌더 정합성은 아직 검증 대상입니다.
 
@@ -87,15 +87,15 @@
 
 ## 4. 최신 데이터베이스 복원
 
-GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v58 전체 통합 SQLite**를 복원할 수 있습니다.
+GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v59 전체 통합 SQLite**를 복원할 수 있습니다.
 
 ```bash
-python3 scripts/restore_unified_v58.py
+python3 scripts/restore_unified_v59.py
 ```
 
 복원 후 분석 대상 전체는 `tile_catalog`, 미관찰 대상은 `analysis_queue`에서 조회합니다. 구버전과 원본 DB는 그대로 보존합니다.
 
-자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v58/)
+자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v59/)
 
 ## 5. GitHub 커밋 메시지 작성 규칙
 
@@ -112,4 +112,12 @@ python3 scripts/restore_unified_v58.py
 
 ---
 
-**참고:** v58 신규 6종의 A/B/C/D 및 비교판 총 30개 JPEG는 [v58 원본 증거](checkpoints/v58_preview/)에 업로드되어 있습니다. 과거 버전의 일부 고해상도 증거는 별도 채팅 체크포인트 ZIP에 남아 있으며 GitHub에 전부 올라온 것은 아닙니다. PNG 높이 불일치 및 TileZed 정합성은 미검증입니다.
+**과거 증거 보존:** v58 신규 6종의 A/B/C/D 및 비교판 총 30개 JPEG는 [v58 원본 증거](checkpoints/v58_preview/)에 업로드되어 있습니다. 과거 버전의 일부 고해상도 증거는 별도 채팅 체크포인트 ZIP에 남아 있으며 GitHub에 전부 올라온 것은 아닙니다. PNG 높이 불일치 및 TileZed 정합성은 미검증입니다.
+
+## 6. v59 신규 판독과 증거 다운로드
+
+- **신규 직접 관찰 12종**: 후보 11종, 보류 1종, 현재 관찰 3,012/5,409종(55.69%).
+- [v59 관찰 결과 CSV](checkpoints/v59/observations.csv) · [TSV](checkpoints/v59/observations.tsv) · [이미지 내장 검수 HTML](checkpoints/v59/v59_이미지내장_검수.html)
+- [A/B/C/D 증거 ZIP](checkpoints/v59/v59_증거_12종_A_B_C_D.zip) · [ZIP CRC 보고서](checkpoints/v59/ZIP_CRC_REPORT.json) · [60장 이미지 원본](checkpoints/v59_preview/)
+- [v59 SQLite 복원 MANIFEST](analysis/current/v59/MANIFEST.json) · [v59 통합 복원 프로그램](scripts/restore_unified_v59.py)
+- 최종 인증 0종. 공식 PNG–TMX Local ID와 TileZed 정합 검증 전에는 잠정 후보를 확정으로 바꾸지 않습니다.
