@@ -41,14 +41,17 @@
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
+## 최신 체크포인트 (v48)
+
+- 새로 직접 관찰: **30종** (잠정 후보 23, 보류 7).\n- 중복 제거 누적 관찰: **2,614/5,409종 (48.33%)**.\n- 아직 미관찰: **2,795종**. 최종 인증 0종.\n- 기록: \u0060checkpoints/v48/observations.tsv\u0060 (v47 원본 DB와 별도로 보존).
+
 ## 다음 실제 작업
 
-1. Restore both complete original SQLite sources from analysis/archive using scripts/restore_source_databases.py (no manual attachment required).
-2. Read analysis/imports/merged_catalog_5409.csv and note verified merged unique observed count 2,584.
-3. Investigate the 135 provisional candidate report-vs-auditable-key discrepancy in v36 without deleting historical reported counts.
-4. Review the 256 keys with different v36 versus v46 candidate wording using original images; do not auto-select a winner.
-5. Continue direct A/B/C/D visual analysis for the remaining 2,825 unobserved keys; keep mapping and TileZed certification separate.
-6. Commit each finished checkpoint and update PROJECT_STATE.json so GitHub Actions refreshes docs/HANDOFF.md.
+1. Run python3 checkpoints/v48/verify_delta.py; preserve both original v36/v46 SQLite archives and v47 merged index.
+2. Review 7 held v48 cases using alternative TMX placements and PNG version checks.
+3. Preserve 256 candidate wording conflicts and 135 historical v36 candidate-discrepancy cases.
+4. Continue A/B/C/D visual review on 2,795 as-yet-unobserved unique tiles.
+5. Require official mapping and TileZed checks before any final certification.
 
 ## 불변 원칙
 
