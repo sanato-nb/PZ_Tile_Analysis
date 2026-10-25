@@ -4,7 +4,7 @@ from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 CP=ROOT/'checkpoints/v74'
-PRE=ROOT/'checkpoints/v73_preview'
+PRE=ROOT/'checkpoints/v74_preview'
 with (CP/'observations.tsv').open(encoding='utf8',newline='') as f:
  rows=list(csv.DictReader(f,delimiter='\t'))
 with (CP/'observations.csv').open('w',encoding='utf-8-sig',newline='') as csv_out:
@@ -27,9 +27,9 @@ for r in rows:
 assert len(images)==len(set(images))==60
 page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>v74 B42 타일 12종 직접 검수</title><style>body{font:16px system-ui;background:#f3f4f6;color:#172b38;max-width:1250px;margin:2rem auto}article{background:white;padding:1rem;margin:1rem;border-radius:10px}img{max-width:60%;height:auto}figure{margin:1rem 0}figcaption{font-weight:bold}</style><h1>v74 타일 이미지 검수 12종 · 잠정 11 · 보류 1</h1><p>PNG 원본 A, TMX 조립 B, 한 배치 제거 C, 다른 사용 위치 D, 비교판. 최종 인증 0.</p>'+''.join(cards)+'</html>'
 assert page.count('data:image/jpeg;base64,')==60
-out=CP/'v73_이미지내장_검수.html'
+out=CP/'v74_이미지내장_검수.html'
 out.write_text(page,encoding='utf8')
-zp=CP/'v73_증거_20종_A_B_C_D.zip'
+zp=CP/'v74_증거_20종_A_B_C_D.zip'
 files=[CP/'observations.csv',CP/'observations.tsv',out,PRE/'EVIDENCE_MANIFEST.json',*images]
 with zipfile.ZipFile(zp,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
  for p in files: z.write(p,p.relative_to(ROOT).as_posix())
