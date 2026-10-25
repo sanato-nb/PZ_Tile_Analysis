@@ -69,12 +69,11 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "Restore both complete original SQLite sources from analysis/archive using scripts/restore_source_databases.py (no manual attachment required).",
-    "Read analysis/imports/merged_catalog_5409.csv and note verified merged unique observed count 2,584.",
-    "Investigate the 135 provisional candidate report-vs-auditable-key discrepancy in v36 without deleting historical reported counts.",
-    "Review the 256 keys with different v36 versus v46 candidate wording using original images; do not auto-select a winner.",
-    "Continue direct A/B/C/D visual analysis for the remaining 2,825 unobserved keys; keep mapping and TileZed certification separate.",
-    "Commit each finished checkpoint and update PROJECT_STATE.json so GitHub Actions refreshes docs/HANDOFF.md."
+    "Run python3 checkpoints/v48/verify_delta.py; preserve both original v36/v46 SQLite archives and v47 merged index.",
+    "Review 7 held v48 cases using alternative TMX placements and PNG version checks.",
+    "Preserve 256 candidate wording conflicts and 135 historical v36 candidate-discrepancy cases.",
+    "Continue A/B/C/D visual review on 2,795 as-yet-unobserved unique tiles.",
+    "Require official mapping and TileZed checks before any final certification."
   ],
   "warnings": [
     "Do not count 2,509+477 as unique: the verified overlap is 402.",
@@ -82,5 +81,26 @@
     "Original v36 and v46 SQLite sources are preserved in GitHub as SHA-256 verifiable xz + base64 text shards.",
     "Image context, sprite correspondence and TileZed validation remain unverified; final certifications 0.",
     "Public repository: never commit tokens or private conversation content; preserve original map and tile assets."
-  ]
+  ],
+  "latest_checkpoint": {
+    "version": "v48",
+    "date": "2026-10-25",
+    "baseline_reconciliation": "v47",
+    "baseline_unique_observed": 2584,
+    "new_unique_observed": 30,
+    "new_provisional_candidates": 23,
+    "new_held": 7,
+    "overlap_with_v47": 0,
+    "merged_unique_observed": 2614,
+    "merged_observation_percent": 48.3269,
+    "remaining_unobserved": 2795,
+    "auditable_provisional_candidate_keys": 2325,
+    "approved_final_certifications": 0,
+    "delta_repo_path": "checkpoints/v48/observations.tsv",
+    "verification_script": "checkpoints/v48/verify_delta.py",
+    "baseline_catalog_blob_sha": "e96944b87abddbbf33539bf484be6c5ab53082b9",
+    "png_tmx_mapping_verified": 0,
+    "tilezed_verified": 0,
+    "evidence_images_in_local_conversation_checkpoint_not_github": true
+  }
 }

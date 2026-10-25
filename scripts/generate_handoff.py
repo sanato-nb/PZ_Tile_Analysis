@@ -8,6 +8,11 @@ ROOT=Path(__file__).resolve().parents[1]
 def render(s):
  r=s["reconciliation"];b=s["baselines"];v=lambda n:f"{n:,}"
  tasks="\n".join(f"{i}. {q}" for i,q in enumerate(s["next_actions"],1))
+ latest=s.get("latest_checkpoint") or {}
+ latest_notes=(f"- 새로 직접 관찰: **{latest.get('new_unique_observed',0):,}종** (잠정 후보 {latest.get('new_provisional_candidates',0):,}, 보류 {latest.get('new_held',0):,}).\\n"
+               f"- 중복 제거 누적 관찰: **{latest.get('merged_unique_observed',0):,}/{s['scope']['unique_tiles']:,}종 ({latest.get('merged_observation_percent',0):.2f}%)**.\\n"
+               f"- 아직 미관찰: **{latest.get('remaining_unobserved',0):,}종**. 최종 인증 {latest.get('approved_final_certifications',0)}종.\\n"
+               f"- 기록: \\u0060{latest.get('delta_repo_path','')}\\u0060 (v47 원본 DB와 별도로 보존).")
  return f"""# 프로젝트 좀보이드 B42 타일 정체 분석 — 자동 인수인계
 
 > GitHub 기준일: {s["status_date"]}. **이 문서는 PROJECT_STATE.json에서 자동 생성됩니다.**
@@ -50,6 +55,10 @@ def render(s):
 - 통합 표: `{r["merged_csv_repo_path"]}`
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
+
+## 최신 체크포인트 (v48)
+
+{latest_notes}
 
 ## 다음 실제 작업
 
