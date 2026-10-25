@@ -102,5 +102,22 @@
     "png_tmx_mapping_verified": 0,
     "tilezed_verified": 0,
     "evidence_images_in_local_conversation_checkpoint_not_github": true
+  },
+  "unified_database": {
+    "version": "v49",
+    "status": "VERIFIED",
+    "repo_manifest": "analysis/current/v49/MANIFEST.json",
+    "restore_script": "scripts/restore_unified_database.py",
+    "observed_unique": 2614,
+    "observed_percent": 48.3269,
+    "remaining_unobserved": 2795,
+    "auditable_candidates": 2325,
+    "certified": 0,
+    "sqlite_sha256": "0db229373ddfaa900d54431c958a1a5f3a4bbe62452d1820258c8f9e3e2c8fb3",
+    "complete_v36_tables": true,
+    "complete_v46_tables": true,
+    "v48_git_checkpoint_integrated": true,
+    "v48_local_extra_metadata_in_external_checkpoint": true,
+    "image_binaries_in_github": false
   }
 }
