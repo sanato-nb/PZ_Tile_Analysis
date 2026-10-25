@@ -62,7 +62,7 @@
 - 신규 잠정 후보 **20종**, 보류 **0종**. 대상: 아이보리색 상부장 2종, 갈색 주방 상부장 코너 1종, 목재·철제 야외 벤치 분할 조각 3종, 황록·녹갈색 풀잎 오버레이 14종. 타일셋명만으로 정체를 판정하지 않고 각 A의 외형과 B-C 제거 효과 및 D 사용 장면을 비교했다.
 - 누적 관찰 **3,325/5,409종(61.4716%)**, 미관찰 **2,084종**, 감사 가능한 잠정 후보 **2,855종**, 최종 인증 **0종**. 신규 중복 키 0.
 - 증거: `checkpoints/v72/observations.tsv`·CSV, `checkpoints/v72_preview/`의 A/B/C/D+비교판 100 JPEG, 이미지 내장 HTML, ZIP **104항목 CRC PASS**.
-- `analysis/current/v72/MANIFEST.json`: SQLite **84,643,840바이트**, SHA-256 `17f2ca1c42af9f93f6fc4c6cbbe938118cccc1c9b95039f0351aa38278fa500b`. 원본 PNG/TMX SHA-256, JPEG 로딩, B-C 변화, 이전 테이블 보존, 중복 키 0, SQLite 무결성 및 압축 복원 왕복 검증.
+- `analysis/current/v73/MANIFEST.json`: SQLite **84,643,840바이트**, SHA-256 `17f2ca1c42af9f93f6fc4c6cbbe938118cccc1c9b95039f0351aa38278fa500b`. 원본 PNG/TMX SHA-256, JPEG 로딩, B-C 변화, 이전 테이블 보존, 중복 키 0, SQLite 무결성 및 압축 복원 왕복 검증.
 - PNG 물리 높이와 TMX 선언 높이 불일치, 공식 Local ID·TileZed 미검증으로 `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. v36~v71 원본·체크포인트 및 사용자 수동 검수 80종 보존.
 
 ## v73 신규 직접 이미지 판독 (2026-10-26)
@@ -73,6 +73,15 @@
 - `checkpoints/v73/observations.tsv`·CSV, `checkpoints/v73_preview/` A/B/C/D 비교판 100 JPEG, `checkpoints/v73/INDEPENDENT_VISUAL_AUDIT.md`, 이미지 내장 HTML·ZIP CRC 보고서를 보존한다.
 - `analysis/current/v73/MANIFEST.json`의 물리 SQLite SHA-256 및 압축 조각 검증을 통과한 뒤 통합 결과로 사용한다. 기존 원본 DB, 이전 체크포인트, 수동 검수 80종은 변경하지 않는다.
 - PNG 물리 높이 불일치와 TileZed 공식 정합 미검증: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`.
+
+## v73 신규 직접 이미지 판독 (2026-10-26)
+- v72 미관찰 대기열 2,084종에서 신규 고유 키 20종을 선정, GitHub 원본 PNG·TMX A/B/C/D와 비교판 100 JPEG를 생성해 직접 시각 관찰했다.
+- 신규 잠정 후보 **16종**, 보류 **4종**(`blends_grassoverlays_01/57,59,61,67`; /57은 B-C 423픽셀이나 가림 심함, 나머지 3종은 0픽셀). 신규 키 중복 0종.
+- 갈색 4패널 목재 문짝 방향별 2종, 전자 키패드 격자 보안문 1종, 목재·검은 철제 야외 벤치 분할 3종, 황갈색 마른 풀 오버레이 10종을 잠정 분류했다.
+- 누적 **3,345/5,409종(61.8414%)**, 미관찰 **2,064종**, 감사 가능한 누적 잠정 후보 **2,871종**, 최종 인증 **0종**.
+- `checkpoints/v73/observations.tsv`·CSV, `checkpoints/v73_preview/` A/B/C/D 및 비교판 100 JPEG, HTML 내장 검수기, ZIP 104항목 CRC PASS를 보존한다.
+- `analysis/current/v73/MANIFEST.json`: SQLite **84,688,896바이트**, SHA-256 `002e8198db76667cb6c73103831e751933d024b50aa98490beab3e4d5acca104`. 원본 SHA, PNG/JPEG 로딩, B-C 변화, SQLite 무결성, 기존 테이블 보존, 압축 복원 및 중복 키 0을 검사한다.
+- 모든 신규 키 PNG 높이 불일치, 공식 Local ID 및 TileZed 미검증. `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`; 과거 체크포인트와 사용자 수동 검수 80종 보존.
 
 ## 다음 작업
 - v73 `analysis_queue`의 **미관찰 2,064종**에서 중복 없는 신규 키를 선정해 A/B/C/D 직접 시각 검수를 계속한다.
