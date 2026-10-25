@@ -41,28 +41,28 @@
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
-## 최신 물리 통합 SQLite (v58)
+## 최신 물리 통합 SQLite (v59)
 
-- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v58까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
-- 단일 테이블 `tile_catalog`: **3,000/5,409종 (55.46%)**, 미관찰 2,409종, 잠정 후보 2,601종, 최종 인증 0종.
-- SHA-256 검증과 전체 복원 방법: `analysis/current/v58/MANIFEST.json`, `scripts/restore_unified_v58.py`.
+- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v59까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
+- 단일 테이블 `tile_catalog`: **3,012/5,409종 (55.69%)**, 미관찰 2,397종, 잠정 후보 2,612종, 최종 인증 0종.
+- SHA-256 검증과 전체 복원 방법: `analysis/current/v59/MANIFEST.json`, `scripts/restore_unified_v59.py`.
 - 과거 DB는 별도 보존합니다. 최신 체크포인트 이미지의 GitHub 보관 여부: **보관됨**. 이전 버전의 로컬 보조 이미지·메타데이터는 각 버전 안내를 따릅니다.
 
-## 최신 체크포인트 (v58)
+## 최신 체크포인트 (v59)
 
-- 새로 직접 관찰: **6종** (잠정 후보 5, 보류 1).
-- 중복 제거 누적 관찰: **3,000/5,409종 (55.46%)**.
-- 아직 미관찰: **2,409종**. 최종 인증 0종.
-- 기록: `checkpoints/v58/observations.tsv` (이전 통합 DB와 별도로 보존).
+- 새로 직접 관찰: **12종** (잠정 후보 11, 보류 1).
+- 중복 제거 누적 관찰: **3,012/5,409종 (55.69%)**.
+- 아직 미관찰: **2,397종**. 최종 인증 0종.
+- 기록: `checkpoints/v59/observations.tsv` (이전 통합 DB와 별도로 보존).
 
 ## 다음 실제 작업
 
-1. v58 통합 DB의 미관찰 2,409종을 원본 PNG·TMX A/B/C/D로 직접 검수한다.
-2. v58 보류 1종(appliances_com_01/82)은 안테나의 타일 분할·지붕 가림·Local ID를 재검증한다.
-3. appliances_com_01 원본 PNG 높이 7,680px와 TMX 명시 높이 2,688px의 차이를 검증하고 TileZed 정합 확인 전 인증 0을 유지한다.
-4. 사용자 수동 검수 80종과 재검수 원본은 별도 계보로 보존하고 자동 합산하지 않는다.
-5. v57 이하 모든 원본 SQLite·체크포인트 및 기존 PNG·TMX를 삭제하거나 덮어쓰지 않는다.
-6. v58 A/B/C/D JPEG 6종 및 원본 출처 SHA-256은 checkpoints/v58_preview/에 저장했다.
+1. v59 통합 DB의 미관찰 2,397종을 PNG·TMX A/B/C/D 직접 관찰로 이어간다.
+2. v59 보류 appliances_com_01/3의 B-C 픽셀 변화 0 원인과 스프라이트 가림을 조사한다.
+3. v58 보류 appliances_com_01/82와 모든 PNG 높이 불일치의 Local ID 정합을 TileZed에서 검증한다.
+4. 사용자 수동 검수 80종 및 재검수 기록은 별도 계보로 보존하고 자동 합산하지 않는다.
+5. v58 이하 통합 원본 SQLite, 모든 타일 PNG·TMX, 모든 과거 관찰/충돌 레코드를 보존한다.
+6. v59 신규 12종 A/B/C/D+비교판 60장 JPEG를 checkpoints/v59_preview/에 별도 보관한다.
 
 ## 불변 원칙
 
