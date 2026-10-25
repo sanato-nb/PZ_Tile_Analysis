@@ -16,10 +16,10 @@ def render(s):
  unified=s.get("unified_database") or {}
  unified_notes=("" if unified.get("status")!="VERIFIED" else
      f"## 최신 물리 통합 SQLite ({unified['version']})\n\n"
-     f"- **v36 전체 원본 SQLite + v46 전체 데이터 테이블 + v47 병합 색인 + v48·v50·v51·v52·v53·v54·v55·v56·v57 신규 관찰 기록**을 한 SQLite로 통합했습니다.\n"
+     f"- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 {unified['version']}까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.\n"
      f"- 단일 테이블 `tile_catalog`: **{unified['observed_unique']:,}/{s['scope']['unique_tiles']:,}종 ({unified['observed_percent']:.2f}%)**, 미관찰 {unified['remaining_unobserved']:,}종, 잠정 후보 {unified['auditable_candidates']:,}종, 최종 인증 {unified['certified']}종.\n"
      f"- SHA-256 검증과 전체 복원 방법: `{unified['repo_manifest']}`, `{unified['restore_script']}`.\n"
-     f"- 과거 DB는 별도 보존합니다. 신규 체크포인트는 GitHub에 저장된 TSV 필드까지 통합되며, 로컬 보조 SQLite에만 남은 추가 메타데이터와 고해상도 이미지 바이너리는 아직 GitHub 본문에 모두 포함되지 않았습니다.\n\n")
+     f"- 과거 DB는 별도 보존합니다. 최신 체크포인트 이미지의 GitHub 보관 여부: **{'보관됨' if unified.get('image_binaries_in_github') else '미보관'}**. 이전 버전의 로컬 보조 이미지·메타데이터는 각 버전 안내를 따릅니다.\n\n")
  return f"""# 프로젝트 좀보이드 B42 타일 정체 분석 — 자동 인수인계
 
 > GitHub 기준일: {s["status_date"]}. **이 문서는 PROJECT_STATE.json에서 자동 생성됩니다.**

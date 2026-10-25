@@ -1,0 +1,31 @@
+{
+  "version": "v58",
+  "sqlite_file": "tile_visual_v58_unified.sqlite",
+  "sqlite_size_bytes": 84041728,
+  "sqlite_sha256": "491ae15d6c61e412137d249cf5463e0fe24fb9b966cfb1cfbb4dda8abe037e80",
+  "compressed_sha256": "c140bc3a9b101218d2a4b974699ad3b5402d9ede8404b79c07f9311a9ebb8977",
+  "compression": "zlib_base64",
+  "parts": [
+    "analysis/current/v58/v58.part000.b64",
+    "analysis/current/v58/v58.part001.b64",
+    "analysis/current/v58/v58.part002.b64",
+    "analysis/current/v58/v58.part003.b64",
+    "analysis/current/v58/v58.part004.b64",
+    "analysis/current/v58/v58.part005.b64",
+    "analysis/current/v58/v58.part006.b64"
+  ],
+  "base_version": "v57",
+  "base_sqlite_sha256": "21ecf81647468e8c7df1196f8f0f5104157c86d40ea50f05d08563293c575f71",
+  "new_records_repo_path": "checkpoints/v58/observations.tsv",
+  "evidence_manifest": "checkpoints/v58_preview/EVIDENCE_MANIFEST.json",
+  "source_record_count": 6,
+  "observed": 3000,
+  "provisional_candidates": 2601,
+  "remaining": 2409,
+  "certified": 0,
+  "all_prior_tables_preserved": true,
+  "original_sprite_evidence_images_in_github": true,
+  "mapping_verified": 0,
+  "tilezed_verified": 0,
+  "note": "6개 신규 타일의 원본 PNG A와 근사 TMX B/C/D JPEG가 저장소의 v58_preview에 보존됨. PNG height mismatch, 매핑·TileZed 인증 0."
+}

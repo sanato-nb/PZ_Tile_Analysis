@@ -1,0 +1,58 @@
+name: "v58 타일 통합 데이터베이스 생성 및 무결성 검증"
+on:
+  push:
+    branches:
+      - work/v58-evidence-20261025
+    paths:
+      - checkpoints/v58/observations.tsv
+      - scripts/build_unified_v58.py
+      - .github/workflows/build-unified-v58.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: 이전 원본 DB와 v58 관찰 증거 가져오기
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v57/*
+            /scripts/*.py
+            /checkpoints/v58/*
+            /checkpoints/v58_preview/*
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+            /.github/workflows/build-unified-v58.yml
+      - name: 원본 v57 SQLite 복원 및 SHA-256 확인
+        run: python3 scripts/restore_unified_v57.py "$RUNNER_TEMP/v57.sqlite"
+      - name: v58 직접 검수 6종 증거 및 중복 검사
+        run: python3 checkpoints/v58/verify_delta.py
+      - name: 기존 전체 테이블 보존하여 v58 SQLite 생성
+        run: python3 scripts/build_unified_v58.py "$RUNNER_TEMP/v57.sqlite"
+      - name: v58 SQLite 압축 조각 왕복 복원 및 무결성 검사
+        run: python3 scripts/restore_unified_v58.py "$RUNNER_TEMP/v58_roundtrip.sqlite"
+      - name: 상태 파일 검사 및 인수인계서 갱신
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - name: 완전한 v58 SQLite 다운로드용 보관
+        uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-unified-v58-SQLite
+          path: ${{ runner.temp }}/tile_visual_v58_unified.sqlite
+          retention-days: 90
+          if-no-files-found: error
+      - name: 검증된 v58 DB·상태·인수인계 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v58/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "데이터: v58 신규 6종 반영 통합 SQLite 및 인수인계 검증"
+            git push
+          fi
