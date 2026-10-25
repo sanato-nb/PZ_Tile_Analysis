@@ -4,7 +4,7 @@ from pathlib import Path
 import csv,sqlite3,hashlib,zlib,base64,json,os,sys
 ROOT=Path(__file__).resolve().parents[1]
 src=Path(sys.argv[1]).resolve()
-prior=json.loads((ROOT/'analysis/current/v76/MANIFEST.json').read_text('utf8'))
+prior=json.loads((ROOT/'analysis/current/v75/MANIFEST.json').read_text('utf8'))
 assert hashlib.sha256(src.read_bytes()).hexdigest()==prior['sqlite_sha256']
 with sqlite3.connect(src) as c:
     assert c.execute('pragma integrity_check').fetchone()[0]=='ok'
@@ -49,7 +49,7 @@ with sqlite3.connect(dst) as c:
         ('v76_new_held',1,'Occluded tiles held without identity'),
         ('v76_total_observed',3397,'v75 3377 + 20 non-overlapping'),
         ('v76_unobserved',2012,'5409 - 3397'),
-        ('v76_candidate_auditable',2919,'2900 + 18')])
+        ('v76_candidate_auditable',2919,'2900 + 19')])
     c.commit()
     assert c.execute('pragma integrity_check').fetchone()[0]=='ok'
     assert tables_prior.issubset({r[0] for r in c.execute("select name from sqlite_master where type='table'")})
@@ -57,9 +57,9 @@ with sqlite3.connect(dst) as c:
                 observed=c.execute('select count(*) from tile_catalog where observed_any=1').fetchone()[0],
                 candidate=c.execute('select count(*) from tile_catalog where provisional_candidate_any_auditable=1').fetchone()[0],
                 remaining=c.execute('select count(*) from analysis_queue').fetchone()[0],
-                v75review=c.execute('select count(*) from v76_visual_review').fetchone()[0],
+                v76review=c.execute('select count(*) from v76_visual_review').fetchone()[0],
                 final=c.execute('select count(*) from tile_catalog where identity_final_certified=1').fetchone()[0])
-    assert checks==dict(all=5409,observed=3397,candidate=2919,remaining=2012,v75review=20,final=0),checks
+    assert checks==dict(all=5409,observed=3397,candidate=2919,remaining=2012,v76review=20,final=0),checks
     c.execute('VACUUM')
 out=ROOT/'analysis/current/v76'
 out.mkdir(parents=True,exist_ok=True)
@@ -100,7 +100,7 @@ s['unified_database']=dict(version='v76',status='VERIFIED',
     v76_git_checkpoint_integrated=True,image_binaries_in_github=True)
 s['status_date']='2026-10-26'
 s['next_actions']=[
-    'v76 통합 DB의 미관찰 2,032종에서 신규 고유 키를 선정해 PNG·TMX A/B/C/D 직접 검수한다.',
+    'v76 통합 DB의 미관찰 2,012종에서 신규 고유 키를 선정해 PNG·TMX A/B/C/D 직접 검수한다.',
     'v75 이하의 보류 타일은 가림·다중 부품 역할을 다른 위치에서 재검수한다.',
     'PNG 물리 높이 불일치 및 TileZed 공식 Local ID 정합을 독립 검증한다.',
     '사용자 수동 검수 80종 및 재검수 자료는 별도 계보로 보존하며 자동 합산하지 않는다.',
