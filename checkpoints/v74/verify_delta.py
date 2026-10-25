@@ -12,7 +12,7 @@ assert len(rows)==len(keys)==12,(len(rows),len(keys))
 assert sum(r['review_status']=='candidate' for r in rows)==11
 assert sum(r['review_status']=='held' for r in rows)==1
 assert all(r['mapping_verified']==r['tilezed_verified']==r['final_certified']=='0' for r in rows)
-manifest=json.loads((root/'checkpoints/v73_preview/EVIDENCE_MANIFEST.json').read_text('utf8'))
+manifest=json.loads((root/'checkpoints/v74_preview/EVIDENCE_MANIFEST.json').read_text('utf8'))
 assert manifest['base']=='v73' and manifest['observed_count_added']==0
 evidence={(r['key'][0],int(r['key'][1])):r for r in manifest['results']}
 assert len(evidence)==12 and set(evidence)==keys
