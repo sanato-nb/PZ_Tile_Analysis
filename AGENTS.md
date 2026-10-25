@@ -1,34 +1,20 @@
-# PZ Tile Analysis — AI/Work 작업 지침
+# 좀보이드 B42 타일 정체 분석 — 고정 AI 작업 지침 (v47)
 
-이 저장소는 프로젝트 좀보이드 B42의 TMX와 원본 타일셋 PNG를 **시각적으로** 분석하는 프로젝트다. 최종적으로 마인크래프트 맵에 건물과 사물을 재현하기 위한 개별 타일 정의를 구축한다.
+## 최우선 목표
+개별 스프라이트 픽셀과 TMX 주변 5×5 조립 이미지 A/B/C/D를 직접 보고 그 물체나 구성부품을 이해한다. **타일 이름에서 정체를 추측하지 않는다.** 다칸 사물, 오염·잔해 오버레이, 벽의 방향·창 개구부, 지붕 경계 등 맥락을 직접 확인한다.
 
-## 새 채팅마다 첫 행동
+## 매 새 채팅/Work의 시작
+1. `PROJECT_STATE.json`, `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 읽는다.
+2. **실제 v36·v46 DB는 GitHub에 있다.** `python3 scripts/restore_source_databases.py <outdir>`로 아카이브 조각을 복원한다. 파일을 사용자에게 다시 첨부해 달라고 하지 않는다.
+3. 복구가 필요 없는 개요 작업은 `analysis/imports/merged_catalog_5409.csv` 및 `scripts/restore_merged_evidence.py`를 활용한다.
+4. **검증된 관찰: 2,584/5,409(47.77%), 미관찰 2,825, 최종 인증 0.** 과거 v36 2,509과 v37~v46 477의 중복 402를 제거해 얻었다.
+5. 잠정 정체 후보 감사 가능 키 2,302종은 최종 정체가 아니다. v36 과거 보고 후보 2,291종과 실제 테이블 근거 2,156종 차이 135종은 숨기지 않는다. 충돌 256종도 재검토한다.
 
-1. `PROJECT_STATE.json`, `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`를 읽는다.
-2. 저장소에서 최신 DB·증거가 **실제로 존재하는지** 확인한다. 경로가 없으면 없다고 말한다.
-3. v36 (2,509 관찰)과 별도 v37~v46 (477 관찰)은 **서로 중복 제거하기 전까지 절대 합산하지 않는다**.
-4. 원본 `Tiles/`, `B4220.3_MapExport_256/`는 보존한다.
-
-## 판독 방법
-
-- 타일 이름이나 텍스트 라벨이 아니라 **원본 스프라이트 픽셀과 TMX 주변 배치의 실제 조립 이미지**를 관찰한다.
-- 한 물체를 구성하는 여러 칸(침대·소파·지붕·울타리 등), 벽 모서리/창·문 개구부, 흙/피/낙서/오염 오버레이를 인접 장면으로 비교한다.
-- 기본 비교 증거: A=원본 PNG, B=동일 층의 주변 5×5 합성, C=선택한 배치만 제거, D=다른 사용 위치. D가 없으면 없음을 표시한다.
-- 근사 아이소메트릭 렌더링은 **TileZed 공식 검증이 아니다**. TMX와 PNG 높이/버전이 어긋나면 Local ID의 정체로 확정하지 않는다.
-- `observed`, `provisional_candidate`, `mapping_verified`, `certified`는 별도 상태다. 빈 증거·자동 카드 생성은 직접 검수로 세지 않는다.
-- 과거 v31의 AI 라벨을 새로운 이미지 판독의 근거로 재사용하지 않는다.
-
-## 데이터와 안전
-
-- 유일 키: `(tile_set_locator, local_id)`; 맵 좌표 및 층/레이어는 증거에 보존.
-- 이름이 애매하면 후보를 낮은 신뢰도로 표시하거나 보류한다. 수치만 올리기 위한 임의 분류 금지.
-- 공개 저장소이므로 비밀키, 개인 데이터, 비공개 대화 내역 게시 금지.
-- 사용자 동의 없이 기존 분석 파일 덮어쓰기/삭제/원본 변형 금지.
-- Git에 큰 DB를 반복 직접 올리기보다 LFS/릴리스/외부 연결 저장소를 결정하고 SHA-256을 함께 기록한다.
-
-## 인수인계 자동화
-
-- 주 상태: `PROJECT_STATE.json`.
-- 상태가 달라지면 `python scripts/validate_project.py`로 검사하고 `python scripts/generate_handoff.py`로 `docs/HANDOFF.md`를 갱신.
-- `.github/workflows/sync-handoff.yml`은 main 푸시 시 검증과 인수인계 갱신을 시도한다. 작업 성공 여부는 Actions에서 확인.
-- `docs/NEXT_CHAT_PROMPT.md`에 새 채팅 시작 지침이 있다.
+## 판정과 보존
+- 고유 키 `(tile_set_locator,local_id)`로 중복을 제거한다.
+- A 원본 PNG, B TMX 같은 층 주변 조립, C 선택 배치만 제거, D 다른 위치를 사용한다.
+- 이미지 직접 관찰 ≠ 잠정 정체 후보 ≠ 버전/Local ID 검증 ≠ TileZed 검증 ≠ 정체 인증.
+- 이미지가 없거나 가려지면 hold; 타일셋명과 기존 v31 AI 의미 라벨을 정체 증거로 사용 금지.
+- 과거 DB와 원본 Tiles/, B4220.3_MapExport_256/를 임의로 덮어쓰지 않는다.
+- 공개 저장소에 개인정보·토큰·비공개 대화 원문을 올리지 않는다.
+- 신규 관찰이 끝나면 체크포인트와 PROJECT_STATE.json을 갱신한다. GitHub Actions가 인수인계서를 재생성하고 DB 복원 검사를 수행한다.

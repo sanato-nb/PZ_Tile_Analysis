@@ -6,8 +6,8 @@
   "status_date": "2026-10-25",
   "scope": {
     "tmx_sources": [
-      "31_45.tmx",
-      "31_46.tmx"
+      "31_45(2).tmx",
+      "31_46(2).tmx"
     ],
     "source_tree": "B4220.3_MapExport_256/tmx/",
     "unique_tiles": 5409,
@@ -20,26 +20,43 @@
       "provisional_identity_candidates": 2291,
       "final_identity_certifications": 0,
       "reported_artifact": "PZ_타일정체_시각분석_v36_복구및검수.zip",
-      "artifact_repo_path": null,
-      "verification": "prior_report_only; actual cumulative SQLite not imported to this repository"
+      "artifact_repo_path": "analysis/archive/v36/",
+      "verification": "Original v36 SQLite extracted from the preserved 81.9MB ZIP, integrity-check OK, SHA-256 recorded, complete compressed SQLite backed up in GitHub"
     },
     "v37_to_v46": {
       "observation_records": 477,
       "provisional_identity_candidates": 402,
       "withheld_identity": 75,
       "reported_sqlite": "tile_visual_v46.sqlite",
-      "artifact_repo_path": null,
-      "verification": "separate_lineage_report; overlap with v36 not computed"
+      "artifact_repo_path": "analysis/archive/v46/",
+      "verification": "Original v46 SQLite recovered; 477 individual reviewed records and 402 candidate statuses verified"
     }
   },
   "reconciliation": {
-    "status": "NOT_STARTED",
-    "v36_v46_overlap_count": null,
-    "merged_unique_observed": null,
-    "merged_unique_candidates": null,
-    "merged_db_repo_path": null,
+    "status": "VERIFIED",
+    "method": "set union keyed by (tile_set_locator,local_id) from original v36 and v46 SQLite files",
+    "v36_v46_overlap_count": 402,
+    "new_unique_observed_v37_to_v46": 75,
+    "merged_unique_observed": 2584,
+    "merged_observation_percent": 47.7722,
+    "remaining_unobserved": 2825,
+    "merged_unique_candidates": 2302,
+    "merged_candidate_semantics": "auditable provisional candidate keys only; not certified identities",
+    "v36_reported_candidates": 2291,
+    "v36_auditable_candidate_keys": 2156,
+    "v36_reported_candidate_discrepancy": 135,
+    "v46_auditable_candidates": 402,
+    "source_candidate_wording_conflicts": 256,
+    "merged_db_repo_path": "analysis/imports/merged_evidence_v47.sqlite.zlib.b64",
+    "merged_csv_repo_path": "analysis/imports/merged_catalog_5409.csv",
+    "original_db_v36": "analysis/archive/v36/",
+    "original_db_v46": "analysis/archive/v46/",
     "approved_final_certifications": 0,
-    "do_not_sum_lineages": true
+    "do_not_sum_lineages": true,
+    "source_sha256": {
+      "v36": "db64cc6285664f715f7b0168f99d625ee4e909e2cefef07b8f15abe817ea0c39",
+      "v46": "73ca1bd292dbfbd22ac63ce5f06671d1475244e0b0f96a1b7a57c08e74031aa7"
+    }
   },
   "evidence_policy": {
     "evidence_key": [
@@ -52,16 +69,18 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "v36 ZIP 및 v46 SQLite 실제 파일을 접근 가능한 장소에서 읽고 SHA-256을 기록한다.",
-    "두 DB의 (tile_set_locator, local_id) 키를 정규화해 교집합·차집합·판정 충돌을 계산한다.",
-    "원본 PNG/TMX Local ID 대응 문제와 미확보·완전 투명 스프라이트를 별도 기록한다.",
-    "직접 조립·육안 관찰된 추가 증거만 새 후보로 집계한다.",
-    "검증 통과 후에만 checkpoints 와 PROJECT_STATE.json 을 갱신한다."
+    "Restore both complete original SQLite sources from analysis/archive using scripts/restore_source_databases.py (no manual attachment required).",
+    "Read analysis/imports/merged_catalog_5409.csv and note verified merged unique observed count 2,584.",
+    "Investigate the 135 provisional candidate report-vs-auditable-key discrepancy in v36 without deleting historical reported counts.",
+    "Review the 256 keys with different v36 versus v46 candidate wording using original images; do not auto-select a winner.",
+    "Continue direct A/B/C/D visual analysis for the remaining 2,825 unobserved keys; keep mapping and TileZed certification separate.",
+    "Commit each finished checkpoint and update PROJECT_STATE.json so GitHub Actions refreshes docs/HANDOFF.md."
   ],
   "warnings": [
-    "GitHub에 DB 원본이 올라가기 전에는 실 DB 병합 완료라고 주장하지 않는다.",
-    "과거 2,509건과 별도 477건을 중복 제거 없이 합산하지 않는다.",
-    "원본 PNG·TMX와 기존 분석 이력은 임의로 변경하거나 삭제하지 않는다.",
-    "공개 저장소에 토큰, 개인정보, 비공개 채팅 원문을 업로드하지 않는다."
+    "Do not count 2,509+477 as unique: the verified overlap is 402.",
+    "2,302 are auditable provisional candidate keys, not verified object identities; historical v36 reported candidate total 2,291 is preserved separately.",
+    "Original v36 and v46 SQLite sources are preserved in GitHub as SHA-256 verifiable xz + base64 text shards.",
+    "Image context, sprite correspondence and TileZed validation remain unverified; final certifications 0.",
+    "Public repository: never commit tokens or private conversation content; preserve original map and tile assets."
   ]
 }
