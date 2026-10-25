@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v80 신규 12종: 원본 PNG/TMX SHA, A/B/C/D 로딩, 위치·키·중복·보류·인증 분리 검증."""
+"""v80 신규 20종: 원본 PNG/TMX SHA, A/B/C/D 로딩, 위치·키·중복·보류·인증 분리 검증."""
 import csv, json, hashlib
 from pathlib import Path
 from PIL import Image, ImageChops
@@ -53,4 +53,4 @@ for r in rows:
     with Image.open(paths[1]) as b, Image.open(paths[2]) as c:
         assert item['visible_pixel_delta']==0 or ImageChops.difference(b.convert('RGB'),c.convert('RGB')).getbbox(),('B-C positive delta missing',key)
 assert len({(r['tile_set_locator'],int(r['local_id'])) for r in rows})==20
-print('PASS v80 12 unique / 8 candidate / 4 held / 100 JPEG /',len(seen),'distinct original PNG+TMX sources / SHA256 + image loading + B-C + provenance')
+print('PASS v80 20 unique / 19 candidate / 1 held / 100 JPEG /',len(seen),'distinct original PNG+TMX sources / SHA256 + image loading + B-C + provenance')
