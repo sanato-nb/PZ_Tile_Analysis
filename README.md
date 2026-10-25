@@ -2,6 +2,8 @@
 
 프로젝트 좀보이드(Project Zomboid) B42의 **원본 타일 이미지를 직접 관찰하고**, TMX 지도에서 사용되는 위치와 주변 타일을 비교해 개별 타일이 나타내는 사물·부품을 분석하는 프로젝트입니다.
 
+> **최신 v74 (2026-10-26):** 고유 5,409종 중 이미지 관찰 **3,357종(62.06%)**, 미관찰 **2,052종**, 감사 가능한 잠정 후보 **2,882종**, 최종 인증 **0종**. 이번 신규 관찰 12종(후보 11·보류 1). [관찰 기록](checkpoints/v74/observations.tsv) · [A/B/C/D 이미지 60장](checkpoints/v74_preview/) · [통합 SQLite 명세](analysis/current/v74/MANIFEST.json).
+
 > **중앙 저장소 운영 원칙:** 원본 지도와 PNG는 보존하고, 분석 결과와 데이터베이스는 버전별로 관리합니다. 최신 진행률은 `PROJECT_STATE.json`에서 확인합니다.
 
 ## 1. 전체 폴더 구조
@@ -29,7 +31,8 @@
 │       ├── v59/ ~ v61/         이전 버전별 통합 DB
 │       ├── v62/ ~ v68/         이전 버전별 통합 DB
 │       ├── v69/ ~ v70/         이전 통합 DB
-│       └── v71/                 ★ 최신 통합 DB
+│       ├── v71/ ~ v73/         이전 통합 DB
+│       └── v74/                 ★ 최신 통합 DB
 │
 ├── 📂 checkpoints/              분석 배치별 진행 기록
 │   ├── v48/
@@ -44,8 +47,9 @@
 │   ├── v58/ ~ v61/              이전 버전별 관찰 기록
 │   ├── v62/ ~ v68/              이전 체크포인트
 │   ├── v69/ ~ v70/             이전 체크포인트
-│   ├── v71/                     ★ 신규 20종 검수 및 증거 ZIP
-│   └── v71_preview/             A/B/C/D+비교판 JPEG 100장
+│   ├── v71/ ~ v73/              이전 체크포인트
+│   ├── v74/                     ★ 신규 12종 검수 및 증거 ZIP
+│   └── v74_preview/             A/B/C/D+비교판 JPEG 60장
 │
 ├── 📂 scripts/                  DB 생성·복원·검증 Python 프로그램
 ├── 📂 .github/workflows/        GitHub Actions 자동 검증 및 인수인계
@@ -70,19 +74,19 @@
 ## 2. 최신 작업 진행도
 
 <details>
-<summary>2026년 10월 26일 · v71 검증 완료 기준</summary>
+<summary>2026년 10월 26일 · v74 검증 완료 기준</summary>
 
 | 항목 | 수량 |
 |---|---:|
 | 전체 TMX 고유 타일 | **5,409종** |
-| 이미지 직접 관찰 | **3,305종 (61.10%)** |
-| 아직 관찰하지 않은 타일 | **2,104종** |
-| 감사 가능한 잠정 정체 후보 | **2,835종** |
+| 이미지 직접 관찰 | **3,357종 (62.06%)** |
+| 아직 관찰하지 않은 타일 | **2,052종** |
+| 감사 가능한 잠정 정체 후보 | **2,882종** |
 | 최종 정체 인증 | **0종** |
 
 </details>
 
-**위 표는 v71 최신 검증 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
+**위 표는 v74 최신 검증 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
 
 이미지로 관찰한 타일이나 잠정 정체 후보는 검증된 최종 정체와 다릅니다. PNG–TMX Local ID 대응과 TileZed 렌더 정합성은 아직 검증 대상입니다.
 
@@ -97,15 +101,15 @@
 
 ## 4. 최신 데이터베이스 복원
 
-GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v71 전체 통합 SQLite**를 복원할 수 있습니다.
+GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v74 전체 통합 SQLite**를 복원할 수 있습니다.
 
 ```bash
-python3 scripts/restore_unified_v71.py
+python3 scripts/restore_unified_v74.py
 ```
 
 복원 후 분석 대상 전체는 `tile_catalog`, 미관찰 대상은 `analysis_queue`에서 조회합니다. 구버전과 원본 DB는 그대로 보존합니다.
 
-자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v71/)
+자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v74/)
 
 ## 5. GitHub 커밋 메시지 작성 규칙
 
@@ -157,10 +161,14 @@ python3 scripts/restore_unified_v71.py
 - PNG–TMX Local ID 공식 매핑 및 TileZed 정합 미검증이므로 **최종 인증은 0종**입니다. 사용자 수동 검수 80종은 별도 계보를 유지합니다.
 
 
-## 10. v71 최신 직접 판독·증거·SQLite
+## 10. v71 과거 판독·증거·SQLite
 
-- **신규 이미지 직접 관찰 15종**: 잠정 후보 **11종**, 보류 **4종**. 누적 **3,270/5,409종(60.45%)**, 미관찰 **2,104종**, 감사 가능한 잠정 후보 **2,835종**.
-- 보류: `furniture_seating_indoor_03/61`(B-C 0픽셀), `furniture_seating_indoor_03/103`(16픽셀), `appliances_refrigeration_01/27`(검은 몸체의 기능 불명), `location_services_beauty_01/10`(4픽셀).
-- [v71 CSV](checkpoints/v71/observations.csv) · [TSV](checkpoints/v71/observations.tsv) · [이미지 내장 검수 HTML](checkpoints/v71/v71_이미지내장_검수.html) · [A/B/C/D 증거 ZIP](checkpoints/v71/v71_증거_15종_A_B_C_D.zip) · [JPEG 75장](checkpoints/v71_preview/) · [ZIP CRC 보고서](checkpoints/v71/ZIP_CRC_REPORT.json).
-- [v71 SQLite 복원 명세](analysis/current/v71/MANIFEST.json) · [v71 복원 스크립트](scripts/restore_unified_v71.py). 기존 원본 DB·이전 체크포인트·수동 검수 80종은 보존합니다.
-- PNG–TMX Local ID와 TileZed 공식 정합 미검증으로 **최종 인증 0종**입니다.
+- v71에서 신규 **20종**(후보 18·보류 2)을 관찰해 누적 **3,305종(61.10%)**, 미관찰 **2,104종**, 잠정 후보 **2,835종**을 기록했습니다.
+- [v71 검수 기록](checkpoints/v71/observations.tsv) · [이미지 증거](checkpoints/v71_preview/) · [SQLite 명세](analysis/current/v71/MANIFEST.json).
+
+## 11. v74 최신 직접 판독·증거·SQLite
+
+- v73의 미관찰 2,064종에서 중복 없는 신규 **12종**을 선택해 A/B/C/D 비교판 12개를 실제 열어 판독했습니다. 잠정 후보 **11종**, 보류 **1종**(잔디 경계 `blends_natural_01/19`, B-C 0픽셀).
+- 누적 이미지 관찰 **3,357/5,409종(62.06%)**, 미관찰 **2,052종**, 감사 가능한 잠정 후보 **2,882종**, 최종 인증 **0종**입니다.
+- [v74 CSV](checkpoints/v74/observations.csv) · [TSV](checkpoints/v74/observations.tsv) · [A/B/C/D JPEG 60장](checkpoints/v74_preview/) · [이미지 내장 검수 HTML](checkpoints/v74/v74_이미지내장_검수.html) · [증거 ZIP](checkpoints/v74/v74_증거_12종_A_B_C_D.zip) · [ZIP CRC](checkpoints/v74/ZIP_CRC_REPORT.json).
+- [v74 통합 SQLite MANIFEST](analysis/current/v74/MANIFEST.json) · [v74 복원 스크립트](scripts/restore_unified_v74.py). PNG–TMX Local ID 공식 대응 및 TileZed 검증은 미완료입니다.
