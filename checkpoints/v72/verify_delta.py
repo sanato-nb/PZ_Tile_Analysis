@@ -3,7 +3,7 @@
 import csv, json, hashlib
 from pathlib import Path
 from PIL import Image, ImageChops
-root=Path(__file__).resolve().parents[0]
+root=Path(__file__).resolve().parents[2]
 cp=root/'checkpoints/v72'
 with (cp/'observations.tsv').open(encoding='utf8',newline='') as f:
     rows=list(csv.DictReader(f,delimiter='\t'))
@@ -50,7 +50,7 @@ for r in rows:
         with Image.open(path) as im:
             im.verify()
         paths.append(path)
-    with Image.open(paths[1]) as b, Image.open(paths[0]) as c:
+    with Image.open(paths[1]) as b, Image.open(paths[2]) as c:
         assert item['visible_pixel_delta']==0 or ImageChops.difference(b.convert('RGB'),c.convert('RGB')).getbbox(),('B-C positive delta missing',key)
 assert len({(r['tile_set_locator'],int(r['local_id'])) for r in rows})==20
 print('PASS v72 20 unique / 20 candidate / 0 held / 100 JPEG /',len(seen),'distinct original PNG+TMX sources / SHA256 + image loading + B-C + provenance')
