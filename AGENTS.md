@@ -1,4 +1,4 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v52)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v53)
 
 ## 프로젝트 목표
 좀보이드 B42 TMX 두 개(31_45(2).tmx, 31_46(2).tmx)의 **실제 사용 고유 타일 5,409종**이 원본 PNG 이미지에서 어떤 사물·부품을 나타내는지 직접 관찰하고, TMX 장면과 비교해 잠정적으로 판정한다. 이름·옛 AI 분류로 정체를 자동 생성하지 않는다.
@@ -6,9 +6,9 @@
 ## 시작 시 항상 확인할 것
 1. `PROJECT_STATE.json`에서 **`unified_database`와 `latest_checkpoint`를 우선 조회**한다. `reconciliation`의 2,584종(v47)은 보존된 옛 교집합 검증 기준이며 최신 총수로 사용하지 않는다.
 2. `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 읽는다.
-3. 최신 원본 기준: **v52 물리 통합 SQLite**. `python3 scripts/restore_unified_v52.py /tmp/pz_latest.sqlite` 실행 시 GitHub의 `analysis/current/v52/` 내 압축 조각 7개를 SHA-256 검증 후 복원한다.
-4. v36·v46 전체 원본 DB, v47 병합, v48·v50·v51·v52 신규 관찰을 모두 하나의 SQLite에서 검색할 수 있다. 과거 `analysis/archive/`, `analysis/current/v49/`, 원본 `Tiles/` 및 `B4220.3_MapExport_256/`는 보존한다.
-5. 2026-10-25 v52 작업 기준은 **관찰 2,750/5,409종(50.84%), 미관찰 2,659종, 감사 가능한 잠정 후보 2,419종, 최종 인증 0종**. 새 작업 후엔 이 수치를 하드코딩하지 말고 상태 파일을 먼저 조회한다.
+3. 최신 원본 기준: **v53 물리 통합 SQLite**. `python3 scripts/restore_unified_v53.py /tmp/pz_latest.sqlite` 실행 시 GitHub의 `analysis/current/v53/` 내 압축 조각 7개를 SHA-256 검증 후 복원한다.
+4. v36·v46 전체 원본 DB, v47 병합, v48·v50·v51·v52·v53 신규 관찰을 모두 하나의 SQLite에서 검색할 수 있다. 과거 `analysis/archive/`, `analysis/current/v49/`, 원본 `Tiles/` 및 `B4220.3_MapExport_256/`는 보존한다.
+5. 2026-10-25 v53 작업 기준은 **관찰 2,800/5,409종(51.77%), 미관찰 2,609종, 감사 가능한 잠정 후보 2,458종, 최종 인증 0종**. 새 작업 후엔 이 수치를 하드코딩하지 말고 상태 파일을 먼저 조회한다.
 
 ## 실제 이미지 분석 규칙
 - 고유 키 `(tile_set_locator,local_id)`로 중복을 계산한다. 신규 작업 대상은 최신 DB의 `analysis_queue`에서 선택하고, 이미 관찰한 키는 다시 신규로 세지 않는다.
@@ -19,9 +19,9 @@
 - 현재 그림 합성은 TileZed 공식 렌더러가 아니라 근사 아이소메트릭이다. 과거 폐기한 2D 평면도 엔진은 분석 근거로 재사용하지 않는다.
 
 ## v52 물리 통합 DB 구조 및 주의
-- `tile_catalog`(5,409종) / `analysis_queue`(미관찰 2,659종) / `v52_visual_review`(신규 66종).
+- `tile_catalog`(5,409종) / `analysis_queue`(미관찰 2,609종) / `v53_visual_review`(신규 50종).
 - v36 원본 테이블은 원래 이름을 유지하고 v46 테이블은 `v46__`, v47은 `v47__` 접두어로 보존.
-- v52: 신규 66종(잠정 후보 41, 보류 25), 기존 v51과 교집합 0. `checkpoints/v52/observations.tsv`와 `analysis/current/v52/MANIFEST.json` 참조.
+- v53: 신규 50종(잠정 후보 39, 보류 11), 기존 v52와 교집합 0. `checkpoints/v53/observations.tsv`와 `analysis/current/v53/MANIFEST.json` 참조.
 - GitHub에 저장된 TSV의 관찰 필드는 통합되었으나, 이번 채팅의 고해상도 증거판 및 로컬 SQLite에만 있는 추가 메타데이터·픽셀 이미지는 **별도 체크포인트 ZIP**에 있다. GitHub에 이미지까지 올렸다고 주장하지 않는다.
 - v36 과거 보고 잠정 후보 2,291종과 감사 가능한 2,156종 사이 차이 135종, v36/v46 후보 표현 충돌 256종은 미해결 그대로 보존한다.
 

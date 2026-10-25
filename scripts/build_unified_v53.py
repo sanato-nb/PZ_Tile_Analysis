@@ -76,7 +76,7 @@ manifest={"version":"v53","sqlite_file":"tile_visual_v53_unified.sqlite","sqlite
 (out/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 statepath=ROOT/"PROJECT_STATE.json";s=json.loads(statepath.read_text("utf8"))
 assert s["unified_database"]["version"]=="v52" and s["unified_database"]["observed_unique"]==2750
-s["latest_checkpoint"]={"version":"v53","date":"2026-10-11","baseline_reconciliation":"v52",
+s["latest_checkpoint"]={"version":"v53","date":"2026-10-25","baseline_reconciliation":"v52",
  "baseline_unique_observed":2750,"new_unique_observed":50,"new_provisional_candidates":39,
  "new_held":11,"overlap_with_prior":0,"merged_unique_observed":2800,
  "merged_observation_percent":51.7656,"remaining_unobserved":2609,
