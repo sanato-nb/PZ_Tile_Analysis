@@ -43,25 +43,25 @@
 
 ## 최신 물리 통합 SQLite (v52)
 
-- **v36 전체 원본 SQLite + v46 전체 테이블 + v47 병합 색인 + v48·v50·v51·v52 신규 직접 관찰 기록**을 물리적으로 하나의 SQLite에 통합했습니다.
-- 단일 `tile_catalog`: **2,750 / 5,409종 (50.84%)**, 아직 미관찰 **2,659종**, 감사 가능한 잠정 후보 **2,419종**, 최종 인증 **0종**.
-- GitHub의 SHA-256 검증 가능한 압축 원본: `analysis/current/v52/MANIFEST.json`; 명령: `python3 scripts/restore_unified_v52.py`.
-- 66개 신규 타일은 원본 PNG 및 A/B/C/D TMX 근사 합성으로 직접 관찰했습니다. 잠정 후보 41종, 보류 25종입니다. C에서 가시 변화 0이거나 아주 작고 주변 PNG 누락이 많으면 보류했습니다.
-- 과거 원본 DB는 보존했습니다. **고해상도 v52 증거 이미지 바이너리**는 현재 채팅 ZIP에 들어 있으며, GitHub에는 축약 관찰 TSV와 복원 가능한 물리 통합 DB가 있습니다. GitHub에 이미지 전체가 있다고 주장하지 않습니다.
+- **v36 전체 원본 SQLite + v46 전체 데이터 테이블 + v47 병합 색인 + v48·v50·v51·v52 신규 관찰 기록**을 한 SQLite로 통합했습니다.
+- 단일 테이블 `tile_catalog`: **2,750/5,409종 (50.84%)**, 미관찰 2,659종, 잠정 후보 2,419종, 최종 인증 0종.
+- SHA-256 검증과 전체 복원 방법: `analysis/current/v52/MANIFEST.json`, `scripts/restore_unified_v52.py`.
+- 과거 DB는 별도 보존합니다. 신규 체크포인트는 GitHub에 저장된 TSV 필드까지 통합되며, 로컬 보조 SQLite에만 남은 추가 메타데이터와 고해상도 이미지 바이너리는 아직 GitHub 본문에 모두 포함되지 않았습니다.
 
 ## 최신 체크포인트 (v52)
 
-- 신규 직접 관찰: **66종**(잠정 후보 41, 보류 25), 기존 계보와 중복 **0종**.
-- 중복 제거 누적 관찰: **2,750 / 5,409종 (50.84%)**, 미관찰 **2,659종**. 인증 **0종**.
-- 기록: `checkpoints/v52/observations.tsv`; 감사 스크립트: `checkpoints/v52/verify_delta.py`.
+- 새로 직접 관찰: **66종** (잠정 후보 41, 보류 25).
+- 중복 제거 누적 관찰: **2,750/5,409종 (50.84%)**.
+- 아직 미관찰: **2,659종**. 최종 인증 0종.
+- 기록: `checkpoints/v52/observations.tsv` (이전 통합 DB와 별도로 보존).
 
 ## 다음 실제 작업
 
-1. Continue new A/B/C/D original-PNG visual review from the v51 analysis_queue of 2,766 never-observed keys.
-2. Review the v52 25 held keys using alternative source scenes and correct PNG atlas versions.
-3. Keep 256 historical candidate-wording conflicts and 135 v36 candidate-report discrepancies unresolved.
-4. Preserve every original SQLite and upgrade only new versioned unified databases.
-5. Collect/store high-resolution image evidence in a persistent accessible source; do not claim embedded images in GitHub until done.
+1. v52 통합 DB의 미관찰 대기열 2,659종을 대상으로 원본 PNG 및 TMX A/B/C/D 이미지 직접 분석을 이어간다.
+2. v52에서 보류한 25종의 다른 TMX 사용 위치와 PNG 원본 버전을 대조해 불확실한 부품 역할을 다시 검토한다.
+3. 기존 v36·v46 정체 후보 표현 충돌 256종과 v36 후보 수 집계 차이 135종을 임의로 합치거나 확정하지 않고 따로 보존한다.
+4. 기존 모든 원본 SQLite와 과거 통합 버전을 삭제하거나 덮어쓰지 않고, 후속 분석 결과는 새 버전으로 저장한다.
+5. 고해상도 A/B/C/D 증거판의 지속 보관처를 마련하되 GitHub에 이미지가 실제로 저장되기 전까지 업로드 완료라고 표시하지 않는다.
 
 ## 불변 원칙
 
