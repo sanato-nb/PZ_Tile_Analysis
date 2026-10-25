@@ -8,7 +8,7 @@
 2. `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 읽는다.
 3. 최신 원본 기준: **v56 물리 통합 SQLite**. `python3 scripts/restore_unified_v56.py /tmp/pz_latest.sqlite` 실행 시 GitHub의 `analysis/current/v56/` 내 압축 조각 7개를 SHA-256 검증 후 복원한다.
 4. v36·v46 전체 원본 DB, v47 병합, v48·v50·v51·v52·v53·v54·v55·v56 신규 관찰을 모두 하나의 SQLite에서 검색할 수 있다. 과거 `analysis/archive/`, `analysis/current/v49/`, 원본 `Tiles/` 및 `B4220.3_MapExport_256/`는 보존한다.
-5. 2026-10-25 v56 작업 기준은 **관찰 2,946/5,409종(54.47%), 미관찰 2,463종, 감사 가능한 잠정 후보 2,559종, 최종 인증 0종**. 새 작업 후엔 이 수치를 하드코딩하지 말고 상태 파일을 먼저 조회한다.
+5. 2026-10-25 v56 작업 기준은 **관찰 2,946/5,409종(54.46%), 미관찰 2,463종, 감사 가능한 잠정 후보 2,559종, 최종 인증 0종**. 새 작업 후엔 이 수치를 하드코딩하지 말고 상태 파일을 먼저 조회한다.
 
 ## 실제 이미지 분석 규칙
 - 고유 키 `(tile_set_locator,local_id)`로 중복을 계산한다. 신규 작업 대상은 최신 DB의 `analysis_queue`에서 선택하고, 이미 관찰한 키는 다시 신규로 세지 않는다.
