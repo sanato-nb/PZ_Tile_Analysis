@@ -19,13 +19,15 @@
 │       ├── v49/
 │       ├── v50/
 │       ├── v51/
-│       └── v52/                 ★ 현재 최신 통합 DB 복원 자료
+│       ├── v52/
+│       └── v53/                 ★ 현재 최신 통합 DB 복원 자료
 │
 ├── 📂 checkpoints/              분석 배치별 진행 기록
 │   ├── v48/
 │   ├── v50/
 │   ├── v51/
-│   └── v52/                     ★ 최근 신규 66종 관찰 기록
+│   ├── v52/
+│   └── v53/                     ★ 최근 신규 50종 관찰 기록
 │
 ├── 📂 scripts/                  DB 생성·복원·검증 Python 프로그램
 ├── 📂 .github/workflows/        GitHub Actions 자동 검증 및 인수인계
@@ -50,19 +52,19 @@
 ## 2. 최신 작업 진행도
 
 <details>
-<summary>2026년 10월 25일 · v52 검증 완료 당시 기준</summary>
+<summary>2026년 10월 25일 · v53 검증 완료 당시 기준</summary>
 
 | 항목 | 수량 |
 |---|---:|
 | 전체 TMX 고유 타일 | **5,409종** |
-| 이미지 직접 관찰 | **2,750종 (50.84%)** |
-| 아직 관찰하지 않은 타일 | **2,659종** |
-| 감사 가능한 잠정 정체 후보 | **2,419종** |
+| 이미지 직접 관찰 | **2,800종 (51.77%)** |
+| 아직 관찰하지 않은 타일 | **2,609종** |
+| 감사 가능한 잠정 정체 후보 | **2,458종** |
 | 최종 정체 인증 | **0종** |
 
 </details>
 
-**위 표는 v52 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
+**위 표는 v53 당시의 기록**입니다. 이후 분석이 진행되면 [`PROJECT_STATE.json`](PROJECT_STATE.json)의 `unified_database` 및 `latest_checkpoint`를 우선합니다.
 
 이미지로 관찰한 타일이나 잠정 정체 후보는 검증된 최종 정체와 다릅니다. PNG–TMX Local ID 대응과 TileZed 렌더 정합성은 아직 검증 대상입니다.
 
@@ -77,15 +79,15 @@
 
 ## 4. 최신 데이터베이스 복원
 
-GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v52 전체 통합 SQLite**를 복원할 수 있습니다.
+GitHub 저장소를 로컬에 받은 뒤 다음 명령으로 **v53 전체 통합 SQLite**를 복원할 수 있습니다.
 
 ```bash
-python3 scripts/restore_unified_v52.py
+python3 scripts/restore_unified_v53.py
 ```
 
 복원 후 분석 대상 전체는 `tile_catalog`, 미관찰 대상은 `analysis_queue`에서 조회합니다. 구버전과 원본 DB는 그대로 보존합니다.
 
-자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v52/)
+자세한 작업 기록: [인수인계서](docs/HANDOFF.md) · [판독 원칙](docs/ANALYSIS_RULES.md) · [최신 체크포인트](checkpoints/v53/)
 
 ## 5. GitHub 커밋 메시지 작성 규칙
 
@@ -93,8 +95,8 @@ python3 scripts/restore_unified_v52.py
 
 예시:
 
-- `분석: 신규 타일 66종 이미지 검수 결과 저장`
-- `데이터: v52 통합 SQLite 생성 및 무결성 검증`
+- `분석: 신규 타일 50종 이미지 검수 결과 저장`
+- `데이터: v53 통합 SQLite 생성 및 무결성 검증`
 - `문서: 최신 분석 진행률과 인수인계 갱신`
 - `자동화: 데이터베이스 복원 검사 개선`
 
