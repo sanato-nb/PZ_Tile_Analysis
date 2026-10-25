@@ -29,7 +29,7 @@ page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>v69 B42 타일
 assert page.count('data:image/jpeg;base64,')==75
 out=CP/'v69_이미지내장_검수.html'
 out.write_text(page,encoding='utf8')
-zp=CP/'v69_증거_80종_A_B_C_D.zip'
+zp=CP/'v69_증거_15종_A_B_C_D.zip'
 files=[CP/'observations.csv',CP/'observations.tsv',out,PRE/'EVIDENCE_MANIFEST.json',*images]
 with zipfile.ZipFile(zp,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
  for p in files: z.write(p,p.relative_to(ROOT).as_posix())
