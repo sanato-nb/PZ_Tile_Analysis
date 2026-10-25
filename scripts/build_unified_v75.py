@@ -49,7 +49,7 @@ with sqlite3.connect(dst) as c:
         ('v75_new_held',2,'Occluded tiles held without identity'),
         ('v75_total_observed',3377,'v74 3357 + 20 non-overlapping'),
         ('v75_unobserved',2032,'5409 - 3377'),
-        ('v75_candidate_auditable',2900,'2882 + 16')])
+        ('v75_candidate_auditable',2900,'2882 + 18')])
     c.commit()
     assert c.execute('pragma integrity_check').fetchone()[0]=='ok'
     assert tables_prior.issubset({r[0] for r in c.execute("select name from sqlite_master where type='table'")})
