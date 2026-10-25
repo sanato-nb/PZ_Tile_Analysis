@@ -84,7 +84,7 @@ manifest=dict(version='v75',sqlite_file='tile_visual_v75_unified.sqlite',
 (out/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 statepath=ROOT/'PROJECT_STATE.json'
 s=json.loads(statepath.read_text('utf8'))
-assert s['unified_database']['version']=='v74' and s['unified_database']['observed_unique']==3357
+assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v74',3357),('v75',3377)}
 s['latest_checkpoint']=dict(version='v75',date='2026-10-26',baseline_reconciliation='v74',
     baseline_unique_observed=3357,new_unique_observed=20,new_provisional_candidates=18,new_held=2,
     overlap_with_prior=0,merged_unique_observed=3377,merged_observation_percent=round(3377/5409*100,4),
