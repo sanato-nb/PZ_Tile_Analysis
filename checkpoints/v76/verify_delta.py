@@ -8,14 +8,14 @@ cp=root/'checkpoints/v76'
 with (cp/'observations.tsv').open(encoding='utf8',newline='') as f:
     rows=list(csv.DictReader(f,delimiter='\t'))
 keys={(r['tile_set_locator'],int(r['local_id'])) for r in rows}
-assert len(rows)==len(keys)==10,(len(rows),len(keys))
+assert len(rows)==len(keys)==20,(len(rows),len(keys))
 assert sum(r['review_status']=='candidate' for r in rows)==19
 assert sum(r['review_status']=='held' for r in rows)==1
 assert all(r['mapping_verified']==r['tilezed_verified']==r['final_certified']=='0' for r in rows)
 manifest=json.loads((root/'checkpoints/v76_preview/EVIDENCE_MANIFEST.json').read_text('utf8'))
 assert manifest['base']=='v75' and manifest['observed_count_added']==0
 evidence={(r['key'][0],int(r['key'][1])):r for r in manifest['results']}
-assert len(evidence)==10 and set(evidence)==keys
+assert len(evidence)==20 and set(evidence)==keys
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 seen=set()
@@ -52,5 +52,5 @@ for r in rows:
         paths.append(path)
     with Image.open(paths[1]) as b, Image.open(paths[2]) as c:
         assert item['visible_pixel_delta']==0 or ImageChops.difference(b.convert('RGB'),c.convert('RGB')).getbbox(),('B-C positive delta missing',key)
-assert len({(r['tile_set_locator'],int(r['local_id'])) for r in rows})==10
+assert len({(r['tile_set_locator'],int(r['local_id'])) for r in rows})==20
 print('PASS v76 20 unique / 19 candidate / 1 held / 100 JPEG /',len(seen),'distinct original PNG+TMX sources / SHA256 + image loading + B-C + provenance')
