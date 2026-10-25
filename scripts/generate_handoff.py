@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+"""Regenerate docs/HANDOFF.md from PROJECT_STATE.json (not from guessed counts)."""
+import json
+from pathlib import Path
+from validate_project import validate
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "PROJECT_STATE.json"
+TARGET = ROOT / "docs" / "HANDOFF.md"
+
+def render(s):
+    b = s["baselines"]
+    m = s["reconciliation"]
+    fmt = lambda n: f"{n:,}"
+    tasks = "\n".join(f"{i}. {task}" for i, task in enumerate(s["next_actions"], 1))
+    return f"""# 최신 작업 인수인계 — {s['project']}
+
+> **기준일:** {s['status_date']} · **상태:** {m['status']} · **저장소:** [{s['repository']}](https://github.com/{s['repository']})
+
+## 분석 목적
+
+프로젝트 좀보이드 B42의 각 타일이 실제로 무엇인지, 여러 타일로 분할된 사물의 어떤 부품인지 원본 PNG를 TMX 주변 배치와 함께 조립하여 이미지 자체로 판독한다. 타일셋 이름이나 과거 AI 레이블만으로 판정하지 않는다.
+
+## 기준 지도와 범위
+
+- 원본 TMX 소스 폴더: `{s['scope']['source_tree']}`
+- 분석 범위(과거 원본 TMX 파싱 기록): **고유 타일 {fmt(s['scope']['unique_tiles'])}종**, 전체 배치 **{fmt(s['scope']['total_tile_placements'])}건**
+- 정확한 TMX/PNG 버전 및 Local ID 픽셀 대응 검증은 별도의 작업이다.
+
+## 현재까지 보고된 두 작업 계보 — 아직 합산 금지
+
+| 계보 | 이미지 직접 관찰 기록 | 잠정 정체 후보 | 자료 상태 |
+|---|---:|---:|---|
+| v36 누적 | {fmt(b['v36']['observation_records'])}종 | {fmt(b['v36']['provisional_identity_candidates'])}종 | 원본 DB 아직 GitHub에 미반입 |
+| v37~v46 별도 | {b['v37_to_v46']['observation_records']}종 | {b['v37_to_v46']['provisional_identity_candidates']}종 | 중복 미검증 · SQLite 아직 GitHub에 미반입 |
+
+**중복 제거 통합 관찰 수: 미확정.** **중복 제거 통합 정체 후보 수: 미확정.**
+
+- 통합 상태: `{m['status']}`
+- v36↔v46 키 중복: **미계산**
+- 최종 정체 인증: **{m['approved_final_certifications']}종**
+- 이 숫자는 이전 결과 기록에서 옮긴 **출발점**이며 현재 GitHub에 들어 있는 개별 판정 DB를 재집계한 값이 아니다.
+
+## 다음에 반드시 수행할 작업
+
+{tasks}
+
+## 불변 분석 규칙
+
+- 키는 `(tile_set_locator, local_id)`이며 같은 키는 중복 계산하지 않는다.
+- 각 관찰은 **PNG 원본 A / TMX 5×5 조립 B / 해당 타일만 제거 C / 다른 사용 위치 D**를 가능하면 보존한다.
+- 이미지 관찰, 정체 잠정 후보, 매핑 검증, 최종 정체 인증을 서로 다른 필드로 관리한다.
+- PNG 행 높이 불일치, 투명 스프라이트, 레이어 가림 문제를 숨기지 않는다.
+- v31 과거 AI 분류를 최종 정체의 증거로 자동 승격하지 않는다.
+- 원본 폴더 `Tiles/` 및 `B4220.3_MapExport_256/`를 이 자동화가 수정하지 않는다.
+
+## 새 채팅/Work 시작법
+
+1. GitHub 저장소의 `AGENTS.md`, `PROJECT_STATE.json`, 이 파일을 읽는다.
+2. `PROJECT_STATE.json`이 최신 수치의 유일한 요약 진입점이라는 점을 확인한다.
+3. 실제 SQLite가 없는 숫자는 **기록 기반**이라고 표기하고, 필요하면 기존 파일을 가져와 중복 제거를 수행한다.
+4. 작업 종료 시 `PROJECT_STATE.json`과 체크포인트를 갱신한다. GitHub Actions가 `docs/HANDOFF.md`를 재생성하도록 설정돼 있다.
+
+> **자동 인수인계 상태:** 설정됨. 단, GitHub Actions 실행 권한 및 실제 실행 성공 여부는 별도 확인해야 한다.
+"""
+
+def main():
+    state = json.loads(SOURCE.read_text(encoding="utf-8"))
+    problems = validate(state)
+    if problems:
+        raise SystemExit("State invalid: " + "; ".join(problems))
+    TARGET.parent.mkdir(parents=True, exist_ok=True)
+    TARGET.write_text(render(state), encoding="utf-8")
+    print("Generated", TARGET)
+
+if __name__ == "__main__":
+    main()

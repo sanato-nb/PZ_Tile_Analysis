@@ -1,0 +1,15 @@
+# 새 분석 작업용 임시 파일만 제외 (기존 원본은 추적 유지)
+__pycache__/
+*.py[cod]
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+scratch/
+.cache/
+.env
+.env.*
+!.env.example
