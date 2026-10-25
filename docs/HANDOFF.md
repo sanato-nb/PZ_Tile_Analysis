@@ -41,6 +41,13 @@
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
+## 최신 물리 통합 SQLite (v49)
+
+- **v36 전체 원본 SQLite + v46 전체 데이터 테이블 + v47 병합 색인 + v48 신규 30종 기록**을 한 SQLite로 통합했습니다.
+- 단일 테이블 `tile_catalog`: **2,614/5,409종 (48.33%)**, 미관찰 2,795종, 잠정 후보 2,325종, 최종 인증 0종.
+- SHA-256 검증과 전체 복원 방법: `analysis/current/v49/MANIFEST.json`, `scripts/restore_unified_database.py`.
+- 과거 DB는 별도 보존합니다. v48은 GitHub에 저장된 TSV 전체 필드가 통합되었으며, 로컬 v48 원본 SQLite에만 있던 추가 메타데이터와 고해상도 이미지 바이너리는 아직 GitHub 본문에 모두 포함되지 않았습니다.
+
 ## 최신 체크포인트 (v48)
 
 - 새로 직접 관찰: **30종** (잠정 후보 23, 보류 7).
