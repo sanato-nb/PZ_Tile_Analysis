@@ -87,14 +87,14 @@ s=json.loads(statepath.read_text('utf8'))
 assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v77',3417),('v78',3429)}
 s['latest_checkpoint']=dict(version='v78',date='2026-10-26',baseline_reconciliation='v77',
     baseline_unique_observed=3417,new_unique_observed=12,new_provisional_candidates=7,new_held=5,
-    overlap_with_prior=0,merged_unique_observed=3429,merged_observation_percent=round(3429/5409*100,5),
+    overlap_with_prior=0,merged_unique_observed=3429,merged_observation_percent=round(3429/5409*100,4),
     remaining_unobserved=1980,auditable_provisional_candidate_keys=2942,approved_final_certifications=0,
     delta_repo_path='checkpoints/v78/observations.tsv',evidence_repo_path='checkpoints/v78_preview/',
     verification_script='checkpoints/v78/verify_delta.py',png_tmx_mapping_verified=0,
     tilezed_verified=0,high_resolution_evidence_images_in_github=True)
 s['unified_database']=dict(version='v78',status='VERIFIED',
     repo_manifest='analysis/current/v78/MANIFEST.json',restore_script='scripts/restore_unified_v78.py',
-    observed_unique=3429,observed_percent=round(3429/5409*100,5),remaining_unobserved=1980,
+    observed_unique=3429,observed_percent=round(3429/5409*100,4),remaining_unobserved=1980,
     auditable_candidates=2942,certified=0,sqlite_sha256=manifest['sqlite_sha256'],
     complete_v36_tables=True,complete_v46_tables=True,all_prior_tables_preserved=True,
     v78_git_checkpoint_integrated=True,image_binaries_in_github=True)
@@ -105,7 +105,7 @@ s['next_actions']=[
     'PNG 물리 높이 불일치 및 TileZed 공식 Local ID 정합을 독립 검증한다.',
     '사용자 수동 검수 80종 및 재검수 자료는 별도 계보로 보존하며 자동 합산하지 않는다.',
     'v77 이하 원본 SQLite·체크포인트·원본 PNG·TMX를 삭제하거나 덮어쓰지 않는다.',
-    'v78 신규 12종 A/B/C/D+비교판 100 JPEG를 checkpoints/v78_preview/에 보존한다.'
+    'v78 신규 12종 A/B/C/D+비교판 60 JPEG를 checkpoints/v78_preview/에 보존한다.'
 ]
 statepath.write_text(json.dumps(s,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 print('PASS BUILD v78',checks,'sha',manifest['sqlite_sha256'],'parts',len(parts))
