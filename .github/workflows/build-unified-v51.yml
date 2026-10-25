@@ -42,14 +42,12 @@ jobs:
           path: ${{ runner.temp }}/tile_visual_v51_unified.sqlite
           retention-days: 90
           if-no-files-found: error
-      - name: Refresh canonical handoff
-        run: python3 scripts/generate_handoff.py
       - name: Commit verified v51 SQLite shards, manifest, and state
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analysis/current/v51/ PROJECT_STATE.json docs/HANDOFF.md
+          git add analysis/current/v51/ PROJECT_STATE.json
           if ! git diff --cached --quiet; then
             git commit -m "data: publish verified complete v51 integrated SQLite"
             git pull --rebase origin main
