@@ -59,7 +59,7 @@ with sqlite3.connect(dst) as c:
  assert checks=={"all":5409,"observed":2750,"candidate":2419,"remaining":2659,"v52review":66,"final":0},checks
  c.execute("VACUUM")
 out=ROOT/"analysis/current/v52";out.mkdir(parents=True,exist_ok=True)
-raw=dst.read_bytes();packed=zlib.compress(raw,25);encoded=base64.b64encode(packed).decode("ascii")
+raw=dst.read_bytes();packed=zlib.compress(raw,6);encoded=base64.b64encode(packed).decode("ascii")
 parts=[]
 for i in range(0,len(encoded),3000000):
  rel=f"analysis/current/v52/v52.part{i//3000000:03}.b64"
