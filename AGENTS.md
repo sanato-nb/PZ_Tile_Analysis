@@ -1,13 +1,14 @@
-# 좀보이드 B42 타일 정체 분석 — 고정 AI 작업 지침 (v48)
+# 좀보이드 B42 타일 정체 분석 — 고정 AI 작업 지침 (v49)
 
 ## 최우선 목표
 개별 스프라이트 픽셀과 TMX 주변 5×5 조립 이미지 A/B/C/D를 직접 보고 그 물체나 구성부품을 이해한다. **타일 이름에서 정체를 추측하지 않는다.** 다칸 사물, 오염·잔해 오버레이, 벽의 방향·창 개구부, 지붕 경계 등 맥락을 직접 확인한다.
 
 ## 매 새 채팅/Work의 시작
 1. `PROJECT_STATE.json`, `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 읽는다.
-2. **실제 v36·v46 DB는 GitHub에 있다.** `python3 scripts/restore_source_databases.py <outdir>`로 아카이브 조각을 복원한다. 파일을 사용자에게 다시 첨부해 달라고 하지 않는다.
-3. `checkpoints/v48/observations.tsv`와 `checkpoints/v48/verify_delta.py`를 이용해 현재 추가 관찰을 기존 미관찰과 구분한다.
-4. 복구가 필요 없는 개요 작업은 `analysis/imports/merged_catalog_5409.csv` 및 `scripts/restore_merged_evidence.py`를 활용한다.
+2. **단일 최신 물리 통합 DB는 `analysis/current/v49/MANIFEST.json`에 있다. `python3 scripts/restore_unified_database.py <out.sqlite>`로 5,409종 및 v36/v46 전체 과거 테이블과 v47 병합·v48 신규 관찰 기록을 바로 사용할 수 있다.** GitHub에는 복원용 압축 조각 7개와 검증된 SHA-256가 있다. 기존 원본 v36·v46 DB도 유지한다.
+3. **실제 v36·v46 DB는 GitHub에 있다.** `python3 scripts/restore_source_databases.py <outdir>`로 아카이브 조각을 복원한다. 파일을 사용자에게 다시 첨부해 달라고 하지 않는다.
+4. `checkpoints/v48/observations.tsv`와 `checkpoints/v48/verify_delta.py`를 이용해 현재 추가 관찰을 기존 미관찰과 구분한다.
+5. 복구가 필요 없는 개요 작업은 `analysis/imports/merged_catalog_5409.csv` 및 `scripts/restore_merged_evidence.py`를 활용한다.
 4. **v47 출처 DB 교차검증 기준은 2,584/5,409종(47.77%)**. 추가 작업까지의 **최신 누적은 반드시 `PROJECT_STATE.json.latest_checkpoint`를 먼저 읽는다.** v48에서는 새 이미지 관찰 30종(후보 23/보류 7)을 더한 **2,614/5,409종(48.33%)**, 미관찰 2,795종, 최종 인증 0종이다. v47 기준 2,584종은 삭제·변경하지 않는다.
 5. 잠정 정체 후보 감사 가능 키 2,302종은 최종 정체가 아니다. v36 과거 보고 후보 2,291종과 실제 테이블 근거 2,156종 차이 135종은 숨기지 않는다. 충돌 256종도 재검토한다.
 
@@ -19,3 +20,8 @@
 - 과거 DB와 원본 Tiles/, B4220.3_MapExport_256/를 임의로 덮어쓰지 않는다.
 - 공개 저장소에 개인정보·토큰·비공개 대화 원문을 올리지 않는다.
 - 신규 관찰이 끝나면 체크포인트와 PROJECT_STATE.json을 갱신한다. GitHub Actions가 인수인계서를 재생성하고 DB 복원 검사를 수행한다.
+
+## v49 단일 DB 이용 주의
+- 통합 `tile_catalog`는 신규 이미지 관찰 총 2,614종, 미관찰 2,795종을 표현한다. 기존 `reconciliation`의 2,584종은 v47 원본 대조 기준으로 보존되며, 최신 진행률은 `PROJECT_STATE.json.unified_database`를 사용한다.
+- 원본 v36 데이터 테이블들은 원래 이름을 유지하고, v46/v47은 접두사 `v46__`/`v47__`로 통합했다. v48의 GitHub 체크포인트는 `v48__review_checkpoint`에 있다.
+- 고해상도 v48 증거판·로컬 v48 원본의 추가 보조 필드는 별도 원본 패키지에 남아 있다. GitHub의 TSV에 없던 필드를 복원했다고 주장하지 않는다.
