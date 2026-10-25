@@ -6,7 +6,7 @@
 - A 원본 PNG의 실제 픽셀 조각, B 동일 층 주변 5×5 근사 조립, C 정확히 한 배치만 제거, D 다른 실제 사용 위치의 주변 조립을 각각 생성했다.
 - GitHub Actions에서 실제 PNG/TMX를 열어 6개 타일의 30개 JPEG(A/B/C/D 및 비교판)를 만들었고, 비교판 6개를 직접 확인한 뒤 외형·잠정 후보·보류를 분리해 기록했다.
 - 신규 관찰 **6종**, 잠정 후보 **5종**, 보류 **1종**. v58 누적 관찰 **3,000/5,409종(55.46%)**, 미관찰 **2,409종**, 감사 가능한 잠정 후보 **2,601종**, 최종 인증 **0종**.
-- `checkpoints/v58/observations.tsv`: 직접 확인한 관찰 특징, 잠정 후보, 분할 부품 역할, 배치 좌표, B/C 제거 픽셀 수 및 JPEG 증거 경로.
+- `checkpoints/v58/observations.tsv` 및 `checkpoints/v58/observations.csv`: 직접 확인한 관찰 특징, 잠정 후보, 분할 부품 역할, 배치 좌표, B/C 제거 픽셀 수 및 JPEG 증거 경로. CSV는 UTF-8 BOM으로 별도 보관.
 - `checkpoints/v58_preview/EVIDENCE_MANIFEST.json`: 원본 PNG/TMX SHA-256, 모든 A/B/C/D 경로, 서로 다른 사용 위치와 근사 렌더링 결과.
 - `analysis/current/v58/MANIFEST.json`: 원본 v57 보존·새 v58 SQLite의 압축 조각 및 SHA-256 복원 명세.
 
