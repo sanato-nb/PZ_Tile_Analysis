@@ -41,29 +41,29 @@
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
-## 최신 물리 통합 SQLite (v60)
+## 최신 물리 통합 SQLite (v61)
 
-- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v60까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
-- 단일 테이블 `tile_catalog`: **3,024/5,409종 (55.91%)**, 미관찰 2,385종, 잠정 후보 2,621종, 최종 인증 0종.
-- SHA-256 검증과 전체 복원 방법: `analysis/current/v60/MANIFEST.json`, `scripts/restore_unified_v60.py`.
+- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v61까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
+- 단일 테이블 `tile_catalog`: **3,036/5,409종 (56.13%)**, 미관찰 2,373종, 잠정 후보 2,629종, 최종 인증 0종.
+- SHA-256 검증과 전체 복원 방법: `analysis/current/v61/MANIFEST.json`, `scripts/restore_unified_v61.py`.
 - 과거 DB는 별도 보존합니다. 최신 체크포인트 이미지의 GitHub 보관 여부: **보관됨**. 이전 버전의 로컬 보조 이미지·메타데이터는 각 버전 안내를 따릅니다.
 
-## 최신 체크포인트 (v60)
+## 최신 체크포인트 (v61)
 
-- 새로 직접 관찰: **12종** (잠정 후보 9, 보류 3).
-- 중복 제거 누적 관찰: **3,024/5,409종 (55.91%)**.
-- 아직 미관찰: **2,385종**. 최종 인증 0종.
-- 기록: `checkpoints/v60/observations.tsv` (이전 통합 DB와 별도로 보존).
+- 새로 직접 관찰: **12종** (잠정 후보 8, 보류 4).
+- 중복 제거 누적 관찰: **3,036/5,409종 (56.13%)**.
+- 아직 미관찰: **2,373종**. 최종 인증 0종.
+- 기록: `checkpoints/v61/observations.tsv` (이전 통합 DB와 별도로 보존).
 
 ## 다음 실제 작업
 
-1. v60 통합 DB의 미관찰 2,385종을 PNG·TMX A/B/C/D 직접 관찰로 이어간다.
-2. v60 보류 fixtures_bathroom_01/10·14 및 furniture_bedding_01/11의 B-C 변화 0 원인을 재검수한다.
-3. v59 보류 appliances_com_01/3 및 v58 보류 appliances_com_01/82의 스프라이트 가림을 검토한다.
+1. v61 통합 DB의 미관찰 2,373종을 PNG·TMX A/B/C/D 직접 관찰로 이어간다.
+2. v61 보류 fixtures_bathroom_01/15·furniture_bedding_01/41·appliances_com_01/124·location_business_machinery_01/28의 가림·미소 픽셀 변화 원인을 재검수한다.
+3. v60 보류 appliances_com_01/3 및 v58 보류 appliances_com_01/82의 스프라이트 가림을 검토한다.
 4. PNG 선언 높이 불일치와 Local ID 매핑을 TileZed에서 검증한다.
 5. 사용자 수동 검수 80종 및 재검수 기록은 별도 계보로 보존하고 자동 합산하지 않는다.
-6. v59 이하 모든 통합 SQLite·체크포인트·원본 PNG·TMX·충돌 기록을 변경하지 않는다.
-7. v60 신규 12종 A/B/C/D+비교판 60장 JPEG를 checkpoints/v60_preview/에 보관한다.
+6. v60 이하 모든 통합 SQLite·체크포인트·원본 PNG·TMX·충돌 기록을 변경하지 않는다.
+7. v61 신규 12종 A/B/C/D+비교판 60장 JPEG를 checkpoints/v61_preview/에 보관한다.
 
 ## 불변 원칙
 

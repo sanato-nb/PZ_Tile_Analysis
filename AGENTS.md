@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v60)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v61)
 
 ## 목표 및 작업 기준
 - B42 TMX 두 개(저장소 실제 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 5,409종(기준 배치 302,177건)을 원본 PNG와 실제 배치로 이해한다. 최초 원본 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 파일명 차이는 기록되었으며, 원본 동일성 인증으로 혼동하지 않는다.
 - 모든 신규 작업의 **최신 소스는 `PROJECT_STATE.json`의 `unified_database`와 `latest_checkpoint`**다. `reconciliation`의 2,584(v47)는 옛 교집합 대조 기준이다.
-- 2026-10-25 현재 최신 **v60: 3,024/5,409종(55.9068%); 미관찰 2,385종; 감사 가능한 잠정 후보 2,621종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite는 `analysis/current/v60/`, 복원기는 `python3 scripts/restore_unified_v60.py /tmp/pz_latest.sqlite`. 압축 7개 조각의 SHA-256·SQLite 무결성·누적 수량을 검증한다.
+- 2026-10-25 현재 최신 **v61: 3,036/5,409종(56.1287%); 미관찰 2,373종; 감사 가능한 잠정 후보 2,629종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite는 `analysis/current/v61/`, 복원기는 `python3 scripts/restore_unified_v61.py /tmp/pz_latest.sqlite`. 압축 7개 조각의 SHA-256·SQLite 무결성·누적 수량을 검증한다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 우선 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -16,24 +16,24 @@
 6. 기존 폐기된 TMX 2D 평면도 엔진은 이 분석에 사용하지 않는다.
 
 ## 계보·보존
-- v36 원본 전체 SQLite, v46 원본 테이블 `v46__`, v47 병합 `v47__`와 이후 v48~v60 작업 버전이 최신 DB에 검색 가능하게 보존된다.
+- v36 원본 전체 SQLite, v46 원본 테이블 `v46__`, v47 병합 `v47__`와 이후 v48~v61 작업 버전이 최신 DB에 검색 가능하게 보존된다.
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종은 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 최신 누적에 자동 병합되지 않은 별도 계보이며 함부로 수정하거나 합산하지 않는다.
 - 과거 `analysis/archive/`, `analysis/current/v49/` ~ `v59/`, `Tiles/`, `B4220.3_MapExport_256/`, `checkpoints/` 원본은 삭제·덮어쓰기 금지.
 
-## 최신 작업 (v60)
-- 원본 v59 통합 SQLite `tile_catalog` 3,012종 관찰·2,612종 후보를 SHA-256 복원 후, `analysis_queue`에서 **12개 고유 미관찰 키만** 선택했다.
-- `checkpoints/v60/observations.tsv`, `observations.csv`: **원본 A/B/C/D 이미지 직접 확인 12종 = 잠정 후보 9종 + 보류 3종**, v59과 중복 0종.
-- B-C 변화 0으로 보류한 키: `fixtures_bathroom_01/10`, `fixtures_bathroom_01/14`, `furniture_bedding_01/11`. 다른 9종은 외형 기반 잠정 후보이며 최종 인증이 아니다.
-- `checkpoints/v60_preview/`: 12종 각각 A/B/C/D 및 비교판 **60개 JPEG**, 실제 TMX 좌표·레이어·GID·원본 SHA를 `EVIDENCE_MANIFEST.json`에 보존.
-- `checkpoints/v60/v60_이미지내장_검수.html`: 60개 JPEG를 내장한 검수 HTML.
-- `checkpoints/v60/v60_증거_12종_A_B_C_D.zip`, `ZIP_CRC_REPORT.json`: ZIP CRC, 이미지 디코딩 통과.
-- `analysis/current/v60/MANIFEST.json`: 원본 v59 DB를 보존한 v60 SQLite SHA-256과 7개 압축 조각. `scripts/build_unified_v60.py`, `scripts/restore_unified_v60.py`, `checkpoints/v60/verify_delta.py`로 중복·무결성·수량 검증.
-- 모든 신규 PNG에 TMX 타일셋 선언 높이와 PNG 물리 높이 불일치가 남아 있어 `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`.
-- v59 보류 `appliances_com_01/3`, v58 보류 `appliances_com_01/82`는 별도 재검수 필요.
+## 최신 작업 (v61)
+- 원본 v60 물리 통합 SQLite 3,024종 관찰·2,621종 후보를 SHA-256 복원 후, `analysis_queue`에서 **12개 고유 미관찰 키만** 선택했다.
+- `checkpoints/v61/observations.tsv`, `observations.csv`: **원본 A/B/C/D 이미지 직접 판독 12종 = 잠정 후보 8종 + 보류 4종**, v60과 중복 0종.
+- 보류 대상: `fixtures_bathroom_01/15` (B-C 0픽셀), `furniture_bedding_01/41` (2픽셀), `appliances_com_01/124` (11픽셀), `location_business_machinery_01/28` (0픽셀). 이미지 특징은 보존하지만 근거가 부족한 기능은 확정하지 않는다.
+- `checkpoints/v61_preview/`: 12종 각각 A/B/C/D 및 비교판 **60개 JPEG**, TMX 좌표·레이어·GID·원본 PNG/TMX SHA-256을 `EVIDENCE_MANIFEST.json`에 보존.
+- `checkpoints/v61/v61_이미지내장_검수.html`: 실제 JPEG 60장 임베딩.
+- `checkpoints/v61/v61_증거_12종_A_B_C_D.zip` / `ZIP_CRC_REPORT.json`: 이미지 로딩 60/60, ZIP CRC 64개 항목 통과.
+- `analysis/current/v61/MANIFEST.json`: v60 이전 테이블을 보존한 v61 SQLite SHA-256 **2657dd75f95b0049d863c6aa8a55cee4b76a58540979961f2488e696fe2e3a1f**와 압축 조각 7개. `scripts/build_unified_v61.py`, `scripts/restore_unified_v61.py`, `checkpoints/v61/verify_delta.py`로 DB SHA-256·무결성·고유키·진행률 검증 완료.
+- PNG 물리 높이와 TMX 선언 높이 불일치가 남아 있어 `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`.
+- v60·v59·v58 등 이전 보류 항목은 자동 재분류하지 않고 개별 재검수 대상으로 남긴다.
 
 ## 다음 작업과 GitHub 규칙
-- 다음 버전은 v60 통합 DB의 **2,385종 미관찰 대기열**에서 시작한다. 사용자 수동 검수 80종은 별도 유지한다.
+- 다음 버전은 v61 통합 DB의 **2,373종 미관찰 대기열**에서 시작한다. 사용자 수동 검수 80종은 별도 유지한다.
 - 새 작업 종료마다 실제 A/B/C/D 판독 → 근거 CSV/SQLite/이미지 내장 HTML/증거 ZIP → 중복·SQLite·PNG·ZIP CRC 검증 → 새 버전 체크포인트 → `PROJECT_STATE.json` → `docs/HANDOFF.md`를 갱신한다.
 - GitHub 커밋 제목은 한국어를 기본으로 쓰고 원본 자산과 기존 버전을 변경하지 않는다.
 - **공개 저장소**에 토큰·개인정보·비공개 대화 원문을 올리지 않는다.
