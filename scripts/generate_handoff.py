@@ -17,8 +17,8 @@ def render(s):
  unified_notes=("" if unified.get("status")!="VERIFIED" else
      f"## 최신 물리 통합 SQLite ({unified['version']})\n\n"
      f"- **v36 전체 원본 SQLite + v46 전체 데이터 테이블 + v47 병합 색인 + v48 신규 30종 기록**을 한 SQLite로 통합했습니다.\n"
-     f"- 단일 테이블 \`tile_catalog\`: **{unified['observed_unique']:,}/{s['scope']['unique_tiles']:,}종 ({unified['observed_percent']:.2f}%)**, 미관찰 {unified['remaining_unobserved']:,}종, 잠정 후보 {unified['auditable_candidates']:,}종, 최종 인증 {unified['certified']}종.\n"
-     f"- SHA-256 검증과 전체 복원 방법: \`{unified['repo_manifest']}\`, \`{unified['restore_script']}\`.\n"
+     f"- 단일 테이블 `tile_catalog`: **{unified['observed_unique']:,}/{s['scope']['unique_tiles']:,}종 ({unified['observed_percent']:.2f}%)**, 미관찰 {unified['remaining_unobserved']:,}종, 잠정 후보 {unified['auditable_candidates']:,}종, 최종 인증 {unified['certified']}종.\n"
+     f"- SHA-256 검증과 전체 복원 방법: `{unified['repo_manifest']}`, `{unified['restore_script']}`.\n"
      f"- 과거 DB는 별도 보존합니다. v48은 GitHub에 저장된 TSV 전체 필드가 통합되었으며, 로컬 v48 원본 SQLite에만 있던 추가 메타데이터와 고해상도 이미지 바이너리는 아직 GitHub 본문에 모두 포함되지 않았습니다.\n\n")
  return f"""# 프로젝트 좀보이드 B42 타일 정체 분석 — 자동 인수인계
 
