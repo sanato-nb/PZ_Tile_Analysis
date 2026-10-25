@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add checkpoints/v58_preview/
+          git add --sparse checkpoints/v58_preview/
           if ! git diff --cached --quiet; then
             git commit -m "증거: v58 후보 6종 A/B/C/D 검수 전 비교판 생성"
             git push
