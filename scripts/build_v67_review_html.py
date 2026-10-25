@@ -44,7 +44,7 @@ figure{margin:0}figure img{width:100%;height:auto}figcaption{font-size:12px;colo
 details{margin-top:10px}summary{cursor:pointer;font-weight:600}
 select{padding:8px;border-radius:6px;margin:12px 0}@media(max-width:700px){.quad{grid-template-columns:1fr}}"""
 html_text='<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>v67 타일 이미지 판독 증거 10종</title><style>'+css+'</style></head><body>'
-html_text+='<header class="top"><h1>좀보이드 B42 v67 · 신규 시각 검수 10종</h1><small>잠정 후보 35, 보류 10 · v60 이후 신규 · 공식 Local ID/TileZed 인증 0</small></header>'
+html_text+='<header class="top"><h1>좀보이드 B42 v67 · 신규 시각 검수 10종</h1><small>잠정 후보 9, 보류 1 · v66 이후 신규 · 공식 Local ID/TileZed 인증 0</small></header>'
 html_text+='<main><p>원본 PNG 크롭과 동일 층 주변 5×5 근사 아이소메트릭 B/C/D를 실제 이미지로 판독했습니다. PNG 높이 불일치 및 정합 미검증을 고려하여 정체를 최종 확정하지 않습니다.</p>'
 html_text+='<label>표시 상태 <select id="filter" onchange="document.querySelectorAll(\'article\').forEach(e=>e.hidden=this.value!==\'all\'&&e.dataset.status!==this.value)"><option value="all">전체 10종</option><option value="candidate">잠정 후보 9종</option><option value="held">보류 1종</option></select></label>'
 html_text+=''.join(cards)+'</main></body></html>'
