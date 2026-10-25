@@ -1,0 +1,43 @@
+name: v74 checkpoint evidence archive filename correction
+on:
+  push:
+    branches: [work/v74-evidence-20261026-0455]
+    paths:
+      - .github/workflows/v74-archive-rename.yml
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /checkpoints/v74/*
+      - name: Rename evidence ZIP without modifying its contents
+        run: |
+          old='checkpoints/v74/v74_증거_20종_A_B_C_D.zip'
+          new='checkpoints/v74/v74_증거_12종_A_B_C_D.zip'
+          test -f "$old"
+          mv "$old" "$new"
+          python3 - <<'PY'
+          import json,hashlib,pathlib,zipfile
+          p=pathlib.Path('checkpoints/v74/v74_증거_12종_A_B_C_D.zip')
+          m=json.loads(pathlib.Path('checkpoints/v74/ZIP_CRC_REPORT.json').read_text())
+          assert hashlib.sha256(p.read_bytes()).hexdigest()==m['zip_sha256']
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None and len(z.namelist())==64
+          print('PASS renamed v74 12 records, 60 JPEG, CRC')
+          PY
+      - name: Commit filename correction
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse -A checkpoints/v74/
+          git commit -m "정정: v74 증거 ZIP 파일명 12종으로 수정·SHA 재검증"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push
