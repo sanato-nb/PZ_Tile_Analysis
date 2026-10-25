@@ -43,22 +43,22 @@
 
 ## 최신 물리 통합 SQLite (v51)
 
-- **v36 전체 원본 SQLite + v46 전체 테이블 + v47 병합 색인 + v48·v50·v51 신규 직접 관찰 기록**을 물리적으로 하나의 SQLite에 통합했습니다.
-- 단일 테이블 `tile_catalog`: **2,684/5,409종 (49.62%)**, 미관찰 **2,725종**, 감사 가능한 잠정 후보 **2,378종**, 최종 인증 **0종**.
-- SHA-256 검증 가능한 통합 DB: `analysis/current/v51/MANIFEST.json`, 복원 명령 `python3 scripts/restore_unified_v51.py`.
-- 이번에 직접 관찰한 물탱크 신규 13종과 기존 6종을 합쳐, 두 TMX에서 사용된 물탱크 고유 키 19종 전체에 관찰 기록이 있습니다. 층별 관계는 z4 철골 구조, z5 탱크 몸체, z6 지붕이며 **공식 렌더 인증이 아닙니다**.
-- 기존 v36·v46 원본, v47~v50 통합 보존 자료는 삭제하지 않았습니다. GitHub TSV의 주석은 통합했지만 고해상도 A/B/C/D 픽셀 및 일부 로컬 메타데이터는 현재 채팅의 별도 v51 체크포인트 ZIP으로 보존합니다.
+- **v36 전체 원본 SQLite + v46 전체 데이터 테이블 + v47 병합 색인 + v48·v50·v51 신규 관찰 기록**을 한 SQLite로 통합했습니다.
+- 단일 테이블 `tile_catalog`: **2,684/5,409종 (49.62%)**, 미관찰 2,725종, 잠정 후보 2,378종, 최종 인증 0종.
+- SHA-256 검증과 전체 복원 방법: `analysis/current/v51/MANIFEST.json`, `scripts/restore_unified_v51.py`.
+- 과거 DB는 별도 보존합니다. 신규 체크포인트는 GitHub에 저장된 TSV 필드까지 통합되며, 로컬 보조 SQLite에만 남은 추가 메타데이터와 고해상도 이미지 바이너리는 아직 GitHub 본문에 모두 포함되지 않았습니다.
 
 ## 최신 체크포인트 (v51)
 
-- 새로 직접 관찰: **41종** (잠정 후보 **35종**, 보류 **6종**, 이전 기록과 중복 **0종**).
-- 중복 제거 누적: **2,684 / 5,409종 (49.62%)**. 아직 미관찰 **2,725종**. 인증 **0종**.
-- 기록: `checkpoints/v51/observations.tsv`; 검증: `checkpoints/v51/verify_delta.py`.
+- 새로 직접 관찰: **41종** (잠정 후보 35, 보류 6).
+- 중복 제거 누적 관찰: **2,684/5,409종 (49.62%)**.
+- 아직 미관찰: **2,725종**. 최종 인증 0종.
+- 기록: `checkpoints/v51/observations.tsv` (이전 통합 DB와 별도로 보존).
 
 ## 다음 실제 작업
 
-1. Continue new A/B/C/D original-PNG visual review from the v50 analysis_queue of 2,766 never-observed keys.
-2. Review the v50 11 held keys using alternative source scenes and correct PNG atlas versions.
+1. Continue new A/B/C/D original-PNG visual review from the v51 analysis_queue of 2,766 never-observed keys.
+2. Review the v51 6 held keys using alternative source scenes and correct PNG atlas versions.
 3. Keep 256 historical candidate-wording conflicts and 135 v36 candidate-report discrepancies unresolved.
 4. Preserve every original SQLite and upgrade only new versioned unified databases.
 5. Collect/store high-resolution image evidence in a persistent accessible source; do not claim embedded images in GitHub until done.
