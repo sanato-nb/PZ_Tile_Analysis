@@ -12,7 +12,7 @@ def render(s):
  latest_notes=(f"- 새로 직접 관찰: **{latest.get('new_unique_observed',0):,}종** (잠정 후보 {latest.get('new_provisional_candidates',0):,}, 보류 {latest.get('new_held',0):,}).\n"
                f"- 중복 제거 누적 관찰: **{latest.get('merged_unique_observed',0):,}/{s['scope']['unique_tiles']:,}종 ({latest.get('merged_observation_percent',0):.2f}%)**.\n"
                f"- 아직 미관찰: **{latest.get('remaining_unobserved',0):,}종**. 최종 인증 {latest.get('approved_final_certifications',0)}종.\n"
-               f"- 기록: `{latest.get('delta_repo_path','')}` (v47 원본 DB와 별도로 보존).")
+               f"- 기록: `{latest.get('delta_repo_path','')}` (이전 통합 DB와 별도로 보존).")
  unified=s.get("unified_database") or {}
  unified_notes=("" if unified.get("status")!="VERIFIED" else
      f"## 최신 물리 통합 SQLite ({unified['version']})\n\n"
