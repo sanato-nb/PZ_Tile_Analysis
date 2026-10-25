@@ -35,6 +35,13 @@ jobs:
         run: python3 scripts/build_unified_v49.py "$RUNNER_TEMP/sources" "$RUNNER_TEMP/merged_v47.sqlite"
       - name: Verify compressed artifact is fully restorable
         run: python3 scripts/restore_unified_database.py "$RUNNER_TEMP/roundtrip.sqlite"
+      - name: Attach the fully unified SQLite as a downloadable Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-unified-v49-SQLite
+          path: ${{ runner.temp }}/tile_visual_v49_unified.sqlite
+          retention-days: 90
+          if-no-files-found: error
       - name: Regenerate handoff
         run: python3 scripts/generate_handoff.py
       - name: Publish v49 database shards and latest project state
