@@ -136,7 +136,7 @@ def label(img,label_text):
 
 # 다양한 종류의 미관찰 타일을 실제 사용 위치·PNG 존재 여부로만 선별한다.
 # 여기서는 이미지 판독/정체 분류를 수행하지 않는다.
-tiers=[('fixtures_',2),('furniture_',2),('appliances_',2),('location_',2),('industry_',2),('vegetation_',2)]
+tiers=[('fixtures_',14),('furniture_',14),('appliances_',14),('location_',14),('industry_',14),('vegetation_',8)]
 eligible=sorted((key for key, uses in OCC.items() if len(uses)>=2),key=lambda k:(k[0],k[1]))
 selected=[]
 for prefix, quota in tiers:
@@ -155,7 +155,7 @@ for prefix, quota in tiers:
 TARGETS=selected
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
-assert len(TARGETS)>=4,('not enough review targets',TARGETS)
+assert len(TARGETS)>=50,('not enough review targets',TARGETS)
 print('v67 UNREVIEWED PREVIEW TARGETS',TARGETS,flush=True)
 results=[]
 for key in TARGETS:
