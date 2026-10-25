@@ -5,8 +5,8 @@
 | 자동화 파일 | 역할 |
 |---|---|
 | `sync-handoff.yml` | `PROJECT_STATE.json`을 확인하고 최신 `docs/HANDOFF.md`를 자동 갱신 |
-| `build-unified-v56.yml` | **현재 v56 통합 SQLite 생성·복원·SHA-256 검증** |
-| `build-unified-v49.yml` ~ `build-unified-v55.yml` | 이전 통합 DB 버전의 재현용 자동화 |
+| `build-unified-v57.yml` | **현재 v57 통합 SQLite 생성·복원·SHA-256 검증** |
+| `build-unified-v49.yml` ~ `build-unified-v56.yml` | 이전 통합 DB 버전의 재현용 자동화 |
 | `validate-source-archives.yml` | 과거 원본 SQLite 복원·검사 |
 | `verify-analysis-archives.yml` | 원본 및 병합 아카이브의 검증 |
 

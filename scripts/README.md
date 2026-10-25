@@ -5,13 +5,13 @@
 ## 지금 사용하는 명령
 
 ```bash
-# 최신 v56 통합 SQLite 복원
-python3 scripts/restore_unified_v56.py
+# 최신 v57 통합 SQLite 복원
+python3 scripts/restore_unified_v57.py
 
 # 프로젝트 상태 검증
 python3 scripts/validate_project.py
 
-# 신규 v56 체크포인트의 고유 키·후보·보류 검사
+# 신규 v57 체크포인트의 고유 키·후보·보류 검사
 python3 checkpoints/v52/verify_delta.py
 
 # 프로젝트 인수인계서 갱신
@@ -22,9 +22,9 @@ python3 scripts/generate_handoff.py
 
 | 프로그램 | 설명 |
 |---|---|
-| `restore_unified_v56.py` | **최신 v56 단일 SQLite 복원 및 SHA-256 검증** |
-| `build_unified_v56.py` | 이전 v55와 v56 신규 관찰을 물리적으로 통합 |
-| `restore_unified_v50.py`, `restore_unified_v51.py`, `restore_unified_v52.py`, `restore_unified_v53.py`, `restore_unified_v54.py`, `restore_unified_v55.py` | 이전 통합 DB 버전 복원 |
+| `restore_unified_v57.py` | **최신 v57 단일 SQLite 복원 및 SHA-256 검증** |
+| `build_unified_v57.py` | 이전 v56과 v57 신규 관찰을 물리적으로 통합 |
+| `restore_unified_v50.py`, `restore_unified_v51.py`, `restore_unified_v52.py`, `restore_unified_v53.py`, `restore_unified_v54.py`, `restore_unified_v55.py`, `restore_unified_v56.py` | 이전 통합 DB 버전 복원 |
 | `restore_unified_database.py` | 최초 물리 통합 v49 복원 |
 | `restore_source_databases.py` | 과거 v36·v46 원본 SQLite 복원 |
 | `restore_merged_evidence.py` | v47 병합 색인 DB 복원 |
