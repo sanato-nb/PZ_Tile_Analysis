@@ -38,7 +38,7 @@ jobs:
       - name: Check 20 new A/B/C/D observations, PNG and TMX hashes
         run: python3 checkpoints/v76/verify_delta.py
       - name: Build v76 unified database preserving original tables
-        run: python3 scripts/build_unified_v76.py "$RUNNER_TEMP/v76.sqlite"
+        run: python3 scripts/build_unified_v76.py "$RUNNER_TEMP/v75.sqlite"
       - name: Restore v76 from compressed shards and verify counts
         run: python3 scripts/restore_unified_v76.py "$RUNNER_TEMP/v76_roundtrip.sqlite"
       - name: Build CSV, embedded HTML and evidence ZIP
