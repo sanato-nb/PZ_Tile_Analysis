@@ -8,6 +8,7 @@ on:
       - "scripts/restore_source_databases.py"
       - "scripts/restore_merged_evidence.py"
       - "PROJECT_STATE.json"
+      - "checkpoints/v48/**"
       - ".github/workflows/verify-analysis-archives.yml"
   workflow_dispatch:
 permissions:
@@ -25,6 +26,7 @@ jobs:
             /analysis/imports/
             /scripts/
             /PROJECT_STATE.json
+            /checkpoints/v48/
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - name: Recover original v36 and v46 SQLite, with SHA-256 and integrity checks
@@ -52,3 +54,6 @@ jobs:
               assert c.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
           print("PASS: originals restored, SHA-256 OK, merged database intact; 2584 observed, 2825 remaining")
           PY
+
+      - name: Validate v48 genuinely new visual-observation delta
+        run: python3 checkpoints/v48/verify_delta.py
