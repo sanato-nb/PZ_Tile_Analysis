@@ -1,0 +1,68 @@
+name: "v67 타일 10종 실제 시각 검수·SQLite·PNG·ZIP CRC 통합 검증"
+on:
+  push:
+    branches:
+      - work/v67-visual-20261026
+    paths:
+      - scripts/build_unified_v67.py
+      - scripts/restore_unified_v67.py
+      - scripts/build_v67_review_html.py
+      - checkpoints/v67/observations.tsv
+      - checkpoints/v67/verify_delta.py
+      - .github/workflows/build-unified-v67.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: 원본 PNG·TMX, 이전 DB, 신규 시각 증거 가져오기
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v66/*
+            /scripts/*.py
+            /checkpoints/v67/*
+            /checkpoints/v67_preview/*
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+            /.github/workflows/build-unified-v67.yml
+      - name: Pillow 설치
+        run: python3 -m pip install --quiet Pillow
+      - name: v66 SQLite 원본 SHA-256·무결성 복원
+        run: python3 scripts/restore_unified_v66.py "$RUNNER_TEMP/v66.sqlite"
+      - name: 신규 10종 중복·원본 PNG/TMX SHA-256·이미지 50장·장면 B-C 검증
+        run: python3 checkpoints/v67/verify_delta.py
+      - name: 이전 모든 테이블 보존한 v67 SQLite 생성
+        run: python3 scripts/build_unified_v67.py "$RUNNER_TEMP/v66.sqlite"
+      - name: v67 SQLite 압축 왕복 SHA-256·무결성·수량 검증
+        run: python3 scripts/restore_unified_v67.py "$RUNNER_TEMP/v67_roundtrip.sqlite"
+      - name: 이미지 50장 내장 HTML 및 독립 ZIP 생성·CRC 검증
+        run: python3 scripts/build_v67_review_html.py
+      - name: 프로젝트 상태·인수인계 갱신
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - name: 전체 v67 SQLite Actions 아티팩트 보관
+        uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-unified-v67-SQLite
+          path: ${{ runner.temp }}/tile_visual_v67_unified.sqlite
+          retention-days: 90
+          if-no-files-found: error
+      - name: 신규 체크포인트·통합 DB·인수인계 GitHub 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v67/ checkpoints/v67/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "데이터: v67 원본 이미지 직접 검수 10종과 통합 SQLite·HTML·ZIP 검증"
+            git push
+          fi
