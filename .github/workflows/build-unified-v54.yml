@@ -1,0 +1,52 @@
+name: v54 타일 통합 데이터베이스 생성 및 검증
+on:
+  push:
+    branches: [main]
+    paths:
+      - "checkpoints/v54/**"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: v53 보존 자료 및 신규 v54 기록 가져오기
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /analysis/current/
+            /analysis/imports/
+            /scripts/
+            /checkpoints/v54/
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+          sparse-checkout-cone-mode: false
+          persist-credentials: true
+      - name: 검증된 v53 통합 DB 복원
+        run: python3 scripts/restore_unified_v53.py "$RUNNER_TEMP/tile_visual_v53.sqlite"
+      - name: v54 신규 관찰 수 및 고유 키 검증
+        run: python3 checkpoints/v54/verify_delta.py
+      - name: v53 원본 보존 후 신규 v54 DB 생성
+        run: python3 scripts/build_unified_v54.py "$RUNNER_TEMP/tile_visual_v53.sqlite"
+      - name: 복원 파일 해시 및 SQLite 무결성 검사
+        run: python3 scripts/restore_unified_v54.py "$RUNNER_TEMP/v54_roundtrip.sqlite"
+      - name: v54 실제 SQLite 다운로드 파일 보관
+        uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-unified-v54-SQLite
+          path: ${{ runner.temp }}/tile_visual_v54_unified.sqlite
+          retention-days: 90
+          if-no-files-found: error
+      - name: 검증된 v54 DB와 진행도 GitHub에 저장
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analysis/current/v54/ PROJECT_STATE.json
+          if ! git diff --cached --quiet; then
+            git commit -m "데이터: 검증된 v54 통합 SQLite와 진행 상태 저장"
+            git pull --rebase origin main
+            git push
+          fi
