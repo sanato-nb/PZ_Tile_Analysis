@@ -87,14 +87,14 @@ s=json.loads(statepath.read_text('utf8'))
 assert s['unified_database']['version']=='v73' and s['unified_database']['observed_unique']==3345
 s['latest_checkpoint']=dict(version='v74',date='2026-10-26',baseline_reconciliation='v73',
     baseline_unique_observed=3345,new_unique_observed=12,new_provisional_candidates=11,new_held=1,
-    overlap_with_prior=0,merged_unique_observed=3357,merged_observation_percent=round(3357/5409*60,1),
+    overlap_with_prior=0,merged_unique_observed=3357,merged_observation_percent=round(3357/5409*100,4),
     remaining_unobserved=2052,auditable_provisional_candidate_keys=2882,approved_final_certifications=0,
     delta_repo_path='checkpoints/v74/observations.tsv',evidence_repo_path='checkpoints/v74_preview/',
     verification_script='checkpoints/v74/verify_delta.py',png_tmx_mapping_verified=0,
     tilezed_verified=0,high_resolution_evidence_images_in_github=True)
 s['unified_database']=dict(version='v74',status='VERIFIED',
     repo_manifest='analysis/current/v74/MANIFEST.json',restore_script='scripts/restore_unified_v74.py',
-    observed_unique=3357,observed_percent=round(3357/5409*60,1),remaining_unobserved=2052,
+    observed_unique=3357,observed_percent=round(3357/5409*100,4),remaining_unobserved=2052,
     auditable_candidates=2882,certified=0,sqlite_sha256=manifest['sqlite_sha256'],
     complete_v36_tables=True,complete_v46_tables=True,all_prior_tables_preserved=True,
     v74_git_checkpoint_integrated=True,image_binaries_in_github=True)
