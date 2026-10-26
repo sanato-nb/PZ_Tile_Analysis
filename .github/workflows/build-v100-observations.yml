@@ -18,6 +18,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /scripts/build_v100_observations.py
+            /checkpoints/v99/observations.tsv
             /checkpoints/v97/observations.tsv
             /checkpoints/v100/review_notes_*.psv
             /checkpoints/v100_preview/EVIDENCE_MANIFEST.json
