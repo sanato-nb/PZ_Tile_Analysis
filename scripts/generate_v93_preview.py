@@ -136,7 +136,7 @@ def label(img,label_text):
 
 # 남은 미관찰을 여러 타일셋에 골고루 배분. 실제 PNG·TMX 사용 사례 있는 타일만 선별.
 # 타일셋/Local ID 이름으로 사물의 정체를 자동 판정하지 않는다.
-TARGET_COUNT=12
+TARGET_COUNT=5
 eligible=sorted((key for key,uses in OCC.items() if len(uses)>=2), key=lambda k:(k[0],k[1]))
 buckets=defaultdict(list)
 for key in eligible:
