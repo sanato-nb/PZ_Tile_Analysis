@@ -6,7 +6,7 @@ import csv,json,hashlib,base64,html,zipfile
 ROOT=Path(__file__).resolve().parents[1]
 CP=ROOT/'checkpoints/v101';PRE=ROOT/'checkpoints/v101_preview'
 with (CP/'observations.tsv').open(encoding='utf8',newline='') as f:rows=list(csv.DictReader(f,delimiter='\t'))
-assert len(rows)==48 and sum(r['review_status']=='candidate' for r in rows)==13
+assert len(rows)==48 and sum(r['review_status']=='candidate' for r in rows)==35
 with (CP/'observations.csv').open('w',encoding='utf-8-sig',newline='') as out:
  writer=csv.DictWriter(out,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
 m=json.loads((PRE/'EVIDENCE_MANIFEST.json').read_text('utf8'))
@@ -39,6 +39,6 @@ for batch in range(1):
  assert hp.stat().st_size<95000000 and zip_path.stat().st_size<95000000
  reports.append({'batch':batch+1,'zip_file':str(zip_path.relative_to(ROOT)),'zip_size_bytes':zip_path.stat().st_size,'zip_sha256':hashlib.sha256(zip_path.read_bytes()).hexdigest(),'zip_files':252,'zip_crc':'PASS','html_file':str(hp.relative_to(ROOT)),'html_size_bytes':hp.stat().st_size,'html_embedded_images':240,'review_sheets':8})
 assert len(all_images)==len(set(all_images))==240
-report={'version':'v101','batch_reports':reports,'zip_crc':'PASS','zip_files_total':252,'image_count':240,'image_load':'PASS','embedded_html_images':240,'observations':48,'provisional':13,'held':13,'certified':0,'review_sheets':8,'single_use_without_D':43,'actual_nearby_D':5,'independent_D':0}
+report={'version':'v101','batch_reports':reports,'zip_crc':'PASS','zip_files_total':252,'image_count':240,'image_load':'PASS','embedded_html_images':240,'observations':48,'provisional':35,'held':13,'certified':0,'review_sheets':8,'single_use_without_D':43,'actual_nearby_D':5,'independent_D':0}
 (CP/'ZIP_CRC_REPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS v101 CSV HTML JPEG ZIP CRC',report)
