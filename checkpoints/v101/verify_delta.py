@@ -11,7 +11,7 @@ evidence={(e['key'][0],int(e['key'][1])):e for e in m['results']}
 keys=[(r['tile_set_locator'],int(r['local_id'])) for r in rows]
 assert len(rows)==len(keys)==len(set(keys))==len(evidence)==48 and set(keys)==set(evidence)
 assert len(m['review_sheets'])==8
-assert sum(r['review_status']=='candidate' for r in rows)==13
+assert sum(r['review_status']=='candidate' for r in rows)==35
 assert sum(r['review_status']=='held' for r in rows)==13
 assert all(r['mapping_verified']==r['tilezed_verified']==r['final_certified']=='0' for r in rows)
 actual=0;notavailable=0
