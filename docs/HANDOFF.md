@@ -101,6 +101,13 @@
 - 기존 5,409키·사용자 제외 14종·기존 v116 SQLite 모두 수정하지 않았다. PROJECT_STATE.json.latest_selected_A_stage 참고.
 - 이것은 **잠정 대표 이미지 배정**이다. 실제 PNG와 TMX Local ID의 공식 일치 검증 및 개별 AI/TileZed 인증 0종. JUMBO A3 프레임 혼합 가능성이 남는다.
 
+## 최신 v120: 신규 4,632종 B 주변 장면 실제 생성 (2026-10-27)
+
+- v119 A를 선택한 신규 **4,632키**, 전체 **84개 원본 TMX**에서 실배치 `tmx, level, layer_index, x, y, raw_gid` 확인 및 5×5 같은 층의 아이소메트릭 B 조립 **4,632건**. 기존 5,409키를 새 정체 분석 대상으로 추가하지 않는다.
+- `review/v120_B_context_new4632/B_CONTEXT_4632.csv`, `PLACEMENTS_4632.csv`, `sheets/` 58접촉시트, `b_png_shards/` 12 WebP ZIP, `B_CONTEXT_4632_BROWSER.html` 오프라인 검색/2배 확대. 전수 ZIP CRC·WebP/선택 원본 SHA 검증 PASS.
+- 품질: 이웃 스프라이트 누락 B **8건**(드로잉 9건), 지도의 끝에서 잘림 **48건**, 개별 스프라이트 그리기 캔버스 잘림 **23,823회**. B는 실배치 기반 **근사 렌더**이며 TileZed 공식 결과 아님.
+- 현재 실제 SQLite **v116**, 이전 A **v119** 그대로. C(대상 하나 제거)와 D(다른 위치)는 미생성. `PROJECT_STATE.json.latest_B_context_stage` 참조. 1개 A 원본 미확보 보류, 사용자 제외 기존 14 유지, Local ID/정체 인증 모두 0.
+
 ## 불변 원칙
 
 - 이미지 직접 관찰, 추론 후보, PNG-TMX Local ID 검증, TileZed 렌더 검증, 최종 인증을 분리한다.
