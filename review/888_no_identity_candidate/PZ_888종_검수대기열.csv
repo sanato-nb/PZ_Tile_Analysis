@@ -1,0 +1,889 @@
+﻿tile_set_locator,local_id,source_tmx,level,layer,x,y,raw_gid,B_C_pixel_delta,A_source_status,previous_observed_features
+appliances_com_01,3,31_45.tmx,0,FloorOverlay2,207,225,132,0,zero_BC_ok,회색 각진 직육면체 상자 옆에 검은 수화기처럼 구부러진 작은 부품이 보인다. 첫 장면은 다른 물체와 겹치며 B와 C가 픽셀 단위로 같아 해당 배치의 독립 역할을 확인하지 못했다.
+appliances_com_01,73,31_45.tmx,0,FloorOverlay2,145,13,202,3768,ok,
+appliances_com_01,74,31_45.tmx,0,FloorOverlay2,116,39,203,2553,ok,베이지 직사각 상자와 회색 받침
+appliances_com_01,75,31_45.tmx,0,FloorOverlay2,154,5,204,2795,ok,
+appliances_com_01,82,31_45.tmx,1,FloorOverlay1,17,14,211,1323,ok,회색 격자 막대와 분리된 작은 받침 모양이 보인다. 첫 위치는 다른 안테나와 겹치고 두 번째 위치는 지붕에 가려져 부품 역할을 분리하기 어렵다.
+appliances_com_01,96,31_45.tmx,2,FloorOverlay,93,0,225,350,ok,
+appliances_com_01,97,31_45.tmx,2,FloorOverlay,94,0,226,175,ok,
+appliances_com_01,108,31_45.tmx,2,FloorOverlay,73,64,237,103,ok,
+appliances_com_01,120,31_45.tmx,2,FloorOverlay,93,46,249,100,ok,
+appliances_com_01,121,31_45.tmx,2,FloorOverlay,94,46,250,231,ok,
+appliances_com_01,123,31_45.tmx,2,FloorOverlay2,93,45,252,55,ok,
+appliances_com_01,124,31_45.tmx,2,FloorOverlay1,94,45,253,12,ok,"A에는 몇 픽셀 너비의 매우 짧은 회색 수직 선 조각만 보인다. B-C 차이는 11픽셀이고 D에는 목재 전신주, 변압기와 여러 공중 전선이 보인다. 수직 선이 전선·지지대 중 어느 부분인지 독립적으로 구분하기 어렵다."
+appliances_com_01,133,31_45.tmx,2,FloorOverlay3,111,63,262,126,ok,A에는 검정·회색의 짧은 수직 선 세 개가 떨어져 보인다. B-C에서는 전신주 위쪽 공중 전선의 가는 수직선 일부가 없어지며 D에서도 전선과 수직 지지선이 중첩된다. 픽셀 변화 134개지만 전선·지지대·안테나 부품 중 정확한 역할을 분리하기 어렵다.
+appliances_com_01,166,31_45.tmx,0,FloorOverlay2,93,5,295,128,ok,
+appliances_com_01,167,31_45.tmx,0,FloorOverlay2,72,63,296,128,ok,
+appliances_cooking_01,2,31_45.tmx,1,FloorOverlay1,119,82,299,0,zero_BC_ok,원본 A에서 올리브색 높이의 독립형 취사 장비가 있지만 B-C 변화가 없다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 0픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+appliances_cooking_01,3,31_45.tmx,1,FloorOverlay1,153,24,300,0,zero_BC_ok,"A에는 녹색 레인지 뒤편 판넬, 통풍구가 뚫린 회색 뒷문과 버너 일부가 보인다. B와 D에는 주방 가구가 많으나 B-C가 완전히 같은 0픽셀이라 이 뒷면의 실제 배치를 식별하지 못한다."
+appliances_cooking_01,4,31_45.tmx,0,FloorOverlay3,241,74,301,6859,ok,
+appliances_cooking_01,6,31_45.tmx,1,FloorOverlay1,188,149,303,0,zero_BC_ok,"원본 A: 흰색 상자에 검정 상단이 있고 제거 변화 없음. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 0픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+appliances_cooking_01,11,31_45.tmx,1,FloorOverlay1,141,31,308,0,zero_BC_ok,A: 빨간 오븐의 등쪽 회색 통풍·점검판과 상단 검은 버너. B 벽 및 주방 기구와 겹쳐 C에서 바뀌는 픽셀이 0이다. D에 다른 후면형 조리기 스프라이트가 보이나 해당 배치 구별 불가.
+appliances_cooking_01,14,31_45.tmx,0,FloorOverlay,78,1,311,0,zero_BC_ok,"회색 상자형 기기 상단에 검은 원형 구멍 두 개, 전면에는 작은 통풍 슬롯과 덮개가 보임. B와 C는 벽 뒤에 가려져 시각 변화 없음."
+appliances_cooking_01,22,31_45.tmx,0,FloorOverlay,116,83,319,0,zero_BC_ok,"A 실제 원본: 검은 상단과 은색 몸체의 큰 가전 면이 있으나 배치 제거 차이 없다. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 0픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+appliances_cooking_01,27,31_45.tmx,1,FloorOverlay2,153,29,324,3069,ok,A: 흰색 직사각형 소형 기기 외장에 상단 얇은 선과 옆면 환기구처럼 보이는 점무늬가 있다. 앞면 조작부나 문은 보이지 않는다. B: 실내 계단·싱크대 근처에 놓인 흰색 상자가 보인다. C: 그 상자가 빠진다. D: 다른 주방 가전 옆에서 비슷한 흰색 외장이 나타난다.
+appliances_cooking_01,30,31_45.tmx,0,FloorOverlay2,116,84,327,1847,ok,"은회색 각진 본체와 검은 상면, B-C 작은 변화로 기능 구분 불가."
+appliances_cooking_01,31,31_45.tmx,0,FloorOverlay2,135,149,328,2444,ok,"검은 상면과 회색 옆판의 조리기 조각, B-C 가림."
+appliances_cooking_01,51,31_45.tmx,0,FloorOverlay,123,32,348,0,zero_BC_ok,"A 실제 원본에서 회색 조리기기 큰 직육면체와 전면 덮개, 제거 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+appliances_cooking_01,54,31_45.tmx,0,FloorOverlay,78,3,351,164,ok,"은회색 조리조와 측면 금속판, B-C 변화 223픽셀."
+appliances_cooking_01,55,31_45.tmx,0,FloorOverlay,190,28,352,0,zero_BC_ok,"A 실제 원본에서 회색 직사각 박스에 작은 윗면 조리판, B-C 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+appliances_cooking_01,57,31_45.tmx,-1,FloorOverlay4,117,46,354,1754,ok,
+appliances_cooking_01,58,31_45.tmx,0,FloorOverlay2,104,10,355,0,zero_BC_ok,검은 박스와 아래 둥근 면
+appliances_cooking_01,59,31_45.tmx,0,FloorOverlay2,182,28,356,5,ok,
+appliances_cooking_01,78,31_45.tmx,0,FloorOverlay,116,84,375,0,zero_BC_ok,"A 실제 원본에서 회백색 상자 몸체 앞면에 검은 패널과 작은 구멍이 보임; B와 C에서 해당 부품 변화 없음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 위치 없음, D 안내판 표시."
+appliances_laundry_01,0,31_46.tmx,0,FloorOverlay4,143,160,377,9161,ok,파란 상판과 둥근 유리 투입창
+appliances_laundry_01,5,31_45.tmx,1,FloorOverlay4,150,26,382,3050,ok,흰 가전 상부 검정 조작판과 덮개
+appliances_laundry_01,13,31_45.tmx,0,FloorOverlay3,226,70,390,1720,ok,흰 상자형 가전과 검정 조작판
+appliances_laundry_01,14,31_45.tmx,0,FloorOverlay3,200,209,391,148,ok,회백색 상자와 오른쪽 통풍 슬롯
+appliances_laundry_01,24,31_45.tmx,2,FloorOverlay6,186,226,401,5356,ok,노란 천이 네모 회색 틀에 접힘
+appliances_laundry_01,25,31_45.tmx,0,FloorOverlay3,200,208,402,2768,ok,노란 천이 사각 금속 틀에 접힌 형태
+appliances_refrigeration_01,2,31_45.tmx,1,FloorOverlay1,154,29,451,0,zero_BC_ok,"하얀 냉장고 뒤편의 검은 냉각관, B-C 변화 0"
+appliances_refrigeration_01,4,31_45.tmx,0,Vegetation,194,118,453,8023,ok,청록색 둥근 모서리와 상하 냉장고 문
+appliances_refrigeration_01,7,31_45.tmx,1,FloorOverlay1,94,72,456,0,zero_BC_ok,"원본 A: 민트색 금속함에 격자 환기창이 있으나 제거 변화 없음. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 0픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+appliances_refrigeration_01,11,31_45.tmx,0,FloorOverlay,13,6,460,0,zero_BC_ok,
+appliances_refrigeration_01,14,31_45.tmx,0,FloorOverlay,55,238,463,0,zero_BC_ok,"A 실제 원본: 녹색 높이 큰 장방형 기계 앞에 환기 격자 있으나 제거 변화 없음. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 0픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+appliances_refrigeration_01,15,31_45.tmx,1,FloorOverlay1,188,144,464,0,zero_BC_ok,"A 실제 원본에서 녹색 직립 직사각 기기의 앞면에 검은 환기 격자가 있다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+appliances_refrigeration_01,26,31_45.tmx,0,FloorOverlay,199,79,475,0,zero_BC_ok,"회색 냉장기 뒤쪽 외판, B-C 변화 0"
+appliances_refrigeration_01,27,31_45.tmx,0,FloorOverlay2,226,39,476,1511,ok,A는 문이나 손잡이 표시가 거의 없는 짙은 회흑색 직육면체로 상단과 두 측면만 보인다. B 부엌·화장실 경계 뒤쪽에 가려 C의 차이가 작고 D의 금속 보관함과 동일 사물인지 확인할 수 없다.
+appliances_refrigeration_01,31,31_46.tmx,0,FloorOverlay,200,123,480,6,ok,"A 실제 원본에서 아이보리색의 높은 세로 기기에 검정 통풍 격자 여러 줄, 제거 차이 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+appliances_refrigeration_01,37,31_45.tmx,0,FloorOverlay,78,5,486,0,zero_BC_ok,짙은 회색 키 큰 직육면체. 전면에 검은 세로 격자 4줄과 하단 통풍구가 보임. B/C 차이 없음.
+appliances_refrigeration_01,42,31_45.tmx,0,FloorOverlay,146,24,491,0,zero_BC_ok,
+appliances_refrigeration_01,46,31_45.tmx,0,FloorOverlay,153,24,495,0,zero_BC_ok,
+appliances_refrigeration_01,47,31_45.tmx,0,FloorOverlay,154,24,496,0,zero_BC_ok,검은 키 큰 직육면체에 아래쪽 통풍 슬롯
+appliances_refrigeration_01,50,31_45.tmx,-1,FloorOverlay,149,24,499,4690,ok,
+appliances_television_01,2,31_45.tmx,1,FloorOverlay2,17,2,507,4566,ok,
+appliances_television_01,3,31_45.tmx,1,FloorOverlay2,156,44,508,2738,ok,회색 TV 뒷면과 검정 화면 테두리
+appliances_television_01,5,31_45.tmx,0,FloorOverlay,105,2,510,1588,ok,
+appliances_television_01,7,31_45.tmx,-1,FloorOverlay3,159,39,512,4229,ok,
+appliances_television_01,8,31_45.tmx,0,FloorOverlay4,250,30,513,5947,ok,나무색 캐비닛에 파란 화면과 안테나
+appliances_television_01,10,31_45.tmx,0,FloorOverlay,79,69,515,4161,ok,
+appliances_television_01,11,31_45.tmx,1,FloorOverlay1,138,37,516,0,zero_BC_ok,나무 받침과 얇은 TV 안테나
+blends_grassoverlays_01,17,31_45.tmx,0,FloorOverlay,41,0,538,3207,ok,길게 휜 가는 풀줄기와 작은 잎
+blends_grassoverlays_01,57,31_45.tmx,0,FloorOverlay,252,15,578,443,ok,A에서 여러 개의 짧은 황갈색 풀잎 덩어리가 떨어져 있다. B 목재 울타리·수풀에 가려 C 제거 후 보이는 변화가 423픽셀뿐이며 D에서는 다른 풀과 섞여 개별 역할 구분이 어렵다.
+blends_grassoverlays_01,59,31_45.tmx,0,FloorOverlay,216,73,580,0,zero_BC_ok,A에서 한쪽으로 기운 황갈색 긴 풀잎이 보인다. B 목재 울타리와 덤불에 가려 선택 배치 제거 C와 B의 가시적 변화가 0픽셀이며 D에서도 여러 풀에 섞여 기여를 분리하기 어렵다.
+blends_grassoverlays_01,61,31_45.tmx,0,FloorOverlay,241,178,582,0,zero_BC_ok,A에는 중앙에 솟은 누런 풀과 양쪽 낮은 잎이 보인다. B 목재 울타리 앞에 해당 배치가 있지만 C에서 가시적 변화가 0픽셀이고 D에서도 울타리 뒤쪽 풀에 가려 개별 기여를 확인하지 못했다.
+blends_grassoverlays_01,67,31_45.tmx,0,FloorOverlay,249,178,588,0,zero_BC_ok,A에서 몇 개의 매우 작은 누런 잎 뭉치가 떨어져 보인다. B 목재 울타리·관목이 있는 장면에서 C와 B의 가시적 차이가 0픽셀이며 D에도 주변 풀이 많아 배치 기여를 분리할 수 없다.
+blends_natural_01,19,31_45.tmx,0,FloorOverlay,107,0,612,0,zero_BC_ok,A에는 오른쪽 변이 거친 잎으로 마감된 녹색 삼각형 잔디 조각이 보인다. 그러나 B와 C 사이 가시적 픽셀 변화가 0으로 선택 배치의 독립적 기여를 확인할 수 없고 D에서도 주변 풀과 중첩되어 정확한 쓰임을 판단하기 어렵다.
+blends_natural_01,27,31_45.tmx,0,FloorOverlay,108,0,620,0,zero_BC_ok,A에는 짧은 녹색 잎이 붙은 가는 사선 테두리가 보이지만 B와 C의 픽셀 변화가 0이다. B의 높은 풀과 실내 작업대 주변에서 대상 배치의 독립적 기여를 분리할 수 없고 D도 다른 풀에 가려진다.
+blends_natural_01,29,31_45.tmx,0,FloorOverlay,0,0,622,0,zero_BC_ok,A에 아래쪽으로 잎이 늘어진 가는 녹색 사선이 보인다. 그러나 B 생울타리 앞 잔디에서 C 제거 전후 변화가 0이며 D에서도 다른 풀과 중첩되어 해당 배치의 가시 기여를 확인하지 못했다.
+blends_natural_01,42,31_45.tmx,0,FloorOverlay,55,3,635,472,ok,
+blends_natural_01,57,31_45.tmx,0,FloorOverlay,84,7,650,527,ok,
+blends_natural_01,60,31_45.tmx,0,FloorOverlay,244,13,653,0,zero_BC_ok,A에는 오른쪽 아래로 기운 가는 갈색 선과 아래로 늘어진 잔풀이 보인다. B 철망 울타리와 나무 상자에 가려 C 제거 전후 변화가 0픽셀이다. D도 풀과 도로가 겹쳐 이 배치의 기여를 분리하기 어렵다.
+blends_natural_01,67,31_45.tmx,-1,FloorOverlay,194,93,660,15,ok,"A 실제 원본: 진갈색 삼각형 잔디와 흙 경계 일부, 제거차이 매우 작음. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 77픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+blends_natural_01,74,31_45.tmx,0,FloorOverlay,235,90,667,18,ok,A에는 오른쪽 위로 향하는 아주 가는 갈색 띠와 위로 솟은 점 모양 흙·풀 질감이 보인다. B 보도·잡초에 가려 C 제거 차이가 단 18픽셀이고 D 야외 가구 아래도 겹쳐 기능을 독립 확인하기 어렵다.
+blends_natural_01,75,31_45.tmx,0,FloorOverlay,246,31,668,37,ok,A에는 오른쪽 아래로 내려가는 갈색 선과 위로 드문 풀잎·흙 점들이 보인다. B 철망과 관목 아래에 가려 C 제거 차이가 51픽셀뿐이며 D 포장 바닥과 풀밭이 겹쳐 대상의 정확한 기여가 불명확하다.
+blends_natural_01,80,31_45.tmx,-1,Floor,150,64,673,0,zero_BC_ok,A는 갈색·올리브색의 마른 풀 질감이 마름모 전체에 있는 바닥 타일이다. B에서는 돌담과 자갈 지면에 가려지고 C와 픽셀 차이가 없다. D에서도 높은 돌담에 바닥 대부분이 가려져 선택 배치 기여가 확인되지 않는다.
+blends_natural_01,85,31_45.tmx,-1,Floor,151,63,678,0,zero_BC_ok,A는 짙은 황갈색 풀 질감의 마름모형 전체 지면이다. B 돌담 아래 가려진 바닥에 위치하며 C와 시각 차이가 0이다. D에서도 돌담 아래 일부만 노출되어 해당 한 배치의 독립 기여를 확인할 수 없다.
+blends_natural_01,86,31_45.tmx,-1,Floor,150,66,679,0,zero_BC_ok,A에는 황갈색과 녹갈색의 가는 마른 풀잎이 반복된 마름모형 지면이 보인다. B 돌담·자갈 타일에 가려지고 C와 동일하다. D에서도 벽 아래 바닥 일부만 드러나 정확한 겹침 기여를 분리할 수 없다.
+blends_natural_01,87,31_45.tmx,-1,Floor,151,62,680,0,zero_BC_ok,A는 짙은 황갈색·녹색이 섞인 마름모형 풀 지면이다. B 돌담과 자갈 경계 아래에 놓여 C와 거의 동일하며 차이는 4픽셀뿐이다. D도 돌담 아래 가려져 해당 배치의 가시적 기여를 신뢰하기 어렵다.
+blends_natural_01,88,31_45.tmx,0,FloorOverlay,0,13,681,379,ok,A에는 가늘고 긴 갈색 사선 선분 아래 불규칙한 마른 풀잎 가장자리가 보인다. B는 생울타리·쓰레기통과 도로가 겹친 장면이고 C의 변화는 492픽셀로 작다. D에서도 땅 표면의 특정 조각을 분리하기 어렵다.
+blends_natural_01,89,31_45.tmx,-1,FloorOverlay,152,62,682,485,ok,가느다란 갈색 흙 비스듬한 선
+blends_natural_01,90,31_45.tmx,-1,FloorOverlay,139,79,683,402,ok,반대 사선으로 그어진 좁은 갈색 흙 선
+blends_natural_01,91,31_45.tmx,-1,FloorOverlay,151,61,684,475,ok,A에는 황갈색 가는 사선 띠와 위쪽으로 솟은 잔풀 형태가 보인다. B는 석벽 안쪽 자갈과 마른 풀 바닥이고 C에서 좁은 부분만 달라진다. D의 생울타리와 도로 경계에서는 해당 기여를 특정하기 어렵다.
+blends_natural_02,5,31_45.tmx,0,Floor,240,170,790,3136,ok,
+blends_natural_02,7,31_45.tmx,0,Floor,242,171,792,3599,ok,
+blends_natural_02,10,31_45.tmx,0,FloorOverlay,239,170,795,590,ok,
+blends_street_01,0,31_45.tmx,0,Floor,187,29,833,0,zero_BC_ok,A에는 균일한 회색 입자의 마름모형 포장면 전체가 보인다. B의 실내 바닥과 가구 아래에 놓인 선택 배치는 C에서 제거해도 화면 변화가 없다. D에서는 회색 도로 포장에 쓰인 듯하지만 해당 원본 배치의 기여가 분리되지 않는다.
+blends_street_01,32,31_45.tmx,0,Floor,139,10,865,0,zero_BC_ok,A는 균일한 회색 자갈·아스팔트 입자 질감의 마름모형 바닥 전체이다. B에서는 실외 포장면이 건물과 이어지지만 선택 배치를 제거한 C와 화면이 완전히 같으며 D에서도 해당 단일 바닥 기여가 구분되지 않는다.
+blends_street_01,39,31_45.tmx,0,Floor,140,10,872,0,zero_BC_ok,A는 균일한 회색 입자 질감의 마름모형 전체 포장 바닥이다. B에서는 건물 옆 포장면 아래에 있으나 C에서 단일 타일을 제거해도 눈에 보이는 변화가 전혀 없고 D에서도 해당 배치 기여를 독립적으로 분리할 수 없다.
+blends_street_01,41,31_45.tmx,0,FloorOverlay,238,60,874,334,ok,A는 회색·베이지색 점과 가는 비스듬한 직선이 있는 매우 좁은 오버레이이다. B는 도로 포장 패치와 겹치며 C의 차이가 340픽셀에 불과하다. D에서 회색 포장과 자갈 경계가 보이지만 선의 정확한 역할은 구분하기 어렵다.
+blends_street_01,52,31_45.tmx,0,FloorOverlay,93,53,885,0,zero_BC_ok,A는 오른쪽으로 뾰족한 베이지색 자갈 삼각형으로 왼쪽 변이 흩어진 점으로 끝난다. B에서 도로 표지판 아래 밝은 보도와 겹치지만 C와 완전히 동일하여 선택 배치 기여를 확인할 수 없다. D에서는 건물 바닥에 가려진다.
+blends_street_01,56,31_45.tmx,0,FloorOverlay,112,69,889,147,ok,A는 베이지·회색 작은 점이 붙은 우하향의 매우 가는 선형 조각이다. B는 잔디·울타리·야외 의자와 겹치고 C 제거 차이가 166픽셀로 미미하다. D에서는 포장 경계가 있으나 독립적인 선분의 기능을 확인하기 어렵다.
+blends_street_01,59,31_45.tmx,0,FloorOverlay,139,24,892,0,zero_BC_ok,A에 베이지 점이 섞인 매우 가는 반대 방향 사선이 보인다. B는 실내 주방과 계단 옆 바닥을 조립한 장면인데 C와 완전히 같아 대상 배치의 기여가 보이지 않는다. D에서는 도로·보도 경계에 있지만 정확한 선 역할을 확인할 수 없다.
+blends_street_01,72,31_45.tmx,0,FloorOverlay,5,18,905,318,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,73,31_45.tmx,0,FloorOverlay,166,0,906,313,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,74,31_45.tmx,0,FloorOverlay,173,0,907,287,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,75,31_45.tmx,0,FloorOverlay,110,62,908,186,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,89,31_45.tmx,0,FloorOverlay,213,18,922,312,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,90,31_45.tmx,2,FloorOverlay1,86,74,923,235,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,91,31_45.tmx,2,FloorOverlay1,88,72,924,277,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,104,31_45.tmx,0,FloorOverlay,129,52,937,261,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,105,31_45.tmx,0,FloorOverlay,136,11,938,324,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,106,31_45.tmx,0,FloorOverlay,129,23,939,303,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_street_01,107,31_45.tmx,0,FloorOverlay,220,62,940,3,ok,원본 A는 얇고 끊긴 회색 점선 모양 테두리 조각. B-C에서 픽셀 변화가 매우 작아 도로와 보도 사이의 정확한 경계·결합 방향을 구분하기 어렵다.
+blends_streetoverlays_01,14,31_45.tmx,-1,FloorOverlay,198,98,815,33,ok,A에 갈색 파손 노면의 큰 구멍 하나와 작은 파편이 있지만 첫 사용 위치 B-C 차이는 34픽셀뿐이고 다른 물체에 가려져 대상 배치 기여를 분리하기 어렵다.
+boulders,4,31_45.tmx,0,FloorOverlay2,244,170,1077,4184,ok,"원본 A: 둥글고 울퉁불퉁한 회색 바위 한 덩어리로 제거 변화 작은 편. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 4646픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+boulders,12,31_45.tmx,-1,FloorOverlay6,150,72,1085,297,ok,"A 실제 원본에서 회색 아주 작은 바닥 자갈 한 조각, 변화 301픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 301픽셀. D는 다른 위치 없어 안내판 표시."
+boulders,15,31_45.tmx,-1,FloorOverlay4,146,76,1088,378,ok,"A 실제 원본에서 어두운 자갈색 작은 바위 한 덩어리, delta374. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 374픽셀. D는 다른 위치 없어 안내판 표시."
+boulders,41,31_45.tmx,0,FloorOverlay,238,175,1114,1224,ok,"A 실제 원본에서 회색과 갈색 작은 돌 두세 개가 바닥에 놓인 형태, 주변 원본 이미지 3개 누락. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1364픽셀. D는 다른 위치 없어 안내판 표시."
+boulders,50,31_45.tmx,-1,FloorOverlay4,140,79,1123,410,ok,"A 실제 원본에서 어두운 회색 작은 돌 하나가 바닥에 있으나 맥락 이미지 1개 누락, 제거 차 408픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 408픽셀. D는 다른 위치 없어 안내판 표시."
+camping_01,11,31_45.tmx,0,FloorOverlay,60,2,1156,0,zero_BC_ok,나무 상판과 검정 X자형 받침
+carpentry_02,112,31_45.tmx,3,FloorOverlay2,150,34,1681,0,zero_BC_ok,"A 실제 원본에서 원본 A에는 식별 가능한 불투명 픽셀이 없고 B-C 변화 0; 장면에는 벽과 목재통만 보인다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+carpentry_03,72,31_45.tmx,3,FloorOverlay1,157,12,1769,379,ok,"A 실제 원본에서 작은 갈색 목재 ㄱ자 연결 받침, 비교 제거 거의 변화 없음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 4픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+constructedobjects_01,0,31_45.tmx,-1,FloorOverlay2,196,90,1865,388,ok,원본 A에서 아주 작은 회갈색 바닥 고정 금속 핀 두 개가 보이지만 배치 기여 적다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 388픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+crafted_01,88,31_45.tmx,0,FloorOverlay2,200,111,2281,0,zero_BC_ok,
+crafted_01,89,31_45.tmx,0,FloorOverlay2,200,110,2282,2807,ok,
+crafted_02,92,31_45.tmx,0,FloorOverlay3,191,111,2413,479,ok,"원본 A: 세 다리 둥근 작은 받침, 제거 차이 부족. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 479픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+d_generic_1,22,31_45.tmx,-1,FloorOverlay4,144,61,3007,2069,ok,"A 실제 원본에서 원본 PNG 개별 칸이 투명하며 B-C 변화 0; 다른 근접 배치 D는 존재하지만 해당 타일 식별 불가. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 위치(거리 5칸 이상)이지만 원본 투명으로 식별 불가."
+d_generic_1,37,31_45.tmx,0,FloorOverlay,156,64,3022,623,ok,"A 원본 PNG에서 한두 개의 짧은 갈색 잎 조각만 보이고 정확한 역할을 가리기 어렵다. B 실제 TMX 같은 층 5×5 조립, C 동일 레이어 선택 배치 1개 제거. B-C 변화 623픽셀. D 다른 실제 TMX 좌표 (31_45.tmx, 0층, 165,71) 확인. PNG 크롭은 TileZed 타일정의 텍스트 격자에 따른 잠정 매핑."
+d_generic_1,40,31_45.tmx,-1,FloorOverlay,189,95,3025,648,ok,"A 원본 PNG에서 회색 작은 돌 조각과 점만 보여 정확한 사물 유형을 구분하기 어렵다. B 실제 TMX 같은 층 5×5 조립, C 동일 레이어 선택 배치 1개 제거. B-C 변화 648픽셀. D 다른 실제 TMX 좌표 (31_45.tmx, 0층, 176,73) 확인. PNG 크롭은 TileZed 타일정의 텍스트 격자에 따른 잠정 매핑."
+d_generic_1,41,31_45.tmx,-1,FloorOverlay,183,96,3026,528,ok,"A 원본 PNG에서 매우 작은 갈색·회색 지면 조각으로 부품 역할이 불명확하다. B 실제 TMX 같은 층 5×5 조립, C 동일 레이어 선택 배치 1개 제거. B-C 변화 528픽셀. D 다른 실제 TMX 좌표 (31_45.tmx, -1층, 143,62) 확인. PNG 크롭은 TileZed 타일정의 텍스트 격자에 따른 잠정 매핑."
+d_generic_1,46,31_45.tmx,-1,FloorOverlay,192,90,3031,896,ok,"A 원본 PNG에서 갈색 얇은 가지와 잎 몇 조각이 흩어져 원형을 알기 어렵다. B 실제 TMX 같은 층 5×5 조립, C 동일 레이어 선택 배치 1개 제거. B-C 변화 896픽셀. D 다른 실제 TMX 좌표 (31_45.tmx, -1층, 181,91) 확인. PNG 크롭은 TileZed 타일정의 텍스트 격자에 따른 잠정 매핑."
+d_wallcracks_1,18,31_45.tmx,-1,FloorOverlay3,139,52,3299,696,ok,A에 아주 작은 회색 점·가느다란 갈라진 선 두 조각이 떨어져 보인다. B-C는 25픽셀 차이에 그쳐 돌담에서 어떤 균열이 실제로 사라졌는지 구분하기 어렵다.
+d_wallcracks_1,41,31_45.tmx,-1,FloorOverlay4,156,29,3322,146,ok,"A 실제 원본에서 검은 실금 모양의 나뭇가지 오버레이, 변화 375. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 375픽셀. D는 다른 위치 없어 안내판 표시."
+d_wallcracks_1,66,31_45.tmx,-1,FloorOverlay3,144,61,3347,631,ok,"A 원본 PNG에서 작은 회흑색 균열 흔적이 아래로 뻗지만 부착 위치와 역할이 모호하다. B 실제 TMX 같은 층 5×5 조립, C 동일 레이어 선택 배치 1개 제거. B-C 변화 630픽셀. D 다른 실제 TMX 좌표 (31_45.tmx, -1층, 145,76) 확인. PNG 크롭은 TileZed 타일정의 텍스트 격자에 따른 잠정 매핑."
+e_carolinasilverbellJUMBO_1,1,31_45.tmx,0,FloorOverlay,244,148,3650,0,zero_BC_png_or_mapping_problem,
+e_dogwoodJUMBO_1,1,31_45.tmx,0,FloorOverlay2,216,51,3714,0,zero_BC_png_or_mapping_problem,
+e_redmapleJUMBO_1,1,31_45.tmx,0,FloorOverlay,237,145,3882,0,zero_BC_png_or_mapping_problem,
+electricity_pylon,42,31_46.tmx,2,FloorOverlay,90,107,3395,219,ok,
+electricity_pylon,45,31_46.tmx,2,FloorOverlay,86,111,3398,316,ok,
+f_wallvines_1,26,31_45.tmx,0,FloorOverlay3,124,86,8467,914,ok,
+f_wallvines_1,37,31_45.tmx,0,FloorOverlay4,205,95,8478,3104,ok,"A 실제 원본에서 잎 없는 검정 가지 여러 가닥이 길게 뻗는 식생. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 492픽셀. D는 다른 위치 없어 안내판 표시."
+fencing_01,20,31_46.tmx,0,FloorOverlay,6,7,4173,585,ok,
+fixtures_bathroom_01,2,31_45.tmx,0,FloorOverlay,150,19,5131,0,zero_BC_ok,흰 둥근 변기 좌석과 뒤편 사각 수조
+fixtures_bathroom_01,8,31_45.tmx,0,FloorOverlay2,147,83,5137,4361,ok,흰 벽걸이 도기와 위쪽 급수부
+fixtures_bathroom_01,10,31_45.tmx,0,FloorOverlay,127,149,5139,0,zero_BC_ok,"원본 A에는 흰색 세로 직사각형 도기와 상단의 금속 급수 밸브, 하부의 짧은 배관이 보인다. B와 C의 픽셀 변화가 0이며 D에서는 외벽에 부착된 비슷한 도기 형태가 보이나 선택 배치의 독립 기여는 확인되지 않는다."
+fixtures_bathroom_01,14,31_45.tmx,0,FloorOverlay,139,86,5143,0,zero_BC_ok,"A에는 은색 테두리와 회색 평평한 전면, 검은 원형 측면 표시가 있는 작은 상자가 보인다. B와 C가 픽셀 단위로 동일하며 D에서는 벽과 다른 가구에 가려 독립 기능을 구분하기 어렵다."
+fixtures_bathroom_01,15,31_45.tmx,0,FloorOverlay2,195,30,5144,0,zero_BC_ok,"원본 A에는 회색 평평한 전면의 작은 벽부착 상자, 측면 검은 원형 표시 및 밝은 테두리가 보인다. B-C 제거 비교는 0픽셀 변화이고 D에는 화장실 벽에 유사 상자가 보이지만 첫 배치의 기여를 분리할 수 없다."
+fixtures_bathroom_01,20,31_45.tmx,0,FloorOverlay6,112,224,5149,519,ok,"원본 A: 아주 작은 검은 사각 표식, 정체 불분명. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 519픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+fixtures_bathroom_01,24,31_45.tmx,1,FloorOverlay1,149,24,5153,0,zero_BC_ok,"흰 도자기 깊은 홈과 위로 솟은 옆판, 갈색 흔적"
+fixtures_bathroom_01,25,31_45.tmx,1,FloorOverlay2,186,22,5154,896,ok,"희끗한 도자기 홈, 위쪽 은색 급수 부품 2개"
+fixtures_bathroom_01,26,31_45.tmx,0,FloorOverlay2,98,34,5155,3892,ok,얼룩진 하얀 수조와 위쪽 두 금속 급수 부품
+fixtures_bathroom_01,27,31_45.tmx,0,FloorOverlay,52,233,5156,0,zero_BC_ok,흰 직사각 도기 수조와 깊은 안쪽 홈
+fixtures_bathroom_01,36,31_45.tmx,0,FloorOverlay,77,80,5165,54,ok,"A에는 회색으로 길게 뻗은 매우 얇은 수직 막대와 상단·하단의 짧은 마감부만 보인다. B-C 202픽셀 차이가 있지만 장면에 욕실, 창틀, 울타리 및 별도 샤워 장치가 겹치며 주변 PNG 누락 1건이 있어 이 막대가 유리 프레임·파이프·칸막이 중 무엇인지 판별하기 어렵다. D에서도 창문과 설비가 겹친다."
+fixtures_bathroom_01,40,31_45.tmx,0,FloorOverlay,142,4,5169,0,zero_BC_ok,A에 자주빛이 감도는 회보라색의 세로로 긴 불투명 평판이 보인다. B에는 화장실 변기 칸막이들이 있지만 C에서 해당 배치 한 개를 빼도 픽셀이 전혀 변하지 않는다(0px). D에서도 보라색 칸막이 군집이 보인다.
+fixtures_bathroom_01,43,31_45.tmx,0,FloorOverlay,182,154,5172,0,zero_BC_ok,A에는 매우 얇고 긴 보라색 세로 막대 한 개가 보인다. B와 D에는 보라색 화장실 칸막이와 기둥들이 있으나 B-C 픽셀 변화가 0이며 대상 막대가 어디에 겹쳤는지 특정하기 어렵다.
+fixtures_bathroom_01,44,31_45.tmx,0,FloorOverlay,119,77,5173,0,zero_BC_ok,연보라색 단색 직사각형 세로 판과 얇은 상단 테두리. 화장실 칸막이 옆에 배치되나 B/C가 동일.
+fixtures_bathroom_01,47,31_45.tmx,0,FloorOverlay,225,42,5176,1,ok,A에는 회보라색의 매우 가느다란 직립 판·기둥이 보인다. B와 D에는 보라색 변기 칸막이와 세로 지지대가 모여 있다. B-C 차이는 45픽셀뿐이라 대상 부품의 정확한 결합 지점을 분리하지 못했다.
+fixtures_bathroom_01,50,31_45.tmx,0,FloorOverlay2,225,41,5179,0,zero_BC_ok,"A 실제 원본에서 회보라색 단일 직립 판 모양이나 비교 변화 22픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 22픽셀. D는 다른 위치 없어 안내판 표시."
+fixtures_bathroom_01,52,31_45.tmx,1,FloorOverlay1,188,81,5181,0,zero_BC_ok,A에는 회백색 욕조 외벽과 윗쪽에 분리되어 떠 있는 둥근 검은 손잡이·금속 수전 부품들이 있다. B-C 차이가 18픽셀에 불과하고 B와 D의 욕실에 세면기·욕조가 겹쳐 수전의 대응을 판단하기 어렵다.
+fixtures_bathroom_01,56,31_45.tmx,-1,FloorOverlay,143,20,5185,0,zero_BC_ok,A에는 먼지가 낀 듯한 적갈색·분홍색 직립 직사각형 칸막이 판이 보인다. B와 D에 유사한 분홍 변기 칸막이들이 배치되지만 B-C 차이는 0픽셀이다.
+fixtures_bathroom_01,59,31_45.tmx,0,FloorOverlay,195,30,5188,0,zero_BC_ok,A는 길고 매우 얇은 적갈색 세로 막대 하나다. B와 D에는 분홍 변기 칸막이 및 기둥들이 있으나 B-C 차이가 0픽셀이어서 대상 기둥의 부착 위치가 확인되지 않는다.
+fixtures_bathroom_01,62,31_45.tmx,0,FloorOverlay2,122,217,5191,0,zero_BC_ok,
+fixtures_bathroom_01,63,31_45.tmx,1,FloorOverlay1,119,32,5192,1,ok,"A 실제 원본에서 적갈색 좁은 세로 금속 또는 목재 봉, 변화 7. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 7픽셀. D는 다른 위치 없어 안내판 표시."
+fixtures_bathroom_01,67,31_45.tmx,0,FloorOverlay2,194,94,5196,0,zero_BC_ok,"A 실제 원본에서 갈색 작은 직사각 변기칸 칸막이판. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 4픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+fixtures_counters_01,1,31_45.tmx,0,FloorOverlay,187,37,5242,4508,ok,나무색 윗판과 갈색 세로 측면
+fixtures_counters_01,7,31_45.tmx,0,FloorOverlay,199,77,5248,0,zero_BC_ok,베이지 상판과 갈색 민무늬 측면
+fixtures_counters_01,10,31_45.tmx,0,FloorOverlay,193,149,5251,0,zero_BC_ok,A: 나뭇결 있는 갈색 윗판에 직각 홈이 있고 아래는 진한 목재 수납 몸체. B 계단과 벽면에 대상이 가려지며 C와 픽셀이 완전히 동일하다. D는 수납대가 보이지만 특정 방향 조각을 확인하지 못한다.
+fixtures_counters_01,11,31_45.tmx,0,FloorOverlay,193,148,5252,0,zero_BC_ok,A: 갈색 직사각형 상판 밑에 작은 손잡이 두 개가 있는 수납문과 나무 옆면. B 계단 아래 대상 제거 변화가 136픽셀로 매우 작고 D에도 칸막이와 가구가 겹쳐 정확한 노출 방향을 구분하지 못한다.
+fixtures_counters_01,13,31_45.tmx,-1,FloorOverlay3,150,18,5254,2423,ok,갈색 나무판 상판과 두 측면
+fixtures_counters_01,15,31_45.tmx,0,FloorOverlay,104,10,5256,0,zero_BC_ok,짙은 나무색 큐브 수납 가구
+fixtures_counters_01,33,31_45.tmx,-1,FloorOverlay,119,48,5274,6456,ok,
+fixtures_counters_01,38,31_45.tmx,0,FloorOverlay,116,81,5279,0,zero_BC_ok,A는 회색 금속제 상판에 계단형 작은 홈과 어두운 하단 판이 있는 한 칸 부품이다. B 계단 뒤로 가려지며 C와 화소 차이가 0이고 D의 작업대 연속 부품으로 정확히 분리할 수 없다.
+fixtures_counters_01,41,31_45.tmx,0,FloorOverlay,223,31,5282,0,zero_BC_ok,
+fixtures_counters_01,45,31_45.tmx,0,FloorOverlay3,68,124,5286,4685,ok,
+fixtures_counters_01,47,31_45.tmx,0,FloorOverlay,197,104,5288,163,ok,A에는 연갈색 매끈한 윗판과 진갈색 옆판을 가진 직선형 한 칸 목재 수납대가 보인다. B에서 벽 뒤에 대부분 가려져 C 제거 변화가 221픽셀뿐이라 방향 연결이 불명확하다.
+fixtures_counters_01,48,31_45.tmx,1,FloorOverlay1,188,28,5289,0,zero_BC_ok,A는 갈색 목재 ㄱ자 모서리 카운터로 보이고 상단 두 변이 직각 연결된다. B-C 이미지 변화 0이며 D에는 큰 가구가 중첩되어 해당 연결 구조 검증 불가.
+fixtures_counters_01,49,31_45.tmx,0,FloorOverlay2,225,39,5290,0,zero_BC_ok,A에는 직선형 갈색 상판과 어두운 목재 몸체가 있는 한 칸 모듈. B 화장실 옆 좁은 조리 공간에서 B-C 변화 0이며 다른 사용 위치도 가구가 가려진다.
+fixtures_counters_01,51,31_45.tmx,0,FloorOverlay,183,75,5292,0,zero_BC_ok,
+fixtures_counters_01,52,31_45.tmx,0,FloorOverlay,183,74,5293,0,zero_BC_ok,A에는 붉은 갈색 상판 두 면이 직각으로 만나며 내측이 꺾인 목재 코너 모듈이 보인다. B의 벽 뒤로 가려져 C 제거 변화 31픽셀에 그친다. D에는 사무실 가구로 쓰이지만 개별 결합 방향 불명.
+fixtures_counters_01,71,31_45.tmx,1,FloorOverlay1,188,154,5312,0,zero_BC_ok,"A 실제 원본에서 녹회색 정방 하부 주방 수납장, B-C 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+fixtures_counters_01,73,31_45.tmx,0,FloorOverlay,140,8,5314,0,zero_BC_ok,연베이지 상판과 옅은 측판
+fixtures_counters_01,75,31_45.tmx,0,FloorOverlay2,69,221,5316,2653,ok,밝은 아이보리 상판과 사각 수납장
+fixtures_counters_01,77,31_45.tmx,0,FloorOverlay,182,25,5318,3013,ok,
+fixtures_counters_01,172,31_45.tmx,1,FloorOverlay3,150,2,5413,4776,ok,"A 실제 원본에서 회색 정육면체 두 개가 꺾여 결합한 상자형 장비로 구조상 상부/하부 역할은 불명확하다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 5463픽셀. D는 다른 위치 없어 안내판 표시."
+fixtures_doors_01,52,31_45.tmx,-1,FloorOverlay3,78,51,5501,6778,ok,
+fixtures_doors_02,5,31_45.tmx,0,FloorOverlay3,201,69,5574,7715,ok,
+fixtures_doors_02,20,31_45.tmx,0,FloorOverlay4,148,21,5589,5927,ok,
+fixtures_doors_02,40,31_45.tmx,0,FloorOverlay3,159,36,5609,6998,ok,
+fixtures_doors_02,44,31_45.tmx,0,FloorOverlay3,159,37,5613,6897,ok,
+fixtures_doors_02,49,31_45.tmx,0,FloorOverlay3,190,36,5618,8135,ok,
+fixtures_doors_02,53,31_45.tmx,0,FloorOverlay2,191,36,5622,6659,ok,
+fixtures_doors_frames_01,25,31_45.tmx,0,FloorOverlay2,159,36,5794,4633,ok,
+fixtures_doors_frames_01,32,31_45.tmx,0,FloorOverlay,196,147,5801,420,ok,
+fixtures_doors_frames_01,35,31_45.tmx,0,FloorOverlay,191,36,5804,3841,ok,
+fixtures_railings_01,2,31_45.tmx,-1,FloorOverlay,146,47,5955,0,zero_BC_ok,
+fixtures_railings_01,12,31_45.tmx,0,FloorOverlay,145,19,5965,0,zero_BC_ok,
+fixtures_railings_01,13,31_45.tmx,1,FloorOverlay1,197,44,5966,68,ok,
+fixtures_railings_01,14,31_45.tmx,0,FloorOverlay,147,48,5967,0,zero_BC_ok,
+fixtures_railings_01,15,31_45.tmx,1,FloorOverlay,15,7,5968,137,ok,
+fixtures_railings_01,18,31_45.tmx,0,FloorOverlay,191,177,5971,173,ok,
+fixtures_railings_01,31,31_45.tmx,1,FloorOverlay1,102,14,5984,8,ok,
+fixtures_railings_01,36,31_45.tmx,0,FloorOverlay,142,40,5989,0,zero_BC_ok,
+fixtures_railings_01,39,31_45.tmx,1,FloorOverlay,241,44,5992,0,zero_BC_ok,
+fixtures_railings_01,49,31_45.tmx,1,FloorOverlay,191,28,6002,0,zero_BC_ok,
+fixtures_railings_01,58,31_45.tmx,1,FloorOverlay,196,151,6011,592,ok,
+fixtures_railings_01,59,31_45.tmx,0,FloorOverlay,149,78,6012,404,ok,
+fixtures_railings_01,82,31_45.tmx,0,FloorOverlay3,117,137,6035,449,ok,
+fixtures_railings_01,94,31_45.tmx,0,FloorOverlay,149,8,6047,0,zero_BC_ok,
+fixtures_railings_01,99,31_45.tmx,0,FloorOverlay,135,140,6052,344,ok,
+fixtures_railings_01,102,31_45.tmx,1,FloorOverlay1,150,8,6055,0,zero_BC_ok,
+fixtures_railings_01,119,31_45.tmx,1,FloorOverlay,144,225,6072,8,ok,
+fixtures_sinks_01,6,31_45.tmx,0,FloorOverlay2,13,4,6103,310,ok,회색 직사각 수조와 한쪽 가장자리의 곡선 수전
+fixtures_sinks_01,7,31_45.tmx,0,FloorOverlay2,99,43,6104,0,zero_BC_ok,
+fixtures_sinks_01,10,31_45.tmx,0,FloorOverlay2,199,77,6107,0,zero_BC_ok,A에서 회색 금속제 두 칸 싱크볼처럼 보이는 얕은 사각 수조와 돌출 수전이 보인다. B에서는 벽·가전 뒤에 가려 C와 시각적으로 동일하고 D에서도 대상 기여가 가려져 독립 확인이 어렵다.
+fixtures_sinks_01,11,31_45.tmx,0,FloorOverlay2,141,8,6108,1646,ok,짙은 은회색 물받이와 오른쪽 수도꼭지 형태
+fixtures_sinks_01,14,31_45.tmx,0,Vegetation,194,123,6111,3283,ok,흰색 둥근 도자기 세면대와 금속 손잡이 두 개
+fixtures_sinks_01,17,31_45.tmx,-1,FloorOverlay3,120,40,6114,475,ok,
+fixtures_sinks_01,19,31_45.tmx,0,FloorOverlay2,145,24,6116,1449,ok,회색 직사각 물받이와 얇은 굽은 금속 수전
+fixtures_sinks_01,30,31_45.tmx,0,FloorOverlay,195,75,6127,0,zero_BC_ok,"A에는 작은 흰색 타원형 세면대와 금속 수전, 아래 어두운 배수구가 보인다. B는 벽과 가구가 겹친 실내 공간이며 C와 동일하게 보인다. D 화장실에서는 유사 세면대가 보이지만 해당 배치 하나의 기여를 분리할 수 없다."
+fixtures_sinks_01,31,31_45.tmx,0,FloorOverlay,194,215,6128,1,ok,
+fixtures_sinks_01,34,31_45.tmx,0,FloorOverlay,192,156,6131,69,ok,"A 실제 원본: 은색 다리 4개와 깊은 회색 사각 물받이가 있지만 B-C 변화가 없다. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 0픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+fixtures_sinks_01,35,31_45.tmx,0,FloorOverlay,123,35,6132,24,ok,"A에는 금속제 사각 싱크볼과 긴 곡선형 분사 수전, 다리 및 하단 격자 선반이 보인다. 그러나 B에서는 벽돌 외벽과 선반 뒤에 가려 C와 동일하며 D에서도 외벽에 가려 선택 배치의 기여가 드러나지 않는다."
+fixtures_stairs_01,48,31_45.tmx,-1,FloorOverlay,140,93,6185,9155,ok,
+fixtures_windows_curtains_01,15,31_45.tmx,1,FloorOverlay1,181,159,6360,97,ok,A에는 가느다란 검은 봉에 달린 흰색 얇은 커튼 2폭이 보인다. 첫 배치 B-C 픽셀 변화는 9뿐이고 창과 지붕에 겹쳐 기능 분리 곤란.
+fixtures_windows_curtains_01,29,31_45.tmx,0,FloorOverlay,250,75,6374,26,ok,검정 봉 양쪽에 푸른 긴 세로 천과 진한 하단
+fixtures_windows_curtains_01,44,31_45.tmx,0,FloorOverlay4,98,38,6389,2007,ok,갈색 커튼봉 아래 어두운 갈색 천 두 폭
+fixtures_windows_curtains_01,45,31_45.tmx,0,FloorOverlay,104,41,6390,62,ok,
+fixtures_windows_curtains_01,60,31_45.tmx,0,FloorOverlay4,76,71,6405,3144,ok,
+fixtures_windows_curtains_01,61,31_45.tmx,0,FloorOverlay,81,71,6406,67,ok,나무 커튼봉 아래 연베이지 두 폭 천
+fixtures_windows_curtains_01,63,31_45.tmx,0,FloorOverlay,80,80,6408,68,ok,
+fixtures_windows_curtains_01,69,31_45.tmx,1,FloorOverlay2,197,90,6414,1016,ok,
+fixtures_windows_curtains_01,71,31_45.tmx,0,FloorOverlay,191,4,6416,8,ok,검정 커튼봉과 연두색 천 두 폭
+fixtures_windows_curtains_01,84,31_45.tmx,0,FloorOverlay4,99,10,6429,3156,ok,갈색 얇은 커튼이 양쪽에 늘어짐
+fixtures_windows_curtains_01,85,31_45.tmx,0,FloorOverlay,108,12,6430,64,ok,검정 갈색 가로봉과 짙은 갈색 천 두 폭
+fixtures_windows_curtains_01,86,31_45.tmx,0,FloorOverlay4,103,9,6431,2751,ok,갈색 커튼봉 양쪽에 탁한 갈색 긴 천폭
+fixtures_windows_curtains_02,4,31_45.tmx,0,FloorOverlay4,139,26,6445,779,ok,
+fixtures_windows_curtains_02,7,31_45.tmx,0,FloorOverlay,111,48,6448,0,zero_BC_ok,
+fixtures_windows_curtains_02,12,31_45.tmx,0,FloorOverlay4,65,120,6453,783,ok,"원본 A: 짧은 녹색 막대와 고정 브래킷, 정확한 역할 불명. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 783픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+fixtures_windows_curtains_02,28,31_45.tmx,0,FloorOverlay4,139,3,6469,781,ok,
+fixtures_windows_curtains_02,30,31_45.tmx,0,FloorOverlay4,146,2,6471,192,ok,
+fixtures_windows_detailing_01,27,31_45.tmx,0,FloorOverlay4,218,165,6500,108,ok,원본 A에서 얇은 세로 갈색 판재 한 줄만 추출된다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 210픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+floors_exterior_tilesandstone_01,5,31_45.tmx,-1,Floor,118,28,6854,0,zero_BC_ok,회갈색 보도블록 사각판 4개와 밝은 홈
+floors_interior_carpet_01,10,31_45.tmx,0,Floor,110,36,6947,0,zero_BC_ok,A는 연한 노란 베이지색 직물 질감의 마름모 바닥 조각이다. B-C 변화 0으로 선택 위치의 바닥 기여가 다른 레이어에 가려져 분리되지 않는다.
+floors_interior_carpet_01,24,31_45.tmx,1,FloorOverlay,206,218,6961,228,ok,"원본 A: 갈색 바닥판에 하얀 타원형 빈 공간, B-C 변화 미미. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 271픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+floors_interior_carpet_01,46,31_45.tmx,-1,Floor,118,29,6983,2,ok,A에 진갈색 줄무늬 마름모 바닥 조각이 보이지만 B-C 변화 0이다. 계단 아래 라커 공간에서 해당 배치의 독립적인 노출이 확인되지 않는다.
+floors_interior_tilesandwood_01,1,31_45.tmx,0,Floor,154,76,6986,0,zero_BC_ok,A는 검푸른색과 아이보리색이 교대로 놓인 격자형 사각 타일이다. B-C 변화 0으로 화장실 바닥의 한 배치가 다른 층과 중첩됐을 가능성을 배제할 수 없다.
+floors_interior_tilesandwood_01,2,31_45.tmx,0,Floor,10,6,6987,0,zero_BC_ok,A에 하늘색과 흰색 사각 타일이 바둑판처럼 배열되어 있다. B-C 변화 0이며 욕실 바닥의 선택 배치가 다른 타일에 가려진다.
+floors_interior_tilesandwood_01,4,31_45.tmx,0,Floor,193,22,6989,0,zero_BC_ok,A는 회색과 거의 검은색의 정사각 격자 타일 4×4 형태. B-C 변화 0으로 공중화장실의 타일 한 칸에 대한 기여가 확인되지 않는다.
+floors_interior_tilesandwood_01,8,31_45.tmx,0,Floor,150,9,6993,0,zero_BC_ok,어두운 녹색 바닥 타일 4칸
+floors_interior_tilesandwood_01,9,31_45.tmx,0,Floor,183,76,6994,0,zero_BC_ok,A는 밝은 노란색 작은 사각 타일의 격자 바닥 조각이다. B-C 변화 0이므로 매장/욕실에 보이는 바닥이 이 배치의 결과인지 확인되지 않는다.
+floors_interior_tilesandwood_01,10,31_45.tmx,0,Floor,142,32,6995,0,zero_BC_ok,A는 베이지색 작은 정사각 타일들이 촘촘한 줄눈으로 구획된 바닥이다. B-C 변화 0으로 복도와 화장실 앞 선택 배치의 직접 노출을 확인할 수 없다.
+floors_interior_tilesandwood_01,11,31_45.tmx,0,Floor,194,24,6996,0,zero_BC_ok,흰 회색 네모 타일 4칸과 흐린 줄눈
+floors_interior_tilesandwood_01,12,31_45.tmx,0,Floor,142,20,6997,1211,ok,흰색에 가까운 마름모판과 흐린 네 칸 경계
+floors_interior_tilesandwood_01,15,31_45.tmx,0,Floor,243,111,7000,0,zero_BC_ok,A에 연회색 큰 타일 네 장과 중앙의 작은 녹회색 정사각 장식이 보인다. B-C 변화 0이고 다른 층 바닥과 겹친다.
+floors_interior_tilesandwood_01,16,31_45.tmx,0,Floor,116,135,7001,0,zero_BC_ok,A는 옅은 회베이지색 미세 결의 거의 단색 바닥 마름모. B-C 변화 0이어서 세탁실·복도 바닥에서 독립적인 변화를 관찰하지 못했다.
+floors_interior_tilesandwood_01,21,31_45.tmx,0,Floor,144,43,7006,0,zero_BC_ok,A는 녹회색 두 칸과 크림색 두 칸이 교차한 2×2 바닥 타일이다. B-C 변화 0으로 지하 계단 옆 바닥에 대한 단일 배치 기여가 없다.
+floors_interior_tilesandwood_01,25,31_45.tmx,0,Floor,98,34,7010,0,zero_BC_ok,A에는 네 개의 흰색 큰 사각 타일이 중앙과 모서리의 적갈색 작은 사각 장식으로 만난다. B-C 변화 0이어서 욕실 바닥 기여를 확인할 수 없다.
+floors_interior_tilesandwood_01,26,31_45.tmx,1,FloorOverlay,147,25,7011,0,zero_BC_ok,A는 흰색 큰 타일 네 개의 교차점마다 청회색 작은 사각 장식이 들어간 패턴. B-C 변화 0으로 욕실의 다른 타일과 중첩된다.
+floors_interior_tilesandwood_01,36,31_45.tmx,1,FloorOverlay,149,32,7021,0,zero_BC_ok,"원본 A: 오렌지 베이지 정방 타일을 여러 칸 붙인 바닥판, 제거 변화 없음. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 0픽셀. D는 실제 동일 TMX 근접 사용 좌표 (독립 검증 아님), 전체 사용 6건."
+floors_interior_tilesandwood_01,37,31_45.tmx,0,Floor,118,29,7022,352,ok,황갈색 네모 타일 4개가 있는 마름모 바닥
+floors_interior_tilesandwood_01,44,31_45.tmx,0,Floor,97,9,7029,0,zero_BC_ok,A에는 따뜻한 갈색의 긴 목재 판재들이 평행하게 놓인 바닥 조각이 보인다. B와 C 차이는 4픽셀로 거의 구분되지 않고 D에서도 다른 바닥과 가구가 겹쳐 선택 배치 기여를 특정하기 어렵다.
+floors_interior_tilesandwood_01,45,31_45.tmx,0,Floor,76,68,7030,519,ok,붉은 갈색 좁은 목판이 평행 배열된 마름모
+floors_interior_tilesandwood_01,47,31_45.tmx,0,Floor,118,123,7032,0,zero_BC_ok,A에 짙은 갈색 목재 마루 판재의 길이 방향 이음선이 보인다. B의 실내 바닥과 D의 유사 바닥은 확인되지만 B-C 차이가 2픽셀에 불과해 대상 한 칸의 실제 가시 기여를 분리할 수 없다.
+floors_interior_tilesandwood_01,49,31_45.tmx,0,Floor,51,231,7034,0,zero_BC_ok,A에는 밝은 황갈색 직사각 목재 블록들이 교차 배열된 패턴이 보인다. B와 C가 0픽셀 차이이고 D 주방 바닥의 유사 패턴도 선택 배치와 직접 연결해 검증하지 못했다.
+floors_interior_tilesandwood_01,54,31_46.tmx,0,Floor,77,110,7039,2,ok,"A 실제 원본: 회백색 정방 바닥 장판에 가는 나뭇결. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 2픽셀. D 다른 실제 사용 좌표의 근접 배치로 독립 현장 아님."
+floors_rugs_01,1,31_45.tmx,0,FloorOverlay,194,47,7202,0,zero_BC_ok,"A에는 짙은 청록색 직물과 안쪽 직각 테두리, 바깥쪽 옅은 녹색 띠가 보인다. B에서는 벽에 가려지고 C와 차이가 0픽셀이다. D에는 비슷한 러그가 있으나 개별 조각의 가시 기여는 확인되지 않는다."
+floors_rugs_01,3,31_45.tmx,0,FloorOverlay,194,46,7204,0,zero_BC_ok,A에 청록색 직물과 대각 방향으로 놓인 녹회색 테두리 띠가 보인다. B의 가구·벽 아래에 겹치고 C와 차이가 0픽셀이다. D에서도 같은 부분의 기여를 단독으로 분리할 수 없다.
+floors_rugs_01,7,31_45.tmx,0,FloorOverlay,194,45,7208,0,zero_BC_ok,"A는 청회색 직물 바탕과 연녹색 꺾인 선·한쪽 가장자리 띠를 가진다. B의 깔개 일부가 계단 벽에 가려 C와 시각적으로 거의 같고, D에도 소파와 외벽이 겹친다."
+floors_rugs_01,8,31_45.tmx,0,FloorOverlay,181,47,7209,250,ok,"A에는 자주회색 직물 바탕과 회색 L자 테두리, 바깥쪽 밝은 띠가 보인다. B 벽·의자에 가려 깔개가 일부만 노출되고 C 변화가 작다. D에서는 사무실 바닥 깔개가 보이지만 같은 조각의 독립 배치는 불명확하다."
+floors_rugs_01,9,31_45.tmx,0,FloorOverlay,183,47,7210,0,zero_BC_ok,A는 짙은 자주회색 바탕에 회색 이중 직각 테두리를 가진다. B에서는 유리 출입문과 벽 뒤쪽 깔개가 일부 보이지만 C에서 차이가 없고 D의 사무실 가구 주변도 직접 대응이 어렵다.
+floors_rugs_01,12,31_45.tmx,0,FloorOverlay,182,47,7213,0,zero_BC_ok,A에는 짙은 자주회색 바탕과 회색 평행 띠·바깥쪽 밝은 테두리가 한 변에 보인다. B 출입문·벽과 겹쳐 깔개 조각이 가려지고 C 제거 효과가 거의 없으며 D는 사무실 깔개가 일부만 노출된다.
+floors_rugs_01,20,31_45.tmx,0,FloorOverlay,141,147,7221,0,zero_BC_ok,적갈색 직물 판과 얇은 외곽선
+floors_rugs_01,21,31_45.tmx,0,FloorOverlay,141,146,7222,3202,ok,갈색 마름모 바닥 면
+floors_rugs_01,23,31_45.tmx,0,FloorOverlay,182,30,7224,2994,ok,갈색 작은 마름모 천판과 안쪽 사각줄
+floors_rugs_01,29,31_45.tmx,2,FloorOverlay1,123,77,7230,3,ok,"A 실제 원본에서 황갈색 작은 정방 깔개 무늬이나 변화 3px. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 3픽셀. D는 다른 위치 없어 안내판 표시."
+floors_rugs_01,35,31_45.tmx,1,FloorOverlay1,194,33,7236,0,zero_BC_ok,"A 실제 원본에서 푸른색과 보라색이 작은 네모로 교차하는 정방 바닥 무늬, 제거 차이 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+floors_rugs_01,37,31_45.tmx,2,FloorOverlay1,123,78,7238,0,zero_BC_ok,"A 실제 원본에서 작은 갈색·초록색·황토색 사각 바닥 무늬인데 제거 차이 4픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 4픽셀. D는 다른 위치 없어 안내판 표시."
+floors_rugs_01,45,31_45.tmx,2,FloorOverlay1,123,79,7246,0,zero_BC_ok,"A 실제 원본에서 작은 황갈색 녹색 직사각 바닥 무늬가 있으나 대상 배치 제거 차이 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+floors_rugs_01,49,31_45.tmx,0,FloorOverlay,16,17,7250,0,zero_BC_ok,
+floors_rugs_01,50,31_45.tmx,0,FloorOverlay,53,230,7251,0,zero_BC_ok,A는 분홍빛 갈색의 둥근 끝과 작은 점무늬가 있는 매트 조각이다. B 욕실 세면대 앞 타원형 매트가 보이지만 C에서 시각 변화가 없고 D에서는 욕실 설비와 벽에 가려 직접 확인하기 어렵다.
+floors_rugs_01,51,31_45.tmx,0,FloorOverlay,53,229,7252,0,zero_BC_ok,A에 적갈색 테두리의 분홍빛 반원형 점무늬 매트 조각이 보인다. B와 C의 욕실·침실 경계에서는 배치 제거 변화가 전혀 드러나지 않는다.
+floors_rugs_01,53,31_45.tmx,0,FloorOverlay,158,6,7254,0,zero_BC_ok,A에는 연보라색 직사각형 매트와 사방 테두리 띠가 있으나 B·C의 석재 바닥 장면은 동일하고 D는 다른 실내 가구에 가려진다.
+floors_rugs_01,54,31_45.tmx,1,FloorOverlay1,151,26,7255,0,zero_BC_ok,A에서 연보라색 표면과 옅은 주변선의 정방형 조각이 보인다. B와 C의 파란 실내 벽·복도에서는 제거 영향이 0픽셀로 나타난다.
+floors_rugs_01,55,31_45.tmx,1,FloorOverlay1,151,25,7256,0,zero_BC_ok,A에 옅은 자주빛 가운데 면과 양 변 밝은 테두리가 보인다. B·C는 동일하며 주변 욕실 벽과 가구가 설치 지점을 가린다.
+floors_rugs_01,58,31_45.tmx,0,FloorOverlay,180,40,7259,3076,ok,짙은 회색 평판과 얇은 가장자리
+floors_rugs_01,76,31_45.tmx,0,FloorOverlay,204,71,7277,0,zero_BC_ok,A에는 어두운 직물 바탕과 선형 띠가 보인다. B의 소파 아래 설치 지점에서 C와 동일한 화면이 나타나 단일 배치의 시각 기여를 확인할 수 없다.
+floors_rugs_01,79,31_45.tmx,0,FloorOverlay,226,37,7280,38,ok,A에는 회색 테두리와 내부 사각선을 가진 검은 직물 조각이 보인다. B·C 변화가 38픽셀뿐이어서 다른 벽·가구와의 중첩을 배제하지 못한다.
+floors_rugs_01,87,31_45.tmx,0,FloorOverlay,204,70,7288,0,zero_BC_ok,A에서는 단색의 짙은 회색 바닥 직물 면이 확인된다. B 거실과 C 제거 장면의 변화가 4픽셀로 배치 정체를 식별할 수 없다.
+floors_rugs_01,114,31_45.tmx,1,FloorOverlay1,138,36,7315,0,zero_BC_ok,A에 황토색·올리브색 곡선 무늬와 갈색 넓은 테두리가 보인다. B와 D 거실에는 원형 패턴 러그가 있지만 C는 4픽셀만 달라 이 조각의 위치를 따로 검증하기 어렵다.
+floors_rugs_01,122,31_45.tmx,1,FloorOverlay1,139,36,7323,0,zero_BC_ok,A에 황갈색 테두리와 올리브색 원형 선 무늬가 보인다. B에는 파란색 타일벽 뒤 러그가 일부 보이나 C 제거가 4픽셀에 그친다.
+floors_rugs_01,128,31_45.tmx,0,FloorOverlay,187,47,7329,177,ok,"A 실제 원본에서 회색의 작은 마름모형 바닥판에 어두운 테두리 두 줄이 있으나 제거 변화가 291픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 291픽셀. D는 다른 위치 없어 안내판 표시."
+floors_rugs_01,129,31_45.tmx,0,FloorOverlay,188,47,7330,146,ok,"A 실제 원본에서 단색 회색 정방 판에 조금 더 밝은 대각 음영이 있지만 제거 차이가 270픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 270픽셀. D는 다른 위치 없어 안내판 표시."
+floors_rugs_01,130,31_45.tmx,1,FloorOverlay1,140,36,7331,0,zero_BC_ok,A에는 녹갈색 중앙과 황갈색 이중 테두리 모서리가 보인다. B는 욕실 칸막이와 가구에 가려 C 제거 장면과 동일해 해당 부품이 보이지 않는다.
+floors_rugs_02,2,31_45.tmx,0,FloorOverlay,103,38,7339,7,ok,A에 짧고 빽빽한 베이지색 술을 세운 사각 러그 원본이 보인다. B 소파 근처와 D 침대 근처에 털 장식이 관찰되지만 C 제거로 드러나는 변화는 14픽셀뿐이다.
+furniture_bedding_01,8,31_45.tmx,2,FloorOverlay1,153,38,7489,0,zero_BC_ok,원본 A에서 하늘색 쿠션과 낮은 갈색 다리가 있는 작은 침대 또는 발판이다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 0픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+furniture_bedding_01,11,31_45.tmx,1,FloorOverlay1,241,113,7492,0,zero_BC_ok,"A에는 파란 직사각형 매트리스와 낮은 갈색 나무 받침, 한쪽 다리 및 그림자가 보인다. D에는 같은 색의 침대가 있지만 B와 C의 픽셀 변화가 0이라 첫 배치에서 정확히 어떤 조각인지 가려져 있다."
+furniture_bedding_01,16,31_45.tmx,1,FloorOverlay1,118,78,7497,0,zero_BC_ok,"A 실제 원본: 하얀 윗면과 갈색 낮은 직사각 가구는 보이나 제거 변화가 없다. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 0픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+furniture_bedding_01,17,31_45.tmx,1,FloorOverlay1,119,78,7498,0,zero_BC_ok,"A 실제 원본에서 흰색 낮은 사각 침대 머리판과 작은 갈색 밑판이 보인다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_bedding_01,18,31_45.tmx,1,FloorOverlay1,118,77,7499,10,ok,"A 실제 원본에서 희끄무레한 낮은 베이지 가구 조각, 변화 8픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 8픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_bedding_01,19,31_45.tmx,1,FloorOverlay1,119,77,7500,0,zero_BC_ok,"A 원본에서 짙은 갈색 직사각 세로 판과 왼쪽 얇은 흰 부분이 보인다. B는 TMX 동일 층 주변 5×5 근사 조립, C는 동일 레이어 대상 배치 한 건 제거. B-C 변화 0픽셀. D는 다른 실제 배치 없어 미확보 안내판."
+furniture_bedding_01,21,31_45.tmx,0,FloorOverlay,102,35,7502,1,ok,매우 옅은 결이 있는 흰색 마름모 평면
+furniture_bedding_01,23,31_45.tmx,0,FloorOverlay,103,35,7504,0,zero_BC_ok,흰 직사각 매트리스와 아래 한쪽 진갈색 판
+furniture_bedding_01,29,31_45.tmx,0,FloorOverlay,79,79,7510,1373,ok,흰 침구 면과 뒤쪽 높은 나무 머리판
+furniture_bedding_01,31,31_45.tmx,0,FloorOverlay3,79,78,7512,5643,ok,흰 침구 한 면과 길게 내려온 진갈색 측판
+furniture_bedding_01,32,31_45.tmx,0,FloorOverlay,64,7,7513,0,zero_BC_ok,
+furniture_bedding_01,33,31_45.tmx,0,FloorOverlay,65,7,7514,0,zero_BC_ok,밝은 목제 다리 넷과 하얀 침구 한 면
+furniture_bedding_01,40,31_45.tmx,1,FloorOverlay4,113,46,7521,7073,ok,밝은 황갈색 세로 머리판과 흰 매트리스
+furniture_bedding_01,41,31_45.tmx,1,FloorOverlay1,114,46,7522,0,zero_BC_ok,A에는 흰색 매트리스와 밝은 갈색 하부 받침 및 다리가 뚜렷하다. B와 C를 비교했을 때 픽셀 차이가 단 2개이며 방의 침대는 다른 타일과 지붕에 가려져 있어 첫 배치의 조각 역할을 확인할 수 없다. D에서는 흰 침대가 보인다.
+furniture_bedding_01,48,31_45.tmx,1,FloorOverlay1,148,16,7529,0,zero_BC_ok,"A 실제 원본에서 흰색 직육면체 상판과 짧은 나무 받침, 제거 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_bedding_01,49,31_45.tmx,1,FloorOverlay1,149,16,7530,0,zero_BC_ok,"A 실제 원본에서 연갈색 목재 틀과 흰 침구를 갖춘 작은 침대형 조각; B와 C의 변화가 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 위치 없음, D 안내판 표시."
+furniture_bedding_01,50,31_45.tmx,1,FloorOverlay1,148,15,7531,0,zero_BC_ok,"A 실제 원본에서 옅은 아이보리 평판이 바닥에 놓인 형태이며 장면 변화가 0픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_bedding_01,53,31_45.tmx,0,FloorOverlay,233,72,7534,0,zero_BC_ok,
+furniture_bedding_01,54,31_45.tmx,0,FloorOverlay,234,73,7535,0,zero_BC_ok,
+furniture_bedding_01,64,31_45.tmx,1,FloorOverlay1,193,229,7545,0,zero_BC_ok,"A에는 희고 두툼한 직사각형 매트리스와 짙은 녹색 금속 침대 테두리, 끝을 감싸는 굽은 난간이 보인다. B와 D는 녹색 철제 침대가 놓인 방이지만 B-C 변화가 0픽셀로 겹친 다른 레이어와의 관계를 판별할 수 없다."
+furniture_bedding_01,66,31_45.tmx,1,FloorOverlay1,189,227,7547,0,zero_BC_ok,"A에는 녹색 금속 침대 다리와 상단 난간, 아래판, 흰 매트리스의 비스듬한 끝면이 보인다. B와 D에는 같은 계열의 철제 침대가 존재하지만 B-C 픽셀 변화가 0이므로 이번 배치의 구체적 조립 방향은 판별하기 어렵다."
+furniture_bedding_01,67,31_45.tmx,1,FloorOverlay1,190,227,7548,0,zero_BC_ok,"A에는 흰 매트리스 한쪽 끝과 녹색 금속 받침, 머리맡 높이의 굽은 난간이 보인다. B와 D의 방에 녹색 금속 침대가 있지만 B-C 변화가 0이어서 해당 분할 부품의 실제 기여를 식별하지 못한다."
+furniture_bedding_01,70,31_45.tmx,0,FloorOverlay,74,222,7551,0,zero_BC_ok,검정 목재 침대 머리판과 흰색 매트리스 일부가 원본 A에 보임. B에서 다른 벽체와 겹쳐 C 변화는 28픽셀.
+furniture_bedding_01,71,31_45.tmx,0,FloorOverlay,75,222,7552,10,ok,"A 실제 원본에서 검정 난간형 머리판과 흰 침대가 보이나 제거 전후 차이 16픽셀이라 해당 사물 기여 확인 어려움. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 16픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+furniture_bedding_01,72,31_45.tmx,1,FloorOverlay1,143,24,7553,0,zero_BC_ok,A에 검은색 세로 살이 있는 침대 머리판과 흰색 매트리스 모서리가 떠 있는 듯 보인다. B-C 차이가 0이고 주변 책장·벽·침대가 겹쳐 어떤 끝 조각인지 확인할 수 없다.
+furniture_bedding_01,73,31_45.tmx,1,FloorOverlay1,143,23,7554,0,zero_BC_ok,A에는 짙은 검은색 가로 머리판·세로 살들과 흰 매트리스의 연한 삼각형 면이 보인다. B-C 차이는 56픽셀로 매우 작고 침대가 다른 층 타일에 가려져 어느 쪽 조각인지 불확실하다.
+furniture_bedding_01,75,31_45.tmx,1,FloorOverlay1,144,23,7556,0,zero_BC_ok,A에는 흰 매트리스 평면과 검은 머리판의 세로 살 및 두 기둥이 보인다. B-C 차이가 122픽셀에 그치며 B의 방에서는 침대가 벽 뒤에 가려져 끝 방향 역할을 확정하기 어렵다.
+furniture_seating_indoor_02,4,31_45.tmx,-1,FloorOverlay,149,20,7645,0,zero_BC_ok,
+furniture_seating_indoor_02,33,31_45.tmx,0,FloorOverlay3,119,136,7674,5928,ok,
+furniture_seating_indoor_02,35,31_45.tmx,0,FloorOverlay,194,41,7676,0,zero_BC_ok,
+furniture_seating_indoor_02,38,31_45.tmx,0,FloorOverlay,197,228,7679,0,zero_BC_ok,
+furniture_seating_indoor_02,54,31_45.tmx,1,FloorOverlay1,138,100,7695,4265,ok,
+furniture_seating_indoor_03,1,31_45.tmx,0,FloorOverlay,115,206,7706,0,zero_BC_ok,"긴 목재 판재 좌판, 얇은 회색 수직 다리"
+furniture_seating_indoor_03,7,31_45.tmx,0,FloorOverlay,234,78,7712,158,ok,"A: 탁한 베이지색 두꺼운 등쿠션의 뒷모습과 좌우 둥근 팔걸이, 사각 받침. B 가옥 외벽에 가려진 위치에서 C가 217픽셀만 바뀌며 어느 방향의 소파 부품인지 분리되지 않는다. D에는 유사한 거실 의자가 있다."
+furniture_seating_indoor_03,12,31_45.tmx,0,FloorOverlay,235,77,7717,235,ok,원본 A에서 둥근 팔걸이가 붙은 회갈색 1인 소파 의자지만 배치 제거량이 적다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 301픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+furniture_seating_indoor_03,13,31_45.tmx,0,FloorOverlay,235,76,7718,153,ok,"원본 A: 회갈색 의자 팔걸이와 낮은 받침, 제거 변화 부족. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 201픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+furniture_seating_indoor_03,14,31_45.tmx,0,FloorOverlay,181,48,7719,10,ok,"A: 베이지색 좌석 뒷판과 둥근 상부 등쿠션, 절단된 좌석 모서리. B 유리 상점벽에 가려져 C 제거 변화가 321픽셀뿐이다. D에서는 여러 개 좌석이 보여도 해당 연결부를 분리하기 어렵다."
+furniture_seating_indoor_03,15,31_45.tmx,0,FloorOverlay,182,48,7720,899,ok,"A: 베이지색 쿠션 의자의 뒷면, 둥근 우측 팔걸이와 아래 받침이 보인다. B 창가 좌석이 일부 가려져 C 변화가 작고 D에서도 창틀과 가구가 겹친다."
+furniture_seating_indoor_03,25,31_45.tmx,0,FloorOverlay,253,30,7730,0,zero_BC_ok,A에서 청회색 쿠션 안락의자의 팔걸이·등받이와 어두운 밑받침이 보인다. B/C 차이 0으로 해당 자리 기여를 확인하지 못했다.
+furniture_seating_indoor_03,36,31_45.tmx,1,FloorOverlay1,157,24,7741,0,zero_BC_ok,"청회색 소파 등쿠션의 뒷쪽 면, B-C 변화 0"
+furniture_seating_indoor_03,37,31_45.tmx,1,FloorOverlay1,158,24,7742,0,zero_BC_ok,"청회색 소파 뒤쪽 팔걸이, B-C 변화 0"
+furniture_seating_indoor_03,38,31_45.tmx,0,FloorOverlay,108,11,7743,429,ok,"청회색 소파 쿠션과 팔걸이 절반, B-C 변화 523픽셀"
+furniture_seating_indoor_03,39,31_45.tmx,0,FloorOverlay,108,10,7744,0,zero_BC_ok,"청회색 소파 끝 쿠션 일부, B-C 변화 0"
+furniture_seating_indoor_03,41,31_45.tmx,0,FloorOverlay3,119,123,7746,6740,ok,
+furniture_seating_indoor_03,42,31_45.tmx,0,FloorOverlay4,199,69,7747,6081,ok,올리브 갈색의 쿠션 높은 등받이와 둥근 손잡이
+furniture_seating_indoor_03,43,31_45.tmx,0,FloorOverlay,78,51,7748,24,ok,"A 실제 원본에서 검정 등받이와 갈색 둥근 팔걸이의 의자, 변화 74픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 74픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,47,31_45.tmx,0,FloorOverlay,198,71,7752,0,zero_BC_ok,
+furniture_seating_indoor_03,57,31_45.tmx,0,FloorOverlay,122,41,7762,0,zero_BC_ok,
+furniture_seating_indoor_03,58,31_45.tmx,0,FloorOverlay,13,1,7763,175,ok,"밝은 크림색 목제 의자, 직선 등받이·네 다리·사각 좌판이 원본 A에 보임. B에서는 식탁 주변 가구와 겹침."
+furniture_seating_indoor_03,60,31_45.tmx,1,FloorOverlay2,89,71,7765,513,ok,"베이지 의자 뒷부분 쿠션과 팔걸이, B-C 변화 1094픽셀"
+furniture_seating_indoor_03,61,31_45.tmx,1,FloorOverlay1,191,152,7766,0,zero_BC_ok,"A에는 베이지색 등받이와 양쪽 팔걸이, 어두운 다리가 있는 1인용 안락의자 뒷면이 보인다. B 침대와 벽 뒤에 가려져 C와의 픽셀 변화가 0이며 D에서도 다른 가구에 가려 위치 대응이 불분명하다."
+furniture_seating_indoor_03,69,31_45.tmx,-1,FloorOverlay4,118,31,7774,3184,ok,
+furniture_seating_indoor_03,70,31_45.tmx,0,FloorOverlay,104,42,7775,0,zero_BC_ok,분홍빛 갈색 둥근 등받이와 좁은 다리
+furniture_seating_indoor_03,71,31_45.tmx,-1,FloorOverlay3,118,33,7776,153,ok,중간에 구멍 난 갈색 등받이와 검은 측면 다리
+furniture_seating_indoor_03,103,31_45.tmx,0,FloorOverlay2,199,74,7808,23,ok,A는 검은색 단추 퀼팅 등받이와 둥근 팔걸이가 ㄱ자로 만나는 좌석 조각이다. B 벽과 다른 가구에 가려 C와의 변화가 16픽셀에 그치고 D에서도 다른 소파 조각과 분리 판정이 어렵다.
+furniture_seating_indoor_03,117,31_45.tmx,0,FloorOverlay2,198,75,7822,0,zero_BC_ok,"A 실제 원본에서 검은 가죽 둥근 팔걸이 소파 의자가 보이지만 대상 배치를 빼도 장면 변화 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,120,31_45.tmx,2,FloorOverlay1,156,74,7825,9,ok,"A 실제 원본에서 갈색 두꺼운 팔걸이와 세로 쿠션이 붙은 가죽 소파 부분이나 제거 변화 232픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 232픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,124,31_45.tmx,0,FloorOverlay,188,35,7829,0,zero_BC_ok,"A 실제 원본에서 흰색 둥근 패브릭 좌석과 짧은 다리들로 보이나 제거 전후 차이 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,125,31_45.tmx,0,FloorOverlay,189,35,7830,0,zero_BC_ok,"A 실제 원본에서 흰색 둥근 쿠션이 놓인 갈색 짧은 소파 의자이나 B-C 차이 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,132,31_45.tmx,2,FloorOverlay1,157,75,7837,0,zero_BC_ok,"A 실제 원본에서 가죽 의자 등받이와 갈색 팔걸이처럼 보이지만 배치를 빼도 차이가 없다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,133,31_45.tmx,2,FloorOverlay1,158,75,7838,48,ok,"A 실제 원본에서 갈색 쿠션이 붙은 가죽 좌석 일부가 있으나 대상 제거 차이 46픽셀이라 배치 역할 불분명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 46픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,134,31_45.tmx,2,FloorOverlay1,133,90,7839,0,zero_BC_ok,A에는 갈색 단추 퀼팅과 둥근 등받이·팔걸이가 만나는 소파 모서리처럼 보이는 조각이 있다. B 벽에 겹쳐진 갈색 2인용 소파가 보이지만 C와 B의 픽셀 차이가 0이다. D에 소파 조합이 있으나 이 배치의 실제 기여가 분리되지 않는다.
+furniture_seating_indoor_03,135,31_45.tmx,2,FloorOverlay1,133,89,7840,0,zero_BC_ok,A에는 갈색 퀼팅 등받이·둥근 팔걸이와 일부 좌판이 보이나 투명한 절단면이 있다. B의 갈색 소파는 C에서도 그대로이고 차이 픽셀이 0이다. D에서도 소파 조각이 겹쳐 정확한 연결 방향을 분리할 수 없다.
+furniture_seating_indoor_03,140,31_45.tmx,0,FloorOverlay,188,34,7845,0,zero_BC_ok,"A 실제 원본에서 천과 목재로 만든 구부러진 팔걸이처럼 보이나 제거 차이 10픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 10픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_indoor_03,141,31_45.tmx,0,FloorOverlay,189,34,7846,0,zero_BC_ok,"A 실제 원본에서 밝은 갈색 쿠션과 구부러진 소파 등받이 같지만 B-C 변화 13픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 13픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_seating_outdoor_01,21,31_45.tmx,0,FloorOverlay,27,0,7950,4243,ok,"짙은 목재 좌판과 짧은 다리, 등받이 없음"
+furniture_shelving_01,9,31_45.tmx,0,FloorOverlay,189,72,7978,7954,ok,
+furniture_shelving_01,31,31_45.tmx,0,FloorOverlay2,104,4,8000,4268,ok,
+furniture_shelving_01,33,31_45.tmx,0,FloorOverlay3,221,158,8002,290,ok,
+furniture_shelving_01,34,31_45.tmx,2,FloorOverlay2,122,85,8003,264,ok,
+furniture_shelving_01,36,31_45.tmx,1,FloorOverlay5,152,48,8005,1700,ok,
+furniture_shelving_01,37,31_45.tmx,0,FloorOverlay3,226,74,8006,550,ok,
+furniture_shelving_01,42,31_45.tmx,0,FloorOverlay,81,69,8011,0,zero_BC_ok,
+furniture_shelving_01,44,31_45.tmx,-1,FloorOverlay6,156,29,8013,14344,ok,
+furniture_shelving_01,49,31_45.tmx,1,FloorOverlay1,10,7,8018,0,zero_BC_ok,
+furniture_storage_01,4,31_45.tmx,1,FloorOverlay1,151,47,8037,69,ok,원본 A에서 연베이지 직육면체의 손잡이 없는 긴 보관장이다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 140픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+furniture_storage_01,5,31_45.tmx,1,FloorOverlay1,151,46,8038,52,ok,"원본 A: 연베이지 높고 좁은 가구 조각, 제거 차이 미미. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 85픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+furniture_storage_01,6,31_45.tmx,1,FloorOverlay1,190,156,8039,119,ok,"A 실제 원본: 흰색 단단한 직립 기둥 형태, 제거 영향이 작다. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 291픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+furniture_storage_01,7,31_45.tmx,1,FloorOverlay1,191,156,8040,140,ok,"A 실제 원본에서 희끗한 높은 직사각 보관함, 제거 B-C 작음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 243픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_storage_01,9,31_45.tmx,0,FloorOverlay4,98,37,8042,8501,ok,
+furniture_storage_01,10,31_45.tmx,2,FloorOverlay1,149,38,8043,25,ok,"A 실제 원본에서 하얀 좁은 1인용 수납함, 제거 변화 25픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 25픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_storage_01,11,31_45.tmx,0,FloorOverlay,11,8,8044,0,zero_BC_ok,흰색 작은 사각 상판과 낮은 몸체
+furniture_storage_01,14,31_45.tmx,0,FloorOverlay,195,77,8047,1,ok,A에 짙은 갈색 낮은 목재 수납장 형태와 평평한 윗판이 보인다. B의 가구와 벽에 가려 C 제거 전후 차이가 단 1픽셀이며 D에도 가구가 겹쳐 독립 기여를 식별하기 어렵다.
+furniture_storage_01,15,31_45.tmx,0,FloorOverlay3,99,15,8048,6839,ok,진갈색 네모 나무 상판과 사각 몸체
+furniture_storage_01,20,31_45.tmx,1,FloorOverlay1,140,40,8053,27,ok,"A 원본에서 갈색의 키 큰 장형 물체와 돌출된 상단 덮개가 보인다. B는 TMX 동일 층 주변 5×5 근사 조립, C는 동일 레이어 대상 배치 한 건 제거. B-C 변화 35픽셀. D는 다른 실제 배치 없어 미확보 안내판."
+furniture_storage_01,21,31_45.tmx,1,FloorOverlay1,140,39,8054,87,ok,"A 실제 원본에서 짙은 원목 사각 긴 세로 수납함. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 220픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_storage_01,32,31_45.tmx,0,Vegetation,15,17,8065,8130,ok,검은 낮은 직육면체에 수평 서랍 두 칸
+furniture_storage_01,39,31_45.tmx,0,FloorOverlay3,232,70,8072,18099,ok,
+furniture_storage_01,40,31_45.tmx,1,FloorOverlay1,116,47,8073,0,zero_BC_ok,A에는 밝은 갈색 상자형 하부장 위에 둥근 상단의 세로판이 솟아 있다. B는 지붕과 벽이 가려진 장면이고 C와 동일해 선택 배치의 기여가 0픽셀이다. D에는 목재 장이 있으나 같은 물체인지 식별되지 않는다.
+furniture_storage_01,45,31_45.tmx,0,FloorOverlay,218,164,8078,0,zero_BC_ok,A에서 상단이 평평한 연갈색 직육면체 목재 가구의 뒷면 또는 옆면처럼 보인다. B는 외벽·상자·문에 겹쳐 있고 C 제거 뒤에도 0픽셀 변화이다. D에서는 다른 가구와 중첩되어 정확한 용도와 배치 기여를 확인하기 어렵다.
+furniture_storage_01,48,31_45.tmx,0,FloorOverlay4,69,4,8081,4962,ok,황갈색 목재 협탁 위 서랍과 아래 열린 선반
+furniture_storage_01,50,31_45.tmx,1,FloorOverlay1,149,17,8083,0,zero_BC_ok,A에 베이지색 목재 직육면체 가구의 측면 또는 뒷면처럼 보이는 판재와 상단 테두리가 있다. B에서는 갈색 옷장 앞쪽에 겹쳐 있고 C와 B의 차이가 0픽셀이다. D에서는 창 아래 다른 가구·벽에 중첩되어 독립적 용도를 판별하기 어렵다.
+furniture_storage_01,51,31_45.tmx,0,FloorOverlay4,76,77,8084,3920,ok,황토색 작은 직육면체 수납 상자
+furniture_storage_01,52,31_45.tmx,1,FloorOverlay3,158,41,8085,3128,ok,"짙은 갈색 상판과 네 다리, 열린 아래 공간"
+furniture_storage_01,54,31_45.tmx,0,FloorOverlay,104,36,8087,0,zero_BC_ok,
+furniture_storage_01,55,31_45.tmx,0,FloorOverlay,232,73,8088,0,zero_BC_ok,진갈색 사각 상판과 짧은 네 다리
+furniture_storage_01,60,31_45.tmx,0,FloorOverlay,248,120,8093,725,ok,A는 손잡이 없이 매끈한 직사각형 베이지 수납장의 측·후면이다. B-C 차이가 322픽셀뿐이고 실제 위치는 외벽에 가려져 역할을 구분하기 어렵다.
+furniture_storage_01,61,31_45.tmx,0,FloorOverlay,248,119,8094,0,zero_BC_ok,"A에는 좁은 밝은 목재 판과 한쪽 상판 돌출, B-C 차이는 0으로 가려진 배치다."
+furniture_storage_01,62,31_45.tmx,1,FloorOverlay1,189,103,8095,0,zero_BC_ok,"A는 밝은 갈색 높은 좁은 판과 평평한 상부, B-C 변화 0이며 실제 연결된 장을 확인하지 못한다."
+furniture_storage_01,63,31_45.tmx,1,FloorOverlay1,190,103,8096,0,zero_BC_ok,A에는 갈색 키 큰 직육면체의 측면만 보이며 B-C 변화 0으로 배치 노출 여부 불명확.
+furniture_storage_02,7,31_45.tmx,0,FloorOverlay2,113,208,8112,28,ok,원본 A에서 푸른색 높은 직사각 캐비닛 앞쪽에 문 패널이 구분된다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 0픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+furniture_storage_02,16,31_45.tmx,-1,FloorOverlay4,151,30,8121,2407,ok,상단 접힌 덮개와 측면 붉은 표시
+furniture_storage_02,19,31_45.tmx,-1,FloorOverlay4,154,37,8124,8754,ok,상단 테이프와 옆면 타원형 구멍
+furniture_storage_02,29,31_45.tmx,0,FloorOverlay,86,75,8134,0,zero_BC_ok,낮은 어두운 회색 상자 뚜껑과 검정 잠금부
+furniture_storage_02,31,31_45.tmx,0,FloorOverlay,204,218,8136,0,zero_BC_ok,A는 손잡이가 달린 낮은 금속 뚜껑 상자지만 B-C 화소 변화 0이고 실제 해당 배치가 드러나지 않는다.
+furniture_storage_02,36,31_45.tmx,1,FloorOverlay1,185,27,8141,0,zero_BC_ok,"A 실제 원본에서 붉은 갈색 세로 높은 수납장, 제거 변화 3픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 3픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_storage_02,37,31_45.tmx,1,FloorOverlay1,185,26,8142,0,zero_BC_ok,"A 원본에서 갈색의 가는 높은 직사각 기둥과 상단 돌출 판이 보인다. B는 TMX 동일 층 주변 5×5 근사 조립, C는 동일 레이어 대상 배치 한 건 제거. B-C 변화 22픽셀. D는 다른 실제 배치 없어 미확보 안내판."
+furniture_storage_02,44,31_45.tmx,1,FloorOverlay1,137,86,8149,0,zero_BC_ok,"A 실제 원본에서 황갈색 세로 직사각 보관 가구, 비교 차이 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_storage_02,45,31_45.tmx,1,FloorOverlay1,137,85,8150,0,zero_BC_ok,"A 실제 원본에서 연황색 작은 직육면 기둥형 수납 가구, 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+furniture_storage_02,46,31_45.tmx,0,FloorOverlay2,97,76,8151,0,zero_BC_ok,A에 누런 크림색 수납장 세로 판과 위쪽 돌출 상판이 보이나 B와 C가 동일하고 외벽 기둥에 가려 실제 기여를 확인하지 못한다.
+furniture_storage_02,47,31_45.tmx,0,FloorOverlay,146,31,8152,0,zero_BC_ok,A에 낡은 크림색 장의 직사각형 상판·측판이 보인다. B-C 변화 0으로 주어진 TMX 위치에서 실제 수납장 기여가 분리되지 않는다.
+furniture_tables_high_01,15,31_45.tmx,-1,FloorOverlay3,157,37,8168,9670,ok,
+furniture_tables_high_02,30,31_45.tmx,0,FloorOverlay,203,222,8247,7469,ok,연베이지 상판과 단일 나무 기둥
+furniture_tables_low_01,2,31_45.tmx,0,FloorOverlay,158,10,8259,0,zero_BC_ok,
+furniture_tables_low_01,8,31_45.tmx,0,FloorOverlay2,187,47,8265,900,ok,
+furniture_tables_low_01,9,31_45.tmx,0,FloorOverlay2,188,47,8266,2209,ok,둥글게 휜 나무 테두리와 밝은 가운데 판
+furniture_tables_low_01,10,31_45.tmx,0,FloorOverlay,107,11,8267,489,ok,
+furniture_tables_low_01,11,31_45.tmx,0,FloorOverlay,107,10,8268,688,ok,
+furniture_tables_low_01,13,31_45.tmx,0,FloorOverlay,181,45,8270,5595,ok,
+furniture_tables_low_01,14,31_45.tmx,0,FloorOverlay2,184,30,8271,4102,ok,나뭇결 있는 넓은 갈색 상판과 짧은 다리
+furniture_tables_low_01,15,31_45.tmx,0,FloorOverlay2,185,30,8272,2182,ok,붉은 갈색 목재 판재 상판과 낮은 받침
+furniture_tables_low_01,16,31_45.tmx,0,FloorOverlay,18,14,8273,0,zero_BC_ok,
+furniture_tables_low_01,19,31_45.tmx,2,FloorOverlay1,194,25,8276,0,zero_BC_ok,"원본 A: 검은 낮은 직육면체, 제거 변화 없음. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 0픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+furniture_tables_low_01,20,31_45.tmx,0,FloorOverlay,71,38,8277,0,zero_BC_ok,A에는 밝은 아이보리색 정사각 상판과 네 개의 수직 다리가 있는 낮은 탁자가 보인다. B 주크박스 옆 배치는 다른 구조물에 가려지고 C는 변화가 0픽셀이다. D의 테라스에는 비슷한 흰 탁자가 보인다.
+furniture_tables_low_01,21,31_45.tmx,-1,FloorOverlay4,154,38,8278,6368,ok,
+industry_01,12,31_45.tmx,3,FloorOverlay,149,40,8525,498,ok,"A 실제 원본에서 어두운 회색 가로 철망 격자판, 제거 변화 43픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 43픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+industry_01,22,31_45.tmx,0,FloorOverlay,232,173,8535,1339,ok,갈색 녹슨 철 원통과 어두운 둥근 뚜껑
+industry_01,31,31_45.tmx,0,FloorOverlay,241,44,8544,0,zero_BC_ok,A에서는 매우 작은 짙은 갈색 세로 직사각형 조각 하나만 보인다. B-C 변화는 70픽셀이며 B 장면의 판벽·지붕 프레임·외부 식생이 겹쳐 기둥·문손잡이·고정물 중 어느 부분인지 식별할 수 없다. 다른 위치 D 역시 벽과 설비에 가려 기능을 확정하기 어렵다. 주변 PNG 1개 누락.
+industry_01,60,31_45.tmx,2,FloorOverlay1,117,34,8573,1862,ok,
+industry_01,61,31_45.tmx,2,FloorOverlay1,123,43,8574,725,ok,"A 실제 원본에서 검은 정방 면과 연회색 경계가 있는 매우 작은 정방 판, 실제 용도 불명확. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 917픽셀. D는 다른 위치 없어 안내판 표시."
+industry_02,21,31_45.tmx,0,FloorOverlay,136,81,8598,0,zero_BC_ok,A: 한쪽 끝이 뚫린 붉은 녹갈색 원통관. B 벽돌 벽 앞 다른 파이프와 겹치며 C와 완전히 동일한 0픽셀이다. D에는 유사한 관이 여러 가닥 있으나 대상은 분리 확인되지 않는다.
+industry_02,70,31_45.tmx,0,FloorOverlay4,217,13,8647,979,ok,"A 실제 원본에서 바닥에 납작하게 놓인 회백색 길쭉한 사다리꼴 조각. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1053픽셀. D는 다른 위치 없어 안내판 표시."
+industry_02,72,31_45.tmx,-1,FloorOverlay,147,30,8649,0,zero_BC_ok,"A: 희끗한 금속의 둥글게 구부러진 대형 탱크 상단, 작은 검정 손잡이와 세로 원통 벽 일부. B 회색 산업실 탱크 뒤편에 가려 C 변화가 4픽셀뿐이다. D에도 탱크 여러 부품이 겹쳐 결합면 확인이 어렵다."
+industry_02,161,31_45.tmx,1,FloorOverlay2,118,214,8738,0,zero_BC_ok,"A 실제 원본에서 회청색 세로 금속 함체와 수평 패널 이음, 하단 통풍구가 보이나 B-C 제거 변화가 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+industry_02,179,31_45.tmx,0,FloorOverlay,64,132,8756,0,zero_BC_ok,"A 실제 원본에서 가늘고 긴 검정 철제 배선/파이프가 세로로 여러 가닥 뻗어 있으나 B-C 차이가 0이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+industry_02,184,31_45.tmx,-1,FloorOverlay,142,62,8761,0,zero_BC_ok,A: 검은 굽은 평행선 두 가닥. B-C 변화 0.
+industry_02,185,31_45.tmx,-1,FloorOverlay3,123,29,8762,447,ok,A: 어두운 케이블 두 줄과 작은 끝 고정부. B-C 447픽셀 변화.
+industry_02,191,31_45.tmx,0,FloorOverlay6,196,178,8768,379,ok,"A 실제 원본에서 검고 얇은 굽은 금속선 두 가닥이 있고 제거 변화는 379픽셀뿐이라 역할 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 379픽셀. D는 다른 위치 없어 안내판 표시."
+industry_02,192,31_45.tmx,0,FloorOverlay4,240,34,8769,445,ok,"A 실제 원본에서 가늘게 두 갈래로 뻗은 어두운 공구형 금속선이나 제거 변화가 446픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 446픽셀. D는 다른 위치 없어 안내판 표시."
+industry_02,194,31_45.tmx,-1,FloorOverlay3,139,48,8771,444,ok,
+industry_02,196,31_45.tmx,-1,FloorOverlay3,150,69,8773,38,ok,A: 검정 평행 짧은 선 두 개만 드러남. B-C 52픽셀 변화.
+industry_02,197,31_45.tmx,0,FloorOverlay3,31,13,8774,196,ok,
+industry_02,198,31_45.tmx,0,FloorOverlay3,254,32,8775,227,ok,
+industry_02,200,31_45.tmx,0,FloorOverlay3,254,33,8777,58,ok,A: 검정 짧은 선 두 토막. B-C 62픽셀 변화.
+industry_02,201,31_45.tmx,0,FloorOverlay2,220,155,8778,0,zero_BC_ok,"A 실제 원본에서 길고 얇은 은색 금속선이 약간 굽었으나 제거 차이 1픽셀이라 부분 역할 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+industry_02,209,31_46.tmx,0,Vegetation,201,126,8786,447,ok,"A 실제 원본에서 가늘고 짧은 검은 금속 포크형 부품이나 제거 차이 447픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 447픽셀. D는 다른 위치 없어 안내판 표시."
+industry_02,252,31_45.tmx,1,FloorOverlay1,114,86,8829,534,ok,"A 실제 원본에서 짙은 회색 짧은 파이프가 두 번 굽어 있고 제거 변화 534픽셀이지만 연결 기능 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 534픽셀. D는 다른 위치 없어 안내판 표시."
+industry_03,52,31_45.tmx,0,FloorOverlay2,98,74,8965,1,ok,
+industry_03,66,31_45.tmx,0,FloorOverlay2,241,39,8979,2451,ok,
+industry_03,77,31_45.tmx,0,FloorOverlay2,14,13,8990,0,zero_BC_ok,
+industry_04,21,31_45.tmx,0,FloorOverlay3,232,176,9062,1731,ok,
+lighting_indoor_01,2,31_45.tmx,-1,FloorOverlay,145,90,9499,0,zero_BC_ok,
+lighting_indoor_01,7,31_45.tmx,0,FloorOverlay,158,35,9504,0,zero_BC_ok,
+lighting_indoor_01,33,31_45.tmx,2,FloorOverlay4,195,22,9530,1042,ok,
+lighting_indoor_02,3,31_45.tmx,0,FloorOverlay2,141,47,9564,0,zero_BC_ok,"A 원본에서 검은색 원형 받침과 굽은 관절대 및 작은 등갓의 책상 램프지만 비교배치는 동일하다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+lighting_indoor_02,12,31_45.tmx,0,FloorOverlay2,151,48,9573,234,ok,"A 원본에서 황동색 받침대와 짧게 굽은 목이 있는 소형 전등이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 207픽셀 변화."
+lighting_indoor_02,14,31_45.tmx,0,FloorOverlay2,155,47,9575,135,ok,"A 실제 원본에서 황금색 금속 작은 탁상등과 받침, 비교 차이 작음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 291픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,17,31_46.tmx,0,FloorOverlay2,146,163,9578,178,ok,"A 실제 원본에서 작은 파란색 바닥 받침과 빨간 전구 머리, 변화153. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 153픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,24,31_45.tmx,1,FloorOverlay2,190,172,9585,232,ok,"A 원본에서 푸른색 둥근 받침에 구부러진 짧은 목과 소형 조명갓이 있다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 233픽셀 변화."
+lighting_indoor_02,28,31_45.tmx,0,FloorOverlay2,115,39,9589,55,ok,"A 원본에서 하얀 둥근 베이스 위 짧은 각도 조절식 팔과 작은 밝은 갓이 붙은 실내 램프이나 C 변화가 적다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 76픽셀 변화."
+lighting_indoor_02,29,31_45.tmx,0,FloorOverlay2,139,38,9590,135,ok,"A 원본에서 희끗한 둥근 바닥과 가느다란 굽은 팔을 가진 작은 탁상 조명이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 127픽셀 변화."
+lighting_indoor_02,35,31_45.tmx,1,FloorOverlay2,245,82,9596,24,ok,"A 원본에서 황색 둥근 받침과 녹색 작은 갓이 달린 조명인데 B와 C 변화는 7픽셀이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 7픽셀 변화."
+lighting_indoor_02,36,31_45.tmx,0,FloorOverlay2,77,50,9597,206,ok,"A 실제 원본에서 작고 파란 갓과 갈색 받침대가 연결된 세워진 조명, 제거 변화 410픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 410픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,47,31_45.tmx,1,FloorOverlay1,186,101,9608,18,ok,"A 실제 원본에서 짧은 회색 막대 조명으로 보이나 B C 조립 차이가 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,54,31_45.tmx,0,FloorOverlay2,14,15,9615,286,ok,"A 실제 원본에서 짧은 회백색 직사각 막대 하나로 보이나 제거 차이 311픽셀이라 용도 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 311픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,55,31_45.tmx,0,FloorOverlay2,14,14,9616,368,ok,"A 실제 원본에서 옅은 회색 짧은 수평 막대이며 제거 차이가 317픽셀이라 조명 여부 검증 불가. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 317픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,62,31_45.tmx,1,FloorOverlay2,193,93,9623,21,ok,"A 실제 원본에서 한쪽에 작은 흰 조명갓과 검은 받침이 분리돼 보이지만 제거 차이 73픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 73픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,63,31_45.tmx,1,FloorOverlay2,186,97,9624,32,ok,"A에서 금속 회색 짧은 조명 장치 원본이 있지만 제거 차이가 작아 정확한 용도 불명확 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 62."
+lighting_indoor_02,72,31_45.tmx,0,FloorOverlay3,155,5,9633,625,ok,흰색 작은 반달형 오목 쉘과 아래 청록 줄
+lighting_indoor_02,74,31_45.tmx,1,FloorOverlay1,200,149,9635,825,ok,"A 실제 원본에서 연회색 작은 타원형 갓 하나만 보여 조명인지 접시인지 역할 구별 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 825픽셀. D는 다른 위치 없어 안내판 표시."
+lighting_indoor_02,75,31_45.tmx,0,FloorOverlay,144,5,9636,0,zero_BC_ok,"A에서 작은 회색 둥근 벽등 혹은 소형 조명판으로 보여도 B와 C의 가시 차이가 없다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+lighting_indoor_02,80,31_45.tmx,0,FloorOverlay3,140,37,9641,103,ok,양 끝이 둥근 얇은 은색 수평 막대
+lighting_indoor_02,83,31_45.tmx,0,FloorOverlay,142,37,9644,0,zero_BC_ok,"A에서 밝은 백색 길쭉한 일자 천장형 조명봉 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 0픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+lighting_outdoor_01,28,31_45.tmx,0,FloorOverlay,183,21,9701,0,zero_BC_ok,"A 원본에서 작은 검은 둥근 전등 헤드처럼 보이는 부품이며 해당 배치에서는 노출되지 않는다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+lighting_outdoor_01,29,31_45.tmx,0,FloorOverlay2,179,69,9702,0,zero_BC_ok,"A 원본에서 작고 둥근 검은 등 몸체와 가는 부착부인데 배치 비교는 2픽셀뿐이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 2픽셀 변화."
+lighting_outdoor_01,31,31_45.tmx,0,FloorOverlay2,185,4,9704,0,zero_BC_ok,"A에서 벽에 걸린 검은 전통 외부 랜턴 형태 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 0픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함. B 장면에 원본 스프라이트 누락 1건이 있어 일부 맥락 불완전."
+lighting_outdoor_01,32,31_45.tmx,0,FloorOverlay4,180,175,9705,582,ok,"A 원본에서 작은 회색 세로 직사각 부품으로 실제 기능을 구별하기 어렵다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 581픽셀 변화."
+lighting_outdoor_01,33,31_45.tmx,0,FloorOverlay4,196,23,9706,535,ok,"A 원본에서 작은 금속 회색 수직 사각판으로 실제 장착 방식이 불명확하다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 535픽셀 변화. B 주변 PNG 1건 누락."
+lighting_outdoor_01,36,31_45.tmx,0,FloorOverlay2,113,35,9709,502,ok,"A 원본에서 작은 검정 사각벽 부품 또는 조명 헤드가 보이나 해당 위치의 구성이 불분명하다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 502픽셀 변화."
+lighting_outdoor_01,38,31_45.tmx,0,FloorOverlay,6,10,9711,0,zero_BC_ok,지지봉 없는 작은 검정 등갓 부분
+lighting_outdoor_01,39,31_45.tmx,0,FloorOverlay2,145,1,9712,0,zero_BC_ok,"A 원본에서 검은 반구형 작은 금속 등갓처럼 보이는 부분이 분리돼 있다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+lighting_outdoor_01,40,31_45.tmx,-1,FloorOverlay6,144,76,9713,565,ok,"A는 회색 원형 렌즈 또는 금속 원판에 검은 테두리. B에서는 돌담 상단 배관 아래 원형 부착물, C 제거 변화 565px. D에서는 동일한 물체 식별이 어려움."
+lighting_outdoor_01,44,31_45.tmx,-1,FloorOverlay,143,62,9717,35,ok,"A에서 검은 타원형 작은 전등헤드만 원본에 있으나 B-C 효과가 미미하다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 89. B 주위 스프라이트 누락 2건."
+lighting_outdoor_01,45,31_45.tmx,0,FloorOverlay2,136,33,9718,0,zero_BC_ok,"A에서 작은 검은 타원형 등 부품으로 원본 배치에서 제거 차이가 없다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+location_business_machinery_01,1,31_45.tmx,0,FloorOverlay2,199,115,9970,10,ok,"원본 A: 푸른색 낮은 길쭉한 금속판으로 배치 기여 미미. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 23픽셀. D는 실제 동일 TMX 근접 사용 좌표 (독립 검증 아님), 전체 사용 2건."
+location_business_machinery_01,5,31_45.tmx,0,FloorOverlay2,199,114,9974,1767,ok,"A 원본에서 파란색 ㄷ자형 낮은 금속 조각에 황갈색 가는 막대가 붙어 있다. B는 TMX 동일 층 주변 5×5 근사 조립, C는 동일 레이어 대상 배치 한 건 제거. B-C 변화 1769픽셀. D는 다른 실제 배치 없어 미확보 안내판."
+location_business_machinery_01,10,31_45.tmx,0,FloorOverlay,203,121,9979,0,zero_BC_ok,"A 실제 원본에서 진파랑 가로 ㄱ자 금속 받침과 황색 덮개, 변화0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_business_machinery_01,28,31_45.tmx,0,FloorOverlay3,94,76,9997,0,zero_BC_ok,A에는 작은 돌출부를 가진 연한 갈색의 평평한 직사각형 패널이 보인다. B-C에서는 픽셀 변화가 없고 D에서도 외벽의 갈색 판과 함께 여러 설비가 보여 해당 타일이 독립적으로 드러나지 않는다.
+location_business_machinery_01,29,31_45.tmx,0,FloorOverlay4,95,76,9998,3627,ok,A에는 무늬가 거의 없는 얇은 갈색 사각 평판이 세워져 있다. B-C에서는 붉은 벽돌 벽의 갈색 판 한 장이 사라지고 D에는 작업장 외벽의 비슷한 갈색 패널이 보인다. 표면 특징만으로 게시판·가림판·벽 보강재 중 용도를 가릴 수 없다.
+location_business_machinery_01,50,31_45.tmx,0,FloorOverlay2,239,34,10019,0,zero_BC_ok,"A 실제 원본에서 검은 길쭉한 난간 또는 작은 선반처럼 보이나 해당 배치를 빼도 변화 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_business_machinery_01,52,31_45.tmx,0,FloorOverlay,14,18,10021,0,zero_BC_ok,A에는 검은 원형 고무 타이어들이 네 개 안팎으로 높게 포개져 있고 가운데 깊은 구멍과 짙은 트레드 무늬가 보인다. B-C는 0픽셀이며 B 주변 PNG 1개가 누락되고 D에서도 실제 타이어 적재 위치가 가려져 있다.
+location_business_office_generic_01,15,31_45.tmx,-1,FloorOverlay3,121,41,10040,3576,ok,
+location_business_office_generic_01,35,31_45.tmx,0,FloorOverlay,155,14,10060,0,zero_BC_ok,
+location_business_office_generic_01,45,31_45.tmx,0,FloorOverlay,215,40,10070,0,zero_BC_ok,
+location_business_office_generic_01,47,31_45.tmx,0,FloorOverlay,139,37,10072,0,zero_BC_ok,
+location_business_office_generic_02,2,31_45.tmx,0,Vegetation,155,9,10259,1402,ok,원본 A에서 낮은 상판 또는 책상 위 아주 작은 물체로 원본만으로 용도 식별이 어렵다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 1402픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+location_business_office_generic_02,18,31_45.tmx,0,FloorOverlay2,215,40,10275,0,zero_BC_ok,"A에는 밝은 회색 숫자 버튼판, 수화기 받침과 둥근 검은 전화선이 달린 버튼식 전화기가 보인다. B와 D 모두 사무실 책상·서류장 사이에 전화기가 있을 수 있지만 B-C 변화가 0이어서 해당 배치의 실제 존재를 구분할 수 없다."
+location_community_church_small_01,49,31_45.tmx,1,FloorOverlay1,193,0,10378,3697,ok,갈색 좌판과 높은 등받이가 이어짐
+location_community_church_small_01,58,31_45.tmx,0,FloorOverlay,119,130,10387,5572,ok,높고 둥근 목재 끝판과 팔걸이
+location_community_church_small_01,59,31_45.tmx,0,FloorOverlay,144,126,10388,0,zero_BC_ok,"A 실제 원본에서 갈색 긴 직사각 판을 수직으로 세운 난간 부품 같으나 제거 차이 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_community_church_small_01,60,31_45.tmx,0,FloorOverlay,144,125,10389,0,zero_BC_ok,"A 실제 원본에서 갈색 난간 수평 판처럼 보이나 B-C 변화가 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_community_church_small_01,61,31_45.tmx,0,FloorOverlay,144,124,10390,0,zero_BC_ok,"A 실제 원본에서 갈색 곡선 끝판이 한쪽으로 올라오는 판이나 B-C 변화 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_community_medical_01,0,31_45.tmx,0,FloorOverlay,149,4,10569,0,zero_BC_ok,연녹색 상판과 베이지 두 문짝 하부장
+location_community_medical_01,1,31_45.tmx,0,FloorOverlay,149,3,10570,0,zero_BC_ok,녹색 상판과 베이지 서랍장 옆면
+location_community_medical_01,4,31_45.tmx,0,FloorOverlay,203,213,10573,0,zero_BC_ok,원본 A에서 낮은 연회색 수납함에 진녹색 윗판이 덮인다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 0픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+location_community_medical_01,5,31_45.tmx,0,FloorOverlay,203,212,10574,0,zero_BC_ok,"원본 A: 초록 상부 덮개와 회갈색 정면 슬랫이 있는 낮은 장치, 제거 변화 없음. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 0픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+location_community_medical_01,6,31_45.tmx,0,FloorOverlay,218,31,10575,0,zero_BC_ok,"A 실제 원본: 초록 천막 같은 낮은 직육면체에 짙은 가로줄이 있으나 배치 차이 없다. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 0픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+location_community_medical_01,7,31_45.tmx,0,FloorOverlay,219,31,10576,0,zero_BC_ok,"A 실제 원본에서 연녹색 얕은 사각 병원용 서랍장 윗면을 덮음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,32,31_45.tmx,0,FloorOverlay,141,6,10601,11,ok,"A 실제 원본에서 회색 흑색 둥근 장치가 작은 사각 받침에 있음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 12픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,48,31_45.tmx,0,FloorOverlay,140,5,10617,1695,ok,작은 회색 상판과 T자 은색 받침
+location_community_medical_01,49,31_45.tmx,0,FloorOverlay,199,118,10618,3381,ok,금속 사각 상판과 두 갈래 T형 지주
+location_community_medical_01,54,31_45.tmx,0,FloorOverlay3,150,3,10623,364,ok,"A 실제 원본에서 회백색의 액자 같은 납작한 사각 프레임이나 B-C 변화 497픽셀로 역할이 애매하다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 497픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,69,31_45.tmx,0,FloorOverlay,116,37,10638,29,ok,"A 실제 원본에서 작은 회색 검사 장비 머리와 받침이 보이나 제거 차이 72픽셀로 판별 불가. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 72픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,96,31_45.tmx,0,FloorOverlay,216,40,10665,0,zero_BC_ok,A: 검정 직사각 상판과 황갈색 아래 받침. B-C 변화 0.
+location_community_medical_01,97,31_45.tmx,0,FloorOverlay,216,39,10666,61,ok,A: 검은 상판에 가느다란 갈색 측면. B-C 변화 205픽셀.
+location_community_medical_01,99,31_45.tmx,0,FloorOverlay2,94,76,10668,0,zero_BC_ok,"A 실제 원본에서 검은 윗판과 황갈색 측면이 연결된 가구 부품이나 제거 차이 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,100,31_45.tmx,0,FloorOverlay2,95,76,10669,0,zero_BC_ok,"A 실제 원본에서 검은 정방형 윗판과 황토색 수직 옆면이 결합한 작은 가구 부품으로 제거 전후 변화가 0이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,101,31_45.tmx,0,FloorOverlay2,96,76,10670,0,zero_BC_ok,"A 실제 원본에서 황토색 사각 수납함에 검은 상판이 있지만 배치를 제거해도 변화 0픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,104,31_45.tmx,0,FloorOverlay3,214,35,10673,449,ok,A: 검은 사각 상판과 갈색 얇은 지지판. B-C 변화 628픽셀.
+location_community_medical_01,118,31_45.tmx,0,FloorOverlay2,216,29,10687,233,ok,"A 실제 원본에서 아주 작은 의료 도구의 회색 수평 봉과 받침이 보이나 B-C 변화 295픽셀로 용도 모호. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 295픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_medical_01,121,31_45.tmx,0,FloorOverlay,148,5,10690,0,zero_BC_ok,"A 실제 원본에서 작은 검정 세로 막대가 서 있는 물체처럼 보이나 B-C 변화가 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_community_park_01,10,31_46.tmx,0,FloorOverlay,123,161,10827,702,ok,붉은 긴 가로 철봉만 남은 구조물
+location_community_park_01,12,31_46.tmx,0,FloorOverlay3,123,162,10829,1994,ok,붉은 가로보와 푸른 좌석의 방향 변형
+location_hospitality_sunstarmotel_01,7,31_45.tmx,0,FloorOverlay,53,234,12016,210,ok,
+location_hospitality_sunstarmotel_02,19,31_45.tmx,1,FloorOverlay1,78,49,12100,59,ok,원본 A에서 백색에 가까운 세로 직사각 문틀만 남고 가운데 빈 개구부다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 55픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+location_hospitality_sunstarmotel_02,22,31_45.tmx,0,FloorOverlay4,143,25,12103,4191,ok,
+location_hospitality_sunstarmotel_02,23,31_45.tmx,0,FloorOverlay2,206,72,12104,0,zero_BC_ok,A: 밝은 사각 상판과 회색 그림자. B-C 변화 0.
+location_military_tent_01,100,31_45.tmx,0,FloorOverlay,48,218,12341,401,ok,
+location_military_tent_01,101,31_45.tmx,0,FloorOverlay3,49,218,12342,977,ok,
+location_military_tent_01,102,31_45.tmx,0,FloorOverlay3,54,218,12343,1429,ok,
+location_restaurant_bar_01,10,31_45.tmx,0,FloorOverlay2,77,44,12395,0,zero_BC_ok,"A 실제 원본에서 짙은 갈색 장방형 상자에 검은 세로판, 제거 변화 없음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_restaurant_bar_01,11,31_45.tmx,0,FloorOverlay,77,43,12396,315,ok,"A 원본에서 검은 넓은 장방형 세로 패널과 하단 짙은 갈색 목재 가로 몰딩이 보인다. B는 TMX 동일 층 주변 5×5 근사 조립, C는 동일 레이어 대상 배치 한 건 제거. B-C 변화 537픽셀. D는 다른 실제 근접 배치이나 독립 현장 아님."
+location_restaurant_bar_01,12,31_45.tmx,0,FloorOverlay2,78,44,12397,0,zero_BC_ok,"A 실제 원본에서 검정 짧고 낮은 등받이와 갈색 바닥판, 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_restaurant_bar_01,32,31_45.tmx,2,FloorOverlay4,154,41,12417,525,ok,"A 실제 원본에서 검은 점 또는 갈고리 몇 개가 짧은 막대에 붙은 형태로 무엇을 걸거나 지지하는지 불확실하다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 526픽셀. D는 다른 위치 없어 안내판 표시."
+location_restaurant_bar_01,33,31_45.tmx,0,FloorOverlay2,78,40,12418,317,ok,짧은 가로대에 검은 손잡이·기둥 여러 개
+location_restaurant_seahorse_01,47,31_45.tmx,0,FloorOverlay,156,23,12960,69,ok,"A 원본에서 검갈색 낮은 상자에 황갈색 평평한 상판이 보인다. B는 TMX 동일 층 주변 5×5 근사 조립, C는 동일 레이어 대상 배치 한 건 제거. B-C 변화 196픽셀. D는 다른 실제 근접 배치이나 독립 현장 아님."
+location_services_beauty_01,0,31_45.tmx,0,FloorOverlay,193,101,13185,0,zero_BC_ok,원본 A에서 검은 의자 좌판과 등받이가 별도 팔걸이·둥근 받침 위에 있다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 0픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+location_services_beauty_01,10,31_45.tmx,0,FloorOverlay,149,31,13195,2,ok,A는 은색 4발 받침의 긴 지지대 위에 검은 원통과 파란 원형 후드가 달린 이동식 미용 설비다. B 계단과 벽 뒤에 가려 C와 4픽셀만 달라지고 D에서도 수납장 뒤에 대부분 가려 실제 배치 역할이 불분명하다.
+location_sewer_01,11,31_45.tmx,0,FloorOverlay2,195,118,13212,0,zero_BC_ok,원본 A에서 매우 얇고 긴 검정 세로 막대만이 독립 이미지에 보인다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 0픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+location_shop_accessories_01,0,31_45.tmx,0,FloorOverlay2,184,157,13257,1912,ok,베이지색 계산 단말의 녹색 키패드
+location_shop_accessories_01,1,31_45.tmx,0,FloorOverlay2,184,25,13258,2708,ok,회색 키패드와 돌출 계산기 화면
+location_shop_accessories_01,10,31_45.tmx,0,FloorOverlay2,116,81,13267,289,ok,"원본 A: 흰색 소형 전자 박스에 검정 테두리와 작은 돌출부. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 405픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+location_shop_accessories_01,20,31_45.tmx,0,FloorOverlay2,193,148,13277,218,ok,"A 실제 원본에서 작은 검은 타자판처럼 돌출 버튼 있는 기기. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 496픽셀. D는 다른 위치 없어 안내판 표시."
+location_shop_accessories_01,28,31_45.tmx,1,FloorOverlay1,204,220,13285,0,zero_BC_ok,"A 원본에서 짙은 회색 세로형 박스에 좁은 세로 홈 여러 개가 보인다. B는 TMX 동일 층 주변 5×5 근사 조립, C는 동일 레이어 대상 배치 한 건 제거. B-C 변화 0픽셀. D는 다른 실제 배치 없어 미확보 안내판."
+location_shop_accessories_01,29,31_45.tmx,0,FloorOverlay,71,132,13286,0,zero_BC_ok,검은 긴 상자의 세로 통풍구와 상품칸
+location_shop_accessories_01,30,31_45.tmx,1,FloorOverlay1,204,221,13287,0,zero_BC_ok,"A 실제 원본에서 진회색 높은 직육면 상자의 상하 패널, 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+location_shop_accessories_01,31,31_45.tmx,0,FloorOverlay,72,132,13288,0,zero_BC_ok,검은 긴 직육면체의 무늬 없는 측판
+location_shop_bargNclothes_01,24,31_46.tmx,0,FloorOverlay,136,119,13417,4983,ok,
+location_shop_bargNclothes_01,27,31_46.tmx,0,FloorOverlay2,125,120,13420,255,ok,
+location_shop_generic_01,16,31_45.tmx,0,FloorOverlay,156,4,13649,10219,ok,
+location_shop_generic_01,48,31_45.tmx,0,FloorOverlay6,180,125,13681,1948,ok,
+location_shop_generic_01,50,31_45.tmx,1,FloorOverlay1,194,25,13683,0,zero_BC_ok,
+location_shop_generic_01,51,31_45.tmx,1,FloorOverlay1,195,25,13684,53,ok,
+location_shop_generic_01,76,31_45.tmx,0,FloorOverlay,124,71,13709,2840,ok,
+location_shop_generic_01,78,31_45.tmx,0,FloorOverlay,116,44,13711,0,zero_BC_ok,
+location_shop_generic_01,79,31_45.tmx,0,FloorOverlay,116,43,13712,65,ok,
+location_shop_greenes_01,33,31_45.tmx,0,Floor,138,41,13794,1120,ok,
+location_shop_zippee_01,3,31_45.tmx,0,FloorOverlay3,144,36,14172,3348,ok,
+location_shop_zippee_01,60,31_45.tmx,0,FloorOverlay,157,40,14229,0,zero_BC_ok,
+location_trailer_01,3,31_45.tmx,0,FloorOverlay2,59,31,14236,0,zero_BC_ok,
+location_trailer_01,17,31_45.tmx,0,FloorOverlay,124,124,14250,0,zero_BC_ok,
+location_trailer_01,18,31_45.tmx,0,FloorOverlay,119,125,14251,1706,ok,
+location_trailer_01,19,31_45.tmx,1,FloorOverlay1,180,113,14252,2298,ok,
+location_trailer_01,20,31_45.tmx,0,FloorOverlay,124,125,14253,0,zero_BC_ok,
+location_trailer_01,21,31_45.tmx,0,FloorOverlay,124,123,14254,0,zero_BC_ok,
+location_trailer_01,25,31_45.tmx,0,FloorOverlay,9,12,14258,6286,ok,
+location_trailer_01,27,31_45.tmx,0,FloorOverlay,7,13,14260,0,zero_BC_ok,
+location_trailer_01,59,31_46.tmx,1,FloorOverlay,201,135,14292,184,ok,
+location_trailer_02,11,31_45.tmx,0,FloorOverlay,18,13,14308,0,zero_BC_ok,원본 A에서 갈색 나무 몸체와 회백색 문이 있는 작은 직사각 수납장으로 B-C 차이 없다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 0픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+location_trailer_02,19,31_45.tmx,0,FloorOverlay4,11,5,14316,4174,ok,베이지 상판 아래 나무색 두 문짝
+location_trailer_02,20,31_45.tmx,1,FloorOverlay1,140,31,14317,0,zero_BC_ok,"A 실제 원본에서 작은 황갈색 가구함이 바닥에 있지만 제거 변화 없음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_trailer_02,21,31_45.tmx,0,FloorOverlay,13,4,14318,0,zero_BC_ok,"A 실제 원본에서 연갈색 낮은 사각 보관함에 손잡이. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 17픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_trailer_02,40,31_45.tmx,1,FloorOverlay,76,225,14337,148,ok,"A 실제 원본에서 매우 작은 청회색 원통 또는 막대가 바닥에 수직으로 솟음; B-C 변화 184픽셀로 역할 식별 어려움. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 184픽셀. D는 다른 실제 위치 없음, D 안내판 표시."
+location_trailer_02,59,31_45.tmx,1,FloorOverlay1,219,209,14356,802,ok,A는 작고 어두운 회색의 낮은 마름모꼴 음영·테두리 조각이다. B 옥상 환기구 주변의 짙은 회색 바닥·지붕 부분이 C에서 미세하게 달라진다. D에서도 지붕과 겹치며 단독 역할을 구분하기 어렵다.
+location_trailer_02,60,31_45.tmx,1,FloorOverlay1,219,208,14357,1522,ok,A에는 검은색 길쭉한 쐐기형 띠와 한쪽 수직면이 보인다. B 지붕 난간과 환기구 뒤쪽 검은 음영이 C에서 일부 빠진다. D에는 해당 조각이 다른 지붕 타일에 가려 정확한 위치·기능이 불분명하다.
+location_trailer_02,63,31_45.tmx,0,FloorOverlay2,13,5,14360,842,ok,"A 실제 원본에서 무늬와 손잡이가 없는 황갈색 직육면체 상자 모양, 다른 설비와 겹쳐 정확한 역할 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1026픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+location_trailer_02,64,31_45.tmx,1,FloorOverlay1,143,31,14361,0,zero_BC_ok,"A 실제 원본에서 황갈색 상판과 갈색 네 면을 가진 단순 직육면체이며 B-C 차이가 없다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+overlay_blood_floor_01,36,31_45.tmx,0,FloorOverlay,218,33,14445,0,zero_BC_ok,
+overlay_blood_floor_01,44,31_45.tmx,0,FloorOverlay,215,35,14453,0,zero_BC_ok,
+overlay_grime_wall_01,4,31_45.tmx,-1,FloorOverlay3,139,58,14805,3056,ok,위에서 아래로 길게 흘러내린 검댕
+overlay_grime_wall_01,10,31_45.tmx,-1,FloorOverlay4,143,47,14811,58,ok,"A 원본에서 희미한 회색 세로 오염 띠가 두어 곳에 번져 있고 제거 차가 작다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 114픽셀 변화."
+overlay_grime_wall_01,26,31_45.tmx,-1,FloorOverlay3,149,32,14827,1172,ok,희미한 회색 세로 물흘림 자국
+overlay_grime_wall_01,27,31_45.tmx,-1,FloorOverlay2,155,37,14828,1768,ok,얇고 옅은 세로 먼지 자국
+overlay_grime_wall_01,30,31_45.tmx,-1,FloorOverlay3,143,47,14831,365,ok,"원본 A: 흰 벽면 아래로 흐르는 회색 먼지 그림자. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 420픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+overlay_grime_wall_01,41,31_45.tmx,0,FloorOverlay3,137,49,14842,3902,ok,반투명 회색 먼지가 삼각 벽에 번짐
+papernotices_01,5,31_45.tmx,0,Vegetation,124,210,14886,107,ok,"A 실제 원본에서 벽부착 인쇄 공고문 여러 장, B-C 차이 없음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+recreational_01,18,31_45.tmx,2,FloorOverlay3,147,31,15035,223,ok,원본 A에서 검정 높은 직육면체 본체 앞면에 알록달록한 캐릭터 그림이 붙는다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 311픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+recreational_01,22,31_45.tmx,2,FloorOverlay2,147,29,15039,27,ok,"A 실제 원본: 노랑 검정 큰 직립 상자에 화면과 앞면 게임 그림. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 72픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+recreational_01,44,31_45.tmx,0,FloorOverlay,188,143,15061,628,ok,"A 실제 원본에서 검은 얇은 정사각 판과 그 아래 회색 그림자만 보이며 맥락상 뚜껑인지 불명확. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1153픽셀. D는 다른 위치 없어 안내판 표시."
+recreational_01,84,31_45.tmx,0,FloorOverlay2,74,36,15101,0,zero_BC_ok,"A 실제 원본에서 녹색 원형 물체 두 개와 긴 막대가 서로 가까이 놓였으나 제거 차이는 0픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+recreational_01,85,31_45.tmx,0,FloorOverlay2,75,36,15102,21,ok,"A 실제 원본에서 초록색 원판 같은 물체와 길게 선 막대가 붙어 보이지만 제거 변화가 3픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 3픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+recreational_sports_01,28,31_45.tmx,0,FloorOverlay4,103,1,15157,3218,ok,검은 평행줄 발판과 회색 직사각 테두리
+recreational_sports_01,45,31_45.tmx,1,FloorOverlay1,244,113,15174,0,zero_BC_ok,어두운 쿠션 형태와 낮은 은색 받침
+recreational_sports_01,47,31_45.tmx,2,FloorOverlay1,198,223,15176,0,zero_BC_ok,"A 실제 원본에서 회색 낮은 운동기구가 있지만 배치 제거 차이가 없다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+recreational_sports_01,72,31_45.tmx,1,FloorOverlay4,117,40,15201,1598,ok,
+roofs_04,4,31_45.tmx,1,FloorOverlay1,196,88,15693,16,ok,"원본 A: 적갈색 세로 홈의 경사판. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 18픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+roofs_04,48,31_45.tmx,1,FloorOverlay1,181,108,15737,2704,ok,
+roofs_04,54,31_45.tmx,2,FloorOverlay,180,69,15743,2289,ok,
+roofs_30_01,0,31_45.tmx,1,FloorOverlay1,209,227,15977,5420,ok,
+roofs_30_01,13,31_45.tmx,1,FloorOverlay1,221,207,15990,5307,ok,
+roofs_30_01,16,31_45.tmx,3,FloorOverlay1,187,223,15993,0,zero_BC_ok,"A 실제 원본에서 검정 작은 기와 판 하나, 비교 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+roofs_30_01,66,31_45.tmx,3,FloorOverlay,211,4,16043,59,ok,"A 실제 원본에서 검정 사각 기와가 경사진 작은 삼각형 판에 반복되나 제거 차이 100픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 100픽셀. D는 다른 위치 없어 안내판 표시."
+roofs_30_01,93,31_45.tmx,2,FloorOverlay1,186,223,16070,0,zero_BC_ok,"A 실제 원본에서 작은 어두운 삼각 기와판이 보이나 해당 배치 제거 차이가 0픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+roofs_30_01,97,31_45.tmx,3,FloorOverlay1,186,225,16074,0,zero_BC_ok,"A 원본에서 회색 기와 격자와 굵은 둥근 볼륨이 있는 작고 불규칙한 지붕판이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 13픽셀 변화."
+roofs_30_01,108,31_45.tmx,3,FloorOverlay1,188,223,16085,14,ok,"A 실제 원본에서 검은 색 기와 삼각형 판이 보이나 현재 타일을 제거해도 변화가 0픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+roofs_30_02,29,31_45.tmx,2,FloorOverlay1,240,111,16126,219,ok,"A 원본에서 어두운 갈색 사각 기와가 한 면에 반복된다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 423픽셀 변화."
+roofs_30_03,11,31_45.tmx,1,FloorOverlay,72,119,16228,5386,ok,
+roofs_30_03,18,31_45.tmx,1,FloorOverlay,67,119,16235,1603,ok,
+roofs_30_03,25,31_45.tmx,2,FloorOverlay,225,36,16242,1490,ok,"A 원본에서 회색 세로 평행선이 듬성듬성 나열된 작은 골판 조각이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 2048픽셀 변화."
+roofs_30_03,29,31_45.tmx,2,FloorOverlay,225,32,16246,1578,ok,"A 원본에서 회색 줄무늬가 가늘게 평행으로 뻗은 흰색 지붕 판재다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 2048픽셀 변화."
+roofs_30_06,1,31_45.tmx,1,FloorOverlay1,241,83,16570,5735,ok,
+roofs_30_06,16,31_45.tmx,1,FloorOverlay1,216,156,16585,1754,ok,
+roofs_30_07,12,31_45.tmx,1,FloorOverlay,54,227,16701,5371,ok,
+roofs_30_07,17,31_45.tmx,1,FloorOverlay,51,227,16706,1680,ok,
+roofs_accents_01,16,31_45.tmx,1,FloorOverlay,109,16,17169,9,ok,"A 원본에서 매우 작은 검은 갈고리형 세로 부속으로 주변 배치에 17픽셀 차이뿐이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 17픽셀 변화."
+roofs_accents_01,19,31_45.tmx,1,FloorOverlay,214,0,17172,108,ok,검정과 흰색 직각 미세 픽셀
+roofs_accents_01,20,31_45.tmx,0,FloorOverlay4,105,44,17173,180,ok,"A에서 회백색 짧은 처마 코너와 어두운 윗면 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 326픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+roofs_accents_01,43,31_45.tmx,1,FloorOverlay1,59,35,17196,333,ok,"A에서 짧은 검은 세로 환기구 같은 원본 조각이나 배치 차이가 매우 적다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 212."
+roofs_accents_01,46,31_45.tmx,1,FloorOverlay2,207,229,17199,366,ok,"A 실제 원본에서 아주 작은 회색 지붕 마감 조각, 변화 301. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 301픽셀. D는 다른 위치 없어 안내판 표시."
+roofs_accents_01,52,31_45.tmx,1,FloorOverlay1,251,81,17205,77,ok,"A 실제 원본에서 희끄무레한 작은 지붕 장식 부속, delta 67. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 67픽셀. D는 다른 위치 없어 안내판 표시."
+roofs_accents_01,53,31_45.tmx,1,FloorOverlay2,205,113,17206,10,ok,"A 실제 원본에서 회갈색 짧은 원통 금속 몰딩, 배치 변화 107. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 107픽셀. D는 다른 위치 없어 안내판 표시."
+roofs_accents_01,54,31_45.tmx,1,FloorOverlay1,249,161,17207,142,ok,"A에서 아주 작은 검은 회색 삼각 지붕 파편으로 B-C 차이가 적다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 134."
+roofs_accents_01,55,31_45.tmx,1,FloorOverlay1,247,161,17208,73,ok,"A에서 지붕의 매우 작은 삼각형 회색 끝판으로 제거 영향이 작다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 109."
+roofs_accents_30_01,14,31_45.tmx,2,FloorOverlay2,160,9,17223,420,ok,"A 원본에서 회백색의 매우 작은 경사 삼각형으로 제거 효과가 좁아 주변 지붕에서 역할 불명확하다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 420픽셀 변화."
+roofs_accents_30_01,24,31_45.tmx,1,FloorOverlay1,104,16,17233,124,ok,"A 실제 원본: 검정 윗면과 회백색 얇은 띠가 이어진 사선 부품, 픽셀 변화 부족. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 288픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+roofs_shallow_01,102,31_45.tmx,1,FloorOverlay1,183,116,17463,4990,ok,
+rooftop_furniture,2,31_45.tmx,0,FloorOverlay3,230,247,17507,140,ok,"A에서 회색 줄무늬 사각 환기 그릴 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 213픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함. B 장면에 원본 스프라이트 누락 1건이 있어 일부 맥락 불완전."
+rooftop_furniture,8,31_45.tmx,3,FloorOverlay3,151,33,17513,30,ok,"A 실제 원본: 작은 검정 원형 격자판에 십자살이 있으나 B-C 효과 미소. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 56픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+rooftop_furniture,9,31_45.tmx,1,FloorOverlay2,211,211,17514,49,ok,"A 실제 원본에서 검정 동그란 금속 고리 안에 십자살, 제거 변화 극소. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 74픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+rooftop_furniture,20,31_45.tmx,0,FloorOverlay,91,90,17525,0,zero_BC_ok,"A 원본에서 검회색 가로 환기 슬랫이 있는 작은 네모 그릴과 아래 그림자가 보인다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화. B 주변 PNG 1건 누락."
+rugs_animals,1,31_45.tmx,0,FloorOverlay,248,83,17570,0,zero_BC_ok,"A에서 회갈색 털무늬가 삼각형으로 잘린 바닥 깔개 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 5픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+rugs_animals,33,31_45.tmx,0,FloorOverlay,244,159,17602,2,ok,"A에서 갈색과 흰색 얼룩이 섞인 동물무늬 깔개 면 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 6픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+rugs_animals,34,31_45.tmx,0,FloorOverlay,244,160,17603,0,zero_BC_ok,"A 원본에서 연갈색 털·가죽 같은 울퉁불퉁한 작은 삼각 깔개 조각이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+rugs_animals,35,31_45.tmx,0,FloorOverlay,245,159,17604,192,ok,"A 원본에서 갈색과 흰색 얼룩이 섞인 부정형 낮은 가죽 깔개다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 314픽셀 변화. B 주변 PNG 1건 누락."
+rugs_animals,37,31_45.tmx,0,FloorOverlay,243,160,17606,0,zero_BC_ok,"A 원본에서 평평한 베이지 털 가죽 조각과 점 모양 얼룩이 보이지만 비교 장면은 동일하다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+rugs_animals,38,31_45.tmx,0,FloorOverlay,243,159,17607,0,zero_BC_ok,"A 원본에서 불규칙 갈색 얼룩을 가진 평평하고 얇은 베이지 가죽 조각이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 42픽셀 변화."
+signs_miscbrands_01,86,31_45.tmx,1,FloorOverlay,161,20,17847,0,zero_BC_ok,"A 실제 원본에서 갈색과 노란색 글자 일부가 인쇄된 작은 광고 표지 판이나 제거 차 1픽셀로 결합관계가 안 보인다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1픽셀. D는 다른 위치 없어 안내판 표시."
+signs_miscbrands_01,87,31_45.tmx,1,FloorOverlay,161,19,17848,0,zero_BC_ok,"A 실제 원본에서 황토색 매우 작은 간판 조각이고 대상 제거 차이가 1픽셀이라 역할 판정 어려움. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1픽셀. D는 다른 위치 없어 안내판 표시."
+signs_miscbrands_01,96,31_45.tmx,1,FloorOverlay,161,23,17857,0,zero_BC_ok,"A 실제 원본에서 황토색 작은 표지판에 일부 글자가 있지만 B-C 변화가 1픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1픽셀. D는 다른 위치 없어 안내판 표시."
+signs_miscbrands_01,97,31_45.tmx,1,FloorOverlay,161,22,17858,0,zero_BC_ok,"A 실제 원본에서 노란 종이 같은 작은 글자 판 일부가 보이지만 제거 변화 1픽셀로 역할 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1픽셀. D는 다른 위치 없어 안내판 표시."
+signs_miscbrands_01,98,31_45.tmx,1,FloorOverlay,161,21,17859,0,zero_BC_ok,"A 실제 원본에서 작고 누런 표지판 조각의 일부 글자가 보이나 제거 전후 변화가 1픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1픽셀. D는 다른 위치 없어 안내판 표시."
+signs_one-off_09,30,31_45.tmx,1,FloorOverlay,115,50,21103,570,ok,
+signs_one-off_09,160,31_45.tmx,0,FloorOverlay4,180,178,21233,1956,ok,"A 실제 원본에서 회색과 흰색의 매우 작은 곡선 판 조각, 원래 글자나 표지의 일부인지 불명확. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 2092픽셀. D는 다른 위치 없어 안내판 표시."
+signs_one-off_09,181,31_45.tmx,1,FloorOverlay1,189,178,21254,1936,ok,"A 실제 원본에서 희미한 연녹색 삼각 그래픽과 회백색 좁은 획만 있고 원래 글씨 구조는 불명확하다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 2010픽셀. D는 다른 위치 없어 안내판 표시."
+signs_one-off_09,183,31_45.tmx,1,FloorOverlay1,191,178,21256,1061,ok,"A 실제 원본에서 얇은 회백색 찢긴 조각과 그림자만 남아 부착된 부위의 원래 형태가 불분명하다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1061픽셀. D는 다른 위치 없어 안내판 표시."
+signs_one-off_09,184,31_45.tmx,1,FloorOverlay1,192,178,21257,2892,ok,"A 실제 원본에서 짙은 회색 세로 사각판과 중간의 작은 흰 획으로 원래 글자·설비 용도 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 2892픽셀. D는 다른 위치 없어 안내판 표시."
+signs_one-off_09,190,31_45.tmx,1,FloorOverlay1,83,36,21263,984,ok,"A 실제 원본에서 연녹색과 회색 아주 작은 곡선 획 여러 개로 글자의 어느 부분인지 불명확하다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 944픽셀. D는 다른 위치 없어 안내판 표시."
+street_curbs_01,1,31_45.tmx,0,FloorOverlay,197,11,21514,100,ok,"A 원본에서 회색 직각 코너 형태의 작은 얇은 석재 조각이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 200픽셀 변화. B 주변 PNG 1건 누락."
+street_curbs_01,3,31_45.tmx,0,FloorOverlay,96,8,21516,0,zero_BC_ok,"A 원본에서 매우 작은 회백색 바닥 경계 석재 조각으로 제거 장면에서 차이가 없다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+street_curbs_01,5,31_45.tmx,0,FloorOverlay,183,15,21518,0,zero_BC_ok,"A 원본에서 회백색 길고 가느다란 단독 보도 연석 조각이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+street_curbs_01,11,31_45.tmx,0,FloorOverlay,179,1,21524,268,ok,
+street_curbs_01,17,31_45.tmx,0,FloorOverlay,215,7,21530,163,ok,"A 원본에서 밝은 회색 얇은 직선 콘크리트 경계석이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 281픽셀 변화."
+street_curbs_01,37,31_45.tmx,0,FloorOverlay,93,4,21550,414,ok,"A에서 회백색의 길고 얇은 직선 콘크리트 블록이 땅에 낮게 놓인다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 448."
+street_curbs_01,39,31_45.tmx,0,FloorOverlay,161,63,21552,400,ok,"A에서 좁은 밝은 회백색 콘크리트 보도 가장자리 돌이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 430."
+street_curbs_01,40,31_45.tmx,0,FloorOverlay,93,2,21553,480,ok,길고 낮은 밝은 회색 일자 석재
+street_curbs_01,42,31_45.tmx,0,FloorOverlay,164,47,21555,480,ok,길고 얇은 회색 바닥 띠
+street_curbs_01,45,31_45.tmx,0,FloorOverlay,163,47,21558,798,ok,회색 석재 두 면 직각 코너
+street_curbs_01,59,31_45.tmx,0,FloorOverlay,99,53,21572,32,ok,"A에서 회백색 아주 작은 경계석 조각이며 B-C 결손이 127픽셀이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 127."
+street_curbs_01,60,31_45.tmx,0,FloorOverlay,218,0,21573,7,ok,"A에서 작고 하얀 콘크리트 보도 조각으로 B-C 변화가 미미하다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 45."
+street_curbs_01,61,31_45.tmx,0,FloorOverlay,179,0,21574,10,ok,"A에서 회백색의 매우 얇은 삼각형 조각만 보여 B-C 75픽셀로 배치 근거 부족 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 75."
+street_curbs_01,62,31_45.tmx,0,FloorOverlay,175,43,21575,47,ok,"A는 매우 작은 연회색·베이지색 삼각 쐐기. B는 아스팔트와 보행로 경계, C 차이는 154픽셀이고 주변 PNG 누락 1건. D는 다른 도로 모서리."
+street_curbs_01_blend_gravel,15,31_45.tmx,0,FloorOverlay,165,106,21768,1964,ok,
+street_curbs_01_blend_gravel,25,31_45.tmx,0,FloorOverlay,176,54,21778,277,ok,
+street_curbs_01_blend_gravel,40,31_45.tmx,0,FloorOverlay,165,103,21793,129,ok,
+street_curbs_01_blend_gravel,43,31_45.tmx,0,FloorOverlay,99,176,21796,0,zero_BC_ok,
+street_curbs_01_blend_gravel,61,31_45.tmx,0,FloorOverlay,175,123,21814,0,zero_BC_ok,
+street_curbs_01_blend_gravel,83,31_45.tmx,0,FloorOverlay,162,117,21836,1000,ok,
+street_curbs_01_blend_medium_grass,61,31_45.tmx,0,FloorOverlay,213,63,21990,0,zero_BC_ok,
+street_curbs_01_diag,4,31_45.tmx,0,FloorOverlay3,174,51,22197,431,ok,
+street_curbs_01_diag,5,31_45.tmx,0,FloorOverlay,173,51,22198,4,ok,
+street_curbs_01_diag,20,31_45.tmx,0,FloorOverlay3,165,67,22213,927,ok,
+street_curbs_01_diag,38,31_45.tmx,0,FloorOverlay3,174,52,22231,481,ok,
+street_curbs_01_diag,41,31_45.tmx,0,FloorOverlay2,176,54,22234,471,ok,
+street_curbs_01_diag,42,31_45.tmx,0,FloorOverlay3,176,53,22235,192,ok,
+street_curbs_01_diag,44,31_45.tmx,0,FloorOverlay3,162,63,22237,397,ok,
+street_curbs_01_diag,45,31_45.tmx,0,FloorOverlay,162,62,22238,16,ok,
+street_curbs_01_diag,46,31_45.tmx,0,FloorOverlay2,163,63,22239,432,ok,
+street_curbs_01_diag,56,31_45.tmx,0,FloorOverlay2,175,53,22249,489,ok,
+street_curbs_01_diag,59,31_45.tmx,0,FloorOverlay2,177,54,22252,717,ok,
+street_curbs_01_diag_2,1,31_45.tmx,0,FloorOverlay2,163,54,22274,871,ok,
+street_curbs_01_diag_2,2,31_45.tmx,0,FloorOverlay,162,109,22275,151,ok,
+street_curbs_01_diag_2,28,31_45.tmx,0,FloorOverlay,175,63,22301,24,ok,
+street_curbs_01_diag_2,32,31_45.tmx,0,FloorOverlay,177,62,22305,20,ok,
+street_curbs_01_diag_2,41,31_45.tmx,0,FloorOverlay2,165,184,22314,874,ok,
+street_curbs_01_diag_2,42,31_45.tmx,0,FloorOverlay,164,107,22315,152,ok,
+street_curbs_01_diag_2,44,31_45.tmx,0,FloorOverlay3,174,66,22317,601,ok,
+street_curbs_01_diag_2,68,31_45.tmx,0,FloorOverlay,150,196,22341,29,ok,
+street_curbs_01_diag_2,75,31_45.tmx,0,FloorOverlay,173,66,22348,30,ok,
+street_decoration_01,44,31_45.tmx,0,FloorOverlay,92,108,22397,1421,ok,길고 낮은 회백색 콘크리트 블록
+street_decoration_01,45,31_45.tmx,0,FloorOverlay,92,110,22398,1195,ok,낮은 회색 사다리꼴 돌턱
+street_decoration_01,59,31_45.tmx,0,FloorOverlay,158,114,22412,54,ok,"A 실제 원본에서 매우 짧고 흐린 회색 도로 표면 작은 물체, 제거 차이 94픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 94픽셀. D는 다른 위치 없어 안내판 표시."
+street_decoration_01,60,31_45.tmx,0,FloorOverlay,112,165,22413,54,ok,"A 실제 원본에서 회색 아스팔트 위에 매우 작은 밝은 점 모양 파편이며 변화 94픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 94픽셀. D는 다른 위치 없어 안내판 표시."
+street_decoration_01,67,31_45.tmx,0,FloorOverlay,111,165,22420,19,ok,"A 실제 원본에서 도로 위 회색 아주 작은 점 같은 파편으로 B-C 차이가 37픽셀이라 용도 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 37픽셀. D는 다른 위치 없어 안내판 표시."
+street_decoration_01,68,31_45.tmx,0,FloorOverlay,158,113,22421,23,ok,"A 실제 원본에서 아스팔트 위 아주 가는 점 형태로 B-C 차이가 51픽셀이라 대상 역할 불분명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 51픽셀. D는 다른 위치 없어 안내판 표시."
+trash_01,0,31_45.tmx,-1,FloorOverlay4,154,39,23249,309,ok,"A에서 갈색 작은 쓰레기 봉투와 녹색 캔으로 보이는 파편 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 336픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+trash_01,1,31_45.tmx,-1,FloorOverlay2,153,38,23250,0,zero_BC_ok,"A 원본에서 아주 작고 어두운 검은 자잘한 선들이 뭉친 바닥 파편이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+trash_01,3,31_45.tmx,-1,FloorOverlay,145,39,23252,0,zero_BC_ok,"A 원본에서 짙은 갈색 및 녹색의 작은 쓰레기 파편이 보이지만 비교 장소에서 효과가 없다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+trash_01,5,31_45.tmx,0,FloorOverlay,96,79,23254,225,ok,
+trash_01,7,31_45.tmx,-1,FloorOverlay,201,98,23256,265,ok,초록색 작은 원통이 눕혀진 모양
+trash_01,8,31_45.tmx,-1,FloorOverlay2,79,49,23257,248,ok,
+trash_01,10,31_45.tmx,-1,FloorOverlay,156,35,23259,0,zero_BC_ok,"A 원본에서 매우 작은 검은 선 형태의 바닥 먼지 또는 쓰레기 파편이 보인다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+trash_01,11,31_45.tmx,0,FloorOverlay,134,23,23260,911,ok,
+trash_01,17,31_45.tmx,0,FloorOverlay,139,14,23266,38,ok,"A 원본에서 빨강·분홍과 검은 점 조각이 모인 작은 쓰레기 더미다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 35픽셀 변화."
+trash_01,20,31_45.tmx,0,FloorOverlay,217,128,23269,12,ok,"A 원본에서 작은 구겨진 종이와 녹색 쓰레기·갈색 찌꺼기가 바닥에 모여 있다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 6픽셀 변화."
+trash_01,26,31_45.tmx,0,FloorOverlay,215,34,23275,0,zero_BC_ok,"A 원본에서 연갈색 종이 조각과 회색 구겨진 잡동사니가 바닥에 흩어진다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+trash_01,27,31_45.tmx,0,FloorOverlay,216,35,23276,0,zero_BC_ok,"A에서 흰 종이 뭉치가 겹쳐진 바닥 잡동사니 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 0픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+trash_01,31,31_45.tmx,0,FloorOverlay,238,44,23280,0,zero_BC_ok,"A에서 종이와 초록색 파편이 모인 바닥 쓰레기 더미지만 B-C 변화 0이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0. B 주위 스프라이트 누락 1건."
+trash_01,32,31_45.tmx,0,FloorOverlay2,203,95,23281,0,zero_BC_ok,"A에서 흰색 종이와 갈색 포장 쓰레기가 낮게 모인 덩어리지만 B-C 차이가 없다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+trash_01,33,31_45.tmx,0,FloorOverlay,84,65,23282,0,zero_BC_ok,"A에서 핑크색과 회색 포장 파편이 작은 무더기로 있으나 B-C 제거 차이 없음 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0. B 주위 스프라이트 누락 1건."
+trash_01,34,31_45.tmx,0,FloorOverlay,139,13,23283,0,zero_BC_ok,"A에서 갈색 초록색 바닥 쓰레기 조각은 보이나 배치 제거 전후 동일하다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+trash_01,44,31_45.tmx,-1,FloorOverlay,151,39,23293,0,zero_BC_ok,"A에서 갈색 녹색 찌꺼기가 한 더미 모인 바닥 쓰레기 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 0픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+trash_01,50,31_45.tmx,0,FloorOverlay,45,243,23299,0,zero_BC_ok,"A에서 회백색과 연녹색 작은 종이 찌꺼기·쓰레기가 있으나 B-C 0픽셀이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+trash_01,51,31_45.tmx,-1,FloorOverlay3,153,40,23300,0,zero_BC_ok,"A에서 캔과 음식물·포장지로 보이는 납작한 작은 쓰레기 조각이 있으나 해당 위치 제거 효과가 없다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+trash_walls_01,7,31_45.tmx,-1,FloorOverlay6,195,89,23312,838,ok,
+trashcontainers_01,18,31_45.tmx,0,FloorOverlay,142,8,23227,0,zero_BC_ok,"A 원본에서 검은 둥근 상부와 회색 몸통의 키 낮은 독립형 쓰레기통이 보이지만 제거 장면은 동일하다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 1픽셀 변화."
+trashcontainers_01,24,31_45.tmx,-1,FloorOverlay2,157,40,23233,0,zero_BC_ok,"A 원본에서 테이프로 봉한 황토색 작은 골판 종이상자 하나다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+trashcontainers_01,27,31_45.tmx,-1,FloorOverlay2,154,32,23236,0,zero_BC_ok,"A 원본에서 밝은 갈색 테이프로 봉한 조그마한 정육면체 골판지 상자가 보이나 배치에서는 빠지지 않는다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 0픽셀 변화."
+vegetation_farm_01,12,31_45.tmx,3,FloorOverlay1,143,32,25733,1101,ok,황토색 지푸라기가 조밀하게 깔린 마름모 평면
+vegetation_farm_01,13,31_45.tmx,3,FloorOverlay1,145,32,25734,2847,ok,짚조각이 조밀하게 덮인 황갈색 지면
+vegetation_farm_01,20,31_45.tmx,3,FloorOverlay3,146,33,25741,287,ok,원본 A에서 베이지색 가느다란 가지나 누운 짚단 한 줄로 보이며 배치 변화 적음 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 305픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+vegetation_farm_01,22,31_45.tmx,3,FloorOverlay1,148,32,25743,207,ok,아주 가느다란 황갈색 짚이 선형으로 이어짐
+vegetation_farm_01,23,31_45.tmx,3,FloorOverlay1,145,33,25744,547,ok,
+vegetation_groundcover_01,22,31_45.tmx,0,FloorOverlay,44,0,25927,0,zero_BC_png_or_mapping_problem,
+vegetation_indoor_01,0,31_45.tmx,0,FloorOverlay2,157,27,25945,515,ok,흰 화분과 노란 꽃
+vegetation_indoor_01,3,31_45.tmx,1,FloorOverlay2,152,24,25948,0,zero_BC_ok,A에는 흰색 작은 원통 화분과 두세 갈래로 솟은 키 큰 초록 선인장 모양 식물이 보인다. B에는 욕실·부엌·식탁이 겹친 장면이며 C와 픽셀 변화가 0이다. D에도 다른 부엌 조립 장면이지만 해당 화분의 실제 표시 위치를 확인할 수 없다.
+vegetation_indoor_01,10,31_45.tmx,0,FloorOverlay,154,8,25955,0,zero_BC_ok,흰 원통에서 길고 뾰족한 녹색 잎
+vegetation_indoor_01,12,31_45.tmx,0,FloorOverlay3,97,9,25957,4151,ok,
+vegetation_indoor_01,20,31_45.tmx,0,FloorOverlay,195,44,25965,0,zero_BC_ok,A: 검정 플라스틱 둥근 화분에 가는 갈색 줄기와 누런 시든 작은 잎. B 계단 앞 장면은 C와 0픽셀 차이로 화분이 보이지 않는다. D 울타리 모서리에는 비슷한 누런 화분이 있다.
+vegetation_indoor_01,27,31_45.tmx,0,FloorOverlay,192,152,25972,0,zero_BC_ok,A: 갈색 원통 화분에 긴 줄기와 엷은 초록·황갈색 잎 다수가 아래로 늘어진다. B 대형 주방 기구 앞 다른 식물들과 겹쳐 C 제거 변화가 0픽셀이고 D에서는 방 벽 옆에 유사한 식물이 있다.
+vegetation_trees_01,8,31_45.tmx,0,FloorOverlay,221,6,26057,0,zero_BC_png_or_mapping_problem,
+vegetation_trees_01,10,31_45.tmx,0,FloorOverlay,31,4,26059,0,zero_BC_png_or_mapping_problem,
+walls_commercial_01,2,31_45.tmx,0,FloorOverlay2,119,49,26163,845,ok,
+walls_commercial_01,19,31_45.tmx,0,FloorOverlay3,160,7,26180,0,zero_BC_ok,
+walls_commercial_01,35,31_45.tmx,0,FloorOverlay,181,74,26196,651,ok,
+walls_commercial_01,55,31_45.tmx,0,FloorOverlay2,123,224,26216,0,zero_BC_ok,
+walls_commercial_01,96,31_45.tmx,0,FloorOverlay2,160,32,26257,8086,ok,
+walls_commercial_01,97,31_45.tmx,1,FloorOverlay2,77,51,26258,6650,ok,
+walls_commercial_01,99,31_45.tmx,0,FloorOverlay2,160,44,26260,546,ok,
+walls_commercial_01,115,31_45.tmx,0,FloorOverlay2,160,42,26276,11,ok,
+walls_commercial_02,23,31_45.tmx,0,FloorOverlay3,160,38,26312,136,ok,
+walls_commercial_02,25,31_45.tmx,0,FloorOverlay2,140,2,26314,257,ok,
+walls_commercial_02,27,31_45.tmx,0,FloorOverlay2,144,2,26316,61,ok,
+walls_commercial_02,39,31_45.tmx,0,FloorOverlay3,134,163,26328,221,ok,
+walls_commercial_03,12,31_45.tmx,2,FloorOverlay1,210,207,26389,1746,ok,
+walls_commercial_03,15,31_45.tmx,2,FloorOverlay1,210,216,26392,240,ok,
+walls_commercial_03,23,31_45.tmx,0,FloorOverlay3,192,161,26400,237,ok,
+walls_commercial_03,35,31_45.tmx,0,FloorOverlay3,149,218,26412,1097,ok,
+walls_commercial_03,36,31_45.tmx,0,FloorOverlay4,142,208,26413,3660,ok,
+walls_commercial_03,39,31_45.tmx,1,FloorOverlay1,144,225,26416,352,ok,
+walls_commercial_03,47,31_45.tmx,0,FloorOverlay3,195,118,26424,0,zero_BC_ok,
+walls_commercial_03,63,31_45.tmx,5,FloorOverlay1,190,227,26440,329,ok,
+walls_commercial_03,95,31_45.tmx,3,FloorOverlay,212,5,26472,8,ok,
+walls_decoration_01,7,31_45.tmx,0,FloorOverlay3,98,37,26480,4397,ok,갈색 네모 나무틀 속 청록빛 유리
+walls_decoration_01,9,31_45.tmx,-1,FloorOverlay3,120,29,26482,0,zero_BC_ok,"A에서 벽에 거는 세로형 검은 테두리 직사각 거울 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 0픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_decoration_01,11,31_45.tmx,0,FloorOverlay2,188,108,26484,0,zero_BC_ok,"A 원본에서 푸른 회색 반사면과 어두운 세로 테두리를 가진 사각 벽걸이 판이 보인다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 1픽셀 변화."
+walls_decoration_01,22,31_45.tmx,0,FloorOverlay4,120,219,26495,0,zero_BC_ok,"A 실제 원본에서 검은 높고 좁은 실내벽 판, B-C 효과 없음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_decoration_01,23,31_45.tmx,0,FloorOverlay3,120,218,26496,0,zero_BC_ok,"A 실제 원본에서 검정 단색 얇은 정방 벽 패널, 제거 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_decoration_01,26,31_45.tmx,1,FloorOverlay2,125,75,26499,168,ok,"A 실제 원본에서 검은 직립 사각 벽판, 제거 변화 250px. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 250픽셀. D는 다른 위치 없어 안내판 표시."
+walls_decoration_01,27,31_45.tmx,1,FloorOverlay1,146,28,26500,0,zero_BC_ok,"A 실제 원본에서 검은 넓은 직사각 벽판, B-C 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_decoration_01,58,31_45.tmx,0,FloorOverlay2,187,103,26531,643,ok,"A 실제 원본에서 무늬와 손잡이 없이 검정색인 세로 직사각 평판. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1328픽셀. D는 다른 위치 없어 안내판 표시."
+walls_decoration_01,98,31_45.tmx,0,FloorOverlay2,19,1,26571,547,ok,"A 실제 원본에서 작은 검정 점 형태의 금속 고리와 몇 가닥 선이 이어지나 부품 역할 명확하지 않음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 547픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+walls_decoration_01,99,31_45.tmx,0,FloorOverlay2,19,0,26572,440,ok,"A 실제 원본에서 작은 흰색 전구 여러 개가 끈에 달린 장식이지만 제거 차이 393픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 393픽셀. D는 다른 실제 근접 위치, 독립 현장 아님."
+walls_decoration_02,7,31_45.tmx,1,FloorOverlay3,154,18,26648,634,ok,
+walls_detailing_01,4,31_45.tmx,0,Vegetation,207,229,27453,1165,ok,A는 상단 작은 돌출부가 있는 매우 얇은 회백색 수직 장식 띠. B의 붉은 벽돌 내측 모서리에 흰 선형 요소가 보이고 C 제거 후 일부 변화. D는 기둥·개구부 장식 주변.
+walls_detailing_01,13,31_45.tmx,0,FloorOverlay2,139,26,27462,0,zero_BC_ok,밝은 회색 좁은 직사각 마감 띠
+walls_detailing_01,14,31_45.tmx,0,FloorOverlay2,140,25,27463,1120,ok,흰 회색 두 구획 낮은 벽 마감
+walls_detailing_01,15,31_45.tmx,0,FloorOverlay2,139,25,27464,382,ok,"A 원본에서 밝은 회색 얇은 띠 두 개가 직각으로 연결된 L형 모서리다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 470픽셀 변화."
+walls_detailing_01,19,31_45.tmx,0,FloorOverlay2,214,0,27468,291,ok,"A 원본에서 매우 가는 크림색 직선 수직 마감 조각이 관찰되나 건물 안에서 기여가 거의 가려진다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 331픽셀 변화. B 주변 PNG 1건 누락."
+walls_detailing_01,20,31_45.tmx,0,FloorOverlay2,109,5,27469,12,ok,"A 원본에서 매우 작은 회백색 세로 조각이 보이며 용도 구별이 어렵다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 74픽셀 변화. B 주변 PNG 1건 누락."
+walls_detailing_01,21,31_45.tmx,0,FloorOverlay2,109,1,27470,314,ok,"A에서 회백색 얇은 수평 선들이 반복되는 벽 마감 스트립이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 443. B 주위 스프라이트 누락 1건."
+walls_detailing_01,22,31_45.tmx,0,FloorOverlay2,102,5,27471,950,ok,A에서 회백색 사선 수평 띠와 여러 줄의 평행 음영을 확인. B는 회색 외벽과 울타리 주변이며 C에서 일부 띠가 사라짐. D는 흰색 사이딩 외벽에서 반복.
+walls_detailing_01,26,31_45.tmx,0,FloorOverlay3,151,130,27475,27,ok,"A에서 아주 짧고 어두운 세로 벽 결합 부품이나 제거 영향 39픽셀만 확인 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 39."
+walls_detailing_01,28,31_45.tmx,0,FloorOverlay3,205,126,27477,0,zero_BC_ok,"A에서 매우 가늘고 짧은 흰색 세로 마감 부품이지만 배치 변화가 미미하다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 111."
+walls_detailing_01,34,31_45.tmx,0,FloorOverlay4,144,225,27483,2,ok,"A에서 작은 짙은 갈색 세로 부재가 보이나 제거 전후 기여가 142픽셀뿐이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 142. B 주위 스프라이트 누락 1건."
+walls_detailing_01,37,31_45.tmx,0,FloorOverlay,15,6,27486,267,ok,"A 원본에서 짙은 갈색 짧고 얇은 사각 판이나 금속 띠 조각이 보인다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 75픽셀 변화."
+walls_detailing_01,39,31_45.tmx,0,FloorOverlay,19,6,27488,0,zero_BC_ok,"A에서 원본에서 작은 짙은 세로 띠가 보이나 다른 배치의 역할은 확인되지 않는다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+walls_detailing_01,55,31_45.tmx,0,FloorOverlay2,105,44,27504,13,ok,"A는 매우 짧고 가는 갈색 수직 막대. B는 갈색 사이딩 외벽과 창 주변, C 차이는 89픽셀. D는 흰 기둥·벽돌 기둥 부근."
+walls_detailing_01,65,31_45.tmx,1,FloorOverlay1,209,3,27514,1699,ok,
+walls_detailing_01,80,31_45.tmx,0,FloorOverlay2,197,93,27529,0,zero_BC_ok,갈색 목재 가로 패널과 깊은 네모 테두리
+walls_detailing_01,81,31_45.tmx,0,FloorOverlay3,184,96,27530,2794,ok,짙은 갈색 가로 장식 면 두 개
+walls_detailing_01,83,31_45.tmx,0,FloorOverlay3,181,96,27532,0,zero_BC_ok,"A에서 어두운 갈색 가는 세로 스트립이지만 배치 제거 효과가 매우 작다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 62."
+walls_detailing_01,90,31_45.tmx,0,FloorOverlay2,19,19,27539,1,ok,A는 매우 좁고 짧은 회갈색 세로 막대이며 오른쪽에 밝은 가장자리. B는 흰색 사이딩 벽의 바깥 모서리와 창 주변이고 C 변화는 117픽셀로 작다. D는 회색 석재 외벽 모서리·지붕 주변에서 사용된다.
+walls_detailing_01,91,31_45.tmx,0,FloorOverlay2,149,73,27540,2508,ok,"A는 회갈색으로 채워진 대칭 ㄱ자/V자 모서리 띠. B는 진회색 실내 벽과 바닥이 만나는 코너의 하단, C 제거 시 해당 모서리 띠가 일부 사라진다. D는 녹색 경사 지붕과 설비가 있는 장면에서 비슷한 각진 테두리가 보인다."
+walls_detailing_02,14,31_45.tmx,2,FloorOverlay1,196,49,27575,49,ok,"A에서 백회색 얇은 세로판 마감 부품 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 102픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_detailing_02,71,31_45.tmx,2,FloorOverlay2,196,31,27632,162,ok,"A 원본에서 흰색 상단 짧은 수평 돌출부와 얇은 아래 받침부가 보인다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 231픽셀 변화."
+walls_exterior_house_01,23,31_45.tmx,-1,Floor,82,54,27672,2,ok,"A 원본에서 붉은 벽돌 무늬의 아주 얇은 세로 줄이 있지만 주변 설치 영향은 38픽셀이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 38픽셀 변화."
+walls_exterior_house_01,34,31_45.tmx,1,FloorOverlay1,104,13,27683,3,ok,"A 실제 원본: 아주 얇은 회백색 가로 사이딩 벽이 직각 코너에서 접함, 제거 변화 미소. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 49픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+walls_exterior_house_01,35,31_45.tmx,0,FloorOverlay,109,5,27684,455,ok,
+walls_exterior_house_01,39,31_45.tmx,2,FloorOverlay3,180,88,27688,34,ok,"A 실제 원본에서 가느다란 붉은 벽돌색 세로 직선. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 160픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_house_02,18,31_45.tmx,2,FloorOverlay1,157,22,27731,4,ok,"A 실제 원본: 회갈색 벽돌 두 면이 ㄱ자 외벽모서리로 겹침, 제거 효과 부족. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 36픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+walls_exterior_house_02,19,31_45.tmx,-1,Floor,152,25,27732,92,ok,"A 원본에서 적갈색 벽돌을 작은 정방형으로 쌓은 세로 얇은 띠다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 174픽셀 변화."
+walls_exterior_house_02,22,31_45.tmx,1,FloorOverlay1,248,80,27735,19,ok,"A 실제 원본에서 파란 회색 가로 결 외벽이 ㄱ자 코너를 이룸, 제거 효과 매우 미미. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 23픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_house_02,39,31_45.tmx,0,FloorOverlay2,205,114,27752,0,zero_BC_ok,"A에서 갈색 세로 외벽 이음 띠가 얇게 있지만 B-C 차이가 0픽셀이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 0."
+walls_exterior_house_02,51,31_45.tmx,0,FloorOverlay,245,40,27764,32,ok,"A에서 얇고 긴 갈색 벽돌 세로 연결줄이 있으나 B-C 변화가 176픽셀이다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 176. B 주위 스프라이트 누락 1건."
+walls_exterior_house_02,67,31_45.tmx,0,FloorOverlay2,129,76,27780,11,ok,"A에서 매우 얇고 긴 적갈색 세로 벽체 이음선만 보여 위치 정합 근거가 약하다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 20."
+walls_exterior_house_02,75,31_45.tmx,0,FloorOverlay2,127,76,27788,214,ok,"A 실제 원본에서 붉은 벽돌무늬 상단과 양옆 세로 경계가 보이는 문틀형 개구부, 제거 변화가 작음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 334픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_house_02,83,31_46.tmx,0,FloorOverlay,224,127,27796,0,zero_BC_ok,"A 실제 원본에서 가늘고 길게 선 연녹회색 선형 막대; B-C 변화가 23픽셀뿐. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 23픽셀. D는 다른 실제 위치 없음, D 안내판 표시."
+walls_exterior_house_08,34,31_45.tmx,2,FloorOverlay,160,42,28363,208,ok,"원본 A: 베이지 가로판 사이에 곡선 개구부 일부, 배치 변화 부족. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 472픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+walls_exterior_house_low_01,7,31_45.tmx,1,FloorOverlay,200,89,28968,173,ok,
+walls_exterior_house_low_01,15,31_45.tmx,1,FloorOverlay,142,49,28976,42,ok,
+walls_exterior_house_low_01,27,31_45.tmx,3,FloorOverlay,196,49,28988,71,ok,
+walls_exterior_house_low_01,39,31_45.tmx,2,FloorOverlay,124,49,29000,409,ok,
+walls_exterior_house_low_01,55,31_45.tmx,0,FloorOverlay2,159,126,29016,188,ok,
+walls_exterior_house_low_01,63,31_45.tmx,1,FloorOverlay,205,126,29024,374,ok,
+walls_exterior_house_low_01,75,31_45.tmx,0,FloorOverlay2,214,49,29036,0,zero_BC_ok,
+walls_exterior_house_low_01,99,31_45.tmx,3,FloorOverlay,129,85,29060,170,ok,
+walls_exterior_roofs_01,117,31_45.tmx,0,FloorOverlay2,183,3,29222,311,ok,"A 실제 원본에서 갈색 짧고 가는 직립 기둥 끝 결합부, 변화 378px. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 378픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_02,3,31_45.tmx,1,FloorOverlay,195,88,29284,106,ok,원본 A에서 적벽돌 층이 수직으로 쌓이다 꼭대기에서 비스듬하게 잘린다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 117픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+walls_exterior_roofs_02,4,31_45.tmx,1,FloorOverlay,196,88,29285,1,ok,"원본 A: 적갈색 가로 무늬 삼각 벽판, 제거 변화 거의 없음. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 1픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+walls_exterior_roofs_02,5,31_45.tmx,1,FloorOverlay,197,88,29286,82,ok,"A 실제 원본: 붉은색 기와 무늬가 있는 아주 작은 삼각판, 비교 변화가 작음. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 83픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+walls_exterior_roofs_02,93,31_45.tmx,1,FloorOverlay,59,35,29374,113,ok,"A 실제 원본에서 매우 얇은 회색 직립 줄무늬 조각, delta186. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 186픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_03,21,31_45.tmx,1,FloorOverlay,249,161,29406,182,ok,"A 실제 원본에서 짧은 갈색 직립 외벽 몰딩, delta185. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 185픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_04,1,31_45.tmx,-1,FloorOverlay2,202,97,29458,36,ok,원본 A에서 어두운 갈색 가로 결의 비스듬한 가는 삼각 벽판이다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 13픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+walls_exterior_roofs_05,7,31_45.tmx,2,FloorOverlay,111,49,29544,877,ok,
+walls_exterior_roofs_08,37,31_45.tmx,7,FloorOverlay,186,0,29798,1219,ok,"A 실제 원본에서 흰색의 매우 작은 삼각판 하나, A는 보이나 제거 기여 낮음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 1422픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_09,105,31_45.tmx,0,FloorOverlay,118,83,29946,0,zero_BC_ok,"A 실제 원본에서 연베이지 얇은 사다리꼴 벽판, 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_09,106,31_45.tmx,0,FloorOverlay,118,82,29947,283,ok,"A 실제 원본에서 얇은 세로 골이 반복되는 베이지 직립판, 다른 구조와의 연결 용도가 모호함. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 525픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_09,125,31_45.tmx,0,FloorOverlay,118,84,29966,0,zero_BC_ok,"A 실제 원본에서 연갈색 매우 얇은 세로 막대 하나; B-C 변화가 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 실제 위치 없음, D 안내판 표시."
+walls_exterior_roofs_30_02,29,31_45.tmx,1,FloorOverlay,204,99,30366,55,ok,원본 A에서 황갈색 좁은 삼각형 조각만 드러나고 B-C 기여 68픽셀이다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 68픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+walls_exterior_roofs_30_03,2,31_46.tmx,1,FloorOverlay1,80,126,30435,10,ok,원본 A에서 흰색 가로판을 층층이 쌓은 작은 삼각판으로 B-C 변화가 15픽셀이다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 15픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+walls_exterior_roofs_30_03,4,31_45.tmx,1,FloorOverlay1,106,14,30437,10,ok,"A 실제 원본: 회백색 사선 홈의 삼각판, B-C 변화 미미. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 15픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+walls_exterior_roofs_30_03,9,31_45.tmx,1,FloorOverlay1,106,10,30442,0,zero_BC_ok,"A 실제 원본에서 회백색 촘촘한 평행선 판이 높이 선다, 변화 29px. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 29픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_03,11,31_46.tmx,1,FloorOverlay1,80,122,30444,0,zero_BC_ok,"A 실제 원본에서 회백색 사이딩 긴 직립 직사각 벽판. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 10픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_03,13,31_46.tmx,1,FloorOverlay,79,110,30446,20,ok,"A에서 회백색의 작은 쐐기형 삼각 표면 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 42픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_03,16,31_45.tmx,1,FloorOverlay,7,19,30449,20,ok,"A에서 좁은 흰색 경사 삼각형 벽면 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 42픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_04,2,31_45.tmx,2,FloorOverlay,180,175,30531,0,zero_BC_ok,"A에서 붉은 벽돌의 삼각형 박공부 조각 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 5픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_04,3,31_45.tmx,2,FloorOverlay,180,174,30532,0,zero_BC_ok,"A에서 붉은 벽돌의 세로 긴 삼각형 면 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 8픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_04,11,31_45.tmx,2,FloorOverlay,180,171,30540,14,ok,"A에서 갈색 적벽돌이 층층이 있는 세로 박공 조각 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 65픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_04,12,31_45.tmx,2,FloorOverlay,180,170,30541,14,ok,"A에서 적벽돌 작은 삼각면을 한 변에 둔 벽판 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 49픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_04,64,31_45.tmx,1,FloorOverlay,216,165,30593,20,ok,"A 실제 원본에서 작은 연베이지 삼각 외벽 조각, 변화 42. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 42픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_04,77,31_45.tmx,1,FloorOverlay,221,165,30606,56,ok,"A 실제 원본에서 작은 회갈색 삼각판, 비교 차이 68. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 68픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_06,13,31_45.tmx,3,FloorOverlay,160,9,30718,20,ok,"A 실제 원본에서 아주 작은 청회색 삼각 경계 부품, 배치 변화 낮음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 42픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_06,29,31_45.tmx,1,FloorOverlay,247,85,30734,3,ok,"A에서 푸른 회색 가로판의 작은 삼각 끝판 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 60픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_06,32,31_45.tmx,4,FloorOverlay,160,13,30737,0,zero_BC_ok,"A 실제 원본에서 매우 작은 청회색 삼각판, 제거 변화 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_08,61,31_45.tmx,3,FloorOverlay3,191,224,30958,20,ok,원본 A에서 어두운 갈색의 매우 작은 삼각형 지붕 끝부품으로 가시 변화 작다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 42픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+walls_exterior_roofs_30_08,64,31_45.tmx,3,FloorOverlay,187,228,30961,20,ok,"원본 A: 갈색의 극히 작은 사선 삼각형으로 배치 변화 부족. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 42픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+walls_exterior_roofs_30_11,0,31_45.tmx,4,FloorOverlay,151,142,31169,0,zero_BC_ok,원본 A에서 연회색의 긴 삼각 쐐기형 조각만 보이며 B-C 3픽셀이다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 3픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+walls_exterior_roofs_30_11,1,31_45.tmx,4,FloorOverlay,151,141,31170,0,zero_BC_ok,"원본 A: 회색 작은 삼각조각만 보이며 제거 변화 없음. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 0픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+walls_exterior_roofs_30_11,12,31_45.tmx,4,FloorOverlay,151,135,31181,0,zero_BC_ok,"A 실제 원본에서 연회색 벽돌 작은 삼각판, 비교 차이 0. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_11,13,31_45.tmx,4,FloorOverlay,151,134,31182,20,ok,"A 실제 원본에서 옅은 베이지 삼각 벽 조각, 변화 42. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 42픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_16,3,31_45.tmx,2,FloorOverlay,224,47,31540,0,zero_BC_ok,"A에서 연베이지 세로판과 얇은 녹색 상단 테두리 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 3픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_16,4,31_45.tmx,2,FloorOverlay,224,46,31541,0,zero_BC_ok,"A에서 베이지색 세로 홈이 있는 모서리 판재 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 3픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_exterior_roofs_30_16,12,31_45.tmx,2,FloorOverlay,224,33,31549,15,ok,"A 원본에서 엷은 베이지 삼각판과 밝은 회색 지붕선이 맞닿는다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 21픽셀 변화."
+walls_exterior_roofs_30_16,13,31_45.tmx,2,FloorOverlay,224,32,31550,2,ok,"A 원본에서 베이지색의 아주 작은 삼각형 박공 끝판이며 배치 기여가 미미하다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 6픽셀 변화."
+walls_exterior_roofs_30_16,16,31_45.tmx,1,FloorOverlay,65,140,31553,20,ok,원본 A에서 연베이지 아주 작은 삼각형 박공 부품으로 B-C 42픽셀이다 같은 TMX 동일 층 B 주변 5×5 배치에서 해당 사용 위치를 확인했고 C에서 단일 타일 배치를 제거했을 때 42픽셀 변화. 충분히 떨어진 별도 검증 위치(다른 TMX 또는 맨해튼 거리 5칸 이상)를 확보하지 못해 D는 독립 현장 미확보로 표기.
+walls_exterior_roofs_30_16,29,31_45.tmx,1,FloorOverlay,74,140,31566,55,ok,"A 실제 원본에서 매우 작은 연베이지 삼각 쐐기와 녹색 끝선, 제거 변화가 68픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 68픽셀. D는 다른 위치 없어 안내판 표시."
+walls_exterior_roofs_30_18,16,31_45.tmx,2,FloorOverlay,117,86,31737,22,ok,"원본 A: 매우 작은 갈색 삼각 판이고 B-C 변화 42픽셀. B: 동일 층 주변 5×5 TMX 근사 조립. C: 선택 레이어 배치 1건 제거. B-C 변화 42픽셀. D는 다른 실제 사용 위치 없음, 사용 1건."
+walls_exterior_wooden_01,27,31_45.tmx,0,FloorOverlay,81,38,32020,0,zero_BC_ok,
+walls_exterior_wooden_01,31,31_45.tmx,0,FloorOverlay2,20,227,32024,0,zero_BC_ok,
+walls_exterior_wooden_02,19,31_46.tmx,0,FloorOverlay,199,122,32092,217,ok,"A 실제 원본에서 연베이지 목재 결 가운데 긴 직사각 창 개구부. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 272픽셀. D는 다른 위치 없어 안내판 표시."
+walls_garage_01,35,31_45.tmx,0,FloorOverlay,143,39,32132,348,ok,
+walls_garage_01,39,31_45.tmx,-1,Floor,160,40,32136,701,ok,
+walls_interior_bathroom_01,1,31_45.tmx,0,FloorOverlay,247,75,32274,16,ok,"A에서 백색 타일과 청록색 꽃띠가 포함된 세로 벽면 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 44픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_interior_bathroom_01,19,31_45.tmx,0,FloorOverlay,187,102,32292,215,ok,"A 실제 원본에서 매우 가는 회백색 수직 막대로 도색 또는 배관처럼 보임, 변화 적음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 394픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_bathroom_01,26,31_45.tmx,-1,FloorOverlay,155,93,32299,222,ok,"A 원본에서 흰 벽 패널에 큰 직사각 출입구가 뚫려 가는 테두리가 있으나 배치 변화는 작다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 191픽셀 변화."
+walls_interior_bathroom_01,46,31_45.tmx,0,FloorOverlay,243,112,32319,533,ok,"A 실제 원본에서 회녹색 타일 벽에 큰 세로 문틀/개구부 모양이 있지만 주변 이미지가 1개 누락됐다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 504픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_bathroom_01,80,31_45.tmx,1,FloorOverlay1,151,42,32353,0,zero_BC_ok,"A 실제 원본에서 연회색 작은 욕실 타일 세로벽의 아래가 청록색 타일인데 제거 전후 변화 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_bathroom_01,82,31_45.tmx,1,FloorOverlay1,151,41,32355,0,zero_BC_ok,"A 실제 원본에서 연회색과 청록색 띠로 나뉜 타일 모서리벽이 보이지만 제거 차이는 0픽셀. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 0픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_detailing_01,3,31_45.tmx,0,FloorOverlay2,12,9,32388,10,ok,
+walls_interior_detailing_01,4,31_45.tmx,-1,FloorOverlay2,118,30,32389,395,ok,
+walls_interior_detailing_01,5,31_45.tmx,-1,FloorOverlay2,119,29,32390,0,zero_BC_ok,
+walls_interior_detailing_01,7,31_45.tmx,-1,FloorOverlay2,122,36,32392,15,ok,
+walls_interior_detailing_01,14,31_45.tmx,-1,FloorOverlay2,122,33,32399,6,ok,
+walls_interior_detailing_01,15,31_45.tmx,-1,FloorOverlay2,122,30,32400,7,ok,
+walls_interior_detailing_01,19,31_45.tmx,0,FloorOverlay2,7,13,32404,3,ok,
+walls_interior_detailing_01,35,31_45.tmx,0,FloorOverlay2,153,11,32420,279,ok,
+walls_interior_detailing_01,39,31_45.tmx,-1,FloorOverlay2,146,92,32424,36,ok,
+walls_interior_detailing_01,42,31_45.tmx,0,FloorOverlay2,193,2,32427,1158,ok,
+walls_interior_detailing_01,43,31_45.tmx,0,FloorOverlay2,194,0,32428,1160,ok,
+walls_interior_detailing_01,44,31_45.tmx,1,FloorOverlay2,116,126,32429,660,ok,
+walls_interior_detailing_01,46,31_45.tmx,-1,FloorOverlay2,144,19,32431,0,zero_BC_ok,
+walls_interior_detailing_01,47,31_45.tmx,-1,FloorOverlay2,148,21,32432,6,ok,
+walls_interior_detailing_01,55,31_45.tmx,0,FloorOverlay2,143,39,32440,0,zero_BC_ok,
+walls_interior_detailing_01,58,31_45.tmx,0,FloorOverlay2,180,101,32443,61,ok,
+walls_interior_detailing_01,62,31_45.tmx,0,FloorOverlay2,144,34,32447,61,ok,
+walls_interior_detailing_01,63,31_45.tmx,0,FloorOverlay2,142,34,32448,31,ok,
+walls_interior_detailing_01,71,31_45.tmx,0,FloorOverlay2,233,42,32456,363,ok,
+walls_interior_detailing_01,78,31_45.tmx,0,FloorOverlay2,232,47,32463,0,zero_BC_ok,
+walls_interior_detailing_01,79,31_45.tmx,0,FloorOverlay2,234,40,32464,61,ok,
+walls_interior_detailing_01,99,31_45.tmx,0,FloorOverlay2,151,20,32484,209,ok,
+walls_interior_detailing_01,103,31_45.tmx,0,FloorOverlay3,160,44,32488,346,ok,
+walls_interior_detailing_01,106,31_45.tmx,0,FloorOverlay2,148,21,32491,0,zero_BC_ok,
+walls_interior_detailing_01,107,31_45.tmx,0,FloorOverlay2,149,20,32492,32,ok,
+walls_interior_detailing_01,111,31_45.tmx,0,FloorOverlay3,145,49,32496,58,ok,
+walls_interior_detailing_01,126,31_45.tmx,1,FloorOverlay3,121,213,32511,821,ok,
+walls_interior_detailing_bathroom_03,59,31_45.tmx,0,FloorOverlay2,242,117,32924,49,ok,"A 실제 원본에서 희고 좁은 장식띠 두 줄이 벽에 붙는데 제거량 적음. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 95픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_house_01,19,31_45.tmx,0,FloorOverlay,185,22,33076,0,zero_BC_ok,
+walls_interior_house_01,23,31_45.tmx,-1,FloorOverlay,122,36,33080,219,ok,
+walls_interior_house_01,87,31_45.tmx,0,FloorOverlay,245,113,33144,78,ok,
+walls_interior_house_01,99,31_45.tmx,0,FloorOverlay,112,38,33156,103,ok,
+walls_interior_house_02,35,31_45.tmx,0,FloorOverlay,153,11,33220,510,ok,
+walls_interior_house_02,55,31_45.tmx,1,FloorOverlay1,141,34,33240,26,ok,
+walls_interior_house_02,119,31_45.tmx,1,FloorOverlay1,187,36,33304,0,zero_BC_ok,
+walls_interior_house_03,3,31_45.tmx,0,FloorOverlay,195,28,33316,243,ok,
+walls_interior_house_03,23,31_45.tmx,-1,FloorOverlay,146,92,33336,1070,ok,
+walls_interior_house_03,31,31_45.tmx,0,FloorOverlay,142,34,33344,561,ok,
+walls_interior_house_03,35,31_45.tmx,0,FloorOverlay,122,30,33348,59,ok,
+walls_interior_house_04,36,31_45.tmx,0,FloorOverlay,10,8,33413,214,ok,"A 원본에서 청록색으로 도색된 평평하고 긴 수직 내벽 판이다 B는 해당 TMX 좌표 주변 같은 층 5×5 근사 조립, C는 동일 레이어 대상 1건 제거, D는 다른 실제 사용 위치. B-C 383픽셀 변화."
+walls_interior_house_04,39,31_45.tmx,1,FloorOverlay1,153,27,33416,94,ok,"A 실제 원본에서 매우 가느다란 청록색 세로선 한 개이며 제거 차가 195픽셀이라 용도가 구별되지 않는다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 195픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_house_04,67,31_45.tmx,0,FloorOverlay,150,16,33444,241,ok,"A에서 거친 갈색 좁은 세로 마감 기둥 형태를 확인함. B는 원본 TMX 동일 층 주변 5×5 배치, C는 해당 레이어의 대상 배치 1건만 제외한 장면으로 270픽셀 변화가 계산됨. D는 실제 다른 사용 위치로 별도 확인함."
+walls_interior_house_04,68,31_45.tmx,0,FloorOverlay,189,30,33445,360,ok,"A에서 갈색 단색 직립 벽판이지만 주변 장면에서 배치 기여 69픽셀로 구별이 어렵다 B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거, D는 다른 사용 위치 비교. B-C 픽셀 변화 69."
+walls_interior_house_04,83,31_45.tmx,0,FloorOverlay,151,20,33460,412,ok,"A 실제 원본에서 밝은 황색의 매우 가늘고 긴 직립선 하나로 해당 배치 변화 459픽셀이라 용도 불명. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 459픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_house_04,90,31_45.tmx,0,FloorOverlay,148,21,33467,0,zero_BC_ok,"A 실제 원본에서 연녹색 두꺼운 선 형태 직립 문틀이 보이나 배치 제거 차이가 28픽셀이다. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 28픽셀. D는 다른 위치 없어 안내판 표시."
+walls_interior_house_26,72,31_45.tmx,1,FloorOverlay1,180,94,35601,297,ok,"A 실제 원본: 진한 자주색 사각 벽 패널과 얇은 윗선. B는 실제 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 선택 배치 하나만 제거. B-C 변화 323픽셀. D 별도 사용 좌표 부재로 안내 화면 표시."
+walls_logs,99,31_45.tmx,-1,Floor,124,49,35820,526,ok,
