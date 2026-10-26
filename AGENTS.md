@@ -21,6 +21,14 @@
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
 
+## v112 남은 9종 원본 소스 진단 (신규 관찰 0, 2026-10-26)
+- **최신 승인 관찰 체크포인트는 계속 v111**(5,400/5,409종, 99.8336%; 미관찰 9종; 잠정 후보 4,512종; 최종 인증 0종). v112는 관찰 승격 없는 감사·원본 소스 추적 결과로서 `PROJECT_STATE.json` 및 통합 v111 SQLite를 덮어쓰지 않는다.
+- 전체 9종 키를 `audits/v112_remaining9/SOURCE_AUDIT.json`·CSV에 기록. `location_business_office_generic_01` Local ID 9/11/12는 TileZed 텍스트 격자 A의 RGBA 알파 픽셀 **0**; `f_bushes_1/66`은 **4,837개** 불투명 픽셀이나 B-C 변화 0. 4종 TMX 실제 GID·좌표·같은 위치 레이어 순서 기록.
+- 잘못 누락으로 본 JUMBO 나무 3종의 **실제 원본 PNG가 `Tiles/2x/jumbo/`에 존재**함을 발견. JUMBO 3키의 A/B/C/D JPEG **15장·검수판 1장** 직접 판독했지만 현재 격자는 `width_scale_unexpected`, A 빈 프레임, B-C 0이므로 3종 모두 미관찰 유지.
+- 충돌 사본명 `camping_03 (ayrton orio's conflicted copy 2025-09-10)`에는 이름 정규화 후 `camping_03.png`가 **대체 후보**로 존재하지만 내용과 Local ID 19 대응을 미검증. `jumbo_tree_01/0`는 동일 이름 PNG 미발견. 파일명 유사도를 타일 정체 증거로 승격하지 않는다.
+- 시각·파일 증거 전체는 `audits/v112_remaining9/v112_nine_unresolved_source_evidence.zip`(24항목 CRC PASS, SHA-256 `246c6361b2aa6d2eda97202d69d8429841b8b4701207d229ff51a3f59284e896`), 보고서 `docs/V112_SOURCE_AUDIT.md`, PNG 크롭 4개, 신규 JPEG 15개 및 검수판 1개로 보존.
+- 다음은 **JUMBO PNG의 실제 타일 격자와 TMX GID·Local ID 대응**, 관목 오클루전, camping 충돌 원본, jumbo_tree 원본을 검증한다. 공식 매핑·TileZed·최종 인증은 모두 0.
+
 ## v111 미관찰 단일배치 21종 실제 A/B/C 시각 검수 (2026-10-26)
 - v110 SQLite SHA 복원 후 미관찰 21종 전수를 TileZed 텍스트 타일정의 격자와 PNG·TMX에 대조. 16종 A/B/C/D 안내판 생성(개별 JPEG 80장, 검수판 3장), 직접 관찰. 나머지 5종은 원본 PNG 누락으로 별도 보류.
 - 새 이미지 관찰 **12종**: B-C 제거 변화가 명확한 작은 식생·벽 균열·잎 없는 나무 관련 잠정 후보 12종(신뢰도 low). 가시 기여 없는 4종은 관찰 미완료, PNG 누락 5종도 미완료. 두 번째 TMX 배치 D는 16종 모두 없음. 원본 A는 TileZed 텍스트 타일정의 잠정 격자이며 공식 매핑 인증 아님.
