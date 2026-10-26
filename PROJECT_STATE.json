@@ -69,11 +69,10 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "v117 source ledger 10042 exists. Always read latest_a_candidate_stage, and never confuse 'image exists' 10035 with 'AI-chosen official local ID' 0.",
-    "Prioritize comparing A2 source geometry for 6673 one-visible keys: A1 absent due TMX-export PNG scale/geometry mismatch; review source and actual TileZed mappings before certification.",
-    "36 jumbo A3 provisional per-sprite grid guesses have visible image; 3 exact PNG missing and 4 no alpha crop stay unresolved; do not call transparent.",
-    "Retain v113 and v116 14 user exclusions and entire historical v116 SQLite without changing observed/identity counts.",
-    "Before B/C/D identity analysis, verify A selections against TMX environment and longer 15x15 context for wiring/tree multi-part objects."
+    "v118 ACTIVE A SCOPE ONLY: read review/v118_A_new_only_4633/A_CANDIDATE_NEW_ONLY_4633.csv: 4633 new keys, no prior 5409; never rerun prior 5409 by default.",
+    "From 4633 new A keys: 1544 A1=A2 consistent, 3068 one-visible, 20 JUMBO A3 provisional, 1 missing source overlay_graffiti_wall_02/2; verify actual Local ID using visual/cross-context rather than assuming image exists means mapping verified.",
+    "Prior A data 5409 from v116 and v117 remains untouched, including 14 earlier manual exclusions. Only if user explicitly requests old-key re-audit should revisit.",
+    "Official mapping and TileZed check are still 0; after credible A visual validation run B/C/D and actual image-grounded identity inference for new keys."
   ],
   "warnings": [
     "Do not count 2,509+477 as unique: the verified overlap is 402.",
@@ -239,5 +238,31 @@
     "official_tilezed_verified": 0,
     "identity_final_certified": 0,
     "meaning": "Full 10042-source-candidate preparatory registry; A1/A2/TMX and provisional whole-sprite A3, not visually resolved/certified Local ID for all keys."
+  },
+  "latest_active_a_scope": {
+    "version": "v118",
+    "date": "2026-10-26",
+    "intent": "select_and_verify_A_on_new_keys_only",
+    "source_scope_version": "v117",
+    "range": "26_43_to_37_49",
+    "target_unique_tile_keys": 10042,
+    "prior_history_excluded_from_new_active_scope": 5409,
+    "new_A_worklist_only": 4633,
+    "already_existing_A_data_reused_not_deleted": true,
+    "new_A_candidate_visible": 4632,
+    "new_A_candidate_held": 1,
+    "new_A_same_A1_A2": 1544,
+    "new_A_single_visible": 3068,
+    "new_A_jumbo_A3": 20,
+    "new_A_source_missing": 1,
+    "new_A_review_sheets": 58,
+    "new_A_worklist": "review/v118_A_new_only_4633/A_CANDIDATE_NEW_ONLY_4633.csv",
+    "new_A_viewer": "review/v118_A_new_only_4633/NEW_ONLY_A_4633_VIEWER.html",
+    "new_A_archive": "review/v118_A_new_only_4633/PZ_신규4633종_A후보_검토자료.zip",
+    "user_excluded_prior_tiles_preserved": 14,
+    "AI_individual_A_mapping_certified": 0,
+    "tilezed_verified": 0,
+    "final_certified": 0,
+    "warning": "Source A candidates visible or mechanically proposed ≠ AI verified Local ID mapping; old 5409 are excluded only from new review queue, not from master data."
   }
 }

@@ -86,6 +86,14 @@
 - 총 **10,035종 가시 A 후보** 확보. 나머지 **7종 미해결(원본 PNG 이름 미확보 3, 빈 후보 크롭 4)**. 사용자 제외 14종 별도 유지. A 후보 생성은 공식 Local ID 검증 또는 정체 확정이 아님.
 - 주 파일: `review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv`, `review/v117_A_candidates_10042/A_CANDIDATE_REVIEW_INDEX.html`, `review/v117_A_candidates_10042/sheets/`, `review/v117_A_candidates_10042/jumbo_a3/`.
 - **최신 실제 SQLite는 아직 v116** (기존 데이터 불변). `PROJECT_STATE.json.latest_a_candidate_stage`가 최신 A 준비작업을 추적한다. 공식 매핑/최종 인증 0.
+## 최신 v118: 기존 5,409종 제외 → 신규 4,633종만 A단계 (2026-10-26)
+
+- 사용자가 기존에 분석한 5,409종을 신규 A단계에서 제외하도록 지시. 전체 10,042종에서 신규 **4,633종만** 남겼다. 기존 결과는 삭제하지 않고 재사용한다.
+- `review/v118_A_new_only_4633/A_CANDIDATE_NEW_ONLY_4633.csv` 정확히 4,633키와 58장 압축 검수 시트를 생성. 기존 키·사용자 제외 14종의 유입 0건 검사 PASS.
+- 신규 A1=A2 **1,544종**, 단일 가시 **3,068종**, JUMBO 잠정 A3 **20종**, 정확한 PNG 미확보 **1종(`overlay_graffiti_wall_02/2`)**. 가시 A 후보 **4,632종**.
+- 검토 HTML·ZIP과 매니페스트는 `review/v118_A_new_only_4633/`. ZIP CRC PASS, 63개 항목. 정확한 이미지 Local ID 공식 매핑과 정체 최종 인증은 0이며, 후보 미확보를 투명 확정으로 처리하지 않음.
+- 최신 실제 통합 SQLite는 **v116 불변**. `PROJECT_STATE.json.latest_active_a_scope`만 새 A 작업 대상으로 갱신. 이후 A 검증·B/C/D 분석은 반드시 신규 4,633키 대상으로만 진행.
+
 ## 불변 원칙
 
 - 이미지 직접 관찰, 추론 후보, PNG-TMX Local ID 검증, TileZed 렌더 검증, 최종 인증을 분리한다.
