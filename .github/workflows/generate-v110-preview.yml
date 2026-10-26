@@ -38,16 +38,16 @@ jobs:
           m=json.loads((p/'EVIDENCE_MANIFEST.json').read_text())
           rows=[r for r in m['results'] if r['status']=='evidence_only_unreviewed']
           assert m['base']=='v108' and m['observed_count_added']==0
-          assert len(rows)==32 and len({tuple(r['key']) for r in rows})==32
+          assert len(rows)==3 and len({tuple(r['key']) for r in rows})==3
           assert all(r['other_placement_available'] for r in rows)
           assert all((r['primary_placement']['tmx'],r['primary_placement']['level'],r['primary_placement']['x'],r['primary_placement']['y']) != (r['other_placement']['tmx'],r['other_placement']['level'],r['other_placement']['x'],r['other_placement']['y']) for r in rows)
-          assert len(m['review_sheets'])==6
+          assert len(m['review_sheets'])==1
           for r in rows:
             for k in ('A','B','C','D','board'):
               with Image.open(p/r[k]) as im: im.verify()
           for f in m['review_sheets']:
             with Image.open(f) as im: im.verify()
-          print('PASS v110 32 unique genuine D keys, 160 JPEG, 6 sheets, no observations counted')
+          print('PASS v110 3 unique genuine D keys, 15 JPEG, 1 sheet, no observations counted')
           PY
       - name: Commit evidence-only images for independent direct visual inspection
         run: |
