@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v109 visual evidence: 48 unique PNG/TMX A/B/C, actual near D 3, absent D 45."""
+"""v109 visual evidence: 48 unique PNG/TMX A/B/C, actual independent D 1, absent D 47."""
 import csv,json,hashlib
 from pathlib import Path
 from PIL import Image,ImageChops
@@ -18,12 +18,13 @@ actual=0;notavailable=0
 for r in rows:
  key=(r['tile_set_locator'],int(r['local_id']))
  e=evidence[key];p=e['primary_placement'];q=e['other_placement']
- assert e['status']=='evidence_only_unreviewed' and e['uses']>=1 and e['D_independent_5_cells_or_other_map'] is False
+ assert e['status']=='evidence_only_unreviewed' and e['uses']>=1
  if e['other_placement_available']:
   actual+=1
   assert e['uses']>=2 and r['other_tmx']==q['tmx']
   assert (int(r['other_level']),int(r['other_x']),int(r['other_y']),int(r['other_raw_gid']))==(q['level'],q['x'],q['y'],q['gid'])
-  assert q['tmx']==p['tmx'] and abs(q['x']-p['x'])+abs(q['y']-p['y'])<5
+  far = q['tmx']!=p['tmx'] or abs(q['x']-p['x'])+abs(q['y']-p['y'])>=5
+  assert far==bool(e['D_independent_5_cells_or_other_map'])
  else:
   notavailable+=1
   assert e['uses']==1 and r['other_tmx']==''
@@ -49,4 +50,5 @@ for r in rows:
  with Image.open(imgs[1]) as B,Image.open(imgs[2]) as C:
   assert e['visible_pixel_delta']==0 or ImageChops.difference(B.convert('RGB'),C.convert('RGB')).getbbox()
 assert (actual,notavailable)==(1,47)
-print('PASS v109 48 unique 38 candidate 10 held, 1 near D and 47 D absent, 240 JPEG; original SHA/GID/coordinate')
+assert sum(bool(e['D_independent_5_cells_or_other_map']) for e in m['results'])==1
+print('PASS v109 48 unique 40 candidate 8 held, 1 independent distant D with transparent original, 47 D absent, 240 JPEG; original SHA/GID/coordinate')

@@ -39,7 +39,7 @@ for i,e in enumerate(m['results']):
  b=f'checkpoints/v109_preview/{tile}__{id:03d}'
  identity=n['candidate'] if status=='candidate' else ''
  record=dict(tile_set_locator=tile,local_id=id,review_status=status,
-  observed_features=f"A 실제 원본에서 {n['visual']}. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 {delta}픽셀. D는 "+('다른 실제 근접 위치, 독립 현장 아님.' if d else '다른 위치 없어 안내판 표시.'),
+  observed_features=f"A 실제 원본에서 {n['visual']}. B는 TMX 같은 층 주변 5×5 근사 조립, C는 동일 레이어 단일 배치 제거. B-C 변화 {delta}픽셀. D는 "+('다른 실제 위치(거리 5칸 이상)이지만 원본 투명으로 식별 불가.' if e['D_independent_5_cells_or_other_map'] else ('다른 실제 근접 위치(독립 현장 아님).' if d else '다른 위치 없어 안내판 표시.')),
   identity_candidate=identity,part_role=role(identity),confidence='low' if status=='candidate' else 'none',
   source_tmx=p['tmx'],level=p['level'],layer_name=p['layer'],x=p['x'],y=p['y'],
   other_tmx=q['tmx'] if d else '',other_level=q['level'] if d else -1,other_x=q['x'] if d else -1,other_y=q['y'] if d else -1,
@@ -51,9 +51,10 @@ for i,e in enumerate(m['results']):
   review_notes=f"v109 8개 접촉 검수판 직접 시각 관찰과 review_notes PSV 2개 기록. 실제 TMX 사용 {e['uses']}회. 근접 D={d}, 독립 D={e['D_independent_5_cells_or_other_map']}, B 주변 누락={e['missing_png_neighbors_B']}. "+('원본 및 배치 기여 충분치 않아 후보 보류.' if status=='held' else '원본 외형으로 잠정 후보 제시, 독립 D 없어 신뢰도 low.')+' 공식 Local ID·PNG 높이·TileZed 미검증.')
  assert set(record)==set(fields),(i,set(fields)-set(record),set(record)-set(fields))
  rows.append(record)
-assert real_d==1 and single==47 and held+candidates==48 and sum(x['D_independent_5_cells_or_other_map'] for x in m['results'])==0
+independent=sum(bool(x['D_independent_5_cells_or_other_map']) for x in m['results'])
+assert real_d==1 and single==47 and independent==1 and held+candidates==48
 with (cp/'observations.tsv').open('w',encoding='utf8',newline='') as f:
  w=csv.DictWriter(f,fieldnames=fields,delimiter='\t',lineterminator='\n')
  w.writeheader();w.writerows(rows)
-(cp/'review_summary.json').write_text(json.dumps(dict(version='v109',observed=48,candidate=candidates,held=held,D_near=real_d,D_none=single,independent_D=0),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+(cp/'review_summary.json').write_text(json.dumps(dict(version='v109',observed=48,candidate=candidates,held=held,D_near=real_d-independent,D_available=real_d,D_none=single,independent_D=independent),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS v109 source notes to 48 TSV:',candidates,'candidate',held,'held')

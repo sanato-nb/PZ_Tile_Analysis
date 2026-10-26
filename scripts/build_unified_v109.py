@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v108 물리 DB 복사 + v109 신규 48종 직접 판독. 독립 D는 0이며 기존 계보 불변."""
+"""v108 물리 DB 복사 + v109 신규 48종 직접 판독. 독립 D 1개는 투명 원본·B-C 0으로 보류, 기존 계보 불변."""
 from pathlib import Path
 import csv,sqlite3,hashlib,zlib,base64,json,os,sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -80,7 +80,7 @@ manifest=dict(version='v109',sqlite_file='tile_visual_v109_unified.sqlite',
     source_record_count=48,observed=5358,provisional_candidates=4475,remaining=51,
     certified=0,all_prior_tables_preserved=True,
     original_sprite_evidence_images_in_github=True,mapping_verified=0,tilezed_verified=0,
-    note='v108 미관찰 48종 A/B/C와 1종 실제 근접 D 직접 판독. 나머지 D 미확보 47종. 후보 40 보류 8; 공식 Local ID/TileZed 미검증, PNG 높이 불일치.')
+    note='v108 미관찰 48종 A/B/C와 1종 실제 원거리 D를 확인했으나 투명 원본으로 정체 보류. 나머지 D 미확보 47종. 후보 40 보류 8; 공식 Local ID/TileZed 미검증, PNG 높이 불일치.')
 (out/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 statepath=ROOT/'PROJECT_STATE.json'
 s=json.loads(statepath.read_text('utf8'))
@@ -101,7 +101,7 @@ s['unified_database']=dict(version='v109',status='VERIFIED',
 s['status_date']='2026-10-26'
 s['next_actions']=[
     'v109 통합 DB 미관찰 51종에서 신규 고유 키를 선정하고 A/B/C/D 실제 증거를 확인한다.',
-    'v109 가까운 D 1종은 독립 현장 미검증이며 47종은 2번째 현장이 없어 TileZed 확인을 우선한다.',
+    'v109 D는 1종에서 5칸 이상 다른 실제 배치 확인. 그러나 A 투명·B-C 변화 0으로 정체 미식별이므로 TileZed 및 공식 Local ID 검증을 우선한다.',
     'v109 보류 8종은 제거 영향이 작거나 부품 역할이 불명확하므로 독립 배치와 TileZed 검증을 우선한다.',
     'PNG 물리 높이 불일치와 공식 Local ID·TileZed 정합을 검증한다.',
     '기존 모든 원본 DB·체크포인트·사용자 수동 검수 80종 및 재검수 계보를 보존한다.'
