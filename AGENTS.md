@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v109)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v110)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v109: 5,358/5,409종(99.0571%); 미관찰 51종; 감사 가능한 잠정 후보 4,475종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v109/`. 복원: `python3 scripts/restore_unified_v109.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v110: 5,388/5,409종(99.6118%); 미관찰 21종; 감사 가능한 잠정 후보 4,500종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v110/`. 복원: `python3 scripts/restore_unified_v110.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v110 실제 D 30종 TileZed 타일정의 텍스트 격자 잠정 크롭·직접 시각 판독 (2026-10-26)
+- v109 최신 물리 SQLite 미관찰 51종을 실제 TMX에서 검사. 다른 사용 위치 D가 있는 32종 중 원본 PNG가 존재하는 30종을 대상으로 A/B/C/D를 생성했고, 2종은 PNG 누락으로 보류. D 없는 나머지 19종은 엄격한 A/B/C/D 관찰 대상에서 제외했다.
+- 핵심 원인: TMX 아틀라스 선언은 8열이지만 TileZed `Tiles/tiledefinitions.tiles.txt`는 `d_generic_1` 16×10, `d_wallcracks_1` 9×8, `f_bushes_1` 16×8로 실제 2x PNG 격자 치수와 정확히 맞는다. **텍스트 격자로 잠정 크롭했을 뿐 공식 Local ID 인증은 아니다.**
+- 원본 A·같은 층 TMX 5×5 B·선택 배치 한 건 제거 C·다른 실제 위치 D **30종**, JPEG **150장**, 접촉판 **5장 모두 직접 시각 판독**. 원거리 D 28종, 근접 D 2종. 후보 **25종(low)**, 보류 **5종**, 기존 키 중복 0.
+- 통합 **5,388/5,409종(99.6118%)**, 미관찰 **21종**, 감사 가능 잠정 후보 **4,500종**, 최종 인증 **0종**. `analysis/current/v110/MANIFEST.json` SHA-256 `cc004fb60f6df412da3068e909f9696b0d8cedf8a57d600abd383d1e214c7de0`; 압축 7조각 복원, SQLite integrity_check, 원본 PNG/TMX SHA·좌표·GID·150 JPEG 및 ZIP 159항목 CRC 통과.
+- `checkpoints/v110/observations.tsv`·CSV·PSV·검수 보고서, `checkpoints/v110_tiledef_preview/`의 원본 JPEG 150장과 접촉판 5장, 이미지 내장 HTML 및 증거 ZIP 보존. `mapping_verified=tilezed_verified=final_certified=0` 유지. 사용자 수동 검수 80종과 과거 DB·체크포인트 불변.
+- 다음: 미관찰 **21종**, 원본 PNG 누락 2종 및 공식 TileZed Local ID 대응 검증.
 
 ## v109 원본 A/B/C/D 신규 48종 직접 시각 판독 (2026-10-26)
 - v108 SHA 검증 물리 통합 SQLite의 미관찰 99종에서 실제 신규 고유 48키를 선정했다. 원본 PNG 크롭 A, TMX 동일 층 5×5 조립 B, 동일 배치 1개 제거 C, 다른 사용 위치 D 또는 안내판을 만들어 **JPEG 240장과 접촉시트 8장 모두 직접 시각 검토**했다.
