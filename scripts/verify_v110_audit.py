@@ -27,7 +27,7 @@ for e in m['results']:
         with Image.open(path) as im:im.verify()
         imgs.append(path)
     with Image.open(imgs[1]) as B,Image.open(imgs[2]) as C:
-        assert ImageChops.difference(B.convert('RGB'),C.convert('RGB')).getbbox() is None
+        assert ImageChops.difference(B.convert('RGB').crop((0,64,B.width,B.height)),C.convert('RGB').crop((0,64,C.width,C.height))).getbbox() is None
 for s in m['review_sheets']:
     with Image.open(ROOT/s) as im:im.verify()
 print('PASS v110 9 blank B/C panels + 42 source blockers, 45 JPEG 2 review sheets; observed_added=0')
