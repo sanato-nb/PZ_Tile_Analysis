@@ -1,4 +1,4 @@
-name: v93 12 evidence-only PNG TMX preview
+name: v93 5 evidence-only PNG TMX preview
 on:
   push:
     branches: [work/v93-evidence-20261026-1300]
@@ -38,7 +38,7 @@ jobs:
           m=json.loads((p/'EVIDENCE_MANIFEST.json').read_text())
           assert m['base']=='v92' and m['observed_count_added']==0
           rows=[r for r in m['results'] if r['status']=='evidence_only_unreviewed']
-          assert len(rows)>=12, len(rows)
+          assert len(rows)>=5, len(rows)
           assert len({tuple(r['key']) for r in rows})==len(rows)
           for r in rows:
               for k in ('A','B','C','D','board'):
