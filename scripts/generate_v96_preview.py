@@ -171,7 +171,7 @@ for key in TARGETS:
         results.append({'key':key,'status':'skipped_no_usage','uses':len(uses)})
         continue
     a=uses[0]
-    b=next((p for p in uses[1:] if p['tmx']!=a['tmx'] or abs(p['x']-a['x'])+abs(p['y']-a['y'])>=5),None)
+    b=next((p for p in uses[1:] if p['tmx']!=a['tmx'] or abs(p['x']-a['x'])+abs(p['y']-a['y'])>=5),uses[1] if len(uses)>1 else None)
     d_available=b is not None
     if not d_available:b={'tmx':'','level':-1,'layer':'NO_SECOND_USE','layer_index':-1,'x':-1,'y':-1,'gid':0}
     m=MAP_DATA[a['tmx']]
