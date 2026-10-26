@@ -1,0 +1,69 @@
+name: v118 A stage strictly new 4633 (reuse prior 5409)
+on:
+  push:
+    branches: [work/v118-new-only-a-4633-20261026]
+    paths:
+      - scripts/build_v118_new_only_a_4633.py
+      - .github/workflows/build-v118-a-new-only.yml
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_v118_new_only_a_4633.py
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v117_A_candidates_10042/sheets/*
+            /review/v117_A_candidates_10042/jumbo_a3/A3_CANDIDATES.csv
+            /review/v117_A_candidates_10042/jumbo_a3/A3_JUMBO_review_sheet.jpg
+            /analysis/imports/merged_catalog_5409.csv
+      - run: python3 -m pip install --quiet Pillow
+      - name: Extract 4633 new-only A candidates and 58 contact sheets
+        run: python3 -u scripts/build_v118_new_only_a_4633.py
+      - name: Validate no prior 5409 and no old manual exclusions leaked
+        run: |
+          python3 - <<'PY'
+          import csv,json,pathlib,zipfile
+          from PIL import Image
+          r=pathlib.Path('review/v118_A_new_only_4633')
+          d=json.loads((r/'SUMMARY.json').read_text('utf8'))
+          assert d['total_range_tile_keys']==10042 and d['reused_old_unchanged']==5409
+          assert d['new_only_active']==4633 and d['prior_manual_exclusions_kept']==14
+          assert d['excluded_prior_manual_keys_in_active']==0
+          assert d['AI_per_key_A_selection_verified']==d['official_mapping_verified']==d['final_identity_certified']==0
+          with (r/'A_CANDIDATE_NEW_ONLY_4633.csv').open(encoding='utf-8-sig',newline='') as f:
+            records=list(csv.DictReader(f))
+          assert len(records)==4633
+          assert all(row['prior_in_5409']=='0' and row['user_excluded']=='0' for row in records)
+          assert len({(row['tile_set_name'],row['local_id']) for row in records})==4633
+          assert sum(d['new_only_status_counts'].values())==4633
+          assert len(list((r/'sheets').glob('new_A_*.jpg')))==58
+          for p in (r/'sheets').glob('new_A_*.jpg'):
+            with Image.open(p) as im:im.verify()
+          with zipfile.ZipFile(r/'PZ_신규4633종_A후보_검토자료.zip') as z:
+            assert z.testzip() is None and len(z.namelist())==63
+          print('PASS A active queue 4633 only, old 5409 excluded, sheets 58, CRC PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v118-new-only-4633-A-stage-zip
+          path: review/v118_A_new_only_4633/
+          compression-level: 0
+          retention-days: 90
+      - name: Commit verified A new-only queue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v118_A_new_only_4633/
+          if ! git diff --cached --quiet; then
+            git commit -m "v118 A stage new 4633 only: exclude all 5409 previously analyzed, 58 source sheets"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
