@@ -94,6 +94,13 @@
 - 검토 HTML·ZIP과 매니페스트는 `review/v118_A_new_only_4633/`. ZIP CRC PASS, 63개 항목. 정확한 이미지 Local ID 공식 매핑과 정체 최종 인증은 0이며, 후보 미확보를 투명 확정으로 처리하지 않음.
 - 최신 실제 통합 SQLite는 **v116 불변**. `PROJECT_STATE.json.latest_active_a_scope`만 새 A 작업 대상으로 갱신. 이후 A 검증·B/C/D 분석은 반드시 신규 4,633키 대상으로만 진행.
 
+## 최신 v119: 신규 대표 A 4,632종 실제 이미지 및 SHA (2026-10-26)
+
+- 새 키 4,633 중 4,632종의 원본 알파 포함 대표 A PNG를 생성해 10개 ZIP으로 보관. A1 1,544종, A2 3,068종, JUMBO A3 20종. overlay_graffiti_wall_02/2 한 종 보류.
+- 개별 출처/크롭 좌표/바이트 SHA/알파/ZIP 참조: review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv. 58장 검수판 sheets/SELECTED_A_000.jpg..057.jpg. 10개 ZIP CRC 및 4,632개 PNG 이미지-원본 RGBA 픽셀 SHA 전수 확인 통과.
+- 기존 5,409키·사용자 제외 14종·기존 v116 SQLite 모두 수정하지 않았다. PROJECT_STATE.json.latest_selected_A_stage 참고.
+- 이것은 **잠정 대표 이미지 배정**이다. 실제 PNG와 TMX Local ID의 공식 일치 검증 및 개별 AI/TileZed 인증 0종. JUMBO A3 프레임 혼합 가능성이 남는다.
+
 ## 불변 원칙
 
 - 이미지 직접 관찰, 추론 후보, PNG-TMX Local ID 검증, TileZed 렌더 검증, 최종 인증을 분리한다.
