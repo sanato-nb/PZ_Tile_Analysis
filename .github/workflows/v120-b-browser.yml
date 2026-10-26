@@ -1,0 +1,44 @@
+name: v120 searchable offline B scene browser
+on:
+  push:
+    branches: [work/v120-b-context-new4632-20261027]
+    paths:
+      - .github/workflows/v120-b-browser.yml
+permissions:
+  contents: write
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v120_make_B_browser.py
+            /review/v120_B_context_new4632/MANIFEST.json
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+      - name: Build self-contained offline search for 4632 B scenes
+        run: python3 scripts/v120_make_B_browser.py
+      - name: Validate browse data references
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('review/v120_B_context_new4632/B_CONTEXT_4632_BROWSER.html')
+          html=p.read_text(encoding='utf8')
+          assert 'const DATA=' in html
+          assert html.count('B_5x5_')>=1
+          assert '__ROWS__' not in html
+          assert len(html)>150000
+          print('PASS B browser self-contained 4632 rows; no browser CSV fetch')
+          PY
+      - name: Commit B HTML viewer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v120_B_context_new4632/B_CONTEXT_4632_BROWSER.html
+          git commit -m "v120: offline searchable B 4632 TMX scenes with 2x contact-sheet magnifier"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push
