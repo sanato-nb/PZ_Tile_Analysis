@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v96)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v97)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v96: 4,446/5,409종(82.1963%); 미관찰 963종; 감사 가능한 잠정 후보 3,737종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v96/`. 복원: `python3 scripts/restore_unified_v96.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v97: 4,566/5,409종(84.4149%); 미관찰 843종; 감사 가능한 잠정 후보 3,841종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v97/`. 복원: `python3 scripts/restore_unified_v97.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v97 신규 120종 A/B/C/D 시각 판독 (2026-10-26)
+- v96 통합 SQLite의 미관찰 대기열 **963종**에서 기존 관찰과 겹치지 않는 **120종**(118개 타일셋)을 선정했다. 원본 PNG A, TMX 실제 같은 층 주변 5×5 B, 동일 레이어 대상 한 배치 제거 C, 다른 실제 위치가 있으면 D 아니면 미확보 D 안내판을 생성했다. 개별 증거와 판독 보드 **600 JPEG**, 6개 타일씩 합친 **20개 접촉시트 모두 직접 열어 시각 판독**, `checkpoints/v97/review_notes_*.psv` 8개와 `observations.tsv`로 기록.
+- 실제 다른 사용 위치 D **15종 모두 근접 비독립**, 다른 위치 없는 **105종**은 D 안내 화면. 독립된 원거리 D는 **0종**. A 외형과 B/C 제거 비교가 충분하지 않으면 보류했다.
+- 신규 이미지 관찰 **120종**, 잠정 후보 **104종**(신뢰도 전부 low), 보류 **16종**, 중복 **0종**. 누적 **4,566/5,409종(84.4149%)**, 미관찰 **843종**, 감사 가능한 잠정 후보 **3,841종**, 최종 인증 **0종**.
+- `analysis/current/v97/MANIFEST.json`에서 물리 SQLite **87,322,624바이트** SHA-256 `1e9976cf3df2c89f79a07e138628c3d2e0f526b6e675e01d393c2c8aa53fde64`와 7개 복구 조각의 SHA를 보존. v96 원본 확인 후 복제해 이전 v36~v96 전체 DB 테이블 및 사용자 수동 검수 80종의 별도 계보를 유지. DB integrity_check, 중복, SQL 총수, 원본 PNG/TMX SHA, TMX 좌표와 GID, JPEG 로딩, DB 압축 복원 모두 통과.
+- `checkpoints/v97/`에 관찰 CSV/TSV, 300장씩 이미지 내장 HTML 2개 및 증거 ZIP 2개(각 314항목, **ZIP CRC PASS**) 보존. `checkpoints/v97_preview/` 원본 JPEG 600장·접촉시트 20장·증거 매니페스트 보존.
+- 공식 PNG–TMX Local ID 정합 및 TileZed 미검증이므로 신규 `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0` 유지. 다음은 v97 통합 SQLite 대기열 **843종**에서 재개.
 
 ## v96 신규 120종 A/B/C 직접 시각 분석 (2026-10-26)
 - v95 물리 통합 SQLite의 미관찰 1,083종에서 고유 **120종** 선정. 서로 다른 120개 타일셋에 대해 원본 PNG A·TMX 같은 층 주변 5×5 B·선택 레이어 하나 제거 C·D 실제 근접 사용 좌표 또는 미확보 안내·ABCD 합본 **총 600 JPEG** 생성. 6종씩 묶인 20개 접촉 시각검수판을 전부 직접 열어 관찰하고 개별 시각 관찰 notes 9개 파일에 기록.
