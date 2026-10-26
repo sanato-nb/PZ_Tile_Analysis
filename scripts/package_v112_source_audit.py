@@ -18,7 +18,7 @@ assets=[
  *[PRE/e[k] for e in m['results'] for k in ('A','B','C','D','board')],
  *[R/x for x in m['review_sheets']]
 ]
-assert len(assets)==23,len(assets)
+assert len(assets)==24,len(assets)
 assert len(set(assets))==len(assets)
 for im in assets:
     assert im.is_file() and im.stat().st_size
