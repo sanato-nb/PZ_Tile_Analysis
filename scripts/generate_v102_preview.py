@@ -61,10 +61,10 @@ def resolve(m,gid):
     if gid<t['first']:return None
     return t,gid-t['first']
 
-subprocess.run([sys.executable,str(ROOT/'scripts/restore_unified_v100.py'),'/tmp/pz_v100_preview.sqlite'],check=True)
-with sqlite3.connect('/tmp/pz_v100_preview.sqlite') as conn:
+subprocess.run([sys.executable,str(ROOT/'scripts/restore_unified_v101.py'),'/tmp/pz_v101_preview.sqlite'],check=True)
+with sqlite3.connect('/tmp/pz_v101_preview.sqlite') as conn:
     queue={(r[0],int(r[1])) for r in conn.execute('select tile_set_locator,local_id from analysis_queue')}
-assert len(queue)==423,len(queue)
+assert len(queue)==375,len(queue)
 target_set=queue
 for name,m in MAP_DATA.items():
     for layer in m['layers']:
@@ -149,19 +149,19 @@ for key in eligible:
 families=sorted(buckets, key=lambda name:(0 if name.startswith(('fixtures_','furniture_','appliances_','walls_','industry_','location_','vegetation_','carpentry_','crafted_')) else 1,name))
 selected=[]
 for round_idx in range(100):
-    if len(selected)>=100: break
+    if len(selected)>=500: break
     for family in families:
         keys=buckets[family]
         if round_idx>=len(keys):continue
         key=keys[round_idx]
         selected.append(key)
-        if len(selected)>=100:break
-# v100 SQLite의 미관찰 대기열에서만 선택, 이전 v100 키 중복 불허.
+        if len(selected)>=500:break
+# v101 SQLite의 미관찰 대기열에서만 선택, 이전 v101 키 중복 불허.
 # 서로 다른 타일셋 우선. 다른 실사용 D가 없으면 미확보로 표시.
 # 병행 v101 48종은 기존 이미지 관찰로 취급하여 신규 선택에서 제외한다.
 EXCLUDED_V101=[["appliances_cooking_01",65],["appliances_refrigeration_01",21],["fixtures_counters_01",93],["furniture_bedding_01",39],["furniture_seating_indoor_03",108],["furniture_storage_01",66],["industry_01",37],["industry_02",70],["location_business_machinery_01",11],["location_community_church_small_01",41],["location_community_medical_01",33],["location_restaurant_bar_01",17],["location_trailer_02",35],["walls_decoration_01",58],["walls_detailing_02",49],["walls_exterior_house_02",75],["walls_exterior_roofs_03",37],["walls_exterior_roofs_09",106],["walls_exterior_roofs_30_03",21],["walls_exterior_roofs_30_06",51],["walls_exterior_roofs_30_16",29],["walls_interior_bathroom_01",36],["walls_interior_house_04",22],["boulders",41],["floors_rugs_01",35],["lighting_indoor_02",36],["overlay_graffiti_wall_01",78],["radio_tower",96],["recreational_01",41],["recreational_sports_01",161],["roofs_30_01",45],["roofs_30_02",65],["roofs_30_10",37],["roofs_shallow_01",23],["rooftop_furniture",45],["signs_miscbrands_01",70],["signs_one-off_02",197],["signs_one-off_09",160],["street_decoration_01",59],["appliances_cooking_01",72],["appliances_refrigeration_01",31],["fixtures_counters_01",146],["furniture_bedding_01",48],["furniture_seating_indoor_03",109],["furniture_storage_01",67],["industry_01",61],["industry_02",71],["location_business_machinery_01",12]]
 EXCLUDED_V101=set(tuple(x) for x in EXCLUDED_V101)
-TARGETS=[k for k in selected if k not in EXCLUDED_V101][:TARGET_COUNT]
+TARGETS=[k for k in selected if k not in EXCLUDED_V101 and len(OCC[k])>1][:TARGET_COUNT]
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
 assert len(TARGETS)>=TARGET_COUNT,('not enough review targets',TARGETS)
@@ -169,7 +169,7 @@ print('v102 UNREVIEWED PREVIEW TARGETS',TARGETS,flush=True)
 results=[]
 for key in TARGETS:
     if key not in queue:
-        results.append({'key':key,'status':'skipped_not_in_v100_queue'})
+        results.append({'key':key,'status':'skipped_not_in_v101_queue'})
         continue
     uses=OCC[key]
     if len(uses)<1:
@@ -218,7 +218,7 @@ for key in TARGETS:
         'rendered_placements_D':dd_count,
         'mapping_verified':False,'tilezed_verified':False,'final_certified':False})
 (OUT/'EVIDENCE_MANIFEST.json').write_text(json.dumps({
-    'source':'GitHub original PNG and TMX','base':'v100','observed_count_added':0, 'excluded_early_v100_keys':0,
+    'source':'GitHub original PNG and TMX','base':'v101','observed_count_added':0, 'excluded_early_v101_keys':0,
     'rendering':'approximate isometric, not TileZed; actual D only when other map or >=5 cells; absence explicitly shown',
     'original_tmx_suffix_note':'Repository files omit (2), but 5409/302177 scope counts match',
     'sha256':HASHES,'results':results},ensure_ascii=False,indent=2),encoding='utf8')
