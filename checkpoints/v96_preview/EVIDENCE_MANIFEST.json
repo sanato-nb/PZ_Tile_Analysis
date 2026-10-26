@@ -175,8 +175,8 @@
     "Tiles/2x/floors_exterior_tilesandstone_01.png": "9efd0a6e12d63bc6fdef5f62b7a6e716627eaf2437e6644f416b5b4b4f861079",
     "Tiles/2x/walls_interior_house_01.png": "4516fddc700f6746f675fbcb7d1b2f152800bf894caff7689b7773cae7a3f4cb",
     "Tiles/2x/fixtures_railings_01.png": "9db0763cb3f40287994d8ec45c62f7300941f2d9e3192add5c51dfdf24bfb9dc",
-    "Tiles/2x/industry_trucks_01.png": "5012a8047e90082bb9d9a8ca3379b86da7c8b478185da3100907fc37608641ba",
     "Tiles/2x/walls_interior_house_02.png": "9889dcfec3f70bcc06e8e2abbf654e115f6e3a537138921ccc67f63e5ee9694b",
+    "Tiles/2x/industry_trucks_01.png": "5012a8047e90082bb9d9a8ca3379b86da7c8b478185da3100907fc37608641ba",
     "Tiles/2x/walls_interior_house_12.png": "5c1b4112346e85c520fd14aaa8f59e261d51ecfbf6447f7eeeda8e0f361fff68",
     "Tiles/2x/walls_interior_house_10.png": "ef5b3e4dc85d6966968adb8c25e0ea5cacaa9e93949b57f996e96e9a619364ba",
     "Tiles/2x/fixtures_windows_01.png": "77d0f322452994510021d8e46b685571dedb13fa321821c1552dedb8892aa1a7",
@@ -200,14 +200,15 @@
     "Tiles/2x/fixtures_windows_wood.png": "59c251a79cf8f9f2a1d9ed084993868f1bf805b2252b7c98ac330011998116f1",
     "Tiles/2x/walls_decoration_05.png": "6160a8178b7427b33855a90bcab9e767d6108c4a2202b63362b5d20b39ea4e23",
     "Tiles/2x/walls_exterior_roofs_05.png": "c49cae135ba0ed1f242a36af8df6238fd5a8ae6049c7076f96a16ed871b6bcb1",
+    "Tiles/2x/walls_exterior_roofs_06.png": "5296f047ba09401cafcdfa3f13e7fbd905ccb1ffa95bf6d0e7394aa38b75b84f",
+    "Tiles/2x/walls_exterior_wooden_01.png": "b355763279009ad04d2999e28d78b00ae484d75f53e0e3dcb67436550826c9be",
     "Tiles/2x/walls_interior_house_13.png": "8bf2b85ac159b06e43b27bddee26cb584fecc827bfabefb4c7a6634823ce8012",
     "Tiles/2x/appliances_laundry_01.png": "3ae228b548c1686f1b9102a60f40cab0de8e9b9b9be715e0267a585894db2ef5",
     "Tiles/2x/blends_natural_02.png": "a798b431af24fc7e6b28e3420e338b5aaec5e1940dfc9c94b3aaa8fe761c4903",
     "Tiles/2x/blends_streetoverlays_01.png": "2e65c3fd64a2551a44134cd6c20df8e2ec9a2cb5bbfdba115e9a240b6f0685fd",
     "Tiles/2x/industry_railroad_05.png": "c46871dddaf6d9599967a3960616f476db397656955c4e27c9ddccbdad6bbc48",
     "Tiles/2x/street_curbs_01_diag_2.png": "277730fc35f78a61a4dd768413f8e8703799e5d4bb91a1a05f3a5c05b63a07f6",
-    "Tiles/2x/location_hospitality_sunstarmotel_01.png": "a39e09e3709bb4dc432975f749306b7de523e7b4bb1b2490b581ee420c8521c2",
-    "Tiles/2x/walls_exterior_roofs_06.png": "5296f047ba09401cafcdfa3f13e7fbd905ccb1ffa95bf6d0e7394aa38b75b84f"
+    "Tiles/2x/location_hospitality_sunstarmotel_01.png": "a39e09e3709bb4dc432975f749306b7de523e7b4bb1b2490b581ee420c8521c2"
   },
   "results": [
     {
@@ -804,15 +805,15 @@
         "gid": 6149
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay2",
+        "layer_index": 22,
+        "x": 196,
+        "y": 44,
+        "gid": 6149
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 3,
       "visible_pixel_delta": 10791,
@@ -821,7 +822,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 83,
       "rendered_placements_C": 82,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 60,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -1200,15 +1201,15 @@
         "gid": 8115
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 130,
+        "y": 204,
+        "gid": 8115
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 3,
       "visible_pixel_delta": 2532,
@@ -1217,7 +1218,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 81,
       "rendered_placements_C": 80,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 68,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -1376,15 +1377,15 @@
         "gid": 8610
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay3",
+        "layer_index": 33,
+        "x": 92,
+        "y": 73,
+        "gid": 8610
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 2,
       "visible_pixel_delta": 1461,
@@ -1393,7 +1394,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 40,
       "rendered_placements_C": 39,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 47,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -1508,15 +1509,15 @@
         "gid": 9970
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 199,
+        "y": 116,
+        "gid": 9970
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 2,
       "visible_pixel_delta": 23,
@@ -1525,7 +1526,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 74,
       "rendered_placements_C": 73,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 45,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -1992,15 +1993,15 @@
         "gid": 12102
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay3",
+        "layer_index": 13,
+        "x": 153,
+        "y": 86,
+        "gid": 12102
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 3,
       "visible_pixel_delta": 6359,
@@ -2009,7 +2010,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 60,
       "rendered_placements_C": 59,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 49,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -2740,15 +2741,15 @@
         "gid": 27677
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay",
+        "layer_index": 20,
+        "x": 99,
+        "y": 70,
+        "gid": 27677
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 5,
       "visible_pixel_delta": 6667,
@@ -2757,7 +2758,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 68,
       "rendered_placements_C": 67,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 28,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -2828,15 +2829,15 @@
         "gid": 28005
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 203,
+        "y": 147,
+        "gid": 28005
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 4,
       "visible_pixel_delta": 2633,
@@ -2845,7 +2846,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 71,
       "rendered_placements_C": 70,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 59,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -3840,15 +3841,15 @@
         "gid": 32914
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 243,
+        "y": 117,
+        "gid": 32914
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 2,
       "visible_pixel_delta": 6255,
@@ -3857,7 +3858,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 65,
       "rendered_placements_C": 64,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 61,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -3884,15 +3885,15 @@
         "gid": 33378
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay1",
+        "layer_index": 31,
+        "x": 183,
+        "y": 22,
+        "gid": 33378
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 3,
       "visible_pixel_delta": 2767,
@@ -3901,7 +3902,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 35,
       "rendered_placements_C": 34,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 41,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -3972,15 +3973,15 @@
         "gid": 33732
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay",
+        "layer_index": 11,
+        "x": 123,
+        "y": 69,
+        "gid": 33732
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 3,
       "visible_pixel_delta": 3175,
@@ -3989,7 +3990,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 64,
       "rendered_placements_C": 63,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 55,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -4588,15 +4589,15 @@
         "gid": 7021
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay",
+        "layer_index": 20,
+        "x": 150,
+        "y": 32,
+        "gid": 7021
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 6,
       "visible_pixel_delta": 0,
@@ -4605,7 +4606,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 68,
       "rendered_placements_C": 67,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 78,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -4896,15 +4897,15 @@
         "gid": 14969
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 4,
+        "layer": "FloorOverlay",
+        "layer_index": 49,
+        "x": 118,
+        "y": 230,
+        "gid": 14969
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 2,
       "visible_pixel_delta": 2028,
@@ -4913,7 +4914,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 8,
       "rendered_placements_C": 7,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 9,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -5160,15 +5161,15 @@
         "gid": 16101
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay1",
+        "layer_index": 21,
+        "x": 247,
+        "y": 116,
+        "gid": 16101
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 4,
       "visible_pixel_delta": 4015,
@@ -5177,7 +5178,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 58,
       "rendered_placements_C": 57,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 57,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -5336,15 +5337,15 @@
         "gid": 16803
       },
       "other_placement": {
-        "tmx": "",
-        "level": -1,
-        "layer": "NO_SECOND_USE",
-        "layer_index": -1,
-        "x": -1,
-        "y": -1,
-        "gid": 0
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay1",
+        "layer_index": 21,
+        "x": 218,
+        "y": 46,
+        "gid": 16803
       },
-      "other_placement_available": false,
+      "other_placement_available": true,
       "D_independent_5_cells_or_other_map": false,
       "uses": 4,
       "visible_pixel_delta": 6144,
@@ -5353,7 +5354,7 @@
       "missing_png_neighbors_D": 0,
       "rendered_placements_B": 28,
       "rendered_placements_C": 27,
-      "rendered_placements_D": 0,
+      "rendered_placements_D": 29,
       "mapping_verified": false,
       "tilezed_verified": false,
       "final_certified": false
@@ -5516,23 +5517,23 @@
   "review_sheets_sha256": {
     "checkpoints/v96_preview/review_sheets/sheet_000.jpg": "44c7477b211feee0bcd86a916d0c13f9f5abe3012acccc318caa4fa558a52117",
     "checkpoints/v96_preview/review_sheets/sheet_001.jpg": "4650f418f4f63a2548a12f5144e39e424118c8d2932babfc3ee8d4e4e8010036",
-    "checkpoints/v96_preview/review_sheets/sheet_002.jpg": "c2b7c3e9d5cc9df1032eae41d52c6d1d0d08763173fd49529c4a7102a522603c",
-    "checkpoints/v96_preview/review_sheets/sheet_003.jpg": "5059769b3923a8b8cf182ceb174fd5859af0aa19feafbbf112293e2f772b117d",
-    "checkpoints/v96_preview/review_sheets/sheet_004.jpg": "a3d5b5abc358ae02b7b7fc0836bee99e07ff1b922417b5fa58e53595d6dcbbbc",
+    "checkpoints/v96_preview/review_sheets/sheet_002.jpg": "153ab76624a3dda7ea57cd3cf8a168b5a32a716abbbae768e295c7bfe8e9a535",
+    "checkpoints/v96_preview/review_sheets/sheet_003.jpg": "47cfa8d8f4a98dd3b0281691c2a85dc74762b297947b0d3e2637d22c767c9227",
+    "checkpoints/v96_preview/review_sheets/sheet_004.jpg": "0d0c8f0ffe837dc39fd9c15b8106203ccc5d89f50eba99647120e54656cc2df9",
     "checkpoints/v96_preview/review_sheets/sheet_005.jpg": "8789e0e4b9a11a95f98f2a44623141a78203f5f88ef5d76b098e3a17dd503c76",
-    "checkpoints/v96_preview/review_sheets/sheet_006.jpg": "64bc50545a89cb36204722e0b997a38bc665d7762874cafa5ca0c406ebd4946d",
+    "checkpoints/v96_preview/review_sheets/sheet_006.jpg": "c139b5c8dd2b2f391d901c3519bf2351329cf9f947f6f73c015683a96a524632",
     "checkpoints/v96_preview/review_sheets/sheet_007.jpg": "9b2aeb115d7a402e4a9d60939723eef6fc88da817acce4dc9045ebc398a979e4",
     "checkpoints/v96_preview/review_sheets/sheet_008.jpg": "a8351b5680ebce1744bfc6394278e8dd8ee22cadeebe131af578bb52a08b4cae",
-    "checkpoints/v96_preview/review_sheets/sheet_009.jpg": "4b5bb8c965c40fe8652fe68c85bf4c12230810ec1e846ded896526daff468851",
+    "checkpoints/v96_preview/review_sheets/sheet_009.jpg": "b44c753db52a5649ae0c0cc23b0bb7a716f7dec57b5b55bb0e66cefd48700ef0",
     "checkpoints/v96_preview/review_sheets/sheet_010.jpg": "b2fbc2ebfb8dd56b068a64c93add3c9067a206df1d2b950410ee465966feb432",
     "checkpoints/v96_preview/review_sheets/sheet_011.jpg": "e6bd586bbcc7e192f5b83adfe277e83f8b0c6d4e62575d0b006025358b7ba866",
     "checkpoints/v96_preview/review_sheets/sheet_012.jpg": "775d47f50b24907833b6bd70fce267322620ab66f7fc3f08fbd71f7ec0800354",
-    "checkpoints/v96_preview/review_sheets/sheet_013.jpg": "50b3d201b0da892f900ac7e6f57d62a3e7296bf0a9261f86093e38d6cafe3950",
-    "checkpoints/v96_preview/review_sheets/sheet_014.jpg": "b5816fcf10bd2348524428388a04166e871ef9585caf2b30b921fc4c6b365469",
+    "checkpoints/v96_preview/review_sheets/sheet_013.jpg": "ad79992972b0c5ff43303cd639130d51100f8c840e1cf4294db9d35273e32244",
+    "checkpoints/v96_preview/review_sheets/sheet_014.jpg": "3a57f07d61e9fa70e79e2062ab0be55b51348022c7df6aaeb65d81c74662fe97",
     "checkpoints/v96_preview/review_sheets/sheet_015.jpg": "66c12dd1b3d3ef2fc663c190b5fa5aae1e387832dbd59fbaa17d0202867d2f19",
-    "checkpoints/v96_preview/review_sheets/sheet_016.jpg": "4b13b73b5dd029254d2d9823131dd05452fd6e7933e791c4d5d9c2fa779de7a1",
-    "checkpoints/v96_preview/review_sheets/sheet_017.jpg": "99b0240de3d962dd56153cc0fffbbccfc1fb29a7638693db1afc2a232256999b",
-    "checkpoints/v96_preview/review_sheets/sheet_018.jpg": "d648829d0518dcac0d85658477ad17ca4b8d17e00a51c180abdf0a20d6efebf3",
-    "checkpoints/v96_preview/review_sheets/sheet_019.jpg": "6972d5dded103cd98f231b72750d14197b3db846117f3fa14491769f69d791b3"
+    "checkpoints/v96_preview/review_sheets/sheet_016.jpg": "b67d39d00b807a53526bb007a4e074092dcc9c5cfa55418324378fd8b875c5a5",
+    "checkpoints/v96_preview/review_sheets/sheet_017.jpg": "2d994515eb625b63162f5d497f7925d64e1fc1eb87b0164a6ab54688ef0c78ab",
+    "checkpoints/v96_preview/review_sheets/sheet_018.jpg": "616ddae9a78688cd62633b1b00a812254b14d64c4c46447d5a5ab0c063e151a2",
+    "checkpoints/v96_preview/review_sheets/sheet_019.jpg": "0423b0c8ff33c158f7b9d8a4ec555a2f8817bb8db6b058b2f24588ec975e952b"
   }
 }
