@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v108)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v109)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v108: 5,310/5,409종(98.1697%); 미관찰 99종; 감사 가능한 잠정 후보 4,435종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v108/`. 복원: `python3 scripts/restore_unified_v108.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v109: 5,358/5,409종(99.0571%); 미관찰 51종; 감사 가능한 잠정 후보 4,475종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v109/`. 복원: `python3 scripts/restore_unified_v109.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v109 원본 A/B/C/D 신규 48종 직접 시각 판독 (2026-10-26)
+- v108 SHA 검증 물리 통합 SQLite의 미관찰 99종에서 실제 신규 고유 48키를 선정했다. 원본 PNG 크롭 A, TMX 동일 층 5×5 조립 B, 동일 배치 1개 제거 C, 다른 사용 위치 D 또는 안내판을 만들어 **JPEG 240장과 접촉시트 8장 모두 직접 시각 검토**했다.
+- 개별 관찰 PSV 48개를 2개 파일에 보존하고 원본 해시·GID·좌표·B-C 픽셀 차이·다른 배치 정보를 TSV/CSV로 기록했다. **잠정 정체 후보 40종(low)**, 모호·투명·변화 적은 대상 **보류 8종**, 신규 고유키 중복 0. 통합 관찰 **5,358/5,409종(99.0571%)**, 미관찰 **51종**, 감사 가능 후보 **4,475종**, 공식 인증 **0종**.
+- 다른 실제 TMX 사용 D **1종**은 5칸 이상 떨어진 위치를 확인했으나 **원본 A가 투명하고 B-C 변화가 0**이라 정체 판단이 불가능하다. **근접 D 0종, 다른 D 미확보 47종**. D가 있다고 정체 인증을 올리지 않는다.
+- v109 통합 SQLite: `analysis/current/v109/MANIFEST.json` 총 **89,051,136 bytes**, SHA-256 `418ba566102c6e3d727c0bf33d5a6228fb2956c7a15b4c1c6f9002fbb235ec61`. v36~v108의 모든 과거 테이블 물리 보존; 압축 Base64 7개 조각 재복원·SQLite `integrity_check`·원본 PNG/TMX SHA·GID/좌표·중복 검사 PASS.
+- `checkpoints/v109/`: CSV/TSV, 이미지 **240장 내장 HTML**, ZIP 증거 252항목 CRC PASS. ZIP SHA-256 `fc9390e349fe7d2d42e31a67825deef389c1fbd4a1ec1dd3ad3eb1405683bb78`. `checkpoints/v109_preview/`의 원본 JPEG 240장, 접촉시트 8장을 보존.
+- 기존 사용자 수동 검수 80종 및 v36~v108 데이터·PNG/TMX 불변. Local ID·PNG 높이·TileZed 정합 검증은 미완료 `mapping_verified=tilezed_verified=final_certified=0`. **다음은 v109 미관찰 51종**.
 
 ## v108 신규 48종 원본 PNG/TMX A/B/C/D 직접 시각 판독 (2026-10-26)
 - v107 통합 SQLite 미관찰 147종에서 신규 고유 48종 선택, A 원본 PNG, B 같은 층 TMX 5×5, C 단일 배치 제거, D 실제 근접 다른 배치 3종 또는 D 미확보 안내 45종을 생성. 접촉 검수판 8장에 담긴 48종을 시각 판독하고 개별 관찰 PSV 48행 기록.
