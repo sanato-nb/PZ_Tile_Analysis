@@ -1,0 +1,42 @@
+name: v96 independent 14 evidence package
+on:
+  push:
+    branches: [work/v96-visual-20261026-continued]
+    paths:
+      - scripts/package_v96_independent_14.py
+      - .github/workflows/v96-independent-14-package.yml
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v95/*
+            /scripts/restore_unified_v95.py
+            /scripts/package_v96_independent_14.py
+            /checkpoints/v96/INDEPENDENT_AUDIT_14_REAL_D_20261026.*
+            /checkpoints/v96_preview/*
+            /.github/workflows/v96-independent-14-package.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Build and verify 14 evidence package
+        run: python3 scripts/package_v96_independent_14.py
+      - name: Commit supplementary evidence package
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse checkpoints/v96/independent_14/
+          if ! git diff --cached --quiet; then
+            git commit -m "검증: v96 독립 14종 이미지내장 HTML·증거 ZIP·보조 SQLite·CRC"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
