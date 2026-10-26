@@ -69,10 +69,10 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "v118 ACTIVE A SCOPE ONLY: read review/v118_A_new_only_4633/A_CANDIDATE_NEW_ONLY_4633.csv: 4633 new keys, no prior 5409; never rerun prior 5409 by default.",
-    "From 4633 new A keys: 1544 A1=A2 consistent, 3068 one-visible, 20 JUMBO A3 provisional, 1 missing source overlay_graffiti_wall_02/2; verify actual Local ID using visual/cross-context rather than assuming image exists means mapping verified.",
-    "Prior A data 5409 from v116 and v117 remains untouched, including 14 earlier manual exclusions. Only if user explicitly requests old-key re-audit should revisit.",
-    "Official mapping and TileZed check are still 0; after credible A visual validation run B/C/D and actual image-grounded identity inference for new keys."
+    "Only 4633 NEW keys are in current A selection, 4632 actual original RGBA selected A crops archived by v119. Do not rerun past 5409 or overwrite v116 DB.",
+    "Read review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv for each representative_A, PNG crop, ZIP shard entry, alpha and SHA; all selected image bytes verified.",
+    "Before any A is asserted officially matched to a TMX local ID, visually verify B/C/D and authoritative TileZed atlas mapping, especially A3 JUMBO 20.",
+    "Hold overlay_graffiti_wall_02 / Local ID 2 as exact original PNG missing; no transparency certification. Preserve previous manual 14 exclusions and historical records."
   ],
   "warnings": [
     "Do not count 2,509+477 as unique: the verified overlap is 402.",
@@ -264,5 +264,37 @@
     "tilezed_verified": 0,
     "final_certified": 0,
     "warning": "Source A candidates visible or mechanically proposed ≠ AI verified Local ID mapping; old 5409 are excluded only from new review queue, not from master data."
+  },
+  "latest_selected_A_stage": {
+    "version": "v119",
+    "date": "2026-10-26",
+    "scope": "new_4633_only",
+    "parent_scope": "v118",
+    "whole_range_tiles": 10042,
+    "old_5409_reused_not_reanalyzed": true,
+    "new_keys": 4633,
+    "representative_A_selected": 4632,
+    "A1_A2_identical_selected_A1": 1544,
+    "sole_visible_selected_A2": 3068,
+    "jumbo_guess_selected_A3": 20,
+    "held_missing_png": 1,
+    "held_key": [
+      "overlay_graffiti_wall_02",
+      2
+    ],
+    "png_source_files_used": 287,
+    "png_shards": 10,
+    "all_zip_crc_pass": true,
+    "selected_contact_sheets": 58,
+    "ledger": "review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv",
+    "ledger_sha256": "b8e87f48800b4064872922428c1958d11cb9c9a9dc2e3f6900b6a68613a3e45d",
+    "manifest_path": "review/v119_selected_A_new4633/MANIFEST.json",
+    "source_original_pixels_verified": true,
+    "user_prior_excluded_preserved": 14,
+    "ai_per_localid_image_mapping_verified": 0,
+    "official_mapping_verified": 0,
+    "tilezed_verified": 0,
+    "final_identity_certified": 0,
+    "note": "Provisional selected images actually extracted from original PNG and SHA verified. Sprite-to-TMX-Local-ID mapping not independently authenticated; A3 JUMBO can include neighboring sprite pixels."
   }
 }
