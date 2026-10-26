@@ -38,3 +38,5 @@ with zipfile.ZipFile(zp) as z:
 report={'version':'v83','zip_sha256':hashlib.sha256(zp.read_bytes()).hexdigest(),'zip_size_bytes':zp.stat().st_size,'zip_files':len(files),'zip_crc':'PASS','image_count':60,'image_load':'PASS','embedded_html_images':60,'html_size_bytes':out.stat().st_size,'observations':12,'provisional':10,'held':2,'certified':0}
 (CP/'ZIP_CRC_REPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 print('PASS v83 HTML/JPEG/ZIP CRC',report)
+
+# v83 rerun after concurrent artifact push conflict; preserve corrected candidate/held counts.
