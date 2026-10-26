@@ -1,0 +1,54 @@
+name: v115 visual review sheets for existing 888
+on:
+  push:
+    branches: [work/v115-ai-review-888-20261026]
+    paths:
+      - scripts/v115_make_visual_sheets.py
+      - .github/workflows/v115-visual-sheets.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /review/888_no_identity_candidate/PZ_888종_일괄수동검수.html
+            /scripts/v115_make_visual_sheets.py
+            /review/v115_model_visual/*
+      - run: python3 -m pip install --quiet pillow
+      - name: Make actual visual sheets
+        run: python3 scripts/v115_make_visual_sheets.py
+      - name: Validate 888 entries and 74 sheets
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          from PIL import Image
+          root=pathlib.Path('review/v115_model_visual')
+          m=json.loads((root/'MANIFEST.json').read_text())
+          assert (m['n'],m['sheets'],m['per_sheet'])==(888,74,12)
+          assert len(list(root.glob('sheet_*.jpg')))==74
+          for p in root.glob('sheet_*.jpg'):
+            with Image.open(p) as im:im.verify()
+          print('PASS 74 sheets for actual visual review')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v115-original-A1-A2-B-C-D-contact-sheets
+          path: review/v115_model_visual
+          retention-days: 90
+      - name: Commit auditable evidence images to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v115_model_visual/
+          if ! git diff --cached --quiet; then
+            git commit -m "v115 evidence: 74 direct-image review sheets for 888"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
