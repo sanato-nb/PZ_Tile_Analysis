@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v109)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v110)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v109: 5,358/5,409종(99.0571%); 미관찰 51종; 감사 가능한 잠정 후보 4,475종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v109/`. 복원: `python3 scripts/restore_unified_v109.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v110(진단): 5,358/5,409종(99.0571%); 미관찰 51종; 감사 가능한 잠정 후보 4,475종; 최종 인증 0종**. 관찰 수 증가 0인 원본 소스 복구 대기열 검증이다.
+- 최신 물리 통합 SQLite: `analysis/current/v110/`. 복원: `python3 scripts/restore_unified_v110.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v110 원본 소스 결손 진단 — 새 관찰 0종·남은 51종 분석 (2026-10-26)
+- v109 완전 통합 SQLite의 미관찰 **51종 전체**를 실제 원본 PNG/TMX와 대조했다. **37종 Local ID가 PNG 범위 밖**, **5종 PNG 파일 누락**, 나머지 **9종**은 개별 PNG 크롭 가능하나 A에서 가시적 형상이 없고 B-C 제거 변화가 **전부 0픽셀**이다.
+- 9종 A/B/C/D 실제 JPEG **45장**과 접촉 검수판 **2장**을 생성해 전부 직접 시각 관찰했고, 9종 전부 정체 판정 보류. 다른 D 위치가 있어도 가시적 타일 기여는 확인되지 않았다.
+- 미해결 51종을 checkpoints/v110/unresolved_51.csv와 별도 SQLite v110_unresolved_queue_audit 테이블로 기록했다. **신규 관찰 0 / 후보 0 / 인증 0**. 기존 누적 관찰 **5,358/5,409종(99.0571%)**, 미관찰 **51종**, 감사 가능 잠정 후보 **4,475종** 불변.
+- 전체 물리 SQLite analysis/current/v110/MANIFEST.json: 89,071,616바이트, SHA-256 f4a47de826d9c1609f4c5eff54a5e16afae3916fb3c4477838bb841b4bc550bc. v36~v109 기존 모든 테이블 보존, 압축 7조각 SHA 재복원과 PRAGMA integrity_check PASS. v110은 진단형 버전이지 정체 인증이 아니다.
+- checkpoints/v110/v110_이미지내장_미해결검수.html: JPEG 45장 내장. 증거 ZIP 50항목 CRC PASS, SHA-256 321c6e022b981163c47341fc2c39ab3cdb85a25aa3c4df0c09dc09035f9e8e23. PNG/TMX A/B/C/D 이미지 45장과 검수판 2장 checkpoints/v110_preview에 보존.
+- 다음 단계는 공식 TileZed 원본 PNG·TMX 타일셋 Local ID 대응표를 복구하여 37종 범위 오류와 5종 파일 누락을 해결하는 것이다. 정합 전 mapping_verified=tilezed_verified=final_certified=0. 사용자 수동 검수 80종과 모든 이전 원본 보존.
 
 ## v109 원본 A/B/C/D 신규 48종 직접 시각 판독 (2026-10-26)
 - v108 SHA 검증 물리 통합 SQLite의 미관찰 99종에서 실제 신규 고유 48키를 선정했다. 원본 PNG 크롭 A, TMX 동일 층 5×5 조립 B, 동일 배치 1개 제거 C, 다른 사용 위치 D 또는 안내판을 만들어 **JPEG 240장과 접촉시트 8장 모두 직접 시각 검토**했다.
