@@ -1,0 +1,55 @@
+name: v117 inspect 43 A source exceptions
+on:
+  push:
+    branches: [work/v117-all-10042-a-candidate-atlas-20261026]
+    paths:
+      - scripts/v117_inspect_43_exceptions.py
+      - .github/workflows/v117-exception-atlases.yml
+permissions:
+  contents: write
+jobs:
+  exception_atlases:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v117_inspect_43_exceptions.py
+            /review/v117_A_candidates_10042/MANIFEST.json
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+      - run: python3 -m pip install --quiet Pillow
+      - name: Examine actual source atlas dimensions, identify mismatched grids
+        run: python3 -u scripts/v117_inspect_43_exceptions.py
+      - name: Verify 29 atlas exceptional names, including unavailable sources
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          from PIL import Image
+          r=pathlib.Path('review/v117_A_candidates_10042/exceptions')
+          d=json.loads((r/'EXCEPTIONS.json').read_text('utf8'))
+          assert d['count_distinct_tilesets']==29 and d['unresolved_keys']==43
+          assert len(d['names'])==29
+          assert sum(x['png_pixels'] is None for x in d['names'])==3
+          with Image.open(r/'A_43_exceptions_source_atlases.jpg') as im:im.verify()
+          print('PASS 29 unique exceptional atlas types with 3 missing PNGs')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v117-43-A-source-exception-atlases
+          path: review/v117_A_candidates_10042/exceptions/
+          retention-days: 90
+      - name: Commit 43 exception source images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v117_A_candidates_10042/exceptions/
+          if ! git diff --cached --quiet; then
+            git commit -m "v117 show 43 A exceptional keys against full source PNG atlases and TileZed grids"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

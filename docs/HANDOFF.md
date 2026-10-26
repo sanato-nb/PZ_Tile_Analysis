@@ -79,6 +79,13 @@
 - 최신 통합 DB 복원: `python3 scripts/restore_unified_v116.py /tmp/pz_latest.sqlite`. `analysis/current/v116/MANIFEST.json`, `checkpoints/v116/user_exclude_six.csv`, `docs/V116_USER_EXCLUDED_NO_IMAGES.md` 참조.
 - **주의:** PNG 이미지가 없거나 Local ID가 불명확하다는 이유로 타일의 투명성·부재를 확정한 것은 아니다.
 
+## v117: 84개 TMX 고유 타일 10,042종 A 후보 사전 구축 (2026-10-26)
+
+- 이전 5,409종에 신규 **4,633종**을 더한 범위 10,042종 전체 키를 실물 PNG의 A1(TMX)·A2(TileZed)로 대조하여 **126장 A 접촉시트**와 가시성·원본 SHA 포함 CSV 작성.
+- TMX/TileZed 후보 일치 **3,326종**, 단일 가시 후보 **6,673종**. 일반 타일 규격이 적용되지 않는 JUMBO/XL/XXL/그루터기 **36종**의 A3 가시 후보도 *추가 생성*.
+- 총 **10,035종 가시 A 후보** 확보. 나머지 **7종 미해결(원본 PNG 이름 미확보 3, 빈 후보 크롭 4)**. 사용자 제외 14종 별도 유지. A 후보 생성은 공식 Local ID 검증 또는 정체 확정이 아님.
+- 주 파일: `review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv`, `review/v117_A_candidates_10042/A_CANDIDATE_REVIEW_INDEX.html`, `review/v117_A_candidates_10042/sheets/`, `review/v117_A_candidates_10042/jumbo_a3/`.
+- **최신 실제 SQLite는 아직 v116** (기존 데이터 불변). `PROJECT_STATE.json.latest_a_candidate_stage`가 최신 A 준비작업을 추적한다. 공식 매핑/최종 인증 0.
 ## 불변 원칙
 
 - 이미지 직접 관찰, 추론 후보, PNG-TMX Local ID 검증, TileZed 렌더 검증, 최종 인증을 분리한다.

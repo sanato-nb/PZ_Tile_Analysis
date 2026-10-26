@@ -1,0 +1,81 @@
+name: v117 entire 10042 tile A candidate atlas
+on:
+  push:
+    branches: [work/v117-all-10042-a-candidate-atlas-20261026]
+    paths:
+      - scripts/build_v117_a_candidates_10042.py
+      - .github/workflows/build-v117-a-10042.yml
+permissions:
+  contents: write
+jobs:
+  a_candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_v117_a_candidates_10042.py
+            /audits/map_range_26_43_to_37_49/SUMMARY.json
+            /audits/map_range_26_43_to_37_49/DISTINCT_TILE_KEYS.csv
+            /analysis/imports/merged_catalog_5409.csv
+            /checkpoints/v113/user_review.csv
+            /checkpoints/v116/user_exclude_six.csv
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+            /review/v117_A_candidates_10042/*
+      - run: python3 -m pip install --quiet Pillow
+      - name: Generate all source candidate crops, one key per TMX local ID
+        run: python3 -u scripts/build_v117_a_candidates_10042.py
+      - name: Reparse full A candidate ledger, image sheets and conservative decisions
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import csv,json,hashlib
+          root=Path('review/v117_A_candidates_10042')
+          manifest=json.loads((root/'MANIFEST.json').read_text('utf8'))
+          assert manifest['source_tiles']==10042
+          assert (manifest['existing_5409'],manifest['new_4633'],manifest['user_excluded_14'])==(5409,4633,14)
+          assert sum(manifest['candidate_stats'].values())==10042
+          assert manifest['AI_selected_by_visual_review']==manifest['mapping_verified']==manifest['tilezed_verified']==manifest['final_identity_certified']==0
+          with (root/'A_CANDIDATE_MASTER_10042.csv').open('r',encoding='utf-8-sig',newline='') as f:
+            rows=list(csv.DictReader(f))
+          assert len(rows)==10042
+          assert len({(x['tile_set_name'],x['local_id']) for x in rows})==10042
+          assert sum(int(x['prior_in_5409']) for x in rows)==5409
+          assert sum(int(x['user_excluded']) for x in rows)==14
+          assert sum(int(x['ai_visual_selected']) for x in rows)==0
+          for x in rows:
+            assert x['source_hypothesis_sheet']
+            assert x['preferred_A'] in ('A1=A2','A1','A2','UNDECIDED')
+            assert x['candidate_decision'] in manifest['candidate_stats']
+          assert hashlib.sha256((root/'A_CANDIDATE_MASTER_10042.csv').read_bytes()).hexdigest()==manifest['master_csv_sha256']
+          assert hashlib.sha256((root/'A_CANDIDATE_REVIEW_INDEX.html').read_bytes()).hexdigest()==manifest['offline_index_sha256']
+          sheet=list((root/'sheets').glob('A_*.jpg'))
+          assert len(sheet)==126
+          for s in sheet:
+            with Image.open(s) as im:
+              assert im.size==(1920,1650)
+              im.verify()
+          print('PASS exactly 10,042 source keys, 5409 known, 4633 new; 14 user exclusions and 126 images; no certification')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-A-candidate-10042-complete-index-sheets
+          path: review/v117_A_candidates_10042/
+          compression-level: 0
+          retention-days: 90
+      - name: Commit complete 10,042-key A source ledger and thumbnails
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v117_A_candidates_10042/
+          if ! git diff --cached --quiet; then
+            git commit -m "v117 audited A1 A2 source candidates for all 10,042 tiles, 126 review sheets"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
