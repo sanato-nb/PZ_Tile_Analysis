@@ -52,12 +52,12 @@ with sqlite3.connect(dst) as c:
   assert c.execute('SELECT observed_any FROM tile_catalog WHERE tile_set_locator=? AND local_id=?',key).fetchone()==(0,)
   c.execute('INSERT INTO v111_unresolved_queue_audit VALUES (?,?,?,?,?)',(key[0],key[1],h['status'],h['reason'],h['observed_features']))
  c.executemany('INSERT INTO progress_snapshot VALUES (?,?,?)',[
-  ('v111_new_observed',12,'Original A/B/C/D with actual D; provisional TileZed text grid'),
+  ('v111_new_observed',12,'Single-use actual A/B/C visual differences; D unavailable and provisional TileZed text grid'),
   ('v111_new_candidates',12,'provisional low, not certified'),
-  ('v111_new_held',0,'ambiguous small vegetation or wall cracks'),
+  ('v111_new_held',0,'4 blank and 5 missing remain unobserved in separate v111_unresolved_queue_audit'),
   ('v111_total_observed',5400,'v110 5388 + 12 non-overlapping'),
   ('v111_unobserved',9,'5409 - 5400'),
-  ('v111_candidate_auditable',4512,'4500 + 25')])
+  ('v111_candidate_auditable',4512,'4500 + 12')])
  c.commit()
  assert c.execute('pragma integrity_check').fetchone()[0]=='ok'
  assert tables_prior.issubset({r[0] for r in c.execute("select name from sqlite_master where type='table'")})
@@ -88,11 +88,11 @@ manifest=dict(version='v111',sqlite_file='tile_visual_v111_unified.sqlite',
  source_record_count=12,observed=5400,provisional_candidates=4512,remaining=9,unresolved_source_and_no_delta=9,
  certified=0,all_prior_tables_preserved=True,
  original_sprite_evidence_images_in_github=True,mapping_verified=0,tilezed_verified=0,
- note='v110 미관찰 30종 A/B/C/D와 D 없는 단일배치 12종. TileZed 타일정의 텍스트 격자 잠정 크롭, 공식 Local ID 미검증. 후보 12 보류 0 인증 0.')
+ note='v110 미관찰 21종 중 단일 사용 PNG A와 TMX B/C 차이가 있는 12종 잠정 후보, B-C 0인 4종과 PNG 누락 5종은 미관찰로 유지. D 미확보, 공식 TileZed 검증 0.')
 (out/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=0)+chr(10),'utf8')
 statepath=ROOT/'PROJECT_STATE.json'
 s=json.loads(statepath.read_text('utf8'))
-assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v111',5400),('v111',5400)}
+assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v110',5388),('v111',5400)}
 s['latest_checkpoint']=dict(version='v111',date='2026-10-26',baseline_reconciliation='v110',
  baseline_unique_observed=5388,new_unique_observed=12,new_provisional_candidates=12,new_held=0,
  overlap_with_prior=0,merged_unique_observed=5400,merged_observation_percent=round(5400/5409*100,4),
