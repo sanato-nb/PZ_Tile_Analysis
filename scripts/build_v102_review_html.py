@@ -39,8 +39,8 @@ for batch in range(1):
   for p in paths:z.write(p,p.relative_to(ROOT).as_posix())
  with zipfile.ZipFile(zip_path) as z:assert z.testzip() is None and len(z.namelist())==66
  assert hp.stat().st_size<95000000 and zip_path.stat().st_size<95000000
- reports.append({'batch':batch+1,'zip_file':str(zip_path.relative_to(ROOT)),'zip_size_bytes':zip_path.stat().st_size,'zip_sha256':hashlib.sha256(zip_path.read_bytes()).hexdigest(),'zip_files':66,'zip_crc':'PASS','html_file':str(hp.relative_to(ROOT)),'html_size_bytes':hp.stat().st_size,'html_embedded_images':60,'review_sheets':8})
+ reports.append({'batch':batch+1,'zip_file':str(zip_path.relative_to(ROOT)),'zip_size_bytes':zip_path.stat().st_size,'zip_sha256':hashlib.sha256(zip_path.read_bytes()).hexdigest(),'zip_files':66,'zip_crc':'PASS','html_file':str(hp.relative_to(ROOT)),'html_size_bytes':hp.stat().st_size,'html_embedded_images':60,'review_sheets':2})
 assert len(all_images)==len(set(all_images))==60
-report={'version':'v102','batch_reports':reports,'zip_crc':'PASS','zip_files_total':66,'image_count':60,'image_load':'PASS','embedded_html_images':60,'observations':12,'provisional':10,'held':2,'certified':0,'review_sheets':8,'single_use_without_D':0,'actual_nearby_D':5,'independent_D':0}
+report={'version':'v102','batch_reports':reports,'zip_crc':'PASS','zip_files_total':66,'image_count':60,'image_load':'PASS','embedded_html_images':60,'observations':12,'provisional':10,'held':2,'certified':0,'review_sheets':2,'single_use_without_D':0,'actual_nearby_D':12,'independent_D':0}
 (CP/'ZIP_CRC_REPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS v102 CSV HTML JPEG ZIP CRC',report)
