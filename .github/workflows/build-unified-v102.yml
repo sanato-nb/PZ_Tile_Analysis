@@ -1,0 +1,65 @@
+name: v102 12 direct A-B-C-D visual observations, unified SQLite and CRC
+on:
+  push:
+    branches: [work/v102-visual-20261026-run11]
+    paths:
+      - .github/workflows/build-unified-v102.yml
+      - scripts/build_v102_observations.py
+      - scripts/build_unified_v102.py
+      - scripts/build_v102_review_html.py
+      - checkpoints/v102/review_notes_*.psv
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v101/*
+            /scripts/*.py
+            /checkpoints/v101/observations.tsv
+            /checkpoints/v102/*
+            /checkpoints/v102_preview/*
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+      - run: python3 -m pip install --quiet Pillow
+      - name: Restore SHA256-authenticated v101 complete source SQLite
+        run: python3 scripts/restore_unified_v101.py "$RUNNER_TEMP/v101.sqlite"
+      - name: Compile all 12 directly inspected image notes into TSV
+        run: python3 scripts/build_v102_observations.py
+      - name: Validate 12 identities held/candidate, B-C, PNG/TMX SHA, and 60 JPEG
+        run: python3 checkpoints/v102/verify_delta.py
+      - name: Preserve prior schema and append v102 into complete SQLite
+        run: python3 scripts/build_unified_v102.py "$RUNNER_TEMP/v101.sqlite"
+      - name: Restore v102 using shards and re-verify all SQL counters
+        run: python3 scripts/restore_unified_v102.py "$RUNNER_TEMP/v102-restored.sqlite"
+      - name: Package UTF-8 CSV, 60 image embedded HTML and ZIP CRC
+        run: python3 scripts/build_v102_review_html.py
+      - name: Validate project state and regenerate handoff
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-v102-unified-sqlite
+          path: ${{ runner.temp }}/tile_visual_v102_unified.sqlite
+          retention-days: 90
+      - name: Persist verified result without touching v101 or older archives
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v102/ checkpoints/v102/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "검증(v102): 신규 12종 직접시각 10후보 2보류 SQLite SHA256 HTML ZIP CRC"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

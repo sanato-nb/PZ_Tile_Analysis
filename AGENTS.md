@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v101)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v102)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v101: 5,034/5,409종(93.0671%); 미관찰 375종; 감사 가능한 잠정 후보 4,226종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v101/`. 복원: `python3 scripts/restore_unified_v101.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v102: 5,046/5,409종(93.2890%); 미관찰 363종; 감사 가능한 잠정 후보 4,236종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v102/`. 복원: `python3 scripts/restore_unified_v102.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v102 신규 12종 실제 A/B/C/D 직접 판독 (2026-10-26)
+- v101 통합 SQLite(원본 SHA-256 검증)의 미관찰 375종에서 **실제 다른 TMX 배치가 존재하는 신규 고유 12종**만 선정. 병행 v101 신규 48종과의 교집합 0, DB 관찰 키 중복 0.
+- 원본 PNG A, 같은 층 주변 5×5 TMX 근사 아이소메트릭 B, 선택 레이어 배치 1건만 제거한 C, **다른 실제 TMX 좌표 D 12종**을 생성. 12개 개별 ABCD 비교판과 접촉 검수판 2개를 **직접 열어 시각 판독**하고 `checkpoints/v102/review_notes_000_011.psv`에 특징과 후보/보류를 분리 기록.
+- 신규 이미지 관찰 **12종**, 잠정 후보 **10종(모두 low)**, 보류 **2종**: `location_trailer_02/63`(무특징 황갈색 상자형 부품의 역할 불명), `industry_02/161`(금속 세로 함체이나 B-C 0픽셀). 다른 D는 전부 근접 비독립 현장, 독립 원거리 D 0.
+- 누적 **5,046/5,409종(93.2890%)**, 미관찰 **363종**, 감사 가능한 잠정 후보 **4,236종**, 최종 인증 **0종**.
+- `analysis/current/v102/MANIFEST.json`: 통합 SQLite **88,342,528바이트**, SHA-256 `1c81a1213fb64c095908618225dac6b3450c5b1edfd1db64fa4c2d241c2c557c`, 압축 7조각 복원 검증 통과. v101 원본 전체 테이블 물리 복제, SQLite integrity_check, 이전 계보 보존, 원본 PNG/TMX SHA·TMX GID·좌표, JPEG 60장, 이미지 내장 HTML 60장, ZIP 66항목 CRC PASS.
+- 원본 `Tiles/`, `B4220.3_MapExport_256/`, v36~v101 원본 DB·체크포인트, 사용자 수동 검수 80종 및 재검수 자료는 수정/삭제하지 않았다. PNG 높이 불일치와 공식 Local ID·TileZed 미검증: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. 다음 작업은 v102 미관찰 363종에서 진행한다.
 
 ## v101 신규 48종 실제 A/B/C/D 시각 판독 (2026-10-26)
 - v100 물리 통합 SQLite 복원·SHA 검증 후 미관찰 423종 대기열에서 고유 48종을 선정하고 실제 원본 PNG 및 TMX로 A/B/C/D 고해상도 JPEG **240장**, 6종씩 묶은 검수판 **8장**을 생성한 뒤 **8장 모두 직접 시각 판독**하여 review_notes PSV 두 파일로 기록했다.
