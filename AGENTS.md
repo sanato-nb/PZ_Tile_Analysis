@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v81)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v82)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v81: 3,473/5,409종(64.2078%); 미관찰 1,936종; 감사 가능한 잠정 후보 2,979종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v81/`. 복원: `python3 scripts/restore_unified_v81.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v82: 3,485/5,409종(64.4297%); 미관찰 1,924종; 감사 가능한 잠정 후보 2,987종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v82/`. 복원: `python3 scripts/restore_unified_v82.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -136,8 +136,16 @@
 - `analysis/current/v81/MANIFEST.json`: SQLite **85,008,384바이트**, SHA-256 `0f04632938f637916e84706e5e933cbeccb541ee88dfb334e6dd813b3d14294b`. GitHub Actions에서 v80 SHA 복원, 원본 PNG/TMX SHA, JPEG 로딩, 중복 키, SQLite 무결성·이전 테이블 보존·압축 복원·ZIP CRC를 검증했다.
 - PNG 높이 불일치 및 공식 Local ID·TileZed 미검증: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. v36~v80 원본·체크포인트 및 사용자 수동 검수 80종은 보존한다.
 
+## v82 신규 직접 이미지 판독 (2026-10-26)
+- v81 최신 통합 SQLite의 미관찰 **1,936종**에서 중복 없는 신규 고유 키 **12종**을 선별했다. GitHub 원본 PNG/TMX로 A(원본), B(동일 층 5×5), C(선택 배치 하나 제거), D(다른 실제 위치), 비교판 **60 JPEG**를 생성하고 **12개 비교판을 직접 열어 육안 판독**했다.
+- 신규 잠정 후보 **8종**, 보류 **4종**. 금속 계단 분할 2종, 밝은 목재 3단 서랍장, 도로 포장 패치의 가는 경계 2종, 자갈 바닥의 삼각 경계 3종이 잠정 후보다. 보류는 `furniture_storage_01/45`(B-C 0), `blends_street_01/41`(340), `/52`(0), `/56`(166): 가림·배치 기여 미확인·미세한 변화.
+- 누적 **3,485/5,409종(64.4297%)**, 미관찰 **1,924종**, 감사 가능한 누적 후보 **2,987종**, 최종 인증 **0종**, 신규 고유 키 중복 0.
+- 증거: `checkpoints/v82/observations.tsv`·CSV, `checkpoints/v82_preview/` A/B/C/D 및 비교판 60 JPEG, `checkpoints/v82/INDEPENDENT_VISUAL_AUDIT.md`, 이미지 내장 HTML 60장, ZIP **64항목 CRC PASS**.
+- `analysis/current/v82/MANIFEST.json`: SQLite **85,037,056바이트**, SHA-256 `2171804042807905938c00a8817fb9a50e5f6911eeb52802374c94cb0274e0d1`. GitHub Actions에서 v81 원본 SHA 복원, PNG/TMX SHA, JPEG 로딩, 신규 키 중복, SQLite 무결성·기존 테이블 보존·압축 복원·ZIP CRC 검증 통과.
+- PNG 물리 높이 불일치, 공식 Local ID·TileZed 정합 미검증으로 `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. v36~v81 원본·체크포인트와 사용자 수동 검수 80종은 별도 보존한다.
+
 ## 다음 작업
-- v81 `analysis_queue`의 **미관찰 1,936종**에서 중복 없는 신규 키를 선정해 A/B/C/D 직접 시각 검수를 계속한다.
+- v82 `analysis_queue`의 **미관찰 1,924종**에서 중복 없는 신규 키를 선정해 A/B/C/D 직접 시각 검수를 계속한다.
 - v80 이하 보류 타일의 가림·분할 부품 역할을 다른 위치에서 재검수한다.
 - PNG–TMX Local ID 물리 높이 불일치와 TileZed 공식 정합을 독립 검증한다.
 - 기존 원본·체크포인트·사용자 수동 검수 80종을 보존하고 SHA·SQLite 무결성·CRC·중복을 확인한다.
