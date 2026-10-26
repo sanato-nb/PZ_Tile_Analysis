@@ -200,7 +200,8 @@ for key in TARGETS:
     enlarged=original.resize((original.width*scale,original.height*scale),Image.Resampling.NEAREST)
     A.alpha_composite(enlarged,((900-enlarged.width)//2,(680-enlarged.height)//2))
     for kind,im in [('A',A),('B',B),('C',C),('D',D)]:
-        label(im,f'{kind} {basename} | {a["tmx"]} level {a["level"]} x{a["x"]} y{a["y"]}')
+        site=b if kind=='D' else a
+        label(im,f'{kind} {basename} | {site["tmx"]} level {site["level"]} x{site["x"]} y{site["y"]}')
         im.convert('RGB').save(OUT/f'{basename}_{kind}.jpg',quality=76,optimize=True)
     contact=Image.new('RGB',(1800,1360),'white')
     for idx,im in enumerate([A,B,C,D]):
