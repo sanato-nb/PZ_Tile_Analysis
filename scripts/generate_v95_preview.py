@@ -261,3 +261,5 @@ print('REVIEW_SHEETS',len(sheets),flush=True)
 
 print(json.dumps({'generated':sum(x['status']=='evidence_only_unreviewed' for x in results),
     'results':results},ensure_ascii=False))
+
+# D 현장 좌표 머리글 수정본을 최신 브랜치에서 재생성한다.
