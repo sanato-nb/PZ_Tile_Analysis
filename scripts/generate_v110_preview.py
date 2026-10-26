@@ -136,7 +136,7 @@ def label(img,label_text):
 
 # 남은 미관찰 전체를 대상으로, 복수 사용 위치가 없어도 원본 A/B/C 검증 가능.
 # 멀리 떨어진(거리 >=5 또는 타 TMX) 다른 사용 위치가 없으면 D 독립 현장 없음으로 명확히 표시한다.
-TARGET_COUNT=48
+TARGET_COUNT=9
 eligible=sorted(OCC, key=lambda k:(k[0],k[1]))
 buckets=defaultdict(list)
 for key in eligible:
@@ -157,7 +157,7 @@ for round_idx in range(100):
         selected.append(key)
         if len(selected)>=TARGET_COUNT:break
 # 이미지 전체가 투명한 타일도 미관찰 키인 이상 보류 증거로 검수한다.
-# 불투명 47종 다음으로 원본 PNG 크롭이 존재하는 고유 1종을 추가한다.
+# 원본 PNG가 투명해도 크롭 가능한 키는 별도로 보류 대상으로 포함한다.
 if len(selected)<TARGET_COUNT:
     for key in eligible:
         if key in selected:continue
@@ -171,7 +171,23 @@ TARGETS=selected[:TARGET_COUNT]
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
 assert len(TARGETS)>=TARGET_COUNT,('not enough review targets',TARGETS)
+# 51종 중 크롭 불가능한 대상을 근거와 함께 미관찰로 보존한다.
+blocked=[]
+for key in sorted(queue):
+    if key in TARGETS:continue
+    uses=OCC.get(key,[])
+    if not uses:
+        reason='no_tmx_placement'
+        atlas_state='not_checked'
+    else:
+        m=MAP_DATA[uses[0]['tmx']]
+        t=next(t for t in m['tilesets'] if t['name']==key[0])
+        sprite,atlas_state=crop(t,key[1])
+        reason=atlas_state if sprite is None else 'not_selected_or_transparent'
+    blocked.append({'key':list(key),'reason':reason,'atlas_status':atlas_state,'uses':len(uses),'needs_official_local_id':True})
+assert len(blocked)==len(queue)-len(TARGETS)==42,(len(blocked),len(TARGETS))
 print('v110 UNREVIEWED PREVIEW TARGETS',TARGETS,flush=True)
+print('v110 BLOCKED UNSEEN',len(blocked),flush=True)
 results=[]
 for key in TARGETS:
     if key not in queue:
@@ -227,7 +243,7 @@ for key in TARGETS:
     'source':'GitHub original PNG and TMX','base':'v109','observed_count_added':0, 'excluded_early_v109_keys':0,
     'rendering':'approximate isometric, not TileZed; actual D only when other map or >=5 cells; absence explicitly shown',
     'original_tmx_suffix_note':'Repository files omit (2), but 5409/302177 scope counts match',
-    'sha256':HASHES,'results':results},ensure_ascii=False,indent=2),encoding='utf8')
+    'sha256':HASHES,'results':results,'blocked_unobserved':blocked,'blocked_count':len(blocked)},ensure_ascii=False,indent=2),encoding='utf8')
 
 # 사람/모델이 실제 A/B/C/D를 한 눈에 검토하기 위한 합본 미리보기 (6개 타일/장).
 # 이 판은 시각 판독을 대신하지 않으며 개별 A/B/C/D 원본은 모두 별도 저장한다.
