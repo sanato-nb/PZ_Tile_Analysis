@@ -50,7 +50,7 @@ for r in rows:
     assert (r['source_tmx'],int(r['x']),int(r['y']),int(r['level']))==(item['primary_placement']['tmx'],item['primary_placement']['x'],item['primary_placement']['y'],item['primary_placement']['level'])
     assert (r['other_tmx'],int(r['other_x']),int(r['other_y']),int(r['other_level']))==(item['other_placement']['tmx'],item['other_placement']['x'],item['other_placement']['y'],item['other_placement']['level'])
     for path_key,sha_col in [(r['source_tmx'],'source_tmx_sha256'),('Tiles/2x/'+key[0]+'.png','source_png_sha256')]:
-        source=root/('B420.3_MapExport_256/tmx/'+path_key if path_key.endswith('.tmx') else path_key)
+        source=root/('B4220.3_MapExport_256/tmx/'+path_key if path_key.endswith('.tmx') else path_key)
         assert source.exists(),source
         assert sha(source)==r[sha_col]==manifest['sha256'][path_key],(key,path_key)
         seen.add(source)
