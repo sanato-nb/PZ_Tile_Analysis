@@ -69,11 +69,11 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "v116 user explicitly excludes all six image-unavailable v115 held keys: consult v116_active_v115_held_queue (0) not the historical v115_ai_held_queue (6).",
-    "Preserve v115 source images/hold records and tile_catalog full 5409; do not label six as transparent or certified.",
-    "Existing v115 visual family candidates 882 remain provisional; use v116_active_v115_review_queue (882) for any targeted verification.",
-    "v113 original unobserved nine remain; user had separately excluded eight; f_bushes_1/66 remains active under v113_active_review_queue.",
-    "Continue eventual 10,042-key target with 4,633 newly seen only after image/Local-ID candidate alignment is checked."
+    "v117 source ledger 10042 exists. Always read latest_a_candidate_stage, and never confuse 'image exists' 10035 with 'AI-chosen official local ID' 0.",
+    "Prioritize comparing A2 source geometry for 6673 one-visible keys: A1 absent due TMX-export PNG scale/geometry mismatch; review source and actual TileZed mappings before certification.",
+    "36 jumbo A3 provisional per-sprite grid guesses have visible image; 3 exact PNG missing and 4 no alpha crop stay unresolved; do not call transparent.",
+    "Retain v113 and v116 14 user exclusions and entire historical v116 SQLite without changing observed/identity counts.",
+    "Before B/C/D identity analysis, verify A selections against TMX environment and longer 15x15 context for wiring/tree multi-part objects."
   ],
   "warnings": [
     "Do not count 2,509+477 as unique: the verified overlap is 402.",
@@ -210,5 +210,34 @@
     "source_png_or_mapping_problem": true,
     "transparency_certified": 0,
     "final_certified": 0
+  },
+  "latest_a_candidate_stage": {
+    "version": "v117",
+    "range": "26_43_through_37_49",
+    "tmx_files": 84,
+    "unique_used_tile_keys": 10042,
+    "used_tileset_names": 322,
+    "existing_keys_reused": 5409,
+    "new_keys": 4633,
+    "user_excluded_recorded": 14,
+    "A1_A2_same_visible": 3326,
+    "A1_or_A2_one_visible": 6673,
+    "A3_jumbo_source_proposed": 36,
+    "any_visible_A_candidate": 10035,
+    "unresolved_no_exact_source": 3,
+    "unresolved_no_visible_crop": 4,
+    "unresolved_total": 7,
+    "candidate_ledger": "review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv",
+    "candidate_sha256": "189700d0d6b1f0e6c20bae268a0d33e4425ca275e169987e13b2786d7dfcb7cf",
+    "contact_sheets": "review/v117_A_candidates_10042/sheets/",
+    "contact_sheet_count": 126,
+    "browser_index": "review/v117_A_candidates_10042/A_CANDIDATE_REVIEW_INDEX.html",
+    "jumbo_A3_gallery": "review/v117_A_candidates_10042/jumbo_a3/A3_JUMBO_review_sheet.jpg",
+    "no_source_evidence": "review/v117_A_candidates_10042/exceptions/EXCEPTIONS.json",
+    "AI_per_key_selection_complete": false,
+    "official_png_tmx_mapping_verified": 0,
+    "official_tilezed_verified": 0,
+    "identity_final_certified": 0,
+    "meaning": "Full 10042-source-candidate preparatory registry; A1/A2/TMX and provisional whole-sprite A3, not visually resolved/certified Local ID for all keys."
   }
 }
