@@ -1,0 +1,32 @@
+{
+"version": "v91",
+"sqlite_file": "tile_visual_v91_unified.sqlite",
+"sqlite_size_bytes": 86405120,
+"sqlite_sha256": "ae36baf4e632ccecd7f80249813a12fc3da90a967699bed3e8ede67fd1170ecf",
+"compressed_sha256": "0b8ebe66ab15e06f06d4905d86bd1fe1121b29a5b3b7e7d827cefc918f1b72b0",
+"compression": "zlib_base64",
+"parts": [
+"analysis/current/v91/v91.part000.b64",
+"analysis/current/v91/v91.part001.b64",
+"analysis/current/v91/v91.part002.b64",
+"analysis/current/v91/v91.part003.b64",
+"analysis/current/v91/v91.part004.b64",
+"analysis/current/v91/v91.part005.b64",
+"analysis/current/v91/v91.part006.b64"
+],
+"base_version": "v90",
+"base_sqlite_sha256": "59ca4987eb72a8b771c4d3122edb4f0253c267889ba0ff0343f26283f87ffc9f",
+"new_records_repo_path": "checkpoints/v91/observations_combined.tsv",
+"evidence_manifest": "checkpoints/v91_preview/EVIDENCE_MANIFEST.json",
+"additional_evidence_manifest": "checkpoints/v91_extra_preview/EVIDENCE_MANIFEST.json",
+"source_record_count": 132,
+"observed": 4177,
+"provisional_candidates": 3521,
+"remaining": 1232,
+"certified": 0,
+"all_prior_tables_preserved": true,
+"original_sprite_evidence_images_in_github": true,
+"mapping_verified": 0,
+"tilezed_verified": 0,
+"note": "A/B/C/D 원본 증거 기존 미계상 12종 + 신규 120종 이미지 직접 시각 판독. 잠정 후보 102, 보류 30. PNG height mismatch/TileZed 미검증."
+}
