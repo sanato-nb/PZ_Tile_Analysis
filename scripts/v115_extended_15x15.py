@@ -213,7 +213,7 @@ def render15(place,remove=False):
                 drawn+=1
     draw=ImageDraw.Draw(canvas)
     draw.rectangle((0,0,1200,37),fill=(16,30,42,255))
-    draw.text((12,12),f'15x15 {place["tmx"]}, level {place["level"]}, x={xx} y={yy},  {"REMOVE CENTER" if remove else "ORIGINAL"}',
+    draw.text((12,12),f'15x15 {place["tmx"]}, level {place["level"]}, x={xx} y={yy}, TARGET COMPARISON',
               fill=(255,255,255,255))
     return canvas.convert('RGB'),missing,drawn,removed
 
