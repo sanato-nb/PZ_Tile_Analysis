@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate v100 per-tile TSV from 180 directly inspected visual note rows and original TMX/PNG manifest."""
+"""Generate v100 per-tile TSV from 216 directly inspected visual note rows and original TMX/PNG manifest."""
 import csv,json,re
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -55,5 +55,5 @@ assert real_d==23 and single==193 and held+candidates==216 and sum(x['D_independ
 with (cp/'observations.tsv').open('w',encoding='utf8',newline='') as f:
  w=csv.DictWriter(f,fieldnames=fields,delimiter='\t',lineterminator='\n')
  w.writeheader();w.writerows(rows)
-(cp/'review_summary.json').write_text(json.dumps(dict(version='v100',observed=180,candidate=candidates,held=held,D_near=real_d,D_none=single,independent_D=0),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+(cp/'review_summary.json').write_text(json.dumps(dict(version='v100',observed=216,candidate=candidates,held=held,D_near=real_d,D_none=single,independent_D=0),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS v100 source notes to 180 TSV:',candidates,'candidate',held,'held')
