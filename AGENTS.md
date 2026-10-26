@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v84)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v85)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v84: 3,589/5,409종(66.3524%); 미관찰 1,820종; 감사 가능한 잠정 후보 3,071종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v84/`. 복원: `python3 scripts/restore_unified_v84.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v85: 3,637/5,409종(67.2398%); 미관찰 1,772종; 감사 가능한 잠정 후보 3,104종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v85/`. 복원: `python3 scripts/restore_unified_v85.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -16,10 +16,18 @@
 6. 이전에 폐기된 TMX→2D 평면도 엔진을 재사용하지 않는다.
 
 ## 보존·계보
-- v36 원본 전체 SQLite, v46 원본 `v46__` 테이블, v47 병합 `v47__` 및 v48~v80의 누적 테이블을 유지한다.
+- v36 원본 전체 SQLite, v46 원본 `v46__` 테이블, v47 병합 `v47__` 및 v48~v85의 누적 테이블을 유지한다.
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v85 신규 실제 이미지 판독 (2026-10-26)
+- 최신 v84 `analysis_queue` 미관찰 1,820종에서 중복 없는 48종을 선택해 원본 PNG A, TMX 같은 층 5×5 B, 단일 배치 제거 C, 다른 실제 위치 D 및 비교판 총 240 JPEG를 직접 열어 판독했다.
+- 잠정 후보 33종, 보류 15종. 누적 관찰 3,637/5,409(67.2398%), 미관찰 1,772종, 감사 가능한 누적 후보 3,104종, 최종 인증 0종.
+- `checkpoints/v85/observations.tsv`·CSV·`INDEPENDENT_VISUAL_AUDIT.md`에 관찰 특징/잠정 정체/부품 역할/신뢰도/보류 사유와 원본 PNG·TMX 해시 및 위치를 분리 보존한다.
+- `checkpoints/v85_preview/`에 A/B/C/D 비교판 240 JPEG, `checkpoints/v85/v85_이미지내장_검수.html`에 이미지 240개 데이터 URI 내장, `v85_증거_48종_A_B_C_D.zip` 244항목 CRC PASS.
+- `analysis/current/v85/MANIFEST.json` 기준 SQLite SHA-256 `1428e58501c73eb2aae65897d69b2eeb0dfd57ebb67b90817acd5cbda4849998`. 원본 v36~v84 DB·체크포인트·사용자 검수 80종은 보존한다.
+- 공식 PNG–TMX Local ID 및 TileZed 검증은 0으로 유지하며, B-C 변화가 없거나 극소인 타일은 보류한다.
 
 ## v68 신규 실제 이미지 판독 (2026-10-26)
 - v67 통합 SQLite의 미관찰 대기열 2,234종에서 중복 없는 **신규 80종**을 선정하고 실제 원본 PNG와 TMX의 A/B/C/D 이미지 + 비교판 **400장**을 직접 판독했다.
