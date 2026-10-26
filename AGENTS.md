@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v90)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v91)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v90: 4,045/5,409종(74.7828%); 미관찰 1,364종; 감사 가능한 잠정 후보 3,419종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v90/`. 복원: `python3 scripts/restore_unified_v90.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v91: 4,177/5,409종(77.2231%); 미관찰 1,232종; 감사 가능한 잠정 후보 3,521종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v91/`. 복원: `python3 scripts/restore_unified_v91.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,16 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v91 132종 시각 판독 통합 (2026-10-26)
+- v90 미관찰 1,364종에서 기존 별도 독립 판독 12종(과거 미계상)을 보존하고, 겹치지 않게 새로 선정한 **120종**을 추가 A 원본 PNG, B TMX 동일 층 5×5 근사 조립, C 해당 단일 배치 제거, D 다른 실사용 위치로 재구성했다.
+- 신규 120종은 20개의 6종 묶음 접촉 검수판을 모두 직접 열어 관찰하고 `checkpoints/v91/review_notes_extra_*.psv`에 개별 형태·역할·잠정 정체·보류 원인을 기록했다. 기존 12종은 `checkpoints/v91/observations.tsv` 및 `v91_preview/` 기록을 불변 보존한다.
+- `checkpoints/v91/observations_combined.tsv`에 합본 **132종(신규 잠정 후보 102·보류 30)** 반영. 앞선 v90 타일과 중복 0, 기존 12와 신규 120 사이 중복 0.
+- 누적 **4,177/5,409종(77.2231%)**, 미관찰 **1,232종**, 감사 가능한 후보 **3,521종**, 최종 인증 **0**.
+- `analysis/current/v91/MANIFEST.json`의 물리 DB **86,405,120바이트**, SHA-256 `ae36baf4e632ccecd7f80249813a12fc3da90a967699bed3e8ede67fd1170ecf`. v90 원본 복원 SHA 확인 → SQLite 복사·기존 테이블 보존 → v91 132종 추가 → SQLite 무결성 → 압축 7조각 왕복 SHA 대조 모두 통과.
+- 총 660 JPEG, 22개 접촉 검수판, CSV, 이미지 330개씩 내장 HTML **2개**, 각 346항목 증거 ZIP **2개 CRC PASS**. 원본 PNG/TMX SHA-256, GID·좌표, 독립 132 키 및 B-C 픽셀 변화 검사 통과.
+- 원본 PNG 높이·공식 Local ID/TileZed 검증 미완료 상태: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. 과거 v36~v90 데이터 및 사용자 수동 검수 80종 원래 계보 유지.
+- 다음 작업: 최신 v91 분석 대기열 **1,232종**에서 고유 미관찰 선택 및 보류 재검토.
 
 ## v90 신규 실제 타일 판독 (2026-10-26)
 - v89 통합 SQLite 미관찰 1,604종에서 중복 없는 **240종** 선정. 총 26개 타일셋에 분산해 원본 PNG·TMX로 A 원본, B 동일 층 5×5 근사 조립, C 같은 레이어 타일 하나 제거, D 다른 실사용 좌표 및 ABCD 비교판 **1,200개 JPEG**를 생성했다.
