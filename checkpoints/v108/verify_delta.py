@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v108 visual evidence: 48 unique PNG/TMX A/B/C, actual near D 5, absent D 43."""
+"""v108 visual evidence: 48 unique PNG/TMX A/B/C, actual near D 3, absent D 45."""
 import csv,json,hashlib
 from pathlib import Path
 from PIL import Image,ImageChops
