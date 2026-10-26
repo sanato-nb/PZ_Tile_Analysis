@@ -62,6 +62,15 @@
 3. 제외 8종 중 사무실 3종은 잠정 크롭 투명, JUMBO 3종은 매핑 불확실한 빈 크롭, PNG 미확보 2종은 실제 투명 여부 미검증.
 4. v36~v111 과거 DB 테이블·사용자 수동 검수 80종·PNG/TMX 원본은 삭제 또는 수정하지 않는다.
 
+## 최신 v115 AI 실제 판독 결과 (2026-10-26)
+
+- 기존 5,400종 이미지 관찰 중 정체 후보 미기록 888종을 A1/A2/B/C/D 74장으로 모델이 직접 재검토.
+- 새 시각 후보 **882종(870 low/12 medium)**, 원본 문제로 보류 **6종**. 모두 시각적 계열·부품 *잠정 후보*이며 정체 완결 인증 아님. 기존 감사 가능 후보 **4,512종**은 변경 없음.
+- 15×15 확대 **8종**의 전신주·가공 전선·통신 설비 B/C 비교. `appliances_com_01/3`은 전화·무전 통신기 형태 후보이며 가려진 대상. `appliances_com_01/96` 등은 전선 선분으로 잠정 식별.
+- 실제 파일: `review/v115_ai_identity/AI_VISUAL_REVIEW_888.csv`, `review/v115_model_visual/`, `review/v115_extended_context/`, `docs/V115_AI_VISUAL_REVIEW_888.md`.
+- 최신 통합 SQLite: `analysis/current/v115/MANIFEST.json` SHA-256 `4f0f0679c85d18a2ac87d440a0c41f9708348b0004e1efe231410e7f99ffae20`. 복원: `python3 scripts/restore_unified_v115.py /tmp/pz_latest.sqlite`. v115 별도 테이블에 888종 기록. 기존 관찰 5,400/5,409, 과거 후보 4,512, 미관찰 9, 사용자 제외 8, 최종 인증 0 보존.
+- **주의:** 882개 전부 세부 정체를 최종 확정한 상태가 아니고 Local ID 공식 매핑·TileZed 검증은 0종. 특정 마크 블록에 자동 배정 금지.
+
 ## 불변 원칙
 
 - 이미지 직접 관찰, 추론 후보, PNG-TMX Local ID 검증, TileZed 렌더 검증, 최종 인증을 분리한다.
