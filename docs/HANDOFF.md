@@ -71,6 +71,14 @@
 - 최신 통합 SQLite: `analysis/current/v115/MANIFEST.json` SHA-256 `4f0f0679c85d18a2ac87d440a0c41f9708348b0004e1efe231410e7f99ffae20`. 복원: `python3 scripts/restore_unified_v115.py /tmp/pz_latest.sqlite`. v115 별도 테이블에 888종 기록. 기존 관찰 5,400/5,409, 과거 후보 4,512, 미관찰 9, 사용자 제외 8, 최종 인증 0 보존.
 - **주의:** 882개 전부 세부 정체를 최종 확정한 상태가 아니고 Local ID 공식 매핑·TileZed 검증은 0종. 특정 마크 블록에 자동 배정 금지.
 
+## 최신 v116: 이미지 근거 미확보 6종 활성 제외 (2026-10-26)
+
+- 사용자 요청에 따라 v115의 소스 이미지/격자 문제 보류 6종을 **추가 분석·재검수 대상에서 제외**했다. 기존 보류 이력 및 검수판은 그대로 보존한다.
+- 이전 `v115_ai_held_queue`는 기록상 **6종**, 최신 `v116_active_v115_held_queue`는 **0종**이다. 이미지가 확인된 AI 잠정 후보 882종은 변경 없음.
+- 이번 6종은 v113 이전 미관찰 사용자 제외 8종과 **서로 다른 작업 대기열의 제외**다. 과거 관찰 5,400종과 기존 감사 후보 4,512종, 최종 인증 0종도 불변.
+- 최신 통합 DB 복원: `python3 scripts/restore_unified_v116.py /tmp/pz_latest.sqlite`. `analysis/current/v116/MANIFEST.json`, `checkpoints/v116/user_exclude_six.csv`, `docs/V116_USER_EXCLUDED_NO_IMAGES.md` 참조.
+- **주의:** PNG 이미지가 없거나 Local ID가 불명확하다는 이유로 타일의 투명성·부재를 확정한 것은 아니다.
+
 ## 불변 원칙
 
 - 이미지 직접 관찰, 추론 후보, PNG-TMX Local ID 검증, TileZed 렌더 검증, 최종 인증을 분리한다.
