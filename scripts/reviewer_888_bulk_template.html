@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PZ B42 정체 후보 미기록 888종 · 일괄 수동 검수</title>
+<style>
+:root{font-family:system-ui,"Malgun Gothic",sans-serif;color:#243347;background:#f3f6fa}
+*{box-sizing:border-box}body{margin:0;font-size:13px;line-height:1.5}header{background:#182b3b;color:white;padding:20px 3vw}h1{font-size:20px;margin:0 0 4px}header p{margin:0;color:#c5d8e6}
+main{padding:12px;max-width:1720px;margin:auto}.panel{background:white;border:1px solid #d5dfe8;border-radius:9px;padding:13px;margin-bottom:11px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.split{justify-content:space-between}
+button,select,input,textarea{font:inherit;color:#23344a;border:1px solid #b7cbd9;border-radius:6px;padding:7px;background:white}
+button{cursor:pointer;font-weight:650}button:disabled{opacity:.45;cursor:default}.primary{background:#0d806e;color:white;border-color:#0d806e}
+.warn{background:#fff5d9;border:1px solid #e9d69c;border-radius:6px;padding:10px;margin:8px 0}.hint{color:#577287;font-size:11px}
+.num{font-weight:750;font-size:19px}#stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.stat{padding:9px;background:#edf4f7;border-radius:8px}.stat span{display:block;font-size:11px;color:#576b79}
+label{display:inline-flex;align-items:center;gap:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:10px}
+.card{border:1px solid #d4e0e7;background:#fff;padding:10px;border-radius:9px;min-width:0;display:grid;gap:7px}
+.card.pick{outline:2px solid #0d806e}.tile-name{font-weight:750;overflow-wrap:anywhere;font-size:12px}.board{width:100%;aspect-ratio:12 / 4;object-fit:contain;border:1px solid #bdcad6;border-radius:5px;background:#dfe7ee;cursor:zoom-in}
+.card-fields{display:grid;gap:6px}.card-fields label{display:grid;gap:2px;font-size:11px;font-weight:700}.card-fields input,.card-fields textarea{width:100%;font-size:12px}.card-fields textarea{min-height:44px;resize:vertical}
+.status{width:100%}.tools{display:flex;gap:7px;flex-wrap:wrap;align-items:center}.tools input{flex:1;min-width:190px}
+.pager{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:9px 0}
+#modal{position:fixed;inset:0;background:#071522dd;display:none;align-items:center;justify-content:center;padding:18px;z-index:9999}
+#modal.open{display:flex}#modal .inner{background:#fff;padding:12px;border-radius:9px;max-width:99vw;max-height:96vh;overflow:auto}
+#large{max-width:95vw;max-height:79vh;object-fit:contain;display:block}#modal-title{font-weight:750;overflow-wrap:anywhere}
+@media(max-width:750px){#stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}}
+</style></head><body>
+<header><h1>프로젝트 좀보이드 B42 · 정체 후보 미기록 타일 수동 검수</h1><p>v113 누적 관찰 기록 기반 · 원본 PNG/TMX 비교판 · 선택 항목 일괄 처리 · 오프라인 CSV 백업</p></header>
+<main>
+<div class="panel">
+<div class="warn"><b>판정 기준:</b> 이 목록의 타일은 기존 <b>이미지 관찰 기록이 있지만 감사 가능한 정체 후보가 없는</b> 대상입니다.
+<b>확인 완료</b>는 사용자가 그림을 봤다는 뜻이지 <b>정체가 확정됐다는 뜻이 아닙니다.</b>
+A1/A2 타일 후보와 B/C/D 합성은 <b>Local ID 공식 매핑을 검증하지 않은 잠정 이미지</b>입니다. 원본이 없거나 가려졌다면 보류하세요.</div>
+<div id="stats"></div>
+<div class="row" style="margin-top:10px">
+<button class="primary" id="csv">검수결과 CSV 저장</button>
+<button id="json">전체 백업 JSON 저장</button>
+<button id="importBtn">이전 검수 결과 불러오기</button>
+<input type="file" id="importFile" accept=".csv,.json" hidden/>
+<button id="clear" title="브라우저 자동 저장된 수동 판단만 초기화합니다.">입력내용 초기화</button>
+<span id="saved" class="hint">입력 시 브라우저에 자동 저장됩니다. CSV 또는 JSON도 내려받아 백업하세요.</span>
+</div>
+</div>
+<div class="panel">
+<div class="tools">
+<input id="search" placeholder="타일셋 이름 / Local ID / 정체 / 원본 특징 검색"/>
+<select id="state"><option value="all">전체 상태</option><option value="todo">미검수</option><option value="seen">확인 완료</option><option value="candidate">정체 후보 입력</option><option value="held">보류</option><option value="confirmed">사용자 정체 확인</option></select>
+<select id="source"><option value="all">전체 이미지</option><option value="usable">B−C 변화 있음</option><option value="zero">B−C 변화 없음</option><option value="missing">원본 매핑 문제</option></select>
+<label>페이지당 <select id="per"><option>20</option><option selected>40</option><option>60</option><option>100</option></select></label>
+</div>
+<div class="row" style="margin-top:9px">
+<button id="selectPage">현재 페이지 모두 선택</button>
+<button id="selectFiltered">검색결과 전체 선택</button>
+<button id="unselect">전체 선택 해제</button>
+<b id="selected">선택 0개</b>
+</div>
+<div class="row" style="margin-top:9px">
+<button class="primary" id="bulkSeen">선택한 항목 확인 완료</button>
+<button id="bulkHeld">선택한 항목 보류</button>
+<button id="bulkTodo">선택한 항목 미검수로</button>
+<button id="bulkCandidate">선택한 항목 정체 후보로</button>
+<label>동일 정체 일괄 입력 <input id="bulkName" placeholder="선택된 타일이 모두 같은 종류일 때만" style="min-width:240px"/></label>
+<button id="applyName">선택 항목에 정체 입력</button>
+</div>
+<p class="hint" id="filterSummary">—</p>
+</div>
+<div class="pager"><button class="back">이전</button><span class="pageLabel">—</span><button class="forward">다음</button></div>
+<div id="cards" class="grid"></div>
+<div class="pager"><button class="back">이전</button><span class="pageLabel">—</span><button class="forward">다음</button></div>
+<div class="panel hint">이미지 범례: A1=TMX 선언 격자 후보, A2=TileZed 텍스트 격자 후보(일치하면 동일), B=TMX 5×5 주변 장면, C=B에서 타일 하나 제거, D=다른 사용 위치(없으면 없음). 특정 PNG 타일의 출처가 불명확할 수 있으므로 **모두 잠정**입니다. <b>일괄 완료는 정체 인증이 아닙니다.</b></div>
+</main>
+<div id="modal"><div class="inner"><div class="row split"><span id="modal-title"></span><button id="closeModal">닫기 ✕</button></div><img id="large" alt="원본과 주변 조립 비교판"/><p class="hint" id="modal-info"></p></div></div>
+<script>
+"use strict";
+const DATA=__PZ_888_ROWS_JSON__;
+const KEY="PZ_B42_888_BULK_REVIEW_V1";
+const byId=id=>document.getElementById(id);
+const nfmt=n=>Number(n).toLocaleString("ko-KR");
+const options={todo:"미검수",seen:"이미지 확인 완료",candidate:"정체 후보 입력",held:"보류",confirmed:"사용자 정체 확인"};
+const stored=(()=>{try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch{return {}}})();
+const reviews=new Map();
+for(const item of DATA)if(stored[item.key])reviews.set(item.key,stored[item.key]);
+const picked=new Set();
+let filtered=[],page=0;
+function get(it){return reviews.get(it.key)||{status:"todo",identity:"",attrs:"",material:"",part:"",notes:""}}
+function keep(it,delta){const v={...get(it),...delta};reviews.set(it.key,v);try{localStorage.setItem(KEY,JSON.stringify(Object.fromEntries(reviews)));byId("saved").textContent="자동 저장됨 · 결과 CSV/JSON 백업 권장"}catch(e){byId("saved").textContent="브라우저 저장 실패 · 반드시 CSV 저장: "+e.message}updateStats()}
+function updateStats(){const states={todo:0,seen:0,candidate:0,held:0,confirmed:0};
+for(const it of DATA)states[get(it).status||"todo"]++;
+byId("stats").innerHTML=`<div class="stat"><b class="num">${nfmt(DATA.length)}</b><span>검수 대상</span></div><div class="stat"><b class="num">${nfmt(states.seen)}</b><span>이미지 확인 완료</span></div><div class="stat"><b class="num">${nfmt(states.candidate)}</b><span>잠정 후보 입력</span></div><div class="stat"><b class="num">${nfmt(states.held)}</b><span>보류</span></div><div class="stat"><b class="num">${nfmt(states.confirmed)}</b><span>사용자 정체 확인</span></div>`;
+byId("selected").textContent="선택 "+nfmt(picked.size)+"개"}
+function download(name,text,type){const b=new Blob([text],{type:type||"text/plain;charset=utf-8"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),15000)}
+function csvEscape(value){const x=String(value??"");return /[,\n\r"]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x}
+const fields=["tile_set_locator","local_id","status","identity_candidate","object_part","materials","attributes","notes","mapping_verified","source_status","source_tmx","level","x","y"];
+function exportCSV(){const header=fields.join(",");const rows=DATA.map(it=>{const r=get(it);return [it.tileset,it.local_id,r.status,r.identity,r.part,r.material,r.attrs,r.notes,0,it.source_status,it.tmx,it.level,it.x,it.y].map(csvEscape).join(",")});download("PZ_888종_일괄검수결과.csv","\uFEFF"+header+"\r\n"+rows.join("\r\n")+"\r\n","text/csv;charset=utf-8")}
+function exportJSON(){download("PZ_888종_검수백업.json",JSON.stringify({format:"PZ_888_BULK_REVIEW_V1",source_count:DATA.length,reviews:Object.fromEntries(reviews)},null,2),"application/json;charset=utf-8")}
+function parseCSV(src){let a=[],row=[],field="",quoted=false;src=src.replace(/^\uFEFF/,"");for(let i=0;i<src.length;i++){let c=src[i];if(quoted){if(c==='"'&&src[i+1]==='"'){field+='"';i++}else if(c==='"')quoted=false;else field+=c}else if(c==='"'){quoted=true}else if(c===','){row.push(field);field=""}else if(c==='\n'){row.push(field.replace(/\r$/,""));if(row.some(x=>x!==""))a.push(row);row=[];field=""}else field+=c}if(row.length||field){row.push(field);a.push(row)}return a}
+byId("csv").onclick=exportCSV;byId("json").onclick=exportJSON;
+byId("importBtn").onclick=()=>byId("importFile").click();
+byId("importFile").onchange=async e=>{const file=e.target.files[0];if(!file)return;try{
+ const txt=await file.text();let updated=0;
+ if(file.name.toLowerCase().endsWith(".json")){const x=JSON.parse(txt);if(!x.reviews||x.format!=="PZ_888_BULK_REVIEW_V1")throw Error("검수 JSON 형식 불일치");
+ for(const it of DATA)if(x.reviews[it.key]){reviews.set(it.key,x.reviews[it.key]);updated++}}
+ else{const rows=parseCSV(txt),head=rows.shift(),idx=Object.fromEntries(head.map((v,i)=>[v,i]));
+ if(idx.tile_set_locator===undefined||idx.local_id===undefined||idx.status===undefined)throw Error("CSV 필수 열 누락");
+ const map=new Map(DATA.map(it=>[it.key,it]));
+ for(const r of rows){const k=r[idx.tile_set_locator]+"|"+Number(r[idx.local_id]);const it=map.get(k);if(!it)continue;const st=r[idx.status];if(!options[st])continue;reviews.set(k,{status:st,identity:r[idx.identity_candidate]||"",part:r[idx.object_part]||"",material:r[idx.materials]||"",attrs:r[idx.attributes]||"",notes:r[idx.notes]||""});updated++}}
+ localStorage.setItem(KEY,JSON.stringify(Object.fromEntries(reviews)));filter();alert("검수 결과 "+updated+"종 불러왔습니다.");
+ }catch(err){alert("불러오기 오류: "+err.message)}e.target.value=""};
+byId("clear").onclick=()=>{if(!confirm("현재 브라우저의 검수 입력 기록만 모두 지울까요? 먼저 CSV를 백업하는 것이 좋습니다."))return;reviews.clear();picked.clear();localStorage.removeItem(KEY);filter()};
+function filter(){const text=byId("search").value.trim().toLowerCase(),status=byId("state").value,src=byId("source").value;
+filtered=DATA.filter(it=>{const r=get(it);if(status!=="all"&&(r.status||"todo")!==status)return false;
+if(src==="usable"&&!(it.delta>0))return false;if(src==="zero"&&it.delta!==0)return false;if(src==="missing"&&it.source_status==="ok")return false;
+return !text||[it.tileset,it.local_id,r.identity,r.notes,it.previous_features].join(" ").toLowerCase().includes(text)});
+page=Math.min(page,Math.max(0,Math.ceil(filtered.length/Number(byId("per").value))-1));render()}
+function render(){const per=Number(byId("per").value),start=per*page,visible=filtered.slice(start,start+per),np=Math.max(1,Math.ceil(filtered.length/per));
+for(const p of document.querySelectorAll(".pageLabel"))p.textContent=`${np? page+1:0} / ${np}페이지 · ${nfmt(filtered.length)}종`;
+for(const b of document.querySelectorAll(".back"))b.disabled=page<=0;
+for(const b of document.querySelectorAll(".forward"))b.disabled=page>=np-1;
+byId("filterSummary").textContent=`표시 ${nfmt(start+1)}~${nfmt(Math.min(start+per,filtered.length))}/${nfmt(filtered.length)}종 · 전체 ${DATA.length}종 · 선택 ${picked.size}종`;
+const cards=byId("cards");cards.replaceChildren();
+for(const it of visible){const r=get(it),el=document.createElement("article");el.className="card"+(picked.has(it.key)?" pick":"");
+const head=document.createElement("div");head.className="row split";
+const check=document.createElement("input");check.type="checkbox";check.checked=picked.has(it.key);check.onchange=()=>{check.checked?picked.add(it.key):picked.delete(it.key);el.classList.toggle("pick",check.checked);updateStats()};
+const name=document.createElement("span");name.className="tile-name";name.textContent=it.tileset+" / Local ID "+it.local_id;head.append(check,name);el.append(head);
+const hint=document.createElement("div");hint.className="hint";hint.textContent=`배치 ${it.maps_using||"?"}회 이상 · ${it.tmx||"출처 미상"} · L${it.level??"?"} (${it.x??"?"},${it.y??"?"}) · B-C ${it.delta??"미산출"} · ${it.source_status||""}`;el.append(hint);
+const im=document.createElement("img");im.className="board";im.loading="lazy";im.alt="원본 A 후보와 B/C/D";im.src=it.image||"";im.onclick=()=>{byId("modal-title").textContent=it.tileset+" / "+it.local_id;byId("large").src=im.src;byId("modal-info").textContent=it.source_note||"매핑은 잠정";byId("modal").classList.add("open")};el.append(im);
+const fieldsBox=document.createElement("div");fieldsBox.className="card-fields";
+const status=document.createElement("select");status.className="status";for(const [k,v] of Object.entries(options)){const o=document.createElement("option");o.value=k;o.textContent=v;status.append(o)}status.value=r.status||"todo";
+status.onchange=()=>{if(status.value==="confirmed"&&!get(it).identity.trim()){alert("정체 확인하려면 정체명을 먼저 적어주세요.");status.value=get(it).status||"todo";return}keep(it,{status:status.value})};
+fieldsBox.append(labelField("검수 상태",status));
+function inp(field,caption,value,placeholder,area=false){const e=document.createElement(area?"textarea":"input");e.value=value||"";e.placeholder=placeholder;e.oninput=()=>{let change={[field]:e.value};if(field==="identity"&&e.value.trim()&&["todo","seen"].includes(get(it).status||"todo"))change.status="candidate";keep(it,change);if(change.status)status.value=change.status};fieldsBox.append(labelField(caption,e))}
+inp("identity","① 어떤 물체인가?",r.identity,"예: 가로등 받침, 잔디 조각, 문틀");
+inp("part","② 부품·결합 역할",r.part,"예: 왼쪽, 뒷면, 모서리");
+inp("material","③ 재질",r.material,"예: 목재, 금속, 식생");
+inp("attrs","④ 형태와 속성",r.attrs,"색상, 방향, 크기 등");
+inp("notes","⑤ 검수 근거·보류",r.notes,"근거로 본 A/B/C/D 차이",true);
+const old=document.createElement("details");const label=document.createElement("summary");label.textContent="기존 관찰·원본 제약 표시";const det=document.createElement("div");det.className="hint";det.textContent=(it.previous_features||"기존 관찰 문구 없음")+" · "+(it.source_note||"");old.append(label,det);fieldsBox.append(old);
+el.append(fieldsBox);cards.append(el)}
+updateStats()}
+function labelField(c,e){const l=document.createElement("label");l.append(document.createTextNode(c));l.append(e);return l}
+for(const id of ["search","state","source","per"])byId(id).addEventListener(id==="search"?"input":"change",()=>{page=0;filter()});
+for(const x of document.querySelectorAll(".back"))x.onclick=()=>{page--;render()};for(const x of document.querySelectorAll(".forward"))x.onclick=()=>{page++;render()};
+byId("selectPage").onclick=()=>{let n=Number(byId("per").value);for(const t of filtered.slice(page*n,page*n+n))picked.add(t.key);render()};
+byId("selectFiltered").onclick=()=>{for(const t of filtered)picked.add(t.key);render()};
+byId("unselect").onclick=()=>{picked.clear();render()};
+function bulk(action){if(!picked.size){alert("먼저 타일을 선택하세요.");return}if(picked.size>50&&!confirm(picked.size+"종에 '"+options[action]+"'를 일괄 적용할까요?"))return;
+for(const it of DATA)if(picked.has(it.key)){const r=get(it);keep(it,{status:action==="candidate"&&!r.identity.trim()?"seen":action})}filter()}
+byId("bulkSeen").onclick=()=>bulk("seen");byId("bulkHeld").onclick=()=>bulk("held");byId("bulkTodo").onclick=()=>bulk("todo");
+byId("bulkCandidate").onclick=()=>{if([...picked].some(k=>!get(DATA.find(i=>i.key===k)).identity.trim()))return alert("정체 후보는 타일별 정체를 입력하거나, 아래 동일 정체 일괄 입력을 먼저 사용하세요.");bulk("candidate")};
+byId("applyName").onclick=()=>{let val=byId("bulkName").value.trim();if(!val||!picked.size)return alert("동일한 정체명과 선택된 타일이 필요합니다.");
+if(!confirm("서로 다른 타일 "+picked.size+"종에 똑같은 정체 '"+val+"'를 기록할까요?"))return;
+for(const it of DATA)if(picked.has(it.key))keep(it,{identity:val,status:"candidate"});filter()};
+byId("closeModal").onclick=()=>byId("modal").classList.remove("open");byId("modal").onclick=e=>{if(e.target===byId("modal"))byId("modal").classList.remove("open")};
+filter();
+</script></body></html>
