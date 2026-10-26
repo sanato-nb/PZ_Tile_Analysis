@@ -142,13 +142,18 @@ def label(img,label_text):
 TARGET_COUNT=32
 eligible=sorted(OCC, key=lambda k:(k[0],k[1]))
 buckets=defaultdict(list)
+unrenderable=[]
 for key in eligible:
     uses=OCC[key]
     m=MAP_DATA[uses[0]['tmx']]
     t=next(t for t in m['tilesets'] if t['name']==key[0])
     sprite,status=crop(t,key[1])
-    if sprite is None: continue # 투명 원본도 B-C 근거 부족으로 보류할 수 있게 보존
+    if sprite is None:
+        unrenderable.append({'key':key,'reason':status})
+        continue # A 원본 PNG 실제 픽셀 없으면 관찰로 계상하지 않는다
     buckets[key[0]].append(key)
+TARGET_COUNT=min(TARGET_COUNT,sum(len(v) for v in buckets.values()))
+assert TARGET_COUNT>0,'다른 D는 있으나 PNG A 추출 가능한 키가 0'
 families=sorted(buckets, key=lambda name:(0 if name.startswith(('fixtures_','furniture_','appliances_','walls_','industry_','location_','vegetation_','carpentry_','crafted_')) else 1,name))
 selected=[]
 for round_idx in range(100):
@@ -221,7 +226,7 @@ for key in TARGETS:
     'source':'GitHub original PNG and TMX','base':'v108','observed_count_added':0, 'selection_policy':'v108 미관찰 99종 중 병행 v109 48종을 제외한 실제 다른 D 사용 위치 32종만 선택',
     'rendering':'approximate isometric, not TileZed; actual D only when other map or >=5 cells; absence explicitly shown',
     'original_tmx_suffix_note':'Repository files omit (2), but 5409/302177 scope counts match',
-    'sha256':HASHES,'results':results},ensure_ascii=False,indent=2),encoding='utf8')
+    'sha256':HASHES,'results':results,'unrenderable_with_actual_D':unrenderable},ensure_ascii=False,indent=2),encoding='utf8')
 
 # 사람/모델이 실제 A/B/C/D를 한 눈에 검토하기 위한 합본 미리보기 (6개 타일/장).
 # 이 판은 시각 판독을 대신하지 않으며 개별 A/B/C/D 원본은 모두 별도 저장한다.
