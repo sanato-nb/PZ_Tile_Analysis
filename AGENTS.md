@@ -1,14 +1,14 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v113)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v115)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v113(사용자 수동 검수 반영): 이미지 관찰 5,400/5,409종(99.8336%); 역사적 미관찰 9종, 이 중 사용자 제외 8종, 활성 검수 대상 1종; 감사 가능한 기존 후보 4,512종 + 사용자 잠정 후보 1종(별도), 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v113/`. 복원: `python3 scripts/restore_unified_v113.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v115(888종 AI 직접 재검수 반영): 기존 이미지 관찰 5,400/5,409종(99.8336%). 이 가운데 기존 정체 후보 미기록 888종을 74장의 A1/A2/B/C/D 원본 접촉시트로 직접 판독해 새 시각 계열·부품 잠정 후보 882종(870 low, 12 medium) 및 원본 문제 6종 보류 기록. 기존 v113 감사 가능한 잠정 후보 4,512종은 변경 없이 보존. 공식 Local ID·TileZed·최종 인증 0종. 기존 미관찰 9종 중 사용자 검수 제외 8종, 활성 검수 1종도 보존**.
+- 최신 물리 통합 SQLite: `analysis/current/v115/`. 복원: `python3 scripts/restore_unified_v115.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
-1. 최신 DB `analysis_queue`에서 미관찰 키 `(tile_set_locator,local_id)`를 선택하고, 이전 관찰과 겹치는 키는 신규로 계상하지 않는다.
+1. 신규 원본 이미지 관찰은 최신 DB `v113_active_review_queue`에서 미관찰 키를 선택한다. 과거 이미지 관찰이 있지만 정체 후보 없던 888종의 결과는 `v115_ai_visual_review` 테이블로 **별도 보존**하며, 이미지 관찰 수에 다시 합산하거나 공식 인증으로 승격하지 않는다.
 2. A 원본 PNG 타일 크롭, B TMX 동일 층 주변 5×5 근사 아이소메트릭, C 동일 레이어 대상 배치 **하나만** 제거, D 다른 실제 TMX 사용 위치를 생성하고 **직접 이미지를 관찰**한다.
 3. `observed_features`, `identity_candidate`, `part_role`, `confidence`, `review_status`를 분리한다. 타일셋명 또는 과거 v31 AI 분류만으로 정체를 판단하지 않는다.
 4. TMX 좌표·층·레이어·raw GID·원본 PNG/TMX SHA-256·B-C 픽셀 변화·주변 누락·`height_mismatch`를 증거에 남긴다. 불충분한 정체는 `held`로 처리한다.
@@ -20,6 +20,13 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v115 사용자 지적 반영: AI 직접 888종 시각 재검수 (2026-10-26)
+- 74장 `review/v115_model_visual/sheet_000.jpg` ~ `sheet_073.jpg`의 전체 888개 키(A1/A2/B/C/D 후보·실제 TMX 장면)를 모델이 직접 화면 판독. AI 잠정 물체·부품 후보 **882종**, 보류 **6종**. 882종 중 **870종 low(주로 계열 수준), 12종 medium**, 정체 최종 인증 **0종**. 888을 100% 상세 완결 식별했다고 주장 금지.
+- 사용자 관찰대로 `appliances_com_01/3`은 **송수화기형 통신기기(전화·무전 장비의 미확정 후보)**로, `appliances_com_01/96/97/108` 등은 전봇대 가로대에 연결되는 가공 전선 계열로 기록. `appliances_com_01/120/121/123/124/133`은 세로 인입선 계열. `electricity_pylon/42/45`는 격자 철골 구성부. 15×15 확대한 **8개**의 B/C/차이 증거가 `review/v115_extended_context/`에 있고 원본 라벨 변조에 따른 가짜 B−C 차이는 수정 완료.
+- 원본 A1=TMX 선언 격자, A2=TileZed 텍스트 격자 잠정 후보이며 **공식 Local ID 검증 0**. B−C 0인 **332종**을 자동으로 투명·빈 것으로 판정 금지. 6종은 원본 또는 격자 소스 불확실하여 held.
+- 모든 결과: `review/v115_ai_identity/AI_VISUAL_REVIEW_888.csv`, `review/v115_ai_identity/SUMMARY.json`, `docs/V115_AI_VISUAL_REVIEW_888.md`. 최신 물리 SQLite `analysis/current/v115/`에는 **독립 `v115_ai_visual_review` 테이블**, `v115_ai_candidate_queue` (882), `v115_ai_held_queue` (6)을 추가. 기존 `tile_catalog.observed_any` 5,400, `provisional_candidate_any_auditable` 4,512, `analysis_queue` 9, `v113_active_review_queue` 1, 사용자 검수 제외 8 및 최종 인증 0 그대로. `mapping_verified=tilezed_verified=final_certified=0`.
+- v115 SHA-256 `4f0f0679c85d18a2ac87d440a0c41f9708348b0004e1efe231410e7f99ffae20`, GitHub Actions workflow `build-v115-unified.yml`에서 복원·PRAGMA integrity_check·이전 테이블 보존 PASS. **다음은 882종의 세부 정체·PNG 매핑 독립 검증**, 후속 신규 맵 범위 4,633종의 A 후보 선정.
 
 ## v113 사용자 수동 검수 — 8종 활성 제외, 2번 식생 잠정 (2026-10-26)
 - **사용자 검수 대상 9종 중 8종(번호 1·3·4·5·6·7·8·9)은 추가 검수 제외**, **2번 `f_bushes_1/66`은 '풀 또는 꽃 계열 식물'로 낮은 확신도의 사용자 잠정 후보**. 이 의견은 사용자의 수동 판단이며 공식 PNG–TMX Local ID 및 TileZed 인증이 아니다.

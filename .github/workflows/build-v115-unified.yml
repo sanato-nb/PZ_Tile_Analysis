@@ -1,0 +1,67 @@
+name: v115 merge AI visual review into historical SQLite safely
+on:
+  push:
+    branches: [work/v115-ai-review-888-20261026]
+    paths:
+      - .github/workflows/build-v115-unified.yml
+      - scripts/build_v115_unified.py
+      - scripts/restore_unified_v115.py
+      - review/v115_ai_identity/AI_VISUAL_REVIEW_888.csv
+      - review/v115_ai_identity/SUMMARY.json
+permissions:
+  contents: write
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v113/*
+            /analysis/current/v115/*
+            /review/v115_ai_identity/*
+            /scripts/build_v115_unified.py
+            /scripts/restore_unified_v113.py
+            /scripts/restore_unified_v115.py
+            /PROJECT_STATE.json
+            /docs/V115_AI_VISUAL_REVIEW_888.md
+      - name: Restore previous physical full SQLite
+        run: python3 scripts/restore_unified_v113.py "$RUNNER_TEMP/v113_full.sqlite"
+      - name: Insert only new v115 AI guesses, keep old 4512 unchanged
+        run: python3 scripts/build_v115_unified.py "$RUNNER_TEMP/v113_full.sqlite"
+      - name: Verify SHA and physical SQLite v115 exactly
+        run: python3 scripts/restore_unified_v115.py "$RUNNER_TEMP/v115_full_restored.sqlite"
+      - name: Verify JSON and all new statuses distinct
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,csv
+          r=pathlib.Path('.')
+          m=json.loads((r/'analysis/current/v115/MANIFEST.json').read_text())
+          s=json.loads((r/'PROJECT_STATE.json').read_text())
+          assert s['latest_checkpoint']['version']=='v115'
+          assert m['v115_new_ai_visual_candidates']==882 and m['v115_held']==6
+          assert m['previous_auditable_candidates']==4512 and m['original_observed']==5400
+          with (r/'review/v115_ai_identity/AI_VISUAL_REVIEW_888.csv').open(encoding='utf-8-sig',newline='') as f:a=list(csv.DictReader(f))
+          assert len(a)==888 and sum(x['review_status']=='candidate' for x in a)==882
+          assert all(x['final_certified']=='0' for x in a)
+          print('PASS 888 v115 records, immutable historical observations, 0 certified')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-v115-AI-visual-provisional-full-SQLite
+          path: ${{ runner.temp }}/tile_visual_v115_unified.sqlite
+          retention-days: 90
+      - name: Commit physical split SQLite with preserved prior tables
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v115/ PROJECT_STATE.json
+          if ! git diff --cached --quiet; then
+            git commit -m "v115: validated 882 provisional visual identities, six holds, full SQLite, no certification"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

@@ -1,0 +1,62 @@
+name: v115 extended contextual B/C, 15 by 15
+on:
+  push:
+    branches: [work/v115-ai-review-888-20261026]
+    paths:
+      - scripts/v115_extended_15x15.py
+      - .github/workflows/v115-extended.yml
+permissions:
+  contents: write
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /Tiles/tiledefinitions.tiles.txt
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v113/*
+            /scripts/restore_unified_v113.py
+            /scripts/v115_extended_15x15.py
+            /review/v115_extended_context/*
+      - run: python3 -m pip install --quiet Pillow
+      - name: Restore verified v113 SQLite
+        run: python3 scripts/restore_unified_v113.py "$RUNNER_TEMP/verified_v113.sqlite"
+      - name: Build 8 complete extended contexts with B C target delta
+        run: python3 -u scripts/v115_extended_15x15.py "$RUNNER_TEMP/verified_v113.sqlite"
+      - name: Verify all expanded image evidence
+        run: |
+          python3 - <<'PY'
+          import pathlib,json
+          from PIL import Image
+          root=pathlib.Path('review/v115_extended_context')
+          s=json.loads((root/'MANIFEST.json').read_text())
+          assert len(s['items'])==8
+          assert all(x['window']=='15x15' and x['removed'] and len(x['images'])==4 for x in s['items'])
+          for e in s['items']:
+            for name in e['images']:
+              with Image.open(name) as im:im.verify()
+          print('PASS 8 x 15x15 full scene, original/removed/delta and candidate visual')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v115-15x15-extended-context-8-tiles
+          path: review/v115_extended_context/
+          retention-days: 90
+      - name: Commit evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v115_extended_context/
+          if ! git diff --cached --quiet; then
+            git commit -m "v115 15x15 source scenes for wires and obscured communications, CRC-checked"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
