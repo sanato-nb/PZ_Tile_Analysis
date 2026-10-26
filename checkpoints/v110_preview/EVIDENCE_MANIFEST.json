@@ -1,0 +1,876 @@
+{
+  "source": "GitHub original PNG and TMX",
+  "base": "v109",
+  "observed_count_added": 0,
+  "excluded_early_v109_keys": 0,
+  "rendering": "approximate isometric, not TileZed; actual D only when other map or >=5 cells; absence explicitly shown",
+  "original_tmx_suffix_note": "Repository files omit (2), but 5409/302177 scope counts match",
+  "sha256": {
+    "31_45.tmx": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936",
+    "31_46.tmx": "5eb55362bafb6235e6f609a65675f083189ebb8a706829d12bb9da0abcd39603",
+    "Tiles/2x/d_generic_1.png": "41c21c9f93f29268a87a4072da1844eaee4c1844c7a7c67f3b1e5a444c18b419",
+    "Tiles/2x/d_wallcracks_1.png": "5f0b98205e52737009c5e633a9e452fd81b82642482ee0b16bcc3e4d59159be5",
+    "Tiles/2x/e_riverbirch_1.png": "ac1ed4085a9f46957bfc7d84351c1c149af72e764888a05a698c5c30e1644dff",
+    "Tiles/2x/f_bushes_1.png": "dbbba132bb8b5f19186236f700b1061d6203168e85222bef315249e05d6270b8",
+    "Tiles/2x/location_business_office_generic_01.png": "38e7e082d1a83cec1c75bf9bca6f92269240b66c6174f14533a6586be1f75c20",
+    "Tiles/2x/floors_exterior_tilesandstone_01.png": "9efd0a6e12d63bc6fdef5f62b7a6e716627eaf2437e6644f416b5b4b4f861079",
+    "Tiles/2x/blends_street_01.png": "cdaa9f9b07d123c18a8609806044e441bffcca5c6e7d84f3b49ec027dc9ec0f4",
+    "Tiles/2x/blends_natural_01.png": "636f70e7a513815a29875644e89ae6ca8218068e7e6089eaf6436e886e38dda2",
+    "Tiles/2x/furniture_seating_outdoor_01.png": "2e23d885994778c9fc9d54e7b8f89c2edf9810364325031200074ba48ecd2149",
+    "Tiles/2x/street_curbs_01.png": "a24c995e27ef13e2b8dc151d07bf76a42f7f667f25be5d457340bde2a5700668",
+    "Tiles/2x/street_curbs_01_blend_dirt.png": "17654a79f7f5dbf19f1952f040f85f95c9920ccf6c80d37a0acadee99f0691b6",
+    "Tiles/2x/overlay_grime_floor_01.png": "7340b8f0473619e5c7617bf6c59d9f385d6145d9d75bda886499fa8195bbcb82",
+    "Tiles/2x/street_trafficlines_01.png": "be83a67838f9368fc12b48019c8e6f6ada33ca81b2f565154acbef8b82de9394",
+    "Tiles/2x/street_decoration_01.png": "e5b1929228f32cfe914d22f0605cf2b6c02ca61b80732c106c12fae2e6db3515",
+    "Tiles/2x/appliances_com_01.png": "fa95c180082a5517af94f76fe5f95b182ba6ea755fcf281b920f504f7ad4db78",
+    "Tiles/2x/walls_logs.png": "57e569ed72d3d32c7ba63e03aa7969d7e9a92fce65a938e7d7c923d6babf3edc",
+    "Tiles/2x/crafted_04.png": "9b9d254278f3af82632f2647f9bf5a678408d2aa066c91fda0feb42ef52bb115",
+    "Tiles/2x/walls_exterior_house_01.png": "ef80421f7850674026423a1b5e980d9f0a7203741cba3d94f954052bb987437e",
+    "Tiles/2x/overlay_grime_wall_01.png": "0f0cd5ba1553b5acab142de617fc177e960a4c4f0e5c392747c952505c71eea6",
+    "Tiles/2x/d_plants_1.png": "db3a7ac80776fae2bbf40bb5e34e969803678adc12a7fd6ead088385e0920bf2",
+    "Tiles/2x/boulders.png": "be955253dcf9f017c711f8e77279f22b54d0a0351d539282dd7d12f020e51bcd",
+    "Tiles/2x/blends_grassoverlays_01.png": "7208a17a4ef938ff9627e946ad8863f370024c515a6e4d17a4ae499d8ddbd6b8",
+    "Tiles/2x/floor_carpet_motif.png": "34dc0f0afdd66ced75b51bd1990e10d8aaddc7beddbb7c859edd636ca803602d",
+    "Tiles/2x/walls_interior_house_03.png": "84164df72557e4c6825cb12932cf5401c80133865e1ea6539ae4a31cc4d3328c",
+    "Tiles/2x/furniture_seating_indoor_03.png": "5cce2615fc62c739f2519b778d6c577234338a263f44d74ef1685d35bdad22f2",
+    "Tiles/2x/fixtures_windows_curtains_01.png": "e19680612a408b737802ecdd388ef432d6f925c914b6f670f4bfa6c73aab57bb",
+    "Tiles/2x/walls_interior_detailing_01.png": "78eb9dccdfdef98f6343b40056331e91ae2a8ea64d451e07b874af8385c47777",
+    "Tiles/2x/lighting_indoor_02.png": "ca07d9148415a07e14d022c3cf952b615d66bf7b290a98b75503984434ddae58",
+    "Tiles/2x/walls_decoration_02.png": "925db0cb3d03a6be034b9880d739c3e1873f489edc0de19150794b7ee7fe5488",
+    "Tiles/2x/location_community_medical_01.png": "2320eb62ef7d1acaaa652dc9b1a718862e5c9f06720893eb66a513d1fc39f02e",
+    "Tiles/2x/fixtures_windows_01.png": "77d0f322452994510021d8e46b685571dedb13fa321821c1552dedb8892aa1a7",
+    "Tiles/2x/vegetation_indoor_01.png": "afbb7f2018b00d836b5311c2d35ce1dce74ab4cc6a15d1c811214ac668f51654",
+    "Tiles/2x/trashcontainers_01.png": "906a353b3d3b4660073cda9a0e2ca1ddb633478a888fc4c8f0f64e43ee3eaf2f",
+    "Tiles/2x/location_business_office_generic_02.png": "34ea7cdba86d66610e1bdea8a85d05c61f5300a6889dedf9dadccf0268159918",
+    "Tiles/2x/furniture_shelving_01.png": "66bfefd269fbc1be41cbfa7b717b36e90f613eacd233bee33eb256d7b5154b43"
+  },
+  "results": [
+    {
+      "key": [
+        "d_generic_1",
+        29
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "height_mismatch",
+      "A": "d_generic_1__029_A.jpg",
+      "B": "d_generic_1__029_B.jpg",
+      "C": "d_generic_1__029_C.jpg",
+      "D": "d_generic_1__029_D.jpg",
+      "board": "d_generic_1__029_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 181,
+        "y": 53,
+        "gid": 3014
+      },
+      "other_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay3",
+        "layer_index": 13,
+        "x": 157,
+        "y": 54,
+        "gid": 3014
+      },
+      "other_placement_available": true,
+      "D_independent_5_cells_or_other_map": true,
+      "uses": 3,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 3,
+      "missing_png_neighbors_C": 3,
+      "missing_png_neighbors_D": 4,
+      "rendered_placements_B": 50,
+      "rendered_placements_C": 49,
+      "rendered_placements_D": 51,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "d_generic_1",
+        30
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "height_mismatch",
+      "A": "d_generic_1__030_A.jpg",
+      "B": "d_generic_1__030_B.jpg",
+      "C": "d_generic_1__030_C.jpg",
+      "D": "d_generic_1__030_D.jpg",
+      "board": "d_generic_1__030_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 156,
+        "y": 52,
+        "gid": 3015
+      },
+      "other_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 157,
+        "y": 65,
+        "gid": 3015
+      },
+      "other_placement_available": true,
+      "D_independent_5_cells_or_other_map": true,
+      "uses": 3,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 4,
+      "missing_png_neighbors_C": 4,
+      "missing_png_neighbors_D": 3,
+      "rendered_placements_B": 48,
+      "rendered_placements_C": 47,
+      "rendered_placements_D": 44,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "d_generic_1",
+        36
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "height_mismatch",
+      "A": "d_generic_1__036_A.jpg",
+      "B": "d_generic_1__036_B.jpg",
+      "C": "d_generic_1__036_C.jpg",
+      "D": "d_generic_1__036_D.jpg",
+      "board": "d_generic_1__036_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": -1,
+        "layer": "FloorOverlay",
+        "layer_index": 1,
+        "x": 190,
+        "y": 98,
+        "gid": 3021
+      },
+      "other_placement": {
+        "tmx": "",
+        "level": -1,
+        "layer": "NO_SECOND_USE",
+        "layer_index": -1,
+        "x": -1,
+        "y": -1,
+        "gid": 0
+      },
+      "other_placement_available": false,
+      "D_independent_5_cells_or_other_map": false,
+      "uses": 1,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 1,
+      "missing_png_neighbors_C": 1,
+      "missing_png_neighbors_D": 0,
+      "rendered_placements_B": 38,
+      "rendered_placements_C": 37,
+      "rendered_placements_D": 0,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "d_generic_1",
+        37
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "height_mismatch",
+      "A": "d_generic_1__037_A.jpg",
+      "B": "d_generic_1__037_B.jpg",
+      "C": "d_generic_1__037_C.jpg",
+      "D": "d_generic_1__037_D.jpg",
+      "board": "d_generic_1__037_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay",
+        "layer_index": 11,
+        "x": 156,
+        "y": 64,
+        "gid": 3022
+      },
+      "other_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 165,
+        "y": 71,
+        "gid": 3022
+      },
+      "other_placement_available": true,
+      "D_independent_5_cells_or_other_map": true,
+      "uses": 4,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 4,
+      "missing_png_neighbors_C": 4,
+      "missing_png_neighbors_D": 6,
+      "rendered_placements_B": 53,
+      "rendered_placements_C": 52,
+      "rendered_placements_D": 49,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "e_riverbirch_1",
+        2
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "height_mismatch",
+      "A": "e_riverbirch_1__002_A.jpg",
+      "B": "e_riverbirch_1__002_B.jpg",
+      "C": "e_riverbirch_1__002_C.jpg",
+      "D": "e_riverbirch_1__002_D.jpg",
+      "board": "e_riverbirch_1__002_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 246,
+        "y": 176,
+        "gid": 3923
+      },
+      "other_placement": {
+        "tmx": "",
+        "level": -1,
+        "layer": "NO_SECOND_USE",
+        "layer_index": -1,
+        "x": -1,
+        "y": -1,
+        "gid": 0
+      },
+      "other_placement_available": false,
+      "D_independent_5_cells_or_other_map": false,
+      "uses": 1,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 3,
+      "missing_png_neighbors_C": 3,
+      "missing_png_neighbors_D": 0,
+      "rendered_placements_B": 46,
+      "rendered_placements_C": 45,
+      "rendered_placements_D": 0,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "e_riverbirch_1",
+        3
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "height_mismatch",
+      "A": "e_riverbirch_1__003_A.jpg",
+      "B": "e_riverbirch_1__003_B.jpg",
+      "C": "e_riverbirch_1__003_C.jpg",
+      "D": "e_riverbirch_1__003_D.jpg",
+      "board": "e_riverbirch_1__003_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 247,
+        "y": 170,
+        "gid": 3924
+      },
+      "other_placement": {
+        "tmx": "",
+        "level": -1,
+        "layer": "NO_SECOND_USE",
+        "layer_index": -1,
+        "x": -1,
+        "y": -1,
+        "gid": 0
+      },
+      "other_placement_available": false,
+      "D_independent_5_cells_or_other_map": false,
+      "uses": 1,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 2,
+      "missing_png_neighbors_C": 2,
+      "missing_png_neighbors_D": 0,
+      "rendered_placements_B": 45,
+      "rendered_placements_C": 44,
+      "rendered_placements_D": 0,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "location_business_office_generic_01",
+        9
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "dimensions_consistent",
+      "A": "location_business_office_generic_01__009_A.jpg",
+      "B": "location_business_office_generic_01__009_B.jpg",
+      "C": "location_business_office_generic_01__009_C.jpg",
+      "D": "location_business_office_generic_01__009_D.jpg",
+      "board": "location_business_office_generic_01__009_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay1",
+        "layer_index": 31,
+        "x": 130,
+        "y": 98,
+        "gid": 10034
+      },
+      "other_placement": {
+        "tmx": "",
+        "level": -1,
+        "layer": "NO_SECOND_USE",
+        "layer_index": -1,
+        "x": -1,
+        "y": -1,
+        "gid": 0
+      },
+      "other_placement_available": false,
+      "D_independent_5_cells_or_other_map": false,
+      "uses": 1,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 0,
+      "missing_png_neighbors_C": 0,
+      "missing_png_neighbors_D": 0,
+      "rendered_placements_B": 51,
+      "rendered_placements_C": 50,
+      "rendered_placements_D": 0,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "location_business_office_generic_01",
+        11
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "dimensions_consistent",
+      "A": "location_business_office_generic_01__011_A.jpg",
+      "B": "location_business_office_generic_01__011_B.jpg",
+      "C": "location_business_office_generic_01__011_C.jpg",
+      "D": "location_business_office_generic_01__011_D.jpg",
+      "board": "location_business_office_generic_01__011_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay1",
+        "layer_index": 31,
+        "x": 131,
+        "y": 98,
+        "gid": 10036
+      },
+      "other_placement": {
+        "tmx": "",
+        "level": -1,
+        "layer": "NO_SECOND_USE",
+        "layer_index": -1,
+        "x": -1,
+        "y": -1,
+        "gid": 0
+      },
+      "other_placement_available": false,
+      "D_independent_5_cells_or_other_map": false,
+      "uses": 1,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 0,
+      "missing_png_neighbors_C": 0,
+      "missing_png_neighbors_D": 0,
+      "rendered_placements_B": 57,
+      "rendered_placements_C": 56,
+      "rendered_placements_D": 0,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    },
+    {
+      "key": [
+        "location_business_office_generic_01",
+        12
+      ],
+      "status": "evidence_only_unreviewed",
+      "atlas_status": "dimensions_consistent",
+      "A": "location_business_office_generic_01__012_A.jpg",
+      "B": "location_business_office_generic_01__012_B.jpg",
+      "C": "location_business_office_generic_01__012_C.jpg",
+      "D": "location_business_office_generic_01__012_D.jpg",
+      "board": "location_business_office_generic_01__012_ABCD.jpg",
+      "primary_placement": {
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay1",
+        "layer_index": 31,
+        "x": 131,
+        "y": 97,
+        "gid": 10037
+      },
+      "other_placement": {
+        "tmx": "",
+        "level": -1,
+        "layer": "NO_SECOND_USE",
+        "layer_index": -1,
+        "x": -1,
+        "y": -1,
+        "gid": 0
+      },
+      "other_placement_available": false,
+      "D_independent_5_cells_or_other_map": false,
+      "uses": 1,
+      "visible_pixel_delta": 0,
+      "missing_png_neighbors_B": 0,
+      "missing_png_neighbors_C": 0,
+      "missing_png_neighbors_D": 0,
+      "rendered_placements_B": 55,
+      "rendered_placements_C": 54,
+      "rendered_placements_D": 0,
+      "mapping_verified": false,
+      "tilezed_verified": false,
+      "final_certified": false
+    }
+  ],
+  "blocked_unobserved": [
+    {
+      "key": [
+        "camping_03 (ayrton orio's conflicted copy 2025-09-10)",
+        19
+      ],
+      "reason": "missing",
+      "atlas_status": "missing",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        40
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 4,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        41
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 8,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        42
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        46
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 5,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        48
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 6,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        49
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 3,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        50
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 4,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        51
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 6,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        52
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 4,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        53
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 4,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        55
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        80
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 5,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        81
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 5,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        83
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        86
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 7,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_generic_1",
+        87
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_wallcracks_1",
+        60
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_wallcracks_1",
+        61
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_wallcracks_1",
+        62
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_wallcracks_1",
+        65
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_wallcracks_1",
+        66
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "d_wallcracks_1",
+        71
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "e_cockspurhawthornJUMBO_1",
+        0
+      ],
+      "reason": "missing",
+      "atlas_status": "missing",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "e_cockspurhawthornJUMBO_1",
+        1
+      ],
+      "reason": "missing",
+      "atlas_status": "missing",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "e_redmapleJUMBO_1",
+        0
+      ],
+      "reason": "missing",
+      "atlas_status": "missing",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        64
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        66
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        71
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        74
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        75
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        96
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        98
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        99
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 21,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        100
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 5,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        101
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        103
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        104
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        105
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 1,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        109
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "f_bushes_1",
+        110
+      ],
+      "reason": "local_id_out_of_png",
+      "atlas_status": "local_id_out_of_png",
+      "uses": 2,
+      "needs_official_local_id": true
+    },
+    {
+      "key": [
+        "jumbo_tree_01",
+        0
+      ],
+      "reason": "missing",
+      "atlas_status": "missing",
+      "uses": 94,
+      "needs_official_local_id": true
+    }
+  ],
+  "blocked_count": 42,
+  "review_sheets": [
+    "checkpoints/v110_preview/review_sheets/sheet_000.jpg",
+    "checkpoints/v110_preview/review_sheets/sheet_001.jpg"
+  ],
+  "review_sheets_sha256": {
+    "checkpoints/v110_preview/review_sheets/sheet_000.jpg": "dedf36e85a6622b7f918159eaad783f454d8597e0648893e873933e22ec1235a",
+    "checkpoints/v110_preview/review_sheets/sheet_001.jpg": "ff5a07cf464c53423efab0570def320bf3ed715400bc7cce5ae536f00ee52a4e"
+  }
+}
