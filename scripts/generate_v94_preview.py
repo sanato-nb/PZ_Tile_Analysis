@@ -165,6 +165,7 @@ for round_idx in range(40):
 TARGETS=selected[:TARGET_COUNT]
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
+print('QUEUE_DIAGNOSTICS',len(queue),'present',len(OCC),'multiuse',sum(len(v)>=2 for v in OCC.values()),'singleuse',sum(len(v)==1 for v in OCC.values()),'eligible',len(eligible),'buckets',len(buckets),'targets',len(TARGETS),flush=True)
 assert len(TARGETS)>=TARGET_COUNT,('not enough review targets',TARGETS)
 print('v94 UNREVIEWED PREVIEW TARGETS',TARGETS,flush=True)
 results=[]
