@@ -1,0 +1,117 @@
+{
+  "version": "v113",
+  "kind": "user_manual_review_filter",
+  "based_on_verified_observations": "v111",
+  "prior_source_audit": "v112",
+  "total_source_keys": 5409,
+  "already_observed": 5400,
+  "historical_unobserved": 9,
+  "user_excluded_from_active_review": 8,
+  "active_unobserved_to_review": 1,
+  "user_provisional_only": 1,
+  "user_provisional_key": [
+    "f_bushes_1",
+    66
+  ],
+  "user_provisional_candidate": "풀 또는 꽃 계열 식물",
+  "new_verified_observations": 0,
+  "new_auditable_candidates": 0,
+  "new_final_certifications": 0,
+  "source_mapping_verified": false,
+  "tilezed_verified": false,
+  "meaning": "Excluded means hidden from active review, never deleted from catalog and never counted as transparent-certified or observed.",
+  "source_evidence_caveat": "Only three office provisional crops have zero alpha; two source PNGs unavailable and three JUMBO provisional crops blank due to mapping uncertainty.",
+  "manual_review_key": "(tile_set_locator, local_id)",
+  "entries": [
+    {
+      "number": 1,
+      "key": [
+        "location_business_office_generic_01",
+        9
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "verified_empty_alpha_in_provisional_crop"
+    },
+    {
+      "number": 2,
+      "key": [
+        "f_bushes_1",
+        66
+      ],
+      "action": "keep_provisional",
+      "candidate": "풀 또는 꽃 계열 식물",
+      "source_status": "visible_source_alpha_bc_delta_zero"
+    },
+    {
+      "number": 3,
+      "key": [
+        "location_business_office_generic_01",
+        11
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "verified_empty_alpha_in_provisional_crop"
+    },
+    {
+      "number": 4,
+      "key": [
+        "location_business_office_generic_01",
+        12
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "verified_empty_alpha_in_provisional_crop"
+    },
+    {
+      "number": 5,
+      "key": [
+        "camping_03 (ayrton orio's conflicted copy 2025-09-10)",
+        19
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "exact_source_missing"
+    },
+    {
+      "number": 6,
+      "key": [
+        "e_cockspurhawthornJUMBO_1",
+        0
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "nested_png_blank_provisional_crop_mapping_unverified"
+    },
+    {
+      "number": 7,
+      "key": [
+        "e_cockspurhawthornJUMBO_1",
+        1
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "nested_png_blank_provisional_crop_mapping_unverified"
+    },
+    {
+      "number": 8,
+      "key": [
+        "e_redmapleJUMBO_1",
+        0
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "nested_png_blank_provisional_crop_mapping_unverified"
+    },
+    {
+      "number": 9,
+      "key": [
+        "jumbo_tree_01",
+        0
+      ],
+      "action": "exclude_from_active_review",
+      "candidate": null,
+      "source_status": "exact_source_missing"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+name: v113 manual-review 8 exclusions, one grass-or-flower provisional
+on:
+  push:
+    branches: [work/v113-user-review-20261026]
+    paths:
+      - .github/workflows/build-unified-v113.yml
+      - scripts/build_v113_user_review.py
+      - scripts/restore_unified_v113.py
+      - scripts/verify_v113_user_review.py
+      - scripts/package_v113_user_review.py
+      - checkpoints/v113/user_review.csv
+      - checkpoints/v113/user_review_summary.json
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v111/*
+            /checkpoints/v113/*
+            /checkpoints/v111/unresolved_9.csv
+            /checkpoints/v111_singleuse_preview/*_ABCD.jpg
+            /checkpoints/v112_jumbo_preview/*_ABCD.jpg
+            /audits/v112_remaining9/SOURCE_AUDIT.json
+            /docs/USER_REVIEW_V113.md
+            /docs/REVIEW_UNOBSERVED_9.md
+            /docs/HANDOFF.md
+            /scripts/build_v113_user_review.py
+            /scripts/restore_unified_v111.py
+            /scripts/restore_unified_v113.py
+            /scripts/verify_v113_user_review.py
+            /scripts/package_v113_user_review.py
+            /scripts/validate_project.py
+            /scripts/generate_handoff.py
+            /PROJECT_STATE.json
+      - run: python3 -m pip install --quiet Pillow
+      - name: Restore verified v111 full SQLite
+        run: python3 scripts/restore_unified_v111.py "$RUNNER_TEMP/v111.sqlite"
+      - name: Validate nine manual review entries and source-specific caveats
+        run: python3 scripts/verify_v113_user_review.py
+      - name: Copy v111 SQLite and filter 8 only from active review
+        run: python3 scripts/build_v113_user_review.py "$RUNNER_TEMP/v111.sqlite"
+      - name: Restore full v113 SHA-256 verified SQLite and counts
+        run: python3 scripts/restore_unified_v113.py "$RUNNER_TEMP/v113-restored.sqlite"
+      - name: Package seven previous A/B/C/D boards and 9 manual review entries
+        run: python3 scripts/package_v113_user_review.py
+      - name: Validate state and regenerate latest handoff
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-v113-user-review-sqlite
+          path: ${{ runner.temp }}/tile_visual_v113_unified.sqlite
+          retention-days: 90
+      - name: Commit versioned full SQLite and review evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v113/ checkpoints/v113/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "검증(v113): 8종 활성 검수 제외·2번 풀/꽃 잠정·원본 SQLite SHA와 ZIP CRC"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
