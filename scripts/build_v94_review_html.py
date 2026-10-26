@@ -24,7 +24,7 @@ for batch in range(2):
    sections.append('<figure><figcaption>'+kind+(' — 다른 사용 위치 없음' if kind=='D' else '')+'</figcaption><img loading="lazy" src="data:image/jpeg;base64,'+base64.b64encode(p.read_bytes()).decode('ascii')+'"></figure>')
   cards.append('<article><h2>'+html.escape(r['tile_set_locator']+'/'+r['local_id'])+'</h2><p>'+html.escape(r['observed_features'])+'</p><p>잠정 후보: '+html.escape(r['identity_candidate'] or '보류')+'</p><p>'+html.escape(r['review_notes'])+'</p>'+''.join(sections)+'</article>')
  assert len(images)==300
- page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>v94 단일사용 타일 '+str(batch+1)+'</title><style>body{font:16px system-ui;background:#f1f3f5;color:#172b38;max-width:1250px;margin:2rem auto}article{background:white;padding:1rem;margin:1rem;border-radius:10px}img{max-width:100%;height:auto}figure{margin:1rem 0}figcaption{font-weight:bold}</style><h1>v94 새 단일사용 타일 '+str(batch*60+1)+'~'+str((batch+1)*60)+' /120</h1><p>A 원본 PNG, B 실제 TMX 5×5 근사 조립, C 배치 제거. D는 다른 사용 위치가 없으므로 검증 자료가 아니라 안내 화면입니다. 모든 후보 잠정, 최종 인증 0.</p>'+''.join(cards)+'</html>'
+ page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>v94 단일사용 타일 '+str(batch+1)+'</title><style>body{font:16px system-ui;background:#f1f3f5;color:#172b38;max-width:1250px;margin:2rem auto}article{background:white;padding:1rem;margin:1rem;border-radius:10px}img{max-width:100%;height:auto}figure{margin:1rem 0}figcaption{font-weight:bold}</style><h1>v94 새 단일사용 타일 '+str(batch*60+1)+'~'+str((batch+1)*60)+' /120</h1><p>A 원본 PNG, B 실제 TMX 5×5 근사 조립, C 배치 제거. D는 충분히 떨어진 독립 위치가 없어 검증 자료가 아니라 안내 화면입니다. 103종은 사용 1건, 17종은 가까운 복수 배치입니다. 모든 후보 잠정, 최종 인증 0.</p>'+''.join(cards)+'</html>'
  assert page.count('data:image/jpeg;base64,')==300
  hp=CP/f'v94_이미지내장_검수_{batch+1:02d}.html'
  hp.write_text(page,encoding='utf8')
@@ -39,6 +39,6 @@ for batch in range(2):
  assert hp.stat().st_size<95000000 and zip_path.stat().st_size<95000000
  reports.append({'batch':batch+1,'zip_file':str(zip_path.relative_to(ROOT)),'zip_size_bytes':zip_path.stat().st_size,'zip_sha256':hashlib.sha256(zip_path.read_bytes()).hexdigest(),'zip_files':314,'zip_crc':'PASS','html_file':str(hp.relative_to(ROOT)),'html_size_bytes':hp.stat().st_size,'html_embedded_images':300,'review_sheets':10})
 assert len(all_images)==len(set(all_images))==600
-report={'version':'v94','batch_reports':reports,'zip_crc':'PASS','zip_files_total':628,'image_count':600,'image_load':'PASS','embedded_html_images':600,'observations':120,'provisional':98,'held':22,'certified':0,'review_sheets':20,'single_use_without_D':120}
+report={'version':'v94','batch_reports':reports,'zip_crc':'PASS','zip_files_total':628,'image_count':600,'image_load':'PASS','embedded_html_images':600,'observations':120,'provisional':98,'held':22,'certified':0,'review_sheets':20,'single_use_without_D':103,'near_duplicated_without_independent_D':17}
 (CP/'ZIP_CRC_REPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS v94 CSV HTML JPEG ZIP CRC',report)
