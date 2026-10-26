@@ -12,9 +12,9 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'checkpoints/v110_tiledef_preview'
 OUT.mkdir(parents=True,exist_ok=True)
 TILEDEF={}
-for block in re.findall(r'tileset\\s*\\{(.*?)\\}',(ROOT/'Tiles/tiledefinitions.tiles.txt').read_text('utf8'),re.S):
-    fm=re.search(r'file\\s*=\\s*(\\S+)',block)
-    sz=re.search(r'size\\s*=\\s*(\\d+)\\s*,\\s*(\\d+)',block)
+for block in re.findall(r'tileset\s*\{(.*?)\}',(ROOT/'Tiles/tiledefinitions.tiles.txt').read_text('utf8'),re.S):
+    fm=re.search(r'file\s*=\s*(\S+)',block)
+    sz=re.search(r'size\s*=\s*(\d+)\s*,\s*(\d+)',block)
     if fm and sz:TILEDEF[fm.group(1)]=(int(sz.group(1)),int(sz.group(2)))
 TARGETS=[]
 MAPS=['31_45.tmx','31_46.tmx']
