@@ -21,3 +21,7 @@ index	tile_set_locator	local_id	observed_features	identity_candidate	part_role	c
 ```
 
 주의: 원본 PNG 물리 크기 불일치, 근사 아이소메트릭 조립, 일부 PNG 주변 누락으로 인해 후보는 공식 인증이 아닙니다. `B-C=0`인 3종은 모두 `held`로 보존합니다.
+
+## v90 증거 매니페스트 구조 검사 (보조)
+
+`checkpoints/v90_preview/EVIDENCE_MANIFEST.json`의 240개 레코드를 구조적으로 검사한 결과, 고유 키 240개(중복 0), 서로 다른 실제 TMX 배치 D 240개, B-C 변화 0인 키 14개, B 주변 PNG 누락을 기록한 키 23개, 비교용 시트 40개였습니다. `mapping_verified`, `tilezed_verified`, `final_certified`가 참인 항목은 0개입니다. **이것은 메타데이터 일관성 검사이지 SQLite 복원, 원본 PNG/TMX SHA-256 독립 대조, JPEG 전체 디코딩, ZIP CRC 검증을 대신하지 않습니다.**
