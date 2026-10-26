@@ -209,7 +209,7 @@ for key in TARGETS:
     results.append({'key':key,'status':'evidence_only_unreviewed','atlas_status':atlas_status,
         'A':f'{basename}_A.jpg','B':f'{basename}_B.jpg','C':f'{basename}_C.jpg',
         'D':f'{basename}_D.jpg','board':f'{basename}_ABCD.jpg',
-        'primary_placement':a,'other_placement':b,'other_placement_available':d_available,'uses':len(uses),
+        'primary_placement':a,'other_placement':b,'other_placement_available':d_available,'D_distance_manhattan':abs(b['x']-a['x'])+abs(b['y']-a['y']) if b['tmx']==a['tmx'] else None,'D_independent_5_cells_or_other_map':b['tmx']!=a['tmx'] or abs(b['x']-a['x'])+abs(b['y']-a['y'])>=5,'uses':len(uses),
         'visible_pixel_delta':delta_pixels,'missing_png_neighbors_B':mb,
         'missing_png_neighbors_C':mc,'missing_png_neighbors_D':md,
         'rendered_placements_B':db_count,'rendered_placements_C':dc_count,
