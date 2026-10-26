@@ -1,0 +1,64 @@
+name: v88 visual review and unified SQLite verification
+on:
+  push:
+    branches: [work/v88-visual-review-20261026]
+    paths:
+      - scripts/build_unified_v88.py
+      - scripts/restore_unified_v88.py
+      - scripts/build_v88_review_html.py
+      - checkpoints/v88/observations.tsv
+      - checkpoints/v88/verify_delta.py
+      - .github/workflows/build-unified-v88.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v87/*
+            /scripts/*.py
+            /checkpoints/v88/*
+            /checkpoints/v88_preview/*
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+            /.github/workflows/build-unified-v88.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Restore and verify v87 source database
+        run: python3 scripts/restore_unified_v87.py "$RUNNER_TEMP/v87.sqlite"
+      - name: Check 24 independently inspected A/B/C/D observations, PNG and TMX hashes
+        run: python3 checkpoints/v88/verify_delta.py
+      - name: Build v88 unified database preserving original tables
+        run: python3 scripts/build_unified_v88.py "$RUNNER_TEMP/v87.sqlite"
+      - name: Restore v88 from compressed shards and verify counts
+        run: python3 scripts/restore_unified_v88.py "$RUNNER_TEMP/v88_roundtrip.sqlite"
+      - name: Build CSV, embedded HTML and evidence ZIP
+        run: python3 scripts/build_v88_review_html.py
+      - name: Validate state and update handoff
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-v88-unified-sqlite
+          path: ${{ runner.temp }}/tile_visual_v88_unified.sqlite
+          retention-days: 90
+      - name: Commit verified v88 database and checkpoint
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v88/ checkpoints/v88/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "검증: v88 신규 24종 직접 판독·SQLite 원본 보존·증거 ZIP CRC"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
