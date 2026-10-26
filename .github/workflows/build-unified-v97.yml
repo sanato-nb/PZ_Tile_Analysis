@@ -1,0 +1,64 @@
+name: v97 120 A-B-C-D near/absent tile direct visual review SQLite verification
+on:
+  push:
+    branches: [work/v97-visual-20261026]
+    paths:
+      - scripts/build_unified_v97.py
+      - scripts/restore_unified_v97.py
+      - scripts/build_v97_review_html.py
+      - checkpoints/v97/observations.tsv
+      - checkpoints/v97/verify_delta.py
+      - .github/workflows/build-unified-v97.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v96/*
+            /scripts/*.py
+            /checkpoints/v97/*
+            /checkpoints/v97_preview/*
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+            /.github/workflows/build-unified-v97.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify v96 SHA and restore complete base SQLite
+        run: python3 scripts/restore_unified_v96.py "$RUNNER_TEMP/v96.sqlite"
+      - name: Verify 120 A B C, 15 nearby D and 105 unavailable D original evidence
+        run: python3 checkpoints/v97/verify_delta.py
+      - name: Build v97 integrated SQLite keeping all historical tables
+        run: python3 scripts/build_unified_v97.py "$RUNNER_TEMP/v96.sqlite"
+      - name: Restore v97 and validate counts
+        run: python3 scripts/restore_unified_v97.py "$RUNNER_TEMP/v97_rebuilt.sqlite"
+      - name: Build 2 HTML + CSV + evidence CRC ZIP
+        run: python3 scripts/build_v97_review_html.py
+      - name: Verify project state and refresh handoff
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-v97-unified-sqlite
+          path: ${{ runner.temp }}/tile_visual_v97_unified.sqlite
+          retention-days: 90
+      - name: Commit v97 certified checkpoint artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v97/ checkpoints/v97/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "검증: v97 신규 120종 A/B/C 판독·D 없음·SQLite SHA·ZIP CRC"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
