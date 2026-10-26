@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v89)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v90)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v89: 3,805/5,409종(70.3457%); 미관찰 1,604종; 감사 가능한 잠정 후보 3,228종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v89/`. 복원: `python3 scripts/restore_unified_v89.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v90: 4,045/5,409종(74.7828%); 미관찰 1,364종; 감사 가능한 잠정 후보 3,419종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v90/`. 복원: `python3 scripts/restore_unified_v90.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,16 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v90 신규 실제 타일 판독 (2026-10-26)
+- v89 통합 SQLite 미관찰 1,604종에서 중복 없는 **240종** 선정. 총 26개 타일셋에 분산해 원본 PNG·TMX로 A 원본, B 동일 층 5×5 근사 조립, C 같은 레이어 타일 하나 제거, D 다른 실사용 좌표 및 ABCD 비교판 **1,200개 JPEG**를 생성했다.
+- 6종씩 조합한 40개 실제 접촉 검수판(`checkpoints/v90_preview/review_sheets/sheet_000.jpg`~`sheet_039.jpg`)을 **모두 직접 열어 관찰**하고, 240종 각각의 원본 외형·정체 후보·부품 역할·보류·TMX 좌표·GID·PNG/TMX 해시 기록을 `checkpoints/v90/review_notes_*.psv` 및 `observations.tsv`로 보존했다.
+- 신규 **잠정 정체 후보 191종, 보류 49종**. B-C 가시변화가 500픽셀 미만이거나 사물/배치가 애매한 타일은 보류. 사용한 B/C/D는 TileZed 공식 렌더가 아닌 근사 판이므로 최종 인증 금지.
+- 누적 관찰 **4,045/5,409종(74.7828%)**, 남은 미관찰 **1,364종**, 감사 가능한 잠정 후보 **3,419종**, 인증 **0종**, 신규 중복 **0종**.
+- SQLite `analysis/current/v90/MANIFEST.json` 86,147,072바이트 SHA-256 `59ca4987eb72a8b771c4d3122edb4f0253c267889ba0ff0343f26283f87ffc9f`. 이전 v89 DB SHA 대조 후 복사, v36~v89 기존 전체 테이블·수동 검수 80종 계보 불변 보존, PRAGMA integrity_check OK, 7압축조각 왕복 SHA 검증.
+- `checkpoints/v90/` CSV 및 이미지 내장 HTML **2개(총 1,200 JPEG 내장)**, 증거 ZIP **2개(각 624항목, CRC PASS)**, 40개 합본 JPEG 및 원본 개별 JPEG 모두 GitHub에 보관한다. SHA·PNG 검증·이미지 로딩·중복과 현장 매핑 이력 검증 성공.
+- 모든 신규 타일은 공식 Local ID와 TileZed 검증 미완료: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`.
+- 다음 작업: v90 분석 대기열 1,364종과 이전 보류 타일들을 다른 실사용 좌표와 고해상도 정합을 활용해 분석한다.
 
 ## v89 신규 타일 직접 이미지 판독 (2026-10-26)
 - v88 통합 SQLite `analysis_queue` 미관찰 1,724종에서 중복 없이 120종을 선택했다. 40개 타일셋의 실제 사용 위치를 확인했고, 원본 PNG A·TMX 같은 층 5×5 조립 B·해당 레이어 대상 1건 제거 C·다른 실제 위치 D 및 비교판 총 600 JPEG를 만들었다.
