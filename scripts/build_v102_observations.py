@@ -51,7 +51,7 @@ for i,e in enumerate(m['results']):
   review_notes=f"v102 2개 접촉 검수판 직접 시각 관찰과 review_notes PSV 1개 기록. 실제 TMX 사용 {e['uses']}회. 근접 D={d}, 독립 D={e['D_independent_5_cells_or_other_map']}, B 주변 누락={e['missing_png_neighbors_B']}. "+('원본 및 배치 기여 충분치 않아 후보 보류.' if status=='held' else '원본 외형으로 잠정 후보 제시, 독립 D 없어 신뢰도 low.')+' 공식 Local ID·PNG 높이·TileZed 미검증.')
  assert set(record)==set(fields),(i,set(fields)-set(record),set(record)-set(fields))
  rows.append(record)
-assert real_d==12 and single==0 and held+candidates==48 and sum(x['D_independent_5_cells_or_other_map'] for x in m['results'])==0
+assert candidates==10 and held==2 and real_d==12 and single==0 and held+candidates==12 and sum(x['D_independent_5_cells_or_other_map'] for x in m['results'])==0
 with (cp/'observations.tsv').open('w',encoding='utf8',newline='') as f:
  w=csv.DictWriter(f,fieldnames=fields,delimiter='\t',lineterminator='\n')
  w.writeheader();w.writerows(rows)
