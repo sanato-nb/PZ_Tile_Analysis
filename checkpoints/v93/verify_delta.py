@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v93 12 타일 원본/경로/키/해시 및 A/B/C/D 개별 JPEG 대조."""
+"""v93 5 타일 원본/경로/키/해시 및 A/B/C/D 개별 JPEG 대조."""
 import csv,json,hashlib
 from pathlib import Path
 from PIL import Image,ImageChops
@@ -8,8 +8,8 @@ cp=root/'checkpoints/v93'
 with (cp/'observations.tsv').open(encoding='utf8',newline='') as f:rows=list(csv.DictReader(f,delimiter='\t'))
 keys=[(r['tile_set_locator'],int(r['local_id'])) for r in rows]
 assert len(keys)==len(set(keys))==5
-assert sum(r['review_status']=='candidate' for r in rows)==2
-assert sum(r['review_status']=='held' for r in rows)==3
+assert sum(r['review_status']=='candidate' for r in rows)==3
+assert sum(r['review_status']=='held' for r in rows)==2
 assert all(r['mapping_verified']==r['tilezed_verified']==r['final_certified']=='0' for r in rows)
 manifests=[json.loads((root/p/'EVIDENCE_MANIFEST.json').read_text('utf8')) for p in [Path('checkpoints/v93_preview')]]
 assert [m['base'] for m in manifests]==['v92']
