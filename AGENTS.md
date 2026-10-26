@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v115)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v116)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v115(888종 AI 직접 재검수 반영): 기존 이미지 관찰 5,400/5,409종(99.8336%). 이 가운데 기존 정체 후보 미기록 888종을 74장의 A1/A2/B/C/D 원본 접촉시트로 직접 판독해 새 시각 계열·부품 잠정 후보 882종(870 low, 12 medium) 및 원본 문제 6종 보류 기록. 기존 v113 감사 가능한 잠정 후보 4,512종은 변경 없이 보존. 공식 Local ID·TileZed·최종 인증 0종. 기존 미관찰 9종 중 사용자 검수 제외 8종, 활성 검수 1종도 보존**.
-- 최신 물리 통합 SQLite: `analysis/current/v115/`. 복원: `python3 scripts/restore_unified_v115.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 **v115(888종 AI 직접 재검수 반영): 기존 이미지 관찰 5,400/5,409종(99.8336%). 이 가운데 기존 정체 후보 미기록 888종을 74장의 A1/A2/B/C/D 원본 접촉시트로 직접 판독해 새 시각 계열·부품 잠정 후보 882종(870 low, 12 medium) 및 원본 문제 6종 보류 기록. 기존 v113 감사 가능한 잠정 후보 4,512종은 변경 없이 보존. 공식 Local ID·TileZed·최종 인증 0종. 기존 미관찰 9종 중 사용자 검수 제외 8종, 활성 검수 1종도 보존**.
+- 최신 물리 통합 SQLite: `analysis/current/v116/`. 복원: `python3 scripts/restore_unified_v116.py /tmp/pz_latest.sqlite`. 압축 분할 조각의 SHA-256·SQLite 무결성·이전 테이블 보존·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -21,6 +21,12 @@
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
 
+## v116 사용자 제외: 이미지 없는 보류 6종을 활성 검수에서 제외 (2026-10-26)
+- **사용자 지시: 이미지가 없어서 검수하지 못한 6종은 앞으로 분석 대상에서 모두 제외.** 정확한 키는 `checkpoints/v116/user_exclude_six.csv`와 `docs/V116_USER_EXCLUDED_NO_IMAGES.md` 참조.
+- **6종:** `e_carolinasilverbellJUMBO_1/1`, `e_dogwoodJUMBO_1/1`, `e_redmapleJUMBO_1/1`, `vegetation_groundcover_01/22`, `vegetation_trees_01/8`, `vegetation_trees_01/10`.
+- 최신 DB 신규 테이블 **`v116_user_excluded_missing_image` = 6**. 앞으로 재검수 대상은 **`v116_active_v115_held_queue` = 0** / **`v116_active_v115_review_queue` = 882**로 필터할 것. 과거 `v115_ai_held_queue` 6행·`v115_ai_visual_review` 888행은 근거 보존을 위해 그대로.
+- **6종 제외는 ‘투명 타일 확인’이나 ‘정체 규명 완료’가 아니다**. 유효한 A 이미지의 확보/Local ID 매핑이 되지 않아 사용자 지시에 따라 활성 작업에서만 제외한 것. 원본 PNG·TMX·기존 증거 삭제 금지.
+- 누적 관찰 5,400종, 기존 4,512종 감사 후보, v115 별도 882 잠정 시각 후보, 최초 미관찰 9종(v113 사용자 제외 8종·활성 1종), 최종 정체 인증 0종 불변.
 ## v115 사용자 지적 반영: AI 직접 888종 시각 재검수 (2026-10-26)
 - 74장 `review/v115_model_visual/sheet_000.jpg` ~ `sheet_073.jpg`의 전체 888개 키(A1/A2/B/C/D 후보·실제 TMX 장면)를 모델이 직접 화면 판독. AI 잠정 물체·부품 후보 **882종**, 보류 **6종**. 882종 중 **870종 low(주로 계열 수준), 12종 medium**, 정체 최종 인증 **0종**. 888을 100% 상세 완결 식별했다고 주장 금지.
 - 사용자 관찰대로 `appliances_com_01/3`은 **송수화기형 통신기기(전화·무전 장비의 미확정 후보)**로, `appliances_com_01/96/97/108` 등은 전봇대 가로대에 연결되는 가공 전선 계열로 기록. `appliances_com_01/120/121/123/124/133`은 세로 인입선 계열. `electricity_pylon/42/45`는 격자 철골 구성부. 15×15 확대한 **8개**의 B/C/차이 증거가 `review/v115_extended_context/`에 있고 원본 라벨 변조에 따른 가짜 B−C 차이는 수정 완료.
