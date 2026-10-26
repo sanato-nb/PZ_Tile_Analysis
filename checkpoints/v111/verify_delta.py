@@ -3,7 +3,7 @@
 from pathlib import Path
 from PIL import Image
 import csv,json,hashlib
-R=Path(__file__).resolve().parents[1];P=R/'checkpoints/v111'
+R=Path(__file__).resolve().parents[2];P=R/'checkpoints/v111'
 m=json.loads((R/'checkpoints/v111_singleuse_preview/EVIDENCE_MANIFEST.json').read_text('utf8'))
 with (P/'observations.tsv').open(encoding='utf8',newline='') as f: rows=list(csv.DictReader(f,delimiter='\t'))
 with (P/'unresolved_9.csv').open(encoding='utf-8-sig',newline='') as f: held=list(csv.DictReader(f))
