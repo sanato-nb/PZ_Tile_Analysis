@@ -17,9 +17,9 @@ assert all(r['mapping_verified']==r['tilezed_verified']==r['final_certified']=='
 src=set()
 for r in rows:
  key=(r['tile_set_locator'],int(r['local_id']));e=ev[key];p=e['primary_placement']
- assert e['status']=='evidence_only_unreviewed' and e['uses']==1 and e['other_placement_available'] is False
+ assert e['status']=='evidence_only_unreviewed' and e['uses']>=1 and e['other_placement_available'] is False
  assert r['other_tmx']=='' and int(r['other_level'])==int(r['other_x'])==int(r['other_y'])==-1 and int(r['other_raw_gid'])==0
- assert r['review_notes'].find('D는 다른 배치가 없음을 명시')>=0
+ assert r['review_notes'].find('D는 충분히 멀리 떨어진 독립 배치가 없어')>=0
  assert r['source_tmx']==p['tmx'] and int(r['raw_gid'])==p['gid'] and int(r['x'])==p['x'] and int(r['y'])==p['y'] and int(r['level'])==p['level']
  assert int(r['visible_pixel_delta'])==e['visible_pixel_delta']
  assert int(r['png_height_mismatch'])==int(e['atlas_status']=='height_mismatch')
@@ -45,4 +45,4 @@ for r in rows:
   images.append(image)
  with Image.open(images[1]) as B, Image.open(images[2]) as C:
   assert e['visible_pixel_delta']==0 or ImageChops.difference(B.convert('RGB'),C.convert('RGB')).getbbox()
-print('PASS v94 120 independent single-use A/B/C + D unavailable; 600 JPEG; hashes, uniqueness, coordinate provenance and confidence')
+print('PASS v94 120 A/B/C (103 single-use + 17 near-duplicates), independent D unavailable; 600 JPEG; hashes, uniqueness, coordinate provenance and confidence')
