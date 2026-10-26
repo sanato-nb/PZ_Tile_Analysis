@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v100)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v101)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v100: 4,986/5,409종(92.1797%); 미관찰 423종; 감사 가능한 잠정 후보 4,191종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v100/`. 복원: `python3 scripts/restore_unified_v100.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v101: 5,034/5,409종(93.0671%); 미관찰 375종; 감사 가능한 잠정 후보 4,226종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v101/`. 복원: `python3 scripts/restore_unified_v101.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,13 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v101 신규 48종 실제 A/B/C/D 시각 판독 (2026-10-26)
+- v100 물리 통합 SQLite 복원·SHA 검증 후 미관찰 423종 대기열에서 고유 48종을 선정하고 실제 원본 PNG 및 TMX로 A/B/C/D 고해상도 JPEG **240장**, 6종씩 묶은 검수판 **8장**을 생성한 뒤 **8장 모두 직접 시각 판독**하여 review_notes PSV 두 파일로 기록했다.
+- 신규 직접 관찰 **48종**, 잠정 후보 **35종(모두 low)**, 보류 **13종**, 중복 0. 누적 **5,034/5,409종(93.0671%)**, 미관찰 **375종**, 감사 가능한 후보 **4,226종**, 최종 인증 0종.
+- D 다른 실제 근접 위치 5종은 모두 독립 현장이 아니고, 43종은 다른 실제 배치가 없어 D 안내판으로 대체. 독립 D 0. 관찰 여부와 잠정 정체가 공식 인증을 뜻하지 않는다.
+- `analysis/current/v101/MANIFEST.json`에서 v100 물리 SQLite SHA·원본 테이블 보존·신규 48키 중복 없음·7개 DB 압축조각 복원·PRAGMA integrity_check 확인. `checkpoints/v101/observations.tsv`, 이미지 내장 HTML 1개, CSV, CRC 검증 증거 ZIP 1개와 `checkpoints/v101_preview/`의 240 JPEG 및 8개 검수판 보존.
+- 공식 PNG-TMX Local ID, TileZed 정합과 PNG 높이 문제는 여전히 미검증. `mapping_verified=tilezed_verified=final_certified=0` 유지. 다음 작업은 **v101 미관찰 375종**.
 
 ## v100 신규 216종 실제 A/B/C/D 시각 판독 (2026-10-26)
 - v98에서 240종 A/B/C/D 비교판을 생성하고 40개 검수 접촉시트를 **전부 직접 관찰**해 개별 외형·부품 역할·보류를 작성했으나, 병렬 작업에서 v99 24종이 먼저 main에 병합된 것을 발견. 기존 **24종과 정확히 겹치는 24키를 제외**하고 v99 통합 DB 대기열에서 **216종만 새로 선정**, 두 증거 매니페스트의 키·B-C 픽셀 변화·직접 시각 기록을 개별 재대조했다. 신규 중복 0.

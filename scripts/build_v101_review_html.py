@@ -31,7 +31,9 @@ for batch in range(1):
  sheets=[ROOT/x for x in m['review_sheets'][batch*8:(batch+1)*8]]
  for p in sheets:
   with Image.open(p) as im:im.verify()
- zip_path=CP/f'v101_증거_72종_{batch+1:02d}.zip'
+ obsolete_zip=CP/f'v101_증거_72종_{batch+1:02d}.zip'
+ if obsolete_zip.exists(): obsolete_zip.unlink()
+ zip_path=CP/f'v101_증거_48종_{batch+1:02d}.zip'
  paths=[CP/'observations.tsv',CP/'observations.csv',hp,PRE/'EVIDENCE_MANIFEST.json',*images,*sheets]
  with zipfile.ZipFile(zip_path,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for p in paths:z.write(p,p.relative_to(ROOT).as_posix())

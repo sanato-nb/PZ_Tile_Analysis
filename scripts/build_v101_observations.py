@@ -55,5 +55,5 @@ assert real_d==5 and single==43 and held+candidates==48 and sum(x['D_independent
 with (cp/'observations.tsv').open('w',encoding='utf8',newline='') as f:
  w=csv.DictWriter(f,fieldnames=fields,delimiter='\t',lineterminator='\n')
  w.writeheader();w.writerows(rows)
-(cp/'review_summary.json').write_text(json.dumps(dict(version='v101',observed=216,candidate=candidates,held=held,D_near=real_d,D_none=single,independent_D=0),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+(cp/'review_summary.json').write_text(json.dumps(dict(version='v101',observed=48,candidate=candidates,held=held,D_near=real_d,D_none=single,independent_D=0),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS v101 source notes to 48 TSV:',candidates,'candidate',held,'held')
