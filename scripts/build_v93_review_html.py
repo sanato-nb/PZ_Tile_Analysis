@@ -28,13 +28,13 @@ for r in rows:
         sections.append('<figure><figcaption>'+key+'</figcaption><img loading="lazy" src="data:image/jpeg;base64,'+b64+'"></figure>')
     cards.append('<article><h2>'+html.escape(r['tile_set_locator']+'/'+r['local_id'])+'</h2><p>'+html.escape(r['observed_features'])+'</p><p>잠정 정체: '+html.escape(r['identity_candidate'] or '보류')+'</p><p>부품 역할: '+html.escape(r['part_role'])+'</p><p>검수 신뢰도: '+html.escape(r['confidence'])+'</p>'+''.join(sections)+'</article>')
 assert len(images)==len(set(images))==25
-page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>v93 신규 5종 시각 검수</title><style>body{font:16px system-ui;background:#f3f4f6;color:#172b38;max-width:1250px;margin:2rem auto}article{background:white;padding:1rem;margin:1rem;border-radius:10px}img{max-width:100%;height:auto}figure{margin:1rem 0}figcaption{font-weight:bold}</style><h1>v93 신규 타일 12종 이미지 검수</h1><p>A 원본 PNG, B 같은 층 TMX 5×5, C 단일 배치 제거, D 다른 위치. 잠정 후보 3, 보류 2, 공식 인증 0.</p>'+''.join(cards)+'</html>'
+page='<!doctype html><html lang="ko"><meta charset="utf-8"><title>v93 신규 5종 시각 검수</title><style>body{font:16px system-ui;background:#f3f4f6;color:#172b38;max-width:1250px;margin:2rem auto}article{background:white;padding:1rem;margin:1rem;border-radius:10px}img{max-width:100%;height:auto}figure{margin:1rem 0}figcaption{font-weight:bold}</style><h1>v93 신규 타일 5종 이미지 검수</h1><p>A 원본 PNG, B 같은 층 TMX 5×5, C 단일 배치 제거, D 다른 위치. 잠정 후보 3, 보류 2, 공식 인증 0.</p>'+''.join(cards)+'</html>'
 assert page.count('data:image/jpeg;base64,')==25
 htmlpath=CP/'v93_이미지내장_검수.html'
 htmlpath.write_text(page,encoding='utf8')
 for p in sheets:
     with Image.open(p) as im:im.verify()
-zp=CP/'v93_증거_12종_A_B_C_D.zip'
+zp=CP/'v93_증거_5종_A_B_C_D.zip'
 paths=[CP/'observations.tsv',CP/'observations.csv',manifest,htmlpath,CP/'INDEPENDENT_VISUAL_AUDIT.md',*images,*sheets]
 with zipfile.ZipFile(zp,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     for p in paths:z.write(p,p.relative_to(ROOT).as_posix())
