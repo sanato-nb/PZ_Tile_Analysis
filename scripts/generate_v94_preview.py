@@ -134,47 +134,31 @@ def label(img,label_text):
     d.rectangle((0,0,img.width,30),fill=(20,30,40,235))
     d.text((10,8),label_text,font=FONT,fill=(255,255,255,255))
 
-# 남은 미관찰을 여러 타일셋에 골고루 배분. 실제 PNG·TMX 사용 사례 있는 타일만 선별.
-# 타일셋/Local ID 이름으로 사물의 정체를 자동 판정하지 않는다.
+# 남은 미관찰 전체를 대상으로, 복수 사용 위치가 없어도 원본 A/B/C 검증 가능.
+# 단일 사용 위치는 D 없음으로 명확히 표시하여 다른 배치를 가장하지 않는다.
 TARGET_COUNT=120
-eligible=sorted((key for key,uses in OCC.items() if len(uses)>=2), key=lambda k:(k[0],k[1]))
+eligible=sorted(OCC, key=lambda k:(k[0],k[1]))
 buckets=defaultdict(list)
 for key in eligible:
     uses=OCC[key]
-    other=next((p for p in uses[1:] if p['tmx']!=uses[0]['tmx'] or abs(p['x']-uses[0]['x'])+abs(p['y']-uses[0]['y'])>=5),None)
-    if other is not None: buckets[key[0]].append(key)
-# 고르게 각 타일셋에서 1종씩, 이후 반복하여 다양성을 우선
-families=sorted(buckets, key=lambda name:(0 if name.startswith(('fixtures_','furniture_','appliances_','walls_','industry_','location_','vegetation_','carpentry_')) else 1,name))
+    m=MAP_DATA[uses[0]['tmx']]
+    t=next(t for t in m['tilesets'] if t['name']==key[0])
+    sprite,status=crop(t,key[1])
+    if sprite is None or not sprite.getbbox(): continue
+    buckets[key[0]].append(key)
+families=sorted(buckets, key=lambda name:(0 if name.startswith(('fixtures_','furniture_','appliances_','walls_','industry_','location_','vegetation_','carpentry_','crafted_')) else 1,name))
 selected=[]
-for round_idx in range(40):
+for round_idx in range(100):
     if len(selected)>=TARGET_COUNT: break
     for family in families:
         keys=buckets[family]
-        if round_idx>=len(keys): continue
-        # 선택 시 샘플이 타일셋 시작에만 몰리지 않도록 Local ID 순환
-        key=keys[(round_idx*11)%len(keys)] if len(keys)>round_idx*11 else keys[round_idx]
-        if key in selected:
-            key=next((v for v in keys if v not in selected),None)
-        if key is None: continue
-        m=MAP_DATA[OCC[key][0]['tmx']]
-        t=next(t for t in m['tilesets'] if t['name']==family)
-        sprite,status=crop(t,key[1])
-        if sprite is None or not sprite.getbbox(): continue
+        if round_idx>=len(keys):continue
+        key=keys[round_idx]
         selected.append(key)
         if len(selected)>=TARGET_COUNT:break
 TARGETS=selected[:TARGET_COUNT]
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
-print('QUEUE_DIAGNOSTICS',len(queue),'present',len(OCC),'multiuse',sum(len(v)>=2 for v in OCC.values()),'singleuse',sum(len(v)==1 for v in OCC.values()),'eligible',len(eligible),'buckets',len(buckets),'targets',len(TARGETS),file=sys.stderr,flush=True)
-statuses=defaultdict(int);valid_examples=[];excluded_examples=[]
-for key,uses in OCC.items():
-    t=next(t for t in MAP_DATA[uses[0]['tmx']]['tilesets'] if t['name']==key[0])
-    sprite,status=crop(t,key[1])
-    reason=status if sprite is not None and sprite.getbbox() else ('transparent' if sprite is not None else status)
-    statuses[reason]+=1
-    if sprite is not None and sprite.getbbox() and len(valid_examples)<30: valid_examples.append([key,len(uses),status])
-    elif len(excluded_examples)<15: excluded_examples.append([key,len(uses),status])
-print('ALL_QUEUE_CROP',dict(statuses),'valid_examples',valid_examples,'excluded_examples',excluded_examples,file=sys.stderr,flush=True)
 assert len(TARGETS)>=TARGET_COUNT,('not enough review targets',TARGETS)
 print('v94 UNREVIEWED PREVIEW TARGETS',TARGETS,flush=True)
 results=[]
@@ -183,11 +167,13 @@ for key in TARGETS:
         results.append({'key':key,'status':'skipped_not_in_v93_queue'})
         continue
     uses=OCC[key]
-    if len(uses)<2:
-        results.append({'key':key,'status':'skipped_no_D_placement','uses':len(uses)})
+    if len(uses)<1:
+        results.append({'key':key,'status':'skipped_no_usage','uses':len(uses)})
         continue
     a=uses[0]
-    b=next((p for p in uses[1:] if p['tmx']!=a['tmx'] or abs(p['x']-a['x'])+abs(p['y']-a['y'])>=5),uses[1])
+    b=next((p for p in uses[1:] if p['tmx']!=a['tmx'] or abs(p['x']-a['x'])+abs(p['y']-a['y'])>=5),None)
+    d_available=b is not None
+    if not d_available:b={'tmx':'','level':-1,'layer':'NO_SECOND_USE','layer_index':-1,'x':-1,'y':-1,'gid':0}
     m=MAP_DATA[a['tmx']]
     target=next(t for t in m['tilesets'] if t['name']==key[0])
     original,atlas_status=crop(target,key[1])
@@ -196,7 +182,11 @@ for key in TARGETS:
         continue
     B,mb,db_count,_=render(a,False)
     C,mc,dc_count,removed=render(a,True)
-    D,md,dd_count,_=render(b,False)
+    if d_available: D,md,dd_count,_=render(b,False)
+    else:
+        D=Image.new('RGBA',(900,680),(239,242,244,255))
+        ImageDraw.Draw(D).text((100,200),'D NOT AVAILABLE: ONLY ONE TMX USE',font=FONT,fill=(120,20,20,255))
+        md=0;dd_count=0
     if not removed:raise ValueError('selected placement not removed '+str(key))
     delta=ImageChops.difference(B,C)
     delta_pixels=sum(1 for px in delta.getdata() if px[:3]!=(0,0,0) or px[3]!=0)
@@ -216,7 +206,7 @@ for key in TARGETS:
     results.append({'key':key,'status':'evidence_only_unreviewed','atlas_status':atlas_status,
         'A':f'{basename}_A.jpg','B':f'{basename}_B.jpg','C':f'{basename}_C.jpg',
         'D':f'{basename}_D.jpg','board':f'{basename}_ABCD.jpg',
-        'primary_placement':a,'other_placement':b,'uses':len(uses),
+        'primary_placement':a,'other_placement':b,'other_placement_available':d_available,'uses':len(uses),
         'visible_pixel_delta':delta_pixels,'missing_png_neighbors_B':mb,
         'missing_png_neighbors_C':mc,'missing_png_neighbors_D':md,
         'rendered_placements_B':db_count,'rendered_placements_C':dc_count,
@@ -224,7 +214,7 @@ for key in TARGETS:
         'mapping_verified':False,'tilezed_verified':False,'final_certified':False})
 (OUT/'EVIDENCE_MANIFEST.json').write_text(json.dumps({
     'source':'GitHub original PNG and TMX','base':'v93','observed_count_added':0, 'excluded_early_v93_keys':0,
-    'rendering':'approximate isometric, not TileZed',
+    'rendering':'approximate isometric, not TileZed; single-use D explicitly marked unavailable',
     'original_tmx_suffix_note':'Repository files omit (2), but 5409/302177 scope counts match',
     'sha256':HASHES,'results':results},ensure_ascii=False,indent=2),encoding='utf8')
 
