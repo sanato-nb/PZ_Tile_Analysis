@@ -11,13 +11,13 @@ with sqlite3.connect(src) as c:
     tables_prior={r[0] for r in c.execute("select name from sqlite_master where type='table'")}
     assert c.execute('select count(*) from tile_catalog').fetchone()[0]==5409
     assert c.execute('select count(*) from tile_catalog where observed_any=1').fetchone()[0]==3497
-    assert c.execute('select count(*) from tile_catalog where provisional_candidate_any_auditable=1').fetchone()[0]==4997
+    assert c.execute('select count(*) from tile_catalog where provisional_candidate_any_auditable=1').fetchone()[0]==2997
 with (ROOT/'checkpoints/v84/observations.tsv').open(encoding='utf8',newline='') as f:
     rows=list(csv.DictReader(f,delimiter='\t'))
 keys={(r['tile_set_locator'],int(r['local_id'])) for r in rows}
 assert len(rows)==len(keys)==12
 assert sum(r['review_status']=='candidate' for r in rows)==8
-assert sum(r['review_status']=='held' for r in rows)==2
+assert sum(r['review_status']=='held' for r in rows)==4
 dst=Path(os.environ.get('RUNNER_TEMP','/tmp'))/'tile_visual_v84_unified.sqlite'
 if dst.exists():dst.unlink()
 with sqlite3.connect(src) as a,sqlite3.connect(dst) as b:a.backup(b)
@@ -49,7 +49,7 @@ with sqlite3.connect(dst) as c:
         ('v84_new_held',4,'Occluded tiles held without identity'),
         ('v84_total_observed',3509,'v83 3497 + 12 non-overlapping'),
         ('v84_unobserved',1900,'5409 - 3509'),
-        ('v84_candidate_auditable',3005,'2997 + 10')])
+        ('v84_candidate_auditable',3005,'2997 + 8')])
     c.commit()
     assert c.execute('pragma integrity_check').fetchone()[0]=='ok'
     assert tables_prior.issubset({r[0] for r in c.execute("select name from sqlite_master where type='table'")})
