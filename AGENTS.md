@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v94)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v95)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v94: 4,314/5,409종(79.7560%); 미관찰 1,095종; 감사 가능한 잠정 후보 3,631종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v94/`. 복원: `python3 scripts/restore_unified_v94.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v95: 4,326/5,409종(79.9778%); 미관찰 1,083종; 감사 가능한 잠정 후보 3,638종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v95/`. 복원: `python3 scripts/restore_unified_v95.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,15 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v95 신규 실제 A/B/C/D 시각 판독 (2026-10-26)
+- 최신 v94 물리 통합 SQLite SHA-256 `4bad407adf9803256d9f39cf691824fe5c2c98a39b9c9a20367c81e9dd5cf679` 복원 후 `analysis_queue`의 미관찰 1,095종에서 고유 12종 선정. 원본 PNG A, 동일 층 5×5 TMX 조립 B, 선택 배치 하나 제거 C, **다른 실제 TMX 좌표 D** 및 비교판 **60 JPEG** 생성·직접 이미지 판독.
+- D 12종 모두 동일 TMX의 **맨해튼 거리 1~3칸** 다른 위치. 독립된 원거리 현장이 아니므로 신뢰도 최대 low, 최종 인증 0. D는 안내판이 아니라 실제 다른 배치지만 독립성 부족을 명시한다.
+- 신규 잠정 후보 **7종**, 정체 보류 **5종**(B-C 0·0·0·28·221픽셀). 모든 후보는 원본 외형·B/C 제거·D 근접 맥락을 대조한 잠정 판정. 신규 중복 0.
+- 누적 관찰 **4,326/5,409종(79.9778%)**, 미관찰 **1,083종**, 감사 가능한 잠정 후보 **3,638종**, 최종 인증 **0종**.
+- 증거: `checkpoints/v95/observations.tsv`·CSV·`INDEPENDENT_VISUAL_AUDIT.md`, `checkpoints/v95_preview/`의 60 JPEG·2 접촉판, 이미지 내장 HTML·증거 ZIP CRC 검사. `analysis/current/v95/MANIFEST.json`에 물리 SQLite SHA-256 `8f485d2993ef262a4f4243f4af72ad5a5c50f6f2a530c6f0d1cbbc0938e04081`과 7개 분할 복원 명세 보존.
+- v36~v94 원본 DB·체크포인트 및 사용자 수동 검수 80종·재검수 계보 변경 없음. PNG 물리 높이 불일치, 공식 Local ID 및 TileZed 정합 미검증이므로 `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`.
+- 후속: v95 미관찰 1,083종에서 A/B/C/D 실사용 검증 가능한 신규 키를 찾고, v94에서 독립 D 미확보된 120종과 v95 근접 D 12종은 별도 독립 위치를 재검증한다.
 
 ## v94 신규 A/B/C 판독 및 독립 D 미확보 (2026-10-26)
 - v93 통합 DB의 **미관찰 1,215종**을 원본 TMX에서 재확인. 총 **1,016종은 TMX 배치 단 1건, 199종은 복수 배치**가 있었다. 기존 선택기는 복수 배치 + 거리가 충분히 떨어진 D를 강제해 0종 선택했던 문제를 수정했다. 원본 PNG 크롭 가능성을 검사해 120종 신규 선정했다.
