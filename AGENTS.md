@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v92)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v93)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v92: 4,189/5,409종(77.4450%); 미관찰 1,220종; 감사 가능한 잠정 후보 3,530종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v92/`. 복원: `python3 scripts/restore_unified_v92.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v93: 4,194/5,409종(77.5374%); 미관찰 1,215종; 감사 가능한 잠정 후보 3,533종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v93/`. 복원: `python3 scripts/restore_unified_v93.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
