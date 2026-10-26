@@ -23,14 +23,14 @@ jobs:
             /Tiles/tiledefinitions.tiles.txt
             /B4220.3_MapExport_256/tmx/31_45.tmx
             /B4220.3_MapExport_256/tmx/31_46.tmx
-            /analysis/current/v112/*
+            /analysis/current/v111/*
             /scripts/generate_v112_jumbo_preview.py
-            /scripts/restore_unified_v112.py
+            /scripts/restore_unified_v111.py
             /.github/workflows/generate-v112-jumbo-preview.yml
       - run: python3 -m pip install --quiet Pillow
       - name: Render A B C D from original PNG using provisional TileZed grid
-        run: python3 scripts/generate_v112_jumbo_preview.py > "$RUNNER_TEMP/v110_tiledef.log"
-      - name: Verify up to 21 A B C D and source-unavailable keys without certification
+        run: python3 scripts/generate_v112_jumbo_preview.py > "$RUNNER_TEMP/v112_jumbo.log"
+      - name: Verify 3 nested-jumbo A B C D and source-unavailable keys without certification
         run: |
           python3 - <<'PY'
           import json,pathlib
@@ -57,7 +57,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add --sparse checkpoints/v112_jumbo_preview/
           if ! git diff --cached --quiet; then
-            git commit -m "증거(v112): TileZed 텍스트 격자 잠정 매핑으로 남은 21종 중 원본 유효 키 A-B-C-D 생성 (미인증)"
+            git commit -m "증거(v112): TileZed 텍스트 격자 잠정 매핑으로 원본 jumbo 하위 폴더에서 발견한 3종 A-B-C-D 생성 (미인증)"
             git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
