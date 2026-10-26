@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v111)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v113)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v111: 5,400/5,409종(99.8336%); 미관찰 9종; 감사 가능한 잠정 후보 4,512종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v111/`. 복원: `python3 scripts/restore_unified_v111.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v113(사용자 수동 검수 반영): 이미지 관찰 5,400/5,409종(99.8336%); 역사적 미관찰 9종, 이 중 사용자 제외 8종, 활성 검수 대상 1종; 감사 가능한 기존 후보 4,512종 + 사용자 잠정 후보 1종(별도), 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v113/`. 복원: `python3 scripts/restore_unified_v113.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v113 사용자 수동 검수 — 8종 활성 제외, 2번 식생 잠정 (2026-10-26)
+- **사용자 검수 대상 9종 중 8종(번호 1·3·4·5·6·7·8·9)은 추가 검수 제외**, **2번 `f_bushes_1/66`은 '풀 또는 꽃 계열 식물'로 낮은 확신도의 사용자 잠정 후보**. 이 의견은 사용자의 수동 판단이며 공식 PNG–TMX Local ID 및 TileZed 인증이 아니다.
+- v113 전체 SQLite는 v111 SHA-256 검증본을 물리 복제. 기존 `analysis_queue` **9종 원형 보존**, 신규 뷰 **`v113_active_review_queue`는 1종만 반환**한다. v113의 다음 검수 작업은 반드시 이 뷰를 우선 사용할 것. 원본 5,409종·누적 이미지 관찰 5,400종·기존 감사 가능 후보 4,512종·최종 인증 0종은 변하지 않는다.
+- **8종 제외 = 투명 인증 아님**: 사무실 3종만 *잠정 원본 크롭* 알파 0 확인, JUMBO 3종은 파일 존재/크롭 격자 불일치, 나머지 2종은 원본 파일 미확보. 기존 PNG/TMX 및 사용자 수동 검수 80종은 모두 보존한다.
+- `checkpoints/v113/user_review.csv` 및 `docs/USER_REVIEW_V113.md`에 9종 수동 검수 의견, 소스 상태, 사용자 제외/활성 유지 구분을 기록. 통합 SQLite `v113_user_review` 테이블과 `tile_catalog.v113_user_review_action`·`tile_catalog.v113_user_candidate`는 해당 의견만 나타내고 관찰·최종 인증 칼럼을 올리지 않는다.
+- v113 통합 SQLite SHA-256 `205e7a4e59b2e85c986662f34b36cd030555a5cc69000ed60115fee9c8475b88`, 7개 복원 조각 SHA/PRAGMA integrity_check PASS. 기존 비교판 7장 및 수동 검수 증거 14항목 ZIP CRC PASS, SHA-256 `51665ca278e72ec7ae121ae02f4b061d852287189904340172e7d76fae22bc0a`.
+- **다음은 `f_bushes_1/66` 1종에 집중**, B–C 변화 0 원인과 실제 식물 형태를 공식 타일 정의·TileZed와 대조하여 재검토한다. 제외 8종은 재검수 요청 시 복구할 수 있다.
 
 ## v112 남은 9종 원본 소스 진단 (신규 관찰 0, 2026-10-26)
 - **최신 승인 관찰 체크포인트는 계속 v111**(5,400/5,409종, 99.8336%; 미관찰 9종; 잠정 후보 4,512종; 최종 인증 0종). v112는 관찰 승격 없는 감사·원본 소스 추적 결과로서 `PROJECT_STATE.json` 및 통합 v111 SQLite를 덮어쓰지 않는다.
