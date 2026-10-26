@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v98)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v99)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v98: 4,746/5,409종(87.7427%); 미관찰 663종; 감사 가능한 잠정 후보 3,993종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v98/`. 복원: `python3 scripts/restore_unified_v98.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v99: 4,770/5,409종(88.1864%); 미관찰 639종; 감사 가능한 잠정 후보 4,010종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v99/`. 복원: `python3 scripts/restore_unified_v99.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v99 신규 24종 A/B/C/D 시각 판독 (2026-10-26)
+- v98 통합 SQLite `analysis_queue` 미관찰 663종에서 중복 없는 24종 선정. 원본 PNG A, TMX 같은 층 주변 5×5 B, 단일 배치 제거 C, 다른 실제 근접 위치 D 6종 또는 대체 현장 없음 안내 D 18종, ABCD 비교판 총 120 JPEG 생성. 4개 접촉 검수판 모두 직접 열어 관찰하고 모호한 3종은 원본 A 확대 확인.
+- 잠정 후보 17종(전부 low), 보류 7종. B-C 0·35·22·1769·537·196·0픽셀 보류. 원본 외형·부품 역할·보류 이유는 `checkpoints/v99/review_notes_000_023.psv`와 `observations.tsv`에 별도 기록.
+- 독립된 원거리 D 0종. 원본 PNG 24종 모두 물리 높이 불일치, 공식 Local ID와 TileZed 정합 미검증. `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`.
+- 신규 24종 중복 0. 누적 관찰 **4,770/5,409종(88.1864%)**, 미관찰 **639종**, 잠정 후보 **4,010종**, 최종 인증 **0종**.
+- `analysis/current/v99/MANIFEST.json` 물리 SQLite 87,744,512바이트 SHA-256 `cd2e811d1a197e6036dc9209d667d967d34cc8011fff277575ed2d949027a793`. v98 SHA 복원 확인, SQLite integrity_check, 전체 기존 테이블 보존, 7조각 압축 복원, 원본 PNG/TMX SHA·좌표/GID, JPEG 120장 로딩, HTML 120장 내장, ZIP 128항목 CRC PASS.
+- 기존 v36~v98 SQLite·체크포인트·원본 PNG/TMX 및 사용자 수동 검수 80종 계보 변경하지 않음. 다음은 v99 미관찰 639종에서 재개.
 
 ## v98 신규 180종 실제 A/B/C/D 시각 분석 (2026-10-26)
 - v97 통합 SQLite에서 미관찰 **843종** 중 중복 없는 신규 **180종(96개 타일셋)** 선정. 원본 PNG A·동일 층 TMX 5×5 조립 B·동일 레이어 단일 사용 위치 제거 C·다른 실제 근접 TMX 배치 또는 독립 위치 미확보 표시 D와 ABCD 합본 총 **900 JPEG** 생성.
