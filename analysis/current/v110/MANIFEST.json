@@ -1,0 +1,31 @@
+{
+"version": "v110",
+"sqlite_file": "tile_visual_v110_unified.sqlite",
+"sqlite_size_bytes": 89124864,
+"sqlite_sha256": "cc004fb60f6df412da3068e909f9696b0d8cedf8a57d600abd383d1e214c7de0",
+"compressed_sha256": "a92c01e0ae3ecdd025172e7c4ec1abb8e1a03bafb2f64029e30c49aac8643c5a",
+"compression": "zlib_base64",
+"parts": [
+"analysis/current/v110/v110.part000.b64",
+"analysis/current/v110/v110.part001.b64",
+"analysis/current/v110/v110.part002.b64",
+"analysis/current/v110/v110.part003.b64",
+"analysis/current/v110/v110.part004.b64",
+"analysis/current/v110/v110.part005.b64",
+"analysis/current/v110/v110.part006.b64"
+],
+"base_version": "v109",
+"base_sqlite_sha256": "418ba566102c6e3d727c0bf33d5a6228fb2956c7a15b4c1c6f9002fbb235ec61",
+"new_records_repo_path": "checkpoints/v110/observations.tsv",
+"evidence_manifest": "checkpoints/v110_tiledef_preview/EVIDENCE_MANIFEST.json",
+"source_record_count": 30,
+"observed": 5388,
+"provisional_candidates": 4500,
+"remaining": 21,
+"certified": 0,
+"all_prior_tables_preserved": true,
+"original_sprite_evidence_images_in_github": true,
+"mapping_verified": 0,
+"tilezed_verified": 0,
+"note": "v109 미관찰 30종 A/B/C/D와 실제 D 30종(원거리 28, 근접 2). TileZed 타일정의 텍스트 격자 잠정 크롭, 공식 Local ID 미검증. 후보 25 보류 5 인증 0."
+}
