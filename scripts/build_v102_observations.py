@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 cp=ROOT/'checkpoints/v102'
 m=json.loads((ROOT/'checkpoints/v102_preview/EVIDENCE_MANIFEST.json').read_text('utf8'))
-with (ROOT/'checkpoints/v100/observations.tsv').open(encoding='utf8',newline='') as f: fields=next(csv.reader(f,delimiter='\t'))
+with (ROOT/'checkpoints/v101/observations.tsv').open(encoding='utf8',newline='') as f: fields=next(csv.reader(f,delimiter='\t'))
 notes={}
 for start in (0,):
  p=cp/f'review_notes_{start:03d}_{start+11:03d}.psv'
@@ -55,5 +55,5 @@ assert real_d==12 and single==0 and held+candidates==48 and sum(x['D_independent
 with (cp/'observations.tsv').open('w',encoding='utf8',newline='') as f:
  w=csv.DictWriter(f,fieldnames=fields,delimiter='\t',lineterminator='\n')
  w.writeheader();w.writerows(rows)
-(cp/'review_summary.json').write_text(json.dumps(dict(version='v102',observed=48,candidate=candidates,held=held,D_near=real_d,D_none=single,independent_D=0),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+(cp/'review_summary.json').write_text(json.dumps(dict(version='v102',observed=12,candidate=candidates,held=held,D_near=real_d,D_none=single,independent_D=0),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS v102 source notes to 12 TSV:',candidates,'candidate',held,'held')
