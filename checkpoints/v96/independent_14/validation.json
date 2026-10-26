@@ -1,0 +1,483 @@
+{
+  "base_version": "v95",
+  "source_v95_sha256": "8f485d2993ef262a4f4243f4af72ad5a5c50f6f2a530c6f0d1cbbc0938e04081",
+  "base_queue_remaining": 1083,
+  "audit_keys": 14,
+  "candidate": 12,
+  "held": 2,
+  "independent_D_sites": 0,
+  "other_actual_D_placements": 14,
+  "source_checks": [
+    {
+      "key": [
+        "fixtures_stairs_01",
+        12
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay6",
+        "layer_index": 16,
+        "x": 196,
+        "y": 44,
+        "gid": 6149
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay2",
+        "layer_index": 22,
+        "x": 196,
+        "y": 44,
+        "gid": 6149
+      },
+      "delta_pixels_from_generation": 10791,
+      "D_independent": false,
+      "source_png_sha256": "b62b4b8ae59a0bdfdd527bec3415520035fbd13f0e4fe1a0b104ae1611223297",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "furniture_storage_02",
+        10
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 129,
+        "y": 204,
+        "gid": 8115
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 130,
+        "y": 204,
+        "gid": 8115
+      },
+      "delta_pixels_from_generation": 2532,
+      "D_independent": false,
+      "source_png_sha256": "4bdc14b4155019cb1cee602fa7abb619617342342d99dfc3620db2cfafb914ea",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "industry_02",
+        33
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay2",
+        "layer_index": 32,
+        "x": 93,
+        "y": 73,
+        "gid": 8610
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay3",
+        "layer_index": 33,
+        "x": 92,
+        "y": 73,
+        "gid": 8610
+      },
+      "delta_pixels_from_generation": 1461,
+      "D_independent": false,
+      "source_png_sha256": "de92a87542705ec0db1a81d6dd682d5c11cc724831e3cf27149c43e189398b18",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "location_business_machinery_01",
+        1
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 199,
+        "y": 115,
+        "gid": 9970
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 199,
+        "y": 116,
+        "gid": 9970
+      },
+      "delta_pixels_from_generation": 23,
+      "D_independent": false,
+      "source_png_sha256": "cc45554a9f2d9651f5ed6464944b5ce168adebefbbea7e35ffe57628d83ce0b7",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "location_hospitality_sunstarmotel_02",
+        21
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay3",
+        "layer_index": 13,
+        "x": 153,
+        "y": 84,
+        "gid": 12102
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay3",
+        "layer_index": 13,
+        "x": 153,
+        "y": 86,
+        "gid": 12102
+      },
+      "delta_pixels_from_generation": 6359,
+      "D_independent": false,
+      "source_png_sha256": "ec9b7b3b1b26a42873a22cd7c3f3254dfcb4a0bf34f3f79a709bdc5ee5d4c653",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "walls_exterior_house_01",
+        28
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 99,
+        "y": 73,
+        "gid": 27677
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay",
+        "layer_index": 20,
+        "x": 99,
+        "y": 70,
+        "gid": 27677
+      },
+      "delta_pixels_from_generation": 6667,
+      "D_independent": false,
+      "source_png_sha256": "ef80421f7850674026423a1b5e980d9f0a7203741cba3d94f954052bb987437e",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "walls_exterior_house_05",
+        60
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 203,
+        "y": 143,
+        "gid": 28005
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 203,
+        "y": 147,
+        "gid": 28005
+      },
+      "delta_pixels_from_generation": 2633,
+      "D_independent": false,
+      "source_png_sha256": "fd16a4537a2181e27e4a4d6e5a1d125c21633006a334e68c5f447b988305eec4",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "walls_interior_detailing_bathroom_03",
+        49
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 241,
+        "y": 117,
+        "gid": 32914
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay2",
+        "layer_index": 12,
+        "x": 243,
+        "y": 117,
+        "gid": 32914
+      },
+      "delta_pixels_from_generation": 6255,
+      "D_independent": false,
+      "source_png_sha256": "0206b233ddb54020fced05bfc0ab75fb274bbe7129163bd0fe84dae2fe500bf6",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "walls_interior_house_04",
+        1
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay1",
+        "layer_index": 31,
+        "x": 182,
+        "y": 22,
+        "gid": 33378
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 2,
+        "layer": "FloorOverlay1",
+        "layer_index": 31,
+        "x": 183,
+        "y": 22,
+        "gid": 33378
+      },
+      "delta_pixels_from_generation": 2767,
+      "D_independent": false,
+      "source_png_sha256": "31c0b27f8fd70d55f7a8ad77e769077e04dbc6eb92a90f52b7d5b4a79091480a",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "walls_interior_house_07",
+        27
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay",
+        "layer_index": 11,
+        "x": 121,
+        "y": 69,
+        "gid": 33732
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 0,
+        "layer": "FloorOverlay",
+        "layer_index": 11,
+        "x": 123,
+        "y": 69,
+        "gid": 33732
+      },
+      "delta_pixels_from_generation": 3175,
+      "D_independent": false,
+      "source_png_sha256": "cb79f22c7fc62d13a7f5ba508f3fd57e960972457b88dd2ff89415944fdc96b2",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "floors_interior_tilesandwood_01",
+        36
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay",
+        "layer_index": 20,
+        "x": 149,
+        "y": 32,
+        "gid": 7021
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay",
+        "layer_index": 20,
+        "x": 150,
+        "y": 32,
+        "gid": 7021
+      },
+      "delta_pixels_from_generation": 0,
+      "D_independent": false,
+      "source_png_sha256": "2504efa35bb60ee91ee09b0df47f6f6f27df568156d47f86b5166858a4fb3179",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "radio_tower",
+        72
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 3,
+        "layer": "FloorOverlay",
+        "layer_index": 39,
+        "x": 118,
+        "y": 230,
+        "gid": 14969
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 4,
+        "layer": "FloorOverlay",
+        "layer_index": 49,
+        "x": 118,
+        "y": 230,
+        "gid": 14969
+      },
+      "delta_pixels_from_generation": 2028,
+      "D_independent": false,
+      "source_png_sha256": "961967df0ae256607419b7b64186a21139555ff971cc55b27fa81682ec58fb4d",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "roofs_30_02",
+        4
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay1",
+        "layer_index": 21,
+        "x": 246,
+        "y": 116,
+        "gid": 16101
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay1",
+        "layer_index": 21,
+        "x": 247,
+        "y": 116,
+        "gid": 16101
+      },
+      "delta_pixels_from_generation": 4015,
+      "D_independent": false,
+      "source_png_sha256": "f22a8e40c9632b1715bce0c5574e7bc2f032c07de17cfd9ffdfcfe179f06a2b8",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    },
+    {
+      "key": [
+        "roofs_30_08",
+        2
+      ],
+      "primary": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay1",
+        "layer_index": 21,
+        "x": 217,
+        "y": 46,
+        "gid": 16803
+      },
+      "other": {
+        "tmx": "31_45.tmx",
+        "level": 1,
+        "layer": "FloorOverlay1",
+        "layer_index": 21,
+        "x": 218,
+        "y": 46,
+        "gid": 16803
+      },
+      "delta_pixels_from_generation": 6144,
+      "D_independent": false,
+      "source_png_sha256": "28b6644269b904ef90a2a93f54bf44da0bc95be1bfc466d74e2bc149f378d190",
+      "source_tmx_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936"
+    }
+  ],
+  "evidence_jpeg_sha256": {
+    "checkpoints/v96_preview/fixtures_stairs_01__012_A.jpg": "a0d338dd99f27ffdc9563be593cf8c6013d3297355dacb5e27bab9f131d5ed3b",
+    "checkpoints/v96_preview/fixtures_stairs_01__012_B.jpg": "bd876bb428986508ea82f253d3b288d7e339a18ee392bfecdd5292e4246e4662",
+    "checkpoints/v96_preview/fixtures_stairs_01__012_C.jpg": "949ddcc570ae24ea27993a09a191924a88743a0be4a3a01eff4a26b552e0a0ff",
+    "checkpoints/v96_preview/fixtures_stairs_01__012_D.jpg": "985971a63fe270a3d61c0463466f2d4ccdd039ff94a8a3b049d6218968c1c284",
+    "checkpoints/v96_preview/fixtures_stairs_01__012_ABCD.jpg": "6e234828b64744448bcba9505db66c8d865b85d5d706d5c5f0f4aeba6c8fae8c",
+    "checkpoints/v96_preview/furniture_storage_02__010_A.jpg": "9c4fdc5155c5153f88ed1e190742067c88b5235b928afbf12b581f09057e111d",
+    "checkpoints/v96_preview/furniture_storage_02__010_B.jpg": "9648240c6f6b88aab9bc735baeacb370cd28c7f8ae036cf193513cef1c57e906",
+    "checkpoints/v96_preview/furniture_storage_02__010_C.jpg": "4c876e741d1b38ce2df5383f39ae21a583f64a225e48d36d2673420fb1a3d4a4",
+    "checkpoints/v96_preview/furniture_storage_02__010_D.jpg": "4ee0e95fca46d45896fc24a578735da45833acdc97c7faaa31db425fbfab3c17",
+    "checkpoints/v96_preview/furniture_storage_02__010_ABCD.jpg": "a4243e93b32acb3d59cfa1f4a94705bdadeadcbbe256fce67da2ffd4ec0aca80",
+    "checkpoints/v96_preview/industry_02__033_A.jpg": "e71a0a4c9484fb463f7649c8501214146e0a913d33af4646e6c4028a2e43b2c1",
+    "checkpoints/v96_preview/industry_02__033_B.jpg": "5edb1fb1d6feeaddf89849ce6dc774ecbad62e4add1084a8fc9748f94a86e57d",
+    "checkpoints/v96_preview/industry_02__033_C.jpg": "a41305903c323ed11d7f4c8edb290ce126ddefc7e9effaffd850d321978d90e2",
+    "checkpoints/v96_preview/industry_02__033_D.jpg": "284a646de2ded7ea18b71783e6e9d9b8283c1ebac841e4da08978af5bc33ec6b",
+    "checkpoints/v96_preview/industry_02__033_ABCD.jpg": "8a3bf20bb2b96cf8b017c711a744470a43ef3c22d07760931aba15cc08d43d1e",
+    "checkpoints/v96_preview/location_business_machinery_01__001_A.jpg": "61f9d96cad83b65082a626364de3673da0f79c01a68b16b79a39a04b1a49e1f6",
+    "checkpoints/v96_preview/location_business_machinery_01__001_B.jpg": "dc8a1669c510cc7183039ee6fd3aa898112900f369065e889040b98c9e19f9eb",
+    "checkpoints/v96_preview/location_business_machinery_01__001_C.jpg": "ae5e71493383c55075cf1255cdf2b7b39eab4d37ea887105d145027b2a2c9b66",
+    "checkpoints/v96_preview/location_business_machinery_01__001_D.jpg": "68be2a2d84297e1149a48a06933dafc8a1656d734f4f92b1acb6a98e49a73305",
+    "checkpoints/v96_preview/location_business_machinery_01__001_ABCD.jpg": "203b7a23b4633df9e9f2e7232f202129e8b1f6a1be05f3957cc9510433201b9b",
+    "checkpoints/v96_preview/location_hospitality_sunstarmotel_02__021_A.jpg": "272443c071ed291a5b7b8ca7376c0cc368139f5a0d9f77a734d365bb466d136a",
+    "checkpoints/v96_preview/location_hospitality_sunstarmotel_02__021_B.jpg": "f59ddb2aa618d6d013dd1247d8864dee436552a00bad95c6f38d36db0ae49a85",
+    "checkpoints/v96_preview/location_hospitality_sunstarmotel_02__021_C.jpg": "492ec224e23af1bd6ade129a78d21b9ae9768c9bc30ac0e9c757a44d745d505f",
+    "checkpoints/v96_preview/location_hospitality_sunstarmotel_02__021_D.jpg": "175dc0ef9f451c84212bba9c8e53ede48af7da8a3ce523ab5870ad1d7f435325",
+    "checkpoints/v96_preview/location_hospitality_sunstarmotel_02__021_ABCD.jpg": "8f4c721e80fe70437522bf308274606f3f0800c8a63adfa0e036e12807e8b8e6",
+    "checkpoints/v96_preview/walls_exterior_house_01__028_A.jpg": "42aae82ab7bc5a79ba28d1b9c1942ad6c5a1697d82a792b6216c4ca06440b801",
+    "checkpoints/v96_preview/walls_exterior_house_01__028_B.jpg": "bb6929bf80523293d1567b3ac0c85d8ddd69ec54b7a1a97490797e11dbaeddbc",
+    "checkpoints/v96_preview/walls_exterior_house_01__028_C.jpg": "fc28e4f9518de3f86a9434fd8cd5f1c974a44c48fc7c3b619288e16711c6e5d2",
+    "checkpoints/v96_preview/walls_exterior_house_01__028_D.jpg": "4689e18229b8b6863da49edf40c4d94d7df16419f7e4dfba71bf17ddceec89e0",
+    "checkpoints/v96_preview/walls_exterior_house_01__028_ABCD.jpg": "da823d6689823de17e6d8461f70ebc6fd272c316ea7c392778249e3641e64d0a",
+    "checkpoints/v96_preview/walls_exterior_house_05__060_A.jpg": "7b844ef96cddb0ad904e27ba4e9c5e194eea0392198e05dfc093cf6352ce92ce",
+    "checkpoints/v96_preview/walls_exterior_house_05__060_B.jpg": "a4533c242ac85e01a95b1d99c819d53f428b9647bbab2fc57f1c7d0ffd9abaf3",
+    "checkpoints/v96_preview/walls_exterior_house_05__060_C.jpg": "2cbe805f4c3b9ee322b980bbe158cb104fa0805dec20e1741e7d7f61633727e3",
+    "checkpoints/v96_preview/walls_exterior_house_05__060_D.jpg": "9957cafbbad6d60d90625d5c6fe08a8258a7789d08572a9cc428abbe1d0ec4f5",
+    "checkpoints/v96_preview/walls_exterior_house_05__060_ABCD.jpg": "6d08ab18a59a9c99cbd88eb00b239ecdbebf1580b970ce19403beddb8b300f8e",
+    "checkpoints/v96_preview/walls_interior_detailing_bathroom_03__049_A.jpg": "5732d97ff6758c66a23c0aec7d675622dc1408312be90c2d0bbdbb79e127fcab",
+    "checkpoints/v96_preview/walls_interior_detailing_bathroom_03__049_B.jpg": "af06443cf65ed41efaa860809348468d2459864a4c105c1a8a6372f6f19e8832",
+    "checkpoints/v96_preview/walls_interior_detailing_bathroom_03__049_C.jpg": "606d26a58d10e98a1d930afbe5bd78841558e3b0a022cf230026d4d7a49f905e",
+    "checkpoints/v96_preview/walls_interior_detailing_bathroom_03__049_D.jpg": "f0c48602f91ed5e6a0f8b270b1134aadda9d60a7ff05ec1d4318889e059da893",
+    "checkpoints/v96_preview/walls_interior_detailing_bathroom_03__049_ABCD.jpg": "5d4edfcc14402c9b717c35eaceea6e8d2e8cbddc19daac9b2b2a068bbf25ee62",
+    "checkpoints/v96_preview/walls_interior_house_04__001_A.jpg": "f08e2df663f23e19592d366aeeb59aeb90b9bd1ceeaaebae5bff01749da3f51a",
+    "checkpoints/v96_preview/walls_interior_house_04__001_B.jpg": "43198a020241bc7e88f0d0d40357420f7a5fac6137e0d9cf138388b55d313745",
+    "checkpoints/v96_preview/walls_interior_house_04__001_C.jpg": "cdab0e510e1cce3813b0c07f4324545eabf9b75841a136293f0c30f6705d3dea",
+    "checkpoints/v96_preview/walls_interior_house_04__001_D.jpg": "eb08dffd7b2ff21d85faefd5bbc4286bb506ec87aa3dad777cd218e10e7df19e",
+    "checkpoints/v96_preview/walls_interior_house_04__001_ABCD.jpg": "da080db83345ac03be3cf1145522a8a463422e07b454a017f1cbd2cc1abb4d59",
+    "checkpoints/v96_preview/walls_interior_house_07__027_A.jpg": "8575906d2636c373287a3daafc7a633d12a5c9f92fbb863ea7cbb5e047f73941",
+    "checkpoints/v96_preview/walls_interior_house_07__027_B.jpg": "eaaee8991090c2d3251ec2a256a09b81b15e6c8da106d828cacf9a67d97aed45",
+    "checkpoints/v96_preview/walls_interior_house_07__027_C.jpg": "0adc6374b5fb5f5caf976819eebcacf274bf9ea24dd270bfc5865ca41fb7e1d4",
+    "checkpoints/v96_preview/walls_interior_house_07__027_D.jpg": "43f965dc4ac170e789b013d4b8f9e2dd08d6890bd42e651d3622b3db54bc2219",
+    "checkpoints/v96_preview/walls_interior_house_07__027_ABCD.jpg": "12eaf9727f14c90f971923f1a92e1ad0fb8719eb239ce3900b6da40b93da0ff8",
+    "checkpoints/v96_preview/floors_interior_tilesandwood_01__036_A.jpg": "2782d7e644506a10fffdccd6d7ddb6c5d0079f5e12d942dbe790a99f7705205a",
+    "checkpoints/v96_preview/floors_interior_tilesandwood_01__036_B.jpg": "21dce5ac0cb11053febcb72ab9661742e818d951d8a2cf3c1abeb6c3bd8c16ad",
+    "checkpoints/v96_preview/floors_interior_tilesandwood_01__036_C.jpg": "5e8faf028706255f757d79750b92b100411a6fcb97b3d41f236bb923bc14b27f",
+    "checkpoints/v96_preview/floors_interior_tilesandwood_01__036_D.jpg": "374502689ea0538a13b30581fc9acc703b51d4995c0a9a189b491524b3fa5fa0",
+    "checkpoints/v96_preview/floors_interior_tilesandwood_01__036_ABCD.jpg": "8c75a40193bd221cefb6452d245be8fc2e77d3e8d6277987fe525da1e61cb765",
+    "checkpoints/v96_preview/radio_tower__072_A.jpg": "15574258a72d556ae94817547a7c5a1f30369156d3e9744f3b9bebffd3f7f0bf",
+    "checkpoints/v96_preview/radio_tower__072_B.jpg": "c1dd3a2282a9746cd6c375501d861b67d8aae06550b8e5c519778fdf82c51a37",
+    "checkpoints/v96_preview/radio_tower__072_C.jpg": "f6a37e813f99af4dbaa6f7945203894494477353aee6f23bff58b8df2f3377eb",
+    "checkpoints/v96_preview/radio_tower__072_D.jpg": "91fad90199f9bdbad7c2b0d00f0911c08fb5a4f326936fc1cc9c1a599ab29cf2",
+    "checkpoints/v96_preview/radio_tower__072_ABCD.jpg": "6e6bc45338c09a6139fb71ef594da2e911d48d4f54c24e9d4bd643f96b330985",
+    "checkpoints/v96_preview/roofs_30_02__004_A.jpg": "608f309d66f46f3a6a130f0606e57a2020cb7bfe637e2a90f1878d96e8be70fb",
+    "checkpoints/v96_preview/roofs_30_02__004_B.jpg": "8393379f455f68ec01861e6b1e2ddd9a29f36292854b04f0d2d6f4690871a91f",
+    "checkpoints/v96_preview/roofs_30_02__004_C.jpg": "140d8d9d146877fe10e632775e45cc1dcde80e00f3151aa7efc7798422ff8297",
+    "checkpoints/v96_preview/roofs_30_02__004_D.jpg": "46eff8830e1698576fdc0b0b05f122e3f9cb7e5d42867b6eec53c4d727b590ac",
+    "checkpoints/v96_preview/roofs_30_02__004_ABCD.jpg": "8c9ea0428c19ac84b435cdff755733ff35bb7e12d68baf786d18f143f7a09bef",
+    "checkpoints/v96_preview/roofs_30_08__002_A.jpg": "46dd0993965d10650ffc4a3afd23a90ae894a818ba00aa7822096902c2d7cd18",
+    "checkpoints/v96_preview/roofs_30_08__002_B.jpg": "efcb2f138b16bc900a4425e573a0602ffc7f5d709b95b280ce8d973e8f98e3da",
+    "checkpoints/v96_preview/roofs_30_08__002_C.jpg": "d947a5618c4d396032417b54740d004bac77b58d0d7f85cb37b898f9a5d71cf3",
+    "checkpoints/v96_preview/roofs_30_08__002_D.jpg": "ec4a67c2a3d581fcbaa18b540ffa3cde6e5aa413c1d0f65a812a58e78b64ce39",
+    "checkpoints/v96_preview/roofs_30_08__002_ABCD.jpg": "939e2774e7c7799863831a650368c92584d9bbaaebcc1ae326e1f5560d17f8bc"
+  },
+  "supplemental_sqlite_sha256": "6e0d9ddbd56159f70bbc8b67b868b0a2c13a5df4dca4429925206c5dcb80d3a6",
+  "html_sha256": "bfad4ea64de077cc4e3bc111ea5e2550d4875992bc72382af98d6f3b23423dc1",
+  "html_embedded_jpegs": 70,
+  "db_integrity": "ok",
+  "source_png_tmx_hash_match": true,
+  "tmx_raw_gid_placements_verified": 28,
+  "jpeg_loaded": 70
+}
