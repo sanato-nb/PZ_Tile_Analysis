@@ -149,13 +149,13 @@ for key in eligible:
 families=sorted(buckets, key=lambda name:(0 if name.startswith(('fixtures_','furniture_','appliances_','walls_','industry_','location_','vegetation_','carpentry_','crafted_')) else 1,name))
 selected=[]
 for round_idx in range(100):
-    if len(selected)>=TARGET_COUNT: break
+    if len(selected)>=100: break
     for family in families:
         keys=buckets[family]
         if round_idx>=len(keys):continue
         key=keys[round_idx]
         selected.append(key)
-        if len(selected)>=TARGET_COUNT:break
+        if len(selected)>=100:break
 # v100 SQLite의 미관찰 대기열에서만 선택, 이전 v100 키 중복 불허.
 # 서로 다른 타일셋 우선. 다른 실사용 D가 없으면 미확보로 표시.
 # 병행 v101 48종은 기존 이미지 관찰로 취급하여 신규 선택에서 제외한다.
