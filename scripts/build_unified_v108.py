@@ -85,7 +85,7 @@ manifest=dict(version='v108',sqlite_file='tile_visual_v108_unified.sqlite',
 statepath=ROOT/'PROJECT_STATE.json'
 s=json.loads(statepath.read_text('utf8'))
 assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v107',5262),('v108',5310)}
-s['latest_checkpoint']=dict(version='v108',date='2026-3-26',baseline_reconciliation='v107',
+s['latest_checkpoint']=dict(version='v108',date='2026-10-26',baseline_reconciliation='v107',
     baseline_unique_observed=5262,new_unique_observed=48,new_provisional_candidates=38,new_held=10,
     overlap_with_prior=0,merged_unique_observed=5310,merged_observation_percent=round(5310/5409*100,4),
     remaining_unobserved=99,auditable_provisional_candidate_keys=4435,approved_final_certifications=0,
@@ -98,7 +98,7 @@ s['unified_database']=dict(version='v108',status='VERIFIED',
     auditable_candidates=4435,certified=0,sqlite_sha256=manifest['sqlite_sha256'],
     complete_v36_tables=True,complete_v46_tables=True,all_prior_tables_preserved=True,
     v108_git_checkpoint_integrated=True,image_binaries_in_github=True)
-s['status_date']='2026-3-26'
+s['status_date']='2026-10-26'
 s['next_actions']=[
     'v108 통합 DB 미관찰 99종에서 신규 고유 키를 선정하고 A/B/C/D 실제 증거를 확인한다.',
     'v108 가까운 D 3종은 독립 현장 미검증이며 45종은 2번째 현장이 없어 TileZed 확인을 우선한다.',
