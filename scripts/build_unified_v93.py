@@ -48,7 +48,7 @@ with sqlite3.connect(dst) as c:
         ('v93_new_candidates',3,'provisional, not certified'),
         ('v93_new_held',2,'Occluded tiles held without identity'),
         ('v93_total_observed',4194,'v92 4189 + 5 non-overlapping'),
-        ('v93_unobserved',1215,'5409 - 4189'),
+        ('v93_unobserved',1215,'5409 - 4194'),
         ('v93_candidate_auditable',3533,'3530 + 3')])
     c.commit()
     assert c.execute('pragma integrity_check').fetchone()[0]=='ok'
@@ -84,7 +84,7 @@ manifest=dict(version='v93',sqlite_file='tile_visual_v93_unified.sqlite',
 (out/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 statepath=ROOT/'PROJECT_STATE.json'
 s=json.loads(statepath.read_text('utf8'))
-assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v92',4177),('v93',4189)}
+assert (s['unified_database']['version'],s['unified_database']['observed_unique']) in {('v92',4189),('v93',4194)}
 s['latest_checkpoint']=dict(version='v93',date='2026-10-26',baseline_reconciliation='v92',
     baseline_unique_observed=4189,new_unique_observed=5,new_provisional_candidates=3,new_held=2,
     overlap_with_prior=0,merged_unique_observed=4194,merged_observation_percent=round(4194/5409*100,4),
