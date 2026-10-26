@@ -1,0 +1,69 @@
+name: v116 user excludes six image-unavailable held keys
+on:
+  push:
+    branches: [work/v116-exclude-six-image-missing-20261026]
+    paths:
+      - .github/workflows/build-v116-exclude-six.yml
+      - scripts/build_v116_exclude_no_image.py
+      - scripts/restore_unified_v116.py
+      - checkpoints/v116/user_exclude_six.csv
+      - checkpoints/v116/user_exclude_summary.json
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v115/*
+            /analysis/current/v116/*
+            /checkpoints/v116/*
+            /scripts/build_v116_exclude_no_image.py
+            /scripts/restore_unified_v115.py
+            /scripts/restore_unified_v116.py
+            /PROJECT_STATE.json
+      - name: Recover verified v115 historical SQLite
+        run: python3 scripts/restore_unified_v115.py "$RUNNER_TEMP/v115_source.sqlite"
+      - name: Build v116 user exclusion overlay without deleting history
+        run: python3 -u scripts/build_v116_exclude_no_image.py "$RUNNER_TEMP/v115_source.sqlite"
+      - name: Restore all versioned SQLite parts and validate every total
+        run: python3 scripts/restore_unified_v116.py "$RUNNER_TEMP/v116_recovered.sqlite"
+      - name: Verify state and key preservation
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,csv
+          R=pathlib.Path('.')
+          s=json.loads((R/'PROJECT_STATE.json').read_text('utf8'))
+          m=json.loads((R/'analysis/current/v116/MANIFEST.json').read_text('utf8'))
+          assert s['latest_checkpoint']['version']=='v116'
+          assert m['v116_excluded_no_image']==6
+          assert m['active_v115_held']==0 and m['historical_v115_held']==6
+          assert m['prior_v115_ai_candidates']==882 and m['original_image_observed']==5400
+          assert m['final_certified']==0 and m['all_prior_tables_preserved']
+          with (R/'checkpoints/v116/user_exclude_six.csv').open(encoding='utf-8-sig',newline='') as f:
+            r=list(csv.DictReader(f))
+          assert len(r)==6
+          assert len({(x['tile_set_locator'],x['local_id']) for x in r})==6
+          print('PASS 6 excluded only from active held queue, all history preserved')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v116-six-user-exclusions-full-history
+          path: ${{ runner.temp }}/tile_visual_v116_unified.sqlite
+          retention-days: 90
+      - name: Commit physical v116 snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v116/ PROJECT_STATE.json
+          if ! git diff --cached --quiet; then
+            git commit -m "v116: six missing-image exclusions, active held zero, historical reviews preserved"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
