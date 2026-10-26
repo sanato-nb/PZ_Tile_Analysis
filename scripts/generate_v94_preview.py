@@ -135,7 +135,7 @@ def label(img,label_text):
     d.text((10,8),label_text,font=FONT,fill=(255,255,255,255))
 
 # 남은 미관찰 전체를 대상으로, 복수 사용 위치가 없어도 원본 A/B/C 검증 가능.
-# 단일 사용 위치는 D 없음으로 명확히 표시하여 다른 배치를 가장하지 않는다.
+# 멀리 떨어진(거리 >=5 또는 타 TMX) 다른 사용 위치가 없으면 D 독립 현장 없음으로 명확히 표시한다.
 TARGET_COUNT=120
 eligible=sorted(OCC, key=lambda k:(k[0],k[1]))
 buckets=defaultdict(list)
@@ -185,7 +185,7 @@ for key in TARGETS:
     if d_available: D,md,dd_count,_=render(b,False)
     else:
         D=Image.new('RGBA',(900,680),(239,242,244,255))
-        ImageDraw.Draw(D).text((100,200),'D NOT AVAILABLE: ONLY ONE TMX USE',font=FONT,fill=(120,20,20,255))
+        ImageDraw.Draw(D).text((100,200),'D INDEPENDENT SITE UNAVAILABLE (>=5 GRID CELLS)',font=FONT,fill=(120,20,20,255))
         md=0;dd_count=0
     if not removed:raise ValueError('selected placement not removed '+str(key))
     delta=ImageChops.difference(B,C)
@@ -214,7 +214,7 @@ for key in TARGETS:
         'mapping_verified':False,'tilezed_verified':False,'final_certified':False})
 (OUT/'EVIDENCE_MANIFEST.json').write_text(json.dumps({
     'source':'GitHub original PNG and TMX','base':'v93','observed_count_added':0, 'excluded_early_v93_keys':0,
-    'rendering':'approximate isometric, not TileZed; single-use D explicitly marked unavailable',
+    'rendering':'approximate isometric, not TileZed; D alternate required >=5 cells; nearby duplicates not counted independent',
     'original_tmx_suffix_note':'Repository files omit (2), but 5409/302177 scope counts match',
     'sha256':HASHES,'results':results},ensure_ascii=False,indent=2),encoding='utf8')
 
