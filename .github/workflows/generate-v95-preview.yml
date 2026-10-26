@@ -1,0 +1,58 @@
+name: v95 12 evidence-only PNG TMX preview
+on:
+  push:
+    branches: [work/v95-evidence-20261026-1354]
+    paths:
+      - scripts/generate_v95_preview.py
+      - .github/workflows/generate-v95-preview.yml
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v93/*
+            /scripts/generate_v95_preview.py
+            /scripts/restore_unified_v93.py
+            /.github/workflows/generate-v95-preview.yml
+      - name: Install Pillow
+        run: python3 -m pip install --quiet Pillow
+      - name: Generate evidence only, do not increment observation counts
+        run: python3 scripts/generate_v95_preview.py > "$RUNNER_TEMP/v95_generation.log"
+      - name: Validate evidence manifest and images
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          from PIL import Image
+          p=pathlib.Path('checkpoints/v95_preview')
+          m=json.loads((p/'EVIDENCE_MANIFEST.json').read_text())
+          assert m['base']=='v93' and m['observed_count_added']==0
+          rows=[r for r in m['results'] if r['status']=='evidence_only_unreviewed']
+          assert len(rows)==12, len(rows)
+          assert len({tuple(r['key']) for r in rows})==len(rows)
+          for r in rows:
+              for k in ('A','B','C','D','board'):
+                  f=p/r[k]
+                  with Image.open(f) as im: im.verify()
+          print('PASS EVIDENCE ONLY',len(rows),'keys',len(rows)*5,'JPEG')
+          PY
+      - name: Commit generated evidence to review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse checkpoints/v95_preview/
+          if ! git diff --cached --quiet; then
+            git commit -m "증거: v95 미관찰 타일 원본 PNG·TMX A/B/C/D 비교판 생성 (미검수)"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
