@@ -1,0 +1,31 @@
+{
+"version": "v109",
+"sqlite_file": "tile_visual_v109_unified.sqlite",
+"sqlite_size_bytes": 89051136,
+"sqlite_sha256": "418ba566102c6e3d727c0bf33d5a6228fb2956c7a15b4c1c6f9002fbb235ec61",
+"compressed_sha256": "a98e32ab93ba4befe62584901f6039c20a1721e5789cc42bb64099f90aa1ed0b",
+"compression": "zlib_base64",
+"parts": [
+"analysis/current/v109/v109.part000.b64",
+"analysis/current/v109/v109.part001.b64",
+"analysis/current/v109/v109.part002.b64",
+"analysis/current/v109/v109.part003.b64",
+"analysis/current/v109/v109.part004.b64",
+"analysis/current/v109/v109.part005.b64",
+"analysis/current/v109/v109.part006.b64"
+],
+"base_version": "v108",
+"base_sqlite_sha256": "182ce653246b0ddb01144f29df91fd97f3ff3aa3baacd54d7ea29d8de42d5bb9",
+"new_records_repo_path": "checkpoints/v109/observations.tsv",
+"evidence_manifest": "checkpoints/v109_preview/EVIDENCE_MANIFEST.json",
+"source_record_count": 48,
+"observed": 5358,
+"provisional_candidates": 4475,
+"remaining": 51,
+"certified": 0,
+"all_prior_tables_preserved": true,
+"original_sprite_evidence_images_in_github": true,
+"mapping_verified": 0,
+"tilezed_verified": 0,
+"note": "v108 미관찰 48종 A/B/C와 1종 실제 원거리 D를 확인했으나 투명 원본으로 정체 보류. 나머지 D 미확보 47종. 후보 40 보류 8; 공식 Local ID/TileZed 미검증, PNG 높이 불일치."
+}
