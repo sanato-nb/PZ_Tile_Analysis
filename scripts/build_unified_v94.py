@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v93 물리 DB 복사 + v94 신규 5종 직접 시각 판독. 원본/기존 테이블 불변 보존."""
+"""v93 물리 DB 복사 + v94 신규 120종 독립 시각 판독. 기존 계보 불변."""
 from pathlib import Path
 import csv,sqlite3,hashlib,zlib,base64,json,os,sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -80,7 +80,7 @@ manifest=dict(version='v94',sqlite_file='tile_visual_v94_unified.sqlite',
     source_record_count=120,observed=4314,provisional_candidates=3631,remaining=1095,
     certified=0,all_prior_tables_preserved=True,
     original_sprite_evidence_images_in_github=True,mapping_verified=0,tilezed_verified=0,
-    note='v93 미관찰에서 단일 사용 120종 A/B/C 직접 시각 판독, D는 다른 사용 위치 없음. 잠정 98 보류 22; 공식 Local ID/TileZed 미검증. PNG height mismatch/TileZed 미검증.')
+    note='v93 미관찰 120종 중 단일 배치 103종·근접 다중 배치 17종 A/B/C 직접 시각 판독, 멀리 떨어진 독립 D 검증 위치 미확보. 잠정 98 보류 22; 공식 Local ID/TileZed 미검증. PNG height mismatch/TileZed 미검증.')
 (out/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 statepath=ROOT/'PROJECT_STATE.json'
 s=json.loads(statepath.read_text('utf8'))
@@ -105,7 +105,7 @@ s['next_actions']=[
     'PNG 물리 높이 불일치 및 TileZed 공식 Local ID 정합을 독립 검증한다.',
     '사용자 수동 검수 80종 및 재검수 자료는 별도 계보로 보존하며 자동 합산하지 않는다.',
     'v94 이하 원본 SQLite·체크포인트·원본 PNG·TMX를 삭제하거나 덮어쓰지 않는다.',
-    'v94 신규 120종 A/B/C + D없음 명시 +비교판 600 JPEG와 시각 검수 보고서를 원래 근거 폴더에 보존한다.'
+    'v94 신규 103 단일·17 근접다중 배치의 A/B/C + 독립 D없음 명시 +비교판 600 JPEG와 시각 검수 보고서를 원래 근거 폴더에 보존한다.'
 ]
 statepath.write_text(json.dumps(s,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
 print('PASS BUILD v94',checks,'sha',manifest['sqlite_sha256'],'parts',len(parts))
