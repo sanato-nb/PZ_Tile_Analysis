@@ -156,6 +156,17 @@ for round_idx in range(100):
         key=keys[round_idx]
         selected.append(key)
         if len(selected)>=TARGET_COUNT:break
+# 이미지 전체가 투명한 타일도 미관찰 키인 이상 보류 증거로 검수한다.
+# 불투명 47종 다음으로 원본 PNG 크롭이 존재하는 고유 1종을 추가한다.
+if len(selected)<TARGET_COUNT:
+    for key in eligible:
+        if key in selected:continue
+        m=MAP_DATA[OCC[key][0]['tmx']]
+        t=next(t for t in m['tilesets'] if t['name']==key[0])
+        sprite,status=crop(t,key[1])
+        if sprite is None:continue
+        selected.append(key)
+        if len(selected)>=TARGET_COUNT:break
 TARGETS=selected[:TARGET_COUNT]
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
