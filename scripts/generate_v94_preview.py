@@ -166,6 +166,15 @@ TARGETS=selected[:TARGET_COUNT]
 assert len(set(TARGETS))==len(TARGETS), 'duplicate target keys'
 
 print('QUEUE_DIAGNOSTICS',len(queue),'present',len(OCC),'multiuse',sum(len(v)>=2 for v in OCC.values()),'singleuse',sum(len(v)==1 for v in OCC.values()),'eligible',len(eligible),'buckets',len(buckets),'targets',len(TARGETS),file=sys.stderr,flush=True)
+statuses=defaultdict(int);valid_examples=[];excluded_examples=[]
+for key,uses in OCC.items():
+    t=next(t for t in MAP_DATA[uses[0]['tmx']]['tilesets'] if t['name']==key[0])
+    sprite,status=crop(t,key[1])
+    reason=status if sprite is not None and sprite.getbbox() else ('transparent' if sprite is not None else status)
+    statuses[reason]+=1
+    if sprite is not None and sprite.getbbox() and len(valid_examples)<30: valid_examples.append([key,len(uses),status])
+    elif len(excluded_examples)<15: excluded_examples.append([key,len(uses),status])
+print('ALL_QUEUE_CROP',dict(statuses),'valid_examples',valid_examples,'excluded_examples',excluded_examples,file=sys.stderr,flush=True)
 assert len(TARGETS)>=TARGET_COUNT,('not enough review targets',TARGETS)
 print('v94 UNREVIEWED PREVIEW TARGETS',TARGETS,flush=True)
 results=[]
