@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v83)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v84)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v83: 3,497/5,409종(64.6515%); 미관찰 1,912종; 감사 가능한 잠정 후보 2,997종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v83/`. 복원: `python3 scripts/restore_unified_v83.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v84: 3,589/5,409종(66.3524%); 미관찰 1,820종; 감사 가능한 잠정 후보 3,071종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v84/`. 복원: `python3 scripts/restore_unified_v84.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -158,3 +158,13 @@
 - `checkpoints/v83/observations.tsv`·CSV, `checkpoints/v83_preview/` 원본 A/B/C/D+비교판 60 JPEG, `checkpoints/v83/INDEPENDENT_VISUAL_AUDIT.md`, 이미지 내장 HTML 60장, ZIP 64항목 CRC PASS를 보존한다.
 - `analysis/current/v83/MANIFEST.json`: SQLite **85,069,824바이트**, SHA-256 `4101d1a1df655df0161fbd4da75890f508a8b68bd80cc003f34413a2409b6369`. 압축 7조각 복원·SHA-256·SQLite integrity_check·이전 테이블 보존·원본 PNG/TMX 해시·PNG/JPEG 로딩·B-C 장면·ZIP CRC 검증.
 - PNG 물리 높이와 TMX 선언 높이 불일치 및 공식 Local ID·TileZed 미검증: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. v36~v82 체크포인트와 원본 자산, 사용자 수동 검수 80종은 변경하지 않는다.
+
+## v84 신규 직접 이미지 판독 (2026-10-26)
+- GitHub v83 통합 SQLite의 미관찰 1,912종에서 중복 없는 **92종**을 선정해 A: 원본 PNG, B: TMX 같은 층 5×5, C: 한 배치 제거, D: 다른 실제 TMX 위치, ABCD 비교판 **460 JPEG**를 직접 열어 판독했다.
+- 신규 잠정 후보 **74종**, 보류 **18종**, 누적 **3,589 / 5,409종(66.3524%)**, 미관찰 **1,820종**, 누적 후보 **3,071종**, 최종 인증 **0종**, 기존 관찰 키 중복 0.
+- 사물·부품 역할 관찰: 3단 목재 계단, 반원형 목제 창틀의 좌우, 커튼 상단 레일, 양문 철망 수납장·옷장·상자, 도로 포장 블렌딩과 노면 균열, 바닥 돌·바위, 차양 기둥·목재 가로보·삼각 보강대, 정원 관목 등을 분리 기록했다.
+- **보류 18종**은 PNG 원본에서 모양이 보이더라도 TMX 배치 가림·B-C 미세 변화·분할 타일 연결 불충분 때문에 공식 정체 후보를 기입하지 않았다.
+- 증거: `checkpoints/v84/observations.tsv` 및 CSV, `checkpoints/v84_preview/`의 A/B/C/D와 비교판 460 JPEG, `checkpoints/v84/v84_이미지내장_검수.html`에 460장 데이터 URI, `v84_증거_92종_A_B_C_D.zip`에 **464파일 CRC PASS**.
+- `analysis/current/v84/MANIFEST.json`: 물리 SQLite **85,229,568바이트**, SHA-256 `db8975cbaea588d17b4f5f36375fea3366c3bdb0f0b8389596d89ad200548708`와 압축 7조각. v83 원본 SHA 복원, v84 압축 왕복, PRAGMA integrity_check, 테이블 보존·원본 PNG/TMX SHA·장면 근거·키 중복·PNG/JPEG 로딩 검사 통과.
+- 공식 PNG–TMX Local ID 높이와 TileZed 매핑 미검증: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. v36~v83 모든 원본·관찰 계보 및 사용자 수동 검수 80종 불변.
+- **다음 작업**: v84 통합 DB 미관찰 **1,820종**에서 이어서 신규 키를 검수하고, 별도로 기존 보류 타일·공식 Local ID 정합을 검증한다.
