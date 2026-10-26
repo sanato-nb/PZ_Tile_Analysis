@@ -1,10 +1,10 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v92)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v93)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
 - 모든 작업은 `PROJECT_STATE.json`의 `unified_database` 및 `latest_checkpoint`를 우선한다. `reconciliation`의 2,584(v47)는 과거 교집합 대조 기준이다.
-- 2026-10-26 최신 **v92: 4,189/5,409종(77.4450%); 미관찰 1,220종; 감사 가능한 잠정 후보 3,530종; 최종 인증 0종**.
-- 최신 물리 통합 SQLite: `analysis/current/v92/`. 복원: `python3 scripts/restore_unified_v92.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
+- 2026-10-26 최신 **v93: 4,194/5,409종(77.5374%); 미관찰 1,215종; 감사 가능한 잠정 후보 3,533종; 최종 인증 0종**.
+- 최신 물리 통합 SQLite: `analysis/current/v93/`. 복원: `python3 scripts/restore_unified_v93.py /tmp/pz_latest.sqlite`. 압축 7조각의 SHA-256·SQLite 무결성·누적 수량 검증을 거친다.
 - `docs/HANDOFF.md`, `docs/ANALYSIS_RULES.md`, `analysis/imports/README_RECONCILIATION.md`를 먼저 읽는다.
 
 ## 실제 이미지 시각 분석 규칙
@@ -29,6 +29,14 @@
 - `analysis/current/v92/MANIFEST.json`: 물리 SQLite **86,433,792바이트**, SHA-256 `1ba2d19fc7765c6d2e4f59035cfd3780f12a320730eb46be1cbfd884c54f591e`. v91 복원 SHA 확인, 이전 테이블 보존, SQLite `integrity_check`, 원본 PNG/TMX SHA, B-C, 이미지 로딩, 압축 7조각 SHA 왕복 검증 성공.
 - PNG 물리 높이 불일치, 공식 PNG–TMX Local ID 및 TileZed 미검증: `mapping_verified=0`, `tilezed_verified=0`, `final_certified=0`. v36~v91 원본과 사용자 수동 검수 80종 계보를 변경하지 않는다.
 - 다음 작업: v92 미관찰 대기열 **1,220종**에서 신규 고유 키를 선정하고, 기존 보류 타일은 다른 위치로 재검수한다.
+
+## v93 신규 5종 A/B/C/D 직접 판독 (2026-10-26)
+- v92 최신 통합 DB 미관찰 1,220종 중 **다른 실제 TMX 사용 위치 D가 확인되는 고유 키 5종**을 선택해 A 원본 PNG, B 동일 층 주변 5×5, C 대상 배치 하나 제거, D 다른 사용 위치를 생성하고 비교판 5개를 직접 열어 판독했다.
+- `walls_detailing_01` Local ID **66·82·89** 잠정 후보, **90·91** 보류. 신규 후보 3종·보류 2종·중복 0종. PNG 높이 불일치, TileZed·공식 Local ID 미검증으로 최종 인증 0종.
+- 누적 관찰 **4,194/5,409종(77.5374%)**, 미관찰 **1,215종**, 감사 가능한 후보 **3,533종**.
+- `checkpoints/v93/observations.tsv`·CSV·독립 시각 검수 기록·`checkpoints/v93_preview/`의 A/B/C/D+비교판 **25 JPEG**, 이미지 내장 HTML(25장), 증거 ZIP(31항목 CRC PASS)을 보존한다.
+- `analysis/current/v93/MANIFEST.json` 물리 SQLite **86,454,272바이트**, SHA-256 `b83266fd8fc626a56410458409a3259c2696467cda4cc7efff671113bd6a06af`. GitHub Actions에서 원본 v92 SHA, PNG/TMX 원본 해시, 이미지 로딩, B-C 변화, 중복 키, SQLite 무결성, 압축 7조각 왕복 및 ZIP CRC 검증 통과.
+- v36~v92 원본·체크포인트 및 사용자 수동 검수 80종 계보는 변경하지 않는다. 다음은 v93 대기열 1,215종 중 새로운 실사용 증거가 충분한 키를 선정한다.
 
 ## v91 132종 시각 판독 통합 (2026-10-26)
 - v90 미관찰 1,364종에서 기존 별도 독립 판독 12종(과거 미계상)을 보존하고, 겹치지 않게 새로 선정한 **120종**을 추가 A 원본 PNG, B TMX 동일 층 5×5 근사 조립, C 해당 단일 배치 제거, D 다른 실사용 위치로 재구성했다.
