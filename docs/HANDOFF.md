@@ -41,26 +41,26 @@
 - 상세 증거·후보 충돌: `analysis/imports/all_observation_records.csv`, `analysis/imports/conflicting_candidates.csv`
 - SQL 원본·CSV·증거를 혼동하지 말 것. 경량 병합 DB는 모든 과거 보조 테이블을 복제한 원본 DB가 아니다.
 
-## 최신 물리 통합 SQLite (v111)
+## 최신 물리 통합 SQLite (v113)
 
-- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v111까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
+- **v36·v46 원본 테이블 + v47 병합 색인 + v48부터 v113까지의 모든 신규 체크포인트**를 한 SQLite에서 조회할 수 있습니다.
 - 단일 테이블 `tile_catalog`: **5,400/5,409종 (99.83%)**, 미관찰 9종, 잠정 후보 4,512종, 최종 인증 0종.
-- SHA-256 검증과 전체 복원 방법: `analysis/current/v111/MANIFEST.json`, `scripts/restore_unified_v111.py`.
+- SHA-256 검증과 전체 복원 방법: `analysis/current/v113/MANIFEST.json`, `scripts/restore_unified_v113.py`.
 - 과거 DB는 별도 보존합니다. 최신 체크포인트 이미지의 GitHub 보관 여부: **보관됨**. 이전 버전의 로컬 보조 이미지·메타데이터는 각 버전 안내를 따릅니다.
 
-## 최신 체크포인트 (v111)
+## 최신 체크포인트 (v113)
 
-- 새로 직접 관찰: **12종** (잠정 후보 12, 보류 0).
+- 새로 직접 관찰: **0종** (잠정 후보 0, 보류 0).
 - 중복 제거 누적 관찰: **5,400/5,409종 (99.83%)**.
 - 아직 미관찰: **9종**. 최종 인증 0종.
-- 기록: `checkpoints/v111/observations.tsv` (이전 통합 DB와 별도로 보존).
+- 기록: `checkpoints/v113/user_review.csv` (이전 통합 DB와 별도로 보존).
 
 ## 다음 실제 작업
 
-1. v111에서 남은 9종: 원본 PNG 누락 5종과 B-C 제거 차이 0인 사무실·관목 4종을 우선 확인한다.
-2. 단일 배치인 12종의 PNG A 및 B-C 차이를 시각 검수했지만 D 미확보·TileZed 텍스트 격자 잠정 매핑이므로 공식 인증 0.
-3. missing PNG 5종의 원본 아틀라스를 확보하고 공식 TileZed Local ID 그리드 대응을 검증한다.
-4. v36~v110 물리 SQLite 전체 테이블과 사용자 수동 검수 80종을 보존한다.
+1. v113부터 신규 검수 대상은 analysis_queue 대신 v113_active_review_queue를 사용한다. 사용자가 8종을 활성 검수에서 제외했으며 과거 타일 키와 출처는 보존한다.
+2. 남은 활성 f_bushes_1/66은 사용자 잠정 후보 풀 또는 꽃 계열 식물. 원본 A 알파 4,837픽셀이나 B-C 변화 0이므로 공식 Local ID·TileZed 정합 전 정체 확정 금지.
+3. 제외 8종 중 사무실 3종은 잠정 크롭 투명, JUMBO 3종은 매핑 불확실한 빈 크롭, PNG 미확보 2종은 실제 투명 여부 미검증.
+4. v36~v111 과거 DB 테이블·사용자 수동 검수 80종·PNG/TMX 원본은 삭제 또는 수정하지 않는다.
 
 ## 불변 원칙
 

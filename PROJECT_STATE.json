@@ -1,122 +1,145 @@
 {
-"schema_version": 1,
-"project": "Project Zomboid B42 - Tile Identity Analysis",
-"repository": "sanato-nb/PZ_Tile_Analysis",
-"repository_visibility": "public",
-"status_date": "2026-10-26",
-"scope": {
-"tmx_sources": [
-"31_45(2).tmx",
-"31_46(2).tmx"
-],
-"source_tree": "B4220.3_MapExport_256/tmx/",
-"unique_tiles": 5409,
-"total_tile_placements": 302177,
-"provenance": "TMX 원본 재파싱으로 확인했던 기준 수치. 저장소의 각 TMX 버전과의 재검증은 향후 수행."
-},
-"baselines": {
-"v36": {
-"observation_records": 2509,
-"provisional_identity_candidates": 2291,
-"final_identity_certifications": 0,
-"reported_artifact": "PZ_타일정체_시각분석_v36_복구및검수.zip",
-"artifact_repo_path": "analysis/archive/v36/",
-"verification": "Original v36 SQLite extracted from the preserved 81.9MB ZIP, integrity-check OK, SHA-256 recorded, complete compressed SQLite backed up in GitHub"
-},
-"v37_to_v46": {
-"observation_records": 477,
-"provisional_identity_candidates": 402,
-"withheld_identity": 75,
-"reported_sqlite": "tile_visual_v46.sqlite",
-"artifact_repo_path": "analysis/archive/v46/",
-"verification": "Original v46 SQLite recovered; 477 individual reviewed records and 402 candidate statuses verified"
-}
-},
-"reconciliation": {
-"status": "VERIFIED",
-"method": "set union keyed by (tile_set_locator,local_id) from original v36 and v46 SQLite files",
-"v36_v46_overlap_count": 402,
-"new_unique_observed_v37_to_v46": 75,
-"merged_unique_observed": 2584,
-"merged_observation_percent": 47.7722,
-"remaining_unobserved": 2825,
-"merged_unique_candidates": 2302,
-"merged_candidate_semantics": "auditable provisional candidate keys only; not certified identities",
-"v36_reported_candidates": 2291,
-"v36_auditable_candidate_keys": 2156,
-"v36_reported_candidate_discrepancy": 135,
-"v46_auditable_candidates": 402,
-"source_candidate_wording_conflicts": 256,
-"merged_db_repo_path": "analysis/imports/merged_evidence_v47.sqlite.zlib.b64",
-"merged_csv_repo_path": "analysis/imports/merged_catalog_5409.csv",
-"original_db_v36": "analysis/archive/v36/",
-"original_db_v46": "analysis/archive/v46/",
-"approved_final_certifications": 0,
-"do_not_sum_lineages": true,
-"source_sha256": {
-"v36": "db64cc6285664f715f7b0168f99d625ee4e909e2cefef07b8f15abe817ea0c39",
-"v46": "73ca1bd292dbfbd22ac63ce5f06671d1475244e0b0f96a1b7a57c08e74031aa7"
-}
-},
-"evidence_policy": {
-"evidence_key": [
-"tile_set_locator",
-"local_id"
-],
-"identity_from": "original_png_pixels_plus_tmx_neighbor_composite",
-"candidate_is_certified": false,
-"uncertain_png_tmx_mapping": "must_remain_unverified",
-"historical_v31_ai_labels": "not_authoritative"
-},
-"next_actions": [
-"v111에서 남은 9종: 원본 PNG 누락 5종과 B-C 제거 차이 0인 사무실·관목 4종을 우선 확인한다.",
-"단일 배치인 12종의 PNG A 및 B-C 차이를 시각 검수했지만 D 미확보·TileZed 텍스트 격자 잠정 매핑이므로 공식 인증 0.",
-"missing PNG 5종의 원본 아틀라스를 확보하고 공식 TileZed Local ID 그리드 대응을 검증한다.",
-"v36~v110 물리 SQLite 전체 테이블과 사용자 수동 검수 80종을 보존한다."
-],
-"warnings": [
-"Do not count 2,509+477 as unique: the verified overlap is 402.",
-"2,302 are auditable provisional candidate keys, not verified object identities; historical v36 reported candidate total 2,291 is preserved separately.",
-"Original v36 and v46 SQLite sources are preserved in GitHub as SHA-256 verifiable xz + base64 text shards.",
-"Image context, sprite correspondence and TileZed validation remain unverified; final certifications 0.",
-"Public repository: never commit tokens or private conversation content; preserve original map and tile assets."
-],
-"latest_checkpoint": {
-"version": "v111",
-"date": "2026-10-26",
-"baseline_reconciliation": "v110",
-"baseline_unique_observed": 5388,
-"new_unique_observed": 12,
-"new_provisional_candidates": 12,
-"new_held": 0,
-"overlap_with_prior": 0,
-"merged_unique_observed": 5400,
-"merged_observation_percent": 99.8336,
-"remaining_unobserved": 9,
-"auditable_provisional_candidate_keys": 4512,
-"approved_final_certifications": 0,
-"delta_repo_path": "checkpoints/v111/observations.tsv",
-"evidence_repo_path": "checkpoints/v111_singleuse_preview/",
-"verification_script": "checkpoints/v111/verify_delta.py",
-"png_tmx_mapping_verified": 0,
-"tilezed_verified": 0,
-"high_resolution_evidence_images_in_github": true
-},
-"unified_database": {
-"version": "v111",
-"status": "VERIFIED",
-"repo_manifest": "analysis/current/v111/MANIFEST.json",
-"restore_script": "scripts/restore_unified_v111.py",
-"observed_unique": 5400,
-"observed_percent": 99.8336,
-"remaining_unobserved": 9,
-"auditable_candidates": 4512,
-"certified": 0,
-"sqlite_sha256": "c2d31b708d5a706709007265ce44f0bd63efed27f8acd5fe5e9b3ecdd1dce73f",
-"complete_v36_tables": true,
-"complete_v46_tables": true,
-"all_prior_tables_preserved": true,
-"v111_git_checkpoint_integrated": true,
-"image_binaries_in_github": true
-}
+  "schema_version": 1,
+  "project": "Project Zomboid B42 - Tile Identity Analysis",
+  "repository": "sanato-nb/PZ_Tile_Analysis",
+  "repository_visibility": "public",
+  "status_date": "2026-10-26",
+  "scope": {
+    "tmx_sources": [
+      "31_45(2).tmx",
+      "31_46(2).tmx"
+    ],
+    "source_tree": "B4220.3_MapExport_256/tmx/",
+    "unique_tiles": 5409,
+    "total_tile_placements": 302177,
+    "provenance": "TMX 원본 재파싱으로 확인했던 기준 수치. 저장소의 각 TMX 버전과의 재검증은 향후 수행."
+  },
+  "baselines": {
+    "v36": {
+      "observation_records": 2509,
+      "provisional_identity_candidates": 2291,
+      "final_identity_certifications": 0,
+      "reported_artifact": "PZ_타일정체_시각분석_v36_복구및검수.zip",
+      "artifact_repo_path": "analysis/archive/v36/",
+      "verification": "Original v36 SQLite extracted from the preserved 81.9MB ZIP, integrity-check OK, SHA-256 recorded, complete compressed SQLite backed up in GitHub"
+    },
+    "v37_to_v46": {
+      "observation_records": 477,
+      "provisional_identity_candidates": 402,
+      "withheld_identity": 75,
+      "reported_sqlite": "tile_visual_v46.sqlite",
+      "artifact_repo_path": "analysis/archive/v46/",
+      "verification": "Original v46 SQLite recovered; 477 individual reviewed records and 402 candidate statuses verified"
+    }
+  },
+  "reconciliation": {
+    "status": "VERIFIED",
+    "method": "set union keyed by (tile_set_locator,local_id) from original v36 and v46 SQLite files",
+    "v36_v46_overlap_count": 402,
+    "new_unique_observed_v37_to_v46": 75,
+    "merged_unique_observed": 2584,
+    "merged_observation_percent": 47.7722,
+    "remaining_unobserved": 2825,
+    "merged_unique_candidates": 2302,
+    "merged_candidate_semantics": "auditable provisional candidate keys only; not certified identities",
+    "v36_reported_candidates": 2291,
+    "v36_auditable_candidate_keys": 2156,
+    "v36_reported_candidate_discrepancy": 135,
+    "v46_auditable_candidates": 402,
+    "source_candidate_wording_conflicts": 256,
+    "merged_db_repo_path": "analysis/imports/merged_evidence_v47.sqlite.zlib.b64",
+    "merged_csv_repo_path": "analysis/imports/merged_catalog_5409.csv",
+    "original_db_v36": "analysis/archive/v36/",
+    "original_db_v46": "analysis/archive/v46/",
+    "approved_final_certifications": 0,
+    "do_not_sum_lineages": true,
+    "source_sha256": {
+      "v36": "db64cc6285664f715f7b0168f99d625ee4e909e2cefef07b8f15abe817ea0c39",
+      "v46": "73ca1bd292dbfbd22ac63ce5f06671d1475244e0b0f96a1b7a57c08e74031aa7"
+    }
+  },
+  "evidence_policy": {
+    "evidence_key": [
+      "tile_set_locator",
+      "local_id"
+    ],
+    "identity_from": "original_png_pixels_plus_tmx_neighbor_composite",
+    "candidate_is_certified": false,
+    "uncertain_png_tmx_mapping": "must_remain_unverified",
+    "historical_v31_ai_labels": "not_authoritative"
+  },
+  "next_actions": [
+    "v113부터 신규 검수 대상은 analysis_queue 대신 v113_active_review_queue를 사용한다. 사용자가 8종을 활성 검수에서 제외했으며 과거 타일 키와 출처는 보존한다.",
+    "남은 활성 f_bushes_1/66은 사용자 잠정 후보 풀 또는 꽃 계열 식물. 원본 A 알파 4,837픽셀이나 B-C 변화 0이므로 공식 Local ID·TileZed 정합 전 정체 확정 금지.",
+    "제외 8종 중 사무실 3종은 잠정 크롭 투명, JUMBO 3종은 매핑 불확실한 빈 크롭, PNG 미확보 2종은 실제 투명 여부 미검증.",
+    "v36~v111 과거 DB 테이블·사용자 수동 검수 80종·PNG/TMX 원본은 삭제 또는 수정하지 않는다."
+  ],
+  "warnings": [
+    "Do not count 2,509+477 as unique: the verified overlap is 402.",
+    "2,302 are auditable provisional candidate keys, not verified object identities; historical v36 reported candidate total 2,291 is preserved separately.",
+    "Original v36 and v46 SQLite sources are preserved in GitHub as SHA-256 verifiable xz + base64 text shards.",
+    "Image context, sprite correspondence and TileZed validation remain unverified; final certifications 0.",
+    "Public repository: never commit tokens or private conversation content; preserve original map and tile assets."
+  ],
+  "latest_checkpoint": {
+    "version": "v113",
+    "date": "2026-10-26",
+    "kind": "manual_review_filter",
+    "baseline_reconciliation": "v111",
+    "baseline_unique_observed": 5400,
+    "new_unique_observed": 0,
+    "new_provisional_candidates": 0,
+    "new_held": 0,
+    "new_user_manual_candidates": 1,
+    "new_user_review_excluded": 8,
+    "new_user_review_count": 9,
+    "merged_unique_observed": 5400,
+    "merged_observation_percent": 99.8336,
+    "remaining_unobserved": 9,
+    "active_unobserved": 1,
+    "user_excluded_from_active_review": 8,
+    "auditable_provisional_candidate_keys": 4512,
+    "approved_final_certifications": 0,
+    "delta_repo_path": "checkpoints/v113/user_review.csv",
+    "evidence_repo_path": "checkpoints/v111_singleuse_preview/",
+    "verification_script": "scripts/restore_unified_v113.py",
+    "png_tmx_mapping_verified": 0,
+    "tilezed_verified": 0,
+    "high_resolution_evidence_images_in_github": true
+  },
+  "unified_database": {
+    "version": "v113",
+    "status": "VERIFIED",
+    "repo_manifest": "analysis/current/v113/MANIFEST.json",
+    "restore_script": "scripts/restore_unified_v113.py",
+    "observed_unique": 5400,
+    "observed_percent": 99.8336,
+    "remaining_unobserved": 9,
+    "active_unobserved": 1,
+    "user_excluded": 8,
+    "auditable_candidates": 4512,
+    "user_provisional_candidates": 1,
+    "certified": 0,
+    "sqlite_sha256": "205e7a4e59b2e85c986662f34b36cd030555a5cc69000ed60115fee9c8475b88",
+    "complete_v36_tables": true,
+    "complete_v46_tables": true,
+    "all_prior_tables_preserved": true,
+    "v113_git_checkpoint_integrated": true,
+    "image_binaries_in_github": true
+  },
+  "latest_user_review": {
+    "version": "v113",
+    "source": "user_manual_review",
+    "reviewed_count": 9,
+    "exclude_from_active_review": 8,
+    "keep_provisional": 1,
+    "active_review_key": [
+      "f_bushes_1",
+      66
+    ],
+    "user_identity_candidate": "풀 또는 꽃 계열 식물",
+    "confidence": "low",
+    "historical_unobserved_preserved": 9,
+    "final_certified": 0
+  }
 }
