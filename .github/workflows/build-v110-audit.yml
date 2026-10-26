@@ -1,0 +1,65 @@
+name: v110 source-gap audit for 51 unresolved B42 tiles
+on:
+  push:
+    branches: [work/v110-visual-20261026]
+    paths:
+      - .github/workflows/build-v110-audit.yml
+      - scripts/build_v110_audit.py
+      - scripts/verify_v110_audit.py
+      - scripts/restore_unified_v110.py
+      - scripts/build_v110_review_html.py
+      - checkpoints/v110/review_notes_000_008.psv
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v109/*
+            /checkpoints/v110/*
+            /checkpoints/v110_preview/*
+            /scripts/build_v110_audit.py
+            /scripts/restore_unified_v109.py
+            /scripts/restore_unified_v110.py
+            /scripts/verify_v110_audit.py
+            /scripts/build_v110_review_html.py
+            /scripts/validate_project.py
+            /scripts/generate_handoff.py
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+            /.github/workflows/build-v110-audit.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Restore v109 full source DB and verify SHA
+        run: python3 scripts/restore_unified_v109.py "$RUNNER_TEMP/v109.sqlite"
+      - name: Validate 9 blank source images and 42 missing PNG or local IDs
+        run: python3 scripts/verify_v110_audit.py
+      - name: Clone entire DB, append unresolved audit only; observed remains 5358
+        run: python3 scripts/build_v110_audit.py "$RUNNER_TEMP/v109.sqlite"
+      - name: Restore full v110 physical SQLite and validate 51-row audit
+        run: python3 scripts/restore_unified_v110.py "$RUNNER_TEMP/v110-restored.sqlite"
+      - name: Package 45 JPEG embedded HTML, 51 unresolved CSV and ZIP CRC
+        run: python3 scripts/build_v110_review_html.py
+      - name: Validate project and update honest handoff
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - name: Persist verified diagnostic without changing old data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v110/ checkpoints/v110/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "진단(v110): 51종 미해결 키/PNG 범위·누락 분석, 관찰 증가 0, SQLite SHA와 ZIP CRC"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
