@@ -1,0 +1,31 @@
+{
+"version": "v95",
+"sqlite_file": "tile_visual_v95_unified.sqlite",
+"sqlite_size_bytes": 86835200,
+"sqlite_sha256": "8f485d2993ef262a4f4243f4af72ad5a5c50f6f2a530c6f0d1cbbc0938e04081",
+"compressed_sha256": "2d938eef9928eded42e32fb4023b06603c341444999c57a2589182cca3a65f80",
+"compression": "zlib_base64",
+"parts": [
+"analysis/current/v95/v95.part000.b64",
+"analysis/current/v95/v95.part001.b64",
+"analysis/current/v95/v95.part002.b64",
+"analysis/current/v95/v95.part003.b64",
+"analysis/current/v95/v95.part004.b64",
+"analysis/current/v95/v95.part005.b64",
+"analysis/current/v95/v95.part006.b64"
+],
+"base_version": "v94",
+"base_sqlite_sha256": "4bad407adf9803256d9f39cf691824fe5c2c98a39b9c9a20367c81e9dd5cf679",
+"new_records_repo_path": "checkpoints/v95/observations.tsv",
+"evidence_manifest": "checkpoints/v95_preview/EVIDENCE_MANIFEST.json",
+"source_record_count": 12,
+"observed": 4326,
+"provisional_candidates": 3638,
+"remaining": 1083,
+"certified": 0,
+"all_prior_tables_preserved": true,
+"original_sprite_evidence_images_in_github": true,
+"mapping_verified": 0,
+"tilezed_verified": 0,
+"note": "v94 미관찰 12종 A/B/C 및 실제 근접 D(거리 1~3칸) 직접 판독. 후보 7 보류 5; 독립 D 현장 검증은 없음. 공식 Local ID/TileZed 미검증, PNG 높이 불일치."
+}
