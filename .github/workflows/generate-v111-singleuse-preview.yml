@@ -1,0 +1,62 @@
+name: v111 provisional TileZed-grid evidence for 21 remaining including single-use
+on:
+  push:
+    branches: [work/v111-single-use-source-audit-20261026]
+    paths:
+      - scripts/generate_v111_singleuse_preview.py
+      - .github/workflows/generate-v111-singleuse-preview.yml
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /Tiles/tiledefinitions.tiles.txt
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v110/*
+            /scripts/generate_v111_singleuse_preview.py
+            /scripts/restore_unified_v110.py
+            /.github/workflows/generate-v111-singleuse-preview.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Render A B C D from original PNG using provisional TileZed grid
+        run: python3 scripts/generate_v111_singleuse_preview.py > "$RUNNER_TEMP/v110_tiledef.log"
+      - name: Verify up to 21 A B C D and source-unavailable keys without certification
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          from PIL import Image
+          p=pathlib.Path('checkpoints/v111_singleuse_preview')
+          m=json.loads((p/'EVIDENCE_MANIFEST.json').read_text())
+          rows=[r for r in m['results'] if r['status']=='evidence_only_unreviewed']
+          assert m['base']=='v110' and m['observed_count_added']==0
+          assert m['tiledef_grid_provisional'] and not m['mapping_verified']
+          assert 1<=len(rows)<=21 and len({tuple(r['key']) for r in rows})==len(rows)
+          assert len(m['source_unrenderable'])+len(rows)==m['remaining_input_count']==21
+          assert len({tuple(x['key']) for x in m['source_unrenderable']})==len(m['source_unrenderable'])
+          assert len(m['review_sheets'])==(len(rows)+5)//6
+          for r in rows:
+            for k in ('A','B','C','D','board'):
+              with Image.open(p/r[k]) as im: im.verify()
+          for f in m['review_sheets']:
+            with Image.open(f) as im: im.verify()
+          print('PASS',len(rows),'crop-valid A/B/C/D evidence,',len(rows)*5,'JPEG,',len(m['review_sheets']),'sheets; mapping provisional; observed added 0')
+          PY
+      - name: Preserve provisional evidence for direct visual review
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse checkpoints/v111_singleuse_preview/
+          if ! git diff --cached --quiet; then
+            git commit -m "증거(v111): TileZed 텍스트 격자 잠정 매핑으로 남은 21종 중 원본 유효 키 A-B-C-D 생성 (미인증)"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
