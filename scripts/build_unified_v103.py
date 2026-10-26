@@ -46,10 +46,10 @@ with sqlite3.connect(dst) as c:
     c.executemany('INSERT INTO progress_snapshot VALUES (?,?,?)',[
         ('v103_new_observed',24,'A/B/C inspected, D explicitly unavailable for single-use tiles'),
         ('v103_new_candidates',19,'provisional, not certified'),
-        ('v103_new_held',5,'Occluded tiles held without identity'),
+        ('v103_new_held',5,'Low or zero B-C contribution, identity withheld'),
         ('v103_total_observed',5070,'v102 5046 + 24 non-overlapping'),
         ('v103_unobserved',339,'5409 - 5070'),
-        ('v103_candidate_auditable',4255,'4236 + 10')])
+        ('v103_candidate_auditable',4255,'4236 + 19')])
     c.commit()
     assert c.execute('pragma integrity_check').fetchone()[0]=='ok'
     assert tables_prior.issubset({r[0] for r in c.execute("select name from sqlite_master where type='table'")})
