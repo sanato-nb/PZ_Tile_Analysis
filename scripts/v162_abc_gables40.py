@@ -72,9 +72,18 @@ def verify_tmx(rec):
  first,name=max((z for z in firsts if z[0]<=gid))
  assert (name,gid-first)==(rec['tile_set_name'],int(rec['local_id']))
  return first
+b_archive_manifest=json.loads((R/'review/v120_B_context_new4632/MANIFEST.json').read_text())
+c_archive_manifest=json.loads((R/'review/v121_C_diff_new4632/MANIFEST.json').read_text())
+archive_sha={}
+for z in b_archive_manifest['B_image_zip_shards']:
+ archive_sha[R/'review/v120_B_context_new4632/b_png_shards'/z['file']]=z['sha256']
+for category in ['C_archives','DIFF_archives']:
+ for z in c_archive_manifest[category]:archive_sha[R/z['path']]=z['sha256']
 archives={}
 def source_entry(path,entry,h):
  if path not in archives:
+  assert path in archive_sha,('unmanifested_source_zip',str(path))
+  assert fh(path)==archive_sha[path],('source_zip_sha256_mismatch',str(path))
   archives[path]=zipfile.ZipFile(path)
   assert archives[path].testzip() is None
  v=archives[path].read(entry)
