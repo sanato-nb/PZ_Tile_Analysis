@@ -148,7 +148,7 @@ jobs:
           assert hashlib.sha256(raw).hexdigest()==d['sqlite_sha256'] and len(raw)==d['sqlite_bytes']
           db=sqlite3.connect(':memory:');db.deserialize(raw)
           assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
-          assert db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==196
+          assert db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==197
           assert db.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
           assert db.execute('SELECT count(*) FROM v134_visual_review').fetchone()[0]==129
           assert db.execute('SELECT count(*) FROM v135_visual_review').fetchone()[0]==m['promoted_provisional']
