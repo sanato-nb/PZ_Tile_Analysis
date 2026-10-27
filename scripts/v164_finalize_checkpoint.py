@@ -74,13 +74,13 @@ state['next_actions']=[
 ]
 state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 summary=(
- "## v164 원본 A/B/C 벽돌무늬·회갈색·베이지색 박공 외벽 40종 검수 (2026-10-28)\\n\\n"
- f"- 원본 A049/B049/C049/차이 이미지 **40종** 직접 시각 관찰. PNG RGBA·TMX 원시 GID·좌표·층·레이어 및 ZIP SHA/CRC 검사 후 **{n}종** 신규 잠정 후보, **{review['excluded_unverified']}종** 판독 부족·B−C=0·지도끝·이웃 누락·중복 보류.\\n"
- f"- 누적 이미지 관찰 **{obs}/10,042 ({obs/10042*100:.2f}%)**, 미관찰 **{remaining}종**. 최종 정체 인증·공식 Local ID/TileZed 매핑 모두 0.\\n"
- f"- 물리 SQLite **226개 테이블**: 부모 v163 225테이블 및 모든 기존 행 수 보존, 신규 {n}행. SHA256 {dbm['sqlite_sha256']}, integrity_check=ok.\\n"
- "- 적갈색 벽돌무늬 박공벽, 회갈색·베이지색 수평 사이딩 경사 외벽 조각을 타일별로 잠정 기록. 정확한 연결·방향·재질 미확정, 미세 변화·가림·지도끝·중복은 투명 확정 금지.\\n"
- "- 기존 5,409종, 수동80·제외14, D held2/JUMBO20, 원본 84 TMX·Tiles PNG·이전 SQLite 보존. D는 같은 키의 공식 다른 A를 원래 B 동일 위치·층·레이어에서 교체해야 하며 아직 미검증.\\n"
- "- 증거 review/v164_abc_3960_3999/, DB analysis/current/v164/MANIFEST.json.\\n\\n---\\n"
+ "## v164 원본 A/B/C 벽돌무늬·회갈색·베이지색 박공 외벽 40종 검수 (2026-10-28)\n\n"
+ f"- 원본 A049/B049/C049/차이 이미지 **40종** 직접 시각 관찰. PNG RGBA·TMX 원시 GID·좌표·층·레이어 및 ZIP SHA/CRC 검사 후 **{n}종** 신규 잠정 후보, **{review['excluded_unverified']}종** 판독 부족·B−C=0·지도끝·이웃 누락·중복 보류.\n"
+ f"- 누적 이미지 관찰 **{obs}/10,042 ({obs/10042*100:.2f}%)**, 미관찰 **{remaining}종**. 최종 정체 인증·공식 Local ID/TileZed 매핑 모두 0.\n"
+ f"- 물리 SQLite **226개 테이블**: 부모 v163 225테이블 및 모든 기존 행 수 보존, 신규 {n}행. SHA256 {dbm['sqlite_sha256']}, integrity_check=ok.\n"
+ "- 적갈색 벽돌무늬 박공벽, 회갈색·베이지색 수평 사이딩 경사 외벽 조각을 타일별로 잠정 기록. 정확한 연결·방향·재질 미확정, 미세 변화·가림·지도끝·중복은 투명 확정 금지.\n"
+ "- 기존 5,409종, 수동80·제외14, D held2/JUMBO20, 원본 84 TMX·Tiles PNG·이전 SQLite 보존. D는 같은 키의 공식 다른 A를 원래 B 동일 위치·층·레이어에서 교체해야 하며 아직 미검증.\n"
+ "- 증거 review/v164_abc_3960_3999/, DB analysis/current/v164/MANIFEST.json.\n\n---\n"
 )
 for rel in ['AGENTS.md','docs/HANDOFF.md']:
  p=R/rel
