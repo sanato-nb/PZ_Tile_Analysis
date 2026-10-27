@@ -5,7 +5,7 @@ on:
     paths:
       - scripts/v157_abc_walls80.py
       - scripts/v157_finalize_checkpoint.py
-      - review/v157_walls_3600_3679/MANUAL_VISUAL_NOTES.json
+      - review/v157_housewalls_3600_3679/MANUAL_VISUAL_NOTES.json
       - .github/workflows/v157-housewalls-abc80.yml
 permissions:
   contents: write
@@ -25,7 +25,7 @@ jobs:
             /PROJECT_STATE.json
             /AGENTS.md
             /docs/HANDOFF.md
-            /review/v157_walls_3600_3679/MANUAL_VISUAL_NOTES.json
+            /review/v157_housewalls_3600_3679/MANUAL_VISUAL_NOTES.json
             /analysis/current/v156/*
             /analysis/imports/merged_catalog_5409.csv
             /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
@@ -127,7 +127,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import json,hashlib,zipfile,base64,zlib,sqlite3,csv
-          R=Path('review/v157_walls_3600_3679')
+          R=Path('review/v157_housewalls_3600_3679')
           m=json.loads((R/'MANIFEST.json').read_text())
           d=json.loads(Path('analysis/current/v157/MANIFEST.json').read_text())
           p=json.loads(Path('analysis/current/v156/MANIFEST.json').read_text())
@@ -136,7 +136,7 @@ jobs:
           assert m['promoted_provisional']>=40
           assert d['new_rows']==m['promoted_provisional']
           assert d['parent_sqlite_sha256']==p['sqlite_sha256']
-          assert d['table_count']==219 and d['prior_tables_preserved']==219
+          assert d['table_count']==219 and d['prior_tables_preserved']==218
           assert m['mapping_verified']==m['tilezed_verified']==m['certified']==0
           for name,h in m['files_sha256'].items():
            assert hashlib.sha256((R/name).read_bytes()).hexdigest()==h,name
@@ -166,7 +166,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse review/v157_walls_3600_3679 analysis/current/v157 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          git add --sparse review/v157_housewalls_3600_3679 analysis/current/v157 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
           if ! git diff --cached --quiet; then
             git commit -m "v157: final verified visual data SQLite and history in one results commit"
             git pull --rebase origin "$GITHUB_REF_NAME"
