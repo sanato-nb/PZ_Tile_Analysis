@@ -51,7 +51,7 @@ state['latest_checkpoint'].update(dict(
  v160_new_provisional=n,v160_excluded_unverified=review['excluded_unverified'],
  v160_exception_indices=review['excluded_indices'],v160_index_range=[3800,3839],
  v160_sqlite_sha256=dbm['sqlite_sha256'],
- caution='Beige/blue-grey siding, dark brown wood and cream/green roof gable wall pieces visually described. Precise source atlas Local ID, material, orientation and joining are unverified. Zero B-C, map edge, missing neighbors and duplicates are not transparent or certified.'
+ caution='Cream-colored wall panels, green/red sloping roof junctions, grey-brown masonry gable pieces visually described. Precise source atlas Local ID, material, orientation and joining are unverified. Zero B-C, map edge, missing neighbors and duplicates are not transparent or certified.'
 ))
 state['unified_database'].update(dict(
  version='v160',status='VERIFIED',repo_manifest='analysis/current/v160/MANIFEST.json',
