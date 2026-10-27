@@ -103,7 +103,7 @@ for r in jumbo:
  assert sha(im.tobytes())==r['selected_rgba_pixel_sha256']
  loc=dict(tile_set_name=k[0],local_id=k[1],source_tmx=pos['tmx_file'],source_tmx_sha256=pos['tmx_sha256'],source_level=pos['source_level'],source_layer_index=pos['source_layer_index'],source_x=pos['source_x'],source_y=pos['source_y'],source_raw_gid=pos['source_raw_gid'])
  first=tmx_verify(loc)
- held.append(dict(status='held',observed=0,visual_features=jumbo_visual[k],identity_candidate='',part_role='A3 crop region: multipart alignment not verified',material='tree/foliage or stump (visible source image only)',direction='unverified',connection='unverified',confidence='low',source_png=r['source_image_path'],source_pixel_sha=sha(im.tobytes()),alternate_png='',alternate_pixel_sha='',**loc,source_firstgid=first,source_crop=r['selected_crop_xyxy'],B_C_changed_pixels='',B_D_changed_pixels='',mapping_verified=0,tilezed_verified=0,certified=0,evidence='JUMBO source PNG and raw TMX GID physically checked; A3 visual source crop inspected in contact sheets; atlas alignment/official Local ID UNVERIFIED'))
+ held.append(dict(status='held',observed=0,visual_features=jumbo_visual[k][0],identity_candidate='',part_role='A3 crop region: multipart alignment not verified',material='tree/foliage or stump (visible source image only)',direction='unverified',connection='unverified',confidence='low',source_png=r['source_image_path'],source_pixel_sha=sha(im.tobytes()),alternate_png='',alternate_pixel_sha='',**loc,source_firstgid=first,source_crop=r['selected_crop_xyxy'],B_C_changed_pixels='',B_D_changed_pixels='',mapping_verified=0,tilezed_verified=0,certified=0,evidence='JUMBO source PNG and raw TMX GID physically checked; A3 visual source crop inspected in contact sheets; atlas alignment/official Local ID UNVERIFIED'))
 for group in range(2):
  sheet=Image.new('RGB',(2000,1200),'#eff3f7');d=ImageDraw.Draw(sheet)
  for j,r in enumerate(jumbo[group*10:(group+1)*10]):
@@ -115,7 +115,7 @@ for group in range(2):
   d.text((x+9,y+27),'JUMBO A3: ALIGNMENT UNVERIFIED',fill='#a45d31',font=font)
   sheet.paste(im,(x+(400-im.width)//2,y+49),im)
  sheet.save(O/f'JUMBO_20_sheet_{group}.jpg',quality=85,optimize=True)
-(O/'JUMBO_VISUAL_FINDINGS.md').write_text('# v132 JUMBO 20 A3 크롭 실제 시각 점검\\n\\n두 접촉시트를 직접 눈으로 검토한 결과입니다. 원본 PNG 바이트 및 TMX GID 일치 검사는 통과했지만 이 크롭이 올바른 Local ID 프레임이라는 뜻은 아닙니다.\\n\\n'+''.join(f'- \`{n}/{lid}\`: {desc} ({flag})\\n' for (n,lid),(desc,flag) in jumbo_visual.items())+'\\n반복 이미지 징후 7/20; 20종 모두 held, 매핑·TileZed·최종 정체 인증 0.\\n',encoding='utf-8')
+(O/'JUMBO_VISUAL_FINDINGS.md').write_text('# v132 JUMBO 20 A3 크롭 실제 시각 점검\n\n두 접촉시트를 직접 눈으로 검토한 결과입니다. 원본 PNG 바이트 및 TMX GID 일치 검사는 통과했지만 이 크롭이 올바른 Local ID 프레임이라는 뜻은 아닙니다.\n\n'+''.join(f'- `{n}/{lid}`: {desc} ({flag})\n' for (n,lid),(desc,flag) in jumbo_visual.items())+'\n반복 이미지 징후 7/20; 20종 모두 held, 매핑·TileZed·최종 정체 인증 0.\n',encoding='utf-8')
 total=out+held;assert len(total)==23 and len({(r['tile_set_name'],r['local_id']) for r in total})==23
 for name,items in [('VISUAL_OBSERVATIONS_3.csv',out),('JUMBO_AUDIT_20.csv',held),('ALL_STATUS_23.csv',total)]:
  with (O/name).open('w',encoding='utf-8-sig',newline='') as f:
@@ -147,5 +147,5 @@ for n in range(0,len(enc),3000000):
 assert sha(zlib.decompress(base64.b64decode(''.join((R/p).read_text() for p in parts))))==sha(rawnew)
 manifest=dict(version='v132',parent='v131',parent_sqlite_sha256=v131['sqlite_sha256'],sqlite_sha256=sha(rawnew),sqlite_bytes=len(rawnew),compressed_sha256=sha(pack),parts=parts,parent_tables_preserved=193,table_count=194,new_rows=23,new_observations=3,jumbo_source_tmx_audited=20,unreviewed_exception_queue=271,mapping_verified=0,tilezed_verified=0,certified=0,integrity_check='ok')
 (D/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
-(O/'MANIFEST.json').write_text(json.dumps(dict(version='v132',source_main_commit='5bae2a6ef593b074f8731a19c48ad0bff5a5eff1',direct_visual_reviews=3,jumbo_source_and_gid_verified_but_not_grid=20,unreviewed_exception_rows=271,jumbo_A3_sheet_visually_inspected=20,jumbo_possible_stacked_frames=7,mapping_verified=0,tilezed_verified=0,certified=0,images={p.name:hs(p) for p in O.glob('*.jpg')},csvs={p.name:hs(p) for p in O.glob('*.csv')}),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+(O/'MANIFEST.json').write_text(json.dumps(dict(version='v132',source_main_commit='5bae2a6ef593b074f8731a19c48ad0bff5a5eff1',direct_visual_reviews=3,jumbo_source_and_gid_verified_but_not_grid=20,unreviewed_exception_rows=271,jumbo_A3_sheet_visually_inspected=20,jumbo_possible_stacked_frames=7,mapping_verified=0,tilezed_verified=0,certified=0,images={p.name:hs(p) for p in O.glob('*.jpg')},csvs={p.name:hs(p) for p in O.glob('*.csv')},jumbo_visual_findings_sha256=hs(O/'JUMBO_VISUAL_FINDINGS.md')),ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 print('PASS 3 reviewed, 20 jumbo source+TMX audited, 271 exception queue; v132 SQLite '+sha(rawnew),flush=True)
