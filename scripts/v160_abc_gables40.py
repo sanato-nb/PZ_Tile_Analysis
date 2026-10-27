@@ -8,7 +8,7 @@ from pathlib import Path
 import csv,io,json,hashlib,zipfile,base64,zlib,sqlite3,re,xml.etree.ElementTree as ET
 from PIL import Image,ImageDraw,ImageFont
 R=Path(__file__).resolve().parents[1]
-OUT=R/'review/v160_abc_3760_3799'; OUT.mkdir(parents=True,exist_ok=True)
+OUT=R/'review/v160_abc_3800_3839'; OUT.mkdir(parents=True,exist_ok=True)
 DBOUT=R/'analysis/current/v160'; DBOUT.mkdir(parents=True,exist_ok=True)
 SHEETS=OUT/'sheets'; SHEETS.mkdir(parents=True,exist_ok=True)
 def sha(x):return hashlib.sha256(x).hexdigest()
