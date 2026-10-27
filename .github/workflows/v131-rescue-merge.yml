@@ -1,0 +1,262 @@
+name: v131 rescue final 312 plus existing 11 batches and full integrated D
+on:
+  push:
+    branches: [work/v131-D-all-remaining-3832-20261027]
+    paths:
+      - .github/workflows/v131-rescue-merge.yml
+permissions:
+  contents: write
+  actions: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 115
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        batch: [11]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v131_D_remaining_batch.py
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/MANIFEST.json
+            /review/v127_D_A_candidates_full4633/D_ALL_CANDIDATE_TRIALS.csv
+            /review/v127_D_A_candidates_full4633/MANIFEST.json
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+            /B4220.3_MapExport_256/tmx/26_44.tmx
+            /B4220.3_MapExport_256/tmx/26_45.tmx
+            /B4220.3_MapExport_256/tmx/26_46.tmx
+            /B4220.3_MapExport_256/tmx/26_47.tmx
+            /B4220.3_MapExport_256/tmx/26_48.tmx
+            /B4220.3_MapExport_256/tmx/26_49.tmx
+            /B4220.3_MapExport_256/tmx/27_43.tmx
+            /B4220.3_MapExport_256/tmx/27_44.tmx
+            /B4220.3_MapExport_256/tmx/27_45.tmx
+            /B4220.3_MapExport_256/tmx/27_46.tmx
+            /B4220.3_MapExport_256/tmx/27_47.tmx
+            /B4220.3_MapExport_256/tmx/27_48.tmx
+            /B4220.3_MapExport_256/tmx/27_49.tmx
+            /B4220.3_MapExport_256/tmx/28_43.tmx
+            /B4220.3_MapExport_256/tmx/28_44.tmx
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/28_46.tmx
+            /B4220.3_MapExport_256/tmx/28_47.tmx
+            /B4220.3_MapExport_256/tmx/28_48.tmx
+            /B4220.3_MapExport_256/tmx/28_49.tmx
+            /B4220.3_MapExport_256/tmx/29_43.tmx
+            /B4220.3_MapExport_256/tmx/29_44.tmx
+            /B4220.3_MapExport_256/tmx/29_45.tmx
+            /B4220.3_MapExport_256/tmx/29_46.tmx
+            /B4220.3_MapExport_256/tmx/29_47.tmx
+            /B4220.3_MapExport_256/tmx/29_48.tmx
+            /B4220.3_MapExport_256/tmx/29_49.tmx
+            /B4220.3_MapExport_256/tmx/30_43.tmx
+            /B4220.3_MapExport_256/tmx/30_44.tmx
+            /B4220.3_MapExport_256/tmx/30_45.tmx
+            /B4220.3_MapExport_256/tmx/30_46.tmx
+            /B4220.3_MapExport_256/tmx/30_47.tmx
+            /B4220.3_MapExport_256/tmx/30_48.tmx
+            /B4220.3_MapExport_256/tmx/30_49.tmx
+            /B4220.3_MapExport_256/tmx/31_43.tmx
+            /B4220.3_MapExport_256/tmx/31_44.tmx
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /B4220.3_MapExport_256/tmx/31_47.tmx
+            /B4220.3_MapExport_256/tmx/31_48.tmx
+            /B4220.3_MapExport_256/tmx/31_49.tmx
+            /B4220.3_MapExport_256/tmx/32_43.tmx
+            /B4220.3_MapExport_256/tmx/32_44.tmx
+            /B4220.3_MapExport_256/tmx/32_45.tmx
+            /B4220.3_MapExport_256/tmx/32_46.tmx
+            /B4220.3_MapExport_256/tmx/32_47.tmx
+            /B4220.3_MapExport_256/tmx/32_48.tmx
+            /B4220.3_MapExport_256/tmx/32_49.tmx
+            /B4220.3_MapExport_256/tmx/33_43.tmx
+            /B4220.3_MapExport_256/tmx/33_44.tmx
+            /B4220.3_MapExport_256/tmx/33_45.tmx
+            /B4220.3_MapExport_256/tmx/33_46.tmx
+            /B4220.3_MapExport_256/tmx/33_47.tmx
+            /B4220.3_MapExport_256/tmx/33_48.tmx
+            /B4220.3_MapExport_256/tmx/33_49.tmx
+            /B4220.3_MapExport_256/tmx/34_43.tmx
+            /B4220.3_MapExport_256/tmx/34_44.tmx
+            /B4220.3_MapExport_256/tmx/34_45.tmx
+            /B4220.3_MapExport_256/tmx/34_46.tmx
+            /B4220.3_MapExport_256/tmx/34_47.tmx
+            /B4220.3_MapExport_256/tmx/34_48.tmx
+            /B4220.3_MapExport_256/tmx/34_49.tmx
+            /B4220.3_MapExport_256/tmx/35_43.tmx
+            /B4220.3_MapExport_256/tmx/35_44.tmx
+            /B4220.3_MapExport_256/tmx/35_45.tmx
+            /B4220.3_MapExport_256/tmx/35_46.tmx
+            /B4220.3_MapExport_256/tmx/35_47.tmx
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+            /B4220.3_MapExport_256/tmx/35_49.tmx
+            /B4220.3_MapExport_256/tmx/36_43.tmx
+            /B4220.3_MapExport_256/tmx/36_44.tmx
+            /B4220.3_MapExport_256/tmx/36_45.tmx
+            /B4220.3_MapExport_256/tmx/36_46.tmx
+            /B4220.3_MapExport_256/tmx/36_47.tmx
+            /B4220.3_MapExport_256/tmx/36_48.tmx
+            /B4220.3_MapExport_256/tmx/36_49.tmx
+            /B4220.3_MapExport_256/tmx/37_43.tmx
+            /B4220.3_MapExport_256/tmx/37_44.tmx
+            /B4220.3_MapExport_256/tmx/37_45.tmx
+            /B4220.3_MapExport_256/tmx/37_46.tmx
+            /B4220.3_MapExport_256/tmx/37_47.tmx
+            /B4220.3_MapExport_256/tmx/37_48.tmx
+            /B4220.3_MapExport_256/tmx/37_49.tmx
+      - run: python3 -m pip install --quiet Pillow
+      - name: Render 320 D replacements from recorded A and original TMX B
+        env:
+          D_BATCH_INDEX: ${{ matrix.batch }}
+        run: python3 -u scripts/v131_D_remaining_batch.py
+      - name: Per-batch verify data and CRC, no mapping promotion
+        env:
+          D_BATCH_INDEX: ${{ matrix.batch }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,csv,json,zipfile
+          import os
+          n=int(os.environ['D_BATCH_INDEX'])
+          p=Path('review/v131_D_full_remaining')/f'batch_{n:02}'
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['batch']==n and m['version']=='v131'
+          lo,hi=(0,319) if n==0 else (1120+(n-1)*320,min(4631,1119+n*320))
+          assert m['source_v120_index_range']==[lo,hi] and m['scope_new_only']==hi-lo+1
+          assert m['D_alternative_rendered']+m['D_held']==hi-lo+1
+          assert m['correspondence_verified']==m['tilezed_verified']==m['identity_certified']==0
+          def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+          for key,hkey in [('D_scene_archive','D_scene_archive_sha256'),('evidence_csv','evidence_csv_sha256'),('trials_csv','trials_csv_sha256')]:
+            assert sha(Path(m[key]))==m[hkey]
+          with zipfile.ZipFile(m['D_scene_archive']) as z:
+            assert z.testzip() is None
+            assert len(z.namelist())==3*m['scope_new_only']+2*m['D_alternative_rendered']
+          with Path(m['evidence_csv']).open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==hi-lo+1 and [int(rows[0]['index']),int(rows[-1]['index'])]==[lo,hi]
+          assert all(r['correspondence_verified']==r['tilezed_verified']==r['identity_certified']=='0' for r in rows)
+          for filename,digest in m['review_sheet_sha256'].items():
+            assert sha(p/filename)==digest
+          print('PASS batch',n,'keys',len(rows),'rendered',m['D_alternative_rendered'],'held',m['D_held'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v131-rescue-batch-11
+          path: review/v131_D_full_remaining/
+          retention-days: 90
+          compression-level: 0
+  merge:
+    needs: [render]
+    if: success()
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v131_merge_all_D_and_sqlite.py
+            /analysis/imports/merged_catalog_5409.csv
+            /analysis/current/v130/*
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/MANIFEST.json
+            /review/v126_D_alt_A_B_160/D_ALTERNATIVE_A_B_160.csv
+            /review/v126_D_alt_A_B_160/MANIFEST.json
+            /review/v129_D_alt_A_B_320/D_ALTERNATIVE_A_B_320.csv
+            /review/v129_D_alt_A_B_320/MANIFEST.json
+            /review/v130_D_alt_A_B_320/D_ALTERNATIVE_A_B_320.csv
+            /review/v130_D_alt_A_B_320/MANIFEST.json
+      - name: Wait for the 11 valid prior batch artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 90); do
+            COUNT=$(gh api "repos/${{ github.repository }}/actions/runs/40450528163/artifacts?per_page=100" --jq '[.artifacts[] | select(.name | startswith("v131-batch-"))] | length' || echo 0)
+            echo "Original artifact count: $COUNT / 11"
+            if [ "$COUNT" -ge 11 ]; then exit 0; fi
+            sleep 15
+          done
+          echo "Timed out waiting for original batches" >&2
+          exit 1
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 40450528163
+          github-token: ${{ github.token }}
+          pattern: v131-batch-*
+          merge-multiple: true
+          path: review/v131_D_full_remaining
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v131-rescue-batch-11
+          merge-multiple: true
+          path: review/v131_D_full_remaining
+      - name: Merge 12 batches, recheck all 4632 keys, append only one v131 table
+        run: python3 -u scripts/v131_merge_all_D_and_sqlite.py
+      - name: Independently verify final v131 SHA and 193 SQLite tables, full D completeness
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,base64,zlib,sqlite3,json,csv,zipfile
+          root=Path('.');d=Path('review/v131_D_full_remaining')
+          s=json.loads((d/'SUMMARY.json').read_text('utf8'))
+          db=json.loads(Path('analysis/current/v131/MANIFEST.json').read_text('utf8'))
+          def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+          assert s['remaining_3832_processed']==3832 and s['past_reused']==800
+          assert s['full_D_same_B_source_hypotheses_attempted']==4632
+          assert s['full_alternate_D_scenes_rendered']+s['full_held']==4632
+          assert len(s['new_batches'])==12
+          assert sha(Path(s['full_all_keys_csv']))==s['full_all_keys_csv_sha256']
+          with Path(s['full_all_keys_csv']).open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==4632 and len({(r['tile_set_name'],r['local_id']) for r in rows})==4632
+          assert [int(x['index']) for x in rows]==list(range(4632))
+          assert all(x['correspondence_verified']==x['tilezed_verified']==x['identity_certified']=='0' for x in rows)
+          for z in s['new_batches']:
+            assert sha(Path(z['ZIP']))==z['ZIP_sha256']
+            with zipfile.ZipFile(z['ZIP']) as f:assert f.testzip() is None
+          assert db['parent']=='v130' and db['prior_tables_preserved']==192
+          raw=zlib.decompress(base64.b64decode(''.join(Path(p).read_text('ascii') for p in db['parts']),validate=True))
+          assert hashlib.sha256(raw).hexdigest()==db['sqlite_sha256'] and len(raw)==db['sqlite_bytes']
+          dest=Path('/tmp/verify-v131-final.sqlite');dest.write_bytes(raw)
+          with sqlite3.connect(dest) as con:
+            assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            tables=[t[0] for t in con.execute("SELECT name FROM sqlite_master WHERE type='table'")]
+            assert len(tables)==193
+            assert con.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+            assert con.execute('SELECT count(*) FROM v131_D_full_4632').fetchone()[0]==4632
+            assert con.execute('SELECT count(*) FROM v126_alt_A_B_160').fetchone()[0]==160
+            assert con.execute('SELECT count(*) FROM v129_alt_A_B_320').fetchone()[0]==320
+            assert con.execute('SELECT count(*) FROM v130_alt_A_B_320').fetchone()[0]==320
+            assert con.execute('SELECT count(*) FROM v131_D_full_4632 WHERE identity_certified=1').fetchone()[0]==0
+          print('PASS FULL D 4632, 12 batch CRC, v131 SQLite 193 tables, no official identity certifications')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v131-D-full-4632-and-SQLite
+          path: |
+            review/v131_D_full_remaining/
+            analysis/current/v131/
+          retention-days: 90
+          compression-level: 0
+      - name: Commit all D evidence and verified full SQLite in one commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v131_D_full_remaining/ analysis/current/v131/
+          if ! git diff --cached --quiet; then
+            git commit -m "v131: full D 4632 experimental source-image alternatives, 12 batches, 193-table audited SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
