@@ -69,11 +69,12 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "v128 PR83 completed: 3 genuine same-basename alternative SOURCE PNG A candidates (vegetation_foliage_01/0,/1,/3) separately rendered at their ORIGINAL TMX B 5x5 positions. 3 B-to-D pixel differences positive. File/crop hashes, original map SHA, 6 PNG panels per tile, full 190-table SQLite integrity verified. No official TileZed/Local-ID mapping or final identity.",
-    "v127 already searched 4633 new keys, 4632 original PNG source and 1 held. A1/A2/A3 valid DISTINCT same key image = 0, other exact-basename source variants = 3 (all v128 B rendered), 30249 adjacent GRID images = other Local IDs possible, NOT valid other A. Avoid blindly rendering them as if legitimate same-key alternatives.",
-    "To continue D beyond the 3 source-PNG variants, acquire and verify authoritative TileZed/TMX PNG Local ID alignment / multi-tile sprite metadata and find actual SAME TILE alternative A source. Other 4629 source-present keys have no credible independent candidate in tested source methods. Keep held PNG overlay_graffiti_wall_02/2.",
-    "Keep v126 160 experimental adjacent-grid images labeled unverified, v124 'other TMX usage' D legacy as separate history. v128 valid source file candidates 3 are still provisional. Source images and prior SQLite all immutable.",
-    "Physical DB latest v128: analysis/current/v128/MANIFEST.json; scripts/restore_unified_v128.py. Existing original 5409, user manual 80, exclusion 14 preserved; expanded visual observations still 5580/10042 (existing5400+new180), new v128 identity observations/certifications 0."
+    "v129 PR85 generated REAL same-TMX original-B scene rerenders for 320 distinct v127 candidates, indices 480..799, verified SHA/ZIP/images and SQLite 191 tables, merged main. All candidates may actually be OTHER local IDs: do NOT certify.",
+    "v126 already did neighboring grid hypothesis rerenders indices 320..479 for 160; v128 did 3 different same-basename source PNG candidates. Total distinct tested 483, but exactly verified alternate Local ID mapping remains 0.",
+    "Remaining v127 neighbor-only experiment targets 4148 (4628-160-320), and 1 no-other-candidate plus 1 source-missing PNG remain held; do not confuse hypotheses with correct alternate A.",
+    "Continue v130 on next v120 indices 800..1119 with v127 candidate ledger and same B-render strategy; preserve all historical 191 tables, full source PNG/TMX and user manual80/excluded14.",
+    "Expand official TileZed mapping verification; A1/A2/A3 alternative source crops 0, three same-name source PNG variants are provisional not official.",
+    "Expanded direct visual observations stay at 5580/10042, user manual and historic 5409 preserved; newly generated scenes never automatically add to individual visual observation or final certifications."
   ],
   "warnings": [
     "Do not count 2,509+477 as unique: the verified overlap is 402.",
@@ -83,10 +84,10 @@
     "Public repository: never commit tokens or private conversation content; preserve original map and tile assets."
   ],
   "latest_checkpoint": {
-    "version": "v128",
+    "version": "v129",
     "date": "2026-10-27",
-    "kind": "D_real_other_original_PNG_A_variant_rerender_same_TM_B_3",
-    "physical_unified_sqlite_version": "v128",
+    "kind": "D_v127_preselected_A_neighbor_candidate_original_B_rerender_320",
+    "physical_unified_sqlite_version": "v129",
     "prior_visual_checkpoint": "v125",
     "original_5409_observed_preserved": 5400,
     "original_5409_unobserved_preserved": 9,
@@ -111,10 +112,10 @@
     "mapping_verified": 0,
     "tilezed_verified": 0,
     "approved_final_certifications": 0,
-    "evidence_repo_path": "review/v128_D_alt_PNG_3/D_ALT_SOURCE_B_COMPARE_3.csv",
-    "evidence_manifest": "review/v128_D_alt_PNG_3/MANIFEST.json",
-    "github_workflow": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40440952240",
-    "caution": "v128 rendered 3 DIFFERENT SOURCE PNG variant A sprites into original B same TMX position, all pixel differences confirmed; original PNG/TileZed mapping NOT certified. All 30249 neighbor-grid alternatives from v127 remain different-ID-risk unverified and must not be promoted. v124 second-location D only historical.",
+    "evidence_repo_path": "review/v129_D_alt_A_B_320/D_ALTERNATIVE_A_B_320.csv",
+    "evidence_manifest": "review/v129_D_alt_A_B_320/MANIFEST.json",
+    "github_workflow": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40442474302",
+    "caution": "v129 REALLY rendered 320 preselected v127 adjacent-grid A hypotheses into same B TMX position; ALL 320 candidate A sprites may be OTHER Local IDs. v126 already tested 160 adjacent-grid hypotheses, v128 real other-PNG sources 3. Still no certified alternate A mapping. v129 320 generated images DO NOT increment individual human/AI visual-observed status.",
     "prior_ABCD_checkpoint": "v123",
     "ABCD_images_generated": 320,
     "ABCD_unrendered_remaining": 4312,
@@ -149,13 +150,21 @@
     "D_source_PNG_original_B_D_pixel_changed": 3,
     "D_source_PNG_mapping_certified": 0,
     "D_source_PNG_scene_generated_from_v127": 3,
-    "D_more_same_key_other_A_mapping_needed": 4629
+    "D_more_same_key_other_A_mapping_needed": 4629,
+    "D_v127_preselected_neighbor_B_rerendered_new": 320,
+    "D_v127_preselected_neighbor_B_rerendered_cumulative": 480,
+    "D_v127_candidate_source_PNG_B_rerendered": 3,
+    "D_v127_preselected_neighbor_unrendered_remaining": 4148,
+    "D_v127_preselected_neighbor_changed_B_D": 316,
+    "D_v127_preselected_neighbor_unchanged_B_D": 4,
+    "D_v129_B_C_zero_held": 9,
+    "D_new_identity_certifications": 0
   },
   "unified_database": {
-    "version": "v128",
+    "version": "v129",
     "status": "VERIFIED",
-    "repo_manifest": "analysis/current/v128/MANIFEST.json",
-    "restore_script": "scripts/restore_unified_v128.py",
+    "repo_manifest": "analysis/current/v129/MANIFEST.json",
+    "restore_script": "scripts/restore_unified_v129.py",
     "observed_unique": 5400,
     "auditable_candidates": 4512,
     "v115_ai_visual_candidates": 882,
@@ -167,12 +176,12 @@
     "v113_excluded": 8,
     "active_unobserved": 1,
     "certified": 0,
-    "sqlite_sha256": "4c37f22293d1e2914f2a7b56157dd31dea2dc5908438ddc9c63607a88488004d",
+    "sqlite_sha256": "9bd69e864d1f378caf2f9fe550a15d770062c5e786c1365505c91b8c1f7a473d",
     "all_prior_tables_preserved": true,
     "image_binaries_in_github": true,
-    "parent_unified_version": "v127",
+    "parent_unified_version": "v128",
     "prior_source_version": "v116",
-    "prior_tables_preserved": 189,
+    "prior_tables_preserved": 190,
     "new_visual_review_table_rows": 180,
     "full_expanded_unique": 10042,
     "expanded_observed_unique": 5580,
@@ -180,10 +189,11 @@
     "new_4633_observed": 180,
     "new_4633_unobserved": 4453,
     "v124_d_placement_rows": 4472,
-    "sqlite_size_bytes": 91897856,
+    "sqlite_size_bytes": 91987968,
     "v126_alt_A_B_rows": 160,
     "v127_d_candidate_catalog_rows": 4633,
-    "v128_D_source_variant_B_rows": 3
+    "v128_D_source_variant_B_rows": 3,
+    "v129_alt_A_B_rows": 320
   },
   "latest_user_review": {
     "version": "v113",
@@ -602,5 +612,32 @@
     "identity_certified": 0,
     "independently_visually_reviewed_identity": 0,
     "contact_sheet_viewed": true
+  },
+  "latest_D_experimental_render_320": {
+    "version": "v129",
+    "merged_pr": 85,
+    "indices": [
+      480,
+      799
+    ],
+    "key_count": 320,
+    "trial_candidates_recorded": 2113,
+    "B_rerendered": 320,
+    "changed_pixels_positive": 316,
+    "changed_pixels_zero": 4,
+    "original_B_C_zero_held": 9,
+    "candidate_type": "v127 adjacent-grid-not-same-ID-verified",
+    "mapping_verified": 0,
+    "tilezed_verified": 0,
+    "final_certified": 0,
+    "observed_addition": 0,
+    "parent_version": "v128",
+    "prior_db_tables": 190,
+    "new_table": "v129_alt_A_B_320",
+    "new_rows": 320,
+    "report": "review/v129_D_alt_A_B_320/QUALITY_AUDIT.md",
+    "contact_sheets": 8,
+    "evidence_zip": "review/v129_D_alt_A_B_320/D_ALT_A_B_SCENES_320.zip",
+    "evidence_csv": "review/v129_D_alt_A_B_320/D_ALTERNATIVE_A_B_320.csv"
   }
 }
