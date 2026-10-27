@@ -1,0 +1,60 @@
+name: v127 verify full D search, corrected handoff and restored SQLite
+on:
+  push:
+    branches: [work/v127-D-full-A-candidates-4633-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - docs/ANALYSIS_RULES.md
+      - scripts/restore_unified_v127.py
+      - .github/workflows/v127-handoff-check.yml
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /docs/ANALYSIS_RULES.md
+            /scripts/restore_unified_v127.py
+            /analysis/current/v127/*
+            /review/v127_D_A_candidates_full4633/MANIFEST.json
+            /review/v127_D_A_candidates_full4633/PRIORITY_VARIANTS_3.json
+      - name: Check D definition, authentic candidate counts and status
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          m=json.loads(Path('review/v127_D_A_candidates_full4633/MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v127/MANIFEST.json').read_text())
+          x=json.loads(Path('review/v127_D_A_candidates_full4633/PRIORITY_VARIANTS_3.json').read_text())
+          assert s['latest_checkpoint']['version']==s['unified_database']['version']=='v127'
+          assert s['unified_database']['sqlite_sha256']==m['sqlite_sha256']==d['sqlite_sha256']
+          assert s['latest_checkpoint']['expanded_unique_observed']==5580
+          assert m['new_total']==4633 and m['original_PNG_missing']==1
+          assert m['direct_other_A_tile_count']==0
+          assert m['variant_other_atlas_tile_count']==3
+          assert m['grid_probe_only_tile_count']==4628
+          assert m['without_any_alt_tile_count']==1
+          assert m['D_scene_B_rerendered_by_this_stage']==0
+          assert m['candidate_trials']==50955
+          assert x['candidate_variant_count']==3 and len(x['variant_tile_keys'])==3
+          assert d['prior_tables_preserved']==188 and d['new_rows']==4633
+          assert '같은' in Path('docs/ANALYSIS_RULES.md').read_text()
+          assert 'v127' in Path('AGENTS.md').read_text()
+          assert 'v127' in Path('docs/HANDOFF.md').read_text()
+          print('PASS v127 latest handoff and candidate integrity')
+          PY
+      - name: Independently restore v127 physical SQLite, SHA, all historic tables
+        run: python3 -u scripts/restore_unified_v127.py /tmp/pz_v127_handoff.sqlite
