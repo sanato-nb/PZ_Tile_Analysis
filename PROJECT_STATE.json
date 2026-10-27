@@ -69,6 +69,8 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
+    "v151: 2068 unique TMX keys still lack individually observed A/B/C images; never treat rendered ABCD as certified identity.",
+    "B-C zero/map-edge/incomplete neighbor are not transparent; official TileZed and A-to-local-ID mapping remain unverified.",
     "v150: 2218 unique TMX keys still lack individually observed A/B/C images; never treat rendered ABCD as certified identity.",
     "B-C zero/map-edge/incomplete neighbor are not transparent; official TileZed and A-to-local-ID mapping remain unverified.",
     "v149: 2376 unique TMX keys still lack individually observed A/B/C images; never treat rendered ABCD as certified identity.",
@@ -145,21 +147,21 @@
     "Public repository: never commit tokens or private conversation content; preserve original map and tile assets."
   ],
   "latest_checkpoint": {
-    "version": "v150",
+    "version": "v151",
     "date": "2026-10-27",
     "kind": "direct_manual_original_A_B_C_160_visual_review",
-    "physical_unified_sqlite_version": "v150",
-    "prior_visual_checkpoint": "v149",
+    "physical_unified_sqlite_version": "v151",
+    "prior_visual_checkpoint": "v150",
     "original_5409_observed_preserved": 5400,
     "original_5409_unobserved_preserved": 9,
     "expanded_84_tmx_unique_total": 10042,
-    "expanded_unique_observed": 7824,
-    "expanded_unique_unobserved": 2218,
-    "expanded_observation_percent": 77.91276638119896,
+    "expanded_unique_observed": 7974,
+    "expanded_unique_unobserved": 2068,
+    "expanded_observation_percent": 79.40649273053177,
     "expanded_4633_new_keys": 4633,
     "new_keys_observed_160": 160,
-    "new_keys_unobserved": 2209,
-    "new_image_observed": 2424,
+    "new_keys_unobserved": 2059,
+    "new_image_observed": 2574,
     "new_provisional_identity_part_candidates": 144,
     "new_held": 16,
     "B_C_zero_held": 9,
@@ -173,8 +175,8 @@
     "mapping_verified": 0,
     "tilezed_verified": 0,
     "approved_final_certifications": 0,
-    "evidence_repo_path": "review/v150_abc_2480_2639/VISUAL_REVIEW.csv",
-    "evidence_manifest": "review/v150_abc_2480_2639/MANIFEST.json",
+    "evidence_repo_path": "review/v151_roof_signs_2640_2799/VISUAL_REVIEW.csv",
+    "evidence_manifest": "review/v151_roof_signs_2640_2799/MANIFEST.json",
     "github_workflow": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40495539813",
     "caution": "160 source A/B/C sprites manually examined, only verified keys provisional. No authoritative TileZed Local-ID mapping or certified identity. B-C zero, truncated scenes or neighbor holes are not transparency. Held entries are immutable.",
     "prior_ABCD_checkpoint": "v123",
@@ -477,12 +479,19 @@
       2480,
       2639
     ],
-    "v150_sqlite_sha256": "78389e5381b42552ef999daf7ccc124ac9fc3ca4afda7d515028d835a7f279b1"
+    "v150_sqlite_sha256": "78389e5381b42552ef999daf7ccc124ac9fc3ca4afda7d515028d835a7f279b1",
+    "v151_new_provisional": 150,
+    "v151_excluded_unverified": 10,
+    "v151_index_range": [
+      2480,
+      2639
+    ],
+    "v151_sqlite_sha256": "2b209e1603641bcff3da8e2ba6f9b2ca921b28c57c1b150a291a3b9fe31b247f"
   },
   "unified_database": {
-    "version": "v150",
+    "version": "v151",
     "status": "VERIFIED",
-    "repo_manifest": "analysis/current/v150/MANIFEST.json",
+    "repo_manifest": "analysis/current/v151/MANIFEST.json",
     "restore_script": "scripts/restore_unified_v132.py",
     "observed_unique": 5400,
     "auditable_candidates": 4512,
@@ -495,20 +504,20 @@
     "v113_excluded": 8,
     "active_unobserved": 1,
     "certified": 0,
-    "sqlite_sha256": "78389e5381b42552ef999daf7ccc124ac9fc3ca4afda7d515028d835a7f279b1",
+    "sqlite_sha256": "2b209e1603641bcff3da8e2ba6f9b2ca921b28c57c1b150a291a3b9fe31b247f",
     "all_prior_tables_preserved": true,
     "image_binaries_in_github": true,
-    "parent_unified_version": "v149",
+    "parent_unified_version": "v150",
     "prior_source_version": "v116",
-    "prior_tables_preserved": 211,
+    "prior_tables_preserved": 212,
     "new_visual_review_table_rows": 180,
     "full_expanded_unique": 10042,
-    "expanded_observed_unique": 7824,
-    "expanded_unobserved_unique": 2218,
-    "new_4633_observed": 2424,
-    "new_4633_unobserved": 2209,
+    "expanded_observed_unique": 7974,
+    "expanded_unobserved_unique": 2068,
+    "new_4633_observed": 2574,
+    "new_4633_unobserved": 2059,
     "v124_d_placement_rows": 4472,
-    "sqlite_size_bytes": 97103872,
+    "sqlite_size_bytes": 97316864,
     "v126_alt_A_B_rows": 160,
     "v127_d_candidate_catalog_rows": 4633,
     "v128_D_source_variant_B_rows": 3,
@@ -538,7 +547,8 @@
     "v147_visual_review_rows": 143,
     "v148_visual_review_rows": 155,
     "v149_visual_review_rows": 159,
-    "v150_visual_review_rows": 158
+    "v150_visual_review_rows": 158,
+    "v151_visual_review_rows": 150
   },
   "latest_user_review": {
     "version": "v113",
@@ -4720,21 +4730,21 @@
     "unobserved_remaining": 2376
   },
   "previous_checkpoint_v149": {
-    "version": "v149",
+    "version": "v150",
     "date": "2026-10-27",
     "kind": "direct_manual_original_A_B_C_160_visual_review",
-    "physical_unified_sqlite_version": "v149",
-    "prior_visual_checkpoint": "v148",
+    "physical_unified_sqlite_version": "v150",
+    "prior_visual_checkpoint": "v149",
     "original_5409_observed_preserved": 5400,
     "original_5409_unobserved_preserved": 9,
     "expanded_84_tmx_unique_total": 10042,
-    "expanded_unique_observed": 7666,
-    "expanded_unique_unobserved": 2376,
-    "expanded_observation_percent": 76.33937462656841,
+    "expanded_unique_observed": 7824,
+    "expanded_unique_unobserved": 2218,
+    "expanded_observation_percent": 77.91276638119896,
     "expanded_4633_new_keys": 4633,
     "new_keys_observed_160": 160,
-    "new_keys_unobserved": 2367,
-    "new_image_observed": 2266,
+    "new_keys_unobserved": 2209,
+    "new_image_observed": 2424,
     "new_provisional_identity_part_candidates": 144,
     "new_held": 16,
     "B_C_zero_held": 9,
@@ -4748,8 +4758,8 @@
     "mapping_verified": 0,
     "tilezed_verified": 0,
     "approved_final_certifications": 0,
-    "evidence_repo_path": "review/v149_abc_2320_2479/VISUAL_REVIEW.csv",
-    "evidence_manifest": "review/v149_abc_2320_2479/MANIFEST.json",
+    "evidence_repo_path": "review/v150_abc_2480_2639/VISUAL_REVIEW.csv",
+    "evidence_manifest": "review/v150_abc_2480_2639/MANIFEST.json",
     "github_workflow": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40495539813",
     "caution": "160 source A/B/C sprites manually examined, only verified keys provisional. No authoritative TileZed Local-ID mapping or certified identity. B-C zero, truncated scenes or neighbor holes are not transparency. Held entries are immutable.",
     "prior_ABCD_checkpoint": "v123",
@@ -5045,7 +5055,14 @@
       2320,
       2479
     ],
-    "v149_sqlite_sha256": "dc144404730adad47e8dee5551fae1c961dc0dd2b50344b81a000b6320aaa494"
+    "v149_sqlite_sha256": "dc144404730adad47e8dee5551fae1c961dc0dd2b50344b81a000b6320aaa494",
+    "v150_new_provisional": 158,
+    "v150_excluded_unverified": 2,
+    "v150_index_range": [
+      2480,
+      2639
+    ],
+    "v150_sqlite_sha256": "78389e5381b42552ef999daf7ccc124ac9fc3ca4afda7d515028d835a7f279b1"
   },
   "latest_v150_evidence": {
     "version": "v150",
@@ -5067,5 +5084,34 @@
     "certified": 0,
     "observed_total": 7824,
     "unobserved_remaining": 2218
+  },
+  "latest_v151_evidence": {
+    "version": "v151",
+    "source_indices": [
+      2640,
+      2799
+    ],
+    "manual_images_seen": 160,
+    "source_verified_provisional": 150,
+    "excluded_unverified": 10,
+    "excluded_indices": [
+      2689,
+      2690,
+      2707,
+      2708,
+      2709,
+      2710,
+      2732,
+      2733,
+      2734,
+      2735
+    ],
+    "sqlite_sha256": "2b209e1603641bcff3da8e2ba6f9b2ca921b28c57c1b150a291a3b9fe31b247f",
+    "prior_tables_and_rows_preserved": 211,
+    "mapping_verified": 0,
+    "tilezed_verified": 0,
+    "certified": 0,
+    "observed_total": 7974,
+    "unobserved_remaining": 2068
   }
 }
