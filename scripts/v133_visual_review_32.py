@@ -152,7 +152,7 @@ dbm=dict(version='v133',parent='v132',parent_sqlite_sha256=parent['sqlite_sha256
 (DB/'MANIFEST.json').write_text(json.dumps(dbm,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 files=[OUT/'VISUAL_REVIEW_32.csv',OUT/'ABC_D_32_PROOF.zip',*sorted(ss.glob('*.jpg'))]
 with zipfile.ZipFile(OUT/'ABC_D_32_PROOF.zip') as z:assert z.testzip() is None and len(z.namelist())==160
-audit=dict(version='v133',source_index_range=[360,399],processed=32,deferred_not_held=[363,377,378,381,382,388,391,397],
+audit=dict(version='v133',source_index_range=[360,399],processed=32,deferred_not_held=[363,364,377,378,381,382,388,397],
  original_A_pixel_TMX_position_verified=32,original_B_C_image_hashes_verified=32,D_experimental_image_inspected=32,
  observed_provisional=32,certified=0,mapping_verified=0,tilezed_verified=0,source_parent_sha=parent['sqlite_sha256'],
  sqlite_sha256=sha(raw),files_sha256={p.relative_to(OUT).as_posix():digest(p) for p in files})
