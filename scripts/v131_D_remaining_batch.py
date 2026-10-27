@@ -17,7 +17,7 @@ R=Path(__file__).resolve().parents[1]
 ROOT=R/'B4220.3_MapExport_256/tmx'
 batch_id=int(os.environ.get('D_BATCH_INDEX','0'))
 assert 0<=batch_id<=11
-beg,end=(160,480) if batch_id==0 else (1120+(batch_id-1)*320,min(4632,1120+batch_id*320))
+beg,end=(0,320) if batch_id==0 else (1120+(batch_id-1)*320,min(4632,1120+batch_id*320))
 OUT=R/'review/v131_D_full_remaining'/('batch_%02d'%batch_id)
 OUT.mkdir(exist_ok=True,parents=True)
 def sha(b):return hashlib.sha256(b).hexdigest()
