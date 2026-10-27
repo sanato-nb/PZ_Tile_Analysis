@@ -174,7 +174,7 @@ encoded=base64.b64encode(newpacked).decode('ascii');parts=[]
 for i in range(0,len(encoded),3000000):
  p=DBOUT/f'v137.part{i//3000000:03}.b64';p.write_text(encoded[i:i+3000000],encoding='ascii');parts.append(p.relative_to(R).as_posix())
 assert sha(zlib.decompress(base64.b64decode(''.join((R/p).read_text('ascii') for p in parts))))==sha(newraw)
-manifest=dict(version='v137',parent='v133',parent_sqlite_sha256=parent['sqlite_sha256'],sqlite_sha256=sha(newraw),
+manifest=dict(version='v137',parent='v136',parent_sqlite_sha256=parent['sqlite_sha256'],sqlite_sha256=sha(newraw),
  compressed_sha256=sha(newpacked),sqlite_bytes=len(newraw),parts=parts,prior_tables_preserved=198,table_count=199,
  new_rows=len(RESULT),skipped_rows=len(SKIPS),integrity_check='ok',mapping_verified=0,tilezed_verified=0,certified=0)
 (DBOUT/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
