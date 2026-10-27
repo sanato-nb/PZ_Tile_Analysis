@@ -1,14 +1,7 @@
-name: v165 40 taupe bluegray yellow gable siding A B C reviews preserving 226 SQLite tables
+name: v165 original PNG/TMX A B C and 226-table parent SQLite verification
 on:
   push:
     branches: [work/v165-abc-4000-4039-20261028-0656]
-    paths:
-      - scripts/v165_abc_gables40.py
-      - scripts/v165_finalize_checkpoint.py
-      - review/v165_abc_4000_4039/MANUAL_VISUAL_NOTES.json
-      - .github/workflows/v165-abc40.yml
-  pull_request:
-    branches: [main]
     paths:
       - scripts/v165_abc_gables40.py
       - scripts/v165_finalize_checkpoint.py
