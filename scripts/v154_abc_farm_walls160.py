@@ -104,7 +104,11 @@ for index in sorted(notes):
  assert key in B_BY_KEY and key in C_BY_KEY,('missing_B_or_C_key',index,key)
  b=B_BY_KEY[key];c=C_BY_KEY[key]
  assert key==(b['tile_set_name'],int(b['local_id']))==(c['tile_set_name'],int(c['local_id']))
- assert key not in oldkeys and key not in prior
+ if key in oldkeys or key in prior:
+  reason='already_in_existing_5409' if key in oldkeys else 'previous_image_observation'
+  SKIPS.append(dict(index=index,tile_set_name=key[0],local_id=key[1],reason=reason,observed=0,certified=0))
+  print('SKIP existing observation',index,key,reason,flush=True)
+  continue
  assert a['selection_status']=='selected_provisional'
  why=[]
  if int(c['B_minus_C_changed_pixels'])<=0:why.append('B_C_zero_not_transparency')
