@@ -1,4 +1,4 @@
-# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v120 B 4632, v116 SQLite)
+# 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v121 C 4632, v116 SQLite)
 
 ## 목표 및 최신 검증 기준
 - B42 TMX 두 개(저장소 파일 `B4220.3_MapExport_256/tmx/31_45.tmx`, `31_46.tmx`)에서 사용한 고유 **5,409종**, 기준 배치 **302,177건**을 원본 PNG와 실제 배치로 이해한다. 최초 이름 `31_45(2).tmx` / `31_46(2).tmx`과 저장소 이름의 동일성은 공식 인증 전까지 별개로 취급한다.
@@ -20,6 +20,14 @@
 - v36 과거 보고 후보 2,291종과 감사 가능한 2,156종의 차이 135종, v36/v46 후보 단어 충돌 256종을 자동 재분류하지 않는다.
 - 사용자 수동 검수 80종과 재검수 의견은 별도 계보이며 누적 관찰에 자동 합산하지 않는다.
 - `analysis/archive/`, `analysis/current/v49/`~`v66/`, `checkpoints/v36/`~`v66/`, `Tiles/`, `B4220.3_MapExport_256/`는 삭제·덮어쓰기 금지.
+
+## v121 C단계 성공과 채팅 중단 인수인계 (2026-10-27)
+
+- **중단 이후 실제 GitHub Actions 결과 성공:** [run 40354707694](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40354707694), C 4,632장 / B 동일 WebP 해시 재현 4,632건 / 대상 동일 TMX 층·레이어·좌표 단일 GID 제거 4,632건 / B−C PNG 4,632장, 58장 검수판 및 24개 ZIP 검증 통과.
+- `review/v121_C_diff_new4632/MANIFEST.json`: B−C 차이 **4,417종**, 0픽셀 **215종**, **현재 계산 결과 잠정**. `C_B_DIFFERENCE_4632.csv`, `ZERO_DELTA_REVIEW.csv`, `c_png_shards/`, `difference_png_shards/`, `sheets/` 확인. **0픽셀을 투명으로 간주 금지**.
+- **코드 주의:** `scripts/v121_generate_C_diff_new4632.py`의 `difference_exact()`에서 `ImageChops.difference(B,C).convert('L')` 마스크를 사용해 미세한 단일 RGB 채널 차이를 0으로 판정할 수 있음. 반드시 **RGB 채널별 OR 마스크로 215종과 전체 집계를 재검증**. C 생성 자체의 GID 제거/B 바이트 SHA 검증은 통과했지만 픽셀 변화 분류는 확정하지 않는다.
+- 이전 5,409키는 신규 A/B/C 분석에서 제외(주변 합성에만 재사용). 이전 14개 제외·v116 물리 SQLite/원본 PNG/TMX는 변경하지 않음. 새 타일 `overlay_graffiti_wall_02/2`은 원본 PNG 미확보 보류. C만 완료, D 미생성. 공식 Local ID·TileZed 매핑 및 정체 인증 **0**.
+- **상세 인수인계:** `docs/V121_C_STAGE_HANDOFF_2026-10-27.md`. `scripts/v121_make_C_browser.py`는 존재하나 생성된 브라우저 HTML은 아직 검증되지 않음.
 
 ## v120 신규 4,632종 B단계 원본 TMX 주변 5×5 장면 생성 (2026-10-27)
 - **신규 4,632키만 대상**. 26_43~37_49 범위 원본 TMX **84개 전부**를 실제 열고 원본 SHA-256을 기존 감사 보고서와 대조해 타일의 `tmx_file, level, source_layer_index, x, y, source_raw_gid`를 정확히 기록. 기존 5,409종은 신규 분석 대상에서 제외하고, 주변을 조립하는 경우에만 기존 v117 A 후보를 참조.
