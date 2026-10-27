@@ -8,7 +8,7 @@ from pathlib import Path
 import csv,io,json,hashlib,zipfile,base64,zlib,sqlite3,re,xml.etree.ElementTree as ET
 from PIL import Image,ImageDraw,ImageFont
 R=Path(__file__).resolve().parents[1]
-OUT=R/'review/v157_walls_3600_3679'; OUT.mkdir(parents=True,exist_ok=True)
+OUT=R/'review/v157_housewalls_3600_3679'; OUT.mkdir(parents=True,exist_ok=True)
 DBOUT=R/'analysis/current/v157'; DBOUT.mkdir(parents=True,exist_ok=True)
 SHEETS=OUT/'sheets'; SHEETS.mkdir(parents=True,exist_ok=True)
 def sha(x):return hashlib.sha256(x).hexdigest()
@@ -46,8 +46,8 @@ tmp=Path('/tmp/pz_v157_physical.sqlite');tmp.write_bytes(raw)
 db=sqlite3.connect(tmp)
 assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
 before={name:db.execute('SELECT count(*) FROM "'+name+'"').fetchone()[0] for (name,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-assert len(before)==218 and before['v156_visual_review']==157
-prior={(r[0],int(r[1])) for table in ['v132_visual3_jumbo20','v133_visual_review_32','v134_visual_review','v135_visual_review','v136_visual_review','v137_visual_review','v138_visual_review','v139_visual_review','v140_visual_review','v141_visual_review','v142_visual_review','v143_visual_review','v144_visual_review','v145_visual_review','v146_visual_review','v147_visual_review','v148_visual_review','v149_visual_review','v150_visual_review','v151_visual_review','v152_visual_review','v153_visual_review','v154_visual_review','v156_visual_review'] for r in db.execute('SELECT tile_set_name,local_id FROM '+table)}
+assert len(before)==218 and before['v156_visual_review']==149
+prior={(r[0],int(r[1])) for table in ['v132_visual3_jumbo20','v133_visual_review_32','v134_visual_review','v135_visual_review','v136_visual_review','v137_visual_review','v138_visual_review','v139_visual_review','v140_visual_review','v141_visual_review','v142_visual_review','v143_visual_review','v144_visual_review','v145_visual_review','v146_visual_review','v147_visual_review','v148_visual_review','v149_visual_review','v150_visual_review','v151_visual_review','v152_visual_review','v153_visual_review','v154_visual_review','v155_visual_review','v156_visual_review'] for r in db.execute('SELECT tile_set_name,local_id FROM '+table)}
 assert len(prior)==3174
 tmxs={}
 def verify_tmx(rec):
@@ -205,5 +205,5 @@ review=dict(version='v157',original_scope=[3600,3679],manual_image_annotations=8
  mapping_verified=0,tilezed_verified=0,certified=0,
  files_sha256={p.relative_to(OUT).as_posix():fh(p) for p in proofs})
 (OUT/'MANIFEST.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n')
-(OUT/'README.md').write_text("# v157 3600~3679 주택 외벽의 사이딩·창틀·아치·낮은 벽·박공 A/B/C 시각 관찰\n\n원본 A 접촉시트 045와 원래 TMX 배치 5x5 B045, 동일 층/레이어/좌표의 하나 제거 C 및 차이 이미지를 직접 살펴서 80종의 외형·부분 역할·추정 재질·신뢰도를 개별 기록. 연한 베이지색 및 짙은 녹색·갈색 사이딩 벽 조각, 아치형 창틀, 창·출입구 옆 수직 프레임, 낮은 담장과 벽 모서리, 지붕 박공 조각을 분리하여 기록했다. 각 단편의 정확한 연결/방향과 그림 문구는 불명으로 기록한다.\n\n원본 PNG SHA256와 RGBA 크롭 픽셀 해시, 실제 TMX raw GID/층·레이어/위치와 B/C/차이 원본 ZIP SHA·CRC 검사 통과만 provisional_candidate 추가. B-C=0, 지도끝, 이웃 누락, 기존 관찰 중복은 별도 예외 CSV에 사유 남김. 불투명·투명 인증 금지. 사용자 정의 D는 같은 키의 서로 다른 공식 A를 동일한 B 위치 층 레이어에 놓는 비교이며, 인접격자·두번째 위치 실험은 대체 불가. TileZed/원본 PNG→Local ID 및 최종 정체 인증 0.\n\n부모 v156의 물리 SQLite 217개 테이블/기존 행을 그대로 보존하고 새로운 한 개의 테이블을 더해 218개가 됨. 기존 5,409종, 수동검수80/제외14/보류D2/JUMBO20, 84 TMX와 모든 원본 PNG 및 이전 물리 DB를 변경하지 않음.\n",encoding='utf-8')
+(OUT/'README.md').write_text("# v157 3600~3679 주택 외벽의 사이딩·창틀·아치·낮은 벽·박공 A/B/C 시각 관찰\n\n원본 A 접촉시트 045와 원래 TMX 배치 5x5 B045, 동일 층/레이어/좌표의 하나 제거 C 및 차이 이미지를 직접 살펴서 80종의 외형·부분 역할·추정 재질·신뢰도를 개별 기록. 연한 베이지색 및 짙은 녹색·갈색 사이딩 벽 조각, 아치형 창틀, 창·출입구 옆 수직 프레임, 낮은 담장과 벽 모서리, 지붕 박공 조각을 분리하여 기록했다. 각 단편의 정확한 연결/방향은 불명으로 기록한다.\n\n원본 PNG SHA256와 RGBA 크롭 픽셀 해시, 실제 TMX raw GID/층·레이어/위치와 B/C/차이 원본 ZIP SHA·CRC 검사 통과만 provisional_candidate 추가. B-C=0, 지도끝, 이웃 누락, 기존 관찰 중복은 별도 예외 CSV에 사유 남김. 불투명·투명 인증 금지. 사용자 정의 D는 같은 키의 서로 다른 공식 A를 동일한 B 위치 층 레이어에 놓는 비교이며, 인접격자·두번째 위치 실험은 대체 불가. TileZed/원본 PNG→Local ID 및 최종 정체 인증 0.\n\n부모 v156의 물리 SQLite 218개 테이블/기존 행을 그대로 보존하고 새로운 한 개의 테이블을 더해 219개가 됨. 기존 5,409종, 수동검수80/제외14/보류D2/JUMBO20, 84 TMX와 모든 원본 PNG 및 이전 물리 DB를 변경하지 않음.\n",encoding='utf-8')
 print('PASS v157',len(RESULT),'observed provisional;',len(SKIPS),'held exceptions; sqlite_sha',sha(newraw),flush=True)
