@@ -1,0 +1,183 @@
+name: v128 D source-PNG alternatives on SAME original B scene (3 keys)
+on:
+  push:
+    branches: [work/v128-D-real-source-variants-3-20261027]
+    paths:
+      - scripts/v128_render_D_variants_same_B.py
+      - .github/workflows/v128-D-3-original-B.yml
+permissions:
+  contents: write
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v128_render_D_variants_same_B.py
+            /analysis/current/v127/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/MANIFEST.json
+            /review/v127_D_A_candidates_full4633/PRIORITY_VARIANTS_3.json
+            /review/v127_D_A_candidates_full4633/D_CANDIDATE_LEDGER_4633.csv
+            /review/v127_D_A_candidates_full4633/D_ALL_CANDIDATE_TRIALS.csv
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+            /B4220.3_MapExport_256/tmx/26_44.tmx
+            /B4220.3_MapExport_256/tmx/26_45.tmx
+            /B4220.3_MapExport_256/tmx/26_46.tmx
+            /B4220.3_MapExport_256/tmx/26_47.tmx
+            /B4220.3_MapExport_256/tmx/26_48.tmx
+            /B4220.3_MapExport_256/tmx/26_49.tmx
+            /B4220.3_MapExport_256/tmx/27_43.tmx
+            /B4220.3_MapExport_256/tmx/27_44.tmx
+            /B4220.3_MapExport_256/tmx/27_45.tmx
+            /B4220.3_MapExport_256/tmx/27_46.tmx
+            /B4220.3_MapExport_256/tmx/27_47.tmx
+            /B4220.3_MapExport_256/tmx/27_48.tmx
+            /B4220.3_MapExport_256/tmx/27_49.tmx
+            /B4220.3_MapExport_256/tmx/28_43.tmx
+            /B4220.3_MapExport_256/tmx/28_44.tmx
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/28_46.tmx
+            /B4220.3_MapExport_256/tmx/28_47.tmx
+            /B4220.3_MapExport_256/tmx/28_48.tmx
+            /B4220.3_MapExport_256/tmx/28_49.tmx
+            /B4220.3_MapExport_256/tmx/29_43.tmx
+            /B4220.3_MapExport_256/tmx/29_44.tmx
+            /B4220.3_MapExport_256/tmx/29_45.tmx
+            /B4220.3_MapExport_256/tmx/29_46.tmx
+            /B4220.3_MapExport_256/tmx/29_47.tmx
+            /B4220.3_MapExport_256/tmx/29_48.tmx
+            /B4220.3_MapExport_256/tmx/29_49.tmx
+            /B4220.3_MapExport_256/tmx/30_43.tmx
+            /B4220.3_MapExport_256/tmx/30_44.tmx
+            /B4220.3_MapExport_256/tmx/30_45.tmx
+            /B4220.3_MapExport_256/tmx/30_46.tmx
+            /B4220.3_MapExport_256/tmx/30_47.tmx
+            /B4220.3_MapExport_256/tmx/30_48.tmx
+            /B4220.3_MapExport_256/tmx/30_49.tmx
+            /B4220.3_MapExport_256/tmx/31_43.tmx
+            /B4220.3_MapExport_256/tmx/31_44.tmx
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /B4220.3_MapExport_256/tmx/31_47.tmx
+            /B4220.3_MapExport_256/tmx/31_48.tmx
+            /B4220.3_MapExport_256/tmx/31_49.tmx
+            /B4220.3_MapExport_256/tmx/32_43.tmx
+            /B4220.3_MapExport_256/tmx/32_44.tmx
+            /B4220.3_MapExport_256/tmx/32_45.tmx
+            /B4220.3_MapExport_256/tmx/32_46.tmx
+            /B4220.3_MapExport_256/tmx/32_47.tmx
+            /B4220.3_MapExport_256/tmx/32_48.tmx
+            /B4220.3_MapExport_256/tmx/32_49.tmx
+            /B4220.3_MapExport_256/tmx/33_43.tmx
+            /B4220.3_MapExport_256/tmx/33_44.tmx
+            /B4220.3_MapExport_256/tmx/33_45.tmx
+            /B4220.3_MapExport_256/tmx/33_46.tmx
+            /B4220.3_MapExport_256/tmx/33_47.tmx
+            /B4220.3_MapExport_256/tmx/33_48.tmx
+            /B4220.3_MapExport_256/tmx/33_49.tmx
+            /B4220.3_MapExport_256/tmx/34_43.tmx
+            /B4220.3_MapExport_256/tmx/34_44.tmx
+            /B4220.3_MapExport_256/tmx/34_45.tmx
+            /B4220.3_MapExport_256/tmx/34_46.tmx
+            /B4220.3_MapExport_256/tmx/34_47.tmx
+            /B4220.3_MapExport_256/tmx/34_48.tmx
+            /B4220.3_MapExport_256/tmx/34_49.tmx
+            /B4220.3_MapExport_256/tmx/35_43.tmx
+            /B4220.3_MapExport_256/tmx/35_44.tmx
+            /B4220.3_MapExport_256/tmx/35_45.tmx
+            /B4220.3_MapExport_256/tmx/35_46.tmx
+            /B4220.3_MapExport_256/tmx/35_47.tmx
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+            /B4220.3_MapExport_256/tmx/35_49.tmx
+            /B4220.3_MapExport_256/tmx/36_43.tmx
+            /B4220.3_MapExport_256/tmx/36_44.tmx
+            /B4220.3_MapExport_256/tmx/36_45.tmx
+            /B4220.3_MapExport_256/tmx/36_46.tmx
+            /B4220.3_MapExport_256/tmx/36_47.tmx
+            /B4220.3_MapExport_256/tmx/36_48.tmx
+            /B4220.3_MapExport_256/tmx/36_49.tmx
+            /B4220.3_MapExport_256/tmx/37_43.tmx
+            /B4220.3_MapExport_256/tmx/37_44.tmx
+            /B4220.3_MapExport_256/tmx/37_45.tmx
+            /B4220.3_MapExport_256/tmx/37_46.tmx
+            /B4220.3_MapExport_256/tmx/37_47.tmx
+            /B4220.3_MapExport_256/tmx/37_48.tmx
+            /B4220.3_MapExport_256/tmx/37_49.tmx
+      - name: Install image renderer
+        run: python3 -m pip install --quiet Pillow
+      - name: Actual original-position B rebuild using 3 alternative SOURCE PNG crops
+        run: python3 -u scripts/v128_render_D_variants_same_B.py
+      - name: Independently validate all evidence and inherited SQLite
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,csv,hashlib,json,sqlite3,zipfile,zlib
+          R=Path('.')
+          m=json.loads((R/'review/v128_D_alt_PNG_3/MANIFEST.json').read_text())
+          d=json.loads((R/'analysis/current/v128/MANIFEST.json').read_text())
+          assert m['version']==d['version']=='v128' and d['parent']=='v127'
+          assert m['source_variant_candidates']==m['D_same_B_scenes_built']==3
+          assert m['all_key_B_positions_verified']==3 and m['all_source_pixel_hashes_verified']==3
+          assert m['no_other_local_id_neighbor_substitutions'] is True
+          assert m['mapping_verified']==m['tilezed_verified']==m['final_certified']==0
+          assert m['direct_image_visual_review_added']==0
+          assert d['prior_tables_preserved']==189 and d['new_rows']==3
+          def digest(path):return hashlib.sha256((R/path).read_bytes()).hexdigest()
+          assert digest(m['csv_path'])==m['csv_sha256']
+          assert digest(m['images_zip'])==m['images_zip_sha256']
+          assert digest(m['contact_sheet'])==m['contact_sheet_sha256']
+          with (R/m['csv_path']).open(encoding='utf-8-sig',newline='') as f: rr=list(csv.DictReader(f))
+          assert len(rr)==3
+          assert {r['tile_set_name']+'/'+r['local_id'] for r in rr}==set(m['source_key_list'])
+          assert all(r['same_B_TMX_position_exact']=='1' and r['replaced_target_GID_exactly_one']=='1' for r in rr)
+          assert all(r['mapping_verified']==r['tilezed_verified']==r['identity_certified']=='0' for r in rr)
+          with zipfile.ZipFile(R/m['images_zip']) as z:
+              assert z.testzip() is None and len(z.namelist())==18
+              assert all(s.endswith('.png') for s in z.namelist())
+          packed=base64.b64decode(''.join((R/p).read_text() for p in d['parts']),validate=True)
+          assert hashlib.sha256(packed).hexdigest()==d['compressed_sha256']
+          raw=zlib.decompress(packed)
+          assert len(raw)==d['sqlite_bytes'] and hashlib.sha256(raw).hexdigest()==d['sqlite_sha256']
+          path=Path('/tmp/pz_v128_full_verify.sqlite');path.write_bytes(raw)
+          with sqlite3.connect(path) as conn:
+              assert conn.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              tables={x[0] for x in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+              assert len(tables)==190
+              for table,count in [('tile_catalog',5409),('v121_abcd_evidence',160),
+                  ('v122_ai_visual_review_160',160),('v123_abcd_evidence_next160',160),
+                  ('v124_d_placement_4472',4472),('v125_ai_visual_spotcheck_20',20),
+                  ('v126_alt_A_B_160',160),('v127_d_candidate_catalog_4633',4633),
+                  ('v128_D_source_variant_B_3',3)]:
+                  assert conn.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]==count
+              assert conn.execute('SELECT count(*) FROM tile_catalog WHERE observed_any=1').fetchone()[0]==5400
+              assert conn.execute('SELECT count(*) FROM tile_catalog WHERE identity_final_certified=1').fetchone()[0]==0
+          print('PASS v128 original B scene source-PNG variants / source SHA / ZIP / inherited SQLite 190 tables')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v128-same-B-source-A-variants3
+          path: |
+            review/v128_D_alt_PNG_3/
+            analysis/current/v128/
+          retention-days: 90
+          compression-level: 0
+      - name: Commit only validated new checkpoint and D evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v128_D_alt_PNG_3/ analysis/current/v128/
+          if ! git diff --cached --quiet; then
+            git commit -m "v128: render 3 distinct source-PNG A alternatives in same original B scenes"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
