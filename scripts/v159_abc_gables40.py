@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v159 source-checked A/B/C wall decoration tile visual observations, indices 3680..3759.
+"""v159 source-checked A/B/C wall decoration tile visual observations, indices 3760..3799.
 
 Only new keys may enter the append-only SQLite table; duplicates and B-C-zero are
 recorded separately. Local-ID atlas correspondence and final identity are uncertified.
@@ -46,7 +46,7 @@ tmp=Path('/tmp/pz_v159_physical.sqlite');tmp.write_bytes(raw)
 db=sqlite3.connect(tmp)
 assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
 before={name:db.execute('SELECT count(*) FROM "'+name+'"').fetchone()[0] for (name,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-assert len(before)==219 and before['v157_visual_review','v158_visual_review']==77
+assert len(before)==220 and before['v158_visual_review']==76
 prior={(r[0],int(r[1])) for table in ['v132_visual3_jumbo20','v133_visual_review_32','v134_visual_review','v135_visual_review','v136_visual_review','v137_visual_review','v138_visual_review','v139_visual_review','v140_visual_review','v141_visual_review','v142_visual_review','v143_visual_review','v144_visual_review','v145_visual_review','v146_visual_review','v147_visual_review','v148_visual_review','v149_visual_review','v150_visual_review','v151_visual_review','v152_visual_review','v153_visual_review','v154_visual_review','v155_visual_review','v156_visual_review','v157_visual_review','v158_visual_review'] for r in db.execute('SELECT tile_set_name,local_id FROM '+table)}
 assert len(prior)==3327
 tmxs={}
