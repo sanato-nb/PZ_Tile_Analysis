@@ -1,0 +1,105 @@
+name: v138 verify 421 new observations and immutable 200-table DB
+on:
+  push:
+    branches: [work/v138-sync-95-99-handoff-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - .github/workflows/v138-handoff-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v133/MANIFEST.json
+            /analysis/current/v134/MANIFEST.json
+            /analysis/current/v135/MANIFEST.json
+            /analysis/current/v136/MANIFEST.json
+            /analysis/current/v137/MANIFEST.json
+            /analysis/current/v138/*
+            /review/v134_visual_180_319/MANIFEST.json
+            /review/v134_visual_180_319/VISUAL_REVIEW.csv
+            /review/v135_visual_400_479/MANIFEST.json
+            /review/v135_visual_400_479/VISUAL_REVIEW.csv
+            /review/v136_pylon_480_559/MANIFEST.json
+            /review/v136_pylon_480_559/VISUAL_REVIEW.csv
+            /review/v137_foliage_fences_560_639/MANIFEST.json
+            /review/v137_foliage_fences_560_639/VISUAL_REVIEW.csv
+            /review/v138_bath_counters_doors_640_719/MANIFEST.json
+            /review/v138_bath_counters_doors_640_719/VISUAL_REVIEW.csv
+            /review/v138_bath_counters_doors_640_719/ABC_EVIDENCE_VERIFIED.zip
+            /review/v138_bath_counters_doors_640_719/EXCLUDED_EXCEPTIONS.csv
+            /review/v138_bath_counters_doors_640_719/sheets/*
+      - name: Verify all five batches, SQLite and handoff
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv,json,hashlib,base64,zlib,sqlite3,zipfile
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          assert s['latest_checkpoint']['version']=='v138'
+          assert s['unified_database']['version']=='v138'
+          assert s['latest_checkpoint']['expanded_unique_observed']==6036
+          assert s['latest_checkpoint']['expanded_unique_unobserved']==4006
+          assert s['latest_checkpoint']['expanded_84_tmx_unique_total']==10042
+          assert s['latest_checkpoint']['approved_final_certifications']==0
+          expected=[129,57,80,79,76]
+          paths=["v134_visual_180_319","v135_visual_400_479","v136_pylon_480_559","v137_foliage_fences_560_639","v138_bath_counters_doors_640_719"]
+          tables=["v134_visual_review","v135_visual_review","v136_visual_review","v137_visual_review","v138_visual_review"]
+          allkeys=set()
+          for p,n in zip(paths,expected):
+              root=Path('review')/p
+              m=json.loads((root/'MANIFEST.json').read_text())
+              assert m['promoted_provisional']==n
+              assert m['mapping_verified']==m['tilezed_verified']==m['certified']==0
+              with (root/'VISUAL_REVIEW.csv').open(encoding='utf-8-sig') as f:
+                  rows=list(csv.DictReader(f))
+              assert len(rows)==n
+              assert all(r['visual_status']=='provisional_candidate' and r['certified']=='0' for r in rows)
+              assert all(r['mapping_verified']==r['tilezed_verified']=='0' for r in rows)
+              assert hashlib.sha256((root/'VISUAL_REVIEW.csv').read_bytes()).hexdigest()==m['files_sha256']['VISUAL_REVIEW.csv']
+              for r in rows:
+                  k=(r['tile_set_name'],r['local_id'])
+                  assert k not in allkeys
+                  allkeys.add(k)
+          assert len(allkeys)==421
+          latest=Path('review')/paths[-1]
+          latestm=json.loads((latest/'MANIFEST.json').read_text())
+          for name,h in latestm['files_sha256'].items():
+              assert hashlib.sha256((latest/name).read_bytes()).hexdigest()==h,name
+          with zipfile.ZipFile(latest/'ABC_EVIDENCE_VERIFIED.zip') as z:
+              assert z.testzip() is None and len(z.namelist())==4*expected[-1]
+          for v in range(134,139):
+              current=json.loads(Path(f'analysis/current/v{v}/MANIFEST.json').read_text())
+              previous=json.loads(Path(f'analysis/current/v{v-1}/MANIFEST.json').read_text())
+              assert current['parent']==f'v{v-1}',(v,current['parent'])
+              assert current['parent_sqlite_sha256']==previous['sqlite_sha256'],v
+          parent=json.loads(Path('analysis/current/v137/MANIFEST.json').read_text())
+          child=json.loads(Path('analysis/current/v138/MANIFEST.json').read_text())
+          assert child['parent']=='v137' and child['parent_sqlite_sha256']==parent['sqlite_sha256']
+          assert child['prior_tables_preserved']==199 and child['table_count']==200 and child['new_rows']==76
+          assert s['unified_database']['sqlite_sha256']==child['sqlite_sha256']
+          packed=base64.b64decode(''.join(Path(p).read_text('ascii').strip() for p in child['parts']),validate=True)
+          assert hashlib.sha256(packed).hexdigest()==child['compressed_sha256']
+          raw=zlib.decompress(packed)
+          assert len(raw)==child['sqlite_bytes'] and hashlib.sha256(raw).hexdigest()==child['sqlite_sha256']
+          db=sqlite3.connect(':memory:');db.deserialize(raw)
+          assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==200
+          assert db.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+          for name,n in zip(tables,expected):
+              assert db.execute('SELECT count(*) FROM '+name).fetchone()[0]==n
+              assert db.execute('SELECT count(*) FROM '+name+' WHERE certified!=0 OR mapping_verified!=0 OR tilezed_verified!=0').fetchone()[0]==0
+          assert all('v138' in Path(p).read_text() for p in ['AGENTS.md','docs/HANDOFF.md'])
+          print('PASS v138 6036 observed, 4006 pending, 421 new provisional, 200 physical tables',child['sqlite_sha256'])
+          PY
