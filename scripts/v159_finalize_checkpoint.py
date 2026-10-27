@@ -8,6 +8,21 @@ dbm=json.loads((R/'analysis/current/v159/MANIFEST.json').read_text())
 parent_dbm=json.loads((R/'analysis/current/v158/MANIFEST.json').read_text())
 state_path=R/'PROJECT_STATE.json'
 state=json.loads(state_path.read_text(encoding='utf-8'))
+# Re-validation of a checkpoint already materialized by the same workflow must be safe.
+if state['latest_checkpoint']['version']=='v159':
+ assert state['latest_checkpoint']['expanded_unique_observed']==8887+review['promoted_provisional']
+ assert state['latest_checkpoint']['expanded_unique_unobserved']==10042-state['latest_checkpoint']['expanded_unique_observed']
+ assert state['unified_database']['version']=='v159'
+ assert state['unified_database']['sqlite_sha256']==dbm['sqlite_sha256']
+ assert state['unified_database']['table_count']==221
+ assert dbm['parent_sqlite_sha256']==parent_dbm['sqlite_sha256']
+ assert dbm['new_rows']==review['promoted_provisional']
+ assert dbm['skipped_rows']==review['excluded_unverified']
+ assert dbm['mapping_verified']==dbm['tilezed_verified']==dbm['certified']==0
+ for rel in ['AGENTS.md','docs/HANDOFF.md']:
+  assert '## v159 ' in (R/rel).read_text(encoding='utf-8')
+ print('PASS v159 already materialized; verified idempotent checkpoint',dbm['sqlite_sha256'],flush=True)
+ raise SystemExit(0)
 assert state['latest_checkpoint']['version']=='v158'
 assert state['latest_checkpoint']['expanded_unique_observed']==8887
 assert state['unified_database']['version']=='v158'
