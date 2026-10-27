@@ -25,6 +25,17 @@ assert len(notes)==159 and set(notes)==(set(range(2160,2320))-{2163})
 A=csvrows(R/'review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv')
 B=csvrows(R/'review/v120_B_context_new4632/B_CONTEXT_4632.csv')
 C=csvrows(R/'review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv')
+def keyed(items):
+ result={}
+ for row in items:
+  key=(row['tile_set_name'],int(row['local_id']))
+  assert key not in result,('duplicate_b_or_c_key',key)
+  result[key]=row
+ return result
+B_BY_KEY=keyed(B)
+C_BY_KEY=keyed(C)
+assert set(B_BY_KEY)==set(C_BY_KEY)
+assert len(B_BY_KEY)==len(C_BY_KEY)==4632
 old=csvrows(R/'analysis/imports/merged_catalog_5409.csv')
 oldkeys={(x['tile_set_locator'],int(x['local_id'])) for x in old}
 assert len(A)==4633 and len(B)==len(C)==4632 and len(oldkeys)==5409
@@ -88,8 +99,10 @@ def thumbnail(image,width=290,height=195):
  im=image.copy();im.thumbnail((width,height));return im
 canvas=None
 for index in sorted(notes):
- a=A[index];b=B[index];c=C[index];note=notes[index]
+ a=A[index];note=notes[index]
  key=(a['tile_set_name'],int(a['local_id']))
+ assert key in B_BY_KEY and key in C_BY_KEY,('missing_B_or_C_key',index,key)
+ b=B_BY_KEY[key];c=C_BY_KEY[key]
  assert key==(b['tile_set_name'],int(b['local_id']))==(c['tile_set_name'],int(c['local_id']))
  assert key not in oldkeys and key not in prior
  assert a['selection_status']=='selected_provisional'
