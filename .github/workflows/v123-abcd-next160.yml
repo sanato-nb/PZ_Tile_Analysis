@@ -139,7 +139,7 @@ jobs:
             assert c.execute('SELECT count(*) FROM v123_abcd_evidence_next160').fetchone()[0]==160
             assert c.execute('SELECT count(*) FROM v122_ai_visual_review_160').fetchone()[0]==160
             assert c.execute('SELECT count(*) FROM v121_abcd_evidence').fetchone()[0]==160
-            assert c.execute('SELECT count(*) FROM v122_user_excluded_missing_image').fetchone()[0]==6
+            assert c.execute('SELECT count(*) FROM v116_user_excluded_missing_image').fetchone()[0]==6
             assert c.execute('SELECT count(*) FROM v113_user_review').fetchone()[0]>=9
           print('PASS v123 pixel evidence and full historical SQLite')
           PY
