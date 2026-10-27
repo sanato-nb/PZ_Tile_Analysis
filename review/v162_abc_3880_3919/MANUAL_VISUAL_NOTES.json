@@ -1,0 +1,376 @@
+{
+  "version": "v162",
+  "scope": [
+    3880,
+    3919
+  ],
+  "source": "Direct visual reading of original A048, actual TMX B048 and one-GID-removed C048 with B-C difference. Match by (tile_set_name,local_id), not contact sheet slot. These are provisional, not TileZed certified.",
+  "notes": {
+    "3880": {
+      "features": "높이가 있는 회베이지색 수직 판재, 한쪽 윗변이 비스듬히 잘린 삼각형 끝벽",
+      "candidate": "회베이지 박공 외벽 판",
+      "part": "지붕 경사와 맞닿는 높은 측벽 조각",
+      "material": "도장 판재 또는 회벽 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3881": {
+      "features": "회베이지색 길고 좁은 경사 측벽 판재, 끝단이 뾰족함",
+      "candidate": "회베이지 경사 끝벽",
+      "part": "박공 측벽의 긴 사선 조각",
+      "material": "회벽 또는 판재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "manual_hold": true
+    },
+    "3882": {
+      "features": "회베이지색 얇은 삼각형 판재, 한쪽이 짧은 쐐기",
+      "candidate": "회베이지 소형 경사 쐐기",
+      "part": "박공 끝벽의 작은 마감 조각",
+      "material": "도장 외벽재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "manual_hold": true
+    },
+    "3883": {
+      "features": "회갈색 직립 판, 기울어진 윗변과 길고 곧은 측면",
+      "candidate": "회갈색 박공 측벽판",
+      "part": "지붕 아래 중간 높이 외벽",
+      "material": "회벽 또는 판재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3884": {
+      "features": "짧고 넓은 회갈색 사다리꼴, 한쪽 사선 윗변",
+      "candidate": "회갈색 짧은 경사벽",
+      "part": "박공 측벽 중간/끝단",
+      "material": "회벽 또는 판재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3885": {
+      "features": "낮고 작은 회베이지색 삼각 판",
+      "candidate": "회베이지 작은 끝벽 쐐기",
+      "part": "경사지붕 측벽의 짧은 끝단",
+      "material": "도장 외벽재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3886": {
+      "features": "연회색 가늘고 길쭉한 삼각형 판, 상단이 한쪽으로 올라감",
+      "candidate": "연회색 박공 경사판",
+      "part": "지붕 아래 끝벽의 경사 조각",
+      "material": "회벽/판재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3887": {
+      "features": "연회색 긴 사다리꼴 벽면, 높은 쪽 모서리와 대각선 윗변",
+      "candidate": "연회색 높은 박공벽판",
+      "part": "경사지붕 끝벽 중간 높이",
+      "material": "회벽/판재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3888": {
+      "features": "연회색 큰 사다리꼴 외벽, 넓은 면과 길게 경사진 모서리",
+      "candidate": "연회색 넓은 박공벽",
+      "part": "지붕 아래 높은 끝벽",
+      "material": "회벽/판재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3889": {
+      "features": "붉은 벽돌 줄눈이 보이는 낮은 사선 삼각 판",
+      "candidate": "붉은 벽돌 무늬 낮은 박공벽",
+      "part": "지붕 경사 아래 작은 벽체 조각",
+      "material": "적갈색 벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3890": {
+      "features": "적갈색 벽돌 줄무늬가 있는 길고 좁은 경사 사다리꼴",
+      "candidate": "적벽돌 박공벽 경사판",
+      "part": "박공 측벽의 짧은 상승 구간",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3891": {
+      "features": "붉은 벽돌 무늬의 중간 높이 직립 판과 사선 상단",
+      "candidate": "적벽돌 중간 높이 박공벽",
+      "part": "지붕 경사에 닿는 중간 벽체",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3892": {
+      "features": "붉은 벽돌 줄눈의 높고 넓은 경사 측벽 판",
+      "candidate": "적벽돌 높은 박공벽",
+      "part": "지붕 아래 높은 측벽 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3893": {
+      "features": "붉은 벽돌 무늬의 낮고 좁은 경사 쐐기",
+      "candidate": "적벽돌 짧은 경사 마감",
+      "part": "박공 끝단의 작은 벽체",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3894": {
+      "features": "붉은 벽돌 무늬의 직립 사각판, 한쪽 경사진 상단",
+      "candidate": "적벽돌 세로 박공벽",
+      "part": "경사지붕 아래 높은 벽체",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3895": {
+      "features": "붉은 벽돌 줄눈이 선명한 좁은 직립 판",
+      "candidate": "적벽돌 직립 외벽판",
+      "part": "박공 측벽의 직선 구간",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3896": {
+      "features": "적갈색 벽돌 무늬의 중간 높이 사각 판",
+      "candidate": "적벽돌 중간 벽판",
+      "part": "박공벽 중간 높이 부품",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3897": {
+      "features": "적갈색 벽돌 무늬의 낮은 직립 사각판",
+      "candidate": "적벽돌 낮은 벽판",
+      "part": "박공벽 낮은 높이 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3898": {
+      "features": "붉은 벽돌 줄무늬의 아주 낮은 사각판",
+      "candidate": "적벽돌 짧은 벽 마감",
+      "part": "박공벽 하단 짧은 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3899": {
+      "features": "붉은 벽돌 무늬의 작은 비스듬한 쐐기",
+      "candidate": "적벽돌 작은 경사 끝판",
+      "part": "박공 끝벽 끝단",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3900": {
+      "features": "짙은 주황갈색 줄눈 무늬의 극소 삼각형, B−C 차이 2픽셀",
+      "candidate": "주황갈색 미세 벽 쐐기 후보",
+      "part": "박공 끝단 극소 부품 추정",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "manual_hold": true
+    },
+    "3901": {
+      "features": "주황갈색 벽돌무늬의 좁은 삼각판, B 장면 지도 끝 잘림",
+      "candidate": "주황갈색 박공 경사판 후보",
+      "part": "경사 외벽 끝단 추정",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "manual_hold": true
+    },
+    "3902": {
+      "features": "주황갈색 벽돌 줄눈과 기울어진 상단이 보이는 삼각판",
+      "candidate": "주황 벽돌 박공 쐐기",
+      "part": "경사지붕 아래 작은 끝벽",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3903": {
+      "features": "짙은 주황색 벽돌 무늬의 가늘고 긴 사선 판",
+      "candidate": "주황 벽돌 경사벽",
+      "part": "박공 외벽의 상승 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3904": {
+      "features": "주황갈색 벽돌 줄눈의 높고 넓은 경사 외벽판",
+      "candidate": "주황 벽돌 높은 박공벽",
+      "part": "경사지붕 아래 높은 끝벽",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3905": {
+      "features": "주황갈색 벽돌 줄눈의 세로 직립 벽판",
+      "candidate": "주황 벽돌 직립 외벽",
+      "part": "박공벽의 수직 구간",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3906": {
+      "features": "갈색 벽돌 줄눈이 있는 높은 직립 판",
+      "candidate": "갈색 벽돌 높은 박공벽",
+      "part": "박공벽 세로 구간",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3907": {
+      "features": "갈색 벽돌 무늬의 중간 높이 판",
+      "candidate": "갈색 벽돌 중간 박공벽",
+      "part": "경사벽 중간 부품",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3908": {
+      "features": "갈색 벽돌 줄무늬의 짧은 직립 판",
+      "candidate": "갈색 벽돌 짧은 외벽",
+      "part": "박공벽 중하단 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3909": {
+      "features": "갈색 벽돌무늬의 작은 사다리꼴 판",
+      "candidate": "갈색 벽돌 낮은 경사판",
+      "part": "박공 끝단 마감",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3910": {
+      "features": "갈색 벽돌무늬의 아주 작은 쐐기, B−C 변화 0",
+      "candidate": "갈색 미세 벽쐐기 후보",
+      "part": "박공 측벽의 끝단 추정",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "manual_hold": true
+    },
+    "3911": {
+      "features": "갈색 벽돌무늬의 극소 삼각형, B−C 변화 12픽셀",
+      "candidate": "갈색 미세 끝벽 후보",
+      "part": "지붕 경사 아래 미세 마감 추정",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "manual_hold": true
+    },
+    "3912": {
+      "features": "갈색 벽돌무늬의 낮고 넓은 판",
+      "candidate": "갈색 벽돌 낮은 박공벽",
+      "part": "끝벽 하단 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3913": {
+      "features": "짙은 주황갈색 벽돌무늬의 작은 경사 쐐기",
+      "candidate": "갈색 벽돌 경사 끝판",
+      "part": "박공 끝벽의 낮은 끝단",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3914": {
+      "features": "적갈색 벽돌 줄눈이 있는 경사진 큰 외벽판",
+      "candidate": "적갈색 벽돌 박공벽",
+      "part": "경사지붕 아래 높은 끝벽",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3915": {
+      "features": "적갈색 벽돌 무늬의 중간 높이 경사 판",
+      "candidate": "적갈색 중간 박공벽",
+      "part": "박공벽 중간 연결 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3916": {
+      "features": "적갈색 벽돌 무늬의 낮고 넓은 경사 판",
+      "candidate": "적갈색 낮은 박공벽",
+      "part": "경사 끝벽 하단 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3917": {
+      "features": "적갈색 벽돌 무늬의 짧은 직립 판",
+      "candidate": "적갈색 짧은 박공벽",
+      "part": "경사벽 중하단 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3918": {
+      "features": "적갈색 벽돌 무늬의 낮은 사다리꼴 판",
+      "candidate": "적갈색 낮은 경사벽",
+      "part": "박공 끝벽 작은 연결부",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "medium",
+      "orientation": "unverified",
+      "connections": "unverified"
+    },
+    "3919": {
+      "features": "적갈색 벽돌 줄눈이 있는 작은 사선 판",
+      "candidate": "적갈색 작은 박공 끝판",
+      "part": "경사 끝벽 마지막 마감 조각",
+      "material": "벽돌무늬 외장재 추정",
+      "confidence": "low",
+      "orientation": "unverified",
+      "connections": "unverified"
+    }
+  }
+}
