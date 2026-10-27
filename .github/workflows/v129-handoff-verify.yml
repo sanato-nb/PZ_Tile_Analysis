@@ -1,0 +1,54 @@
+name: v129 Verify latest D experimental rerenders and whole SQLite
+on:
+  push:
+    branches: [work/v129-sync-handoff-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - scripts/restore_unified_v129.py
+      - .github/workflows/v129-handoff-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /scripts/restore_unified_v129.py
+            /analysis/current/v129/*
+            /review/v129_D_alt_A_B_320/MANIFEST.json
+      - name: Verify v129 statuses and source counts
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          m=json.loads(Path('review/v129_D_alt_A_B_320/MANIFEST.json').read_text())
+          db=json.loads(Path('analysis/current/v129/MANIFEST.json').read_text())
+          assert s['latest_checkpoint']['version']==s['unified_database']['version']=='v129'
+          assert db['version']=='v129' and db['parent']=='v128'
+          assert s['unified_database']['sqlite_sha256']==m['db_sha256']==db['sqlite_sha256']
+          assert s['latest_D_experimental_render_320']['B_rerendered']==320
+          assert s['latest_D_experimental_render_320']['candidate_type']=='v127 adjacent-grid-not-same-ID-verified'
+          assert m['source_v120_index_range']==[480,799]
+          assert m['D_alternative_rendered']==320 and m['D_held']==0
+          assert m['grid_alignment_hypothesis_alternatives']==320
+          assert m['identity_certified']==m['correspondence_verified']==0
+          assert db['prior_tables_preserved']==190 and db['new_rows']==320
+          assert s['latest_checkpoint']['expanded_unique_observed']==5580
+          assert 'v129' in Path('AGENTS.md').read_text()
+          assert 'v129' in Path('docs/HANDOFF.md').read_text()
+          print('PASS v129 latest evidence and historical state')
+          PY
+      - name: Restore latest full SQLite with all past data intact
+        run: python3 -u scripts/restore_unified_v129.py /tmp/pz_v129_handoff.sqlite
