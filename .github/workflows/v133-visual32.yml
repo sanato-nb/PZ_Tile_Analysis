@@ -1,0 +1,156 @@
+name: v133 visual A B C D 32 tiles and append-only SQLite
+on:
+  push:
+    branches: [work/v133-visual32-20261027]
+    paths:
+      - scripts/v133_visual_review_32.py
+      - .github/workflows/v133-visual32.yml
+permissions:
+  contents: write
+jobs:
+  visual-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v133_visual_review_32.py
+            /analysis/imports/merged_catalog_5409.csv
+            /analysis/current/v132/*
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/b_png_shards/*
+            /review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv
+            /review/v121_C_diff_new4632/c_png_shards/*
+            /review/v121_C_diff_new4632/difference_png_shards/*
+            /review/v126_D_alt_A_B_160/D_ALTERNATIVE_A_B_160.csv
+            /review/v126_D_alt_A_B_160/D_ALT_A_B_SCENES_160.zip
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+            /B4220.3_MapExport_256/tmx/26_44.tmx
+            /B4220.3_MapExport_256/tmx/26_45.tmx
+            /B4220.3_MapExport_256/tmx/26_46.tmx
+            /B4220.3_MapExport_256/tmx/26_47.tmx
+            /B4220.3_MapExport_256/tmx/26_48.tmx
+            /B4220.3_MapExport_256/tmx/26_49.tmx
+            /B4220.3_MapExport_256/tmx/27_43.tmx
+            /B4220.3_MapExport_256/tmx/27_44.tmx
+            /B4220.3_MapExport_256/tmx/27_45.tmx
+            /B4220.3_MapExport_256/tmx/27_46.tmx
+            /B4220.3_MapExport_256/tmx/27_47.tmx
+            /B4220.3_MapExport_256/tmx/27_48.tmx
+            /B4220.3_MapExport_256/tmx/27_49.tmx
+            /B4220.3_MapExport_256/tmx/28_43.tmx
+            /B4220.3_MapExport_256/tmx/28_44.tmx
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/28_46.tmx
+            /B4220.3_MapExport_256/tmx/28_47.tmx
+            /B4220.3_MapExport_256/tmx/28_48.tmx
+            /B4220.3_MapExport_256/tmx/28_49.tmx
+            /B4220.3_MapExport_256/tmx/29_43.tmx
+            /B4220.3_MapExport_256/tmx/29_44.tmx
+            /B4220.3_MapExport_256/tmx/29_45.tmx
+            /B4220.3_MapExport_256/tmx/29_46.tmx
+            /B4220.3_MapExport_256/tmx/29_47.tmx
+            /B4220.3_MapExport_256/tmx/29_48.tmx
+            /B4220.3_MapExport_256/tmx/29_49.tmx
+            /B4220.3_MapExport_256/tmx/30_43.tmx
+            /B4220.3_MapExport_256/tmx/30_44.tmx
+            /B4220.3_MapExport_256/tmx/30_45.tmx
+            /B4220.3_MapExport_256/tmx/30_46.tmx
+            /B4220.3_MapExport_256/tmx/30_47.tmx
+            /B4220.3_MapExport_256/tmx/30_48.tmx
+            /B4220.3_MapExport_256/tmx/30_49.tmx
+            /B4220.3_MapExport_256/tmx/31_43.tmx
+            /B4220.3_MapExport_256/tmx/31_44.tmx
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /B4220.3_MapExport_256/tmx/31_47.tmx
+            /B4220.3_MapExport_256/tmx/31_48.tmx
+            /B4220.3_MapExport_256/tmx/31_49.tmx
+            /B4220.3_MapExport_256/tmx/32_43.tmx
+            /B4220.3_MapExport_256/tmx/32_44.tmx
+            /B4220.3_MapExport_256/tmx/32_45.tmx
+            /B4220.3_MapExport_256/tmx/32_46.tmx
+            /B4220.3_MapExport_256/tmx/32_47.tmx
+            /B4220.3_MapExport_256/tmx/32_48.tmx
+            /B4220.3_MapExport_256/tmx/32_49.tmx
+            /B4220.3_MapExport_256/tmx/33_43.tmx
+            /B4220.3_MapExport_256/tmx/33_44.tmx
+            /B4220.3_MapExport_256/tmx/33_45.tmx
+            /B4220.3_MapExport_256/tmx/33_46.tmx
+            /B4220.3_MapExport_256/tmx/33_47.tmx
+            /B4220.3_MapExport_256/tmx/33_48.tmx
+            /B4220.3_MapExport_256/tmx/33_49.tmx
+            /B4220.3_MapExport_256/tmx/34_43.tmx
+            /B4220.3_MapExport_256/tmx/34_44.tmx
+            /B4220.3_MapExport_256/tmx/34_45.tmx
+            /B4220.3_MapExport_256/tmx/34_46.tmx
+            /B4220.3_MapExport_256/tmx/34_47.tmx
+            /B4220.3_MapExport_256/tmx/34_48.tmx
+            /B4220.3_MapExport_256/tmx/34_49.tmx
+            /B4220.3_MapExport_256/tmx/35_43.tmx
+            /B4220.3_MapExport_256/tmx/35_44.tmx
+            /B4220.3_MapExport_256/tmx/35_45.tmx
+            /B4220.3_MapExport_256/tmx/35_46.tmx
+            /B4220.3_MapExport_256/tmx/35_47.tmx
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+            /B4220.3_MapExport_256/tmx/35_49.tmx
+            /B4220.3_MapExport_256/tmx/36_43.tmx
+            /B4220.3_MapExport_256/tmx/36_44.tmx
+            /B4220.3_MapExport_256/tmx/36_45.tmx
+            /B4220.3_MapExport_256/tmx/36_46.tmx
+            /B4220.3_MapExport_256/tmx/36_47.tmx
+            /B4220.3_MapExport_256/tmx/36_48.tmx
+            /B4220.3_MapExport_256/tmx/36_49.tmx
+            /B4220.3_MapExport_256/tmx/37_43.tmx
+            /B4220.3_MapExport_256/tmx/37_44.tmx
+            /B4220.3_MapExport_256/tmx/37_45.tmx
+            /B4220.3_MapExport_256/tmx/37_46.tmx
+            /B4220.3_MapExport_256/tmx/37_47.tmx
+            /B4220.3_MapExport_256/tmx/37_48.tmx
+            /B4220.3_MapExport_256/tmx/37_49.tmx
+      - run: python3 -m pip install --quiet Pillow
+      - name: Read original sprites and 84 TMX, compare ABCD, preserve v132 DB
+        run: python3 -u scripts/v133_visual_review_32.py
+      - name: Independently recheck v133 artifacts
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,zlib,base64,sqlite3,csv,zipfile
+          p=Path('review/v133_visual32');x=json.loads((p/'MANIFEST.json').read_text())
+          assert x['processed']==32 and x['observed_provisional']==32
+          assert x['certified']==x['mapping_verified']==x['tilezed_verified']==0
+          for path,hexdigest in x['files_sha256'].items():assert hashlib.sha256((p/path).read_bytes()).hexdigest()==hexdigest
+          with zipfile.ZipFile(p/'ABC_D_32_PROOF.zip') as z:assert z.testzip() is None and len(z.namelist())==160
+          with (p/'VISUAL_REVIEW_32.csv').open(encoding='utf-8-sig') as fp:recs=list(csv.DictReader(fp))
+          assert len(recs)==32 and len({(r['tile_set_name'],r['local_id']) for r in recs})==32
+          assert all(r['mapping_verified']==r['tilezed_verified']==r['certified']=='0' for r in recs)
+          m=json.loads(Path('analysis/current/v133/MANIFEST.json').read_text())
+          rawcomp=base64.b64decode(''.join(Path(part).read_text('ascii') for part in m['parts']),validate=True)
+          assert hashlib.sha256(rawcomp).hexdigest()==m['compressed_sha256']
+          raw=zlib.decompress(rawcomp)
+          assert hashlib.sha256(raw).hexdigest()==m['sqlite_sha256'] and len(raw)==m['sqlite_bytes']
+          con=sqlite3.connect(':memory:');con.deserialize(raw)
+          assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert con.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==195
+          assert con.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+          assert con.execute('SELECT count(*) FROM v132_visual3_jumbo20').fetchone()[0]==23
+          assert con.execute('SELECT count(*) FROM v133_visual_review_32').fetchone()[0]==32
+          assert con.execute('SELECT count(*) FROM v133_visual_review_32 WHERE certified!=0 OR tilezed_verified!=0 OR mapping_verified!=0').fetchone()[0]==0
+          print('PASS v133 audit and 195 SQLite tables',m['sqlite_sha256'])
+          PY
+      - name: Commit v133 visual evidence and DB only on this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v133_visual32 analysis/current/v133
+          if ! git diff --cached --quiet; then
+            git commit -m "v133: 32 provisional ABCD observations and preserved 195-table physical DB"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
