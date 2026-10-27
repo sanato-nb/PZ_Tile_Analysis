@@ -2,6 +2,11 @@ name: v159 40 original A B C visual reviews with parent SQLite preservation
 on:
   push:
     branches: [work/v159-abc-3760-3799-20261028-0155]
+    paths:
+      - scripts/v159_abc_gables40.py
+      - scripts/v159_finalize_checkpoint.py
+      - review/v159_abc_3760_3799/MANUAL_VISUAL_NOTES.json
+      - .github/workflows/v159-abc40.yml
   pull_request:
     branches: [main]
     paths:
