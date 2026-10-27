@@ -22,6 +22,10 @@ jobs:
             /PROJECT_STATE.json
             /AGENTS.md
             /docs/HANDOFF.md
+            /analysis/current/v133/MANIFEST.json
+            /analysis/current/v134/MANIFEST.json
+            /analysis/current/v135/MANIFEST.json
+            /analysis/current/v136/MANIFEST.json
             /analysis/current/v137/MANIFEST.json
             /analysis/current/v138/*
             /review/v134_visual_180_319/MANIFEST.json
@@ -75,6 +79,11 @@ jobs:
               assert hashlib.sha256((latest/name).read_bytes()).hexdigest()==h,name
           with zipfile.ZipFile(latest/'ABC_EVIDENCE_VERIFIED.zip') as z:
               assert z.testzip() is None and len(z.namelist())==4*expected[-1]
+          for v in range(134,139):
+              current=json.loads(Path(f'analysis/current/v{v}/MANIFEST.json').read_text())
+              previous=json.loads(Path(f'analysis/current/v{v-1}/MANIFEST.json').read_text())
+              assert current['parent']==f'v{v-1}',(v,current['parent'])
+              assert current['parent_sqlite_sha256']==previous['sqlite_sha256'],v
           parent=json.loads(Path('analysis/current/v137/MANIFEST.json').read_text())
           child=json.loads(Path('analysis/current/v138/MANIFEST.json').read_text())
           assert child['parent']=='v137' and child['parent_sqlite_sha256']==parent['sqlite_sha256']
