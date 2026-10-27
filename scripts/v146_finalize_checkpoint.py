@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
-r=json.loads((R/'review/v146_abc_1680_1839/MANIFEST.json').read_text())
+r=json.loads((R/'review/v146_abc_1840_1999/MANIFEST.json').read_text())
 m=json.loads((R/'analysis/current/v146/MANIFEST.json').read_text())
 sp=R/'PROJECT_STATE.json'
 s=json.loads(sp.read_text(encoding='utf-8'))
@@ -24,8 +24,8 @@ s['latest_checkpoint'].update(dict(
  expanded_84_tmx_unique_total=10042,expanded_unique_observed=obs,
  expanded_unique_unobserved=remaining,expanded_observation_percent=obs/10042*100,
  new_image_observed=obs-5400,new_keys_unobserved=4633-(obs-5400),
- evidence_repo_path='review/v146_abc_1680_1839/VISUAL_REVIEW.csv',
- evidence_manifest='review/v146_abc_1680_1839/MANIFEST.json',
+ evidence_repo_path='review/v146_abc_1840_1999/VISUAL_REVIEW.csv',
+ evidence_manifest='review/v146_abc_1840_1999/MANIFEST.json',
  mapping_verified=0,tilezed_verified=0,approved_final_certifications=0,
  v146_new_provisional=n,v146_excluded_unverified=r['excluded_unverified'],
  v146_index_range=[1840,1999],v146_sqlite_sha256=m['sqlite_sha256'],
@@ -59,7 +59,7 @@ section=(
  '공식 Local ID↔PNG/TileZed·정체 최종 인증 각 0. 준비된 ABCD 증거는 정체 완료가 아님.\n'
  '- 물리 SQLite analysis/current/v146/MANIFEST.json, SHA '+m['sqlite_sha256']
  +', **208개 테이블**(v145 이전 207테이블과 전체 기존 행 수 보존, 신규 '+str(n)
- +'행 1테이블). PRAGMA integrity_check=ok. 증거 review/v146_abc_1680_1839 에 CSV·PNG ZIP·접촉시트·예외표 저장.\n'
+ +'행 1테이블). PRAGMA integrity_check=ok. 증거 review/v146_abc_1840_1999 에 CSV·PNG ZIP·접촉시트·예외표 저장.\n'
  '- 기존 수동80·사용자 제외14·기존5409, 사용자 held D2/JUMBO20, 원본 PNG/TMX 및 과거 DB 불변. '
  'D 다른 A 동일 TMX 위치/층/레이어 공식 매핑 미검증, 인접격자 및 두 번째 TMX 위치는 인증 근거 아님.\n\n---\n'
 )
