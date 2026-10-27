@@ -51,7 +51,7 @@ state['latest_checkpoint'].update(dict(
  v165_new_provisional=n,v165_excluded_unverified=review['excluded_unverified'],
  v165_exception_indices=review['excluded_indices'],v165_index_range=[4000,4039],
  v165_sqlite_sha256=dbm['sqlite_sha256'],
- caution='Taupe-gray, blue-gray and yellow-beige horizontal siding gable pieces visually described. Source atlas Local ID, material, orientation and joining unverified. Zero B-C, map edge, missing neighbors and duplicates never transparent or certified.'
+ caution='Gray brick-pattern, blue-gray/yellow-beige horizontal siding and ochre brick-pattern gable pieces visually described. Source atlas Local ID, material, orientation and joining unverified. Zero B-C, map edge, missing neighbors and duplicates never transparent or certified.'
 ))
 state['unified_database'].update(dict(
  version='v165',status='VERIFIED',repo_manifest='analysis/current/v165/MANIFEST.json',
@@ -78,7 +78,7 @@ summary=(
  f"- 원본 A050/B050/C050/차이 이미지 **40종** 직접 시각 관찰(첫 키의 B/C는 049). PNG RGBA·TMX raw GID·좌표·층·레이어 및 ZIP SHA/CRC 검사 후 **{n}종** 신규 잠정 후보, **{review['excluded_unverified']}종** 미세 변화·B−C=0·지도끝·이웃 누락·중복 보류. A/B/C 행 인덱스 차이는 키로 결합.\n"
  f"- 누적 이미지 관찰 **{obs}/10,042 ({obs/10042*100:.2f}%)**, 미관찰 **{remaining}종**. 최종 정체 인증·공식 Local ID/TileZed 매핑 모두 0.\n"
  f"- 물리 SQLite **227개 테이블**: 부모 v164 226개 테이블 및 모든 기존 행 수 보존, 신규 {n}행. SHA256 {dbm['sqlite_sha256']}, integrity_check=ok.\n"
- "- 회갈색·청회색·황베이지·황갈색 가로결 외장판의 경사 박공 외벽 조각을 잠정 기록. 실제 재질·방향·연결 미확정, B−C=0·지도끝·이웃 누락·중복은 투명 확정 금지.\n"
+ "- 회갈색 벽돌무늬·청회색/황베이지색 수평 사이딩·황갈색 벽돌무늬의 경사 박공 외벽 조각을 잠정 기록. 실제 재질·방향·연결 미확정, B−C=0·지도끝·이웃 누락·중복은 투명 확정 금지.\n"
  "- 기존 5,409종, 수동80·제외14, D held2/JUMBO20, 원본 84 TMX·Tiles PNG·이전 SQLite 보존. D는 같은 키의 공식 다른 A를 원래 B 동일 위치·층·레이어에서 교체해야 하며 아직 미검증.\n"
  "- 증거 review/v165_abc_4000_4039/, DB analysis/current/v165/MANIFEST.json.\n\n---\n"
 )
