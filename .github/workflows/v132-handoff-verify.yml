@@ -1,0 +1,73 @@
+name: v132 state and historical SQLite preservation verification
+on:
+  push:
+    branches: [work/v132-sync-state-after-pr91-20261027]
+    paths:
+      - .github/workflows/v132-handoff-verify.yml
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v131/*
+            /analysis/current/v132/*
+            /review/v132_visual3_jumbo20/*
+            /scripts/restore_unified_v132.py
+      - name: Validate latest v132 state, parent sha, all visual evidence and physical SQLite
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,hashlib,base64,zlib,csv
+          from pathlib import Path
+          root=Path('.')
+          state=json.loads(Path('PROJECT_STATE.json').read_text())
+          v131=json.loads(Path('analysis/current/v131/MANIFEST.json').read_text())
+          v132=json.loads(Path('analysis/current/v132/MANIFEST.json').read_text())
+          evidence=json.loads(Path('review/v132_visual3_jumbo20/MANIFEST.json').read_text())
+          assert state['latest_checkpoint']['version']=='v132'
+          assert state['unified_database']['version']=='v132'
+          assert state['latest_checkpoint']['expanded_unique_observed']==5583
+          assert state['latest_checkpoint']['expanded_unique_unobserved']==4459
+          assert state['latest_checkpoint']['expanded_84_tmx_unique_total']==10042
+          assert state['unified_database']['table_count']==v132['table_count']==194
+          assert v132['parent']=='v131' and v132['parent_sqlite_sha256']==v131['sqlite_sha256']
+          assert v132['parent_tables_preserved']==193 and v132['new_rows']==23 and v132['new_observations']==3
+          assert all(evidence[x]==0 for x in ('mapping_verified','tilezed_verified','certified'))
+          assert evidence['jumbo_A3_sheet_visually_inspected']==20 and evidence['jumbo_possible_stacked_frames']==7
+          assert evidence['direct_visual_reviews']==3 and evidence['unreviewed_exception_rows']==271
+          for n,h in {**evidence['images'],**evidence['csvs']}.items():
+              assert hashlib.sha256((root/'review/v132_visual3_jumbo20'/n).read_bytes()).hexdigest()==h,n
+          assert hashlib.sha256((root/'review/v132_visual3_jumbo20/JUMBO_VISUAL_FINDINGS.md').read_bytes()).hexdigest()==evidence['jumbo_visual_findings_sha256']
+          with Path('review/v132_visual3_jumbo20/ALL_STATUS_23.csv').open(encoding='utf-8-sig') as f:
+              all_status=list(csv.DictReader(f))
+          assert len(all_status)==23 and len({(r['tile_set_name'],r['local_id']) for r in all_status})==23
+          assert sum(r['observed']=='1' for r in all_status)==3
+          assert all(r['mapping_verified']==r['tilezed_verified']==r['certified']=='0' for r in all_status)
+          compressed=base64.b64decode(''.join((root/p).read_text('ascii').strip() for p in v132['parts']),validate=True)
+          assert hashlib.sha256(compressed).hexdigest()==v132['compressed_sha256']
+          dbbytes=zlib.decompress(compressed)
+          assert len(dbbytes)==v132['sqlite_bytes'] and hashlib.sha256(dbbytes).hexdigest()==v132['sqlite_sha256']
+          db=sqlite3.connect(':memory:');db.deserialize(dbbytes)
+          assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==194
+          assert db.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+          assert db.execute('SELECT count(*) FROM v131_D_full_4633').fetchone()[0]==4633
+          assert db.execute('SELECT count(*) FROM v132_visual3_jumbo20').fetchone()[0]==23
+          assert db.execute('SELECT count(*) FROM v132_visual3_jumbo20 WHERE observed=1').fetchone()[0]==3
+          assert db.execute('SELECT count(*) FROM v132_visual3_jumbo20 WHERE status="held"').fetchone()[0]==20
+          for k in ('AGENTS.md','docs/HANDOFF.md'):
+              assert 'v132' in Path(k).read_text()
+          print('PASS v132 verified state and physical SQLite',v132['sqlite_sha256'])
+          PY

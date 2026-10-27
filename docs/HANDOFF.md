@@ -1,5 +1,19 @@
 # 프로젝트 좀보이드 B42 타일 정체 분석 — 인수인계 (v131 최신)
 
+## v132 최신 작업 — 실제 PNG/TMX 재검증·신규 3종 시각 후보·JUMBO A3 20종 감사 (2026-10-27)
+
+- **병합된 PR #91**: [v132 원본 이미지와 TMX 실제 검수](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/91), 검증된 [Actions run 40460201283](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40460201283). 원본 v131 `main` `5bae2a6ef593b074f8731a19c48ad0bff5a5eff1`에서 추가, 기존 역사 불변.
+- **새 이미지 직접 관찰 3종**: `vegetation_foliage_01/{0,1,3}`. 실제 서로 다른 원본 PNG 2개, 기존 A/B/C/D 이미지 직접 판독, 정확한 원본 TMX raw GID·층·레이어·좌표 및 원본 PNG 픽셀 SHA 검증. 낮은 갈색 관목·자줏빛 세로 관목·작은 녹색 관목은 **`provisional_candidate`**이고 `certified`가 아니다.
+- **JUMBO A3 20종**: 원본 PNG 바이트·RGBA 크롭 SHA와 실제 TMX raw GID·Local ID 수치 대응 물리 확인, A3 시각 접촉시트 2장 검토. **7종 A3 크롭에 수관/나무의 상하 반복이 보이므로 잘못된 격자·멀티프레임 가능성**. 모두 `held`: 원본 정의로 A3 타일 프레임 자체가 공식 대응한다고 검증하지 않음. 기록: `review/v132_visual3_jumbo20/JUMBO_VISUAL_FINDINGS.md`.
+- **미검수 우선순위 271행**: 기존 C B−C 차이0 215, B 이웃 누락8, 지도 가장자리48. 고유 타일 271종으로 중복 없이 센 값이 아니며 아직 해당 사례 전부 시각 판독한 것도 아니다. 보류/가림/차이0을 투명 인증하지 않는다. 전화기·전선 15×15 추가 검수는 미수행.
+- **누적 이미지 개별 관찰 기록 5,583/10,042** (v131 5,580 + 신규 비중복 3), 미관찰 4,459. JUMBO A3 소스 검수20은 공식 정체 관찰 개수에 중복/확정 계상하지 않는다.
+- **새 물리 통합 DB v132** `analysis/current/v132/MANIFEST.json`: 이전 v131 **193테이블/기존 모든 행 수 보존** + 새 `v132_visual3_jumbo20` (3 후보 + 20 보류) = **194테이블**, `PRAGMA integrity_check=ok`. SHA256 `4f4ce7be16a382457de1b4e1b6618452c3509957c697e8ba18de870fb213ddad` (93,802,496 bytes). 복원: `python3 scripts/restore_unified_v132.py /tmp/pz_v132.sqlite` (대상 파일 존재 시 덮어쓰기 거부).
+- **공식 PNG↔TMX Local ID 매핑/TileZed/정체 최종 인증 각각 0종**. D는 여전히 *동일 키의 다른 A 후보를 정확히 같은 B TMX 위치·층·레이어에 치환한 비교*이고, v131의 인접 PNG 격자 4,628은 다른 ID일 수 있는 미검증 실험이다.
+- **불변**: 84개 TMX 범위 10,042, 기존 5,409(새 분석 제외), 수동80·사용자 제외14, 기존 원본 PNG/TMX, 모든 v131 이하 SQLite와 이미지·사용자 철회 지시, 폐기 평면도 엔진 재사용 금지. 마인크래프트는 얇은 벽이 아니라 전체 블록 느낌을 선호하고 좌표 충돌 미해결.
+
+검증 자료: `review/v132_visual3_jumbo20/README.md`, `VISUAL_OBSERVATIONS_3.csv`, `JUMBO_AUDIT_20.csv`, `PRIORITY_271_EXCEPTIONS.csv`, `VISUAL_3_ABCDE.jpg`, `JUMBO_20_sheet_{0,1}.jpg`, `analysis/current/v132/MANIFEST.json`.
+
+---
 ## 최신 v131 — 신규 4,633종 D 전체 상태·실제 후보 재조립 완료 (2026-10-27)
 
 - **D 현재 정의**: 같은 타일의 다른 A 이미지 후보를 **기존 B의 정확히 같은 TMX 위치·층·레이어에** 대입하여 기존 B/C와 비교. v124의 두 번째 TMX 사용 위치는 보조 위치 색인일 뿐 현재 D 단계 의미와 다름.
