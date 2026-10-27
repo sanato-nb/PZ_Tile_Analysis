@@ -69,9 +69,9 @@ current_zip_idx=-1
 def zipthumb(index,img):
     global zipfile_now,current_zip_idx
     shard=index//400
+    path=OUT/'previews'/('D_CANDIDATES_%02d.zip'%shard)
     if shard!=current_zip_idx:
         if zipfile_now:zipfile_now.close()
-        path=OUT/'previews'/('D_CANDIDATES_%02d.zip'%shard)
         zipfile_now=zipfile.ZipFile(path,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=4)
         zipfile_parts.append(path)
         current_zip_idx=shard
@@ -104,7 +104,17 @@ for idx,row in enumerate(a):
         note='All 8 neighboring-grid cells are OTHER IDs until proven otherwise; no D image/B rerender certified.')
     if not selected:
         rec['search_status']='held_no_source_PNG'
-        stats['missing_source']+=1;ledger.append(rec);continue
+        stats['missing_source']+=1
+        if idx%80==0:
+            sheet=Image.new('RGB',(1920,1760),(242,246,248));draw=ImageDraw.Draw(sheet)
+        i=idx%80;x=(i%8)*240;y=(i//8)*176
+        draw.rectangle((x+1,y+1,x+237,y+173),fill=(255,255,255),outline=(145,161,176))
+        draw.text((x+5,y+8),'%04d %s/%d'%(idx,k[0][:17],k[1]),font=font,fill=(25,42,60))
+        draw.text((x+5,y+72),'HELD NO SOURCE PNG',font=font,fill=(182,55,45))
+        if idx%80==79 or idx==len(a)-1:
+            f=OUT/('D_A_sheet_%02d.jpg'%(idx//80))
+            sheet.save(f,quality=87,optimize=True);scenes.append(f)
+        ledger.append(rec);continue
     src=atlas(row['source_image_path'])
     assert src is not None,k
     assert filehash(R/row['source_image_path'])==row['source_png_sha256'] if row['source_image_path'] not in seenpng else True
