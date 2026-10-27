@@ -71,5 +71,5 @@ jobs:
           assert db.execute('SELECT COUNT(*) FROM v142_visual_review').fetchone()[0]==141
           assert db.execute('SELECT COUNT(*) FROM v142_visual_review WHERE certified!=0 OR mapping_verified!=0 OR tilezed_verified!=0').fetchone()[0]==0
           assert all('v142' in Path(q).read_text() for q in ('AGENTS.md','docs/HANDOFF.md'))
-          print('PASS v142 6600 observed, 3442 pending and 203 immutable SQLite tables',child['sqlite_sha256'])
+          print('PASS v142 6600 observed, 3442 pending and 204 immutable SQLite tables',child['sqlite_sha256'])
           PY
