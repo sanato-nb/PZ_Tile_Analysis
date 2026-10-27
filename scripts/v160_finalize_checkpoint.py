@@ -3,7 +3,7 @@
 from pathlib import Path
 import json
 R=Path(__file__).resolve().parents[1]
-review=json.loads((R/'review/v160_abc_3760_3799/MANIFEST.json').read_text())
+review=json.loads((R/'review/v160_abc_3800_3839/MANIFEST.json').read_text())
 dbm=json.loads((R/'analysis/current/v160/MANIFEST.json').read_text())
 parent_dbm=json.loads((R/'analysis/current/v159/MANIFEST.json').read_text())
 state_path=R/'PROJECT_STATE.json'
@@ -45,8 +45,8 @@ state['latest_checkpoint'].update(dict(
  expanded_84_tmx_unique_total=10042,expanded_unique_observed=obs,
  expanded_unique_unobserved=remaining,expanded_observation_percent=obs/10042*100,
  new_image_observed=obs-5400,new_keys_unobserved=4633-(obs-5400),
- evidence_repo_path='review/v160_abc_3760_3799/VISUAL_REVIEW.csv',
- evidence_manifest='review/v160_abc_3760_3799/MANIFEST.json',
+ evidence_repo_path='review/v160_abc_3800_3839/VISUAL_REVIEW.csv',
+ evidence_manifest='review/v160_abc_3800_3839/MANIFEST.json',
  mapping_verified=0,tilezed_verified=0,approved_final_certifications=0,
  v160_new_provisional=n,v160_excluded_unverified=review['excluded_unverified'],
  v160_exception_indices=review['excluded_indices'],v160_index_range=[3800,3839],
@@ -80,7 +80,7 @@ summary=(
  f'- 물리 SQLite **222개 테이블**: 부모 v159 221테이블 및 기존 모든 행 수 보존, 신규 {n}행. SHA256 {dbm["sqlite_sha256"]}, integrity_check=ok.\n'
  '- 연크림색 외벽과 녹색·적갈색 지붕 접합부, 회갈색 조적 박공벽, 가구에 가려진 미세 판재의 재질·방향·연결은 잠정. B−C=0·지도끝·이웃 누락·중복은 투명 확정 금지.\n'
  '- 기존 5,409종, 수동80·제외14, D held2/JUMBO20, 원본 84 TMX·Tiles PNG·이전 SQLite 보존. D는 같은 키의 공식 다른 A를 원래 B 동일 위치·층·레이어에서 교체해야 하며 아직 미검증.\n'
- '- 증거 review/v160_abc_3760_3799/, DB analysis/current/v160/MANIFEST.json.\n\n---\n'
+ '- 증거 review/v160_abc_3800_3839/, DB analysis/current/v160/MANIFEST.json.\n\n---\n'
 )
 for rel in ['AGENTS.md','docs/HANDOFF.md']:
  p=R/rel
