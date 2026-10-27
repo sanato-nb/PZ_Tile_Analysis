@@ -1,5 +1,13 @@
 # 프로젝트 좀보이드 B42 타일 정체 분석 — 인수인계 (v131 최신)
 
+## v145 군용시설·식당 A/B/C 실제 이미지 관찰 (2026-10-27)
+
+- 원본 A/B/C 접촉시트 1680~1839 총 160개 직접 검토; PNG 픽셀·원래 TMX GID/좌표/층/레이어, C 제거 및 B-C SHA 검증 통과 **153종**만 provisional_candidate, **7종**은 B-C=0·이웃 누락·지도 경계 등으로 신규 완료 계산 제외.
+- 전체 84 TMX 고유 10,042종에서 **7054종 관찰 기록 (70.24%)**, 미관찰 **2988종**. 공식 Local ID↔PNG/TileZed·정체 최종 인증 각 0. 준비된 ABCD 증거는 정체 완료가 아님.
+- 물리 SQLite analysis/current/v145/MANIFEST.json, SHA 4c045c742bf4f5b62dae66b8f2a8a42d35f8a364d7d23b46ada65643736e7d13, **207개 테이블**(v144 이전 206테이블과 전체 기존 행 수 보존, 신규 153행 1테이블). PRAGMA integrity_check=ok. 증거 review/v145_abc_1680_1839 에 CSV·PNG ZIP·접촉시트·예외표 저장.
+- 기존 수동80·사용자 제외14·기존5409, 사용자 held D2/JUMBO20, 원본 PNG/TMX 및 과거 DB 불변. D 다른 A 동일 TMX 위치/층/레이어 공식 매핑 미검증, 인접격자 및 두 번째 TMX 위치는 인증 근거 아님.
+
+---
 <!-- AUTO_CHECKPOINT_START -->
 ## 자동 확인된 최신 진행 상태 (v144)
 
