@@ -7,6 +7,9 @@ on:
       - scripts/v157_finalize_checkpoint.py
       - review/v157_housewalls_3600_3679/MANUAL_VISUAL_NOTES.json
       - .github/workflows/v157-housewalls-abc80.yml
+concurrency:
+  group: v157-housewalls-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
