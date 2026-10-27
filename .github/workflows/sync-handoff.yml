@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "PROJECT_STATE.json"
+      - "README.md"
       - "checkpoints/**"
       - "scripts/generate_handoff.py"
       - "scripts/validate_project.py"
@@ -23,6 +24,7 @@ jobs:
         with:
           sparse-checkout: |
             /PROJECT_STATE.json
+            /README.md
             /AGENTS.md
             /docs/
             /scripts/
@@ -31,17 +33,17 @@ jobs:
           persist-credentials: true
       - name: 프로젝트 상태 검사
         run: python3 scripts/validate_project.py
-      - name: 최신 인수인계서 생성
+      - name: 최신 인수인계서 및 README 자동 요약 생성
         run: python3 scripts/generate_handoff.py
-      - name: 변경된 인수인계서 GitHub에 저장
+      - name: 변경된 인수인계서와 README GitHub에 저장
         shell: bash
         run: |
-          if ! git diff --quiet -- docs/HANDOFF.md; then
+          if ! git diff --quiet -- docs/HANDOFF.md README.md; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add docs/HANDOFF.md
-            git commit -m "문서: 최신 타일 분석 인수인계 자동 갱신"
+            git add docs/HANDOFF.md README.md
+            git commit -m "문서: 최신 타일 분석 README 및 인수인계 자동 갱신"
             git push
           else
-            echo "docs/HANDOFF.md already up to date."
+            echo "README.md and docs/HANDOFF.md already up to date."
           fi
