@@ -48,7 +48,7 @@ def update_document(old, section):
     if START in old:
         prefix, rest = old.split(START, 1)
         _, suffix = rest.split(END, 1)
-        return prefix + section + suffix.lstrip("\n")
+        return prefix + section + "\n" + suffix.lstrip("\n")
     index = old.find("\n")
     if index < 0:
         raise ValueError("Missing HANDOFF heading")
