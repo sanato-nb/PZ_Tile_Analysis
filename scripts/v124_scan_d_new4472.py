@@ -187,3 +187,5 @@ vm=dict(version='v124',source='v120_B_context_new4632',
   'v123 이미지 증거 첫 160종과 160개 전부 재대조. 기존 5,409·수동 검수 80·사용자 제외 14·원본 TMX/PNG 불변.\n'
   'DB는 부모 v123의 185개 테이블을 그대로 보존하고 D 위치표만 신규 추가. 이미지 미생성 및 시각 판독 미수행 항목은 의미 확정하지 않습니다.\n',encoding='utf8')
 print('PASS V124 D LOCATION INDEX',json.dumps({k:v for k,v in vm.items() if k not in ['source_original_TMX_84_sha256']},ensure_ascii=False),flush=True)
+
+# Re-run serialization after concurrent initial Actions result; preserve level=0 explicitly.
