@@ -1,11 +1,6 @@
 name: v131 All remaining D candidates - parallel evidence and single integrated database
 on:
-  push:
-    branches: [work/v131-D-all-remaining-3832-20261027]
-    paths:
-      - scripts/v131_D_remaining_batch.py
-      - scripts/v131_merge_all_D_and_sqlite.py
-      - .github/workflows/v131-D-all-in-one.yml
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
