@@ -167,11 +167,11 @@
 
 ---
 <!-- AUTO_CHECKPOINT_START -->
-## 자동 확인된 최신 진행 상태 (v162)
+## 자동 확인된 최신 진행 상태 (v163)
 
-- TMX 고유 10,042종, 이미지 관찰 기록 9,025종 (89.87%), 미관찰 1,017종.
+- TMX 고유 10,042종, 이미지 관찰 기록 9,061종 (90.23%), 미관찰 981종.
 - 정체는 잠정 후보. 공식 PNG↔Local ID 매핑 0종, TileZed 검증 0종, 최종 인증 0종.
-- 물리 SQLite: analysis/current/v162/MANIFEST.json, 224테이블, SHA256 cab8f379588ee8ba0c39c51984a99e61bfd6b0e1ee0d761dca69ef8adab9d1b0.
+- 물리 SQLite: analysis/current/v163/MANIFEST.json, 225테이블, SHA256 94cd995522958a09c905fdb6dfae971e2082d80ec9379010a992be7d8690bb4d.
 - 기존 사용자 수동 80종, 제외 14종, 보류 D 2종과 JUMBO 20종 및 원본 PNG/TMX는 보존.
 - D는 동일 (tile_set_name, local_id)의 다른 A를 원래 B TMX의 동일 좌표·층·레이어에 치환한 비교임. 과거 두 번째 TMX 위치·인접격자 D는 인증되지 않음.
 - 아래 버전별 상세 인수인계는 그대로 보존.
