@@ -108,6 +108,13 @@
 - 품질: 이웃 스프라이트 누락 B **8건**(드로잉 9건), 지도의 끝에서 잘림 **48건**, 개별 스프라이트 그리기 캔버스 잘림 **23,823회**. B는 실배치 기반 **근사 렌더**이며 TileZed 공식 결과 아님.
 - 현재 실제 SQLite **v116**, 이전 A **v119** 그대로. C(대상 하나 제거)와 D(다른 위치)는 미생성. `PROJECT_STATE.json.latest_B_context_stage` 참조. 1개 A 원본 미확보 보류, 사용자 제외 기존 14 유지, Local ID/정체 인증 모두 0.
 
+## 최신 v121: 채팅 중단 이후 C단계 GitHub 성공 (2026-10-27)
+
+- C 실제 GitHub Actions run `40354707694`는 **SUCCESS**. 신규 4,632키의 v120 B 바이트 동일 재현·동일 TMX 단일 GID 제거 C 생성·B−C PNG 계산·24 ZIP SHA/CRC 검사 완료, 비교판 58장.
+- 잠정 계산 결과 **4,417종 변화/215종 0 변화**. 단, `difference_exact()`에서 RGB 차이를 `convert('L')`로 변환하여 작은 단일 RGB 채널 차이를 놓칠 수 있음. **RGB 채널 OR 재검증 필수**. 0 변화는 투명 타일 확정이 아니다.
+- `review/v121_C_diff_new4632/`에 B/C/delta CSV, 215종 zero 검수 목록, C 원본 ZIP 12개, 차이 PNG ZIP 12개와 58 비교판. 상세 `docs/V121_C_STAGE_HANDOFF_2026-10-27.md` 및 `PROJECT_STATE.json.latest_C_difference_stage`를 먼저 읽을 것.
+- 이전 5,409종/사용자 제외 14종, v116 통합 DB, 원본 PNG/TMX 보존. D 미생성, 개별 정체·공식 Local ID/TileZed 인증 0.
+
 ## 불변 원칙
 
 - 이미지 직접 관찰, 추론 후보, PNG-TMX Local ID 검증, TileZed 렌더 검증, 최종 인증을 분리한다.
