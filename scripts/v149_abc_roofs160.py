@@ -49,7 +49,7 @@ db=sqlite3.connect(tmp)
 assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
 before={name:db.execute('SELECT count(*) FROM "'+name+'"').fetchone()[0] for (name,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
 assert len(before)==210 and before['v148_visual_review']==155
-prior={(r[0],int(r[1])) for table in ['v132_visual3_jumbo20','v133_visual_review_32','v134_visual_review','v135_visual_review','v136_visual_review','v137_visual_review','v138_visual_review','v139_visual_review','v140_visual_review','v141_visual_review','v142_visual_review','v143_visual_review','v144_visual_review','v145_visual_review','v146_visual_review','v148_visual_review'] for r in db.execute('SELECT tile_set_name,local_id FROM '+table)}
+prior={(r[0],int(r[1])) for table in ['v132_visual3_jumbo20','v133_visual_review_32','v134_visual_review','v135_visual_review','v136_visual_review','v137_visual_review','v138_visual_review','v139_visual_review','v140_visual_review','v141_visual_review','v142_visual_review','v143_visual_review','v144_visual_review','v145_visual_review','v146_visual_review','v147_visual_review','v148_visual_review'] for r in db.execute('SELECT tile_set_name,local_id FROM '+table)}
 assert len(prior)==1947
 tmxs={}
 def verify_tmx(rec):
