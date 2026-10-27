@@ -69,11 +69,11 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "v120 new-only B stage complete: B_CONTEXT_4632.csv joins each v119 target A to original TMX name/SHA, floor, layer index, x,y, raw_gid, single B scene ZIP entry. 58 sheets and searchable offline browser available.",
-    "Do not include prior 5409 unique keys as new analysis targets; old neighbors may be rendered from v117 A source for context only.",
-    "Quality exceptions: 8 B scenes have missing neighboring sprite(s), 48 scene windows truncated at map edge, 23823 drawn sprites were canvas-clipped in total (not 23823 scenes); show these caveats in manual review.",
-    "Next C stage should use same source TMX exact layer and remove only that raw GID at x/y (not all tiles in the cell), then compare B/C pixels, with extended 15x15 for wires/long linear parts.",
-    "The one new A source missing overlay_graffiti_wall_02/2 remains held and not transparent-certified; official mapping, TileZed and final identity certification remain 0."
+    "v121 C job run 40354707694 SUCCESS; C 4632, exact source B sha match 4632, DIFF 4632, 58 comparison sheets. Read docs/V121_C_STAGE_HANDOFF_2026-10-27.md first.",
+    "Recheck 215 zero-delta candidates using precise per-RGB-channel difference OR instead of .convert('L'); do not interpret zero change as transparency.",
+    "Inspect visual B/C/DIFF evidence for actual object and parts identities. 20 provisional JUMBO A3 may have blended adjacent sprites. Official Local ID and TileZed certification remain 0.",
+    "Only newly analyzed 4632 targets; retain old 5409, manual 14 exclusions and all v116 SQLite history. One missing A overlay_graffiti_wall_02/2 remains held.",
+    "Build D only from real alternative TMX tile placements where available; do not invent second context."
   ],
   "warnings": [
     "Do not count 2,509+477 as unique: the verified overlap is 402.",
@@ -330,5 +330,36 @@
     "final_identity_certified": 0,
     "AI_all_4632_B_scenes_visually_reviewed": false,
     "caveat": "Rendered true TMX same-floor 5x5 tile neighborhoods with original PNG pixels using a provisional isometric renderer; actual target often occluded, some huge sprites clipped; do not call TileZed-certified."
+  },
+  "latest_C_difference_stage": {
+    "version": "v121",
+    "date": "2026-10-27",
+    "based_on_B": "v120",
+    "based_on_A": "v119",
+    "scope": "new_only_4632",
+    "entire_TMX_scope": 10042,
+    "prior_5409_reused_no_reanalysis": true,
+    "C_images_generated": 4632,
+    "B_regenerated_byte_SHA_matched": 4632,
+    "exact_one_GID_removed": 4632,
+    "nonzero_delta_provisional": 4417,
+    "zero_delta_provisional": 215,
+    "lossless_C_zip_shards": 12,
+    "difference_png_zip_shards": 12,
+    "all_zip_crc_verified": true,
+    "comparison_sheets": 58,
+    "C_master_csv": "review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv",
+    "C_master_sha256": "d462eb0f02cec4072be20aabc7201ab9d87284db1978c9d2d18058fb12748733",
+    "zero_delta_csv": "review/v121_C_diff_new4632/ZERO_DELTA_REVIEW.csv",
+    "c_run_url": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40354707694",
+    "handoff": "docs/V121_C_STAGE_HANDOFF_2026-10-27.md",
+    "C_browser_script": "scripts/v121_make_C_browser.py",
+    "C_browser_html_generated": false,
+    "D_generated": false,
+    "official_mapping_verified": 0,
+    "TileZed_verified": 0,
+    "final_identity_certified": 0,
+    "known_qa_issue": "Current difference_exact() uses RGB ImageChops.difference().convert('L') nonzero mask; small RGB differences may be lost to luminance rounding. Recheck zero 215 using OR across R,G,B channels before treating count as final.",
+    "zero_delta_not_transparency": true
   }
 }
