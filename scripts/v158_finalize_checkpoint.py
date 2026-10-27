@@ -9,7 +9,7 @@ state_path=R/'PROJECT_STATE.json'
 state=json.loads(state_path.read_text(encoding='utf-8'))
 assert state['latest_checkpoint']['version'] in ('v157','v158')
 if state['latest_checkpoint']['version']=='v158':
-    assert state['latest_checkpoint']['expanded_unique_observed']==8811
+    assert state['latest_checkpoint']['expanded_unique_observed']==8811+review['promoted_provisional']
     assert state['previous_checkpoint_v157']['version']=='v157'
     assert state['previous_checkpoint_v157']['expanded_unique_observed']==8811
     parent_checkpoint=state['previous_checkpoint_v157']
@@ -30,7 +30,7 @@ remaining=10042-obs
 state['previous_checkpoint_v157']=json.loads(json.dumps(parent_checkpoint))
 state['latest_checkpoint'].update(dict(
  version='v158',date='2026-10-28',
- kind='manual_A_B_C_house_wall_trim_frame_visual_review',
+ kind='manual_A_B_C_gable_roof_sidewall_visual_review',
  physical_unified_sqlite_version='v158',prior_visual_checkpoint='v157',
  expanded_84_tmx_unique_total=10042,
  expanded_unique_observed=obs,expanded_unique_unobserved=remaining,
