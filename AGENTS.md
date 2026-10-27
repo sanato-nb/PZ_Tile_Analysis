@@ -1,5 +1,24 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v131 D 전체 후보 실험 완료, 물리 SQLite v131)
 
+## v138 최신 PNG/TMX 기반 시각 정체 분석 — PR #95~#99 (2026-10-27)
+
+**실제 작업 범위**: 사용자 지시대로 기존 보류 D 2종 및 JUMBO 20종은 건드리지 않고, 이미 생성된 A/B/C 비교 증거를 **직접 눈으로 판독**하였다. 검사 근거는 (1) 원본 PNG 바이트 SHA256·A 크롭 RGBA 픽셀 해시, (2) 실제 원본 TMX의 raw GID·층·레이어·x/y, (3) B 5×5 원본과 정확히 같은 층·레이어·좌표에서 타일 하나를 제거한 C와 픽셀차이 ZIP SHA/CRC다. 인접 그리드 후보 D와 과거 두 번째 TMX 위치 D는 사물 정체의 공식 인증에 **사용하지 않음**.
+
+| 병합 PR | 범위 | 신규 관찰 잠정 후보 | 검수 대상 중 제외 |
+|---|---|---:|---:|
+| [#95](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/95) | v134: 캠핑·목재 180~319 | 129 | 11 |
+| [#96](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/96) | v135: 녹지·폐기물·철탑 400~479 (JUMBO 기존 held 20 제외) | 57 | 3 |
+| [#97](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/97) | v136: 송전 철탑 480~559 | 80 | 0 |
+| [#98](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/98) | v137: 식물·울타리 560~639 | 79 | 1 |
+| [#99](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/99) | v138: 욕실·카운터·문 640~719 | 76 | 4 |
+
+**합계: 신규 비중복 개별 이미지 관찰 421종**, 출처 시트 직접 판독 검수 대상 440종 중 19개 신규 완료 제외(이미 보류 20종 재분석하지 않음). 신규 421종 전부 `provisional_candidate`, **Local ID 아틀라스 공식 매핑 검증 0·TileZed 검증 0·정체 최종 인증 0**. 실물 이미지/주변 비교로 유추한 물체 명칭과 역할은 최종 확인 아님. 이번 요청 기준 총 **6,036 / 10,042종 관찰 기록 (60.11%)**, **4,006종 미관찰**. ABCD 실험 이미지가 이미 생성되었어도 개별 사물 판독/공식 매핑이 자동 완성되는 것은 아니다.
+
+**DB**: `analysis/current/v138/MANIFEST.json` — SHA256 `973fe1337392be6b3099e54570569742930e90af7bcb68c8a3128d6660a495db`, **200 물리 테이블**. v137까지 199테이블과 모든 과거 행 수 보존, v138 관찰 76행 테이블만 추가, PRAGMA integrity_check=ok. 원본 PNG/TMX, 기존 5,409종의 기록, 사용자 수동80·제외14, 과거 버전 물리 SQLite 전부 보존. 증거는 `review/v134_visual_180_319/`부터 `review/v138_bath_counters_doors_640_719/`까지의 `VISUAL_REVIEW.csv`, 4개/타일 원본 비교 `ABC_EVIDENCE_VERIFIED.zip`, `sheets/proof_*.jpg`, 제외항목 CSV 및 매니페스트.
+
+향후 단계는 **미관찰 4,006종의 개별 실물 관찰**과 원본 TileZed tiledefinitions/PNG-Local ID 대응 공인 검증, 기존 19건의 새 제외 사유 재검토다. 사용자 정의 D = 같은 키의 다른 A를 원래 B TMX 정확히 같은 위치·층·레이어에 치환하는 것; 4,628 인접 격자 D는 미인증이다. 폐기한 범용 TMX 평면도 엔진을 재사용하지 않으며 Minecraft 전체 블록 벽 선호·PZ 선형 벽 좌표 충돌은 미해결.
+
+---
 ## v133 최신 실제 ABCD 이미지 정체 분석 (2026-10-27)
 
 - **병합 PR #93**: [v133 32종 원본 A/B/C/D 시각 검수](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/93), [Actions 성공 검증](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40463349746).
