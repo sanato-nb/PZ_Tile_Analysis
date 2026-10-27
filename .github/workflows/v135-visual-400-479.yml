@@ -1,7 +1,7 @@
-name: v135 verify new A B C pixel observations and preserve v133 SQLite
+name: v135 original ABC visual review excluding 20 held JUMBO and preserve v134 SQLite
 on:
   push:
-    branches: [work/v135-visual-400-479-20261027]
+    branches: [work/v135-visual-400-479-excluding-held-20261027]
     paths:
       - scripts/v135_visual_400_479.py
       - review/v135_visual_400_479/MANUAL_VISUAL_NOTES.json
