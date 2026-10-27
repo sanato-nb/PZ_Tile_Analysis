@@ -67,7 +67,7 @@ jobs:
           assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
           assert db.execute("SELECT COUNT(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==204
           assert db.execute('SELECT COUNT(*) FROM tile_catalog').fetchone()[0]==5409
-          assert db.execute('SELECT COUNT(*) FROM v141_visual_review').fetchone()[0]==132
+          assert db.execute('SELECT COUNT(*) FROM v141_visual_review').fetchone()[0]==142
           assert db.execute('SELECT COUNT(*) FROM v142_visual_review').fetchone()[0]==141
           assert db.execute('SELECT COUNT(*) FROM v142_visual_review WHERE certified!=0 OR mapping_verified!=0 OR tilezed_verified!=0').fetchone()[0]==0
           assert all('v142' in Path(q).read_text() for q in ('AGENTS.md','docs/HANDOFF.md'))
