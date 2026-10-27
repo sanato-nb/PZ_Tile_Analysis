@@ -69,11 +69,11 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
-    "v120 new-only B stage complete: B_CONTEXT_4632.csv joins each v119 target A to original TMX name/SHA, floor, layer index, x,y, raw_gid, single B scene ZIP entry. 58 sheets and searchable offline browser available.",
-    "Do not include prior 5409 unique keys as new analysis targets; old neighbors may be rendered from v117 A source for context only.",
-    "Quality exceptions: 8 B scenes have missing neighboring sprite(s), 48 scene windows truncated at map edge, 23823 drawn sprites were canvas-clipped in total (not 23823 scenes); show these caveats in manual review.",
-    "Next C stage should use same source TMX exact layer and remove only that raw GID at x/y (not all tiles in the cell), then compare B/C pixels, with extended 15x15 for wires/long linear parts.",
-    "The one new A source missing overlay_graffiti_wall_02/2 remains held and not transparent-certified; official mapping, TileZed and final identity certification remain 0."
+    "v121 C complete for all 4,632 new keys: original v120 B byte-exact reproduced, precisely one source TMX GID removed, 4,417 nonzero B-C pixel differences and 215 zero-delta unresolved. C and delta PNG 24 ZIP shards and 58 contact sheets in review/v121_C_diff_new4632/. ",
+    "Next produce D from a genuinely different TMX placement where possible. If no second occurrence exists explicitly mark no D, never synthesize.",
+    "AI independently inspect actual A/B/C/D imagery. Keep observed features, identity candidate, part role, confidence, status and mapping/certification separate; no broad bulk promotion without visual evidence.",
+    "Old 5,409 review records and v116 physical SQLite unchanged; 9 old unobserved (8 user excluded and 1 active) remain historical, and 14 user excluded across disjoint queues remain preserved.",
+    "One new missing-PNG tile overlay_graffiti_wall_02/2 is held. Do not certify transparency, Local ID correspondence, TileZed rendering or final identity without evidence."
   ],
   "warnings": [
     "Do not count 2,509+477 as unique: the verified overlap is 402.",
@@ -330,5 +330,37 @@
     "final_identity_certified": 0,
     "AI_all_4632_B_scenes_visually_reviewed": false,
     "caveat": "Rendered true TMX same-floor 5x5 tile neighborhoods with original PNG pixels using a provisional isometric renderer; actual target often occluded, some huge sprites clipped; do not call TileZed-certified."
+  },
+  "latest_C_diff_stage": {
+    "version": "v121",
+    "date": "2026-10-27",
+    "stage": "C_exact_one_source_GID_removed_from_B",
+    "repository_merge_pr": 73,
+    "repository_merge_commit": "08f6f06a286d634d4e5bdd5d4dae96c20c020278",
+    "source_stage": "v120",
+    "source_A_stage": "v119",
+    "original_84_tmx": true,
+    "existing_5409_preserved": true,
+    "new_4632_processed": 4632,
+    "B_exactly_recreated_and_SHA_matched": 4632,
+    "C_exact_one_GID_removal": 4632,
+    "positive_B_minus_C": 4417,
+    "zero_B_minus_C": 215,
+    "scenes_edge_incomplete": 48,
+    "missing_neighbor_source_scenes": 8,
+    "archive_C_shards": 12,
+    "archive_difference_shards": 12,
+    "evidence_csv": "review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv",
+    "evidence_csv_sha256": "d462eb0f02cec4072be20aabc7201ab9d87284db1978c9d2d18058fb12748733",
+    "manifest": "review/v121_C_diff_new4632/MANIFEST.json",
+    "contact_sheets": 58,
+    "zip_crc": "PASS",
+    "source_sha": "PASS",
+    "github_actions": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40354707694",
+    "any_individual_AI_new_identity_review_completed": false,
+    "official_mapping_verified": 0,
+    "tilezed_verified": 0,
+    "final_identity_certified": 0,
+    "note": "C pixel differences are evidence, not identity certification. 215 zero-delta scenes are unresolved; D different placement and detailed AI identification are pending."
   }
 }
