@@ -2,6 +2,8 @@ name: v159 40 original A B C visual reviews with parent SQLite preservation
 on:
   push:
     branches: [work/v159-abc-3760-3799-20261028-0155]
+  pull_request:
+    branches: [main]
     paths:
       - scripts/v159_abc_gables40.py
       - scripts/v159_finalize_checkpoint.py
@@ -88,6 +90,7 @@ jobs:
       - name: Update latest checkpoint only after verification
         run: python3 -u scripts/v159_finalize_checkpoint.py
       - name: Commit verified results only to isolated work branch
+        if: github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
