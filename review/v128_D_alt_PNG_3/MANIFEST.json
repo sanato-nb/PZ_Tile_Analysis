@@ -1,0 +1,32 @@
+{
+  "version": "v128",
+  "definition": "D = candidate alternate A source PNG for same tile, rerender B at SAME TMX/layer/x/y",
+  "parent_candidate_search": "v127",
+  "source_variant_candidates": 3,
+  "D_same_B_scenes_built": 3,
+  "source_key_list": [
+    "vegetation_foliage_01/0",
+    "vegetation_foliage_01/1",
+    "vegetation_foliage_01/3"
+  ],
+  "all_key_B_positions_verified": 3,
+  "all_source_pixel_hashes_verified": 3,
+  "changed_B_to_D_count": 3,
+  "unchanged_B_to_D_count": 0,
+  "original_B_C_zero_count": 0,
+  "csv_path": "review/v128_D_alt_PNG_3/D_ALT_SOURCE_B_COMPARE_3.csv",
+  "csv_sha256": "72428301beda76e0beece02bf99dc2e7d80e4c1c91ab56d9988675c78889ebbf",
+  "images_zip": "review/v128_D_alt_PNG_3/D_SAME_B_VARIANT_3.zip",
+  "images_zip_sha256": "b2b68bff9726321dc0186ab627ad26b3ffc373e8cbc9e5958ea18a93dd398e30",
+  "contact_sheet": "review/v128_D_alt_PNG_3/D_SAME_B_COMPARE_3.jpg",
+  "contact_sheet_sha256": "9a0ba69185da3ff8f81b77c34ab25151df8b21abc474d34b164fa9d5b22eefe7",
+  "parent_tables_preserved": 189,
+  "db_sha256": "4c37f22293d1e2914f2a7b56157dd31dea2dc5908438ddc9c63607a88488004d",
+  "sqlite_integrity": "ok",
+  "direct_image_visual_review_added": 0,
+  "mapping_verified": 0,
+  "tilezed_verified": 0,
+  "final_certified": 0,
+  "no_other_local_id_neighbor_substitutions": true,
+  "note": "Two same-name PNG files can differ in pixel art and still lack official TileZed correspondence. B/D scene difference is NOT external ground truth. No promoted final identities."
+}
