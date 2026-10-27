@@ -1,0 +1,75 @@
+name: v142 verify 142 industrial visual observations and 203 SQLite tables
+on:
+  push:
+    branches: [work/v142-abc-community-1200-1359-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - .github/workflows/v142-handoff-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v141/MANIFEST.json
+            /analysis/current/v142/*
+            /review/v142_community_1200_1359/MANIFEST.json
+            /review/v142_community_1200_1359/VISUAL_REVIEW.csv
+            /review/v142_community_1200_1359/EXCLUDED_EXCEPTIONS.csv
+            /review/v142_community_1200_1359/MANUAL_VISUAL_NOTES.json
+            /review/v142_community_1200_1359/ABC_EVIDENCE_VERIFIED.zip
+            /review/v142_community_1200_1359/sheets/*
+      - name: Verify source image SHA ZIP CRC physical database and current state
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib,sqlite3,zipfile,zlib,base64
+          from pathlib import Path
+          p=Path('review/v142_community_1200_1359')
+          m=json.loads((p/'MANIFEST.json').read_text())
+          parent=json.loads(Path('analysis/current/v141/MANIFEST.json').read_text())
+          child=json.loads(Path('analysis/current/v142/MANIFEST.json').read_text())
+          state=json.loads(Path('PROJECT_STATE.json').read_text())
+          assert state['latest_checkpoint']['version']==child['version']=='v142'
+          assert state['latest_checkpoint']['expanded_unique_observed']==6600
+          assert state['latest_checkpoint']['expanded_unique_unobserved']==3442
+          assert state['unified_database']['table_count']==204
+          assert m['manual_image_annotations']==160
+          assert m['promoted_provisional']==child['new_rows']==141
+          assert m['excluded_unverified']==child['skipped_rows']==19
+          assert m['mapping_verified']==m['tilezed_verified']==m['certified']==0
+          assert child['parent']=='v141' and child['parent_sqlite_sha256']==parent['sqlite_sha256']
+          assert child['prior_tables_preserved']==203 and child['table_count']==204
+          for name,h in m['files_sha256'].items():
+              assert hashlib.sha256((p/name).read_bytes()).hexdigest()==h,name
+          assert hashlib.sha256((p/'MANUAL_VISUAL_NOTES.json').read_bytes()).hexdigest()==m['source_notes_sha256']
+          with (p/'VISUAL_REVIEW.csv').open(encoding='utf-8-sig') as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==141 and len({(r['tile_set_name'],r['local_id']) for r in rows})==141
+          assert all(r['visual_status']=='provisional_candidate' and r['mapping_verified']==r['tilezed_verified']==r['certified']=='0' for r in rows)
+          with zipfile.ZipFile(p/'ABC_EVIDENCE_VERIFIED.zip') as z:
+              assert z.testzip() is None and len(z.namelist())==564
+          comp=base64.b64decode(''.join(Path(x).read_text('ascii').strip() for x in child['parts']),validate=True)
+          assert hashlib.sha256(comp).hexdigest()==child['compressed_sha256']
+          raw=zlib.decompress(comp)
+          assert hashlib.sha256(raw).hexdigest()==child['sqlite_sha256'] and len(raw)==child['sqlite_bytes']
+          db=sqlite3.connect(':memory:');db.deserialize(raw)
+          assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert db.execute("SELECT COUNT(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==204
+          assert db.execute('SELECT COUNT(*) FROM tile_catalog').fetchone()[0]==5409
+          assert db.execute('SELECT COUNT(*) FROM v141_visual_review').fetchone()[0]==132
+          assert db.execute('SELECT COUNT(*) FROM v142_visual_review').fetchone()[0]==141
+          assert db.execute('SELECT COUNT(*) FROM v142_visual_review WHERE certified!=0 OR mapping_verified!=0 OR tilezed_verified!=0').fetchone()[0]==0
+          assert all('v142' in Path(q).read_text() for q in ('AGENTS.md','docs/HANDOFF.md'))
+          print('PASS v142 6600 observed, 3442 pending and 203 immutable SQLite tables',child['sqlite_sha256'])
+          PY
