@@ -1,5 +1,13 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+## v150 녹색·회색 기와, 갈색 널판, 녹색·붉은 골판 지붕 A/B/C 실제 시각 검수 (2026-10-27)
+
+- 기존 A/B/C 접촉시트 031/032 총 160종을 직접 관찰. 원본 PNG·A RGBA·TMX raw GID/층/레이어/좌표와 C 제거 및 B-C SHA를 검증 통과한 **158종**만 provisional_candidate. **2종**은 B−C 무변화·이웃 누락·지도끝 등으로 관찰 완료에서 제외하고 투명 인증하지 않음.
+- 전체 84 TMX 10,042종 중 **7824종 관찰 기록 (77.91%)**, 미관찰 **2218종**. 공식 Local ID↔PNG/TileZed·사물 최종 인증 각 0. 준비된 ABCD 이미지 생성과 정체 인증은 별개.
+- 물리 SQLite analysis/current/v150/MANIFEST.json, SHA a0ede1b3439c7baef4c4789365ae62016f1c671eeb828bcdd4e3ba436ac8ec1f, **212개 테이블** (v149 기존 211개 테이블과 전 행 수 보존, 신규 158행 1테이블). PRAGMA integrity_check=ok. review/v150_roofs_2480_2639의 CSV·증거 ZIP·개별 이미지·예외표 보존.
+- 기존 5,409·사용자 수동80·제외14·보류 D2/JUMBO20, 원본 PNG/TMX와 과거 DB 무변경. 사용자 D 정의는 같은 키 다른 A를 원래 B 위치/층/레이어에 대입하는 것; 인접 격자/두 번째 TMX 위치는 미인증.
+
+---
 ## v149 검정·갈색·녹색 지붕 기와 및 골판 A/B/C 실제 시각 검수 (2026-10-27)
 
 - 기존 A/B/C 접촉시트 029/030 총 160종을 직접 관찰. 원본 PNG·A RGBA·TMX raw GID/층/레이어/좌표와 C 제거 및 B-C SHA를 검증 통과한 **159종**만 provisional_candidate. **1종**은 B−C 무변화·이웃 누락·지도끝 등으로 관찰 완료에서 제외하고 투명 인증하지 않음.
