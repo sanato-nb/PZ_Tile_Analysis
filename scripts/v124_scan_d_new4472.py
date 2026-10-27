@@ -141,7 +141,7 @@ with sqlite3.connect(local) as c:
     c.executemany('INSERT INTO v124_d_placement_4472 VALUES ('+','.join('?' for _ in range(22))+')',[
       (r['tile_set_name'],r['local_id'],r['index'],r['source_tmx'],r['source_level'],
        r['source_layer_index'],r['source_x'],r['source_y'],r['source_raw_gid'],r['d_status'],
-       r['d_tmx'],r['d_level'] or None,r['d_layer_index'] if r['d_layer_index']!='' else None,
+       r['d_tmx'],r['d_level'] if r['d_level']!='' else None,r['d_layer_index'] if r['d_layer_index']!='' else None,
        r['d_x'] if r['d_x']!='' else None,r['d_y'] if r['d_y']!='' else None,
        r['d_raw_gid'] if r['d_raw_gid']!='' else None,
        r['d_5x5_bounded'] if r['d_5x5_bounded']!='' else None,0,r['review_status'],0,0,0)
