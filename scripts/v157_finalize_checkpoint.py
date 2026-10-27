@@ -7,20 +7,27 @@ review=json.loads((R/'review/v157_housewalls_3600_3679/MANIFEST.json').read_text
 dbm=json.loads((R/'analysis/current/v157/MANIFEST.json').read_text())
 state_path=R/'PROJECT_STATE.json'
 state=json.loads(state_path.read_text(encoding='utf-8'))
-assert state['latest_checkpoint']['version']=='v156'
-assert state['latest_checkpoint']['expanded_unique_observed']==8734
+assert state['latest_checkpoint']['version'] in ('v156','v157')
+if state['latest_checkpoint']['version']=='v157':
+    assert state['latest_checkpoint']['expanded_unique_observed']==8811
+    assert state['previous_checkpoint_v156']['version']=='v156'
+    assert state['previous_checkpoint_v156']['expanded_unique_observed']==8734
+    parent_checkpoint=state['previous_checkpoint_v156']
+else:
+    assert state['latest_checkpoint']['expanded_unique_observed']==8734
+    parent_checkpoint=state['latest_checkpoint']
 assert review['manual_image_annotations']==80
 assert review['original_scope']==[3600,3679]
 assert review['promoted_provisional']+review['excluded_unverified']==80
 assert dbm['version']=='v157' and dbm['parent']=='v156'
 assert dbm['table_count']==219 and dbm['prior_tables_preserved']==218
 assert dbm['new_rows']==review['promoted_provisional'] and dbm['skipped_rows']==review['excluded_unverified']
-assert dbm['parent_sqlite_sha256']==state['unified_database']['sqlite_sha256']
+assert dbm['parent_sqlite_sha256']==json.loads((R/'analysis/current/v156/MANIFEST.json').read_text())['sqlite_sha256']
 assert review['mapping_verified']==review['tilezed_verified']==review['certified']==0
 n=review['promoted_provisional']
 obs=8734+n
 remaining=10042-obs
-state['previous_checkpoint_v156']=json.loads(json.dumps(state['latest_checkpoint']))
+state['previous_checkpoint_v156']=json.loads(json.dumps(parent_checkpoint))
 state['latest_checkpoint'].update(dict(
  version='v157',date='2026-10-28',
  kind='manual_A_B_C_house_wall_trim_frame_visual_review',
@@ -77,5 +84,10 @@ for rel in ['AGENTS.md','docs/HANDOFF.md']:
  original=p.read_text(encoding='utf-8')
  assert 'v156' in original
  newline=original.index('\n')
- p.write_text(original[:newline+1]+'\n'+summary+original[newline+1:].lstrip('\n'),encoding='utf-8')
+ tail=original[newline+1:].lstrip('\n')
+ if tail.startswith('## v157 '):
+  boundary=tail.find('\n---\n## v156 ')
+  assert boundary>=0, 'Cannot locate prior v156 handoff boundary'
+  tail=tail[boundary+len('\n---\n'):]
+ p.write_text(original[:newline+1]+'\n'+summary+tail,encoding='utf-8')
 print('PASS v157 checkpoint',obs,'observed',remaining,'remaining',dbm['sqlite_sha256'],flush=True)
