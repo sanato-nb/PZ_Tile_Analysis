@@ -29,7 +29,6 @@ with sqlite3.connect(out) as db:
     assert db.execute("SELECT count(*) FROM v127_d_candidate_catalog_4633 WHERE search_status='held_no_source_PNG'").fetchone()[0]==1
     assert db.execute('SELECT count(*) FROM v128_D_source_variant_B_3').fetchone()[0]==3
     assert db.execute('SELECT count(*) FROM v128_D_source_variant_B_3 WHERE B_D_changed_pixels > 0').fetchone()[0]==3
-    assert len({r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")})==190
     assert db.execute('SELECT count(*) FROM v129_alt_A_B_320').fetchone()[0]==320
     assert db.execute('SELECT count(*) FROM v129_alt_A_B_320 WHERE B_D_changed_pixels > 0').fetchone()[0]==316
     assert len({r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")})==191
