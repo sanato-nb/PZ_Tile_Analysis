@@ -49,7 +49,7 @@ targets=v120[beg:end]
 assert len(targets)==end-beg and int(targets[0].get('index',beg))>=0
 assert 1<=len(targets)<=320
 assert all((row['tile_set_name'],int(row['local_id'])) in a for row in targets)
-assert len({(t['tile_set_name'],int(t['local_id'])) for t in targets})==320
+assert len({(t['tile_set_name'],int(t['local_id'])) for t in targets})==len(targets)
 assert not oldkeys&{(t['tile_set_name'],int(t['local_id'])) for t in targets}
 def mapread(name):
     tree=ET.parse(ROOT/name).getroot()
@@ -294,7 +294,7 @@ for offset,row in enumerate(targets):
     if (offset+1)%40==0:print('GENERATED',offset+1,'/',len(targets),flush=True)
 zipout.close()
 assert len(records)==len(targets) and len(sheets)==(len(targets)+39)//40
-assert len({(r['tile_set_name'],r['local_id']) for r in records})==320
+assert len({(r['tile_set_name'],r['local_id']) for r in records})==len(targets)
 def write_csv(path,rows):
     with path.open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0]))
