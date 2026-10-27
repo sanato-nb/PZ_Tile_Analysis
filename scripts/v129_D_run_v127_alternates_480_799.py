@@ -370,7 +370,7 @@ manifest=dict(version='v129',corrected_D_definition='different A candidate for s
   evidence_csv=maincsv.relative_to(R).as_posix(),evidence_csv_sha256=filesha(maincsv),
   trials_csv=trials_csv.relative_to(R).as_posix(),trials_csv_sha256=filesha(trials_csv),
   review_sheet_sha256={p.name:filesha(p) for p in sheets},
-  v128_tables_preserved=187,db_sha256=sha(newraw),db_integrity='ok',
+  v128_tables_preserved=190,db_sha256=sha(newraw),db_integrity='ok',
   correspondence_verified=0,tilezed_verified=0,identity_certified=0,human_visual_review_completed=0,
   caution='All candidate sources are pixel verified against v127; nearby-grid probes are NOT verified SAME tile and may be OTHER local IDs. These are only experimental B scene re-renders.')
 (OUT/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
