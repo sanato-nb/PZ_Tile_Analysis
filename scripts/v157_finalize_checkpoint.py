@@ -3,7 +3,7 @@
 from pathlib import Path
 import json
 R=Path(__file__).resolve().parents[1]
-review=json.loads((R/'review/v157_walls_3600_3679/MANIFEST.json').read_text())
+review=json.loads((R/'review/v157_housewalls_3600_3679/MANIFEST.json').read_text())
 dbm=json.loads((R/'analysis/current/v157/MANIFEST.json').read_text())
 state_path=R/'PROJECT_STATE.json'
 state=json.loads(state_path.read_text(encoding='utf-8'))
@@ -29,8 +29,8 @@ state['latest_checkpoint'].update(dict(
  expanded_unique_observed=obs,expanded_unique_unobserved=remaining,
  expanded_observation_percent=obs/10042*100,
  new_image_observed=obs-5400,new_keys_unobserved=4633-(obs-5400),
- evidence_repo_path='review/v157_walls_3600_3679/VISUAL_REVIEW.csv',
- evidence_manifest='review/v157_walls_3600_3679/MANIFEST.json',
+ evidence_repo_path='review/v157_housewalls_3600_3679/VISUAL_REVIEW.csv',
+ evidence_manifest='review/v157_housewalls_3600_3679/MANIFEST.json',
  mapping_verified=0,tilezed_verified=0,approved_final_certifications=0,
  v157_new_provisional=n,v157_excluded_unverified=review['excluded_unverified'],
  v157_exception_indices=review['excluded_indices'],
@@ -48,7 +48,7 @@ state['unified_database'].update(dict(
 ))
 state['latest_v157_evidence']={
  'version':'v157','source_indices':[3600,3679],
- 'manual_images_seen':160,'source_verified_provisional':n,
+ 'manual_images_seen':80,'source_verified_provisional':n,
  'excluded_unverified':review['excluded_unverified'],
  'excluded_indices':review['excluded_indices'],
  'sqlite_sha256':dbm['sqlite_sha256'],
@@ -68,7 +68,7 @@ summary=(
  f'**{review["excluded_unverified"]}종**은 기존 관찰 중복·B−C 0·지도끝 등의 사유로 신규 관찰에서 제외. 투명 인증 불가.\n'
  f'- 전체 **{obs}/10,042종 ({obs/10042*100:.2f}%)** 이미지 관찰 기록, 미관찰 **{remaining}종**. 연결·방향·정확한 부품 규격은 공식 검증 전까지 보류.\n'
  f'- **219개 물리 SQLite 테이블** (부모 v156 218개/모든 기존 행 수 그대로 보존, 신규 {n}행 1테이블), SHA256 {dbm["sqlite_sha256"]}, PRAGMA integrity_check=ok. '
- '증거 review/v157_walls_3600_3679의 CSV/ZIP/시각 검수판/예외표에 저장.\n'
+ '증거 review/v157_housewalls_3600_3679의 CSV/ZIP/시각 검수판/예외표에 저장.\n'
  '- 원본 PNG/TMX, 기존 5,409, 수동80·제외14, held D2/JUMBO20 및 이전 DB 불변. 공식 Local ID/TileZed/정체 최종 인증 0; 사용자 정의 D 동일키 다른 A 공식 매핑 미검증.\n'
  '- v157은 v156 물리 DB에서만 파생하고 기존 자료를 변경하지 않음.\n\n---\n'
 )
