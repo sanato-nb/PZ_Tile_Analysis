@@ -1,7 +1,7 @@
-name: v136 original ABC visual review excluding 20 held JUMBO and preserve v135 SQLite
+name: v136 visual verification of 80 electricity pylon structures and v135 SQLite
 on:
   push:
-    branches: [work/v136-visual-pylon-480-559-excluding-held-20261027]
+    branches: [work/v136-visual-electricity-pylon-480-559-20261027]
     paths:
       - scripts/v136_visual_pylon_480_559.py
       - review/v136_pylon_480_559/MANUAL_VISUAL_NOTES.json
