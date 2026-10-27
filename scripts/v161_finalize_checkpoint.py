@@ -28,7 +28,7 @@ assert state['latest_checkpoint']['expanded_unique_observed']==8954
 assert state['unified_database']['version']=='v160'
 assert review['manual_image_annotations']==40 and review['original_scope']==[3840,3879]
 assert review['promoted_provisional']+review['excluded_unverified']==40
-assert dbm['version']=='v161' and dbm['parent']=='v159'
+assert dbm['version']=='v161' and dbm['parent']=='v160'
 assert dbm['prior_tables_preserved']==222 and dbm['table_count']==223
 assert dbm['new_rows']==review['promoted_provisional']
 assert dbm['skipped_rows']==review['excluded_unverified']
