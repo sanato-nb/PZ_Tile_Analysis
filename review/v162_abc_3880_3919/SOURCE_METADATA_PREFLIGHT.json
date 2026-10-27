@@ -1001,5 +1001,21 @@
       "manual_hold": false,
       "status": "metadata_preflight_only_not_source_reverified"
     }
-  ]
+  ],
+  "independent_original_TMX_XML_read": {
+    "source": "GitHub main v161 original four TMX files, fetched by Git blob SHA and directly parsed",
+    "files": [
+      "28_45.tmx",
+      "29_46.tmx",
+      "30_45.tmx",
+      "28_46.tmx"
+    ],
+    "rows_checked": 40,
+    "raw_gid_exact_matches": 40,
+    "source_level_matches": 40,
+    "source_layer_name_matches": 40,
+    "tileset_firstgid_local_id_matches": 40,
+    "method": "Parse each TMX <layer> CSV into 256x256 grid; compare source_x, source_y, layer_index, raw_gid and firstgid/tileset name to B metadata. This does not independently verify PNG pixel SHA or B/C ZIP bytes; CI handles those.",
+    "result": "PASS"
+  }
 }
