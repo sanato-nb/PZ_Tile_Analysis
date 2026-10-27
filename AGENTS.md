@@ -1,5 +1,15 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (v124 실제 D 위치 전수 색인, 통합 SQLite v124)
 
+## 최신 v128 — 다른 원본 PNG A 후보를 원래 B 장면에서 재조립 (2026-10-27)
+
+- 사용자 정의 D: **같은 (tile_set_name, local_id)에 해당할 수 있는 다른 A 원본 이미지를 찾고, 원래 B의 동일 TMX 좌표/레이어에서 대상 GID 이미지 하나만 교체해 5×5 장면을 재조립한다.** v124 두 번째 TMX 사용 위치는 별도 역사적 데이터이며, 인접 격자 다른 ID 크롭은 검증된 D로 승격 금지.
+- **v128 PR #83**, Actions **40440952240 PASS**: v127 전수 검색에서 발견한 다른 PNG 원본 변형 3종 `vegetation_foliage_01/{0,1,3}`의 A 대체 크롭을 각 원래 B 장면에 대입해 **D 3종** 실제 생성. B↔D 변화 픽셀: 2,725 / 5,561 / 6,585. 같은 TMX 타일 GID 딱 하나만 교체했으며 인접 다른 Local ID를 사용하지 않았음.
+- 결과: `review/v128_D_alt_PNG_3/D_SAME_B_COMPARE_3.jpg` (육안 검수), `D_SAME_B_VARIANT_3.zip` (원본 A·대체 A·B·C·D·절대차 PNG 18개), `D_ALT_SOURCE_B_COMPARE_3.csv`, `QUALITY_AUDIT.md`, `MANIFEST.json`.
+- **최신 물리 통합 DB v128** `analysis/current/v128/MANIFEST.json`. v127 부모 SQLite **189개 테이블 보존 + 새 v128 테이블 3행**. SHA-256 `4c37f22293d1e2914f2a7b56157dd31dea2dc5908438ddc9c63607a88488004d` / `PRAGMA integrity_check = ok`. 복원 스크립트 `scripts/restore_unified_v128.py`.
+- 현재 원본 다른 PNG 파일 후보 3종은 모두 B 재조립 완료했지만, **공식 PNG/TMX Local ID·TileZed 대응 및 최종 정체 인증은 0**. A1/A2/A3 다른 같은 키 크롭 0종. v127의 30,249개 이웃 격자는 **다른 타일일 수 있는 미검증 가설**이며 동일 타일 후보로 계산하지 않는다.
+- 기존 5,409종·수동 검수80·제외14·원본 Tiles/TMX·과거 DB 보존. 새 시각 정체 관찰 수 추가 0, 전체 확장 고유 관찰 **5,580/10,042종 유지**. 다음은 실제 Local ID 그리드/타일 정의/멀티타일 연결의 추가 증거 확보 후 나머지 D 후보를 검증하는 단계다.
+
+
 ## v127 전체 D 후보 전수 검색 결과 (2026-10-27) — 최신 우선
 
 - **D 의미**: **같은 타일 Local ID의 대체 A 이미지를 탐색한 뒤, 동일 TMX 원래 B 5×5 위치에서 후보를 치환해 비교**한다. 과거 v124의 '다른 TMX 위치' 색인은 별도 보조 기록이다.
