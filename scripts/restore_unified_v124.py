@@ -18,6 +18,10 @@ with sqlite3.connect(out) as db:
     assert db.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
     assert db.execute('SELECT count(*) FROM tile_catalog WHERE observed_any=1').fetchone()[0]==5400
     assert db.execute('SELECT count(*) FROM v121_abcd_evidence').fetchone()[0]==160
-    assert db.execute('SELECT count(*) FROM v124_ai_visual_review_160').fetchone()[0]==160
+    assert db.execute('SELECT count(*) FROM v122_ai_visual_review_160').fetchone()[0]==160
+    assert db.execute("SELECT count(*) FROM v123_abcd_evidence_next160").fetchone()[0]==160
+    assert db.execute("SELECT count(*) FROM v124_d_placement_4472").fetchone()[0]==4472
+    assert db.execute("SELECT count(*) FROM v124_d_placement_4472 WHERE d_status='actual_second_placement'").fetchone()[0]==2791
+    assert db.execute("SELECT count(*) FROM v124_d_placement_4472 WHERE d_status='actual_second_placement' AND d_level=0").fetchone()[0]>0
     assert db.execute('SELECT count(*) FROM tile_catalog WHERE identity_final_certified=1').fetchone()[0]==0
 print('PASS full v124 historical DB',out,m['sqlite_sha256'])
