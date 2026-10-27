@@ -1,0 +1,54 @@
+name: v130 Verify latest D experimental rerenders and whole SQLite
+on:
+  push:
+    branches: [work/v130-sync-D-handoff-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - scripts/restore_unified_v130.py
+      - .github/workflows/v130-handoff-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /scripts/restore_unified_v130.py
+            /analysis/current/v130/*
+            /review/v130_D_alt_A_B_320/MANIFEST.json
+      - name: Verify v130 statuses and source counts
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          m=json.loads(Path('review/v130_D_alt_A_B_320/MANIFEST.json').read_text())
+          db=json.loads(Path('analysis/current/v130/MANIFEST.json').read_text())
+          assert s['latest_checkpoint']['version']==s['unified_database']['version']=='v130'
+          assert db['version']=='v130' and db['parent']=='v129'
+          assert s['unified_database']['sqlite_sha256']==m['db_sha256']==db['sqlite_sha256']
+          assert s['latest_checkpoint']['D_v130_scene_generated']==319
+          assert s['latest_checkpoint']['D_v127_preselected_neighbor_B_rerendered_cumulative']==799
+          assert m['source_v120_index_range']==[800,1119]
+          assert m['D_alternative_rendered']==319 and m['D_held']==1
+          assert m['grid_alignment_hypothesis_alternatives']==319
+          assert m['identity_certified']==m['correspondence_verified']==0
+          assert db['prior_tables_preserved']==191 and db['new_rows']==320
+          assert s['latest_checkpoint']['expanded_unique_observed']==5580
+          assert 'v130' in Path('AGENTS.md').read_text()
+          assert 'v130' in Path('docs/HANDOFF.md').read_text()
+          print('PASS v130 latest evidence and historical state')
+          PY
+      - name: Restore latest full SQLite with all past data intact
+        run: python3 -u scripts/restore_unified_v130.py /tmp/pz_v130_handoff.sqlite
