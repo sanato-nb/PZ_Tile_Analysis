@@ -4,6 +4,7 @@ on:
     branches: [work/v146-abc-1840-1999-20261027]
     paths:
       - scripts/v146_abc_visual160.py
+      - scripts/v146_finalize_checkpoint.py
       - review/v146_abc_1840_1999/MANUAL_VISUAL_NOTES.json
       - .github/workflows/v146-abc-visual160.yml
 permissions:
