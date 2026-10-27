@@ -1,5 +1,16 @@
 # 프로젝트 좀보이드 B42 타일 정체 분석 — 인수인계 (v131 최신)
 
+## v133 최신 실제 ABCD 이미지 정체 분석 (2026-10-27)
+
+- **병합 PR #93**: [v133 32종 원본 A/B/C/D 시각 검수](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/93), [Actions 성공 검증](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40463349746).
+- **새 시각 관찰 32종**: 신규 타일 인덱스 360~399 중 32종 `provisional_candidate`. A 원본 PNG 바이트와 RGBA SHA256, 원래 TMX raw GID·층·레이어·x/y 및 B/C/차이 이미지 해시 확인. D는 **다른 Local ID일 수 있는 인접 격자 가설**이므로 사물 정체 인증 근거에 사용 금지. 해당 구간 8개 인덱스 [363,364,377,378,381,382,388,397]은 이번 신규 분석에서 제외/미분류.
+- 시각 결과: `review/v133_visual32/VISUAL_REVIEW_32.csv`, `sheets/visual_00.jpg`~`03.jpg`, 실제 PNG 160장 `ABC_D_32_PROOF.zip`. 물체 외형, 후보 정체, 부품, 재질, 신뢰도, 근거 기록; 공식 Local ID 매핑·TileZed·최종 사물 인증 **모두 0**.
+- **84 TMX 전체 고유 10,042종 기준 개별 이미지 관찰 누계 5,615/10,042 (55.92%)**, 미관찰 4,427. v132의 5,583종 + 신규 겹치지 않는 32종. 수동 80, 제외 14, 기존 5,409 모두 보존.
+- **실물 v133 통합 SQLite**: `analysis/current/v133/MANIFEST.json`, SHA256 `bf85d911bd8ba27aa20fcd38e923de9555196b03cc2fc8d95eb3bb7f4f0b3bc3` (93,839,360 bytes). v132 194개 테이블과 모든 기존 행 수 그대로 보존하고 `v133_visual_review_32` 32행 1테이블만 추가하여 총 **195테이블**. `PRAGMA integrity_check=ok`, ZIP CRC·해시 검증 통과.
+- 사용자 요구대로 원래 보류 D 2종은 **이번 작업 대상 제외**. 기존 v132 JUMBO 20종(그중 A3 격자 반복 의심 7종)도 `held` 그대로 유지. B−C 0 사례 215건·이웃 누락8·지도 경계48 미검증이며 투명 인증 금지.
+- 보류 건은 삭제하지 않고 이력 보존. 과거 폐기한 범용 평면도 엔진 사용 금지. 얇은 벽보다 전체 Minecraft 블록 느낌 선호 및 벽 좌표 충돌 미해결.
+
+---
 ## v132 최신 작업 — 실제 PNG/TMX 재검증·신규 3종 시각 후보·JUMBO A3 20종 감사 (2026-10-27)
 
 - **병합된 PR #91**: [v132 원본 이미지와 TMX 실제 검수](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/91), 검증된 [Actions run 40460201283](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40460201283). 원본 v131 `main` `5bae2a6ef593b074f8731a19c48ad0bff5a5eff1`에서 추가, 기존 역사 불변.

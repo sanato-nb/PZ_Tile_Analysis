@@ -1,0 +1,70 @@
+name: Verify v133 handoff and immutable physical SQLite
+on:
+  push:
+    branches: [work/v133-sync-after-pr93-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - .github/workflows/v133-handoff-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /review/v133_visual32/*
+            /review/v133_visual32/sheets/*
+            /analysis/current/v132/MANIFEST.json
+            /analysis/current/v133/*
+      - name: Validate physical v133 and all handoff counts
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,base64,zlib,sqlite3,csv,zipfile
+          j=json.loads(Path('PROJECT_STATE.json').read_text())
+          m=json.loads(Path('analysis/current/v133/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v132/MANIFEST.json').read_text())
+          v=json.loads(Path('review/v133_visual32/MANIFEST.json').read_text())
+          assert j['latest_checkpoint']['version']=='v133'
+          assert j['unified_database']['version']=='v133'
+          assert j['latest_checkpoint']['expanded_unique_observed']==5615
+          assert j['latest_checkpoint']['expanded_unique_unobserved']==4427
+          assert j['unified_database']['table_count']==195
+          assert m['parent']=='v132' and m['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert m['prior_tables_preserved']==194 and m['new_rows']==32
+          assert v['processed']==32 and v['observed_provisional']==32
+          assert v['mapping_verified']==v['tilezed_verified']==v['certified']==0
+          assert v['deferred_not_held']==[363,364,377,378,381,382,388,397]
+          for name,h in v['files_sha256'].items():
+              assert hashlib.sha256((Path('review/v133_visual32')/name).read_bytes()).hexdigest()==h
+          with zipfile.ZipFile('review/v133_visual32/ABC_D_32_PROOF.zip') as z:
+              assert z.testzip() is None and len(z.namelist())==160
+          with Path('review/v133_visual32/VISUAL_REVIEW_32.csv').open(encoding='utf-8-sig') as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==32 and len({(r['tile_set_name'],r['local_id']) for r in rows})==32
+          assert all(r['mapping_verified']==r['tilezed_verified']==r['certified']=='0' for r in rows)
+          encoded=''.join(Path(part).read_text('ascii').strip() for part in m['parts'])
+          comp=base64.b64decode(encoded,validate=True)
+          assert hashlib.sha256(comp).hexdigest()==m['compressed_sha256']
+          raw=zlib.decompress(comp)
+          assert hashlib.sha256(raw).hexdigest()==m['sqlite_sha256'] and len(raw)==m['sqlite_bytes']
+          db=sqlite3.connect(':memory:');db.deserialize(raw)
+          assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==195
+          assert db.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+          assert db.execute('SELECT count(*) FROM v132_visual3_jumbo20').fetchone()[0]==23
+          assert db.execute('SELECT count(*) FROM v133_visual_review_32').fetchone()[0]==32
+          assert db.execute('SELECT count(*) FROM v133_visual_review_32 WHERE certified!=0').fetchone()[0]==0
+          assert all('v133' in Path(path).read_text() for path in ('AGENTS.md','docs/HANDOFF.md'))
+          print('PASS v133 5615 of 10042, physical 195 tables')
+          PY
