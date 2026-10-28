@@ -189,7 +189,7 @@ assert len(rows)==379 and verified_png>=368 and verified_primary>=368
  'unique_source_keys_requiring_evidence':379,
  'unreconciled_count_difference':2,
  'disposition':'unresolved historical accounting only; cannot infer which two keys were undercounted; no observation promotions'
-},ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 # Marking a review/audit is NOT marking the actual visual identity as observed.
 assert all(int(r['original_observed'])==int(r['identity_certified'])==0 for r in rows)
 fieldnames=list(rows[0].keys())
@@ -241,7 +241,7 @@ dbm=dict(version='v175',parent='v174',parent_sqlite_sha256=parent['sqlite_sha256
  compressed_sha256=sha(newpacked),sqlite_bytes=len(newraw),parts=parts,prior_tables_preserved=236,
  table_count=237,new_rows=379,new_observed_rows=0,integrity_check='ok',mapping_verified=0,tilezed_verified=0,certified=0)
 (DBOUT/'MANIFEST.json').write_text(json.dumps(dbm,ensure_ascii=False,indent=2)+'\n')
-summary=dict(version='v175',audit_type='complete_remaining_381_original_png_TMX_occurrence_census',
+summary=dict(version='v175',audit_type='physical_379_unobserved_key_census_plus_two_history_count_discrepancies',
  total_remaining_in_checkpoint=381,source_keys_audited=379,new_source_missing=370,old_source_missing=9,bookkeeping_discrepancy=2,observed_before=9661,observed_after=9661,
  remaining_after=381,original_png_pixel_verified=verified_png,original_B_TMX_placement_verified=verified_primary,
  actual_tmx_maps_checked=84,real_tmx_occurrences_total=sum(placement_count.values()),
@@ -254,10 +254,10 @@ summary=dict(version='v175',audit_type='complete_remaining_381_original_png_TMX_
  image_sheets=[p.name for p in sorted(SHEETS.glob('*.jpg'))])
 (OUT/'MANIFEST.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
 (OUT/'README.md').write_text(
- '# v175 남은 381종 전수 원본 증거 조사 (정체 인증·관찰 완료 추가 아님)\n\n'
- 'v174 기준 9,661/10,042종 이미지 잠정 관찰, 미관찰 381종. 이전 5,409 키 중 9종(observed_any=0), 새 4,633 키 중 372종(기존 v122/125/132~174 성공후보 외)을 실제 부모 SQLite와 원본 A CSV에서 확인했습니다. 역사적 잠정후보 2종이 최신 진행 상태의 관찰 집계에 반영되지 않는 차이가 있어, 체크포인트 미관찰381과 실제 원본 미관찰 고유키379가 불일치합니다. 차이 2는 아직 원인 확정 전이며 강제 관찰·정체인증하지 않습니다.\n\n'
- '84개 원본 TMX를 실제 GID와 tileset firstgid로 전수 스캔하고 해당 381개 키의 총 사용 횟수, 좌표/층/레이어, 가장자리 여부, 다른 5x5 가능 배치 후보를 집계합니다. 기존 B의 픽셀변화 0, 지도끝/주변누락, 기타 수동 보류 사유와 구분합니다.\n'
+ '# v175 상태 미관찰 381종과 실제 미관찰 379고유키 집계 차이 검수 (정체 인증·관찰 완료 추가 아님)\n\n'
+ 'v174 기준 9,661/10,042종 이미지 잠정 관찰, 미관찰 381종. 이전 5,409 키 중 9종(observed_any=0), 새 4,633 키 중 370종(기존 v122/125/132~174 성공후보 외)을 실제 부모 SQLite와 원본 A CSV에서 확인했습니다. 역사적 잠정후보 2종이 최신 진행 상태의 관찰 집계에 반영되지 않는 차이가 있어, 체크포인트 미관찰381과 실제 원본 미관찰 고유키379가 불일치합니다. 차이 2는 아직 원인 확정 전이며 강제 관찰·정체인증하지 않습니다.\n\n'
+ '84개 원본 TMX를 실제 GID와 tileset firstgid로 전수 스캔하고 해당 실제 미관찰 379개 고유키의 총 사용 횟수, 좌표/층/레이어, 가장자리 여부, 다른 5x5 가능 배치 후보를 집계합니다. 기존 B의 픽셀변화 0, 지도끝/주변누락, 기타 수동 보류 사유와 구분합니다.\n'
  '원본 A PNG 바이트 및 선택 RGBA 픽셀 해시 확인, B 원본 TMX selected GID와 실제 타일 키 일치 여부 대조; 다른 배치 후보가 있다는 사실만으로 정체 확정·관찰 완료·투명 인증하지 않습니다.\n'
- 'SQLite v174의 236개 기존 테이블/모든 행 수·내용을 변경하지 않고 감사 목적 381행 별도 테이블 v175_remaining_evidence_audit 하나만 추가(237개, 고유 원본 키 379행). 관찰률 96.21%, 상태의 남은 381종은 유지하고 2종의 역사적 집계 불일치를 별도 확인 대상으로 기록.\n'
+ 'SQLite v174의 236개 기존 테이블/모든 행 수·내용을 변경하지 않고 감사 목적 379행 별도 테이블 v175_remaining_evidence_audit 하나만 추가(237개, 고유 원본 키 379행). 관찰률 96.21%, 상태의 남은 381종은 유지하고 2종의 역사적 집계 불일치를 별도 확인 대상으로 기록.\n'
  'CSV와 원본 A 미관찰 접촉시트 6장, 실제 TMX 위치 후보, 지난 5,409 중 미관찰 9개 정체를 증거 파일로 보관. 다음 검수는 A/B/C를 실제 다른 원본 TMX 위치로 재조립하고 그 결과를 눈으로 확인해야만 승격 가능.\n',encoding='utf-8')
 print('PASS v175 FULL FORENSIC',json.dumps(summary,ensure_ascii=False),flush=True)
