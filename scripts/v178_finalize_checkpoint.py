@@ -51,7 +51,7 @@ state['latest_v178_evidence']=dict(
  official_mapping_verified=0,tilezed_verified=0,certified=0)
 state['next_actions']=[
  'v178: review ALT_BC_00..07.jpg and original A/B/C by eye; only promote physically source-checked and visually interpretable positive-delta scenes.',
- 'v178: first 48 (v176) plus remaining 163 (v178) complete 220 alternative scenes; visually examine 29 contact sheets and verify candidate identities before observed promotion.',
+ 'v178: first 48 (v176) plus remaining 163 (v178) complete 211 original-A-selected alternative scenes; old source 9 lack matched original-A crop and remain held. Visually inspect 28 contact sheets before provisional promotion.',
  'v178: reconcile checkpoint 358 vs 356 actual missing keys without artificially assigning two tile identities.',
  *state.get('next_actions',[])
 ]
