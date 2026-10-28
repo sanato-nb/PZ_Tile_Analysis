@@ -3,7 +3,7 @@
 from pathlib import Path
 import json
 R=Path(__file__).resolve().parents[1]
-m=json.loads((R/'review/v178_alt_scene_bulk163/MANIFEST.json').read_text())
+m=json.loads((R/'review/v178_alt_scene_bulk172/MANIFEST.json').read_text())
 d=json.loads((R/'analysis/current/v178/MANIFEST.json').read_text())
 p=json.loads((R/'analysis/current/v177/MANIFEST.json').read_text())
 path=R/'PROJECT_STATE.json'
@@ -28,8 +28,8 @@ state['latest_checkpoint'].update(dict(
  v178_new_B_C_positive=m['new_B_C_positive_count'],
  v178_new_B_C_zero=m['new_B_C_zero_count'],
  v178_newly_observed=0,
- evidence_repo_path='review/v178_alt_scene_bulk163/ALT_SCENE_RESULTS_163.csv',
- evidence_manifest='review/v178_alt_scene_bulk163/MANIFEST.json',
+ evidence_repo_path='review/v178_alt_scene_bulk172/ALT_SCENE_RESULTS_163.csv',
+ evidence_manifest='review/v178_alt_scene_bulk172/MANIFEST.json',
  mapping_verified=0,tilezed_verified=0,approved_final_certifications=0,
  v178_sqlite_sha256=d['sqlite_sha256'],
  caution='163 other ORIGINAL TMX placements assembled with identical original A candidate and single GID deletion. Pixel differences do NOT prove identity, material or official Local ID. Must visually inspect the newly rendered B/C evidence before any provisional identity promotion. Parent checkpoint 358 missing vs 356 strict physically missing remains unresolved.'
@@ -63,7 +63,7 @@ summary=(
  f"- 물리 SQLite **240테이블**, 부모 v177의 239개 테이블 모든 행 내용/수 보존, 신규 증거 163행 1테이블. SHA256 {d['sqlite_sha256']}, integrity_check=ok.\n"
  '- 최신 누적 이미지 잠정 관찰률 **9,684/10,042종(96.43%)** 및 기록상 미관찰 **358종** 유지, 실제 원본 고유 미관찰 356과 과거 집계 차이 2 미해결. 공식 TileZed/Local ID 정체 최종 인증 0.\n'
  '- 원본 84 TMX/PNG, 기존 5409·수동80·제외14·D held2/JUMBO20 및 역사 DB/근거 보존. 이것은 같은 원본 A의 다른 진짜 TMX B 자리를 보는 것이지 D의 다른 공식 A를 원래 B 같은 좌표에 넣는 작업이 아님.\n'
- '- 증거 review/v178_alt_scene_bulk163/, 물리 SQLite analysis/current/v178/MANIFEST.json.\n\n---\n'
+ '- 증거 review/v178_alt_scene_bulk172/, 물리 SQLite analysis/current/v178/MANIFEST.json.\n\n---\n'
 )
 for rel in ['AGENTS.md','docs/HANDOFF.md']:
  f=R/rel;s=f.read_text(encoding='utf-8')
