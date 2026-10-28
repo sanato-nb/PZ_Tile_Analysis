@@ -78,13 +78,12 @@ jobs:
           assert hashlib.sha256((p/'MANUAL_A_REASSESSMENT_FLAGS.json').read_bytes()).hexdigest()==a['flags_sha256']
           print('PASS 160 true original-A pixel source matches, 25 flagged historical specificity risks, no invented identity certification')
           PY
-      - name: Commit verified independent audit evidence to branch
+      - name: Commit verified independent A-only audit evidence without rebasing binary JPEG sheets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add --sparse review/v194_Afirst_second160_319
           if ! git diff --cached --quiet; then
             git commit -m "v194: 160 original PNG A sprites independently hashed and four A-only sheets; 25 B-scene leakage risks"
-            git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
