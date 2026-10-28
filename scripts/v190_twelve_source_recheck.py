@@ -26,6 +26,8 @@ notes=json.loads((OUT/'MANUAL_ASSESSMENT_12.json').read_text(encoding='utf-8'))
 assert notes['version']=='v190' and len(notes['indices'])==12 and len(notes['notes'])==12
 assert notes['reclassified_as_provisional']==notes['identity_certified']==notes['official_mapping_verified']==notes['tilezed_verified']==0
 a=keys(R/'review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv')
+A_SEQUENCE={(r['tile_set_name'],int(r['local_id'])):i for i,r in enumerate(rows(R/'review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv'))}
+assert len(A_SEQUENCE)==4633
 occ=keys(R/'review/v182_occlusion202/SOURCE_OCCLUSION_202.csv')
 excl=keys(R/'review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv')
 held=keys(R/'review/v183_original_BC_visual65/HELD_137.csv')
@@ -40,7 +42,7 @@ tmp=Path('/tmp/pz_v190_verified12.sqlite');tmp.write_bytes(raw)
 db=sqlite3.connect(tmp)
 assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
 before={n:db.execute('SELECT count(*) FROM "'+n+'"').fetchone()[0] for (n,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-assert len(before)==251 and before['v189_targeted_recheck_7']==7,('parent_tables',len(before))
+assert len(before)==251 and before['v189_held_source_reverification']==7,('parent_tables',len(before))
 out=[]
 @lru_cache(maxsize=40)
 def png(p):
@@ -56,7 +58,7 @@ def tmx(name):
 for index in notes['indices']:
  note=notes['notes'][str(index)]
  assert note['index']==index and note['new_observed']==note['certified']==0
- matches=[(key,r) for key,r in a.items() if int(r['source_index'])==index]
+ matches=[(key,r) for key,r in a.items() if A_SEQUENCE[key]==index]
  assert len(matches)==1,('index_lookup',index,len(matches))
  key,src=matches[0]
  assert key in occ and key in held and key in excl and key in more
@@ -108,7 +110,7 @@ for index in notes['indices']:
   original_v188_exclusion_preserved=1,observed=0,
   official_mapping_verified=0,tilezed_verified=0,certified=0))
  assert db.execute('SELECT count(*) FROM v188_active_review_disposition WHERE tile_set_name=? AND local_id=?',key).fetchone()==(1,)
- assert db.execute('SELECT count(*) FROM v189_targeted_recheck_7 WHERE tile_set_name=? AND local_id=?',key).fetchone()==(0,)
+ assert db.execute('SELECT count(*) FROM v189_held_source_reverification WHERE tile_set_name=? AND local_id=?',key).fetchone()==(0,)
 assert len(out)==12 and len({(r['tile_set_name'],r['local_id']) for r in out})==12
 fieldnames=list(out[0])
 with (OUT/'RECHECK_12.csv').open('w',encoding='utf-8-sig',newline='') as f:
