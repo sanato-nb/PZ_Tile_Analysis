@@ -1,0 +1,268 @@
+{
+  "version": "v194",
+  "scope": "second new A-only batch source indices 160..319",
+  "source_page": "https://pzwiki.net/wiki/PZwiki:Tile_list",
+  "wiki_usage": "Moveables_EN/script generated names are high-level vocabulary only. Names do NOT authenticate tile_set_name/local_id or atlas crop.",
+  "reviewed_A_contact_sheets": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_002.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_003.jpg"
+  ],
+  "corrective_action": "Do not modify old provisional database. Flag per-sprite exact role as needing downgrade/re-review rather than treating TMX B composite as A alone.",
+  "flagged_indices": [
+    180,
+    181,
+    182,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    196,
+    197,
+    201,
+    202,
+    205,
+    208,
+    209,
+    260,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310,
+    311,
+    312
+  ],
+  "flag_count": 25,
+  "flags": [
+    {
+      "index": 180,
+      "risk": "B_assembly_leakage",
+      "reason": "A에는 가로로 짧은 목재 절단조각만 보임. B의 완성 장작더미를 A의 독립 사물로 읽지 말 것.",
+      "A_observation": "짧은 가로 목재 조각; 쌓인 장작의 어느 면인지는 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 181,
+      "risk": "B_assembly_leakage",
+      "reason": "A에는 비스듬한 단일 목재판만 보이고 장작더미 전체 윤곽은 없음.",
+      "A_observation": "짧은 비스듬한 목재판; 윗판 역할 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 182,
+      "risk": "B_assembly_leakage",
+      "reason": "A는 세로로 긴 목재/통나무 묶음 한 조각. B 전체 장작더미의 측면으로 확정할 수 없음.",
+      "A_observation": "세로 방향의 나뭇결·통나무형 조각; 조립 위치 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 187,
+      "risk": "A_category_overreach",
+      "reason": "A에는 회녹색 가장자리와 중앙 어두운 장방형 천/패드 면이 보임. 매트·접힌 천·침낭 바닥 등 비교 후보가 있으나 이 타일 단독으로 종류는 확정되지 않음.",
+      "A_observation": "회녹색 테두리와 어두운 낮은 판·천 형태; 정확한 캠핑 용품 이름 보류",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 188,
+      "risk": "A_category_overreach",
+      "reason": "A에 길쭉한 녹색 천면과 평행한 줄·접힘이 보여 침낭 후보는 가능하지만 지퍼/머리공간·배치 방향은 A만으로 확정되지 않음. 완성 물체의 정확한 형식은 보류.",
+      "A_observation": "길쭉한 녹색 천상 형태에 가로 줄과 접힘이 있음; 침낭 형태의 후보로서 방향·세부 모델 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 189,
+      "risk": "A_category_overreach",
+      "reason": "A는 저면 갈색 경사 지형/천 조각처럼 보이지만 접힌 깔개 재질은 A만으로 불명.",
+      "A_observation": "갈색 낮은 경사 판형 조각; 깔개인지 미정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 190,
+      "risk": "A_category_overreach",
+      "reason": "A는 작은 갈색 마름모 단편이며 갈색 캠핑 깔개로 확정할 명확한 가장자리 정보 없음. 이전에도 지도경계 보류.",
+      "A_observation": "갈색 납작한 사각 판형; 기능 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 191,
+      "risk": "A_category_overreach",
+      "reason": "A에 바닥처럼 놓인 밝은 갈색 조각이 보이나 접힌 천 매트로 단정할 구조가 없음.",
+      "A_observation": "낮은 갈색 판형 조각; 소재·용도 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 192,
+      "risk": "A_category_overreach",
+      "reason": "A에 얇은 갈색 다각형 단편만 보임. 바닥 매트인지 주변 장면 의존.",
+      "A_observation": "갈색 얇은 평판 조각; 매트 여부 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 196,
+      "risk": "A_part_vs_whole",
+      "reason": "A는 갈색 큰 마름모·직사각 천/판 면. 텐트 전체가 아닌 한 면만 보임.",
+      "A_observation": "갈색 큰 경사 평판; 텐트 지붕면 역할은 같은 시트 비교 후보",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 197,
+      "risk": "A_part_vs_whole",
+      "reason": "A는 넓은 갈색 사각 평판만 보임. 천막 지붕으로 확정하려면 194~203 연결 비교 필요.",
+      "A_observation": "갈색 경사 평판; 지붕·천막면 연결 미검증",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 201,
+      "risk": "A_part_vs_whole",
+      "reason": "A에는 갈색 한쪽 평면만 보이고 장력이 있는 텐트 전체 형상은 없음.",
+      "A_observation": "갈색 넓은 평판; 텐트와 연결 가능성만 기록",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 202,
+      "risk": "A_part_vs_whole",
+      "reason": "A에는 경사진 단일 갈색 평판. '텐트 상단'은 실제 결합 전에는 단정 불가.",
+      "A_observation": "갈색 경사 판형 조각; 연결면 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 205,
+      "risk": "A_part_vs_whole",
+      "reason": "A에는 세로 목재 널판이 여러 줄 겹친 작은 패널. 벽의 역할은 TMX 결합 전 미정.",
+      "A_observation": "겹친 나무 널판 패널; 벽/상자/울타리 여부 미정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 208,
+      "risk": "A_part_vs_whole",
+      "reason": "A는 갈색 판재 단편이며 특정 구조 판이라는 기능은 B에서 유추했을 가능성.",
+      "A_observation": "작은 목재 판재 조각; 연결 용도 미정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 209,
+      "risk": "A_part_vs_whole",
+      "reason": "A는 좁은 갈색 겹판으로 보임. '판자 벽'이라는 완성 구조 단정은 이르다.",
+      "A_observation": "갈색 좁은 널판 패널; 벽 역할 미검증",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 260,
+      "risk": "A_family_misclassification",
+      "reason": "A 원본은 목제 계단과 상부 작은 플랫폼, 이를 지지하는 긴 기둥 두 개의 조합으로 보임. 종전의 단순 상부/지붕 프레임 설명은 계단 단차와 기둥을 놓친 분류 가능성이 큼.",
+      "A_observation": "나무 디딤계단+작은 상부 플랫폼+두 지지기둥; 플랫폼 용도와 연결 방향은 미확정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 305,
+      "risk": "A_family_uncertain",
+      "reason": "A에는 아주 작은 흰 갈래와 회색 점. '장식'이라는 사용 목적은 확인되지 않음.",
+      "A_observation": "흰 가지/갈래 모양의 극소 조각; 재질·기능 미정",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 306,
+      "risk": "A_family_uncertain",
+      "reason": "A에는 밝은 흰 갈래와 가는 갈색 지주가 보임. 완성된 장식품인지 식생/간판 부속인지 미확정.",
+      "A_observation": "흰 갈래+목재색 수직대; 기능 불명",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 307,
+      "risk": "A_family_uncertain",
+      "reason": "A는 나무줄기 모양 세로봉 위에 가는 흰 가지가 뻗음. 장식이라는 목적은 A에서 불확실.",
+      "A_observation": "갈색 세로봉+흰 가지형 부품",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 308,
+      "risk": "A_family_uncertain",
+      "reason": "A는 세로 갈색 지주 상단의 여러 흰 가지 조각. 고정된 장식물인지 식물인지 미확정.",
+      "A_observation": "갈색 세로봉+흰 가지형 부품",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 309,
+      "risk": "A_family_uncertain",
+      "reason": "A에는 흰 가는 갈래 일부만 보임. 개별 물체로 판독 불가.",
+      "A_observation": "흰 극소 가지형 단편",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 310,
+      "risk": "A_family_uncertain",
+      "reason": "A는 작은 흰 갈래 및 짧은 세로 지주. 사물 기능 특정 불가.",
+      "A_observation": "짧은 지주+흰 가지형 단편",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 311,
+      "risk": "A_family_uncertain",
+      "reason": "A는 희미한 흰 갈래와 갈색 봉. '장식 기둥' 명칭은 B 맥락에 따른 추정일 수 있음.",
+      "A_observation": "갈색 지주+흰 분기 형태",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    },
+    {
+      "index": 312,
+      "risk": "A_family_uncertain",
+      "reason": "A는 가는 갈색 직립봉과 꼭대기의 흰 갈래. 기능은 A만으로 미정.",
+      "A_observation": "세로봉과 흰 가지형 상단",
+      "reassessment": "downgrade_specificity_hold_exact_role",
+      "official_A_tile_mapping_verified": false,
+      "BC_scene_can_identify_A_alone": false
+    }
+  ],
+  "official_mapping_verified": 0,
+  "final_identity_certified": 0
+}

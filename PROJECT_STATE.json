@@ -69,6 +69,9 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
+    "v194: audit subsequent new source keys 320..4632 from individual original A PNG morphology BEFORE original B/C; prioritize specificity errors vs B scene assembly; never auto-promote/auto-correct without evidence.",
+    "v194: manually examine 25 previously worded too specifically in 160..319, compare source A to target B/C and same atlas neighbors; 23 were previously provisional, 2 held; do not claim 25 proven errors.",
+    "v194: PZwiki tile list names are movable taxonomy only (B42.0.0 list), not validated tileset/local_id or exact PNG crop; wiki label alone never certifies mapping.",
     "v192: re-examine the remaining 23 low-confidence A fragments, requiring neighboring sprite group and exact TMX placement; never call B-C zero transparent.",
     "v192: find exact original A atlas and crop for historical 9 + missing new overlay_graffiti_wall_02/2, never infer an official Local ID from a filename.",
     "v192: distinguish 99 A-visible but actual B-C-occluded provisional candidates from 10 actual B-C positive; none are official TileZed or final identity certified.",
@@ -37436,5 +37439,27 @@
     "official_mapping_verified": 0,
     "tilezed_verified": 0,
     "identity_certified": 0
+  },
+  "latest_v194_A_first_quality_audit": {
+    "version": "v194",
+    "status": "A_image_source_sha_checked_and_25_specificity_risks_flagged",
+    "audited_range": "new_4633 ledger indices 160..319",
+    "audited_source_keys": 160,
+    "original_png_and_rgba_sha256_checked": 160,
+    "legacy_provisional_in_scope": 147,
+    "legacy_held_in_scope": 13,
+    "manual_A_only_specificity_risks": 25,
+    "previous_provisional_to_recheck": 23,
+    "previous_held_to_recheck": 2,
+    "remaining_in_scope_without_specificity_issue_identified": 135,
+    "remaining_135_independent_certified": false,
+    "official_local_id_mapping_verified": 0,
+    "final_identity_certified": 0,
+    "added_observed": 0,
+    "previous_sqlite_unchanged": true,
+    "source_memo": "review/v194_Afirst_second160_319/MANUAL_A_REASSESSMENT_FLAGS.json",
+    "source_report": "review/v194_Afirst_second160_319/A_FIRST_REAUDIT_160_319.csv",
+    "wiki_reference": "https://pzwiki.net/wiki/PZwiki:Tile_list",
+    "wiki_is_not_mapping": true
   }
 }
