@@ -1,0 +1,86 @@
+name: v194 A-first second-added 160..319 source PNG independent audit
+on:
+  push:
+    branches: [work/v194-A-first-independent-audit-second-batch-160-319-20261028]
+    paths:
+      - scripts/v194_A_only_reaudit_second160.py
+      - review/v194_Afirst_second160_319/MANUAL_A_REASSESSMENT_FLAGS.json
+      - .github/workflows/v194-original-A-reinspection.yml
+permissions:
+  contents: write
+concurrency:
+  group: v194-independent-original-A-check
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v194_A_only_reaudit_second160.py
+            /review/v194_Afirst_second160_319/MANUAL_A_REASSESSMENT_FLAGS.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v123_ABCD_next160/ABCD_160_319.csv
+            /review/v125_AI_ABCD_20/AI_VISUAL_SPOTCHECK_20.csv
+            /review/v134_visual_180_319/MANUAL_VISUAL_NOTES.json
+            /review/v134_visual_180_319/VISUAL_REVIEW.csv
+      - name: Hydrate exactly original PNG atlas files for second-added indices 160 through 319
+        run: |
+          python3 - <<'PY' >/tmp/v194_source_atlases.txt
+          import csv
+          with open('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv',encoding='utf-8-sig') as f:
+            src=list(csv.DictReader(f))
+          assert len(src)==4633
+          paths=set()
+          for i in range(160,320):
+            r=src[i]
+            assert r['source_image_path'].startswith('Tiles/') and '..' not in r['source_image_path']
+            paths.add('/'+r['source_image_path'])
+          assert 3<=len(paths)<=160
+          for path in sorted(paths):print(path)
+          PY
+          echo "Source PNG atlas count: $(wc -l </tmp/v194_source_atlases.txt)"
+          git sparse-checkout add --stdin </tmp/v194_source_atlases.txt
+      - name: Install original image pixel support
+        run: python3 -m pip install --quiet Pillow
+      - name: Verify 160 source PNG exact hashes and render four original-A-only comparison sheets
+        run: python3 -u scripts/v194_A_only_reaudit_second160.py
+      - name: Verify correction notes are not based on false official PZwiki mapping
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv,json,hashlib
+          p=Path('review/v194_Afirst_second160_319')
+          a=json.loads((p/'MANIFEST.json').read_text())
+          rows=list(csv.DictReader((p/'A_FIRST_REAUDIT_160_319.csv').open(encoding='utf-8-sig')))
+          flags=json.loads((p/'MANUAL_A_REASSESSMENT_FLAGS.json').read_text())
+          assert len(rows)==160 and [int(x['index']) for x in rows]==list(range(160,320))
+          assert len({(x['tile_set_name'],x['local_id']) for x in rows})==160
+          assert all(x['A_source_verified']=='1' for x in rows)
+          assert all(x['official_PNG_LocalID_mapping_verified']=='0' and x['final_identity_certified']=='0' for x in rows)
+          assert len(flags['flags'])==25 and a['A_specificity_flags']==25
+          assert sum(x['A_first_reaudit_status']=='A_specificity_downgrade_requested' for x in rows)==25
+          assert sum(x['A_first_reaudit_status']=='A_sha_verified_no_independent_specificity_decision' for x in rows)==135
+          assert a['exact_original_PNG_sha_verified']==a['exact_original_A_RGBA_sha_verified']==160
+          assert a['new_official_mapping']==a['new_final_certified']==a['new_observed']==a['automatic_identity_changes']==0
+          assert a['wiki_scope'].startswith('Moveables_EN')
+          for i in range(4): assert (p/'sheets'/('A_ONLY_BATCH_%02d.jpg'%i)).stat().st_size>200000
+          assert hashlib.sha256((p/'A_FIRST_REAUDIT_160_319.csv').read_bytes()).hexdigest()==a['csv_sha256']
+          assert hashlib.sha256((p/'MANUAL_A_REASSESSMENT_FLAGS.json').read_bytes()).hexdigest()==a['flags_sha256']
+          print('PASS 160 true original-A pixel source matches, 25 flagged historical specificity risks, no invented identity certification')
+          PY
+      - name: Commit verified independent audit evidence to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v194_Afirst_second160_319
+          if ! git diff --cached --quiet; then
+            git commit -m "v194: 160 original PNG A sprites independently hashed and four A-only sheets; 25 B-scene leakage risks"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
