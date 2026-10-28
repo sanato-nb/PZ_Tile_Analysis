@@ -1,0 +1,128 @@
+name: v195 original-A-only independent audit second tile batch
+on:
+  push:
+    branches: [work/v195-a-image-first-recheck-second-batch-20261028]
+    paths:
+      - scripts/v195_A_first_reaudit_second_batch.py
+      - review/v195_A_first_independent_reaudit/MANUAL_A_ONLY_SECOND_OPINION_68.json
+      - .github/workflows/v195-A-first-recheck.yml
+permissions:
+  contents: write
+concurrency:
+  group: v195-A-first-second-batch
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v195_A_first_reaudit_second_batch.py
+            /review/v195_A_first_independent_reaudit/MANUAL_A_ONLY_SECOND_OPINION_68.json
+            /review/v133_visual32/MANIFEST.json
+            /review/v133_visual32/VISUAL_REVIEW_32.csv
+            /review/v133_visual32/ABC_D_32_PROOF.zip
+            /review/v133_visual32/sheets/visual_00.jpg
+            /review/v133_visual32/sheets/visual_01.jpg
+            /review/v133_visual32/sheets/visual_02.jpg
+            /review/v133_visual32/sheets/visual_03.jpg
+            /review/v134_visual_180_319/MANIFEST.json
+            /review/v134_visual_180_319/VISUAL_REVIEW.csv
+            /review/v134_visual_180_319/ABC_EVIDENCE_VERIFIED.zip
+            /review/v134_visual_180_319/sheets/proof_00.jpg
+            /review/v134_visual_180_319/sheets/proof_01.jpg
+            /review/v134_visual_180_319/sheets/proof_02.jpg
+            /review/v134_visual_180_319/sheets/proof_03.jpg
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /analysis/current/v192/*
+      - name: Fetch exact original PNGs and TMXs referenced by 68 audit indices
+        run: |
+          python3 - <<'PY' >/tmp/v195_source_paths.txt
+          from pathlib import Path
+          import csv,json
+          rep=list(csv.DictReader(open('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv',encoding='utf-8-sig')))
+          names=json.load(open('review/v195_A_first_independent_reaudit/MANUAL_A_ONLY_SECOND_OPINION_68.json'))['notes']
+          a=list(csv.DictReader(open('review/v133_visual32/VISUAL_REVIEW_32.csv',encoding='utf-8-sig')))
+          b=list(csv.DictReader(open('review/v134_visual_180_319/VISUAL_REVIEW.csv',encoding='utf-8-sig')))
+          by={int(x['source_index']):x['tmx_file'] for x in a}
+          by.update({int(x['index']):x['B_tmx_file'] for x in b})
+          paths=set()
+          assert len(names)==68 and len(rep)==4633
+          for idx in names:
+            ix=int(idx)
+            p=rep[ix]['source_image_path']
+            assert p.startswith('Tiles/') and '..' not in p
+            paths.add('/'+p)
+            if ix in by:
+              t=by[ix]
+              assert t.endswith('.tmx') and '/' not in t and '..' not in t
+              paths.add('/B4220.3_MapExport_256/tmx/'+t)
+          assert 8<len(paths)<120
+          for p in sorted(paths):print(p)
+          PY
+          git sparse-checkout add --stdin </tmp/v195_source_paths.txt
+          echo "Original source files: $(wc -l </tmp/v195_source_paths.txt)"
+      - name: Install PIL
+        run: python3 -m pip install --quiet Pillow
+      - name: Re-check every actual A sprite and actual source TMX, make new A-only visual evidence and append-only SQLite
+        run: python3 -u scripts/v195_A_first_reaudit_second_batch.py
+      - name: Independently prove all 253 parent tables content unchanged and 68 A-only records unique
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,base64,zlib,json,csv,sqlite3
+          R=Path('.');m=json.load(open('review/v195_A_first_independent_reaudit/MANIFEST.json'))
+          a=json.load(open('analysis/current/v192/MANIFEST.json'))
+          b=json.load(open('analysis/current/v195/MANIFEST.json'))
+          assert m['A_images_individually_reinspected']==68
+          assert m['png_file_and_A_RGBA_sha_reverified']==68
+          assert m['original_TMX_GID_reverified']==64
+          assert m['audit_flags']=={'A_supported':58,'BC_context_overreach':2,'A_ambiguous':3,'prior_excluded':4,'A_contradiction':1}
+          assert m['image_observation_progress_unchanged']=='10007/10042'
+          assert m['official_mapping_verified']==m['certified']==m['tilezed_verified']==0
+          assert b['parent']=='v192' and b['parent_sqlite_sha256']==a['sqlite_sha256']
+          assert b['table_count']==254 and b['previous_tables_preserved']==253 and b['new_observed_rows']==0
+          with open('review/v195_A_first_independent_reaudit/A_FIRST_REAUDIT_68.csv',encoding='utf-8-sig') as f:items=list(csv.DictReader(f))
+          assert len(items)==68 and len({(x['tile_set_name'],x['local_id']) for x in items})==68
+          assert sum(x['source_GID_TMX_verified']=='1' for x in items)==64
+          assert all(x['certified']==x['mapping_verified']==x['tilezed_verified']=='0' for x in items)
+          assert hashlib.sha256(Path('review/v195_A_first_independent_reaudit/A_FIRST_REAUDIT_68.csv').read_bytes()).hexdigest()==m['review_csv_sha256']
+          assert len(m['original_A_sheets'])==9
+          assert all(Path(p).stat().st_size>75000 for p in m['original_A_sheets'])
+          def dbraw(d):
+            data=base64.b64decode(''.join(Path(x).read_text('ascii') for x in d['parts']))
+            assert hashlib.sha256(data).hexdigest()==d['compressed_sha256']
+            raw=zlib.decompress(data)
+            assert len(raw)==d['sqlite_bytes'] and hashlib.sha256(raw).hexdigest()==d['sqlite_sha256']
+            return raw
+          x=sqlite3.connect(':memory:');x.deserialize(dbraw(a))
+          y=sqlite3.connect(':memory:');y.deserialize(dbraw(b))
+          assert x.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert y.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          parent=[v[0] for v in x.execute("SELECT name FROM sqlite_master WHERE type='table'")]
+          newer=[v[0] for v in y.execute("SELECT name FROM sqlite_master WHERE type='table'")]
+          assert len(parent)==253 and len(newer)==254 and set(newer)-set(parent)=={'v195_A_first_second_opinion'}
+          assert y.execute('SELECT count(*) FROM v195_A_first_second_opinion').fetchone()[0]==68
+          for name in parent:
+            u=x.execute('SELECT * FROM "'+name+'"');v=y.execute('SELECT * FROM "'+name+'"')
+            while True:
+              u1=u.fetchmany(1024);v1=v.fetchmany(1024)
+              assert u1==v1,('parent row mutated',name)
+              if not u1:break
+          print('PASS 68 real original sprite A independent visual notes with source provenance; all 253 old tables exactly preserved')
+          PY
+      - name: Commit versioned audit without altering PROJECT_STATE or old evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v195_A_first_independent_reaudit analysis/current/v195
+          if ! git diff --cached --quiet; then
+            git commit -m "v195 independent original-A visual re-audit 68 source keys from v133 and v134; preserve parent SQLite, never certify wiki names"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
