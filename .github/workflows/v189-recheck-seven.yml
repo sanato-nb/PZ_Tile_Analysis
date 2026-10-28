@@ -63,6 +63,14 @@ jobs:
              if gid:
               i=bisect.bisect_right(first,gid)-1
               if i>=0:need.add((ts[i][1],gid-ts[i][0]))
+          # All seven historically classified-but-held tiles must be original-A verified,
+          # not just the two whose alternate TMX neighborhoods we render.
+          need.update({
+           ('appliances_cooking_01',39),
+           ('furniture_seating_indoor_01',6),('furniture_seating_indoor_01',7),
+           ('furniture_seating_indoor_01',32),
+           ('furniture_seating_indoor_03',22),('furniture_seating_indoor_03',23),
+           ('industry_02',270)})
           paths=set()
           for key in need:
            rec=a.get(key)
@@ -95,12 +103,11 @@ jobs:
           assert m['previous_active_review_exclusions_preserved']
           assert new['parent']=='v188' and new['parent_sqlite_sha256']==old['sqlite_sha256']
           assert new['prior_tables_preserved']==250 and new['table_count']==251 and new['new_rows']==7 and new['new_observed_rows']==0
-          assert m['final_identity_certified'] if False else m['certified']==m['mapping_verified'] if False else True
           assert m['certified']==m['official_mapping_verified']==m['tilezed_verified']==0
           rows=list(csv.DictReader(open(out/'SEVEN_RECHECK.csv',encoding='utf-8-sig')))
           assert len(rows)==7 and len({(r['tile_set_name'],r['local_id']) for r in rows})==7
           assert sum(bool(r['new_actual_TMX']) for r in rows)==2
-          assert all(r['historical_v188_review_exclusion_preserved']==r['historical_v188_review_exclusion_preserved']=='1' for r in rows)
+          assert all(r['historical_v188_review_exclusion_preserved']=='1' for r in rows)
           assert all(r['newly_observed']==r['final_identity_certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in rows)
           assert hashlib.sha256((out/'SEVEN_RECHECK.csv').read_bytes()).hexdigest()==m['comparison_csv_sha']
           zpath=out/'REAL_ALTERNATE_BC_TWO.zip'
