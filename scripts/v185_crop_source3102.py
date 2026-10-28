@@ -12,7 +12,7 @@ from PIL import Image,ImageDraw,ImageFont,ImageChops,ImageEnhance
 R=Path(__file__).resolve().parents[1]
 ROOT=R/'B4220.3_MapExport_256/tmx'
 OUT=R/'review/v185_crop3102_source'
-DBOUT=R/'analysis/current/v180'
+DBOUT=R/'analysis/current/v185'
 SHEETS=OUT/'sheets'
 for d in [OUT,DBOUT,SHEETS]:d.mkdir(parents=True,exist_ok=True)
 def sha(b):return hashlib.sha256(b).hexdigest()
