@@ -1,0 +1,103 @@
+name: v179 163 manually reviewed A B C scenes and 108 provisional parts from signed parent proofs
+on:
+  push:
+    branches: [work/v179-bulk163-manual-visual-review-20261028]
+    paths:
+      - scripts/v179_visual163_from_v178_proofs.py
+      - scripts/v179_finalize_checkpoint.py
+      - .github/workflows/v179-bulk163-visual.yml
+permissions:
+  contents: write
+concurrency:
+  group: v179-human-visual163-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v179_visual163_from_v178_proofs.py
+            /scripts/v179_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v178/*
+            /review/v178_alt_scene_bulk172/ALT_BC_163_ORIGINAL_TMXS.zip
+            /review/v178_alt_scene_bulk172/ALT_SCENE_RESULTS_163.csv
+            /review/v178_alt_scene_bulk172/MANIFEST.json
+            /review/v179_alternative163_visual/MANUAL_VISUAL_NOTES.json
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify previous true TMX original PNG proof chain and re-read 652 A B C PNG differences, annotate 108
+        run: python3 -u scripts/v179_visual163_from_v178_proofs.py
+      - name: Independently compare all 240 parent physical SQL tables including every existing row, 108 accepted and 55 held
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv,base64,hashlib,json,sqlite3,zlib,zipfile
+          R=Path('review/v179_alternative163_visual')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v179/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v178/MANIFEST.json').read_text())
+          assert m['visually_reviewed']==163 and m['positive_alt_B_C']==126
+          assert m['newly_provisional']==108 and m['held']==55
+          assert m['held_zero']==37 and m['held_weak_or_missing']==18
+          assert m['observed_parent']==9684 and m['observed_now']==9792
+          assert m['remaining_checkpoint']==250 and m['remaining_physical_unique']==248
+          assert m['checkpoint_discrepancy']==2
+          assert m['official_mapping_verified']==m['tilezed_verified']==m['identity_certified']==0
+          assert d['version']=='v179' and d['parent']=='v178' and d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==241 and d['prior_tables_preserved']==240
+          assert d['new_rows']==d['new_observed_rows']==108
+          with (R/'VISUAL_REVIEW_108.csv').open(encoding='utf-8-sig') as f:good=list(csv.DictReader(f))
+          with (R/'EXCLUDED_55.csv').open(encoding='utf-8-sig') as f:skips=list(csv.DictReader(f))
+          assert len(good)==108 and len(skips)==55
+          assert all(int(r['B_C_changed_pixels'])>=200 and r['review_status']=='provisional_candidate' for r in good)
+          assert all(r['certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in good)
+          assert len({(r['tile_set_name'],r['local_id']) for r in good})==108
+          assert hashlib.sha256((R/'VISUAL_REVIEW_108.csv').read_bytes()).hexdigest()==m['review_csv_sha256']
+          assert hashlib.sha256((R/'EXCLUDED_55.csv').read_bytes()).hexdigest()==m['excluded_csv_sha256']
+          ev=Path('review/v178_alt_scene_bulk172/ALT_BC_163_ORIGINAL_TMXS.zip')
+          assert hashlib.sha256(ev.read_bytes()).hexdigest()==m['original_evidence_zip_sha256']
+          with zipfile.ZipFile(ev) as z:
+            assert z.testzip() is None and len(z.namelist())==652
+          def raw(man):
+            z=base64.b64decode(''.join(Path(k).read_text('ascii').strip() for k in man['parts']),validate=True)
+            assert hashlib.sha256(z).hexdigest()==man['compressed_sha256']
+            out=zlib.decompress(z)
+            assert hashlib.sha256(out).hexdigest()==man['sqlite_sha256'] and len(out)==man['sqlite_bytes']
+            return out
+          old=sqlite3.connect(':memory:');old.deserialize(raw(p))
+          new=sqlite3.connect(':memory:');new.deserialize(raw(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          o={x[0]:old.execute('SELECT count(*) FROM "'+x[0]+'"').fetchone()[0] for x in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          n={x[0]:new.execute('SELECT count(*) FROM "'+x[0]+'"').fetchone()[0] for x in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(o)==240 and len(n)==241 and set(n)-set(o)=={'v179_visual_review'}
+          assert all(n[k]==v for k,v in o.items()) and n['v179_visual_review']==108
+          for name in o:
+            a=old.execute('SELECT * FROM "'+name+'"');b=new.execute('SELECT * FROM "'+name+'"')
+            while True:
+              x=a.fetchmany(1024);y=b.fetchmany(1024)
+              assert x==y,('modified_parent_table',name)
+              if not x:break
+          assert new.execute('SELECT SUM(certified),SUM(mapping_verified),SUM(tilezed_verified) FROM v179_visual_review').fetchone()==(0,0,0)
+          print('PASS 108 manually visually source-proven provisional parts, all 240 parent tables contents identical')
+          PY
+      - name: Finalize 9792 observed checkpoint only after independent proof validations
+        run: python3 -u scripts/v179_finalize_checkpoint.py
+      - name: Commit verified results to isolated v179 branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v179_alternative163_visual analysis/current/v179 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v179 visually reviewed 163 original alternate scenes, 108 provisional new, 241-table SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
