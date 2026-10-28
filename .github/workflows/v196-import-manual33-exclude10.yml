@@ -1,0 +1,93 @@
+name: v196 user manual 33 review, exclude 10 unjudged, preserve prior SQLite
+on:
+  push:
+    branches: [work/v196-user-manual33-exclude10-20261028]
+    paths:
+      - scripts/v196_import_user_manual33.py
+      - review/v196_user_manual33/USER_UPLOADED_33_VERBATIM.csv
+      - .github/workflows/v196-import-manual33-exclude10.yml
+permissions:
+  contents: write
+concurrency:
+  group: v196-user-manual33-queue
+  cancel-in-progress: true
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v196_import_user_manual33.py
+            /review/v196_user_manual33/USER_UPLOADED_33_VERBATIM.csv
+            /review/v193_manual33_offline_review/수동검수_33종_입력양식.csv
+            /review/v192_image_first_TMX_BC_142/CROSSCHECK_142.csv
+            /analysis/current/v195/*
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+      - name: Source-byte SHA256, exact 33 keys, source-backed 23 provisional and 10 user-excluded, immutable v195 DB
+        run: python3 -u scripts/v196_import_user_manual33.py
+      - name: Independent 254 prior tables content byte-value equality and current queue stats
+        run: |
+          python3 - <<'PY'
+          import base64,csv,hashlib,json,sqlite3,zlib
+          from pathlib import Path
+          R=Path('.')
+          src=R/'review/v196_user_manual33/USER_UPLOADED_33_VERBATIM.csv'
+          sh=hashlib.sha256(src.read_bytes()).hexdigest()
+          assert sh=='14671a09bf43d6273e53d56cfc4521fb092551499909793c90200770b4a441ef'
+          with src.open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==33 and len({(x['tile_set_name'],x['local_id']) for x in rows})==33
+          assert sum(x['status']=='미판정' for x in rows)==10
+          assert sum(x['status']=='잠정 후보' for x in rows)==23
+          assert all(x['official_mapping_verified']==x['certified']=='0' for x in rows)
+          m=json.loads((R/'analysis/current/v196/MANIFEST.json').read_text())
+          p=json.loads((R/'analysis/current/v195/MANIFEST.json').read_text())
+          assert m['parent']=='v195' and m['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert m['table_count']==256 and m['previous_tables_preserved']==254
+          def unpack(meta):
+           b=base64.b64decode(''.join((R/x).read_text('ascii').strip() for x in meta['parts']),validate=True)
+           assert hashlib.sha256(b).hexdigest()==meta['compressed_sha256']
+           data=zlib.decompress(b)
+           assert hashlib.sha256(data).hexdigest()==meta['sqlite_sha256']
+           return data
+          old=sqlite3.connect(':memory:');old.deserialize(unpack(p))
+          new=sqlite3.connect(':memory:');new.deserialize(unpack(m))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          oa=[x[0] for x in old.execute("SELECT name FROM sqlite_master WHERE type='table'")]
+          nb=[x[0] for x in new.execute("SELECT name FROM sqlite_master WHERE type='table'")]
+          assert len(oa)==254 and len(nb)==256
+          assert set(nb)-set(oa)=={'v196_user_manual33_decisions','v196_user_excluded10'}
+          for table in oa:
+           x=old.execute('SELECT * FROM "'+table+'"');y=new.execute('SELECT * FROM "'+table+'"')
+           while True:
+            a=x.fetchmany(2048);b=y.fetchmany(2048)
+            assert a==b,('PARENT_ROW_MUTATED',table)
+            if not a:break
+          assert new.execute('SELECT status,count(*) FROM v196_user_manual33_decisions GROUP BY status ORDER BY status').fetchall()==[('미판정',10),('잠정 후보',23)]
+          assert new.execute('SELECT count(*),sum(transparent_certified),sum(identity_certified) FROM v196_user_excluded10').fetchone()==(10,0,0)
+          state=json.loads((R/'PROJECT_STATE.json').read_text())
+          assert state['latest_checkpoint']['version']=='v196'
+          assert state['latest_checkpoint']['active_review_queue_remaining']==0
+          assert state['latest_checkpoint']['expanded_unique_observed']==10007
+          assert state['latest_checkpoint']['expanded_unique_unobserved']==35
+          assert state['unified_database']['version']=='v196'
+          assert state['unified_database']['table_count']==256
+          print('PASS: all 254 original table values unchanged; 23 user provisional preserved, all 10 unjudged excluded from ACTIVE queue only; original observation progress unchanged.')
+          PY
+      - name: Commit reviewed source CSV archive, integrity-verified v196 DB and state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v196_user_manual33 analysis/current/v196 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v196 user manual33 23 provisional and 10 explicitly excluded active; preserve original 254 DB tables"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
