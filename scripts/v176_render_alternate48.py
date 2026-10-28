@@ -193,8 +193,8 @@ for i,row in enumerate(selected):
   original_scene_reason=row['reason'],original_scene_changed_pixels=row['B_C_changed_pixels'],
   alternate_tmx=loc['tmx'],alternate_layer=int(loc['layer_index']),alternate_level=int(loc['level']),
   alternate_x=int(loc['x']),alternate_y=int(loc['y']),alternate_raw_gid=int(loc['raw_gid']),
-  alternate_changed_pixels=changed,neighbors_missing=int(missB['missing_source']),
-  outside_canvas=int(missB['outside_canvas']),
+  alternate_changed_pixels=changed,neighbors_missing=int(missB.get('missing_source',0)),
+  outside_canvas=int(missB.get('outside_canvas',0)),
   actual_raw_gid_matches_key=1,exactly_one_target_GID_removed=1,
   original_A_pixel_sha=sha(A.tobytes()),alternate_TMX_sha256=filesha(ROOT/loc['tmx']),
   evidence_status='source_verified_new_scene_needs_manual_visual_identity_assessment',
@@ -213,7 +213,7 @@ for i,row in enumerate(selected):
   if q.mode=='RGBA':board.paste(q,pos,q)
   else:board.paste(q,pos)
  if i%6==5:board.save(SHEETS/f'ALT_BC_{i//6:02}.jpg',quality=88,optimize=True)
- print('ALT',i+1,'/48',k,'former pix',row['B_C_changed_pixels'],'new pix',changed,'missing sprites',missB['missing_source'],flush=True)
+ print('ALT',i+1,'/48',k,'former pix',row['B_C_changed_pixels'],'new pix',changed,'missing sprites',missB.get('missing_source',0),flush=True)
 proofs.close()
 assert len(results)==48 and len({(r['tile_set_name'],r['local_id']) for r in results})==48
 with zipfile.ZipFile(OUT/'ALT_BC_48_ORIGINAL_TMXS.zip') as proof:
