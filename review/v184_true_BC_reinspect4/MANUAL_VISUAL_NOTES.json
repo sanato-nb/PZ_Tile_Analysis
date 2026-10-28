@@ -1,0 +1,90 @@
+{
+  "version": "v184",
+  "parent": "v183",
+  "scope": "second-pass of 4 actual B-C positive tiles previously held as ambiguous",
+  "reviewed_original_indices": [
+    29,
+    298,
+    327,
+    3901
+  ],
+  "manual_image_annotations": 4,
+  "source_positive_without_missing_neighbors": 4,
+  "provisional_eligible": 3,
+  "still_held": 1,
+  "source_sheets": [
+    "review/v182_occlusion202/sheets/SOURCE_LAYER_DIAGNOSTIC_01.jpg",
+    "review/v182_occlusion202/sheets/SOURCE_LAYER_DIAGNOSTIC_09.jpg",
+    "review/v182_occlusion202/sheets/SOURCE_LAYER_DIAGNOSTIC_28.jpg",
+    "review/v182_occlusion202/sheets/SOURCE_LAYER_DIAGNOSTIC_32.jpg"
+  ],
+  "notes": {
+    "29": {
+      "candidate": "검회색 소형 휴대형 무전기 형태의 기기",
+      "features": "검은 직립 본체, 상단의 가는 안테나 모양 돌기, 어두운 화면·버튼부가 같은 원본 A와 상업 설비 주변 B 장면에서 확인됨",
+      "part": "휴대용 통신기 모양 소형 부품",
+      "material": "플라스틱·금속 추정",
+      "confidence": "medium",
+      "manual_hold": false,
+      "reason": "원본 B-C 453픽셀 확인, 소스 주변 누락0. 작은 크기지만 안테나·직립 본체 외형이 A 및 B에 일치; '무전기 형태' 이상의 기능 확정 금지",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "observation_basis": "Direct visual second-pass inspection of v182 original A, actual TMX B and single-original-GID C proof; no layer-masked X/Y used for promotion.",
+      "identity_certified": 0,
+      "official_mapping_verified": 0,
+      "tilezed_verified": 0,
+      "source_review": "v183 true-positive/ambiguous with zero missing neighbor images"
+    },
+    "298": {
+      "candidate": "작은 황갈색 직사각 바닥 부속",
+      "features": "매우 작은 황토색 나뭇결 사각 조각이 판재 바닥 근처에 존재하지만 원본 장면에서 독립 용도를 구분하기 어려움",
+      "part": "건축물 내 작은 목재형 조각",
+      "material": "목재 추정",
+      "confidence": "low",
+      "manual_hold": true,
+      "reason": "원본 B-C 361픽셀이지만 실제 물체 역할·기능이 충분히 구별되지 않아 보류 유지",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "observation_basis": "Direct visual second-pass inspection of v182 original A, actual TMX B and single-original-GID C proof; no layer-masked X/Y used for promotion.",
+      "identity_certified": 0,
+      "official_mapping_verified": 0,
+      "tilezed_verified": 0,
+      "source_review": "v183 true-positive/ambiguous with zero missing neighbor images"
+    },
+    "327": {
+      "candidate": "검회색 두 가로대의 금속 난간 부품",
+      "features": "두 개의 긴 수평 막대가 양쪽 검회색 세로 지주와 연결된 작은 계단식 울타리 판이 A에 직접 보이고, B 배치에서 건축물 경계에 부착",
+      "part": "외벽·계단 주변 난간 한 구간",
+      "material": "금속 추정",
+      "confidence": "medium",
+      "manual_hold": false,
+      "reason": "원본 B-C 250픽셀 확인, 소스 주변 누락0. 두 가로대와 세로 지주 연결이 A와 실제 배치에 부합; 방향·설치 규칙 미확정",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "observation_basis": "Direct visual second-pass inspection of v182 original A, actual TMX B and single-original-GID C proof; no layer-masked X/Y used for promotion.",
+      "identity_certified": 0,
+      "official_mapping_verified": 0,
+      "tilezed_verified": 0,
+      "source_review": "v183 true-positive/ambiguous with zero missing neighbor images"
+    },
+    "3901": {
+      "candidate": "적갈색 벽돌무늬 박공벽의 삼각형 끝판",
+      "features": "붉은 갈색 가로 벽돌 줄눈이 있는 작은 경사 잘림 판; 실제 원본 B의 검회색 기와 두 사면 사이에 박공벽이 겹쳐 드러남",
+      "part": "기와 지붕 아래 벽돌무늬 박공벽의 사선 마감",
+      "material": "벽돌무늬 마감재 추정",
+      "confidence": "low",
+      "manual_hold": false,
+      "reason": "원본 B-C 125픽셀만 양수, 원본 이웃 PNG 누락0. 정확한 재질이나 조립 방향은 정할 수 없으므로 부분계열만 low로 기록",
+      "orientation": "unverified",
+      "connections": "unverified",
+      "observation_basis": "Direct visual second-pass inspection of v182 original A, actual TMX B and single-original-GID C proof; no layer-masked X/Y used for promotion.",
+      "identity_certified": 0,
+      "official_mapping_verified": 0,
+      "tilezed_verified": 0,
+      "source_review": "v183 true-positive/ambiguous with zero missing neighbor images"
+    }
+  },
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "identity_certified": 0
+}
