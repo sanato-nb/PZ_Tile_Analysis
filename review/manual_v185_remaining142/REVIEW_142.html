@@ -199,7 +199,7 @@ function go(n){const arr=visible.length?visible:data.map(x=>x.id);let i=arr.inde
 const csvQuote=(v)=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
 function download(file,mime,txt){const a=document.createElement("a"),url=URL.createObjectURL(new Blob([txt],{type:mime}));a.href=url;a.download=file;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),800)}
 function exportCSV(){
- save();const cols=["origin","index","tile_set_name","local_id","prior_reason","original_real_B_C_pixels","original_TM X","original_layer","original_level","original_x","original_y","verdict","confidence","candidate","part","material","notes","lastSaved","official_identity_certified"];
+ save();const cols=["origin","index","tile_set_name","local_id","prior_reason","original_real_B_C_pixels","original_TMX","original_layer","original_level","original_x","original_y","verdict","confidence","candidate","part","material","notes","lastSaved","official_identity_certified"];
  const rows=data.map(d=>{const a=answers[d.id]||{};return[d.kind,d.index==null?"":d.index,d.tileset,d.local_id,d.reason_ko,d.pixels==null?"":d.pixels,d.orig_tmx,d.layer,d.level,d.x,d.y,a.verdict||"",a.confidence||"",a.candidate||"",a.part||"",a.material||"",a.memo||"",a.lastSaved||"",0]});
  const csv="\uFEFF"+cols.map(csvQuote).join(",")+"\r\n"+rows.map(r=>r.map(csvQuote).join(",")).join("\r\n");
  download("PZ_B42_v185_142종_수동검수결과.csv","text/csv;charset=utf-8",csv);
