@@ -223,7 +223,7 @@ fields=[('index', 'INTEGER'),('origin','TEXT'),('tile_set_name','TEXT'),('local_
  ('alternate_scene_candidate','TEXT'),('eligible_for_visual_followup','INTEGER'),('reason','TEXT'),('evidence_state','TEXT')]
 db.execute('CREATE TABLE v175_remaining_evidence_audit ('+','.join('"'+n+'" '+typ for n,typ in fields)+', PRIMARY KEY(tile_set_name,local_id), CHECK(original_observed=0 AND identity_certified=0))')
 keys=[n for n,_ in fields]
-db.executemany('INSERT INTO v175_remaining_evidence_audit ('+','.join(keys)+') VALUES ('+','.join('?' for _ in keys)+')',
+db.executemany('INSERT INTO v175_remaining_evidence_audit ('+','.join('"'+k+'"' for k in keys)+') VALUES ('+','.join('?' for _ in keys)+')',
  [tuple(r[k] for k in keys) for r in rows])
 db.commit()
 after={n:db.execute('SELECT count(*) FROM "'+n+'"').fetchone()[0] for (n,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
