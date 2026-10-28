@@ -5,7 +5,7 @@ on:
     paths:
       - scripts/v169_abc_gables40.py
       - scripts/v169_finalize_checkpoint.py
-      - review/v169_abc_4120_4159/MANUAL_VISUAL_NOTES.json
+      - review/v169_abc_4160_4199/MANUAL_VISUAL_NOTES.json
       - .github/workflows/v169-abc40.yml
 permissions:
   contents: write
@@ -28,7 +28,7 @@ jobs:
             /PROJECT_STATE.json
             /AGENTS.md
             /docs/HANDOFF.md
-            /review/v169_abc_4120_4159/MANUAL_VISUAL_NOTES.json
+            /review/v169_abc_4160_4199/MANUAL_VISUAL_NOTES.json
             /analysis/current/v168/*
             /analysis/imports/merged_catalog_5409.csv
             /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
@@ -49,7 +49,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import json,hashlib,zipfile,base64,zlib,sqlite3,csv
-          R=Path('review/v169_abc_4120_4159')
+          R=Path('review/v169_abc_4160_4199')
           m=json.loads((R/'MANIFEST.json').read_text())
           d=json.loads(Path('analysis/current/v169/MANIFEST.json').read_text())
           p=json.loads(Path('analysis/current/v168/MANIFEST.json').read_text())
@@ -101,7 +101,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse review/v169_abc_4120_4159 analysis/current/v169 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          git add --sparse review/v169_abc_4160_4199 analysis/current/v169 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
           if ! git diff --cached --quiet; then
             git commit -m "v169: verified A/B/C observations and 230-table physical SQLite"
             git pull --rebase origin "$GITHUB_REF_NAME"
