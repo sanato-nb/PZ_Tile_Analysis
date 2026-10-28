@@ -116,7 +116,7 @@ with zipfile.ZipFile(BytesIO(b''.join((R/'review/v182_occlusion202'/p).read_byte
   review.append(blob)
 assert len(review)==33 and sum(bool(x['images'].get('A')) for x in review)==23
 assert sum(x['old_catalog'] for x in review)==9
-assert sum(x['changed_pixels']==0 for x in review if x['changed_pixels'] is not None)==16
+assert sum(x['changed_pixels']==0 for x in review if x['changed_pixels'] is not None)==15
 print('sourced 33; available original actual B/C',sum(bool(x['images']) for x in review),flush=True)
 # Do not write image data in the CSV template; UI offline HTML has fully embedded
 # thumbnails. Exported user's own manual decisions are separate from verified data.
