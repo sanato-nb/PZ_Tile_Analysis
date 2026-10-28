@@ -4,6 +4,8 @@ on:
     branches: [work/v191-reopen142-A-first-20261028]
     paths:
       - scripts/v191_reopen142_A_image_first.py
+      - scripts/v191_finalize_A_visual_review.py
+      - review/v191_reopen142_A_first/MANUAL_A_IMAGE_OBSERVATIONS_142.json
       - .github/workflows/v191-reopen142-A-first.yml
 permissions:
   contents: write
@@ -22,6 +24,11 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /scripts/v191_reopen142_A_image_first.py
+            /scripts/v191_finalize_A_visual_review.py
+            /review/v191_reopen142_A_first/MANUAL_A_IMAGE_OBSERVATIONS_142.json
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
             /review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv
             /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
             /review/v175_remaining381_evidence_audit/OLD_NINE_UNOBSERVED.json
@@ -72,11 +79,13 @@ jobs:
           assert m['observed_checkpoint_before']==m['observed_checkpoint_after']==9898
           print('PASS 142 original tile keys, 9 actual contact sheets, no claimed image-identity observation')
           PY
-      - name: Commit source-verified PNG enlarged evidence sheets and audit
+      - name: Validate all 142 direct-image individual notes, preserve old SQLite and checkpoint, add handoff
+        run: python3 -u scripts/v191_finalize_A_visual_review.py
+      - name: Commit source-verified PNG enlarged evidence sheets, 132 real visual descriptions and handoff
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse review/v191_reopen142_A_first
+          git add --sparse review/v191_reopen142_A_first PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
           if ! git diff --cached --quiet; then
             git commit -m "v191 exact original PNG source A pixel evidence and 9 visual review sheets for 142 reopened keys"
             git pull --rebase origin "$GITHUB_REF_NAME"
