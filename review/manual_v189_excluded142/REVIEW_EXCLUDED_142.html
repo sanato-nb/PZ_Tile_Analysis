@@ -118,11 +118,16 @@ const blob=(p)=>REPO+"blob/main/"+p.split("/").map(encodeURIComponent).join("/")
 const V188_CATEGORY_LABELS={previously_reviewed_visual_or_occlusion_held:"원본 가림·시각 근거 부족",previously_visually_classified_but_not_observation_promoted:"외형 후보는 있으나 원본 관찰 미승격",historical_user_excluded:"과거 사용자 제외 보호",original_neighborhood_source_missing:"주변 원본 PNG 누락",historical_keep_provisional_not_source_observed:"기존 잠정·새 원본 근거 미검증",original_A_unavailable:"원본 A 미확보"};
 const localTiles=new Map(),localEvidence=new Map(),localURLs=new Map();
 function localImageFor(path){
- const rel=String(path||"").replace(/^Tiles\\//,"");
+ const input=String(path||"");
+ const rel=input.startsWith("Tiles/")?input.slice(6):input;
  const name=rel.split("/").pop();
- const f=localTiles.get(rel)||localEvidence.get(name);
- if(f){const key=f.name+"|"+f.size+"|"+f.lastModified;if(!localURLs.has(key))localURLs.set(key,URL.createObjectURL(f));return localURLs.get(key)}
- return raw(path)
+ const file=localTiles.get(rel)||localEvidence.get(name);
+ if(file){
+   const key=file.name+"|"+file.size+"|"+file.lastModified;
+   if(!localURLs.has(key))localURLs.set(key,URL.createObjectURL(file));
+   return localURLs.get(key);
+ }
+ return raw(path);
 }
 function localFileStatus(){
  const el=document.getElementById("localSourceStatus");if(el)el.textContent="로컬 원본 PNG "+localTiles.size+"개 / 비교시트 "+localEvidence.size+"개 등록. 등록한 파일은 이 컴퓨터에서만 읽어.";}
@@ -235,15 +240,21 @@ $("backupBtn").onclick=()=>{save();download("PZ_B42_v189_제외142종_검수백�
 $("importFile").onchange=async(e)=>{const f=e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());if(j.caseCount!==142||!j.answers)throw Error("이 검수기의 백업 형식이 아니야");answers=j.answers;persist();select(current);alert("142종 검수 기록을 복원했어")}catch(err){alert("파일을 읽지 못했어: "+err.message)}};
 document.addEventListener("keydown",(e)=>{if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))return;if(e.key==="ArrowRight")go(1);if(e.key==="ArrowLeft")go(-1)});
 document.getElementById("localTilesFolder").addEventListener("change", e=>{
- localTiles.clear();for(const file of e.target.files){
-   const p=(file.webkitRelativePath||file.name).replace(/\\\\/g,"/");
-   const i=p.indexOf("/2x/");const rel=i>=0?p.slice(i+1):(p.startsWith("2x/")?p:file.name);
+ localTiles.clear();
+ for(const file of e.target.files){
+   const src=(file.webkitRelativePath||file.name).split(String.fromCharCode(92)).join("/");
+   const pos=src.indexOf("/2x/");
+   const rel=pos>=0?src.slice(pos+1):(src.startsWith("2x/")?src:file.name);
    if(rel.toLowerCase().endsWith(".png"))localTiles.set(rel,file);
  }
  localFileStatus();select(current);
 });
 document.getElementById("localEvidenceFiles").addEventListener("change", e=>{
- localEvidence.clear();for(const file of e.target.files)if(/\\.(jpg|jpeg)$/i.test(file.name))localEvidence.set(file.name,file);
+ localEvidence.clear();
+ for(const file of e.target.files){
+   const n=file.name.toLowerCase();
+   if(n.endsWith(".jpg")||n.endsWith(".jpeg"))localEvidence.set(file.name,file);
+ }
  localFileStatus();select(current);
 });
 select(current);
