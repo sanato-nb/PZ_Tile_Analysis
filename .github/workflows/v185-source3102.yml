@@ -1,0 +1,114 @@
+name: v185 actual third TMX original crop 3102 complete-neighbor A B C and 247 SQLite tables
+on:
+  push:
+    branches: [work/v185-unobscured-crop-source3102-20261028]
+    paths:
+      - scripts/v185_crop_source3102.py
+      - scripts/v185_finalize_checkpoint.py
+      - .github/workflows/v185-source3102.yml
+permissions:
+  contents: write
+concurrency:
+  group: v185-crop-source-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v185_crop_source3102.py
+            /scripts/v185_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v184/*
+            /review/v180_remnant239_multisite/ALTERNATE_SELECTED_SCENES.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+      - name: Fetch original atlas PNGs referenced by source sprite crops
+        run: |
+          python3 - <<'PY' >/tmp/v185_required_atlases.txt
+          import csv
+          paths=set()
+          for name,field in [
+            ('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv','source_image_path'),
+            ('review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv','source_png_path')]:
+           with open(name,encoding='utf-8-sig') as f:
+            for r in csv.DictReader(f):
+             if r.get(field):paths.add(r[field])
+          for p in sorted(paths):
+           assert p.startswith('Tiles/') and '..' not in p
+           print('/'+p)
+          PY
+          git sparse-checkout add --stdin </tmp/v185_required_atlases.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Render real third source 3102 and compare source TMX GID, PNG hashes, B-C pixel counts
+        run: python3 -u scripts/v185_crop_source3102.py
+      - name: Independently verify all 246 original SQLite tables and new source record
+        run: |
+          python3 - <<'PY'
+          import base64,csv,hashlib,json,sqlite3,zipfile,zlib
+          from pathlib import Path
+          R=Path('review/v185_crop3102_source')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v184/MANIFEST.json').read_text())
+          n=json.loads(Path('analysis/current/v185/MANIFEST.json').read_text())
+          assert m['promoted_provisional']==1 and m['index']==3102
+          assert m['actual_B_C_pixels']==7650 and m['actual_missing_neighbor_sources']==0
+          assert m['observed_parent']==9897 and m['observed_now']==9898
+          assert m['remaining_checkpoint']==144
+          assert m['final_identity_certified']==m['official_mapping_verified']==m['tilezed_verified']==0
+          assert n['version']=='v185' and n['parent']=='v184' and n['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert n['new_rows']==n['new_observed_rows']==1 and n['table_count']==247 and n['prior_tables_preserved']==246
+          with (R/'VISUAL_REVIEW_1.csv').open(encoding='utf-8-sig') as f:a=list(csv.DictReader(f))
+          assert len(a)==1
+          assert a[0]['index']=='3102' and a[0]['tile_set_name']=='vegetation_farming_01b' and a[0]['local_id']=='21'
+          assert a[0]['actual_original_B_C_pixels']=='7650' and a[0]['missing_neighbor_source']=='0'
+          assert a[0]['certified']==a[0]['mapping_verified']==a[0]['tilezed_verified']=='0'
+          assert hashlib.sha256((R/'VISUAL_REVIEW_1.csv').read_bytes()).hexdigest()==m['visual_csv_sha256']
+          assert hashlib.sha256((R/'3102_ALT_TRUE_SOURCE_ABC.zip').read_bytes()).hexdigest()==m['images_zip_sha256']
+          with zipfile.ZipFile(R/'3102_ALT_TRUE_SOURCE_ABC.zip') as z:assert z.testzip() is None and len(z.namelist())==4
+          def raw(man):
+           packed=base64.b64decode(''.join(Path(f).read_text('ascii').strip() for f in man['parts']),validate=True)
+           assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+           r=zlib.decompress(packed)
+           assert len(r)==man['sqlite_bytes'] and hashlib.sha256(r).hexdigest()==man['sqlite_sha256']
+           return r
+          old=sqlite3.connect(':memory:');old.deserialize(raw(p))
+          new=sqlite3.connect(':memory:');new.deserialize(raw(n))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          prev={r[0]:old.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          curr={r[0]:new.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(prev)==246 and len(curr)==247
+          assert set(curr)-set(prev)=={'v185_visual_review'}
+          assert curr['v185_visual_review']==1 and all(curr[x]==prev[x] for x in prev)
+          for table in prev:
+           x=old.execute('SELECT * FROM "'+table+'"')
+           y=new.execute('SELECT * FROM "'+table+'"')
+           while True:
+            a=x.fetchmany(1024);b=y.fetchmany(1024)
+            assert a==b,('parent_row_changed',table)
+            if not a:break
+          assert new.execute('SELECT SUM(certified),SUM(mapping_verified),SUM(tilezed_verified) FROM v185_visual_review').fetchone()==(0,0,0)
+          print('PASS v185 genuine third alternative TMX source 3102, 247 tables; all 246 parent tables row-identical')
+          PY
+      - name: Update checked progress and handoff
+        run: python3 -u scripts/v185_finalize_checkpoint.py
+      - name: Commit verified artifacts to isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v185_crop3102_source analysis/current/v185 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v185 true original alternate 3102 1 provisional crop part with 247 SQLite tables"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
