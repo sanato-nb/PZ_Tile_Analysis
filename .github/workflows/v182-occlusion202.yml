@@ -1,0 +1,120 @@
+name: v182 202 original A B C vs occlusion diagnostics and immutable 244-table SQLite
+on:
+  push:
+    branches: [work/v182-source-occlusion-202-20261028]
+    paths:
+      - scripts/v182_source_layer_occlusion202.py
+      - scripts/v182_finalize_checkpoint.py
+      - .github/workflows/v182-occlusion202.yml
+permissions:
+  contents: write
+concurrency:
+  group: v182-occlusion202-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  multisite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v182_source_layer_occlusion202.py
+            /scripts/v182_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v181/*
+            /review/v175_remaining381_evidence_audit/REMAINING_381_EVIDENCE_AUDIT.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v177_alternate_visual23/VISUAL_REVIEW_23.csv
+            /review/v179_alternative163_visual/VISUAL_REVIEW_108.csv
+            /review/v181_multisite_visual37/VISUAL_REVIEW_37.csv
+            /review/v175_remaining381_evidence_audit/REMAINING_381_EVIDENCE_AUDIT.csv
+            /review/v176_alt_scene_48/ALT_SCENE_RESULTS_48.csv
+            /review/v178_alt_scene_bulk172/ALT_SCENE_RESULTS_163.csv
+            /audits/map_range_26_43_to_37_49/SUMMARY.json
+            /B4220.3_MapExport_256/tmx/*
+      - name: Hydrate source PNG files referenced by original tileset A candidates
+        run: |
+          python3 - <<'PY' > /tmp/pz_v182_atlases.txt
+          import csv
+          paths=set()
+          for fname,field in [
+            ('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv','source_image_path'),
+            ('review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv','source_png_path')]:
+           with open(fname,encoding='utf-8-sig') as f:
+            for r in csv.DictReader(f):
+             if r.get(field):paths.add(r[field])
+          for path in sorted(paths):
+           assert path.startswith('Tiles/') and '..' not in path,path
+           print('/'+path)
+          PY
+          git sparse-checkout add --stdin < /tmp/pz_v182_atlases.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Build real A/B/C and strictly separated diagnostic X/Y for all 202 remaining new keys
+        run: python3 -u scripts/v182_source_layer_occlusion202.py
+      - name: Independently verify 202 unique source rows, evidence ZIP, old 243 SQLite tables
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,csv,hashlib,json,sqlite3,zlib,zipfile
+          R=Path('review/v182_occlusion202')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v182/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v181/MANIFEST.json').read_text())
+          assert m['source_new_key_unobserved_before']==m['source_new_key_unobserved_after']==202
+          assert m['parent_checkpoint_observed']==9829 and m['parent_checkpoint_missing']==213
+          assert m['historical_checkpoint_count_discrepancy']==2 and m['original_9_unobserved_held']==9
+          assert m['final_certified']==m['official_mapping_verified']==m['tilezed_verified']==0
+          assert d['parent']=='v181' and d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==244 and d['prior_tables_preserved']==243 and d['new_rows']==202 and d['new_observed_rows']==0
+          with (R/'SOURCE_OCCLUSION_202.csv').open(encoding='utf-8-sig') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==202 and len({(r['tile_set_name'],r['local_id']) for r in rows})==202
+          assert all(r['observed_new']==r['certified']==r['official_mapping_verified']==r['tilezed_verified']=='0' for r in rows)
+          assert sum(r['original_source_A_pixels_verified']=='1' for r in rows)==m['true_original_png_verified']
+          assert sum(r['tmX_raw_gid']!='' for r in rows)==m['true_original_TMXS_rendered']
+          assert hashlib.sha256((R/'SOURCE_OCCLUSION_202.csv').read_bytes()).hexdigest()==m['evidence_csv_sha256']
+          assert hashlib.sha256((R/'OCCLUSION_ACTUAL_BC_AND_LAYER_DIAGNOSTIC.zip').read_bytes()).hexdigest()==m['image_evidence_zip_sha256']
+          with zipfile.ZipFile(R/'OCCLUSION_ACTUAL_BC_AND_LAYER_DIAGNOSTIC.zip') as z:
+            assert z.testzip() is None and len(z.namelist())==6*m['true_original_TMXS_rendered']
+          def raw(man):
+            packed=base64.b64decode(''.join(Path(k).read_text('ascii').strip() for k in man['parts']),validate=True)
+            assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+            val=zlib.decompress(packed)
+            assert hashlib.sha256(val).hexdigest()==man['sqlite_sha256'] and len(val)==man['sqlite_bytes']
+            return val
+          a=sqlite3.connect(':memory:');a.deserialize(raw(p))
+          b=sqlite3.connect(':memory:');b.deserialize(raw(d))
+          assert a.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert b.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          old={row[0]:a.execute('SELECT COUNT(*) FROM "'+row[0]+'"').fetchone()[0] for row in a.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          new={row[0]:b.execute('SELECT COUNT(*) FROM "'+row[0]+'"').fetchone()[0] for row in b.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(old)==243 and len(new)==244
+          assert set(new)-set(old)=={'v182_source_layer_occlusion_audit'}
+          assert all(new[n]==num for n,num in old.items()) and new['v182_source_layer_occlusion_audit']==202
+          for name in old:
+            x=a.execute('SELECT * FROM "'+name+'"');y=b.execute('SELECT * FROM "'+name+'"')
+            while True:
+              xa=x.fetchmany(1024);ya=y.fetchmany(1024)
+              assert xa==ya,('parent row modified',name)
+              if not xa:break
+          assert b.execute('SELECT SUM(observed_new),SUM(certified),SUM(official_mapping_verified),SUM(tilezed_verified) FROM v182_source_layer_occlusion_audit').fetchone()==(0,0,0,0)
+          print('PASS 202 original B/C vs X/Y source records, all 243 parent tables intact')
+          PY
+      - name: Update checkpoint only after raw source and physical database verification
+        run: python3 -u scripts/v182_finalize_checkpoint.py
+      - name: Save v182 original source occlusion evidence, database and progress docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v182_occlusion202 analysis/current/v182 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v182 original/diagnostic PNG evidence 202 missing keys with 244-table immutable SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
