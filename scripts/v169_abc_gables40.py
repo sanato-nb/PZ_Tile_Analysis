@@ -17,6 +17,10 @@ def csvrows(p):
  with p.open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
 def bb(s):
  a=tuple(map(int,s.strip('[]').split(',')));assert len(a)==4 and a[0]<a[2] and a[1]<a[3];return a
+# Fail early with the correct current-range path, avoiding stale inherited batch names.
+assert OUT.name=='v169_abc_4160_4199' and DBOUT.name=='v169', (OUT, DBOUT)
+notes_file=OUT/'MANUAL_VISUAL_NOTES.json'
+assert notes_file.is_file(), f'Missing actual 4160-4199 annotation file: {notes_file}'
 meta=json.loads((OUT/'MANUAL_VISUAL_NOTES.json').read_text())
 notes={int(i):x for i,x in meta['notes'].items()}
 assert len(notes)==40 and set(notes)==set(range(4160,4200))
