@@ -131,6 +131,21 @@ function localImageFor(path){
 }
 function localFileStatus(){
  const el=document.getElementById("localSourceStatus");if(el)el.textContent="로컬 원본 PNG "+localTiles.size+"개 / 비교시트 "+localEvidence.size+"개 등록. 등록한 파일은 이 컴퓨터에서만 읽어.";}
+// v190: source A visual recognition and actual TMX B-C visibility are independent axes.
+// These are EDITABLE SUGGESTIONS, never autosaved, never a user verdict; existing local
+// answers always override. The historical v188 exclusion queue is preserved.
+const SOURCE_A_VISUAL_SUGGESTIONS={
+ N34:{verdict:"",confidence:"medium",
+   candidate:"회색 산업용 기계장치의 후면 또는 측면",
+   part:"산업용 기계 본체의 후면/측면 금속 외장",
+   material:"회색 금속 외함 추정",
+   memo:"원본 A에서 상단 통풍구·작은 조작부·회색 금속 패널·하부 통기 슬롯 확인. 사용자 제공 이미지에서 기계 후면/측면이 뚜렷함. 원래 TMX의 B−C=0은 가림/장면 진단 결과일 뿐 사물 A 외형 판독 불가의 근거가 아님. 정확한 기계 종류·공식 ID/방향은 미인증."},
+ N70:{verdict:"",confidence:"high",
+   candidate:"바퀴 달린 야외 바비큐 그릴",
+   part:"뚜껑 달린 조리통, 옆 선반 및 이동식 프레임",
+   material:"검정·회색 금속, 갈색 선반 추정",
+   memo:"원본 A에서 검정/회색 덮개, 수평 조리통, 바퀴, 다리, 양쪽 측면 선반이 명확함. v186에서도 outdoor_barbecue_grill로 시각 재분류. 원래 TMX B−C=0은 장면에서 안 보인다는 뜻이지 원본 A의 바비큐 그릴 정체를 부정하지 않음. 정확한 연료 방식·공식 ID는 미확정."}
+};
 const STORAGE="PZ_remaining_142_v185_manual_review";
 let answers={};try{answers=JSON.parse(localStorage.getItem(STORAGE)||"{}")}catch(e){answers={}}
 let current=data[0].id,visible=data.map(x=>x.id);
@@ -212,9 +227,9 @@ function select(id){
  $("meta").innerHTML="";
  const props=[["v188 제외 이유",V188_CATEGORY_LABELS[d.v188_category]||d.v188_category],["타일 인덱스",d.index===null?"기존 5409":d.index],["타일셋 / Local ID",d.tileset+" / "+d.local_id],["원본 TMX",d.orig_tmx||"별도 확인"],["층 / 레이어",(d.level||"0")+" / "+(d.layer||"미확인")],["원본 좌표",d.x!==""?d.x+", "+d.y:"미확인"],["A 상태",d.selected_A_status]];
  for(const [name,val]of props){const el=document.createElement("div");el.innerHTML="<b>"+htmlEscape(name)+"</b><span>"+htmlEscape(val)+"</span>";$("meta").appendChild(el)}
- displayImages(d);const a=answers[id]||{};
+ displayImages(d);const a=Object.prototype.hasOwnProperty.call(answers,id)?answers[id]:(SOURCE_A_VISUAL_SUGGESTIONS[id]||{});
  for(const key of ["verdict","confidence","candidate","part","material","memo"])$(key).value=a[key]||"";
- $("status").textContent="";renderList()
+ $("status").textContent=(!Object.prototype.hasOwnProperty.call(answers,id)&&SOURCE_A_VISUAL_SUGGESTIONS[id])?"원본 A 시각 판독 제안 표시 — 미저장 상태. 실제 판단 후 저장해 줘.":"";renderList()
 }
 function save(){
  const a={};for(const key of ["verdict","confidence","candidate","part","material","memo"])a[key]=$(key).value;
