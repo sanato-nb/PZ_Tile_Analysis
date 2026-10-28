@@ -50,7 +50,7 @@ jobs:
       - run: python3 -m pip install --quiet Pillow
       - name: Enumerate ALL unobserved keys and every actual 84 TMX placement; preserve parent 236 tables
         run: python3 -u scripts/v175_remaining381_forensic.py
-      - name: Independent 381-key source audit and physical SQLite whole-row preservation
+      - name: Independent 379 source-key audit plus historical 2-count discrepancy and physical SQLite whole-row preservation
         run: |
           python3 - <<'PY'
           import base64,csv,hashlib,json,sqlite3,zlib
@@ -60,7 +60,7 @@ jobs:
           p=json.loads(Path('analysis/current/v174/MANIFEST.json').read_text())
           m=json.loads((R/'MANIFEST.json').read_text())
           assert m['total_remaining_in_checkpoint']==381 and m['source_keys_audited']==379 and m['new_source_missing']==370 and m['old_source_missing']==9 and m['bookkeeping_discrepancy']==2
-          assert m['observed_before']==m['observed_after']==9661 and m['remaining_after']==379
+          assert m['observed_before']==m['observed_after']==9661 and m['remaining_after']==381
           assert m['actual_tmx_maps_checked']==84
           assert d['version']=='v175' and d['parent']=='v174'
           assert d['new_rows']==379 and d['new_observed_rows']==0
@@ -109,7 +109,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add --sparse review/v175_remaining381_evidence_audit analysis/current/v175 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
           if ! git diff --cached --quiet; then
-            git commit -m "v175 evidence audit: all 381 remaining keys and physical 237-table SQLite, no observation promotion"
+            git commit -m "v175 evidence audit: 379 physical missing keys and 2-count discrepancy and physical 237-table SQLite, no observation promotion"
             git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
