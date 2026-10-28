@@ -1,0 +1,89 @@
+{
+  "version": "v189",
+  "basis": "direct visual examination of A/B/C rendered actual 32_46.tmx scenes and original A contact sheets; plus immutable v186/v175/v182/v180 source records",
+  "source_refs": [
+    "review/v189_seven_prior_classified_source_recheck/sheets/TWO_REAL_ALT_CHAIR_PARTS.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_000.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_012.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_013.jpg"
+  ],
+  "visual_reviewed_keys": 7,
+  "visually_reviewed_new_alternate_scenes": 2,
+  "assessment": [
+    {
+      "index": 70,
+      "key": "appliances_cooking_01/39",
+      "visible_A": "Outdoor metal barbeque or grill-shaped unit",
+      "real_TMX_uses": 1,
+      "B_C": "0 only original scene",
+      "status": "held",
+      "reason": "A-alone suggests cooking appliance, but original placement B-C=0 and no independent scene"
+    },
+    {
+      "index": 974,
+      "key": "furniture_seating_indoor_01/6",
+      "visible_A": "Reddish upholstered one-person armchair, front/side part",
+      "real_TMX_uses": 1,
+      "B_C": "0 only original scene",
+      "status": "held",
+      "reason": "Source A appearance recorded, original position completely occluded"
+    },
+    {
+      "index": 975,
+      "key": "furniture_seating_indoor_01/7",
+      "visible_A": "Reddish upholstered armchair opposite-facing part",
+      "real_TMX_uses": 1,
+      "B_C": "0 only original scene",
+      "status": "held",
+      "reason": "Source A appearance recorded, original position completely occluded"
+    },
+    {
+      "index": 977,
+      "key": "furniture_seating_indoor_01/32",
+      "visible_A": "Brown purple upholstered armchair tile",
+      "real_TMX_uses": 1,
+      "B_C": "0 only original scene",
+      "status": "held",
+      "reason": "No other original TMX occurrence, original B-C=0"
+    },
+    {
+      "index": 986,
+      "key": "furniture_seating_indoor_03/22",
+      "visible_A": "Yellow-olive individual chair or sofa-seat side assembly",
+      "B_scene": "gray sofa beside wood side table, window and light siding wall",
+      "C_scene": "same visible gray sofa and table, only minute dots differ",
+      "actual_scene": "32_46.tmx layer9 level0 x235 y126 raw_gid7727",
+      "original_B_C_pixels": 0,
+      "new_B_C_pixels": 68,
+      "new_scene_missing_neighbors": 0,
+      "status": "held_new_real_scene_verified",
+      "reason": "A depiction is distinguishable in isolation, but original gray-sofa scene overlays it: only 68 pixel change; cannot independently assign the target part to the visible sofa"
+    },
+    {
+      "index": 987,
+      "key": "furniture_seating_indoor_03/23",
+      "visible_A": "Yellow-olive chair/sofa end with armrest and low back",
+      "B_scene": "gray sofa with front door and windows on siding wall",
+      "C_scene": "almost identical sofa and wall, minute pixel delta",
+      "actual_scene": "32_46.tmx layer9 level0 x236 y126 raw_gid7728",
+      "original_B_C_pixels": 0,
+      "new_B_C_pixels": 46,
+      "new_scene_missing_neighbors": 0,
+      "status": "held_new_real_scene_verified",
+      "reason": "New different original placement is valid, but target remains nearly fully occluded (46 delta pixels)"
+    },
+    {
+      "index": 1119,
+      "key": "industry_02/270",
+      "visible_A": "Green industrial machining attachment or tool-face",
+      "real_TMX_uses": 1,
+      "B_C": "0 only original scene; layer-masked 5205 pixels diagnostic but not original",
+      "status": "held",
+      "reason": "layer-masked diagnostic difference is not the actual original B-C evidence"
+    }
+  ],
+  "newly_observed": 0,
+  "finally_certified": 0,
+  "user_v188_active_exclusions_preserved": true,
+  "summary": "Two new source scenes establish the actual map positions, not identifiable item parts. Seven original PNG crop hashes and source TMX evidence verified; none meets the threshold to replace the explicit previous held status."
+}
