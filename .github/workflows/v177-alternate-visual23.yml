@@ -1,0 +1,105 @@
+name: v177 human visual review of 23 source-backed A B C alternate TMX parts with 239-table SQLite
+on:
+  push:
+    branches: [work/v177-alternate-visual23-20261028]
+    paths:
+      - scripts/v177_visual23_from_alternate_BC.py
+      - scripts/v177_finalize_checkpoint.py
+      - .github/workflows/v177-alternate-visual23.yml
+permissions:
+  contents: write
+concurrency:
+  group: v177-alt-visual23-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v177_visual23_from_alternate_BC.py
+            /scripts/v177_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v176/*
+            /review/v176_alt_scene_48/ALT_BC_48_ORIGINAL_TMXS.zip
+            /review/v176_alt_scene_48/ALT_SCENE_RESULTS_48.csv
+            /review/v176_alt_scene_48/MANIFEST.json
+            /review/v177_alternate_visual23/MANUAL_VISUAL_NOTES.json
+            /B4220.3_MapExport_256/tmx/*
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify original PNG CRC and actual TMX GIDs for human-visible positive B C deltas and append SQLite
+        run: python3 -u scripts/v177_visual23_from_alternate_BC.py
+      - name: Independently verify all 238 original tables byte-for-byte at SQL row level and all 23 positive-source candidates
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,base64,sqlite3,zlib,csv,zipfile
+          R=Path('review/v177_alternate_visual23')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v176/MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v177/MANIFEST.json').read_text())
+          assert m['visually_seen_alternate_scenes']==48
+          assert m['alternative_delta_positive']==27
+          assert m['provisional_promoted_after_manual_visual_review']==23
+          assert m['tiny_positive_held']==4 and m['zero_pixel_held']==21
+          assert m['observed_parent']==9661 and m['observed_now']==9684
+          assert m['remaining_in_checkpoint']==358 and m['source_distinct_unobserved_after']==356
+          assert m['checkpoint_discrepancy']==2
+          assert d['parent']=='v176' and d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==239 and d['prior_tables_preserved']==238
+          assert d['new_rows']==d['new_observed_rows']==23
+          assert m['identity_certified']==m['official_mapping_verified']==m['tilezed_verified']==0
+          with (R/'VISUAL_REVIEW_23.csv').open(encoding='utf-8-sig') as f:found=list(csv.DictReader(f))
+          with (R/'EXCLUDED_25.csv').open(encoding='utf-8-sig') as f:skips=list(csv.DictReader(f))
+          assert len(found)==23 and len(skips)==25
+          assert all(int(r['B_C_changed_pixels'])>=100 and r['review_status']=='provisional_candidate' for r in found)
+          assert all(r['certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in found)
+          assert len({(r['tile_set_name'],r['local_id']) for r in found})==23
+          assert hashlib.sha256((R/'VISUAL_REVIEW_23.csv').read_bytes()).hexdigest()==m['visual_review_csv_sha256']
+          assert hashlib.sha256((R/'EXCLUDED_25.csv').read_bytes()).hexdigest()==m['excluded_csv_sha256']
+          zip_path=Path(m['evidence_zip'])
+          assert hashlib.sha256(zip_path.read_bytes()).hexdigest()==m['evidence_zip_sha256']
+          with zipfile.ZipFile(zip_path) as z:assert z.testzip() is None and len(z.namelist())==192
+          def dbraw(man):
+            packed=base64.b64decode(''.join(Path(x).read_text('ascii').strip() for x in man['parts']),validate=True)
+            assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+            raw=zlib.decompress(packed)
+            assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+            return raw
+          a=sqlite3.connect(':memory:');a.deserialize(dbraw(p))
+          b=sqlite3.connect(':memory:');b.deserialize(dbraw(d))
+          assert a.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert b.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          old={row[0]:a.execute('SELECT COUNT(*) FROM "'+row[0]+'"').fetchone()[0] for row in a.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          new={row[0]:b.execute('SELECT COUNT(*) FROM "'+row[0]+'"').fetchone()[0] for row in b.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(old)==238 and len(new)==239
+          assert set(new)-set(old)=={'v177_visual_review'}
+          assert all(new[n]==num for n,num in old.items()) and new['v177_visual_review']==23
+          for name in old:
+            ca=a.execute('SELECT * FROM "'+name+'"');cb=b.execute('SELECT * FROM "'+name+'"')
+            while True:
+              x=ca.fetchmany(1024);y=cb.fetchmany(1024)
+              assert x==y,('parent modified',name)
+              if not x:break
+          assert b.execute('SELECT SUM(certified),SUM(mapping_verified),SUM(tilezed_verified) FROM v177_visual_review').fetchone()==(0,0,0)
+          print('PASS v177 23 manual image-source verified provisional candidates, 239 tables, all 238 parent row contents unchanged')
+          PY
+      - name: Finalize after all source/TMX/SQLite checks pass
+        run: python3 -u scripts/v177_finalize_checkpoint.py
+      - name: Commit verified v177 evidence to source branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v177_alternate_visual23 analysis/current/v177 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v177 source-verified 23 manually interpreted alternate TMX candidates, 239 SQLite tables"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
