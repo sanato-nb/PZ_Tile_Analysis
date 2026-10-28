@@ -34,6 +34,12 @@ cand={(r['tile_set_name'],int(r['local_id'])):r for r in csvrows(R/'review/v117_
 assert len(a)==4633 and len(cand)==10042
 W,H=800,580
 
+def layerlevel(ly):
+    if 'level' in ly.attrib:
+        return int(ly.get('level','0'))
+    prop=ly.find("properties/property[@name='level']")
+    return int((prop.get('value') or prop.text or '0') if prop is not None else '0')
+
 def mapread(name):
     tree=ET.parse(ROOT/name).getroot()
     ts=sorted((int(x.get('firstgid')),x.get('name')) for x in tree.findall('tileset') if x.get('name'))
