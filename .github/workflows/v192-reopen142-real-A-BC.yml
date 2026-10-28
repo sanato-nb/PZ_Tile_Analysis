@@ -1,0 +1,136 @@
+name: v192 original A sprite first and real original TMX B-C 142 key source review
+on:
+  push:
+    branches: [work/v192-142-original-A-plus-real-TMX-BC-20261028]
+    paths:
+      - scripts/v192_crosscheck_reopened142_A_TMX_BC.py
+      - scripts/v192_finalize_checkpoint.py
+      - .github/workflows/v192-reopen142-real-A-BC.yml
+permissions:
+  contents: write
+concurrency:
+  group: v192-A-first-real-TMX-B-C
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v192_crosscheck_reopened142_A_TMX_BC.py
+            /scripts/v192_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v190/*
+            /review/v191_reopen142_A_first/MANIFEST.json
+            /review/v191_reopen142_A_first/MANUAL_A_IMAGE_OBSERVATIONS_142.json
+            /review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v182_occlusion202/MANIFEST.json
+            /review/v182_occlusion202/SOURCE_OCCLUSION_202.csv
+            /review/v182_occlusion202/OCCLUSION_PROOF.part000.bin
+            /review/v182_occlusion202/OCCLUSION_PROOF.part001.bin
+            /review/v182_occlusion202/OCCLUSION_PROOF.part002.bin
+            /review/v182_occlusion202/sheets/*
+      - name: Hydrate only original TMX maps and PNGs for the 132 available A tiles
+        run: |
+          python3 - <<'PY' > /tmp/v192_source_paths.txt
+          import csv,json
+          images=json.load(open('review/v191_reopen142_A_first/MANUAL_A_IMAGE_OBSERVATIONS_142.json'))
+          sources=list(csv.DictReader(open('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv',encoding='utf-8-sig')))
+          scene=list(csv.DictReader(open('review/v182_occlusion202/SOURCE_OCCLUSION_202.csv',encoding='utf-8-sig')))
+          bykey={(x['tile_set_name'],int(x['local_id'])):x for x in scene}
+          paths=set()
+          for n in images['manual_image_notes']:
+            if not n['original_A_sha256_verified']:continue
+            i=int(n['index']);s=sources[i]
+            key=(n['tile_set_name'],int(n['local_id']))
+            assert (s['tile_set_name'],int(s['local_id']))==key
+            o=bykey[key];assert int(o['index'])==i
+            p=s['source_image_path'];t=o['original_tmx']
+            assert p.startswith('Tiles/') and '..' not in p
+            assert t.endswith('.tmx') and '/' not in t and '..' not in t
+            paths.add('/'+p);paths.add('/B4220.3_MapExport_256/tmx/'+t)
+          assert 20<len(paths)<264
+          for path in sorted(paths):print(path)
+          PY
+          echo "Original source files to hydrate: $(wc -l </tmp/v192_source_paths.txt)"
+          git sparse-checkout add --stdin </tmp/v192_source_paths.txt
+      - name: Install original RGBA image support
+        run: python3 -m pip install --quiet Pillow
+      - name: Check original PNG pixel hashes / TMX raw source GID / archived real B-C ZIP CRC and append-only SQLite
+        run: python3 -u scripts/v192_crosscheck_reopened142_A_TMX_BC.py
+      - name: Independently compare all 252 parent SQLite table contents and 109 A-based candidate statuses
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,csv,hashlib,json,sqlite3,zlib
+          r=Path('review/v192_image_first_TMX_BC_142')
+          m=json.load(open(r/'MANIFEST.json'))
+          p=json.load(open('analysis/current/v190/MANIFEST.json'))
+          d=json.load(open('analysis/current/v192/MANIFEST.json'))
+          assert m['total']==142 and m['A_RGBA_sha_verified']==132
+          assert m['TMX_raw_GID_and_exact_key_verified']==132
+          assert m['new_A_first_provisional_observations']==109
+          assert m['new_B_C_zero_occluded_in_accepted']==99
+          assert m['new_B_C_positive_in_accepted']==10
+          assert m['A_ambiguous_low_held']==23 and m['exact_A_unavailable_held']==10
+          assert m['image_observed_parent']==9898 and m['image_observed_now']==10007
+          assert m['remaining_checkpoint']==35 and m['physical_unique_unobserved_remaining']==33
+          assert m['historical_two_count_gap']==2
+          assert m['official_mapping_verified']==m['tilezed_verified']==m['certified']==0
+          assert d['parent']=='v190' and d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==253 and d['prior_tables_preserved']==252
+          assert d['new_rows']==142 and d['new_observed_rows']==109
+          with (r/'CROSSCHECK_142.csv').open(encoding='utf-8-sig') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==142 and len({(x['tile_set_name'],x['local_id']) for x in rows})==142
+          assert sum(x['new_provisional_observation']=='1' for x in rows)==109
+          assert sum(x['A_image_status'].startswith('verified_') for x in rows)==132
+          assert sum(x['A_appearance_confidence']=='low' for x in rows)==23
+          assert sum(x['A_appearance_confidence']=='none' for x in rows)==10
+          assert all(x['final_certified']==x['official_mapping_verified']==x['tilezed_verified']=='0' for x in rows)
+          assert hashlib.sha256((r/'CROSSCHECK_142.csv').read_bytes()).hexdigest()==m['crosscheck_csv_sha256']
+          def raw(man):
+            pack=base64.b64decode(''.join(Path(x).read_text('ascii').strip() for x in man['parts']),validate=True)
+            assert hashlib.sha256(pack).hexdigest()==man['compressed_sha256']
+            data=zlib.decompress(pack)
+            assert hashlib.sha256(data).hexdigest()==man['sqlite_sha256'] and len(data)==man['sqlite_bytes']
+            return data
+          old=sqlite3.connect(':memory:');old.deserialize(raw(p))
+          new=sqlite3.connect(':memory:');new.deserialize(raw(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          a={n:old.execute('SELECT count(*) FROM "'+n+'"').fetchone()[0] for (n,) in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          b={n:new.execute('SELECT count(*) FROM "'+n+'"').fetchone()[0] for (n,) in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(a)==252 and len(b)==253
+          assert set(b)-set(a)=={'v192_reopened_A_first_TMX_BC_review'}
+          assert b['v192_reopened_A_first_TMX_BC_review']==142
+          for name,count in a.items():
+            assert b[name]==count
+            u=old.execute('SELECT * FROM "'+name+'"')
+            v=new.execute('SELECT * FROM "'+name+'"')
+            while True:
+              p1=u.fetchmany(1024);p2=v.fetchmany(1024)
+              assert p1==p2,('OLD TABLE MUTATED',name)
+              if not p1:break
+          assert new.execute('SELECT sum(new_provisional_observation),sum(final_certified),sum(official_mapping_verified),sum(tilezed_verified) FROM v192_reopened_A_first_TMX_BC_review').fetchone()==(109,0,0,0)
+          print('PASS 109 exact source-A provisional; original 99 B-C zero distinguished; all 252 prior tables content unchanged')
+          PY
+      - name: Update checkpoint only after complete evidence and SQLite verifications succeed
+        run: python3 -u scripts/v192_finalize_checkpoint.py
+      - name: Commit verified review and 253-table physical database
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v192_image_first_TMX_BC_142 analysis/current/v192 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v192 user-directed A-first 109 visually identifiable sources with real TMX GID B-C evidence, 253-table SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
