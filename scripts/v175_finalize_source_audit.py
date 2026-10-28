@@ -31,7 +31,7 @@ state['latest_checkpoint'].update(dict(
  evidence_repo_path='review/v175_remaining381_evidence_audit/REMAINING_381_EVIDENCE_AUDIT.csv',
  evidence_manifest='review/v175_remaining381_evidence_audit/MANIFEST.json',
  mapping_verified=0,tilezed_verified=0,approved_final_certifications=0,v175_sqlite_sha256=d['sqlite_sha256'],
- caution='All 381 unresolved keys audited for actual original source and alternative actual TMX GID occurrences. This audit adds ZERO visually observed/identity-certified keys. B-C=0, map-edge, neighbor missing, or original atlas failures cannot be called transparent, observed or certified. Follow-up visual rendering in alternate scene required.'
+ caution='379 distinct source keys audited, with 2 historical provisional-candidate keys discrepant from the checkpoint count; unresolved accounting, not fabricated source keys. This audit adds ZERO visually observed/identity-certified keys. B-C=0, map-edge, neighbor missing, or original atlas failures cannot be called transparent, observed or certified. Follow-up visual rendering in alternate scene required.'
 ))
 state['unified_database'].update(dict(version='v175',status='VERIFIED_SOURCE_AUDIT_NOT_IDENTITY',
  repo_manifest='analysis/current/v175/MANIFEST.json',parent_unified_version='v174',
@@ -51,7 +51,7 @@ state['latest_v175_evidence']={
  'mapping_verified':0,'tilezed_verified':0,'certified':0
 }
 state['next_actions']=[
- 'v175: use actual alternate 84 TMX positions to render independent same-original-A 5x5 B/C for 381 pending keys; visually inspect results before any observed promotion.',
+ 'v175: render alternate-source A/B/C for 379 source-confirmed pending tile keys; reconcile two historical checkpoint discrepancy cases before final coverage claim.',
  'v175: review older 9 catalog keys separately; require actual source PNG and TMX placement evidence. Do not invent source or count them as observed.',
  'v175: source ledger has 379 distinct unresolved tile keys (370 new, 9 old), but v174 checkpoint says 381. Reconcile 2 historical undercounted provisional source records before claiming full coverage.',
  *state.get('next_actions',[])
@@ -71,4 +71,4 @@ for rel in ['AGENTS.md','docs/HANDOFF.md']:
  assert 'v174' in s
  k=s.index('\n')
  file.write_text(s[:k+1]+'\n'+summary+s[k+1:].lstrip('\n'),encoding='utf-8')
-print('PASS v175 audited entire remaining 381 with unchanged observation 9661/10042,',d['sqlite_sha256'])
+print('PASS v175 379 actual pending source keys and 2 unresolved checkpoint-count differences, unchanged observed 9661/10042,',d['sqlite_sha256'])
