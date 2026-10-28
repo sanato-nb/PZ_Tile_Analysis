@@ -52,7 +52,7 @@ jobs:
           assert m['physically_unobserved_distinct']==m['excluded_from_active_review_unique']==142
           assert m['historical_checkpoint_two_count_difference']==2
           assert m['active_review_queue_remaining']==0 and m['newly_observed_this_version']==0
-          assert m['previously_reclassified_49_already_observed']==49 and m['already_classified_overlap_pending']==0
+          assert m['previously_reclassified_49_already_observed']==42 and m['previously_reclassified_7_still_unobserved_but_classified']==7
           assert m['old_nine_prior_user_excluded']==8 and m['old_nine_prior_kept_provisional']==1
           assert m['official_mapping_verified']==m['tilezed_verified']==m['final_identity_certified']==0
           assert new['parent']=='v187' and new['parent_sqlite_sha256']==old['sqlite_sha256']
@@ -65,6 +65,7 @@ jobs:
           assert sum(r['origin']=='new_4633' for r in rows)==133
           assert sum(r['origin']=='original_5409' for r in rows)==9
           assert sum(r['source_blocker_category']=='original_neighborhood_source_missing' for r in rows)==6
+          assert sum(r['source_blocker_category']=='previously_visually_classified_but_not_observation_promoted' for r in rows)==7
           assert all(r['new_observed']==r['official_mapping_verified']==r['tilezed_verified']==r['final_identity_certified']=='0' for r in rows)
           assert all(r['disposition']=='excluded_from_active_review_per_latest_user_instruction' for r in rows)
           assert hashlib.sha256((R/'EXCLUDED_FROM_ACTIVE_REVIEW_142.csv').read_bytes()).hexdigest()==m['csv_sha256']
