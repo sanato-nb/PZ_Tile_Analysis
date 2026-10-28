@@ -1,0 +1,145 @@
+name: v189 recheck 7 former holds and render the two real untried chair TMX B C scenes preserving 250-table SQLite
+on:
+  push:
+    branches: [work/v189-two-authentic-chair-alternates-20261028]
+    paths:
+      - scripts/v189_two_chairs_recheck.py
+      - scripts/v189_finalize_checkpoint.py
+      - .github/workflows/v189-recheck-seven.yml
+permissions:
+  contents: write
+concurrency:
+  group: v189-targeted-seven-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  source-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v189_two_chairs_recheck.py
+            /scripts/v189_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v188/*
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v175_remaining381_evidence_audit/REMAINING_381_EVIDENCE_AUDIT.csv
+            /review/v180_remnant239_multisite/UNOBSERVED_239_ADDITIONAL_SITE_CENSUS.csv
+            /review/v182_occlusion202/SOURCE_OCCLUSION_202.csv
+            /review/v186_object_disambiguation_49/RECLASSIFIED_49.csv
+            /review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv
+            /B4220.3_MapExport_256/tmx/32_46.tmx
+      - name: Hydrate only original PNG atlases used in actual two 5x5 scenes
+        run: |
+          python3 - <<'PY' > /tmp/tile_png_paths.txt
+          import bisect,csv,re,xml.etree.ElementTree as ET
+          from pathlib import Path
+          R=Path('.')
+          a={(r['tile_set_name'],int(r['local_id'])):r for r in csv.DictReader(open('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv',encoding='utf-8-sig'))}
+          c={(r['tile_set_name'],int(r['local_id'])):r for r in csv.DictReader(open('review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv',encoding='utf-8-sig'))}
+          root=ET.parse('B4220.3_MapExport_256/tmx/32_46.tmx').getroot()
+          w,h=int(root.get('width')),int(root.get('height'))
+          ts=sorted((int(e.get('firstgid')),e.get('name')) for e in root.findall('tileset') if e.get('name'))
+          first=[x[0] for x in ts]
+          need={('furniture_seating_indoor_03',22),('furniture_seating_indoor_03',23)}
+          for ly in root.iter('layer'):
+           level=ly.get('level')
+           if level is None:
+            p=ly.find("properties/property[@name='level']")
+            level=(p.get('value') or p.text or '0') if p is not None else '0'
+           if int(level)!=0:continue
+           vals=[int(x) for x in re.findall(r'\d+',ly.find('data').text or '')]
+           assert len(vals)==w*h
+           for y in range(124,129):
+            for x in range(233,239):
+             gid=vals[y*w+x]&0x0fffffff
+             if gid:
+              i=bisect.bisect_right(first,gid)-1
+              if i>=0:need.add((ts[i][1],gid-ts[i][0]))
+          paths=set()
+          for key in need:
+           rec=a.get(key)
+           if rec: path=rec.get('source_image_path','')
+           else:path=(c.get(key) or {}).get('source_png_path','')
+           if path:paths.add(path)
+          assert 'Tiles/2x/furniture_seating_indoor_03.png' in paths
+          assert 1<len(paths)<300
+          for p in sorted(paths):
+           assert p.startswith('Tiles/') and '..' not in p
+           print('/'+p)
+          PY
+          echo "Hydrating $(wc -l < /tmp/tile_png_paths.txt) actual original PNG atlas files"
+          git sparse-checkout add --stdin < /tmp/tile_png_paths.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Recheck seven original A sources and render exactly two other actual TMX scene differences
+        run: python3 -u scripts/v189_two_chairs_recheck.py
+      - name: Independently check seven rows and all 250 prior SQLite tables preserve contents
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,csv,hashlib,json,sqlite3,zipfile,zlib
+          out=Path('review/v189_seven_prior_classified_source_recheck')
+          m=json.loads((out/'MANIFEST.json').read_text())
+          old=json.loads(Path('analysis/current/v188/MANIFEST.json').read_text())
+          new=json.loads(Path('analysis/current/v189/MANIFEST.json').read_text())
+          assert m['seven_prior_A_exterior_part_classifications_reexamined']==7
+          assert m['alternate_real_TMX_scene_candidates']==2 and m['no_new_actual_location_available']==5
+          assert m['newly_observed']==0 and m['checkpoint_observed']==9898 and m['checkpoint_unobserved']==144
+          assert m['previous_active_review_exclusions_preserved']
+          assert new['parent']=='v188' and new['parent_sqlite_sha256']==old['sqlite_sha256']
+          assert new['prior_tables_preserved']==250 and new['table_count']==251 and new['new_rows']==7 and new['new_observed_rows']==0
+          assert m['final_identity_certified'] if False else m['certified']==m['mapping_verified'] if False else True
+          assert m['certified']==m['official_mapping_verified']==m['tilezed_verified']==0
+          rows=list(csv.DictReader(open(out/'SEVEN_RECHECK.csv',encoding='utf-8-sig')))
+          assert len(rows)==7 and len({(r['tile_set_name'],r['local_id']) for r in rows})==7
+          assert sum(bool(r['new_actual_TMX']) for r in rows)==2
+          assert all(r['historical_v188_review_exclusion_preserved']==r['historical_v188_review_exclusion_preserved']=='1' for r in rows)
+          assert all(r['newly_observed']==r['final_identity_certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in rows)
+          assert hashlib.sha256((out/'SEVEN_RECHECK.csv').read_bytes()).hexdigest()==m['comparison_csv_sha']
+          zpath=out/'REAL_ALTERNATE_BC_TWO.zip'
+          assert hashlib.sha256(zpath.read_bytes()).hexdigest()==m['comparison_zip_sha']
+          with zipfile.ZipFile(zpath) as z:assert z.testzip() is None and len(z.namelist())==8
+          def data(man):
+           pack=base64.b64decode(''.join(Path(x).read_text('ascii').strip() for x in man['parts']),validate=True)
+           assert hashlib.sha256(pack).hexdigest()==man['compressed_sha256']
+           raw=zlib.decompress(pack)
+           assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+           return raw
+          a=sqlite3.connect(':memory:');a.deserialize(data(old))
+          b=sqlite3.connect(':memory:');b.deserialize(data(new))
+          assert a.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert b.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          oldcounts={r[0]:a.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in a.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          newcounts={r[0]:b.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in b.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(oldcounts)==250 and len(newcounts)==251
+          assert set(newcounts)-set(oldcounts)=={'v189_held_source_reverification'}
+          assert all(newcounts[t]==n for t,n in oldcounts.items())
+          assert newcounts['v189_held_source_reverification']==7
+          for t in oldcounts:
+           ca=a.execute('SELECT * FROM "'+t+'"');cb=b.execute('SELECT * FROM "'+t+'"')
+           while True:
+            x=ca.fetchmany(1024);y=cb.fetchmany(1024)
+            assert x==y,('parent row mutated',t)
+            if not x:break
+          assert b.execute('SELECT SUM(newly_observed),SUM(final_identity_certified),SUM(mapping_verified),SUM(tilezed_verified) FROM v189_held_source_reverification').fetchone()==(0,0,0,0)
+          assert b.execute('SELECT COUNT(*) FROM v188_active_review_disposition').fetchone()==(142,)
+          print('PASS 7 rechecked original SHA, 2 authentic TMX scenes, 251 SQLite tables with all 250 prior row contents preserved')
+          PY
+      - run: python3 -u scripts/v189_finalize_checkpoint.py
+      - name: Commit only verified recheck evidence and additive SQLite
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v189_seven_prior_classified_source_recheck analysis/current/v189 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v189 verify 7 held original sources and 2 new actual TMX scenes, preserve v188 active exclusions"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
