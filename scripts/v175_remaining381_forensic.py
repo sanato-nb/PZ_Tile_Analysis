@@ -44,14 +44,14 @@ for table in ('v122_ai_visual_review_160','v125_ai_visual_spotcheck_20'):
  pre={(r[0],int(r[1])) for r in rows if r[2]=='provisional_candidate'}
  print('early visual',table,len(pre),flush=True)
  all_prior.update(pre)
-assert len(all_prior)==4261,('unique_observed_new',len(all_prior))
+assert len(all_prior)==4263,('distinct_prior_candidate_keys',len(all_prior))
 a=readcsv(R/'review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv')
 assert len(a)==4633
 missing=[]
 for i,record in enumerate(a):
  key=(record['tile_set_name'],int(record['local_id']))
  if key not in all_prior:missing.append((i,key,record))
-assert len(missing)==372,('new_remaining',len(missing))
+assert len(missing)==370,('new_remaining_based_on_physical_candidate_rows',len(missing))
 oldmiss=db.execute('SELECT * FROM tile_catalog WHERE observed_any=0').fetchall()
 ocol=[x[1] for x in db.execute('PRAGMA table_info(tile_catalog)')]
 assert len(oldmiss)==9 and len(a)==4633
@@ -63,8 +63,8 @@ for row in oldmiss:
  old_missing.append((key,d))
 assert len(set(key for key,d in old_missing))==9
 target={key for _,key,_ in missing}|{key for key,_ in old_missing}
-assert len(target)==381 and not (target&all_prior)
-print('REMAINDER VERIFIED',len(missing),'new plus',len(old_missing),'old =',len(target),flush=True)
+assert len(target)==379 and not (target&all_prior)
+print('SOURCE-KEY CENSUS',len(missing),'new plus',len(old_missing),'old =',len(target),'; checkpoint missing 381 has 2-count discrepancy, leave unresolved',flush=True)
 B={(r['tile_set_name'],int(r['local_id'])):r for r in readcsv(R/'review/v120_B_context_new4632/B_CONTEXT_4632.csv')}
 C={(r['tile_set_name'],int(r['local_id'])):r for r in readcsv(R/'review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv')}
 assert len(B)==len(C)==4632 and set(B)==set(C)
@@ -108,7 +108,7 @@ for ix,meta in enumerate(audit['per_map']):
    if len(q)<8:q.append(occ)
    elif inside and not any(z['inbounds_5x5'] for z in q):q[-1]=occ
  if (ix+1)%12==0:print('CENSUS TMX',ix+1,'/84',flush=True)
-assert len(placement_count)==381,('unplaced keys',list(target-set(placement_count))[:20])
+assert len(placement_count)==379,('unplaced keys',list(target-set(placement_count))[:20])
 # Independently verify representative A PNG crop pixel and original selected TMX.
 @lru_cache(maxsize=8)
 def png_image(p):
@@ -175,7 +175,21 @@ for key,d in old_missing:
  eligible_for_visual_followup=int(interior_count[key]>0),
  alternate_scene_candidate=json.dumps(next((x for x in choices[key] if x['inbounds_5x5']),choices[key][0]),ensure_ascii=False))
  rows.append(rec)
-assert len(rows)==381 and verified_png>=370 and verified_primary>=370
+assert len(rows)==379 and verified_png>=368 and verified_primary>=368
+# Historical checkpoint accounting mismatch, without arbitrary selection of two keys:
+# The historical SQLite contains 4263 distinct new-key provisional candidates,
+# but PROJECT_STATE.json reports 4261. Hence 370+9=379 demonstrably pending
+# physical keys vs. 381 in the aggregate checkpoint. Never manufacture two key IDs.
+(OUT/'CHECKPOINT_RECONCILIATION.json').write_text(json.dumps({
+ 'checkpoint_v174_reported_missing':381,
+ 'checkpoint_v174_reported_observed':9661,
+ 'strict_sqlite_distinct_new_provisional_keys':4263,
+ 'strict_sqlite_new_pending_keys':370,
+ 'strict_sqlite_historical_pending_keys':9,
+ 'unique_source_keys_requiring_evidence':379,
+ 'unreconciled_count_difference':2,
+ 'disposition':'unresolved historical accounting only; cannot infer which two keys were undercounted; no observation promotions'
+},ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
 # Marking a review/audit is NOT marking the actual visual identity as observed.
 assert all(int(r['original_observed'])==int(r['identity_certified'])==0 for r in rows)
 fieldnames=list(rows[0].keys())
@@ -215,7 +229,7 @@ db.commit()
 after={n:db.execute('SELECT count(*) FROM "'+n+'"').fetchone()[0] for (n,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
 assert len(after)==237 and set(after)-set(before)=={'v175_remaining_evidence_audit'}
 assert all(after[n]==c for n,c in before.items())
-assert after['v175_remaining_evidence_audit']==381
+assert after['v175_remaining_evidence_audit']==379
 assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
 db.close()
 newraw=tmp.read_bytes();newpacked=zlib.compress(newraw,8)
@@ -225,10 +239,10 @@ for i in range(0,len(encoded),3000000):
 assert sha(zlib.decompress(base64.b64decode(''.join((R/p).read_text('ascii') for p in parts))))==sha(newraw)
 dbm=dict(version='v175',parent='v174',parent_sqlite_sha256=parent['sqlite_sha256'],sqlite_sha256=sha(newraw),
  compressed_sha256=sha(newpacked),sqlite_bytes=len(newraw),parts=parts,prior_tables_preserved=236,
- table_count=237,new_rows=381,new_observed_rows=0,integrity_check='ok',mapping_verified=0,tilezed_verified=0,certified=0)
+ table_count=237,new_rows=379,new_observed_rows=0,integrity_check='ok',mapping_verified=0,tilezed_verified=0,certified=0)
 (DBOUT/'MANIFEST.json').write_text(json.dumps(dbm,ensure_ascii=False,indent=2)+'\n')
 summary=dict(version='v175',audit_type='complete_remaining_381_original_png_TMX_occurrence_census',
- total_remaining=381,new_source_missing=372,old_source_missing=9,observed_before=9661,observed_after=9661,
+ total_remaining_in_checkpoint=381,source_keys_audited=379,new_source_missing=370,old_source_missing=9,bookkeeping_discrepancy=2,observed_before=9661,observed_after=9661,
  remaining_after=381,original_png_pixel_verified=verified_png,original_B_TMX_placement_verified=verified_primary,
  actual_tmx_maps_checked=84,real_tmx_occurrences_total=sum(placement_count.values()),
  alternate_inbounds_candidates=sum(int(r['eligible_for_visual_followup']) for r in rows),
@@ -241,9 +255,9 @@ summary=dict(version='v175',audit_type='complete_remaining_381_original_png_TMX_
 (OUT/'MANIFEST.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
 (OUT/'README.md').write_text(
  '# v175 남은 381종 전수 원본 증거 조사 (정체 인증·관찰 완료 추가 아님)\n\n'
- 'v174 기준 9,661/10,042종 이미지 잠정 관찰, 미관찰 381종. 이전 5,409 키 중 9종(observed_any=0), 새 4,633 키 중 372종(기존 v122/125/132~174 성공후보 외)을 실제 부모 SQLite와 원본 A CSV로 정확히 구했습니다.\n\n'
+ 'v174 기준 9,661/10,042종 이미지 잠정 관찰, 미관찰 381종. 이전 5,409 키 중 9종(observed_any=0), 새 4,633 키 중 372종(기존 v122/125/132~174 성공후보 외)을 실제 부모 SQLite와 원본 A CSV에서 확인했습니다. 역사적 잠정후보 2종이 최신 진행 상태의 관찰 집계에 반영되지 않는 차이가 있어, 체크포인트 미관찰381과 실제 원본 미관찰 고유키379가 불일치합니다. 차이 2는 아직 원인 확정 전이며 강제 관찰·정체인증하지 않습니다.\n\n'
  '84개 원본 TMX를 실제 GID와 tileset firstgid로 전수 스캔하고 해당 381개 키의 총 사용 횟수, 좌표/층/레이어, 가장자리 여부, 다른 5x5 가능 배치 후보를 집계합니다. 기존 B의 픽셀변화 0, 지도끝/주변누락, 기타 수동 보류 사유와 구분합니다.\n'
  '원본 A PNG 바이트 및 선택 RGBA 픽셀 해시 확인, B 원본 TMX selected GID와 실제 타일 키 일치 여부 대조; 다른 배치 후보가 있다는 사실만으로 정체 확정·관찰 완료·투명 인증하지 않습니다.\n'
- 'SQLite v174의 236개 기존 테이블/모든 행 수·내용을 변경하지 않고 감사 목적 381행 별도 테이블 v175_remaining_evidence_audit 하나만 추가(237개). 관찰률 96.21%, 남은 381종 그대로.\n'
+ 'SQLite v174의 236개 기존 테이블/모든 행 수·내용을 변경하지 않고 감사 목적 381행 별도 테이블 v175_remaining_evidence_audit 하나만 추가(237개, 고유 원본 키 379행). 관찰률 96.21%, 상태의 남은 381종은 유지하고 2종의 역사적 집계 불일치를 별도 확인 대상으로 기록.\n'
  'CSV와 원본 A 미관찰 접촉시트 6장, 실제 TMX 위치 후보, 지난 5,409 중 미관찰 9개 정체를 증거 파일로 보관. 다음 검수는 A/B/C를 실제 다른 원본 TMX 위치로 재조립하고 그 결과를 눈으로 확인해야만 승격 가능.\n',encoding='utf-8')
 print('PASS v175 FULL FORENSIC',json.dumps(summary,ensure_ascii=False),flush=True)
