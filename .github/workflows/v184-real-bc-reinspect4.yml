@@ -1,0 +1,119 @@
+name: v184 four original A B C ambiguous parts second-pass source verification and immutable 246 SQLite tables
+on:
+  push:
+    branches: [work/v184-reinspect-real-bc-four-20261028]
+    paths:
+      - scripts/v184_source_bc_reinspect4.py
+      - scripts/v184_finalize_checkpoint.py
+      - .github/workflows/v184-real-bc-reinspect4.yml
+permissions:
+  contents: write
+concurrency:
+  group: v184-real-BC-reinspection-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v184_source_bc_reinspect4.py
+            /scripts/v184_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v183/*
+            /review/v182_occlusion202/SOURCE_OCCLUSION_202.csv
+            /review/v182_occlusion202/MANIFEST.json
+            /review/v182_occlusion202/OCCLUSION_PROOF.part000.bin
+            /review/v182_occlusion202/OCCLUSION_PROOF.part001.bin
+            /review/v182_occlusion202/OCCLUSION_PROOF.part002.bin
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v183_original_BC_visual65/MANIFEST.json
+            /review/v183_original_BC_visual65/HELD_137.csv
+            /review/v184_true_BC_reinspect4/MANUAL_VISUAL_NOTES.json
+      - name: Checkout only real TMX maps for 3 accepted true B C examples
+        run: |
+          python3 - <<'PY' > /tmp/v184_required_tmx.txt
+          import csv
+          chosen={29,327,3901}
+          seen=set()
+          with open('review/v182_occlusion202/SOURCE_OCCLUSION_202.csv',encoding='utf-8-sig') as f:
+           for r in csv.DictReader(f):
+            if int(r['index']) in chosen:seen.add(r['original_tmx'])
+          assert 1<=len(seen)<=3
+          for name in sorted(seen):
+           assert name.endswith('.tmx') and '/' not in name and '..' not in name
+           print('/B4220.3_MapExport_256/tmx/'+name)
+          PY
+          git sparse-checkout add --stdin </tmp/v184_required_tmx.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Recheck v182 actual A B C source 4 ambiguous and append only 3 honest visual provisional records
+        run: python3 -u scripts/v184_source_bc_reinspect4.py
+      - name: Independent verify CSV and all original 245 SQLite tables including every row value
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib,base64,sqlite3,zlib
+          from pathlib import Path
+          review=Path('review/v184_true_BC_reinspect4')
+          meta=json.loads((review/'MANIFEST.json').read_text())
+          oldmeta=json.loads(Path('analysis/current/v183/MANIFEST.json').read_text())
+          newmeta=json.loads(Path('analysis/current/v184/MANIFEST.json').read_text())
+          assert meta['manual_source_original_B_C_reviewed']==4
+          assert meta['promoted_provisional']==3 and meta['still_held']==1
+          assert set(meta['upgraded_indices'])=={29,327,3901} and meta['held_indices']==[298]
+          assert meta['prior_observed']==9894 and meta['current_observed']==9897 and meta['remaining_checkpoint']==145
+          assert meta['source_neighbor_missing']==0
+          assert newmeta['parent']=='v183' and newmeta['parent_sqlite_sha256']==oldmeta['sqlite_sha256']
+          assert newmeta['table_count']==246 and newmeta['prior_tables_preserved']==245 and newmeta['new_rows']==newmeta['new_observed_rows']==3
+          assert meta['identity_certified']==meta['official_mapping_verified']==meta['tilezed_verified']==0
+          with (review/'VISUAL_REVIEW_3.csv').open(encoding='utf-8-sig') as f:a=list(csv.DictReader(f))
+          with (review/'HELD_1.csv').open(encoding='utf-8-sig') as f:b=list(csv.DictReader(f))
+          assert len(a)==3 and len(b)==1
+          assert set(int(x['index']) for x in a)=={29,327,3901} and int(b[0]['index'])==298
+          assert all(int(x['real_B_C_pixels'])>=100 for x in a)
+          assert all(x['certified']==x['official_mapping_verified']==x['tilezed_verified']=='0' for x in a)
+          assert hashlib.sha256((review/'VISUAL_REVIEW_3.csv').read_bytes()).hexdigest()==meta['observations_sha256']
+          assert hashlib.sha256((review/'HELD_1.csv').read_bytes()).hexdigest()==meta['held_csv_sha256']
+          def raw(man):
+           compressed=base64.b64decode(''.join(Path(q).read_text('ascii').strip() for q in man['parts']),validate=True)
+           assert hashlib.sha256(compressed).hexdigest()==man['compressed_sha256']
+           data=zlib.decompress(compressed)
+           assert len(data)==man['sqlite_bytes'] and hashlib.sha256(data).hexdigest()==man['sqlite_sha256']
+           return data
+          o=sqlite3.connect(':memory:');o.deserialize(raw(oldmeta))
+          n=sqlite3.connect(':memory:');n.deserialize(raw(newmeta))
+          assert o.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert n.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          old={r[0]:o.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in o.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          new={r[0]:n.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in n.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(old)==245 and len(new)==246
+          assert set(new)-set(old)=={'v184_visual_review'}
+          assert new['v184_visual_review']==3 and all(new[name]==v for name,v in old.items())
+          for name in old:
+           a=o.execute('SELECT * FROM "'+name+'"')
+           b=n.execute('SELECT * FROM "'+name+'"')
+           while True:
+            x=a.fetchmany(1024);y=b.fetchmany(1024)
+            assert x==y,('parent_row_modified',name)
+            if not x:break
+          assert n.execute('SELECT SUM(certified),SUM(official_mapping_verified),SUM(tilezed_verified) FROM v184_visual_review').fetchone()==(0,0,0)
+          print('PASS v184 original actual source A B C verified, 3 provisional, 1 held, 246 tables and all 245 parent rows equal')
+          PY
+      - name: Update main state checkpoint only after exact source and database integrity validation
+        run: python3 -u scripts/v184_finalize_checkpoint.py
+      - name: Commit verified work in isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v184_true_BC_reinspect4 analysis/current/v184 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v184 3 true source visually rechecked provisional tile parts, 1 ambiguous held, 246 SQLite tables"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
