@@ -46,6 +46,10 @@ jobs:
           PY
           echo "Source PNG atlas count: $(wc -l </tmp/v194_source_atlases.txt)"
           git sparse-checkout add --stdin </tmp/v194_source_atlases.txt
+      - name: Install Korean display font for A-only evidence sheets
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-nanum
       - name: Install original image pixel support
         run: python3 -m pip install --quiet Pillow
       - name: Verify 160 source PNG exact hashes and render four original-A-only comparison sheets
