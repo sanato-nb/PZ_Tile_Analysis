@@ -284,7 +284,7 @@ assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
 before={x[0]:db.execute('SELECT COUNT(*) FROM "'+x[0]+'"').fetchone()[0] for x in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
 assert len(before)==243 and before['v181_visual_review']==37
 for rec in records:
- assert db.execute('SELECT count(*) FROM v175_remaining_evidence_audit WHERE tile_set_name=? AND local_id=?',(rec['tile_set_name'],int(rec['local_id']))).fetchone()==1
+ assert db.execute('SELECT count(*) FROM v175_remaining_evidence_audit WHERE tile_set_name=? AND local_id=?',(rec['tile_set_name'],int(rec['local_id']))).fetchone()[0]==1
 scenezip=zipfile.ZipFile(OUT/'OCCLUSION_ACTUAL_BC_AND_LAYER_DIAGNOSTIC.zip','w',zipfile.ZIP_DEFLATED,compresslevel=5)
 results=[]
 # TMX map data cache avoids repeated parse of very large maps.
