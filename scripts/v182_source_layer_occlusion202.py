@@ -201,7 +201,7 @@ def flips(img,raw):
     if raw&0x40000000:img=img.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
     return img
 W,H=800,580
-def scene(m,loc,replacement=None,delete=False):
+def scene(m,loc,replacement=None,delete=False,through_layer=None):
     x0,y0=int(loc['source_x']),int(loc['source_y'])
     level=int(loc['source_level'])
     layerid=int(loc['source_layer_index'])
@@ -212,7 +212,7 @@ def scene(m,loc,replacement=None,delete=False):
     canvas=Image.new('RGBA',(W,H),(237,242,247,255))
     replacement_drawn=0;misses=Counter()
     for layer in m['layers']:
-        if layer['level']!=level:continue
+        if layer['level']!=level or (through_layer is not None and layer['index']>through_layer):continue
         commands=[]
         for dy in range(-2,3):
             y=y0+dy
@@ -386,8 +386,7 @@ with (OUT/'SOURCE_OCCLUSION_202.csv').open('w',encoding='utf-8-sig',newline='') 
 # Existing physical DB remains unchanged except a segregated evidence-audit table.
 types={k:'INTEGER' if k in ('index','local_id','tmX_raw_gid','original_source_A_pixels_verified','manual_visual_completed',
  'observed_new','certified','official_mapping_verified','tilezed_verified') else 'TEXT' for k in fields}
-db.execute('CREATE TABLE v182_source_layer_occlusion_audit ('+','.join('"'+k+'" '+types[k] for k in fields)+',
- PRIMARY KEY(tile_set_name,local_id),CHECK(observed_new=0 AND certified=0 AND official_mapping_verified=0 AND tilezed_verified=0))')
+db.execute('CREATE TABLE v182_source_layer_occlusion_audit ('+','.join('"'+k+'" '+types[k] for k in fields)+', PRIMARY KEY(tile_set_name,local_id),CHECK(observed_new=0 AND certified=0 AND official_mapping_verified=0 AND tilezed_verified=0))')
 db.executemany('INSERT INTO v182_source_layer_occlusion_audit ('+','.join('"'+k+'"' for k in fields)+') VALUES ('+','.join('?' for k in fields)+')',
  [tuple(r[k] for k in fields) for r in results])
 db.commit()
