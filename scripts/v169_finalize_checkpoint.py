@@ -3,7 +3,7 @@
 from pathlib import Path
 import json
 R=Path(__file__).resolve().parents[1]
-review=json.loads((R/'review/v169_abc_4120_4159/MANIFEST.json').read_text())
+review=json.loads((R/'review/v169_abc_4160_4199/MANIFEST.json').read_text())
 dbm=json.loads((R/'analysis/current/v169/MANIFEST.json').read_text())
 parent_dbm=json.loads((R/'analysis/current/v168/MANIFEST.json').read_text())
 state_path=R/'PROJECT_STATE.json'
@@ -45,8 +45,8 @@ state['latest_checkpoint'].update(dict(
  expanded_84_tmx_unique_total=10042,expanded_unique_observed=obs,
  expanded_unique_unobserved=remaining,expanded_observation_percent=obs/10042*100,
  new_image_observed=obs-5400,new_keys_unobserved=4633-(obs-5400),
- evidence_repo_path='review/v169_abc_4120_4159/VISUAL_REVIEW.csv',
- evidence_manifest='review/v169_abc_4120_4159/MANIFEST.json',
+ evidence_repo_path='review/v169_abc_4160_4199/VISUAL_REVIEW.csv',
+ evidence_manifest='review/v169_abc_4160_4199/MANIFEST.json',
  mapping_verified=0,tilezed_verified=0,approved_final_certifications=0,
  v169_new_provisional=n,v169_excluded_unverified=review['excluded_unverified'],
  v169_exception_indices=review['excluded_indices'],v169_index_range=[4160,4199],
