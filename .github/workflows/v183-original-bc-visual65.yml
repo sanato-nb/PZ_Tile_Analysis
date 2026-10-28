@@ -1,0 +1,125 @@
+name: v183 original TMX B C manual visual65 true source evidence and immutable 245 SQLite tables
+on:
+  push:
+    branches: [work/v183-manual-original-bc65-20261028]
+    paths:
+      - scripts/v183_actual_BC_visual65.py
+      - scripts/v183_finalize_checkpoint.py
+      - .github/workflows/v183-original-bc-visual65.yml
+permissions:
+  contents: write
+concurrency:
+  group: v183-true-bc-visual-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  source_review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v183_actual_BC_visual65.py
+            /scripts/v183_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v182/*
+            /review/v182_occlusion202/SOURCE_OCCLUSION_202.csv
+            /review/v182_occlusion202/MANIFEST.json
+            /review/v182_occlusion202/OCCLUSION_PROOF.part000.bin
+            /review/v182_occlusion202/OCCLUSION_PROOF.part001.bin
+            /review/v182_occlusion202/OCCLUSION_PROOF.part002.bin
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v183_original_BC_visual65/MANUAL_VISUAL_NOTES.json
+      - name: Hydrate only original TMX files required for 65 source-positive manually visual-confirmed candidates
+        run: |
+          python3 - <<'PY' > /tmp/v183_needed_tmx.txt
+          import csv,json
+          from pathlib import Path
+          notes=json.loads(Path('review/v183_original_BC_visual65/MANUAL_VISUAL_NOTES.json').read_text())
+          eligible={int(i) for i,n in notes['notes'].items() if not n['manual_hold']}
+          names=set()
+          with open('review/v182_occlusion202/SOURCE_OCCLUSION_202.csv',encoding='utf-8-sig') as f:
+           for r in csv.DictReader(f):
+            if int(r['index']) in eligible:names.add(r['original_tmx'])
+          assert len(eligible)==65 and 1<=len(names)<=65
+          for name in sorted(names):
+           assert name.endswith('.tmx') and '/' not in name and '..' not in name
+           print('/B4220.3_MapExport_256/tmx/'+name)
+          PY
+          echo "Original TMX files required: $(wc -l </tmp/v183_needed_tmx.txt)"
+          git sparse-checkout add --stdin </tmp/v183_needed_tmx.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify real original TMX A B C 65 manual part candidates, archive SHA CRC and SQLite parent integrity
+        run: python3 -u scripts/v183_actual_BC_visual65.py
+      - name: Independent check 202 reviewed candidates and every parent 244 SQLite table and row values unchanged
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib,base64,sqlite3,zlib
+          from pathlib import Path
+          R=Path('review/v183_original_BC_visual65')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v182/MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v183/MANIFEST.json').read_text())
+          assert m['source_original_TMX_A_B_C_directly_reviewed']==202
+          assert m['real_B_C_positive']==87 and m['positive_ge100']==76
+          assert m['source_verified_promoted']==65 and m['held_total']==137
+          assert m['positive_ge100_held']==11 and m['weak_under100_held']==11
+          assert m['B_C_zero_held']==114 and m['source_A_missing_held']==1
+          assert m['diagnostic_mask_only_promoted']==0
+          assert m['prior_observed']==9829 and m['current_observed']==9894 and m['remaining_checkpoint']==148
+          assert m['identity_certified']==m['official_mapping_verified']==m['tilezed_verified']==0
+          assert d['parent']=='v182' and d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==245 and d['prior_tables_preserved']==244
+          assert d['new_rows']==d['new_observed_rows']==65
+          with (R/'VISUAL_REVIEW_65.csv').open(encoding='utf-8-sig') as f:a=list(csv.DictReader(f))
+          with (R/'HELD_137.csv').open(encoding='utf-8-sig') as f:b=list(csv.DictReader(f))
+          assert len(a)==65 and len(b)==137
+          assert len({(r['tile_set_name'],r['local_id']) for r in a})==65
+          assert all(int(r['real_B_C_pixels'])>=100 and r['review_status']=='provisional_candidate' for r in a)
+          assert all(r['certified']==r['official_mapping_verified']==r['tilezed_verified']=='0' for r in a)
+          assert all(r['observed']==r['certified']=='0' for r in b)
+          assert hashlib.sha256((R/'VISUAL_REVIEW_65.csv').read_bytes()).hexdigest()==m['accepted_csv_sha256']
+          assert hashlib.sha256((R/'HELD_137.csv').read_bytes()).hexdigest()==m['held_csv_sha256']
+          def original(man):
+           rawb=base64.b64decode(''.join(Path(q).read_text('ascii').strip() for q in man['parts']),validate=True)
+           assert hashlib.sha256(rawb).hexdigest()==man['compressed_sha256']
+           raw=zlib.decompress(rawb)
+           assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+           return raw
+          old=sqlite3.connect(':memory:');old.deserialize(original(p))
+          new=sqlite3.connect(':memory:');new.deserialize(original(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          before={r[0]:old.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          after={r[0]:new.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(before)==244 and len(after)==245
+          assert set(after)-set(before)=={'v183_visual_review'}
+          assert all(after[k]==n for k,n in before.items())
+          assert after['v183_visual_review']==65
+          for name in before:
+           aa=old.execute('SELECT * FROM "'+name+'"')
+           bb=new.execute('SELECT * FROM "'+name+'"')
+           while True:
+            x=aa.fetchmany(1024);y=bb.fetchmany(1024)
+            assert x==y,('old_data_modified',name)
+            if not x:break
+          assert new.execute('SELECT SUM(certified),SUM(official_mapping_verified),SUM(tilezed_verified) FROM v183_visual_review').fetchone()==(0,0,0)
+          print('PASS v183 real B-C source evidence, 65 provisional, 137 held, 245 tables, 244 old full row values immutable')
+          PY
+      - name: Update checkpoint only after independent source and SQLite verification
+        run: python3 -u scripts/v183_finalize_checkpoint.py
+      - name: Commit verified results to isolated work branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v183_original_BC_visual65 analysis/current/v183 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v183 65 source-verified real TMX B/C provisional candidates; 137 held and 245-table SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
