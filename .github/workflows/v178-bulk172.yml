@@ -1,0 +1,113 @@
+name: v178 163 selected original A alternative TMX A B C scenes, parent SQLite preserved
+on:
+  push:
+    branches: [work/v178-bulk172-alternate-scenes-20261028]
+    paths:
+      - scripts/v178_render_bulk172.py
+      - scripts/v178_finalize_checkpoint.py
+      - .github/workflows/v178-bulk172.yml
+permissions:
+  contents: write
+concurrency:
+  group: v178-other-original-scenes-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v178_render_bulk172.py
+            /scripts/v178_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v177/*
+            /review/v175_remaining381_evidence_audit/REMAINING_381_EVIDENCE_AUDIT.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /B4220.3_MapExport_256/tmx/*
+      - name: Hydrate only referenced original PNG atlas image files
+        run: |
+          python3 - <<'PY' > /tmp/original_atlas_paths.txt
+          import csv
+          paths=set()
+          for fname,field in [
+            ('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv','source_image_path'),
+            ('review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv','source_png_path')]:
+           with open(fname,encoding='utf-8-sig') as f:
+            for r in csv.DictReader(f):
+             if r.get(field):paths.add(r[field])
+          for path in sorted(paths):
+           assert path.startswith('Tiles/') and '..' not in path,path
+           print('/'+path)
+          PY
+          echo "Original atlas PNG files: $(wc -l < /tmp/original_atlas_paths.txt)"
+          git sparse-checkout add --stdin < /tmp/original_atlas_paths.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Physically render A at another actual TMX position and B-C removal for 163 distinct keys
+        run: python3 -u scripts/v178_render_bulk172.py
+      - name: Independently check new scene CRC, source status, parent SQLite rows
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,zipfile,hashlib,zlib,base64,sqlite3
+          R=Path('review/v178_alt_scene_bulk172')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v178/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v177/MANIFEST.json').read_text())
+          assert m['true_alternate_TMX_scenes']==163
+          assert m['new_B_C_positive_count']+m['new_B_C_zero_count']==163
+          assert m['observed_after']==9684 and m['identity_certified']==0
+          assert d['parent']=='v177' and d['prior_tables_preserved']==239 and d['table_count']==240
+          assert d['new_rows']==163 and d['new_observed_rows']==0
+          assert d['parent_sqlite_sha256']==p['sqlite_sha256']
+          with (R/'ALT_SCENE_RESULTS_163.csv').open(encoding='utf-8-sig') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==163 and len({(r['tile_set_name'],r['local_id']) for r in rows})==163
+          assert all(r['actual_raw_gid_matches_key']==r['exactly_one_target_GID_removed']=='1' for r in rows)
+          assert all(r['mapping_verified']==r['tilezed_verified']==r['certified']==r['observed']=='0' for r in rows)
+          assert hashlib.sha256((R/'ALT_SCENE_RESULTS_163.csv').read_bytes()).hexdigest()==m['evidence_csv_sha']
+          assert hashlib.sha256((R/'ALT_BC_163_ORIGINAL_TMXS.zip').read_bytes()).hexdigest()==m['evidence_zip_sha']
+          with zipfile.ZipFile(R/'ALT_BC_163_ORIGINAL_TMXS.zip') as z:
+           assert z.testzip() is None and len(z.namelist())==163*4
+          def extract(man):
+           packed=base64.b64decode(''.join(Path(q).read_text('ascii').strip() for q in man['parts']),validate=True)
+           assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+           raw=zlib.decompress(packed)
+           assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+           return raw
+          old=sqlite3.connect(':memory:');old.deserialize(extract(p))
+          new=sqlite3.connect(':memory:');new.deserialize(extract(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          o={r[0]:old.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          n={r[0]:new.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(o)==239 and len(n)==240
+          assert set(n)-set(o)=={'v178_alternate_scene_evidence'}
+          assert all(n[k]==v for k,v in o.items()) and n['v178_alternate_scene_evidence']==163
+          for tab in o:
+           a=old.execute('SELECT * FROM "'+tab+'"');b=new.execute('SELECT * FROM "'+tab+'"')
+           while True:
+            x=a.fetchmany(1024);y=b.fetchmany(1024)
+            assert x==y,('parent_values_modified',tab)
+            if not x:break
+          assert new.execute('SELECT SUM(observed),SUM(certified) FROM v178_alternate_scene_evidence').fetchone()==(0,0)
+          print('PASS 163 original alternate TMX scenes, 240 physical SQLite tables, no visual/identity promotions')
+          PY
+      - name: Finalize source evidence checkpoint without identity inflation
+        run: python3 -u scripts/v178_finalize_checkpoint.py
+      - name: Commit verified A B C scene images and 240-table SQLite evidence to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v178_alt_scene_bulk172 analysis/current/v178 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v178 verified 163 original alternate TMX B/C source scenes, 240 tables with unchanged observed count"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
