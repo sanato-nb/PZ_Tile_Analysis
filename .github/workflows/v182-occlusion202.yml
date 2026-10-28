@@ -79,8 +79,10 @@ jobs:
           assert sum(r['original_source_A_pixels_verified']=='1' for r in rows)==m['true_original_png_verified']
           assert sum(r['tmX_raw_gid']!='' for r in rows)==m['true_original_TMXS_rendered']
           assert hashlib.sha256((R/'SOURCE_OCCLUSION_202.csv').read_bytes()).hexdigest()==m['evidence_csv_sha256']
-          assert hashlib.sha256((R/'OCCLUSION_ACTUAL_BC_AND_LAYER_DIAGNOSTIC.zip').read_bytes()).hexdigest()==m['image_evidence_zip_sha256']
-          with zipfile.ZipFile(R/'OCCLUSION_ACTUAL_BC_AND_LAYER_DIAGNOSTIC.zip') as z:
+          data=b''.join((R/q).read_bytes() for q in m['evidence_zip_parts'])
+          assert len(data)==m['evidence_zip_bytes'] and hashlib.sha256(data).hexdigest()==m['image_evidence_zip_sha256']
+          proof=Path('/tmp/v182-joined.zip');proof.write_bytes(data)
+          with zipfile.ZipFile(proof) as z:
             assert z.testzip() is None and len(z.namelist())==6*m['true_original_TMXS_rendered']
           def raw(man):
             packed=base64.b64decode(''.join(Path(k).read_text('ascii').strip() for k in man['parts']),validate=True)
