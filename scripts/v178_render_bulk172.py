@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """v178 renderer: actual alternate TMX GID occurrence A/B/C comparison of
-up to 172 remaining alternative source scenes following the first 48. Evidence only; no identity
+up to 163 new-key original-A supported alternative source scenes following the first 48. Evidence only; no identity
 claim, atlas Local ID certification, or visual-observed inflation.
 Isometric TileZed presentation remains a provisional reconstructed renderer.
 """
@@ -153,7 +153,7 @@ pool.sort(key=lambda r:(
  0 if r['reason']=='B_C_zero_original_scene' else 1 if r['reason']=='original_scene_at_TMX_edge' else 2,
  -int(r['interior_occurrences_84']),-int(r['actual_occurrences_84']),int(r['index'])))
 selected=pool[48:]
-assert len(pool)==220 and len(selected)==172 and len(set((x['tile_set_name'],x['local_id']) for x in selected))==172
+assert len(pool)==211 and len(selected)==163 and len(set((x['tile_set_name'],x['local_id']) for x in selected))==163
 parent=json.loads((R/'analysis/current/v177/MANIFEST.json').read_text())
 pack=base64.b64decode(''.join((R/p).read_text('ascii').strip() for p in parent['parts']),validate=True)
 assert sha(pack)==parent['compressed_sha256']
@@ -167,7 +167,7 @@ assert len(before)==239 and before['v177_visual_review']==23 and before['v175_re
 assert all(db.execute('SELECT COUNT(*) FROM v175_remaining_evidence_audit WHERE tile_set_name=? AND local_id=?',(r['tile_set_name'],int(r['local_id']))).fetchone()[0]==1 for r in selected)
 font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',13)
 font2=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',12)
-proofs=zipfile.ZipFile(OUT/'ALT_BC_172_ORIGINAL_TMXS.zip','w',compression=zipfile.ZIP_DEFLATED,compresslevel=5)
+proofs=zipfile.ZipFile(OUT/'ALT_BC_163_ORIGINAL_TMXS.zip','w',compression=zipfile.ZIP_DEFLATED,compresslevel=5)
 results=[]
 maps={}
 for i,row in enumerate(selected):
@@ -219,12 +219,12 @@ for i,row in enumerate(selected):
   if q.mode=='RGBA':board.paste(q,pos,q)
   else:board.paste(q,pos)
  if i%6==5 or i==len(selected)-1:board.save(SHEETS/f'ALT_BC_{i//6:02}.jpg',quality=88,optimize=True)
- print('ALT',i+1,'/172',k,'former pix',row['B_C_changed_pixels'],'new pix',changed,'missing sprites',missB.get('missing_source',0),flush=True)
+ print('ALT',i+1,'/163',k,'former pix',row['B_C_changed_pixels'],'new pix',changed,'missing sprites',missB.get('missing_source',0),flush=True)
 proofs.close()
-assert len(results)==172 and len({(r['tile_set_name'],r['local_id']) for r in results})==172
-with zipfile.ZipFile(OUT/'ALT_BC_172_ORIGINAL_TMXS.zip') as proof:
- assert proof.testzip() is None and len(proof.namelist())==172*4
-with (OUT/'ALT_SCENE_RESULTS_172.csv').open('w',encoding='utf-8-sig',newline='') as f:
+assert len(results)==163 and len({(r['tile_set_name'],r['local_id']) for r in results})==163
+with zipfile.ZipFile(OUT/'ALT_BC_163_ORIGINAL_TMXS.zip') as proof:
+ assert proof.testzip() is None and len(proof.namelist())==163*4
+with (OUT/'ALT_SCENE_RESULTS_163.csv').open('w',encoding='utf-8-sig',newline='') as f:
  w=csv.DictWriter(f,fieldnames=list(results[0]));w.writeheader();w.writerows(results)
 fields=[('index','INTEGER'),('tile_set_name','TEXT'),('local_id','INTEGER'),('source_png','TEXT'),
  ('original_scene_reason','TEXT'),('original_scene_changed_pixels','TEXT'),('alternate_tmx','TEXT'),
@@ -239,7 +239,7 @@ db.executemany('INSERT INTO v178_alternate_scene_evidence ('+','.join('"'+n+'"' 
 db.commit()
 after={n:db.execute('SELECT COUNT(*) FROM "'+n+'"').fetchone()[0] for (n,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
 assert len(after)==240 and set(after)-set(before)=={'v178_alternate_scene_evidence'}
-assert all(after[n]==v for n,v in before.items()) and after['v178_alternate_scene_evidence']==172
+assert all(after[n]==v for n,v in before.items()) and after['v178_alternate_scene_evidence']==163
 assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
 db.close()
 newraw=tmp.read_bytes();compressed=zlib.compress(newraw,8)
@@ -249,11 +249,11 @@ for i in range(0,len(encoded),3000000):
 assert sha(zlib.decompress(base64.b64decode(''.join((R/p).read_text('ascii') for p in parts))))==sha(newraw)
 dbm=dict(version='v178',parent='v177',parent_sqlite_sha256=parent['sqlite_sha256'],
  sqlite_sha256=sha(newraw),compressed_sha256=sha(compressed),sqlite_bytes=len(newraw),parts=parts,
- table_count=240,prior_tables_preserved=239,new_rows=172,new_observed_rows=0,
+ table_count=240,prior_tables_preserved=239,new_rows=163,new_observed_rows=0,
  integrity_check='ok',mapping_verified=0,tilezed_verified=0,certified=0)
 (DBOUT/'MANIFEST.json').write_text(json.dumps(dbm,indent=2)+'\n')
-manifest=dict(version='v178',scope='172 remaining formerly zero or edge keys with alternative original TMX 5x5 occurrence',
- true_alternate_TMX_scenes=172,
+manifest=dict(version='v178',scope='163 original-A-supported remaining formerly zero or edge keys with alternative original TMX 5x5 occurrence',
+ true_alternate_TMX_scenes=163,
  original_B_C_zero_count=sum(r['original_scene_reason']=='B_C_zero_original_scene' for r in results),
  new_B_C_positive_count=sum(int(r['alternate_changed_pixels'])>0 for r in results),
  new_B_C_zero_count=sum(int(r['alternate_changed_pixels'])==0 for r in results),
@@ -263,9 +263,9 @@ manifest=dict(version='v178',scope='172 remaining formerly zero or edge keys wit
  source_keys_pending=356,source_key_count_discrepancy=2,
  official_mapping_verified=0,tilezed_verified=0,identity_certified=0,
  parent_db_tables_preserved=239,physical_tables=240,sqlite_sha256=sha(newraw),
- evidence_zip_sha=filesha(OUT/'ALT_BC_172_ORIGINAL_TMXS.zip'),
- evidence_csv_sha=filesha(OUT/'ALT_SCENE_RESULTS_172.csv'),
+ evidence_zip_sha=filesha(OUT/'ALT_BC_163_ORIGINAL_TMXS.zip'),
+ evidence_csv_sha=filesha(OUT/'ALT_SCENE_RESULTS_163.csv'),
  contact_sheets=[p.name for p in sorted(SHEETS.glob('*.jpg'))])
 (OUT/'MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
-(OUT/'README.md').write_text("# v178 잔여 172종 실제 다른 TMX 배치 대형 A/B/C 재조립\n\nv175의 원본 84 TMX 전수 조사에서 다른 5x5 배치를 확보할 수 있었던 220종 중 v176에서 렌더한 48종을 정확한 원본 키/정렬 기준으로 제외하고, **나머지 172종 전부를 한 배치로 렌더**한다. 각 타일의 고유 (tile_set_name,local_id)는 변하지 않는다. A는 원본 타일셋 PNG에서 선택한 기존 같은 A, B는 실제 해당 타일이 등장한 별도 TMX 원본 레이어/층/좌표, C는 그 위치에서 GID 한 개만 제거한 이미지다. 모든 장면의 RGB B-C 픽셀 증거를 따로 저장하고 6종씩 대형 시각 시트 29장을 생성한다.\n\n타일 한 개의 새로운 장소 발견/픽셀 변화 양수는 **사물 정체 확정이 아님**. 새 원본 배치의 B/C를 사람이 직접 보고 외형/물체부분을 확인한 경우에만 다음 검수판에서 새 provisional_candidate가 될 수 있다. 기록상 관찰 9684/10042(96.43%) 및 상태 미관찰 358 유지; 실제 고유 미관찰 356과 역사적 집계 차이 2 보존. 공식 A↔LocalID/TileZed 및 최종 정체 인증 0. 사용자 정의 D 공식 대체 A 실험이 아니라 동일 A의 다른 원본 B 장면 테스트다.\n\n원본 A PNG SHA256·RGBA 크롭 픽셀 SHA256, 원본 TMX GID/레이어/층/좌표·TMX SHA, C 한 GID 제거, ZIP CRC, 부모 v177 239테이블 모든 행값 및 행수 보존을 독립 검증하고 v178 240번째 물리 SQLite 테이블에는 172행의 미인증 증거만 추가한다. 기존5409·수동80·제외14·held D2/JUMBO20, 84개 TMX/Tiles PNG, 과거 DB와 증거 원형 보존.\n",encoding='utf-8')
+(OUT/'README.md').write_text("# v178 대형 배치: 163개 원본 A 대응 타일의 다른 실제 TMX A/B/C 재조립\n\nv175 전체 대체장면 후보 220종 중 기존 5409키에 속한 9종은 새 A 원본 크롭 선택 기록이 없으므로 이 스크립트로 허위 A를 그리지 않는다. 새 A 원본 근거가 있는 211종 중 v176가 렌더링한 48종을 정확한 정렬 기준과 (tile_set_name,local_id)로 제외한 **163종 전부**를 단일 배치로 재조립한다. 원본 A PNG를 그대로 쓰고 실제 다른 TMX 레이어·층·raw GID 위치에 배치한 B, 해당 GID 하나만 뺀 C, 색 차이 이미지를 원본 PNG ZIP과 6종씩 접촉시트로 저장한다.\n\n원본 A RGBA 픽셀 SHA, PNG 해시, 실제 TMX GID/좌표/레이어/층, C 단일 제거, B/C 4장/종 ZIP CRC와 부모 v177 SQLite 239개 기존 테이블의 모든 행 내용/수 보존 확인. 신규 SQLite 증거 163행을 v178 240번째 테이블에만 추가. 생성만으로 이미지 관찰이나 최종 인증으로 간주하지 않는다. 누적 관찰 9684/10042(96.43%), 기록상 미관찰 358, 실제 미관찰 키 356+집계 차이2 유지. 다음 검수에서 실제 새 장면을 눈으로 판독한 후에만 신규 provisional 후보 인정. 기존 5409중 원본 A 대응이 없는 9종은 별도 근거 발굴 대상. 사용자 정의 D(다른 공식 A를 같은 B 위치에 교체) 아님.\n",encoding='utf-8')
 print('PASS v178 ALTERNATE SCENES',json.dumps(manifest,ensure_ascii=False),flush=True)
