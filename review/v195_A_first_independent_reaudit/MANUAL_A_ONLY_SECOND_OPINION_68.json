@@ -1,0 +1,567 @@
+{
+  "version": "v195",
+  "scope": "v133 32 true A sprite cards + first 36 indices 180-215 of v134 (including 4 historically excluded)",
+  "actual_A_contact_sheets_directly_viewed": [
+    "review/v133_visual32/sheets/visual_00.jpg",
+    "review/v133_visual32/sheets/visual_01.jpg",
+    "review/v133_visual32/sheets/visual_02.jpg",
+    "review/v133_visual32/sheets/visual_03.jpg",
+    "review/v134_visual_180_319/sheets/proof_00.jpg",
+    "review/v134_visual_180_319/sheets/proof_01.jpg",
+    "review/v134_visual_180_319/sheets/proof_02.jpg",
+    "review/v134_visual_180_319/sheets/proof_03.jpg"
+  ],
+  "wiki_reference": "https://pzwiki.net/wiki/PZwiki:Tile_list",
+  "wiki_warning": "B42 42.0.0 generated Moveables_EN + script list, names/families only, not exact source PNG↔TMX Local ID certified mapping; current B42 versions can differ",
+  "status": "A_first_second_opinion_not_official",
+  "old_prior_exclusions_preserved": true,
+  "mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "notes": {
+    "180": {
+      "revised_A_only_description": "통나무의 둥근 끝/목재 띠가 있는 장작 단편",
+      "audit_flag": "A_supported",
+      "reason": "A에서 가로놓인 나무 단면이 직접 보이고 B는 장작 더미를 보조함",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "181": {
+      "revised_A_only_description": "평평한 작은 갈색 판목처럼 보이는 장작더미의 연결 조각",
+      "audit_flag": "BC_context_overreach",
+      "reason": "A만으로 '장작더미 윗판' 위치를 특정할 수 없음. B의 전체 장작더미 형상에서 과도한 위치 해석",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "182": {
+      "revised_A_only_description": "둥근 절단면이 세로로 쌓인 통나무 묶음 옆 조각",
+      "audit_flag": "A_supported",
+      "reason": "A에서 통나무 끝면의 수직 스택 확인",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "183": {
+      "revised_A_only_description": "금속 세로 지주와 아래 고정판, 위쪽 구부러진 레버",
+      "audit_flag": "A_supported",
+      "reason": "A에 손잡이와 기둥. 정확한 장치명을 단정하지 않음",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "184": {
+      "revised_A_only_description": "긴 어두운 금속 물펌프형 직립 기둥과 구부러진 손잡이",
+      "audit_flag": "A_supported",
+      "reason": "A에서 펌프 몸체와 레버 형태 직접 관찰",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "185": {
+      "revised_A_only_description": "낮은 삼각형의 적갈색 천막/텐트 단편",
+      "audit_flag": "A_supported",
+      "reason": "A 단독으로 뾰족한 천면 확인. 완성 천막과 구분",
+      "pzwiki_reference_term_only": "Improvized Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "186": {
+      "revised_A_only_description": "누런 갈색의 낮은 판재 두세 개가 겹친 나무 바닥판",
+      "audit_flag": "A_supported",
+      "reason": "A는 단순 판재로 보임. 정확한 캠핑 용도는 B 의존",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "187": {
+      "revised_A_only_description": "올리브색 낮은 평면 가장자리와 어두운 내부가 보이는 매트",
+      "audit_flag": "A_supported",
+      "reason": "A에서 얇은 녹색 깔개 형태. 정확한 종류는 추정",
+      "pzwiki_reference_term_only": "Spiffo Sleeping Bag",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "188": {
+      "revised_A_only_description": "길쭉한 올리브색 덮개·봉제선 있는 수면용 바닥 천",
+      "audit_flag": "A_supported",
+      "reason": "A에서 침낭처럼 길고 직사각 표시가 보임",
+      "pzwiki_reference_term_only": "Spiffo Sleeping Bag",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "189": {
+      "revised_A_only_description": "두꺼운 삼각형 갈색 거친 솔/털 같은 텍스처와 판 받침",
+      "audit_flag": "A_ambiguous",
+      "reason": "기존 '접힌 야영 깔개/천'은 A에서 보장되지 않음. 털/솔/짚 같은 표면 재검 필요",
+      "pzwiki_reference_term_only": "Hide Sleeping Bag",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "190": {
+      "revised_A_only_description": "연갈색 사각 받침 위 거친 갈색 삼각형 부품",
+      "audit_flag": "prior_excluded",
+      "reason": "과거 제외 상태 유지. A 접촉시트만 보아 용도 추정 불가",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "191": {
+      "revised_A_only_description": "사각 바닥 받침 한쪽에서 솟은 갈색 거친 털/짚 부분",
+      "audit_flag": "BC_context_overreach",
+      "reason": "기존 '접힌 천 매트'는 A에서 재질과 기능을 확인하기 어려움. 소재 모호",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "192": {
+      "revised_A_only_description": "엷은 받침과 짙은 갈색 불규칙 털/덤불 모양의 납작한 부품",
+      "audit_flag": "A_ambiguous",
+      "reason": "A만으로 깔개/천 여부 불명. 주변 캠핑 영역을 신뢰도로 전이하지 않음",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "193": {
+      "revised_A_only_description": "돌을 쌓아 만든 원형 둘레·가로 나무 걸이·수직 지주",
+      "audit_flag": "A_contradiction",
+      "reason": "기존 '돌로 만든 화덕 자리' 명칭은 지지대 구조를 설명하지 못함. 우물처럼 보이는 구조 가능, 화덕 확정 불가",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "194": {
+      "revised_A_only_description": "작은 삼각 갈색 텐트 측벽·밝은 가장자리",
+      "audit_flag": "A_supported",
+      "reason": "A에서 삼각 텐트 단편, 단독 완성 텐트 아님",
+      "pzwiki_reference_term_only": "Small Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "195": {
+      "revised_A_only_description": "세로 천막 기둥과 경사진 갈색 천면/줄",
+      "audit_flag": "A_supported",
+      "reason": "A에 지지봉, 천면과 당김 줄 확인",
+      "pzwiki_reference_term_only": "Small Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "196": {
+      "revised_A_only_description": "큰 갈색 경사진 판 모양의 텐트 외부 천",
+      "audit_flag": "A_supported",
+      "reason": "A에서는 갈색 천막 표면, 정확한 방향은 인접 부품 참조",
+      "pzwiki_reference_term_only": "Small Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "197": {
+      "revised_A_only_description": "좁고 길게 접힌 갈색 천막 외피",
+      "audit_flag": "prior_excluded",
+      "reason": "v134 제외를 유지, v191 A 메모 존재하나 당시 원본 기여 집계 제외",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "198": {
+      "revised_A_only_description": "작은 갈색 곡선 천막 모서리/당김끈 단편",
+      "audit_flag": "prior_excluded",
+      "reason": "v134 제외 유지. 독립 정체나 연결 방향 확정 금지",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "199": {
+      "revised_A_only_description": "삼각 입구를 가진 갈색 천막 끝판",
+      "audit_flag": "A_supported",
+      "reason": "A에서 밝은 테두리 및 안쪽 어두운 삼각 입구",
+      "pzwiki_reference_term_only": "Improvized Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "200": {
+      "revised_A_only_description": "갈색 삼각형 옆 천막 천과 연결선",
+      "audit_flag": "A_supported",
+      "reason": "A에서 좁은 삼각 천막 측면; 다른 면과 분할",
+      "pzwiki_reference_term_only": "Improvized Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "201": {
+      "revised_A_only_description": "갈색 큰 경사 텐트 판과 가는 하단 테두리",
+      "audit_flag": "A_supported",
+      "reason": "A에서 단일 천막면, 전체 텐트와 구분",
+      "pzwiki_reference_term_only": "Improvized Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "202": {
+      "revised_A_only_description": "진갈색 경사형 텐트 천 판",
+      "audit_flag": "A_supported",
+      "reason": "A 직접 천막 지붕 단편 관찰",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "203": {
+      "revised_A_only_description": "긴 지지선이 포함된 삼각형 텐트 전면 판",
+      "audit_flag": "A_supported",
+      "reason": "A에서 삼각면과 텐트 당김줄 확인",
+      "pzwiki_reference_term_only": "Small Tent",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "204": {
+      "revised_A_only_description": "짧은 장방형 갈색 나무 판/벽 걸이 조각",
+      "audit_flag": "A_supported",
+      "reason": "A에서 목재 판만, 정확한 역할은 설치 맥락이 필요",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "205": {
+      "revised_A_only_description": "겹쳐진 세 가로 판목 패널",
+      "audit_flag": "A_supported",
+      "reason": "A에서 판목 세 줄을 직접 확인. 문/창 용도는 미확정",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "206": {
+      "revised_A_only_description": "얇은 직사각형 목판 하나",
+      "audit_flag": "A_supported",
+      "reason": "A 직접 목판 확인. 정확한 지지용도 미확정",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "207": {
+      "revised_A_only_description": "갈색 나무 판자 두 장 결합",
+      "audit_flag": "A_supported",
+      "reason": "A에서 가로 판자 직접 확인",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "208": {
+      "revised_A_only_description": "서로 이어지는 목재 갈색 판 두 장",
+      "audit_flag": "A_supported",
+      "reason": "A에서 판자 결합, 구조상 연결 위치 미확정",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "209": {
+      "revised_A_only_description": "가로 판자 세 장의 수직 패널",
+      "audit_flag": "A_supported",
+      "reason": "A에서 세 층 목판 직접 보임. B의 외벽 여부는 별개",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "210": {
+      "revised_A_only_description": "원본 A는 작은 목재 박스형 부속으로 보이나 기능 미확정",
+      "audit_flag": "prior_excluded",
+      "reason": "v134 제외 유지. 원본 A 단독으로 상자 기능 단정 금지",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "211": {
+      "revised_A_only_description": "나무 널판과 X형 다리가 있는 낮은 작업대",
+      "audit_flag": "A_supported",
+      "reason": "A에서 널판과 지지 다리 직접 확인",
+      "pzwiki_reference_term_only": "Wood Top Workbench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "212": {
+      "revised_A_only_description": "상판이 여러 나무 널판 조각으로 이루어진 작업대 단편",
+      "audit_flag": "A_supported",
+      "reason": "A에서 부분 조립 작업대가 보임",
+      "pzwiki_reference_term_only": "Wood Top Workbench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "213": {
+      "revised_A_only_description": "모서리가 정리된 정사각 목재 탁자와 짧은 다리",
+      "audit_flag": "A_supported",
+      "reason": "A에서 네모 탁자 확인",
+      "pzwiki_reference_term_only": "Wooden Table",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "214": {
+      "revised_A_only_description": "나무 상판과 한쪽 지지다리의 불완전한 가구 조각",
+      "audit_flag": "A_supported",
+      "reason": "A에서는 분할 가구, 단독 테이블로 단정 금지",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "215": {
+      "revised_A_only_description": "짙은 나무판·긴 수직 목재 받침 조합",
+      "audit_flag": "A_ambiguous",
+      "reason": "A에서 뚜렷한 완성 가구 불명. 세부 용도를 B 가구 무리에 기대지 않음",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "360": {
+      "revised_A_only_description": "회흑색 윗구멍과 원통 벽체가 보이는 작은 금속 통",
+      "audit_flag": "A_supported",
+      "reason": "A만으로 원통과 열려있는 상단이 보임. 내용물과 구체적 게임 이름은 모름",
+      "pzwiki_reference_term_only": "Metal Drum",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "361": {
+      "revised_A_only_description": "윗면 내부가 밝게 드러나는 원형 금속통",
+      "audit_flag": "A_supported",
+      "reason": "개구와 원통 외형을 직접 확인. 저장물 종류는 불명",
+      "pzwiki_reference_term_only": "Metal Drum",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "362": {
+      "revised_A_only_description": "회색 원형 덮개가 덮인 원통형 금속통",
+      "audit_flag": "A_supported",
+      "reason": "밀폐된 상단과 원통 판면을 A에서 확인",
+      "pzwiki_reference_term_only": "Metal Drum",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "365": {
+      "revised_A_only_description": "등판이 높고 판상 작업면과 하부가 붙은 목재 작업대",
+      "audit_flag": "A_supported",
+      "reason": "A에 작업면과 등판이 직접 보임. 정확한 제작 기능은 판단하지 않음",
+      "pzwiki_reference_term_only": "Wood Top Workbench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "366": {
+      "revised_A_only_description": "작업면에 어두운 도구 또는 죔쇠가 보이는 목재 작업대",
+      "audit_flag": "A_supported",
+      "reason": "목재 구조와 검정 부품이 A에 직접 드러남. 도구의 정확한 종류 불명",
+      "pzwiki_reference_term_only": "Wood Top Workbench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "367": {
+      "revised_A_only_description": "나무를 다듬은 낮은 긴 평판과 작은 지지 다리",
+      "audit_flag": "A_supported",
+      "reason": "A에서 평판과 다리가 관찰됨. '벤치/평상' 사용 목적은 미확정",
+      "pzwiki_reference_term_only": "Log Bench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "368": {
+      "revised_A_only_description": "비스듬히 놓인 목재 상판과 한쪽 지지 다리",
+      "audit_flag": "A_supported",
+      "reason": "낮은 받침 형태가 A에 보임. 혼자 완결된 가구 여부 미확정",
+      "pzwiki_reference_term_only": "Log Bench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "369": {
+      "revised_A_only_description": "두께 있는 목제 판재와 안쪽 짧은 받침",
+      "audit_flag": "A_supported",
+      "reason": "A에서 목제 판과 받침 확인. 정확한 작업대의 종류 미확정",
+      "pzwiki_reference_term_only": "Log Bench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "370": {
+      "revised_A_only_description": "짧은 다리를 가진 작은 통나무형 평판",
+      "audit_flag": "A_supported",
+      "reason": "A에서 평판과 목제 둥근 하단이 보임",
+      "pzwiki_reference_term_only": "Log Bench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "371": {
+      "revised_A_only_description": "밝은 회색 사각 두꺼운 석재 수조와 물처럼 보이는 안쪽",
+      "audit_flag": "A_supported",
+      "reason": "원본 A에 오목한 수조가 드러남. 용도/수질은 미확정",
+      "pzwiki_reference_term_only": "Animal Trough",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "372": {
+      "revised_A_only_description": "가늘고 짧은 다리의 직사각 목재 탁자",
+      "audit_flag": "A_supported",
+      "reason": "작은 테이블 외형을 A에서 직접 확인",
+      "pzwiki_reference_term_only": "Small Wooden Table",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "373": {
+      "revised_A_only_description": "한쪽 모서리가 내려간 목재 판 부속",
+      "audit_flag": "A_supported",
+      "reason": "A는 독립 판 부품으로 보임. 무덤/가구 상단 역할은 B맥락에 의존",
+      "pzwiki_reference_term_only": "Wooden Table",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "374": {
+      "revised_A_only_description": "두꺼운 갈색 목재 판 하나",
+      "audit_flag": "A_supported",
+      "reason": "독립 목재판, 연결 방향 기능은 A로 판정 불가",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "375": {
+      "revised_A_only_description": "양 끝 높이가 다른 갈색 나무 받침/상단",
+      "audit_flag": "A_supported",
+      "reason": "A에 삼각형 목재 조각; 관/묘표 역할은 확인 불가",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "376": {
+      "revised_A_only_description": "갈색 평판과 짧은 가장자리 턱",
+      "audit_flag": "A_supported",
+      "reason": "A에서 간단한 사각 판재 확인",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "379": {
+      "revised_A_only_description": "한쪽 세로 받침과 작은 가로 판재",
+      "audit_flag": "A_supported",
+      "reason": "A만으로 ㄱ자 목제 구조. 정확한 기능은 B 배치와 별도",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "380": {
+      "revised_A_only_description": "사각 갈색 판자 상판과 낮은 다리",
+      "audit_flag": "A_supported",
+      "reason": "A에서 작업용 낮은 테이블로 보임",
+      "pzwiki_reference_term_only": "Wood Top Workbench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "383": {
+      "revised_A_only_description": "작은 세로봉에 가로봉 하나가 가로지른 목재 십자 지주",
+      "audit_flag": "A_supported",
+      "reason": "A에서 교차 지지대가 보임. 비석/표식인지 미확정",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "384": {
+      "revised_A_only_description": "가로 널판이 얽힌 낮고 긴 목재 작업판",
+      "audit_flag": "A_supported",
+      "reason": "A에서 판재 결합 직접 확인",
+      "pzwiki_reference_term_only": "Wood Top Workbench",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "385": {
+      "revised_A_only_description": "가로판 끝에 짧은 세로 목재 지주가 결합",
+      "audit_flag": "A_supported",
+      "reason": "A에서 수직 기둥과 판재 조합 확인",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "386": {
+      "revised_A_only_description": "비스듬한 버팀목이 얹힌 작은 목재 받침",
+      "audit_flag": "A_supported",
+      "reason": "A에서 사선 지지 구조가 보임",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "387": {
+      "revised_A_only_description": "상부 가로보 끝에 고리가 매달린 높고 긴 목재 기둥",
+      "audit_flag": "A_supported",
+      "reason": "원본 A에 고리/지주, 인양 기능 가능하지만 용도 확정 금지",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "389": {
+      "revised_A_only_description": "회색 원통 기기에서 검은 연통이 위로 꺾인 금속 설비",
+      "audit_flag": "A_supported",
+      "reason": "A에서 원통 난로/화덕형 기기, 연소 여부는 확정 금지",
+      "pzwiki_reference_term_only": "Crafted Oven",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "390": {
+      "revised_A_only_description": "검은 둥근 뚜껑을 가진 세로로 긴 갈색 나무통",
+      "audit_flag": "A_supported",
+      "reason": "A에서 목재 띠가 있는 드럼/배럴 형태. 정확한 게임 물건 불명",
+      "pzwiki_reference_term_only": "Metal Drum",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "391": {
+      "revised_A_only_description": "높은 회갈색 판목의 수직형 나무 수납장 또는 문틀",
+      "audit_flag": "A_supported",
+      "reason": "기둥형 판목과 문 같은 얇은 틈이 A에서 보임. 사용 목적 미확정",
+      "pzwiki_reference_term_only": "Crude Tall Locker",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "392": {
+      "revised_A_only_description": "평평한 윗면을 가진 회갈색 직육면체 상자",
+      "audit_flag": "A_supported",
+      "reason": "A에서 뚜껑 같은 평판이 보임. 수납 여부 불명",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "393": {
+      "revised_A_only_description": "작은 손잡이가 보이는 회색 직육면체 나무 보관함",
+      "audit_flag": "A_supported",
+      "reason": "A에서 문면/손잡이 보임. B 주변 진열과 독립적으로 확인 가능",
+      "pzwiki_reference_term_only": "Crude Tall Locker",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "394": {
+      "revised_A_only_description": "작은 갈색 원통형 통과 검은 둥근 윗구멍",
+      "audit_flag": "A_supported",
+      "reason": "A에 작은 통이 직접 보임",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "395": {
+      "revised_A_only_description": "얼룩/녹이 있는 회백색 원통형 금속 통",
+      "audit_flag": "A_supported",
+      "reason": "원본 A 금속통, 녹처럼 보이나 확정 성분 아님",
+      "pzwiki_reference_term_only": "Metal Drum",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "396": {
+      "revised_A_only_description": "어두운 둥근 뚜껑과 갈색 원통 몸체",
+      "audit_flag": "A_supported",
+      "reason": "원본 A에 통 외형 명확",
+      "pzwiki_reference_term_only": "Metal Drum",
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "398": {
+      "revised_A_only_description": "고리형 윗개구가 있는 작은 갈색 원통 양동이",
+      "audit_flag": "A_supported",
+      "reason": "원본 A 작은 용기. 내용물·용도 미확정",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    },
+    "399": {
+      "revised_A_only_description": "A자 목재 지지틀과 가로 지지봉 두 개",
+      "audit_flag": "A_supported",
+      "reason": "원본 A에 삼각 목재 구조. 설치 목적은 B 맥락 불필요",
+      "pzwiki_reference_term_only": null,
+      "A_visual_reviewed": true,
+      "B_C_as_secondary_only": true
+    }
+  }
+}
