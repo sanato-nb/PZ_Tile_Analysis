@@ -13,7 +13,6 @@ assert state['latest_checkpoint']['active_review_queue_remaining']==0
 assert d['parent']=='v189' and d['parent_sqlite_sha256']==p['sqlite_sha256']
 assert d['table_count']==252 and d['prior_tables_preserved']==251 and d['new_rows']==12 and d['new_observed_rows']==0
 assert m['individual_original_A_RGBA_and_PNG_SHA_verified']==12 and m['actual_source_TMX_raw_GID_verified']==12
-assert m['reclassified_as_provisional'] if False else True
 assert m['newly_provisionally_observed']==0 and m['held']==12
 assert m['previous_v188_exclusions_preserved'] is True
 assert m['official_mapping_verified']==m['tilezed_verified']==m['certified']==0
