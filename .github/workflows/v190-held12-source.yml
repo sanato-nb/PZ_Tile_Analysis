@@ -1,0 +1,113 @@
+name: v190 held12 original PNG and TMX source verification, SQLite 252 tables
+on:
+  push:
+    branches: [work/v190-targeted-12-unverified-source-review-20261028]
+    paths:
+      - scripts/v190_twelve_source_recheck.py
+      - scripts/v190_finalize_checkpoint.py
+      - .github/workflows/v190-held12-source.yml
+permissions:
+  contents: write
+concurrency:
+  group: v190-held12-source-20261028
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v190_twelve_source_recheck.py
+            /scripts/v190_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v189/*
+            /review/v190_twelve_held_visual_source_recheck/MANUAL_ASSESSMENT_12.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v182_occlusion202/SOURCE_OCCLUSION_202.csv
+            /review/v183_original_BC_visual65/HELD_137.csv
+            /review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv
+            /review/v180_remnant239_multisite/UNOBSERVED_239_ADDITIONAL_SITE_CENSUS.csv
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/30_44.tmx
+            /B4220.3_MapExport_256/tmx/31_44.tmx
+            /B4220.3_MapExport_256/tmx/31_48.tmx
+            /B4220.3_MapExport_256/tmx/32_43.tmx
+            /B4220.3_MapExport_256/tmx/32_44.tmx
+            /B4220.3_MapExport_256/tmx/32_45.tmx
+      - name: Download only original PNG atlases for 12 source keys
+        run: |
+          python3 - <<'PY' >/tmp/v190_png_paths.txt
+          import csv,json
+          a=list(csv.DictReader(open('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv',encoding='utf-8-sig')))
+          notes=json.load(open('review/v190_twelve_held_visual_source_recheck/MANUAL_ASSESSMENT_12.json'))
+          assert len(a)==4633 and len(notes['indices'])==12
+          paths=sorted({a[i]['source_image_path'] for i in notes['indices']})
+          assert 0<len(paths)<=12
+          for p in paths:
+            assert p.startswith('Tiles/') and '..' not in p
+            print('/'+p)
+          PY
+          git sparse-checkout add --stdin </tmp/v190_png_paths.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Source pixel SHA256, actual TMX GID, previous held status, append SQLite
+        run: python3 -u scripts/v190_twelve_source_recheck.py
+      - name: Verify SQLite physical parent row preservation independently
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,csv,hashlib,json,sqlite3,zlib
+          m=json.load(open('review/v190_twelve_held_visual_source_recheck/MANIFEST.json'))
+          p=json.load(open('analysis/current/v189/MANIFEST.json'))
+          d=json.load(open('analysis/current/v190/MANIFEST.json'))
+          assert m['individual_original_A_RGBA_and_PNG_SHA_verified']==12
+          assert m['actual_source_TMX_raw_GID_verified']==12
+          assert m['previous_v188_exclusions_preserved'] and m['held']==12
+          assert m['newly_provisionally_observed']==m['certified']==0
+          assert d['parent']=='v189' and d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==252 and d['prior_tables_preserved']==251 and d['new_rows']==12 and d['new_observed_rows']==0
+          with open('review/v190_twelve_held_visual_source_recheck/RECHECK_12.csv',encoding='utf-8-sig') as f:rr=list(csv.DictReader(f))
+          assert len(rr)==12 and len({(r['tile_set_name'],r['local_id']) for r in rr})==12
+          assert all(r['observed']==r['certified']==r['official_mapping_verified']==r['tilezed_verified']=='0' for r in rr)
+          assert hashlib.sha256(Path('review/v190_twelve_held_visual_source_recheck/RECHECK_12.csv').read_bytes()).hexdigest()==m['review_csv_sha256']
+          def raw(x):
+            pack=base64.b64decode(''.join(Path(n).read_text('ascii').strip() for n in x['parts']),validate=True)
+            assert hashlib.sha256(pack).hexdigest()==x['compressed_sha256']
+            b=zlib.decompress(pack)
+            assert hashlib.sha256(b).hexdigest()==x['sqlite_sha256'] and len(b)==x['sqlite_bytes']
+            return b
+          a=sqlite3.connect(':memory:');a.deserialize(raw(p))
+          b=sqlite3.connect(':memory:');b.deserialize(raw(d))
+          assert a.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert b.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          oc={n[0]:a.execute('SELECT COUNT(*) FROM "'+n[0]+'"').fetchone()[0] for n in a.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          nc={n[0]:b.execute('SELECT COUNT(*) FROM "'+n[0]+'"').fetchone()[0] for n in b.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(oc)==251 and len(nc)==252 and set(nc)-set(oc)=={'v190_held_twelve_source_audit'}
+          assert all(nc[n]==v for n,v in oc.items()) and nc['v190_held_twelve_source_audit']==12
+          for table in oc:
+            x=a.execute('SELECT * FROM "'+table+'"');y=b.execute('SELECT * FROM "'+table+'"')
+            while True:
+              old=x.fetchmany(1024);new=y.fetchmany(1024)
+              assert old==new,('parent changed',table)
+              if not old:break
+          assert b.execute('SELECT SUM(observed),SUM(certified) FROM v190_held_twelve_source_audit').fetchone()==(0,0)
+          print('PASS 12 genuine held source checks, prior 251 physical tables and rows unchanged')
+          PY
+      - name: Publish verified v190 state
+        run: python3 -u scripts/v190_finalize_checkpoint.py
+      - name: Commit source-verified 12 held records on isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v190_twelve_held_visual_source_recheck analysis/current/v190 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v190 12 evidence-reviewed held tiles and preserved 252-table SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
