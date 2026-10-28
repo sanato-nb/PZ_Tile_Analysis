@@ -66,7 +66,11 @@ src_182=idx_by_key('review/v182_occlusion202/SOURCE_OCCLUSION_202.csv')
 src_183=idx_by_key('review/v183_original_BC_visual65/HELD_137.csv')
 src_187=idx_by_key('review/v187_missing_neighbor6/SOURCE_BLOCKED_6.csv')
 classified_49=idx_by_key('review/v186_object_disambiguation_49/RECLASSIFIED_49.csv')
-assert len(classified_49)==49 and not (set(classified_49)&set(pending)),('already classified counted as still pending',set(classified_49)&set(pending))
+assert len(classified_49)==49
+classified_pending=set(classified_49)&set(pending)
+classified_already_observed=set(classified_49)&observed
+assert len(classified_pending)==7 and len(classified_already_observed)==42,('reclassified_source_49_reconciliation',len(classified_pending),len(classified_already_observed))
+assert not (classified_pending & classified_already_observed)
 rows=[]
 for key in sorted(pending):
  origin,index,record=pending[key]
@@ -79,6 +83,9 @@ for key in sorted(pending):
  if origin=='original_5409':
   category='historical_user_excluded' if old_action=='exclude_from_active_review' else 'historical_keep_provisional_not_source_observed'
   evidence=f'Historical v113 action: {old_action}; old tile_catalog observed_any=0. Preserve original record exactly.'
+ elif key in classified_pending:
+  category='previously_visually_classified_but_not_observation_promoted'
+  evidence='v186 source-backed revised appearance='+classified_49[key]['revised_identity']+'; distinct identity category noted, but source record explicitly new_observed=0 and official ID certification=0. User requested closure of repeated review.'
  elif s187:
   category='original_neighborhood_source_missing'
   evidence='v187 original B-C changed, but one or more adjacent original sprite pixels unavailable; do not certify object.'
@@ -116,6 +123,7 @@ assert all((r['tile_set_name'],r['local_id']) not in observed for r in rows)
 assert sum(x['origin']=='original_5409' for x in rows)==9
 assert sum(x['origin']=='new_4633' for x in rows)==133
 assert sum(x['source_blocker_category']=='original_neighborhood_source_missing' for x in rows)==6
+assert sum(x['source_blocker_category']=='previously_visually_classified_but_not_observation_promoted' for x in rows)==7
 fields=list(rows[0])
 csvpath=OUT/'EXCLUDED_FROM_ACTIVE_REVIEW_142.csv'
 with csvpath.open('w',encoding='utf-8-sig',newline='') as f:
@@ -128,7 +136,7 @@ ledger=dict(version='v188',parent='v187',policy='user_directed_exclusion_from_ac
  physically_unobserved_new=133,physically_unobserved_old=9,physically_unobserved_distinct=142,
  historical_checkpoint_two_count_difference=2,
  old_nine_prior_user_excluded=8,old_nine_prior_kept_provisional=1,
- previously_reclassified_49_already_observed=49,already_classified_overlap_pending=0,
+ previously_reclassified_49_already_observed=42,previously_reclassified_7_still_unobserved_but_classified=7,
  newly_observed_this_version=0,reviewed_for_scope_disposition=142,
  excluded_from_active_review_unique=142,
  accounting_only_unresolved_nonkey_count=2,
@@ -181,7 +189,7 @@ ledger.update(csv_sha256=sha(csvpath.read_bytes()),sqlite_sha256=sha(newraw),
  '# v188 사용자 요청: 남은 타일을 기존 검수 건수에서 제외 (원본·정체 인증 불변)\n\n'
  '남은 144종이라는 상태 숫자는 물리 SQLite에서 확인된 서로 다른 미관찰 실제 키 142개와 2건의 역사적 체크포인트 집계 차이로 이루어져 있습니다. 원본 자료와 과거 기록을 보존한 상태로 142개를 "활성 반복 검수 대상에서 제외" 처리하고 역사적 집계 차이 2건은 가짜 타일을 만들지 않고 별도 기록했습니다.\n'
  '과거 9개 미관찰 중 8개는 애초 v113부터 활성 검수 제외였고, f_bushes_1/66 하나는 과거 keep_provisional로 지정됐습니다. 해당 역사적 상태 자체는 변경하지 않고 이번 사용자의 최신 지시 범위에 따라 작업 큐에서만 제외했습니다.\n'
- 'v186에서 물체 정체를 재분류한 49종은 이미 관찰 기록에 들어 있어 이중으로 미처리 건수에서 빼지 않습니다. v187 B-C 양수 6종은 누락된 jumbo_tree_01/0 주변 원본 이미지가 여전히 없다는 차단 사유로 분류하되 기존 A/B/C와 DB 증거를 보존했습니다.\n'
+ 'v186에서 외형을 재분류한 49종 중 42종은 이미 잠정 관찰 기록에 들어 있고, **7종은 기존 분류에도 불구하고 미관찰로 남아 있던 대상**이라 이번 활성 검수 제외 목록에 따로 표시했습니다. 49종 전체를 이중 차감하지 않습니다. v187 B-C 양수 6종은 누락된 jumbo_tree_01/0 주변 원본 이미지가 여전히 없다는 차단 사유로 분류하되 기존 A/B/C와 DB 증거를 보존했습니다.\n'
  '따라서 활성 검수 잔여 **0건**이고 실물 이미지 잠정 관찰 기록 9,898/10,042(98.57%), 역사적 미관찰144, 공식 PNG↔Local ID·TileZed·최종 정체 인증0은 변경되지 않았습니다. 제외는 관찰/인증이 아닙니다. 필요한 경우 개별 키의 제외를 해제해 다시 검수할 수 있습니다.\n'
  '모든 원본 84 TMX, PNG 타일셋, 사용자 수동 검수80·제외14·held D2/JUMBO20·과거 자료 전부 유지하고 v187의 249개 물리 SQLite 테이블을 전체 행 값/행 수 그대로 보존, v188 작업 상태 테이블 142행만 추가(총250테이블).\n',
  encoding='utf-8')
