@@ -1,0 +1,113 @@
+name: v188 user-directed 142-key active-review exclusion without false observations; 250-table SQLite
+on:
+  push:
+    branches: [work/v188-close-active-review-20261028]
+    paths:
+      - scripts/v188_close_active_review.py
+      - scripts/v188_finalize_checkpoint.py
+      - .github/workflows/v188-close-active-review.yml
+permissions:
+  contents: write
+concurrency:
+  group: v188-close-active-review-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  exclude:
+    runs-on: ubuntu-latest
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v188_close_active_review.py
+            /scripts/v188_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v187/*
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v175_remaining381_evidence_audit/OLD_NINE_UNOBSERVED.json
+            /review/v175_remaining381_evidence_audit/REMAINING_381_EVIDENCE_AUDIT.csv
+            /review/v180_remnant239_multisite/UNOBSERVED_239_ADDITIONAL_SITE_CENSUS.csv
+            /review/v182_occlusion202/SOURCE_OCCLUSION_202.csv
+            /review/v183_original_BC_visual65/HELD_137.csv
+            /review/v186_object_disambiguation_49/RECLASSIFIED_49.csv
+            /review/v187_missing_neighbor6/SOURCE_BLOCKED_6.csv
+      - name: Resolve exactly 142 distinct unobserved source keys and disposition into user-excluded review queue
+        run: python3 -u scripts/v188_close_active_review.py
+      - name: Independent physical SQLite original row preservation and exclusion-only validation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,csv,hashlib,json,sqlite3,zlib
+          R=Path('review/v188_active_review_exclusions')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          old=json.loads(Path('analysis/current/v187/MANIFEST.json').read_text())
+          new=json.loads(Path('analysis/current/v188/MANIFEST.json').read_text())
+          assert m['checkpoint_observed']==9898 and m['checkpoint_unobserved']==144
+          assert m['physically_unobserved_new']==133 and m['physically_unobserved_old']==9
+          assert m['physically_unobserved_distinct']==m['excluded_from_active_review_unique']==142
+          assert m['historical_checkpoint_two_count_difference']==2
+          assert m['active_review_queue_remaining']==0 and m['newly_observed_this_version']==0
+          assert m['previously_reclassified_49_already_observed']==42 and m['previously_reclassified_7_still_unobserved_but_classified']==7
+          assert m['old_nine_prior_user_excluded']==8 and m['old_nine_prior_kept_provisional']==1
+          assert m['official_mapping_verified']==m['tilezed_verified']==m['final_identity_certified']==0
+          assert new['parent']=='v187' and new['parent_sqlite_sha256']==old['sqlite_sha256']
+          assert new['table_count']==250 and new['prior_tables_preserved']==249
+          assert new['new_rows']==142 and new['active_review_excluded_rows']==142
+          assert new['new_observed_rows']==0 and new['integrity_check']=='ok'
+          with (R/'EXCLUDED_FROM_ACTIVE_REVIEW_142.csv').open(encoding='utf-8-sig') as f:
+            rows=list(csv.DictReader(f))
+          assert len(rows)==142 and len({(r['tile_set_name'],r['local_id']) for r in rows})==142
+          assert sum(r['origin']=='new_4633' for r in rows)==133
+          assert sum(r['origin']=='original_5409' for r in rows)==9
+          assert sum(r['source_blocker_category']=='original_neighborhood_source_missing' for r in rows)==6
+          assert sum(r['source_blocker_category']=='previously_visually_classified_but_not_observation_promoted' for r in rows)==7
+          assert all(r['new_observed']==r['official_mapping_verified']==r['tilezed_verified']==r['final_identity_certified']=='0' for r in rows)
+          assert all(r['disposition']=='excluded_from_active_review_per_latest_user_instruction' for r in rows)
+          assert hashlib.sha256((R/'EXCLUDED_FROM_ACTIVE_REVIEW_142.csv').read_bytes()).hexdigest()==m['csv_sha256']
+          x=json.loads((R/'COUNT_RECONCILIATION.json').read_text())
+          assert x['checkpoint_unobserved']==144 and x['distinct_source_unobserved_keys']==142
+          assert x['historical_count_gap_without_distinct_tile_key']==2
+          assert x['active_review_queue_after_user_exclusion']==0
+          def payload(man):
+            packed=base64.b64decode(''.join(Path(p).read_text('ascii').strip() for p in man['parts']),validate=True)
+            assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+            raw=zlib.decompress(packed)
+            assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+            return raw
+          a=sqlite3.connect(':memory:');a.deserialize(payload(old))
+          b=sqlite3.connect(':memory:');b.deserialize(payload(new))
+          assert a.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert b.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          oldnames={r[0]:a.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in a.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          newnames={r[0]:b.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in b.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(oldnames)==249 and len(newnames)==250
+          assert set(newnames)-set(oldnames)=={'v188_active_review_disposition'}
+          assert all(newnames[n]==v for n,v in oldnames.items())
+          assert newnames['v188_active_review_disposition']==142
+          for name in oldnames:
+            x=a.execute('SELECT * FROM "'+name+'"')
+            y=b.execute('SELECT * FROM "'+name+'"')
+            while True:
+              aa=x.fetchmany(1024);bb=y.fetchmany(1024)
+              assert aa==bb,('previous_sqlite_record_modified',name)
+              if not aa:break
+          assert b.execute('SELECT SUM(new_observed),SUM(final_identity_certified),SUM(official_mapping_verified),SUM(tilezed_verified) FROM v188_active_review_disposition').fetchone()==(0,0,0,0)
+          print('PASS v188: 142 actual missing keys marked excluded ONLY FROM ACTIVE QUEUE; two unresolved bookkeeping counts retained, 9898 historic observations and all 249 parent tables unchanged')
+          PY
+      - name: Update v188 checkpoint and handoff only after complete independent preservation proof
+        run: python3 -u scripts/v188_finalize_checkpoint.py
+      - name: Commit verified user scope disposition without changing original files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v188_active_review_exclusions analysis/current/v188 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v188 user requested exclude unresolved 142 keys from active review queue, historic observations unchanged"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
