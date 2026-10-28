@@ -327,7 +327,11 @@ for k,r in target.items():
 assert len(rows)==239 and len({(x['tile_set_name'],x['local_id']) for x in rows})==239
 with (OUT/'UNOBSERVED_239_ADDITIONAL_SITE_CENSUS.csv').open('w',newline='',encoding='utf-8-sig') as f:
  w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
-eligible=[r for r in rows if r['fresh_untried_inbounds_candidate_count_capped_3']>0]
+# Some original A records were never selected (e.g. held graffiti overlay);
+# never replace those with guessed source sprites or count them as rendered.
+eligible=[r for r in rows if r['fresh_untried_inbounds_candidate_count_capped_3']>0
+ and a[(r['tile_set_name'],r['local_id'])]['selection_status']=='selected_provisional'
+ and a[(r['tile_set_name'],r['local_id'])]['source_image_path']]
 eligible.sort(key=lambda r:(
   0 if r['prior_hold_reason']=='B_C_zero_original_scene' else 1,
   -int(r['actual_original_TMX_uses']),-int(r['fresh_untried_inbounds_candidate_count_capped_3']),r['index']))
@@ -427,8 +431,9 @@ dbm=dict(version='v180',parent='v179',parent_sqlite_sha256=parent['sqlite_sha256
 (DBOUT/'MANIFEST.json').write_text(json.dumps(dbm,ensure_ascii=False,indent=2)+'\n')
 summary=dict(version='v180',source_map_count=84,actual_distinct_new_A_missing_keys=239,
  historical_missing_old_keys=9,checkpoint_missing=250,physical_missing_total=248,unreconciled_difference=2,
- original_source_keys_with_fresh_untried_inbounds_sites=len(eligible),
- original_source_keys_without_untried_5x5_sites=239-len(eligible),
+ original_source_keys_with_fresh_untried_inbounds_sites=sum(r['fresh_untried_inbounds_candidate_count_capped_3']>0 for r in rows),
+ original_source_keys_without_untried_5x5_sites=sum(r['fresh_untried_inbounds_candidate_count_capped_3']==0 for r in rows),
+ source_candidates_with_missing_original_A=sum(r['fresh_untried_inbounds_candidate_count_capped_3']>0 and (a[(r['tile_set_name'],r['local_id'])]['selection_status']!='selected_provisional' or not a[(r['tile_set_name'],r['local_id'])]['source_image_path']) for r in rows),
  new_TMX_context_candidates_rendered=len(rendered),
  source_candidates_with_positive_new_B_C=sum(x['selected_B_C_changed_pixels']>0 for x in rendered),
  source_candidates_with_new_B_C_zero=sum(x['selected_B_C_changed_pixels']==0 for x in rendered),
