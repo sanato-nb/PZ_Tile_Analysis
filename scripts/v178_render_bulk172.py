@@ -175,7 +175,7 @@ for i,row in enumerate(selected):
  original=a[k]
  assert original['selection_status']=='selected_provisional'
  loc=json.loads(row['alternate_scene_candidate'])
- assert loc['inbounds_5x5'] and (loc['tmx'],loc['x'],loc['y'])!=(row['original_scene_tmx'],int(row['original_scene_x']),int(row['original_scene_y']))
+ assert loc['inbounds_5x5'] and (loc['tmx'],int(loc['layer_index']),int(loc['x']),int(loc['y']))!=(row['original_scene_tmx'],int(row['original_scene_layer']),int(row['original_scene_x']),int(row['original_scene_y'])), ('not_a_distinct_TMX_layer_placement',int(row['index']),loc)
  if loc['tmx'] not in maps:
   maps[loc['tmx']]=mapread(loc['tmx'])
  m=maps[loc['tmx']]
