@@ -69,6 +69,9 @@
     "historical_v31_ai_labels": "not_authoritative"
   },
   "next_actions": [
+    "v191 user reopening supersedes earlier active queue exclusion; re-examine 142 original image descriptions and original TMX B/C one GID removal evidence, do not ignore clear direct A appearance when B-C=0.",
+    "v191 cross-check 132 original A source-visible shapes with real placement/part family. Upgrade only upon independently supported source key, TMX scene and candidate identity evidence; keep final official mapping 0 until proven.",
+    "v191 resolve exact original A source/crop for 9 older original catalog keys plus 1 new missing original source; never substitute a guess.",
     "v190: keep 12 correctly source-audited but still ambiguous tile keys excluded from routine re-review; only reopen if new original source scene, unobscured imagery or official TileZed metadata is supplied.",
     "v190: two unresolved historical checkpoint count cases are accounting only; do not assign them invented tile-set/local IDs.",
     "v189: visual inspection of new actual source A/B/C comparison for 986/987; do not promote just because delta is nonzero or A looks like sofa.",
@@ -36091,5 +36094,24 @@
     "historical_count_gap": 2,
     "official_mapping_verified": 0,
     "final_certified": 0
+  },
+  "latest_v191_explicit_142_reopen": {
+    "reopened_by_user": true,
+    "stage": "A_original_pixel_verified_and_all_visible_individual_images_visually_reviewed",
+    "all_targeted_keys": 142,
+    "actual_A_image_verified_and_viewed": 132,
+    "A_image_missing_or_no_exact_crop": 10,
+    "A_visual_notes": 142,
+    "A_confidence_high": 60,
+    "A_confidence_medium": 49,
+    "A_confidence_low": 23,
+    "official_mapping_verified": 0,
+    "tilezed_verified": 0,
+    "identity_final_certified": 0,
+    "new_image_observed": 0,
+    "awaiting_BC_contextual_crosscheck_count": 142,
+    "source_evidence": "review/v191_reopen142_A_first/MANUAL_A_IMAGE_OBSERVATIONS_142.json",
+    "source_manifest": "review/v191_reopen142_A_first/MANIFEST.json",
+    "note": "v188 exclusion was from active review ONLY. User expressly reopened 142 keys; new source-A appearance descriptions are NOT provisional observed or official certified tile identities. 10 without exact original A remain source-blocked. Physical v190 SQLite and checkpoint 9898/10042 unchanged."
   }
 }
