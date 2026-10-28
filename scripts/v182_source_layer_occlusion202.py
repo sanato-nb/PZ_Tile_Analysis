@@ -406,6 +406,24 @@ dbm=dict(version='v182',parent='v181',parent_sqlite_sha256=parent['sqlite_sha256
  table_count=244,prior_tables_preserved=243,new_rows=202,new_observed_rows=0,
  integrity_check='ok',mapping_verified=0,tilezed_verified=0,certified=0)
 (DBOUT/'MANIFEST.json').write_text(json.dumps(dbm,ensure_ascii=False,indent=2)+'\n')
+# GitHub enforces <100 MiB per file. Keep the original verified ZIP as two
+# byte-exact chunks and reconstruct only during independent validation.
+source_zip=OUT/'OCCLUSION_ACTUAL_BC_AND_LAYER_DIAGNOSTIC.zip'
+original_zip_sha=filesha(source_zip)
+original_zip_bytes=source_zip.stat().st_size
+zip_parts=[]
+with source_zip.open('rb') as fzip:
+ for n in range(100):
+  chunk=fzip.read(70_000_000)
+  if not chunk:break
+  part=OUT/f'OCCLUSION_PROOF.part{n:03d}.bin'
+  part.write_bytes(chunk)
+  assert len(chunk)<100_000_000
+  zip_parts.append(part.name)
+assert len(zip_parts)>=1 and sum((OUT/p).stat().st_size for p in zip_parts)==original_zip_bytes
+assert sha(b''.join((OUT/p).read_bytes() for p in zip_parts))==original_zip_sha
+source_zip.unlink()
+
 summary=dict(version='v182',source_new_key_unobserved_before=202,source_new_key_unobserved_after=202,
  parent_checkpoint_observed=9829,parent_checkpoint_missing=213,
  original_9_unobserved_held=9,historical_checkpoint_count_discrepancy=2,
@@ -420,7 +438,7 @@ summary=dict(version='v182',source_new_key_unobserved_before=202,source_new_key_
  physical_sqlite_tables=244,prior_tables_preserved=243,new_observed=0,
  final_certified=0,official_mapping_verified=0,tilezed_verified=0,
  evidence_csv_sha256=filesha(OUT/'SOURCE_OCCLUSION_202.csv'),
- image_evidence_zip_sha256=filesha(OUT/'OCCLUSION_ACTUAL_BC_AND_LAYER_DIAGNOSTIC.zip'),
+ image_evidence_zip_sha256=original_zip_sha,evidence_zip_parts=zip_parts,evidence_zip_bytes=original_zip_bytes,
  contact_sheets=[x.name for x in sorted(SHEETS.glob('*.jpg'))],db_sha256=sha(newraw))
 (OUT/'MANIFEST.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
 (OUT/'README.md').write_text(
