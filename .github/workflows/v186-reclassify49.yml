@@ -6,6 +6,7 @@ on:
       - scripts/v186_reclassify49.py
       - scripts/v186_finalize_checkpoint.py
       - .github/workflows/v186-reclassify49.yml
+      - review/v186_object_disambiguation_49/MANUAL_REINSPECTION.json
 permissions:
   contents: write
 concurrency:
