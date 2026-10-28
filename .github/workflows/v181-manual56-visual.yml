@@ -1,0 +1,101 @@
+name: v181 real TMX multisite 56 A B C manual review with 34 provisional parts and 243-table SQLite
+on:
+  push:
+    branches: [work/v181-manual56-alt-review-20261028]
+    paths:
+      - scripts/v181_visual34_from_v180.py
+      - scripts/v181_finalize_checkpoint.py
+      - .github/workflows/v181-manual56-visual.yml
+permissions:
+  contents: write
+concurrency:
+  group: v181-manual56-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v181_visual34_from_v180.py
+            /scripts/v181_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v180/*
+            /review/v180_remnant239_multisite/ALTERNATE_MULTISITE_IMAGES.zip
+            /review/v180_remnant239_multisite/ALTERNATE_SELECTED_SCENES.csv
+            /review/v180_remnant239_multisite/MANIFEST.json
+            /review/v181_multisite56_visual/MANUAL_VISUAL_NOTES.json
+      - run: python3 -m pip install --quiet Pillow
+      - name: Recheck all 56 original A B C pixel evidence and append 34 observed only after source integrity
+        run: python3 -u scripts/v181_visual34_from_v180.py
+      - name: Independent evidence and 242 full parent SQLite tables all rows check
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib,base64,zlib,sqlite3,zipfile
+          from pathlib import Path
+          R=Path('review/v181_multisite56_visual')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v180/MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v181/MANIFEST.json').read_text())
+          assert m['visually_reviewed']==56 and m['positive_B_C_scenes']==47
+          assert m['newly_provisional']==34 and m['held']==22
+          assert m['held_zero']==9 and m['held_weak_or_missing']==13
+          assert m['observed_parent']==9792 and m['observed_now']==9826
+          assert m['remaining_checkpoint']==216 and m['remaining_physical_unique']==214
+          assert m['checkpoint_discrepancy']==2
+          assert m['official_mapping_verified']==m['tilezed_verified']==m['identity_certified']==0
+          assert d['parent']=='v180' and d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==243 and d['prior_tables_preserved']==242
+          assert d['new_rows']==d['new_observed_rows']==34
+          with (R/'VISUAL_REVIEW_34.csv').open(encoding='utf-8-sig') as f: rows=list(csv.DictReader(f))
+          with (R/'EXCLUDED_22.csv').open(encoding='utf-8-sig') as f: held=list(csv.DictReader(f))
+          assert len(rows)==34 and len(held)==22
+          assert all(int(r['B_C_changed_pixels'])>=200 and r['review_status']=='provisional_candidate' for r in rows)
+          assert all(r['certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in rows)
+          assert sum(r['reason']=='new_B_C_zero' for r in held)==9
+          assert len({(r['tile_set_name'],r['local_id']) for r in rows})==34
+          assert hashlib.sha256((R/'VISUAL_REVIEW_34.csv').read_bytes()).hexdigest()==m['review_csv_sha256']
+          assert hashlib.sha256((R/'EXCLUDED_22.csv').read_bytes()).hexdigest()==m['excluded_csv_sha256']
+          def raw(man):
+            b=base64.b64decode(''.join(Path(f).read_text('ascii').strip() for f in man['parts']),validate=True)
+            assert hashlib.sha256(b).hexdigest()==man['compressed_sha256']
+            a=zlib.decompress(b)
+            assert hashlib.sha256(a).hexdigest()==man['sqlite_sha256'] and len(a)==man['sqlite_bytes']
+            return a
+          old=sqlite3.connect(':memory:');old.deserialize(raw(p))
+          new=sqlite3.connect(':memory:');new.deserialize(raw(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          def counts(db):
+            return {n:db.execute('SELECT count(*) FROM "'+n+'"').fetchone()[0] for (n,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          a=counts(old);b=counts(new)
+          assert len(a)==242 and len(b)==243 and set(b)-set(a)=={'v181_visual_review'}
+          assert all(b[n]==num for n,num in a.items()) and b['v181_visual_review']==34
+          for name in a:
+            aa=old.execute('SELECT * FROM "'+name+'"');bb=new.execute('SELECT * FROM "'+name+'"')
+            while True:
+              x=aa.fetchmany(1024);y=bb.fetchmany(1024)
+              assert x==y,('parent altered',name)
+              if not x:break
+          assert new.execute('SELECT SUM(mapping_verified),SUM(tilezed_verified),SUM(certified) FROM v181_visual_review').fetchone()==(0,0,0)
+          print('PASS 34 manual candidate identities, all 242 historic table row contents exactly preserved and 243 physical tables')
+          PY
+      - name: Write checkpoint only after all image and database integrity validations
+        run: python3 -u scripts/v181_finalize_checkpoint.py
+      - name: Commit verified v181 evidence and physical SQLite on isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v181_multisite56_visual analysis/current/v181 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v181 physically verified 34 original A B C manual tile parts and 243-table SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
