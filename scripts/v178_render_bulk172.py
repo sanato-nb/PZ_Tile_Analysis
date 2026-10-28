@@ -247,7 +247,7 @@ encoded=base64.b64encode(compressed).decode('ascii');parts=[]
 for i in range(0,len(encoded),3000000):
  p=DBOUT/f'v178.part{i//3000000:03}.b64';p.write_text(encoded[i:i+3000000],encoding='ascii');parts.append(p.relative_to(R).as_posix())
 assert sha(zlib.decompress(base64.b64decode(''.join((R/p).read_text('ascii') for p in parts))))==sha(newraw)
-dbm=dict(version='v178',parent='v175',parent_sqlite_sha256=parent['sqlite_sha256'],
+dbm=dict(version='v178',parent='v177',parent_sqlite_sha256=parent['sqlite_sha256'],
  sqlite_sha256=sha(newraw),compressed_sha256=sha(compressed),sqlite_bytes=len(newraw),parts=parts,
  table_count=240,prior_tables_preserved=239,new_rows=172,new_observed_rows=0,
  integrity_check='ok',mapping_verified=0,tilezed_verified=0,certified=0)
@@ -260,7 +260,7 @@ manifest=dict(version='v178',scope='172 remaining formerly zero or edge keys wit
  no_missing_sprites_count=sum(int(r['neighbors_missing'])==0 for r in results),
  no_outside_canvas_count=sum(int(r['outside_canvas'])==0 for r in results),
  observed_before=9684,observed_after=9684,remaining_in_checkpoint=358,
- source_keys_pending=379,source_key_count_discrepancy=2,
+ source_keys_pending=356,source_key_count_discrepancy=2,
  official_mapping_verified=0,tilezed_verified=0,identity_certified=0,
  parent_db_tables_preserved=239,physical_tables=240,sqlite_sha256=sha(newraw),
  evidence_zip_sha=filesha(OUT/'ALT_BC_172_ORIGINAL_TMXS.zip'),
