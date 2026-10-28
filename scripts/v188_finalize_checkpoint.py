@@ -17,7 +17,7 @@ assert d['table_count']==250 and d['prior_tables_preserved']==249
 assert d['new_rows']==d['active_review_excluded_rows']==142 and d['new_observed_rows']==0
 assert m['physically_unobserved_distinct']==142 and m['excluded_from_active_review_unique']==142
 assert m['historical_checkpoint_two_count_difference']==2 and m['active_review_queue_remaining']==0
-assert m['previously_reclassified_49_already_observed']==49 and m['already_classified_overlap_pending']==0
+assert m['previously_reclassified_49_already_observed']==42 and m['previously_reclassified_7_still_unobserved_but_classified']==7
 assert m['old_nine_prior_user_excluded']==8 and m['old_nine_prior_kept_provisional']==1
 assert m['newly_observed_this_version']==0
 assert m['official_mapping_verified']==m['tilezed_verified']==m['final_identity_certified']==0
@@ -36,7 +36,7 @@ state['latest_checkpoint'].update(dict(
  non_tile_historical_checkpoint_count_difference=2,
  v188_observed_new=0,
  v188_historical_observations_unchanged=9898,
- v188_existing_disambiguated_49_already_counted=True,
+ v188_previous_disambiguated_49_split_42_counted_7_still_unobserved=True,
  v188_original_user_excluded_8_preserved=True,
  v188_original_keep_provisional_one_preserved=True,
  v188_reopen_requires_explicit_scope_change=True,
@@ -64,7 +64,7 @@ state['latest_v188_review_scope']={
  'version':'v188','user_instruction':'Exclude unresolvable tiles from review workload instead of repeatedly reprocessing',
  'observed_tiles':9898,'total_original_tile_keys':10042,'raw_unobserved_checkpoint':144,
  'actual_unobserved_distinct_keys_excluded':142,'historical_count_discrepancy_not_keys':2,
- 'active_remaining_review_count':0,'already_disambiguated_49_already_observed':49,
+ 'active_remaining_review_count':0,'already_disambiguated_49_already_observed':42,'already_classified_7_previous_unobserved_closed_from_queue':7,
  'old_9_historical_user_excluded':8,'old_9_kept_provisional_historical':1,
  'observed_this_version':0,'mapping_verified':0,'tilezed_verified':0,'certified':0,
  'source_evidence_csv':'review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv',
@@ -81,7 +81,7 @@ file.write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n',encoding='utf
 summary=(
  '## v188 남은 타일 활성 검수 제외 — 사용자 명시 요청 반영 (2026-10-28)\n\n'
  '- **사용자 지시: 이미 정체를 설명한 타일을 되풀이하지 말고 해결 불가 항목은 제외한다.** v187 실물 SQLite에서 실제로 미관찰인 142개 (새 133 + 기존 9)를 일일이 분리하고 신규 `v188_active_review_disposition` 142행으로 근거/보류 원인/제외 범위를 기록. 기존 기록상 미관찰144와의 **차이 2는 실제 타일 고유키가 아닌 누적 집계 차이**로 별도 감사표에 보존.\n'
- '- v186 이미 분류해 두었던 49종은 기존 잠정 관찰 집합에 들어 있어 새로 이중 차감하지 않음. 원본 9종 중 과거 사용자 제외8, 기존 keep_provisional1의 역사적 상태를 변경하지 않음. v187 B−C 양수지만 주변 원본 JUMBO A 소스 누락6종은 별도 정확한 차단 사유 보존.\n'
+ '- v186에서 이미 외형을 분류했던 49종 중 42종은 기관찰, **7종은 실제 미관찰 키에 남아 있었음**을 재발견해 중복 검수에서 제외. 정체 최종 인증과 원본 observed 값은 새로 변경하지 않음. 원본 9종 중 과거 사용자 제외8, 기존 keep_provisional1의 역사적 상태를 변경하지 않음. v187 B−C 양수지만 주변 원본 JUMBO A 소스 누락6종은 별도 정확한 차단 사유 보존.\n'
  '- 새 **실행 중인 활성 검수 잔여 0건**. 하지만 **실제 잠정 관찰 기록 9,898/10,042(98.57%)와 기록상 미관찰144종은 변함없음**. 이번 신규 관찰0, 최종 물체 정체 인증·공식 타일셋 Local ID/TileZed 매핑0. 검수 제외 ≠ 관찰·인증 완료.\n'
  f"- 물리 SQLite **250테이블**, 부모 v187 기존249테이블 모든 행 내용/수 보존. 새 상태 테이블 142행만 추가. SHA256 {d['sqlite_sha256']}, integrity_check=ok.\n"
  '- 신규 리뷰 워크를 다시 시작하려면 구체적인 타일 ID·사유 또는 사용자 지시로 제외를 해제해야 함. 기존 D held2/JUMBO20, 수동80·제외14 및 원본84 TMX/Tiles PNG 불변.\n'
