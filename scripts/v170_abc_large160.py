@@ -211,7 +211,7 @@ with zipfile.ZipFile(OUT/'ABC_EVIDENCE_VERIFIED.zip') as z:
  assert z.testzip() is None
  assert len(z.namelist())==len(RESULT)*4
 proofs=[OUT/'VISUAL_REVIEW.csv',OUT/'EXCLUDED_EXCEPTIONS.csv',OUT/'ABC_EVIDENCE_VERIFIED.zip',*sorted(SHEETS.glob('*.jpg'))]
-review=dict(version='v170',original_scope=[4200,4359],manual_image_annotations=40,promoted_provisional=len(RESULT),
+review=dict(version='v170',original_scope=[4200,4359],manual_image_annotations=160,promoted_provisional=len(RESULT),
  excluded_unverified=len(SKIPS),excluded_indices=[r['index'] for r in SKIPS],
  original_PNG_TMX_B_C_files_verified=len(RESULT),D_current_alternative_not_used_to_certify=True,
  source_notes_sha256=fh(OUT/'MANUAL_VISUAL_NOTES.json'),
