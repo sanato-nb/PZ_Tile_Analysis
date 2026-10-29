@@ -18,3 +18,13 @@
 파일: MASTER_ALL_10042.csv(누락 없이 모두), ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv(활성만), EXCLUDED_ARCHIVE_455.csv(과거 제외 원문과 상태 보존). 물리 SQLite는 analysis/current/v240/MANIFEST.json의 zlib+base64 파트들을 이어 복원한다.
 
 이 통합은 과거 실제 검수 결과를 소스키로 병합한 작업이고, 새 원본 이미지 판독·TMX 레이어별 B/C 렌더·공식 TileZed 인증은 실행하지 않았다. 최종 정체 인증 0. 3102는 v185에서 다른 진짜 TMX 위치로 이웃 PNG 누락을 해소했으나 v238의 원 대표 보류를 기록대로 유지하고 이번 활성 제외 적용.
+
+## SQLite 파일 직접 복원
+
+이 저장소의 실제 DB는 GitHub 텍스트 용량 제한 때문에 `analysis/current/v240/v240.part000.b64`부터 `part007.b64`까지 8개로 나누어 저장한다. **이 8개를 각각 별개의 DB로 취급하면 안 된다.** 저장소를 내려받은 후 루트에서 다음 명령 실행:
+
+```bash
+python3 scripts/restore_v240_master.py PZ_Tile_Analysis_v240_MASTER_10042.sqlite
+```
+
+복원기는 압축본·DB SHA-256을 계산하고 `PRAGMA integrity_check=ok`, 전체10,042/활성9,587/제외455/기존5,409, 총258테이블을 검증한다. SQLite에서 `v240_tile_master_10042`, `v240_active_tile_master`(VIEW), `v240_excluded_archive_455`를 조회할 수 있다. **예전 256테이블은 모두 복사·유지**했으나 그 내용 전체를 최신 정체 인증으로 승격한 것이 아니다.
