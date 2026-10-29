@@ -1,0 +1,91 @@
+{
+  "version": "v209_A_first_exclusive_QA_change_counts",
+  "date": "2026-10-29",
+  "source_scope": [
+    2480,
+    2639
+  ],
+  "source_indices_total": 160,
+  "prior_v150_provisional_reaudited": 158,
+  "exclusive_QA_class_counts": {
+    "role_or_assembly_assumption_narrowing": 3,
+    "A_morphology_refinement": 31,
+    "prior_A_description_retained": 124
+  },
+  "exclusive_class_sum": 158,
+  "QA_change_recommendations_total": 34,
+  "QA_unchanged_retained": 124,
+  "previously_held_source_indices": 2,
+  "previous_held_keys": [
+    "roofs_30_06/50",
+    "roofs_30_06/58"
+  ],
+  "verified_context_overreach_cases": [
+    {
+      "index": 2590,
+      "key": "roofs_30_08/99",
+      "issue": "Prior observed_features refers to chimney next to green roof; original A is only green ribbed bent roof plate."
+    },
+    {
+      "index": 2616,
+      "key": "roofs_30_09/29",
+      "issue": "Prior observed_features refers to chimney-bearing red roof corner; original A does not contain chimney."
+    },
+    {
+      "index": 2617,
+      "key": "roofs_30_09/32",
+      "issue": "Prior observed_features labels chimney junction; A is short red diagonal roof panel, role unverified."
+    }
+  ],
+  "low_B_minus_C_100_or_less": [
+    {
+      "index": 2619,
+      "key": "roofs_30_09/34",
+      "changed_pixels": 55,
+      "root_cause": "unproven wall/upper-layer/other roof occlusion"
+    }
+  ],
+  "B_C_zero_previous_held": [
+    {
+      "index": 2507,
+      "key": "roofs_30_06/50",
+      "prior_reason": "B_C_zero_not_transparency"
+    }
+  ],
+  "B_map_edge_truncation_previous_held": [
+    {
+      "index": 2508,
+      "key": "roofs_30_06/58",
+      "prior_reason": "B_map_edge_truncated"
+    }
+  ],
+  "old_v150_metadata_rows_compared": 158,
+  "metadata_field_mismatches": 0,
+  "distinct_source_atlas_archive_sha_values_matched": 6,
+  "source_png_byte_sha256_freshly_recomputed": 0,
+  "source_RGBA_crop_sha256_freshly_recomputed": 0,
+  "source_TMX_reparsed": 0,
+  "BC_re_rendered_from_original_TMX": 0,
+  "original_BC_contact_sheets_visually_inspected": 2,
+  "original_A_contact_sheets_visually_inspected": 2,
+  "D_different_official_A_same_key_verified": 0,
+  "wall_hidden_layer_diagnostic_renders": 0,
+  "mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "new_observed": 0,
+  "new_provisional_promotions": 0,
+  "old_SQLite_rows_modified": 0,
+  "old_review_rows_overwritten": 0,
+  "user_undecided10_reactivated": 0,
+  "previous_A_first_scope_rechecked": 2154,
+  "current_A_first_new_rechecked": 158,
+  "cumulative_A_first_scope_rechecked": 2312,
+  "previous_historical_held": 166,
+  "current_historical_held": 168,
+  "previous_pending": 2313,
+  "current_pending": 2153,
+  "total_scope_keys": 4633,
+  "scope_check": "2312+168+2153=4633",
+  "accuracy_interpretation": "QA change proposals do not imply proven classification errors or official identity certifications; individual A partial roof geometry and original B/C visual exposure reconsidered."
+}
