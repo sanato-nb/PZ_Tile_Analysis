@@ -1,0 +1,116 @@
+{
+  "version": "v223_A_first_existing_tile_QA_overlay_only",
+  "date": "2026-10-29",
+  "base_main_sha": "1717ddb53d2d9f572e1e7321afff5bc1ccc5d6bb",
+  "source_review": "review/v164_abc_3960_3999",
+  "original_scope": [
+    3960,
+    3999
+  ],
+  "historical_provisional_reaudited": 27,
+  "historical_held_preserved": 13,
+  "change_counts": {
+    "version": "v223",
+    "date": "2026-10-29",
+    "scope": [
+      3960,
+      3999
+    ],
+    "scope_indices": 40,
+    "old_provisional_reaudited": 27,
+    "old_held_preserved": 13,
+    "exclusive_QA_classes": {
+      "assembled_B_part_role_overreach_risk": 14,
+      "A_pattern_refinement_material_label_risk": 10,
+      "original_A_shape_adequately_supported": 3
+    },
+    "change_proposals_total": 24,
+    "unchanged_A_shape_supported": 3,
+    "definitively_proven_wrong_historical_ids": 0,
+    "physical_source_identity_status_changes": 0,
+    "observed_promotions": 0,
+    "provisional_promotions": 0,
+    "official_mapping_verified": 0,
+    "tilezed_verified": 0,
+    "certified": 0,
+    "tiny_B_minus_C_le_60_pixels": [
+      {
+        "index": 3976,
+        "pixels": 2
+      },
+      {
+        "index": 3986,
+        "pixels": 3
+      },
+      {
+        "index": 3991,
+        "pixels": 12
+      }
+    ],
+    "tiny_BC_subset_not_disjoint_from_classes": 3,
+    "manual_user_undecided10_reactivated": 0,
+    "old_review_rows_modified": 0,
+    "physical_SQLite_rows_modified": 0
+  },
+  "source_A_original_raw_png_opened": [
+    "Tiles/2x/walls_exterior_roofs_30_04.png",
+    "Tiles/2x/walls_exterior_roofs_30_05.png"
+  ],
+  "source_A_contact_sheet": "review/v119_selected_A_new4633/sheets/SELECTED_A_049.jpg",
+  "source_true_B_C_same_TMX_one_raw_gid_removed_diff_sheet": "review/v121_C_diff_new4632/sheets/C_B_DIFF_049.jpg",
+  "source_zoom_proof_sheets": [
+    "review/v164_abc_3960_3999/sheets/proof_00.jpg",
+    "review/v164_abc_3960_3999/sheets/proof_01.jpg",
+    "review/v164_abc_3960_3999/sheets/proof_02.jpg",
+    "review/v164_abc_3960_3999/sheets/proof_03.jpg"
+  ],
+  "direct_source_PNG_byte_SHA256_computed_this_session": [
+    {
+      "path": "Tiles/2x/walls_exterior_roofs_30_04.png",
+      "bytes": 427999,
+      "sha256": "ddca02d07f2873d46be16e5f49ecec14585b3e85c21fc3694c123b6fd9991895",
+      "archived_match": true
+    },
+    {
+      "path": "Tiles/2x/walls_exterior_roofs_30_05.png",
+      "bytes": 422390,
+      "sha256": "94ad16125c17c6f3c59b97d6eef0b86a496480faf3ab77f165a033eca4f12ac9",
+      "archived_match": true
+    }
+  ],
+  "original_source_metadata_crosschecked_rows": 27,
+  "source_metadata_crosscheck_mismatches": 0,
+  "prior_source_SHA256_registry": "review/v119_selected_A_new4633/MANIFEST.json",
+  "original_A_RGBA_crop_pixel_hashes_recomputed_this_session": false,
+  "original_TMX_reparsed_this_session": false,
+  "new_B_C_renders_this_session": false,
+  "wall_occlusion_cause_independently_verified": false,
+  "official_D_same_key_other_A_executed": false,
+  "total_new_key_scope": 4633,
+  "cumulative_QA_scope_before": 3549,
+  "cumulative_QA_scope_after": 3576,
+  "historical_held_before": 251,
+  "historical_held_after": 264,
+  "not_yet_reaudited_after": 793,
+  "coverage_percent": 77.18540902223181,
+  "scope_accounting": "3576 distinct source indices in A-first QA scopes + 264 previous held + 793 still not reaudited = 4633; no official correctness implied",
+  "historical_all_unique_keys": 10042,
+  "historical_image_provisionally_observed": 10007,
+  "historical_reported_unobserved": 35,
+  "historical_actual_missing_keys": 33,
+  "historical_accounting_gap": 2,
+  "user_manual_33_provisional23_verbatim_unchanged": true,
+  "user_manual_10_undecided_active_excluded_preserved": true,
+  "user_manual80_prior_excluded14_preserved": true,
+  "sqlite_physical_version": "v196",
+  "sqlite_physical_tables_prior_only": 256,
+  "sqlite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "sqlite_recreated_or_rehashed_this_session": false,
+  "sqlite_integrity_check_rerun_this_session": false,
+  "files_existing_mutated": 0,
+  "write_policy": "add-only review/v223 overlay; preserve Tiles, TMX, all earlier manual/user decisions and DB",
+  "next_scope": [
+    4000,
+    4039
+  ]
+}
