@@ -49,6 +49,17 @@ try:
     driver.execute_script("inspect(3,3)")
     info2=driver.find_element(By.ID,"details").text
     assert "기둥" in info2,info2[:700]
+    # Exercise one real B42 256x256 TMX file, not only a synthetic example.
+    real=ROOT/"B4220.3_MapExport_256/tmx/31_46.tmx"
+    if real.exists():
+        inp=driver.find_element(By.ID,"files")
+        driver.execute_script("arguments[0].value=''",inp)
+        inp.send_keys(str(real))
+        WebDriverWait(driver,150).until(lambda d:d.execute_script("return model && model.filename==='31_46.tmx' && model.stats.placed>1000"))
+        realCount=driver.execute_script("return model.stats.placed")
+        realFloors=driver.execute_script("return model.floors.size")
+        assert realCount>1000 and realFloors>=1,(realCount,realFloors)
+        print("PASS 31_46 real original TMX parsed:",realCount,"GID placements;",realFloors,"floors")
     driver.save_screenshot(str(tmp/"v243_smoke_browser.png"))
     print("PASS headless Chrome actual TMX 2 tiles, A-first overrides, pillar correction, legacy fallback and 10042/9587/455.")
 finally:
