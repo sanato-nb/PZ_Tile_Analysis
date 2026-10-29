@@ -13,6 +13,8 @@
 | 통합 DB 복원 | [restore_v240_master.py](../scripts/restore_v240_master.py) |
 | 프로젝트 최신 요약 | [CURRENT_STATUS.md](CURRENT_STATUS.md), [PROJECT_STATE.json](../PROJECT_STATE.json) |
 | 분석 작업 규칙 | [ANALYSIS_RULES.md](ANALYSIS_RULES.md) |
+| **새 이미지/게임 스프라이트 분석 방법** | [v242 경험 기반 이미지 분석 매뉴얼](SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md) / [빠른 판정표](SPRITE_ANALYSIS_QUICK_REFERENCE.md) |
+| 한 타일당 분석 기록 양식 | [검수 JSON 템플릿](SPRITE_REVIEW_RECORD_TEMPLATE.json) |
 | 새 채팅·후속 작업 | [NEXT_CHAT_PROMPT.md](NEXT_CHAT_PROMPT.md) |
 
 ## 2. 경로별 역할
