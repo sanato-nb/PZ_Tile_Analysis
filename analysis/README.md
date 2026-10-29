@@ -1,49 +1,31 @@
-# 분석 결과와 통합 데이터베이스
+# 분석 데이터베이스 — 최신 v240과 과거 복원 파일
 
-이 폴더에는 **원본 분석 데이터, 이전 버전, 최신 통합 SQLite, 중복·충돌 감사 자료**를 보관합니다.
+**현재 기준: [v240 물리 SQLite](current/v240/)**
 
-## 폴더 구성
-
-| 경로 | 내용 |
-|---|---|
-| `archive/v36/` | 기존 v36 원본 SQLite의 복원용 보관 파일 |
-| `archive/v46/` | 기존 v46 원본 SQLite의 복원용 보관 파일 |
-| `imports/` | v36·v46 병합 카탈로그, 출처별 관찰 기록, 후보 표현 충돌 및 검증 결과 |
-| `current/v49/` | 첫 물리 통합 SQLite 복원 자료 |
-| `current/v50/` | v50 누적 데이터베이스 복원 자료 |
-| `current/v51/` | v51 누적 데이터베이스 복원 자료 |
-| `current/v52/` | v52 과거 통합 SQLite 복원 자료 |
-| `current/v53/` | 이전 v53 통합 SQLite 복원 자료 |
-| `current/v54/` | 이전 v54 통합 SQLite 복원 자료 |
-| `current/v55/` | 이전 v55 통합 SQLite 복원 자료 |
-| `current/v56/` | 이전 v56 통합 SQLite 복원 자료 |
-| `current/v57/` | **현재 최신 통합 SQLite 복원 자료** |
-
-## 최신 통합 DB (2026년 10월 25일, v57)
-
-| 항목 | 수량 |
+| 항목 | v240 |
 |---|---:|
-| 전체 분석 대상 | 5,409종 |
-| 중복 제거한 이미지 관찰 | **2,994종 (55.35%)** |
-| 미관찰 타일 | **2,415종** |
-| 감사 가능한 잠정 정체 후보 | **2,596종** |
-| 최종 정체 인증 | **0종** |
+| 전체 고유 타일 | **10,042종** |
+| 기존(부모 v196) | 5,409종, 부모 256테이블 |
+| 신규(v238) | 4,633종 |
+| 활성 목록 | 9,587종 |
+| 별도 보관 | 455종 (보류439 + 사용자미판정10 + 추가6) |
+| 새 SQLite | **258테이블**, `PRAGMA integrity_check=ok` |
+| 공식 정체/TileZed/PNG-ID 인증 | 0 |
 
-> 위 수치는 v57 생성 시점의 기록입니다. 새 버전이 생기면 루트 `PROJECT_STATE.json`의 `unified_database`가 우선입니다.
-
-GitHub에 저장된 압축 조각을 모아 전체 SQLite를 복원합니다.
+전체 읽기용 CSV는 [review/v240_unified_10042_2026-10-30/](../review/v240_unified_10042_2026-10-30/)를 사용하세요.
 
 ```bash
-python3 scripts/restore_unified_v57.py
+python3 scripts/restore_v240_master.py PZ_Tile_Analysis_v240_MASTER_10042.sqlite
 ```
 
-복원 후 `tile_catalog`에서 5,409종을 조회하고, `analysis_queue`에서 미관찰 타일을 선택할 수 있습니다.
+주요 SQLite 조회 대상: `v240_tile_master_10042`(전체), `v240_active_tile_master`(활성 VIEW), `v240_excluded_archive_455`(아카이브). 복원 코드는 SHA-256 및 SQLite 무결성을 확인하며 기존 파일을 덮어쓰지 않습니다.
 
-## 기존 기록과 감사 자료
+## 옛 경로를 지우면 안 되는 이유
 
-- `imports/merged_catalog_5409.csv` — v47 당시 전체 고유 키의 병합 색인
-- `imports/all_observation_records.csv` — 복원된 원본 계보의 버전별 관찰 기록
-- `imports/conflicting_candidates.csv` — 서로 다른 후보 표현이 있는 타일
-- `imports/RECONCILIATION_RESULT.json` — v36·v46 중복 계산의 근거
+- `archive/v36/`, `archive/v46/`: 구형 SQLite 원본 계보.
+- `imports/`: 과거 5,409 키의 병합·충돌 색인.
+- `current/v49/`부터 `current/v196/`: 각 버전의 당시 SQLite 복원 파일·증거·암호학적 해시. **현재 최신 상태라는 뜻이 아님**.
+- `current/v196/`: 실제 v240이 복제한 256테이블 부모 SQLite. **원본 불변**.
+- `current/v240/`: 새 최신 258테이블 DB의 zlib+base64 8개 조각·MANIFEST.
 
-v47 당시 2,584종은 **과거 병합 기준**이지 최신 관찰 수가 아닙니다. 이전 DB와 원본 자료는 삭제하거나 덮어쓰지 않습니다. **고해상도 A/B/C/D 이미지 전체는 아직 GitHub 통합 DB에 내장되지 않았으며**, 별도 분석 증거 ZIP에 보존됩니다.
+**과거 v57 등 README의 '최신' 표시와 통계는 역사 기록**입니다. 현재 원본 이미지 잠정 관찰10,007/10,042(99.65%) 역시 공식 정체 인증과 구별합니다.
