@@ -1,0 +1,114 @@
+{
+  "version": "v203_Afirst_QA_append_only",
+  "date": "2026-10-29",
+  "parent_main_commit": "368a9bc61e9f569863ed4f065e5b331340d8552d",
+  "reinspection_source_index_range": [
+    1520,
+    1679
+  ],
+  "scoped_indices": 160,
+  "prior_v144_provisional_candidate_rows": 149,
+  "prior_v144_excluded_preserved": 11,
+  "QA_change_count_definition": "Mutually exclusive review NOTE recommendations; no historical identity/status rows rewritten.",
+  "QA_change_counts": {
+    "role_narrowing_recommended": 56,
+    "A_morphology_refined": 38,
+    "historical_candidate_supported": 55,
+    "total_reexamined": 149,
+    "nonretained_notes": 94
+  },
+  "QA_note_depth": {
+    "individual_A_specific_morphology_notes": 80,
+    "previous_A_source_morphology_crosschecked_without_new_individual_note": 69
+  },
+  "B_C_50_or_fewer_5": [
+    {
+      "index": 1582,
+      "pixels": 22
+    },
+    {
+      "index": 1587,
+      "pixels": 5
+    },
+    {
+      "index": 1596,
+      "pixels": 8
+    },
+    {
+      "index": 1607,
+      "pixels": 6
+    },
+    {
+      "index": 1661,
+      "pixels": 44
+    }
+  ],
+  "B_C_zero_in_prior_active149": 0,
+  "historical_excluded_reason_counts": {
+    "B_C_zero_not_transparency": 9,
+    "B_map_edge_truncated": 2
+  },
+  "historical_excluded_reactivated": 0,
+  "A_original_source_crop_sheets_opened": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_019.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_020.jpg"
+  ],
+  "B_original_C_one_GID_removed_sheets_opened": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_019.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_020.jpg"
+  ],
+  "old_v144_zoom_proof_sheets_opened": [
+    "review/v144_abc_1520_1679/sheets/proof_00.jpg",
+    "review/v144_abc_1520_1679/sheets/proof_03.jpg",
+    "review/v144_abc_1520_1679/sheets/proof_07.jpg",
+    "review/v144_abc_1520_1679/sheets/proof_10.jpg",
+    "review/v144_abc_1520_1679/sheets/proof_13.jpg",
+    "review/v144_abc_1520_1679/sheets/proof_16.jpg",
+    "review/v144_abc_1520_1679/sheets/proof_18.jpg"
+  ],
+  "original_A_PNG_atlases_directly_opened": [
+    "Tiles/2x/location_entertainment_theatre_01.png",
+    "Tiles/2x/location_farm_accesories_01.png"
+  ],
+  "source_metadata_crosscheck": {
+    "original_candidate_rows": 149,
+    "matched_rows": 149,
+    "unique_atlas_paths": 7,
+    "mismatches": 0,
+    "prior_png_sha_registry": "review/v119_selected_A_new4633/MANIFEST.json",
+    "hash_values_matched_registry": 7,
+    "original_atlas_PNG_byte_SHA256_recomputed_this_turn": false,
+    "RGBA_crop_SHA256_recomputed_this_turn": false,
+    "TMX_reparsed_this_turn": false,
+    "source_BC_scene_reconstructed_this_turn": false
+  },
+  "wall_or_top_layer_hidden_render_performed": false,
+  "official_same_key_other_A_D_executed": false,
+  "user_manual33_provisional_verbatim_preserved": 23,
+  "user_undecided10_active_excluded_preserved": true,
+  "prior_user_manual80_and_excluded14_unchanged": true,
+  "new_identity_certifications": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_observed_promotions": 0,
+  "new_provisional_promotions": 0,
+  "parent_v196_SQLite_256_tables_prior_record": "preserved without modification",
+  "parent_v196_SQLite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "SQLite_reconstructed_or_PRAGMA_integrity_check_rerun_this_turn": false,
+  "source_scope_total_unique": 4633,
+  "source_scope_previous_A_BC_screened": 1240,
+  "source_scope_after_A_BC_screened": 1389,
+  "source_scope_historical_held_after": 131,
+  "source_scope_remaining_individual_reaudit": 3113,
+  "accounting": "1389 + 131 + 3113 = 4633; scoped 1389 have mixed depths, not accurate identity certifications",
+  "historical_unique_all": 10042,
+  "historical_provisionally_image_observed": 10007,
+  "historical_unobserved_reported": 35,
+  "historical_true_unobserved_keys": 33,
+  "historical_unresolved_count_gap": 2,
+  "file_write_policy": "only add review/v203 files; source Tiles/TMX, earlier audits, user verbatim, SQLite unchanged",
+  "next_reaudit_scope": [
+    1680,
+    1839
+  ]
+}
