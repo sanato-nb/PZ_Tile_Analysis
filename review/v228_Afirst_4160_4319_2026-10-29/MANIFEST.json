@@ -1,0 +1,210 @@
+{
+  "version": "v228_Afirst_bulk_160_source_key_guarded_reaudit",
+  "date": "2026-10-29",
+  "parent_main_commit": "0abef71fb12bee82f465d6aaec8d81bc75e533e7",
+  "scope_source_indices": [
+    4160,
+    4319
+  ],
+  "indices_in_batch": 160,
+  "source_reviews": [
+    "review/v169_abc_4160_4199",
+    "review/v170_large_4200_4359 (only 4200–4319)"
+  ],
+  "former_provisional_candidates_in_batch": {
+    "v169": 26,
+    "v170_4200_4319": 98,
+    "total": 124
+  },
+  "historical_held_preserved": {
+    "v169": 14,
+    "v170_4200_4319": 22,
+    "total": 36
+  },
+  "new_family_aware_A_only_tile_morphology_notes": 124,
+  "A_visible_color_and_shape_individually_annotated_with_family_template": true,
+  "not_claiming_all_124_independent_raw_crop_pixel_remeasurement": true,
+  "B_C_evidence_source": "historical actual TMX B with one raw GID removed C, as already rendered in parent proofs",
+  "exact_key_labelled_proof_sheets_v169_visually_opened": 4,
+  "exact_key_labelled_proof_sheets_v170_part_visually_opened": 13,
+  "v170_last_4_proof_sheets_outside_scope_not_reviewed": true,
+  "A_contact_sheets_visually_opened": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_052.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_053.jpg"
+  ],
+  "original_png_atlas_directly_opened_this_turn": [
+    "Tiles/2x/walls_exterior_roofs_30_17.png",
+    "Tiles/2x/walls_exterior_roofs_30_18.png",
+    "Tiles/2x/walls_garage_01.png"
+  ],
+  "original_A_source_atlas_unique_paths_prior_registry_compared": 9,
+  "historical_source_record_metadata_crosscheck": {
+    "rows": 124,
+    "mismatches": 0,
+    "fields": [
+      "tile_set_name",
+      "local_id",
+      "A_png",
+      "A_png_sha256 prior",
+      "A_rgba_pixel_sha256 prior",
+      "A_crop_xyxy",
+      "B_tmx_file",
+      "B_tmx_sha256 prior",
+      "level",
+      "layer_index",
+      "x",
+      "y",
+      "raw_gid",
+      "firstgid",
+      "B_entry",
+      "C_entry",
+      "DELTA_entry",
+      "B_C_changed_pixels"
+    ],
+    "exact_proof_index_ordinal_by_prior_row_verified": 124,
+    "user_undecided10_reactivated": 0,
+    "distinct_keys": 124,
+    "held_overlap_count": 0
+  },
+  "original_B_minus_C_changed_pixels_at_most_50": {
+    "count": 12,
+    "entries": [
+      {
+        "index": 4202,
+        "px": 12
+      },
+      {
+        "index": 4204,
+        "px": 8
+      },
+      {
+        "index": 4208,
+        "px": 4
+      },
+      {
+        "index": 4224,
+        "px": 2
+      },
+      {
+        "index": 4226,
+        "px": 32
+      },
+      {
+        "index": 4235,
+        "px": 1
+      },
+      {
+        "index": 4237,
+        "px": 4
+      },
+      {
+        "index": 4256,
+        "px": 2
+      },
+      {
+        "index": 4258,
+        "px": 11
+      },
+      {
+        "index": 4264,
+        "px": 3
+      },
+      {
+        "index": 4276,
+        "px": 15
+      },
+      {
+        "index": 4301,
+        "px": 7
+      }
+    ]
+  },
+  "A_vs_B_assembly_alerts": [
+    {
+      "source_index": 4240,
+      "key": "walls_exterior_roofs_30_18/51",
+      "A_only": "light wood vertical planking without circular opening",
+      "B_assembly": "circular feature appears in neighboring assembly",
+      "not_authorized": "A hole/circle"
+    },
+    {
+      "source_index": 4250,
+      "key": "walls_exterior_roofs_30_18/69",
+      "A_only": "solid light wood vertical planks without cross",
+      "B_assembly": "black cross fixed on adjacent scene",
+      "not_authorized": "cross attached to A pixels"
+    },
+    {
+      "source_index": 4293,
+      "key": "walls_exterior_wooden_01/33",
+      "A_only": "wood wall with true square opening",
+      "not_authorized": "entire finished interior is A"
+    },
+    {
+      "source_index": 4294,
+      "key": "walls_exterior_wooden_01/36",
+      "A_only": "wood wall with true rectangular opening",
+      "not_authorized": "furniture/window glazing is A"
+    },
+    {
+      "source_index": 4295,
+      "key": "walls_exterior_wooden_01/37",
+      "A_only": "wood wall with true rectangular opening",
+      "not_authorized": "entire assembled house is A"
+    },
+    {
+      "source_index": 4302,
+      "key": "walls_exterior_wooden_02/14",
+      "A_only": "C-shaped panel with genuine large cutout",
+      "not_authorized": "B surroundings are A"
+    },
+    {
+      "source_index": 4304,
+      "key": "walls_garage_01/0",
+      "A_only": "single cream panelled garage door section",
+      "not_authorized": "entire garage building is A"
+    },
+    {
+      "source_index": 4318,
+      "key": "walls_garage_01/52",
+      "A_only": "single silvery ribbed roller-shutter tile",
+      "not_authorized": "entire garage frontage is A"
+    }
+  ],
+  "historical_held_zero_BC_not_certified_as_alpha": true,
+  "v224_v119_to_v121_display_sheet_index_mismatch_mitigation": "Never join v119 A to v121 B/C by printed index; use parent v169/v170 original key-labelled proof images and raw GID stored in records.",
+  "official_D_same_key_alternative_scene_performed": false,
+  "original_TMX_reparsed_this_turn": false,
+  "new_B_C_composites_rendered_this_turn": false,
+  "wall_or_upper_layer_occlusion_cause_independently_tested": false,
+  "source_raw_png_sha256_independently_recomputed_this_turn": false,
+  "source_RGBA_sha256_independently_recomputed_this_turn": false,
+  "SQLite_bytes_rehashed_or_PRAGMA_integrity_check_this_turn": false,
+  "official_mapping_newly_verified": 0,
+  "tilezed_mapping_newly_verified": 0,
+  "new_provisional_or_observed_promotions": 0,
+  "new_final_identity_certifications": 0,
+  "previous_A_first_source_reviewed": 3697,
+  "this_turn_A_first_source_reviewed": 124,
+  "cumulative_A_first_source_reviewed": 3821,
+  "previous_historical_held": 303,
+  "cumulative_historical_held": 339,
+  "previous_pending": 633,
+  "cumulative_pending": 473,
+  "denominator_new_source_keys": 4633,
+  "percent_scope_covered": 82.47355924886682,
+  "scope_partition_invariant": true,
+  "next_source_index_start": 4320,
+  "historical_all_unique_keys": 10042,
+  "historical_provisional_observed_keys": 10007,
+  "historical_unobserved_record_count": 35,
+  "historical_real_unobserved_distinct": 33,
+  "historical_2_count_gap_still_unresolved": true,
+  "prior_v196_SQLite_tables": 256,
+  "prior_v196_SQLite_file_sha256_archived": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "source_and_older_audits_modified": false,
+  "user_manual80_and_excluded14_preserved": true,
+  "user_uploaded_manual33_verbatim_preserved": true,
+  "user_undecided10_active_excluded_preserved": true,
+  "output_append_only": true
+}
