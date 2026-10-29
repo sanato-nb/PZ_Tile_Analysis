@@ -1,0 +1,48 @@
+{
+  "version": "v211_A_first_QA_overlay",
+  "date": "2026-10-29",
+  "base_main_sha": "a25be4a70cebef6d64a70f6c58de6010338c0b18",
+  "source_scope": [
+    2800,
+    2959
+  ],
+  "scope_source_keys": 160,
+  "old_v152_provisional_reaudited": 158,
+  "old_v152_historical_held_preserved": 2,
+  "exclusive_change_class_counts": {
+    "role_narrowing": 137,
+    "A_morphology_refinement": 14,
+    "retain_prior_A_shape": 7
+  },
+  "QA_changes_recommended": 151,
+  "prior_description_retained": 7,
+  "confirmed_historical_identity_errors": 0,
+  "original_status_changes": 0,
+  "original_parent_SQLite_records_modified": 0,
+  "new_qa_overlay_rows": 158,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "BC_prior_changed_pixels_le_100": [
+    {
+      "index": 2854,
+      "key": "street_curbs_01_blend_dark_grass/25",
+      "pixels": 97
+    },
+    {
+      "index": 2935,
+      "key": "street_curbs_01_blend_sand/32",
+      "pixels": 91
+    },
+    {
+      "index": 2955,
+      "key": "street_curbs_01_diag/39",
+      "pixels": 76
+    }
+  ],
+  "BC_low_pixel_delta_is_subgroup_not_added_to_151": true,
+  "user_manual_undecided_excluded_reactivated": 0,
+  "v196_user_uploaded_33_verbatim_modified": false,
+  "v196_original_256table_SQLite_modified": false,
+  "evidence_boundary": "A original cropped RGBA contact sheets and 3 original PNG atlases visually inspected; inherited original B/C evidence screens read. No independent TMX render, wall/upper-layer occlusion removal, official D, or physical SQLite PRAGMA rerun."
+}
