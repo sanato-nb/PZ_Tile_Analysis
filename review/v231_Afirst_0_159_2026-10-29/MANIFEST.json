@@ -1,0 +1,130 @@
+{
+  "version": "v231_A_first_remaining_0_159_source_key_reaudit",
+  "date": "2026-10-29",
+  "base_main_commit": "a9eefb197caa23d296fc4543bb5c2b8a4ed28ef0",
+  "scope": [
+    0,
+    159
+  ],
+  "scope_total": 160,
+  "scope_exact_source_confirmed": true,
+  "source_backlog_locator": "review/v199_Afirst_remaining_480_879_2026-10-29/A_AUDIT_SCOPE_INDEX_0_4632.csv",
+  "source_backlog_blob_sha": "8819ece692988cfc6ea276d4709f95129057a070",
+  "source_backlog_blob_actually_read_rows": 4633,
+  "old_ledger_all_0_to_159_pending_individual_ABC_reaudit": 160,
+  "previous_A_first_cumulative": {
+    "qa_scoped": 4052,
+    "historical_held": 421,
+    "pending": 160
+  },
+  "new_v231_count": {
+    "reviewed_existing_provisional_candidate": 144,
+    "prior_held_preserved_not_promoted": 16,
+    "total": 160
+  },
+  "new_cumulative": {
+    "qa_scoped": 4196,
+    "historical_held": 437,
+    "pending": 0
+  },
+  "new_scope_denominator": 4633,
+  "candidate_A_first_QA_rate_percent": 90.56766673861429,
+  "triaged_and_classified_coverage_percent": 100,
+  "confirmed_final_certifications": 0,
+  "all_4633_are_independently_pixel_hash_certified": false,
+  "QA_160_reinspection_evidence": {
+    "original_atlas_png_directly_viewed": [
+      "Tiles/2x/advertising_01.png",
+      "Tiles/2x/appliances_com_01.png",
+      "Tiles/2x/blends_natural_01.png",
+      "Tiles/2x/boulders.png"
+    ],
+    "original_A_sprite_crop_sheets_directly_viewed": [
+      "review/v119_selected_A_new4633/sheets/SELECTED_A_000.jpg",
+      "review/v119_selected_A_new4633/sheets/SELECTED_A_001.jpg"
+    ],
+    "prior_original_TMX_B_C_D_contact_sheets_directly_viewed": [
+      "review/v121_ABCD_first160/ABCD_sheet_00.jpg",
+      "review/v121_ABCD_first160/ABCD_sheet_01.jpg",
+      "review/v121_ABCD_first160/ABCD_sheet_02.jpg",
+      "review/v121_ABCD_first160/ABCD_sheet_03.jpg"
+    ],
+    "prior_source_tables": [
+      "review/v121_ABCD_first160/ABCD_160.csv",
+      "review/v122_AI_ABCD_160/AI_VISUAL_REVIEW_160.csv"
+    ],
+    "source_rows_160_crosscheck": 160,
+    "source_unique_keys": 160,
+    "source_metadata_mismatch_count": 0,
+    "historical_held_16_records_verbatim_preserved": true,
+    "source_png_unique_atlas_paths_prior_sha_registry_crosschecked": 11,
+    "raw_original_png_atlas_byte_SHA256_independently_recomputed_all_11": false,
+    "source_individual_RGBA_SHA256_independently_recomputed_all_160": false,
+    "original_TMX_XML_reparsed": false,
+    "new_true_B_C_rerenders": false,
+    "specific_wall_upper_layer_occlusion_cause_experiment": false,
+    "same_key_different_official_A_D_substitution": false
+  },
+  "prior_v121_renderer_limit": "v121 MANIFEST marks B/C as approximate scene context and source A Local ID not officially mapped. This round re-read historical B/C evidence; it does not upgrade them to fully independently verified compositing.",
+  "prior_v121_D_actual_second_placement_106_not_official_D": true,
+  "v122_candidate_count": 144,
+  "v122_hold_count": 16,
+  "low_BC_exposure_provisional_indices": [
+    {
+      "index": 44,
+      "delta": 16
+    },
+    {
+      "index": 46,
+      "delta": 30
+    },
+    {
+      "index": 53,
+      "delta": 8
+    },
+    {
+      "index": 56,
+      "delta": 27
+    },
+    {
+      "index": 61,
+      "delta": 10
+    },
+    {
+      "index": 65,
+      "delta": 36
+    }
+  ],
+  "previous_held_BC_zero_indices": [
+    34,
+    70,
+    79,
+    100,
+    103,
+    104,
+    105,
+    108,
+    110
+  ],
+  "status_promotions": 0,
+  "new_observed": 0,
+  "new_provisional_status": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "historical_source_unique_keys": 10042,
+  "historical_provisional_observed_keys": 10007,
+  "historical_reported_unobserved": 35,
+  "historical_actual_distinct_unobserved": 33,
+  "historical_two_count_gap_unresolved": true,
+  "user_manual_33_provisional23_verbatim_preserved": true,
+  "user_manual_undecided10_excluded_unchanged": true,
+  "older_user_manual80_and_held14_unchanged": true,
+  "original_png_tmx_original_manifests_prior_QA_records_modified": false,
+  "v196_sqlite_files_modified": false,
+  "prior_v196_SQLite_256_tables_archived": true,
+  "v196_SQLite_SHA256_prior_archived": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_rehashed_or_PRAGMA_integrity_check_rerun": false,
+  "write_policy": "append-only files under review/v231 only",
+  "after_this_next_review": "Historical held 437 source keys need separately sourced A/B/C layer-occlusion evidence; no automatic certification or promotion"
+}
