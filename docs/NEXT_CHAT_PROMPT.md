@@ -1,5 +1,7 @@
 # 다음 채팅에서 프로젝트 이어가기 — v240 최신 기준
 
+> **이미지/스프라이트 새 분석을 수행할 때**는 [v242 분석 매뉴얼](SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md), [1분 빠른 판정표](SPRITE_ANALYSIS_QUICK_REFERENCE.md), [레코드 템플릿](SPRITE_REVIEW_RECORD_TEMPLATE.json)을 먼저 확인하세요. [이미지 분석 시작 전문](SPRITE_VISUAL_NEXT_CHAT_PROMPT.md)을 복사해 사용할 수도 있습니다.
+
 이 저장소는 **좀보이드 B42 원본 타일 10,042종의 잠정 정체·부품 분석**과 Minecraft 월드 변환 준비 작업을 담습니다.
 
 ## 시작 시 우선 확인할 파일
