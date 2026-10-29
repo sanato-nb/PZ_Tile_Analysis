@@ -19,6 +19,7 @@ jobs:
           sparse-checkout: |
             /floorplan/**
             /review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv
+            /B4220.3_MapExport_256/tmx/31_46.tmx
       - name: Build from authentic legacy floorplan and v240 CSV
         run: python3 floorplan/build_v243_floorplan.py
       - name: Independent source key, embedded metadata and JS syntax checks
