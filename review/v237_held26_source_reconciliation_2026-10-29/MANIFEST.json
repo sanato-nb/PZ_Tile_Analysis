@@ -1,0 +1,99 @@
+{
+  "version": "v237_historical_held_last_26_and_source_count_conflict",
+  "date": "2026-10-29",
+  "base_main_commit": "6332919a6463390e91f1a884427bff3130353a62",
+  "new_reviewed_historical_source_held": {
+    "jumbo_v132": 20,
+    "roof_v160": 6,
+    "total": 26,
+    "distinct_keys": 26,
+    "source_key_A_B_C_prior_SHA_GID_crosscheck_matched": 26,
+    "mismatches": 0,
+    "promoted": 0
+  },
+  "jumbo": {
+    "source_indices": [
+      439,
+      440,
+      441,
+      442,
+      443,
+      444,
+      445,
+      446,
+      451,
+      454,
+      455,
+      456,
+      458,
+      459,
+      460,
+      461,
+      462,
+      463,
+      464,
+      465
+    ],
+    "source_v132_status": "held",
+    "v119_selection_status": "selected_provisional (not final identity status)",
+    "A3_multipart_atlas_alignment_officially_verified": false
+  },
+  "roof": {
+    "source_indices": [
+      3824,
+      3825,
+      3826,
+      3833,
+      3834,
+      3835
+    ],
+    "prior_B_C_delta": [
+      452,
+      0,
+      0,
+      6614,
+      4,
+      0
+    ],
+    "prior_B_C_zero": 3,
+    "old_C_global_display_index_minus_A_source_index": -1
+  },
+  "previous_focused_reviewed": 413,
+  "parent_source_historical_held_total_by_parent_sum": 439,
+  "previously_published_canonical_held": 437,
+  "unresolved_parent_minus_published": 2,
+  "source_scope_denominator": 4633,
+  "previously_published_provisional_A_QA": 4196,
+  "if_439_parent_held_and_4196_provisional_added": 4635,
+  "accounting_issue_is_open": true,
+  "original_status_records_unchanged": true,
+  "do_not_publish_439_as_canonical_until_reconciled": true,
+  "this_round_A_contact_sheets_directly_inspected": [
+    "review/v132_visual3_jumbo20/JUMBO_20_sheet_0.jpg",
+    "review/v132_visual3_jumbo20/JUMBO_20_sheet_1.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_005.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_047.jpg"
+  ],
+  "historical_BC_sheets_directly_inspected": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_005.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_047.jpg"
+  ],
+  "v160_neighbor_proof_sheets_seen_but_not_evidence_for_all_six": [
+    "review/v160_abc_3800_3839/sheets/proof_02.jpg",
+    "review/v160_abc_3800_3839/sheets/proof_03.jpg"
+  ],
+  "original_A_B_C_prior_registered_RGBA_SHA_and_raw_GID_matched": 26,
+  "original_TMX_reparsed": false,
+  "new_actual_B_C_renders": false,
+  "actual_wall_layer_occlusion_cause_proven": 0,
+  "independent_full_original_PNG_byte_SHA256_recomputed": false,
+  "individual_A_RGBA_pixel_SHA_newly_recomputed": false,
+  "official_D_alt_A_same_key": false,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "prior_v196_SQLite_256_tables_unchanged": true,
+  "original_png_tmx_user_manual_data_unchanged": true,
+  "write_policy": "new review/v237 files only",
+  "next_work": "Independently reconcile 4633 source-key+status ledger and historical 437/439 difference; independently rerender TMX layers for held occlusion questions."
+}
