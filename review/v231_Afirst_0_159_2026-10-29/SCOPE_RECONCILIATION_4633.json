@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-29",
+  "source_scope_denominator": 4633,
+  "v199_original_full_source_index_ledger": {
+    "path": "review/v199_Afirst_remaining_480_879_2026-10-29/A_AUDIT_SCOPE_INDEX_0_4632.csv",
+    "blob_sha": "8819ece692988cfc6ea276d4709f95129057a070",
+    "actual_rows_fetched": 4633,
+    "original_pending_by_index": [
+      {
+        "first": 0,
+        "last": 159,
+        "count": 160
+      },
+      {
+        "first": 880,
+        "last": 4632,
+        "count": 3753
+      }
+    ],
+    "not_claimed_current_after_later_reviews": true
+  },
+  "v230_prior_published_scope": {
+    "A_candidate_reaudited": 4052,
+    "held": 421,
+    "unreviewed_index_count": 160
+  },
+  "v231_reaudited_exact_160": {
+    "index_first": 0,
+    "index_last": 159,
+    "prior_v122_candidates_reinspected": 144,
+    "prior_v122_held_preserved": 16
+  },
+  "new_accounting": {
+    "A_candidate_reaudit_scope": 4196,
+    "historical_held_no_promotion": 437,
+    "not_yet_A_first_scope": 0,
+    "scope_accounted": 4633,
+    "all_scope_indices_triaged_percent": 100,
+    "independent_A_candidate_QA_percent": 90.56766673861429,
+    "official_certified": 0
+  },
+  "important_interpretation": "100% here means all 4633 source indices have been dispositioned into rechecked provisional candidate or historical held. It does NOT mean all were individually independently rehashed, official PNG↔TileZed mapped, or all identities certified. 437 remain held for new evidence.",
+  "ongoing_limits": [
+    "Old original v121 B/C scene context is approximate per v121 MANIFEST",
+    "No new TMX render or per-layer occlusion masking performed",
+    "v199 original index ledger preserved untouched; summary overlay only",
+    "User excluded statuses remain authoritative and unpromoted"
+  ]
+}
