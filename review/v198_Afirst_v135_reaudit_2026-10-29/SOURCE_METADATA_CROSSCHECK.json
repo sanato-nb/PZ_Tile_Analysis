@@ -1,0 +1,52 @@
+{
+  "method": "Compare newly appended 57 A-first rows to previous v135 VISUAL_REVIEW.csv and PNG atlas SHA256 registry from original v119 MANIFEST.json; metadata only, no pixel rehash or TMX rerender",
+  "checked_date": "2026-10-29",
+  "rechecked_rows": 57,
+  "distinct_keys": 57,
+  "source_png_atlases": 11,
+  "each_row_tile_set_local_id_PNG_sha_RGBA_sha_TMX_path_raw_GID_prior_delta_matches_v135": true,
+  "all_11_atlas_prior_sha256_values_match_v119_manifest": true,
+  "mismatched_fields": 0,
+  "QA_flagged": 24,
+  "actual_BC_delta_positive": 57,
+  "actual_BC_zero": 0,
+  "micro_delta_423_pixels": 4,
+  "user_excluded_v135_indices_preserved": [
+    400,
+    422,
+    433
+  ],
+  "JUMBO_held_indices_preserved": [
+    439,
+    440,
+    441,
+    442,
+    443,
+    444,
+    445,
+    446,
+    451,
+    454,
+    455,
+    456,
+    458,
+    459,
+    460,
+    461,
+    462,
+    463,
+    464,
+    465
+  ],
+  "parent_v196_manifest_sha": "e3d49bd7e139b7c6c3dfc2ea1b439254fbdbcbf8",
+  "parent_v196_sqlite_file_sha_prior_only": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "v196_manual33_original_git_blob": "30b67367bd07ba5f7ea3f332e30fa36474311503",
+  "not_claimed": [
+    "new source PNG byte-level SHA computation",
+    "v196 physical sqlite PRAGMA integrity_check new run",
+    "all parent table rows fresh comparison",
+    "uncovered wall masking diagnosis",
+    "new official mapping or final certification",
+    "any A/B/C re-render from original TMX this turn"
+  ]
+}
