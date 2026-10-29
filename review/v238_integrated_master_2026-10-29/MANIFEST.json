@@ -1,0 +1,134 @@
+{
+  "version": "v238_consolidated_tile_review_master",
+  "generated_on": "2026-10-29",
+  "source_main_commit": "f726b0d94692de6c9842ff1d6f7366eb50721026",
+  "global_project_scope": {
+    "unique_key_total": 10042,
+    "legacy_existing_key_count": 5409,
+    "new_B42_map_selected_key_count": 4633,
+    "legacy_canonical_physical_database": "analysis/current/v196/",
+    "legacy_database_table_count_prior_manifest": 256,
+    "legacy_database_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+    "legacy_5409_not_physically_reexported_or_joined_into_new_CSV": true
+  },
+  "new_source_master": {
+    "path": "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_ALL_4633_WITH_MANUAL.csv",
+    "rows": 4633,
+    "source_indices_contiguous": [
+      0,
+      4632
+    ],
+    "unique_keys": 4633,
+    "status_counts": {
+      "A_first_QA_provisional": 4185,
+      "historical_held": 439,
+      "source_provisional_without_this_Afirst_note": 8,
+      "source_missing_A_BC": 1
+    },
+    "held_unique_keys": 439,
+    "old_held_count_v231_published": 437,
+    "old_parent_held_records_439_diff": 2,
+    "published_437_to_439_root_two_specific_keys_not_independently_identified": true,
+    "A_first_QA_records_lacking_explicit_individual_shape_note": 232,
+    "prior_only_without_A_first_notes_indices": [
+      363,
+      364,
+      377,
+      378,
+      381,
+      382,
+      388,
+      397
+    ],
+    "source_missing_A_BC": {
+      "source_index": 2163,
+      "key": "overlay_graffiti_wall_02/2",
+      "user_manual_status": "미판정",
+      "do_not_reactivate": true
+    },
+    "B_C_original_records_present": 4632,
+    "missing_B_C_only_index": 2163,
+    "A_first_qa_potentially_family_level_or_sheet_screening_present": true,
+    "A_first_status_not_final_or_pixel_hash_recertification": true,
+    "original_A_blob_sha": "2054b15a1acfbc840616c447581f52d7e875a835",
+    "original_B_blob_sha": "a5570a9445356a4fa47a6fe791052a2456a04b4c",
+    "original_C_blob_sha": "afa4843417c84399584fd27d1ec039db2c568114",
+    "A_B_C_key_join": "exact tile_set_name/local_id (not displayed contact-sheet index)"
+  },
+  "manual_data": {
+    "source_verbatim": "review/v196_user_manual33/USER_UPLOADED_33_VERBATIM.csv",
+    "total_rows": 33,
+    "provisional_user_supplied": 23,
+    "undecided_excluded_by_user": 10,
+    "rows_joined_to_new_4633_master": 24,
+    "of_these_provisional": 23,
+    "of_these_undecided_excluded": 1,
+    "manual_rows_in_older_5409_scope": 9,
+    "all_nine_user_undecided_excluded": true,
+    "legacy_user_manual_80_and_excluded_14_unchanged": true
+  },
+  "historical_image_observation": {
+    "provisional_observed_from_prior_v196": 10007,
+    "out_of_unique": 10042,
+    "prior_reported_unobserved": 35,
+    "prior_actual_unobserved_distinct_keys": 33,
+    "prior_historical_statistic_gap": 2,
+    "updated_in_this_merge": false
+  },
+  "outstanding_queue": {
+    "rows": 448,
+    "held": 439,
+    "no_individual_A_reaudit_note": 8,
+    "source_A_unavailable_and_user_excluded": 1,
+    "classes": {
+      "HELD_BC_ZERO_OCCLUSION_UNPROVEN": 209,
+      "HELD_BC_MAP_EDGE": 45,
+      "HELD_BC_MISSING_NEIGHBOUR": 8,
+      "HELD_IDENTITY_OR_COVER_UNRESOLVED": 177,
+      "MISSING_INDEPENDENT_A_FIRST_NOTE": 8,
+      "USER_EXCLUDED_AND_MISSING_ORIGINAL": 1
+    },
+    "path": "review/v238_integrated_master_2026-10-29/OPEN_ISSUES_AND_NEXT_TESTS_448.csv"
+  },
+  "validation": {
+    "raw_A_rows": 4633,
+    "old_B_rows": 4632,
+    "old_C_rows": 4632,
+    "new_master_rows": 4633,
+    "unique_key_duplicates": 0,
+    "missing_source_indices": 0,
+    "all_439_held_indices_unique": true,
+    "held_source_index_key_mismatch": 0,
+    "prior_source_A_RGBA_vs_C_known_keys_mismatch": 0,
+    "old_original_record_references_preserved": true,
+    "original_TMX_reparsed_this_turn": false,
+    "new_B_C_compositions_rendered_this_turn": false,
+    "original_PNG_all_bytes_independently_rehashed": false,
+    "independent_RGBA_pixel_crop_hashes_recomputed": false,
+    "official_same_key_D_alternate_A_performed": false,
+    "physical_SQLite_PRAGMA_integrity_check_run": false
+  },
+  "certification": {
+    "official_tilezED_local_id_mapping_verified": 0,
+    "individual_object_identity_certified": 0,
+    "status_promotions": 0
+  },
+  "write_policy": "only new files under review/v238, no original PNG/TMX/v196 SQLite/user manual/prior QA records modified",
+  "component_csv_shards": [
+    "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_0000_0879.csv",
+    "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_0880_1679.csv",
+    "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_1680_2479.csv",
+    "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_2480_3279.csv",
+    "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_3280_3839.csv",
+    "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_3840_4319.csv",
+    "review/v238_integrated_master_2026-10-29/MASTER_NEW_A_BC_4320_4632.csv"
+  ],
+  "next_steps": [
+    "investigate provenance of published held 437 vs source-key 439 without deleting data",
+    "eight prior-only indices need individual A-first visual notes",
+    "find official PNG source for overlay_graffiti_wall_02/2 without reactivating user's excluded manual status",
+    "rerender original TMX B/C per layer for held occlusion",
+    "confirm official same-key replacement D only if actual alternative A source exists",
+    "optionally export prior 5409 base keys from preserved v196 SQLite to create a literal 10042-row joined export"
+  ]
+}
