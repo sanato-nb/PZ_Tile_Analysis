@@ -35,6 +35,16 @@ def restore(target: Path) -> dict:
     state = json.loads(repo_file("PROJECT_STATE.json").read_text(encoding="utf-8"))
     cp = state["latest_checkpoint"]
     db_state = state["unified_database"]
+    if db_state.get("version") == "v240":
+        if cp.get("version") != "v240":
+            raise ValueError("v240 physical manifest and checkpoint mismatch")
+        if target.expanduser().resolve().exists():
+            raise FileExistsError(f"Refusing to overwrite: {target}")
+        from restore_v240_master import restore as restore_v240
+        resolved = target.expanduser().resolve()
+        restore_v240(resolved)
+        return {"version": "v240", "table_count": 258, "sha256": db_state["sqlite_sha256"], "path": str(resolved)}
+
     version = cp["version"]
     if db_state["version"] != version:
         raise ValueError("Canonical state has mismatched DB/checkpoint versions")
