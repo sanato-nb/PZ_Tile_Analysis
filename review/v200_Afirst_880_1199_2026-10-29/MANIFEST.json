@@ -1,0 +1,136 @@
+{
+  "version": "v200_Afirst_semantic_reaudit_overlay_only",
+  "date": "2026-10-29",
+  "parent_main_sha": "a0d8100efdda31ea0af82cbe8b49a4bc92dc2073",
+  "scope": [
+    880,
+    1199
+  ],
+  "original_scope_indices": 320,
+  "original_historical_candidate_rows_reaudited": 274,
+  "cohorts": {
+    "v140": [
+      880,
+      1039,
+      132
+    ],
+    "v141": [
+      1040,
+      1199,
+      142
+    ]
+  },
+  "individual_A_morphology_rewritten": 168,
+  "contact_sheets_screened_only_without_new_individual_A_morphology": 106,
+  "preserved_parent_held_excluded": 46,
+  "parent_v140_excluded": 28,
+  "parent_v141_excluded": 18,
+  "A_contact_sheets_viewed": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_011.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_012.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_013.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_014.jpg"
+  ],
+  "BC_original_source_sheets_viewed": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_011.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_012.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_013.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_014.jpg"
+  ],
+  "additional_v140_v141_ABCD_proof_sheets_viewed": [
+    "review/v140_abc_880_1039/sheets/proof_00.jpg",
+    "review/v140_abc_880_1039/sheets/proof_08.jpg",
+    "review/v140_abc_880_1039/sheets/proof_14.jpg",
+    "review/v141_industry_1040_1199/sheets/proof_00.jpg",
+    "review/v141_industry_1040_1199/sheets/proof_07.jpg",
+    "review/v141_industry_1040_1199/sheets/proof_14.jpg"
+  ],
+  "original_PNG_atlases_directly_viewed": [
+    "Tiles/2x/floors_rugs_01.png",
+    "Tiles/2x/fixtures_windows_wood.png"
+  ],
+  "original_PNG_industry_02_atlas_access": "GitHub returned blob metadata; base64 content empty in connector; underlying individual A extracted crops seen via v119/v141",
+  "prior_source_PNG_SHA256_registry": "review/v119_selected_A_new4633/MANIFEST.json",
+  "prior_source_PNG_unique_paths_crosschecked": 28,
+  "prior_candidate_source_metadata_rows_compared": 274,
+  "source_metadata_fields_exact_match": [
+    "tile_set_name",
+    "local_id",
+    "A_png",
+    "A_png_sha256",
+    "A_rgba_pixel_sha256",
+    "B_tmx_file",
+    "raw_gid",
+    "B_C_changed_pixels",
+    "B_entry",
+    "C_entry"
+  ],
+  "source_metadata_mismatch_count": 0,
+  "prior_SHA_crosschecked_against_registry_not_recomputed": true,
+  "original_TMX_reparsed_this_session": false,
+  "original_BC_rerendered_this_session": false,
+  "A_individual_RGBA_pixel_sha256_recomputed_this_session": false,
+  "BC_prior_changed_pixels_le_50_count": 19,
+  "BC_prior_very_low_pixels_4_or_less": [
+    {
+      "index": 944,
+      "changed_pixels": 1,
+      "tile_key": "floors_rugs_01/46"
+    },
+    {
+      "index": 952,
+      "changed_pixels": 1,
+      "tile_key": "floors_rugs_01/67"
+    },
+    {
+      "index": 1018,
+      "changed_pixels": 2,
+      "tile_key": "furniture_storage_02/15"
+    },
+    {
+      "index": 1156,
+      "changed_pixels": 1,
+      "tile_key": "industry_railroad_05/8"
+    },
+    {
+      "index": 1180,
+      "changed_pixels": 4,
+      "tile_key": "industry_trucks_01/26"
+    }
+  ],
+  "wall_upper_layer_occlusion_diagnosed_with_masked_wall_render": false,
+  "D_different_official_same_key_A_verified": false,
+  "D_official_alternative_rendered": 0,
+  "new_observed": 0,
+  "new_provisional_promoted": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "prev_v199_4633_progress": {
+    "source_A_BC_scope_seen": 673,
+    "pending": 3913,
+    "preserved_historical_held": 47
+  },
+  "updated_v200_4633_progress": {
+    "source_A_BC_scope_seen": 947,
+    "still_pending": 3593,
+    "preserved_historical_held": 93
+  },
+  "updated_v200_fraction_screened": 0.20440319447442262,
+  "progress_interpretation": "947 source-key indices have been within A-first evidence review scopes across v194-v200, NOT 947 separately certified accurate identifications. v200 included 168 individual A description and 106 evidence-only screening records.",
+  "user_manual_v196_provisional_verbatim_preserved": 23,
+  "user_manual_v196_undecided10_excluded_preserved": 10,
+  "older_user_manual80_excluded14_preserved": true,
+  "parent_physical_SQLite_version": "v196",
+  "parent_SQLite_256_tables_untouched": true,
+  "parent_SQLite_SHA256_previous_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_integrity_check_previous_manifest": "ok",
+  "physical_SQLite_rebuilt_rehashed_or_PRAGMA_rerun_in_v200": false,
+  "historical_unique_source_keys": 10042,
+  "historical_provisional_image_observed": 10007,
+  "historical_reported_unobserved": 35,
+  "historical_actual_unobserved": 33,
+  "historical_accounting_gap": 2,
+  "write_policy": "append-only review/v200 data, never overwrite original Tiles/TMX, prior reviews, physical SQLite, manual33",
+  "next_scope_start": 1200
+}
