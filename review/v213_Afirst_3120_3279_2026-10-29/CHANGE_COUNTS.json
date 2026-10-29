@@ -1,0 +1,42 @@
+{
+  "version": "v213",
+  "date": "2026-10-29",
+  "source_range": [
+    3120,
+    3279
+  ],
+  "historical_candidate_rows_reaudited": 141,
+  "exclusive_change_categories": {
+    "candidate_role_narrowed": 48,
+    "A_morphology_refined": 37,
+    "historical_candidate_supported": 56
+  },
+  "QA_notes_changed_total": 85,
+  "source_candidate_status_promoted": 0,
+  "source_candidate_status_replaced": 0,
+  "confirmed_wrong_original_identities": 0,
+  "held_excluded_preserved": 19,
+  "held_reactivated": 0,
+  "held_reasons": {
+    "B_C_zero_not_transparency": 14,
+    "B_map_edge_truncated": 2,
+    "previous_image_observation": 3
+  },
+  "prior_B_minus_C_at_most_50_pixels": {
+    "count": 1,
+    "indices": [
+      3241
+    ],
+    "tile_keys": [
+      "walls_commercial_03/87"
+    ],
+    "delta_pixels": [
+      12
+    ],
+    "occlusion_cause": "not independently tested"
+  },
+  "new_certified": 0,
+  "new_official_mapping": 0,
+  "new_tilezed_verified": 0,
+  "numeric_interpretation": "48 role narrowing suggestions and 37 shape refinements are reviewer QA notes based on inspected original A. 85 is NOT confirmed historical error count. Other 56 retained; 19 held are separate, non-overlapping. Physical SQLite changes zero."
+}
