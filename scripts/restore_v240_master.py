@@ -11,6 +11,7 @@ def restore(destination):
     assert digest(packed)==m["v240_zlib_sha256"],"compressed file SHA mismatch"
     data=zlib.decompress(packed)
     assert len(data)==m["v240_sqlite_bytes"] and digest(data)==m["v240_sqlite_sha256"],"database SHA mismatch"
+    if destination.exists(): raise FileExistsError(f"Refusing to overwrite existing SQLite: {destination}")
     destination.parent.mkdir(parents=True,exist_ok=True)
     destination.write_bytes(data)
     with sqlite3.connect("file:"+str(destination.resolve())+"?mode=ro",uri=True) as con:

@@ -71,6 +71,25 @@ def render_readme(state):
     remaining = int(cp["expanded_unique_unobserved"])
     if observed + remaining != total:
         raise ValueError("README expanded observation total mismatch")
+    if version == "v240":
+        return (
+            f"{README_START}\n"
+            f"> **최신 통합: v240 ({cp['date']})** — 10,042종 통합이며 정체 인증 10,042종이 아닙니다.\n\n"
+            "| 항목 | 현재 기준 |\n|---|---:|\n"
+            "| 전체 고유 타일 | **10,042종** (기존 5,409 + 신규 4,633) |\n"
+            "| 이미지 잠정 관찰 기록 | **10,007/10,042 (99.65%)** |\n"
+            "| 통합 활성 목록 | **9,587종** (잠정, 정체 미인증) |\n"
+            "| 별도 보류/제외 아카이브 | **455종** (보류439 + 사용자 미판정10 + 과거 추가6) |\n"
+            f"| 물리 SQLite | **{db['table_count']}테이블** (기존256 보존) |\n"
+            "| PNG↔Local ID / TileZed / 최종 정체 인증 | **0 / 0 / 0종** |\n\n"
+            "- [전체 10,042종](review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv) · "
+            "[활성 9,587종](review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv) · "
+            "[보류/제외 455종](review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv)\n"
+            f"- [물리 SQLite 매니페스트]({db['repo_manifest']}) · "
+            "[복원 명령](scripts/restore_v240_master.py). "
+            "보류는 삭제하지 않았고 원본 PNG/TMX·사용자 원문·과거 검수 이력 모두 보존합니다.\n"
+            f"{README_END}"
+        )
     evidence = state.get(f"latest_{version}_evidence", {})
     new = evidence.get("source_verified_provisional", db.get(f"{version}_visual_review_rows", "증거 참고"))
     excluded = evidence.get("excluded_unverified", "증거 참고")

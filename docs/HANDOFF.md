@@ -1,5 +1,8 @@
 # 프로젝트 좀보이드 B42 타일 정체 분석 — 인수인계 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+> **현재 인수인계 v240 (2026-10-30):** 이 문서의 이전 v196 이하 장별 내용은 역사적 기록입니다. 현재 [10,042종 통합 현황](CURRENT_STATUS.md), [파일 지도](REPOSITORY_MAP.md), [v240 매니페스트](../analysis/current/v240/MANIFEST.json), [새 채팅 안내](NEXT_CHAT_PROMPT.md)를 먼저 확인하세요. 보류439 및 사용자 제외16은 활성에서 제외하고 원본 및 이전 결정을 보존합니다.
+
+
 > **새 채팅 인수인계 (2026-10-29 / v196):** 우선 [최신 인수인계](NEW_CHAT_HANDOFF_V196_2026-10-29.md), [대화 연대기](NEW_CHAT_CONVERSATION_CHRONOLOGY_2026-10-29.md), [PR #91–162 색인](PR_91-162_2026-10-29.md), [새 채팅 시작 프롬프트](NEW_CHAT_START_PROMPT_V196_2026-10-29.txt)를 읽을 것. 사용자 33종 판정에서 **잠정23, 미판정10 활성 제외**(PR #162); 기존 이미지관찰10,007/10,042/공식 인증0, v196 DB256테이블. 이전 전체 이력과 원본/수동80·제외14는 삭제하지 말 것.
 
 ## v196 사용자 수동판정 33종 (2026-10-28)
@@ -438,11 +441,11 @@
 
 ---
 <!-- AUTO_CHECKPOINT_START -->
-## 자동 확인된 최신 진행 상태 (v196)
+## 자동 확인된 최신 진행 상태 (v240)
 
 - TMX 고유 10,042종, 이미지 관찰 기록 10,007종 (99.65%), 미관찰 35종.
 - 정체는 잠정 후보. 공식 PNG↔Local ID 매핑 0종, TileZed 검증 0종, 최종 인증 0종.
-- 물리 SQLite: analysis/current/v196/MANIFEST.json, 256테이블, SHA256 d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424.
+- 물리 SQLite: analysis/current/v240/MANIFEST.json, 258테이블, SHA256 b7ffd8524ea202ecc42c01b92b3a856d8f1bca040ea4ffddada1b375623072d6.
 - 기존 사용자 수동 80종, 제외 14종, 보류 D 2종과 JUMBO 20종 및 원본 PNG/TMX는 보존.
 - D는 동일 (tile_set_name, local_id)의 다른 A를 원래 B TMX의 동일 좌표·층·레이어에 치환한 비교임. 과거 두 번째 TMX 위치·인접격자 D는 인증되지 않음.
 - 아래 버전별 상세 인수인계는 그대로 보존.

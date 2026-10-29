@@ -1,137 +1,70 @@
-# 프로젝트 좀보이드 B42 타일 정체 분석
+# 프로젝트 좀보이드 B42 → Minecraft 맵 변환을 위한 타일 분석
 
-프로젝트 좀보이드(Project Zomboid) B42의 **원본 타일 이미지를 직접 관찰**하고, TMX의 원래 위치·층·레이어와 주변 타일을 비교하여 개별 타일이 어떤 사물 또는 사물의 어느 부분인지 기록하는 프로젝트입니다. 최종 목표는 Minecraft 월드 재현을 위한 검증 가능한 구조·재질 정보를 축적하는 것입니다.
+**현재 기준: v240 통합 데이터베이스 (2026-10-30)** · 원본 PNG/TMX로 개별 타일의 사물·부품·연결·방향을 분석하고, 나중에 Minecraft 월드로 재현하기 위한 프로젝트입니다.
 
-## 1. 현재 작업 상태
+> **빠른 시작:** [현재 상태](docs/CURRENT_STATUS.md) · [저장소 사용 안내](docs/REPOSITORY_MAP.md) · [새 채팅/작업 이어가기](docs/NEXT_CHAT_PROMPT.md) · [검수 원칙](docs/ANALYSIS_RULES.md)
+
+## 최신 기준 데이터
 
 <!-- AUTO_README_START -->
-> **최신 검증 체크포인트: v196 (2026-10-28)** — 원본 이미지 관찰과 잠정 정체 후보 기록이며, 최종 정체 인증과 다릅니다.
+> **최신 통합: v240 (2026-10-30)** — 10,042종 통합이며 정체 인증 10,042종이 아닙니다.
 
-| 최신 진행 항목 | 확인된 수치 |
+| 항목 | 현재 기준 |
 |---|---:|
-| 84개 TMX의 고유 타일 | **10,042종** |
-| 이미지 관찰 기록 | **10,007종 (99.65%)** |
-| 미관찰 타일 | **35종** |
-| 이번 v196 신규 잠정 기록 | **증거 참고종** (160종 검토 중 증거 참고종 제외) |
-| 물리 SQLite | **256테이블** |
-| 공식 PNG↔Local ID / TileZed / 최종 정체 인증 | **0 / 0 / 0종** |
+| 전체 고유 타일 | **10,042종** (기존 5,409 + 신규 4,633) |
+| 이미지 잠정 관찰 기록 | **10,007/10,042 (99.65%)** |
+| 통합 활성 목록 | **9,587종** (잠정, 정체 미인증) |
+| 별도 보류/제외 아카이브 | **455종** (보류439 + 사용자 미판정10 + 과거 추가6) |
+| 물리 SQLite | **258테이블** (기존256 보존) |
+| PNG↔Local ID / TileZed / 최종 정체 인증 | **0 / 0 / 0종** |
 
-- [최신 시각 관찰 CSV](review/v190_twelve_held_visual_source_recheck/RECHECK_12.csv) · [이미지 증거 및 검수 결과](review/v190_twelve_held_visual_source_recheck/) · [최신 SQLite 매니페스트](analysis/current/v196/MANIFEST.json)
-- SQLite SHA-256: `d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424`. **기존 결과·사용자 수동 80종·제외 14종·원본 PNG/TMX는 보존**하며, 보류 항목을 완료에 합산하지 않습니다.
+- [전체 10,042종](review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv) · [활성 9,587종](review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv) · [보류/제외 455종](review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv)
+- [물리 SQLite 매니페스트](analysis/current/v240/MANIFEST.json) · [복원 명령](scripts/restore_v240_master.py). 보류는 삭제하지 않았고 원본 PNG/TMX·사용자 원문·과거 검수 이력 모두 보존합니다.
 <!-- AUTO_README_END -->
 
-**모수 구분:** 확장 범위는 **84개 TMX에서 발견한 고유 10,042종**입니다. 기존 5,409종(관찰 기록 5,400·미관찰 9)은 결과와 원본 이미지를 재사용하며, 새 4,633종 가운데 관찰 기록 1,809·미관찰 2,824종입니다. 예전 README의 5,409종 기준 통계는 **과거 v80 당시 기록**이며 현재 진행률이 아닙니다.
+**활성 9,587종은 마인크래프트 변환이 확정된 블록 목록이 아닙니다.** 기존 관찰·잠정 형태 분석을 활용하는 범위이며 재질·부분 역할·방향·공식 Local ID 매핑은 아직 검증이 필요합니다. 보류 439종은 추가 수동 검수나 다른 실험을 위해 별도 보관 중입니다. `99.65%`는 **이미지 잠정 관찰 기록률**이지 정체 정확도가 아닙니다.
 
-**주의:** `observed`는 이미지를 실제로 본 기록, `provisional_candidate`는 정체의 잠정 추론, `held`는 보류입니다. `mapping_verified`, `tilezed_verified`, `certified`는 각각 별개이며 **현재 공식 인증은 모두 0**입니다.
+## 파일은 여기에서 시작하세요
 
-## 2. 분석 절차와 증거
+| 필요한 것 | 최신 링크 | 주의 |
+|---|---|---|
+| **전체 10,042종 단일 CSV** | [MASTER_ALL_10042.csv](review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv) | 타일 키 중복 없이 기존+신규 통합 |
+| **활성 9,587종** | [ACTIVE_9587.csv](review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv) | 검수·후속 변환의 잠정 대상 |
+| **비활성 455종** | [EXCLUDED_ARCHIVE_455.csv](review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv) | 보류439·사용자 제외16, 삭제 아님 |
+| **통합 SQLite** | [analysis/current/v240/](analysis/current/v240/) | 8개 .b64 압축 조각 + 매니페스트 |
+| **복원 스크립트** | [restore_v240_master.py](scripts/restore_v240_master.py) | SHA-256 및 SQLite 무결성 검사 |
+| **신규 4,633종 근거** | [v238 통합 검수](review/v238_integrated_master_2026-10-29/) | A/B/C·기존 판정·출처·보류 |
+| **보류439 추가 대조** | [v239](review/v239_held439_independent_source_crosscheck_2026-10-30/) | 재검수 이력/미해결 상태 분리 |
 
-1. **A — 원본 이미지:** 해당 타일의 실제 PNG 픽셀과 출처·크롭 범위를 확인합니다.
-2. **B — 원래 TMX 맥락:** 원래 지도의 동일 위치·층·레이어와 주변 5×5 배치를 관찰합니다.
-3. **C — 원래 위치에서 제거:** B에서 해당 타일 한 배치만 제거해 픽셀 차이와 가려짐을 비교합니다.
-4. **D — 같은 키의 다른 A 대입 실험:** **동일 `(tile_set_name, local_id)`에 대응하는 다른 A 이미지**를 찾아, 원래 B의 정확히 같은 TMX 위치·층·레이어에 치환하여 비교합니다. 과거의 '두 번째 TMX 사용 위치'나 **다른 Local ID일 수 있는 인접 PNG 격자**는 현재 D 완료·공식 매핑의 증거가 아닙니다.
-5. **시각 판독:** 형태·부분 역할·방향·연결·재질을 실제 이미지 근거와 함께 기록하고, 모르면 보류합니다. 파일명만 보고 정체를 확정하지 않습니다.
-6. **증거 및 DB 검증:** 타일별 증거·신뢰도·상태를 분리해 저장하고, 기존 SQLite·원본 데이터 무변경 여부, ZIP CRC·SHA-256·SQLite 무결성을 검사합니다.
+## 전체 SQLite 복원
 
-A/B/C/D 이미지를 생성했다는 것만으로 사물 정체가 검증된 것은 아닙니다. 특히 **B−C 변화 0이나 B 가림은 투명 타일 확정의 근거가 아닙니다.** 원래 보류 D 2종과 JUMBO 20종은 사용자 지시대로 보존합니다.
-
-## 3. 최신 결과 찾기
-
-| 경로 | 내용 |
-|---|---|
-| [`PROJECT_STATE.json`](PROJECT_STATE.json) | 최신 버전과 전체 진행률의 기준 데이터 |
-| [`AGENTS.md`](AGENTS.md) | 작업 중 지켜야 할 사용자 결정·인수인계 규칙 |
-| [`docs/HANDOFF.md`](docs/HANDOFF.md) | 최신 작업과 과거 버전 기록 |
-| [`docs/ANALYSIS_RULES.md`](docs/ANALYSIS_RULES.md) | 시각 판독·상태 분리·인증 기준 |
-| [`analysis/current/`](analysis/current/) | 버전별 SQLite 복원용 압축 조각과 매니페스트 |
-| [`review/`](review/) | 버전별 타일 관찰 CSV·A/B/C 증거 이미지·예외 내역 |
-| [`B4220.3_MapExport_256/`](B4220.3_MapExport_256/) | 원본 TMX 지도 (변경 금지) |
-| [`Tiles/`](Tiles/) | 원본 타일셋 PNG (변경 금지) |
-| [`checkpoints/`](checkpoints/) | 예전 버전의 관찰 기록·증거 |
-
-## 4. 최신 통합 SQLite 복원
-
-저장소를 내려받은 환경에서 다음 명령으로 **`PROJECT_STATE.json`이 지정하는 최신 물리 SQLite**를 복원할 수 있습니다.
+저장소를 내려받은 뒤 프로젝트 루트에서 아래 명령을 실행합니다. Python 3 표준 라이브러리만 필요합니다.
 
 ```bash
-python3 scripts/restore_latest_unified.py ./pz_tiles_latest.sqlite
+python3 scripts/restore_v240_master.py PZ_Tile_Analysis_v240_MASTER_10042.sqlite
 ```
 
-복원 도구는 해당 버전의 `MANIFEST.json`과 모든 압축 조각의 SHA-256을 검증하고 `PRAGMA integrity_check` 및 물리 테이블 수를 확인합니다. 기존 출력 파일이 있으면 **덮어쓰지 않고 중지**합니다.
+일반 최신 버전 복원기도 v240을 사용하도록 연결했습니다.
 
-**과거 복원 명령** `scripts/restore_unified_v80.py`, `scripts/restore_unified_v132.py`는 해당 시점의 역사적 DB 복원에만 사용해야 합니다.
+```bash
+python3 scripts/restore_latest_unified.py PZ_Tile_Analysis_latest.sqlite
+```
 
----
+복원된 DB에는 `v240_tile_master_10042`(전체), `v240_active_tile_master`(활성 뷰), `v240_excluded_archive_455`(보류/제외) 등이 있고, 기존 v196의 256개 테이블도 변경 없이 포함되어 있습니다. 기존 출력 파일은 덮어쓰지 않도록 검사합니다.
 
-## 이전 버전 보존 기록 (v59~v80)
+## 분석·검수 원칙
 
-아래의 수치·'최신' 표현은 **각 버전 작성 시점의 역사 기록**입니다. 현재 통계는 위 최신 상태 표와 `PROJECT_STATE.json`을 우선합니다.
+**A:** 원본 PNG 스프라이트를 먼저 본다 → **B:** 진짜 TMX의 원래 좌표·층·레이어에서 5×5 주변 배치를 본다 → **C:** 그 위치의 목표 배치 한 개를 제거해 B−C의 실제 변화를 확인한다 → **D:** *같은 타일 키에 대응하는 검증된 다른 공식 A*가 존재할 때만 동일 B 위치에서 치환 실험한다.
 
-## 5. GitHub 커밋 메시지 작성 규칙
+**B−C=0은 투명 또는 물체가 없다는 증거가 아닙니다.** 벽·상위 레이어·인접 물체로 가려졌을 수 있습니다. 단일 타일의 부품 형태와 B의 완성된 집·가구·철탑을 혼동하지 말고, 불분명하면 보류를 유지합니다. 정확한 정의는 [검수 규칙](docs/ANALYSIS_RULES.md)에 있습니다.
 
-**새로 작성하는 커밋 메시지는 한글**을 기본으로 합니다. 파일명, 버전명, Python 명령어, 실행에 필요한 기술 용어는 원래 형태를 유지합니다.
+## 보관 및 이력
 
-예시:
+- [Tiles/](Tiles/): 원본 타일셋 PNG — **변경 금지**
+- [B4220.3_MapExport_256/](B4220.3_MapExport_256/): 원본 TMX — **변경 금지**
+- [review/](review/), [analysis/current/](analysis/current/), [checkpoints/](checkpoints/): 버전별 **과거 증거**. 숫자가 크다는 이유만으로 원본 판정을 덮어쓰지 않습니다.
+- [docs/HISTORY_INDEX.md](docs/HISTORY_INDEX.md): 버전별 핵심 증거 및 원본/과거 문서 색인.
+- [docs/history/ROOT_README_BEFORE_V241.md](docs/history/ROOT_README_BEFORE_V241.md): 이전 루트 README의 상세 연대기 원문 보존.
+- [AGENTS.md](AGENTS.md): AI 작업 규칙의 역사적 세부 내용. 최신 상태 판단은 **v240 매니페스트와 [PROJECT_STATE.json](PROJECT_STATE.json)** 우선.
 
-- `분석: 신규 타일 50종 이미지 검수 결과 저장`
-- `데이터: v54 통합 SQLite 생성 및 무결성 검증`
-- `문서: 최신 분석 진행률과 인수인계 갱신`
-- `자동화: 데이터베이스 복원 검사 개선`
-
-이전에 생성된 영어 커밋을 억지로 수정하지는 않습니다. Git 커밋의 메시지를 과거까지 바꾸려면 이력 재작성이 필요하므로, **기존 이력은 보존하고 이후 기록부터 한글을 적용합니다.**
-
----
-
-**과거 증거 보존:** v58 신규 6종의 A/B/C/D 및 비교판 총 30개 JPEG는 [v58 원본 증거](checkpoints/v58_preview/)에 업로드되어 있습니다. 과거 버전의 일부 고해상도 증거는 별도 채팅 체크포인트 ZIP에 남아 있으며 GitHub에 전부 올라온 것은 아닙니다. PNG 높이 불일치 및 TileZed 정합성은 미검증입니다.
-
-## 6. v59 신규 판독과 증거 다운로드
-
-- **신규 직접 관찰 12종**: 후보 11종, 보류 1종, 현재 관찰 3,012/5,409종(55.69%).
-- [v59 관찰 결과 CSV](checkpoints/v59/observations.csv) · [TSV](checkpoints/v59/observations.tsv) · [이미지 내장 검수 HTML](checkpoints/v59/v59_이미지내장_검수.html)
-- [A/B/C/D 증거 ZIP](checkpoints/v59/v59_증거_12종_A_B_C_D.zip) · [ZIP CRC 보고서](checkpoints/v59/ZIP_CRC_REPORT.json) · [60장 이미지 원본](checkpoints/v59_preview/)
-- [v59 SQLite 복원 MANIFEST](analysis/current/v59/MANIFEST.json) · [v59 통합 복원 프로그램](scripts/restore_unified_v59.py)
-- 최종 인증 0종. 공식 PNG–TMX Local ID와 TileZed 정합 검증 전에는 잠정 후보를 확정으로 바꾸지 않습니다.
-
-
-## 7. v60 신규 판독과 증거 다운로드
-
-- **신규 직접 관찰 12종**: 잠정 후보 9종, 보류 3종. 누적 관찰 **3,024/5,409종(55.91%)**, 미관찰 2,385종, 잠정 후보 누적 2,621종.
-- [v60 관찰 결과 CSV](checkpoints/v60/observations.csv) · [TSV](checkpoints/v60/observations.tsv) · [이미지 내장 검수 HTML](checkpoints/v60/v60_이미지내장_검수.html)
-- [A/B/C/D 증거 ZIP](checkpoints/v60/v60_증거_12종_A_B_C_D.zip) · [ZIP CRC 보고서](checkpoints/v60/ZIP_CRC_REPORT.json) · [60장 원본 비교 이미지](checkpoints/v60_preview/)
-- [v60 SQLite 복원 MANIFEST](analysis/current/v60/MANIFEST.json) · [v60 통합 복원 프로그램](scripts/restore_unified_v60.py)
-- B-C 변화가 0인 3종은 **보류**로 유지합니다. 공식 PNG–TMX Local ID 정합과 TileZed 검증이 완료되지 않아 최종 인증은 **0종**입니다.
-
-
-## 8. v61 이전 체크포인트
-
-- v61에서 신규 12종(후보 8·보류 4)을 직접 판독하여 누적 3,036/5,409종(56.13%)을 기록했습니다.
-- [v61 관찰 기록](checkpoints/v61/observations.tsv) · [v61 증거](checkpoints/v61_preview/) · [v61 통합 DB](analysis/current/v61/MANIFEST.json)
-
-## 9. v62 과거 판독·증거·SQLite
-
-- **신규 이미지 직접 관찰 12종**: 잠정 후보 10종, 보류 2종. 누적 **3,048/5,409종(56.35%)**, 미관찰 **2,361종**, 감사 가능한 잠정 후보 **2,639종**.
-- 보류 2종은 `appliances_com_01/133`(전신주 수직선 역할 불명), `location_business_machinery_01/29`(갈색 벽판의 기능 불명)입니다.
-- [v62 CSV](checkpoints/v62/observations.csv) · [TSV](checkpoints/v62/observations.tsv) · [이미지 내장 검수 HTML](checkpoints/v62/v62_이미지내장_검수.html)
-- [A/B/C/D 증거 ZIP](checkpoints/v62/v62_증거_12종_A_B_C_D.zip) · [60장 JPEG](checkpoints/v62_preview/) · [ZIP CRC 검사](checkpoints/v62/ZIP_CRC_REPORT.json)
-- [v62 SQLite MANIFEST](analysis/current/v62/MANIFEST.json) · [v62 복원 스크립트](scripts/restore_unified_v62.py)
-- PNG–TMX Local ID 공식 매핑 및 TileZed 정합 미검증이므로 **최종 인증은 0종**입니다. 사용자 수동 검수 80종은 별도 계보를 유지합니다.
-
-
-## 10. v71 과거 판독·증거·SQLite
-
-- v71에서 신규 **20종**(후보 18·보류 2)을 관찰해 누적 **3,305종(61.10%)**, 미관찰 **2,104종**, 잠정 후보 **2,835종**을 기록했습니다.
-- [v71 검수 기록](checkpoints/v71/observations.tsv) · [이미지 증거](checkpoints/v71_preview/) · [SQLite 명세](analysis/current/v71/MANIFEST.json).
-
-## 11. v74 당시 직접 판독·증거·SQLite
-
-- v73의 미관찰 2,064종에서 중복 없는 신규 **12종**을 선택해 A/B/C/D 비교판 12개를 실제 열어 판독했습니다. 잠정 후보 **11종**, 보류 **1종**(잔디 경계 `blends_natural_01/19`, B-C 0픽셀).
-- 누적 이미지 관찰 **3,357/5,409종(62.06%)**, 미관찰 **2,052종**, 감사 가능한 잠정 후보 **2,882종**, 최종 인증 **0종**입니다.
-- [v74 CSV](checkpoints/v74/observations.csv) · [TSV](checkpoints/v74/observations.tsv) · [A/B/C/D JPEG 60장](checkpoints/v74_preview/) · [이미지 내장 검수 HTML](checkpoints/v74/v74_이미지내장_검수.html) · [증거 ZIP](checkpoints/v74/v74_증거_12종_A_B_C_D.zip) · [ZIP CRC](checkpoints/v74/ZIP_CRC_REPORT.json).
-- [v74 통합 SQLite MANIFEST](analysis/current/v74/MANIFEST.json) · [v74 복원 스크립트](scripts/restore_unified_v74.py). PNG–TMX Local ID 공식 대응 및 TileZed 검증은 미완료입니다.
-
-## v80 신규 직접 판독 (2026-10-26)
-
-- 신규 미관찰 20종을 A/B/C/D 및 비교판 100장으로 직접 검수: **후보 19종·보류 1종**. 누적 **3,461/5,409종(63.99%)**, 미관찰 1,948종, 최종 인증 0종.
-- [v80 관찰 CSV](checkpoints/v80/observations.csv) · [TSV](checkpoints/v80/observations.tsv) · [독립 시각 검수 기록](checkpoints/v80/INDEPENDENT_VISUAL_AUDIT.md) · [이미지 내장 HTML](checkpoints/v80/v80_이미지내장_검수.html)
-- [A/B/C/D 증거 100장](checkpoints/v80_preview/) · [증거 ZIP](checkpoints/v80/v80_증거_20종_A_B_C_D.zip) · [CRC 보고서](checkpoints/v80/ZIP_CRC_REPORT.json) · [통합 SQLite MANIFEST](analysis/current/v80/MANIFEST.json)
-- 모든 신규 PNG에서 높이 불일치가 확인되어 공식 Local ID 매핑 및 TileZed 검증 전까지 최종 인증하지 않습니다.
+이번 저장소 정리는 **문서·최신 포인터·복원 도구를 정돈하는 비파괴 작업**입니다. 이전 검수 파일, Git 브랜치, GitHub Actions 이력은 임의 삭제하지 않습니다.

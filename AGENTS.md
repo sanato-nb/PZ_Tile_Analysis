@@ -1,5 +1,10 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+> **현재 우선 적용 기준 — 2026-10-30 / v240**: 최신 작업은 [v240 통합 상태](docs/CURRENT_STATUS.md), [전체 10,042종 마스터](review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv), [활성 9,587종](review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv), [비활성 455종](review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv), [v240 물리 DB](analysis/current/v240/MANIFEST.json)를 먼저 읽어야 함. 아래 v196 이하의 '최신'·진행률·다음 작업 지시는 **작성 당시의 역사적 메모**임. 원본 PNG/TMX, 이전 256테이블, 사용자 잠정23/미판정10·과거 제외 기록 유지. 보류439와 사용자제외16은 **활성에서 제외, 삭제 아님**. 공식 PNG↔Local ID, TileZed, 정체 인증은 모두0. [새 채팅 안내](docs/NEXT_CHAT_PROMPT.md)를 따를 것.
+
+---
+
+
 > **새 채팅 인수인계 (2026-10-29 / v196):** 우선 [최신 인수인계](docs/NEW_CHAT_HANDOFF_V196_2026-10-29.md), [대화 연대기](docs/NEW_CHAT_CONVERSATION_CHRONOLOGY_2026-10-29.md), [PR #91–162 색인](docs/PR_91-162_2026-10-29.md), [새 채팅 시작 프롬프트](docs/NEW_CHAT_START_PROMPT_V196_2026-10-29.txt)를 읽을 것. 사용자 33종 판정에서 **잠정23, 미판정10 활성 제외**(PR #162); 기존 이미지관찰10,007/10,042/공식 인증0, v196 DB256테이블. 이전 전체 이력과 원본/수동80·제외14는 삭제하지 말 것.
 
 ## v196 사용자 수동판정 33종 (2026-10-28)
