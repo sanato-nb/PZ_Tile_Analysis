@@ -1,0 +1,103 @@
+{
+  "version": "v214_A_first_poster_reaudit_append_only",
+  "date": "2026-10-29",
+  "base_main_sha": "14be86724601a11355b81ba6397a795d4bd4061b",
+  "original_review": "review/v155_posters_3280_3439",
+  "original_scope": [
+    3280,
+    3439
+  ],
+  "original_unique_source_indices": 160,
+  "reviewed_historical_source_keys": 157,
+  "individual_A_pixel_focused_notes": 60,
+  "conservative_A_family_level_notes": 97,
+  "exclusive_change_counts": {
+    "candidate_role_narrowed": 44,
+    "A_morphology_refined": 36,
+    "historical_candidate_supported": 77
+  },
+  "QA_note_recommendations": 80,
+  "old_held_preserved": 3,
+  "held_indices": [
+    3336,
+    3340,
+    3365
+  ],
+  "held_reasons": {
+    "B_C_zero_not_transparency": 1,
+    "B_map_edge_truncated": 2
+  },
+  "B_C_trace": [
+    {
+      "index": 3345,
+      "key": "walls_decoration_02/176",
+      "changed_pixels": 2,
+      "cause": "unknown; wall/upper-layer/neighbor occlusion possible, not demonstrated"
+    },
+    {
+      "index": 3431,
+      "key": "walls_decoration_05/183",
+      "changed_pixels": 2,
+      "cause": "unknown; wall/upper-layer/neighbor occlusion possible, not demonstrated"
+    }
+  ],
+  "source_A_original_RGBA_contact_sheets_visually_inspected": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_041.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_042.jpg"
+  ],
+  "source_B_original_TMX_one_GID_removed_C_diff_sheets_visually_inspected": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_041.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_042.jpg"
+  ],
+  "original_v155_extended_proof_sheets_visually_inspected": [
+    "review/v155_posters_3280_3439/sheets/proof_00.jpg",
+    "review/v155_posters_3280_3439/sheets/proof_08.jpg",
+    "review/v155_posters_3280_3439/sheets/proof_14.jpg",
+    "review/v155_posters_3280_3439/sheets/proof_19.jpg"
+  ],
+  "original_full_atlas_open_attempts_binary_missing": [
+    "Tiles/2x/walls_decoration_01.png",
+    "Tiles/2x/walls_decoration_05.png"
+  ],
+  "original_5_PNG_atlas_SHA_from_prior_v155_against_v119_registered_values_matched": true,
+  "source_visual_review_metadata_157_rows_crosschecked": true,
+  "source_metadata_mismatches": 0,
+  "independently_recomputed_original_PNG_byte_hashes": 0,
+  "independently_recomputed_RGBA_pixel_crop_hashes": 0,
+  "independently_reparsed_TMX_this_round": false,
+  "fresh_original_B_C_rerenders_this_round": false,
+  "masked_wall_upper_layer_occlusion_diagnostic_executed": false,
+  "official_D_same_key_other_official_A_replacement_verified": false,
+  "manual_undecided10_intersection_with_reaudited": 0,
+  "manual_undecided10_active_excluded_unchanged": true,
+  "user_manual23_verbatim_preserved": true,
+  "older_user_manual80_and_excluded14_untouched": true,
+  "new_provisional_or_observed_promotions": 0,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "prior_A_first_scope_screened": 2916,
+  "this_round_new_screened": 157,
+  "post_scope_screened": 3073,
+  "prior_historical_held": 204,
+  "this_round_held": 3,
+  "post_scope_historical_held": 207,
+  "post_scope_pending": 1353,
+  "scope_denominator": 4633,
+  "scope_equation": "3073+207+1353=4633",
+  "historical_unique_keys": 10042,
+  "historical_image_observed_provisional": 10007,
+  "historical_reported_unobserved": 35,
+  "historical_actual_unobserved_keys": 33,
+  "historical_count_discrepancy": 2,
+  "parent_physical_SQLite_version": "v196",
+  "parent_physical_SQLite_tables_previous_manifest": 256,
+  "parent_physical_SQLite_sha256_previous_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_SQLite_reconstructed_rehashed_or_integrity_pragma_rerun": false,
+  "write_policy": "add new v214 QA artifacts only; original PNG/TMX and v196 SQLite, earlier QA and manual/exclusions remain unchanged",
+  "next_indices": [
+    3440,
+    3599
+  ],
+  "quality_limit": "Colors and basic A morphology observed; 97 of 157 notes are conservative family-level. No exact poster text, subject or official Local ID certified. 44 role-narrowing warnings are not 44 proven wrong records."
+}
