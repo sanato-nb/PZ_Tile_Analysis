@@ -1,0 +1,124 @@
+{
+  "version": "v220_Afirst_existing_tile_QA_overlay",
+  "date": "2026-10-29",
+  "base_main_commit": "e32b266c7bc96439c0dbada0c3956ab9ddcc9d63",
+  "source_review": "review/v161_abc_3840_3879",
+  "source_scope_indices": [
+    3840,
+    3879
+  ],
+  "source_scope_count": 40,
+  "prior_provisional_source_keys_individually_A_reaudited": 37,
+  "prior_held_not_reopened": 3,
+  "change_category_mutually_exclusive": {
+    "role_narrowing_recommended": 14,
+    "A_description_refined": 18,
+    "prior_candidate_supported": 5
+  },
+  "total_changes_recommended_without_physical_edit": 32,
+  "confirmed_wrong_historical_identity_count": 0,
+  "physical_old_SQLite_rows_modified": 0,
+  "old_historical_holds": [
+    {
+      "index": 3848,
+      "key": "walls_exterior_roofs_09/108",
+      "reason": "manual_visual_insufficient"
+    },
+    {
+      "index": 3854,
+      "key": "walls_exterior_roofs_09/116",
+      "reason": "manual_visual_insufficient"
+    },
+    {
+      "index": 3864,
+      "key": "walls_exterior_roofs_10/4",
+      "reason": "manual_visual_insufficient"
+    }
+  ],
+  "BC_low_positive_change_pixels": [
+    {
+      "index": 3849,
+      "key": "walls_exterior_roofs_09/109",
+      "changed": 11
+    },
+    {
+      "index": 3865,
+      "key": "walls_exterior_roofs_10/5",
+      "changed": 8
+    }
+  ],
+  "source_A_contact_sheet_directly_inspected": "review/v119_selected_A_new4633/sheets/SELECTED_A_048.jpg",
+  "prior_source_A_and_true_original_B_one_GID_removed_C_proofs_inspected": [
+    "review/v161_abc_3840_3879/sheets/proof_00.jpg",
+    "review/v161_abc_3840_3879/sheets/proof_01.jpg",
+    "review/v161_abc_3840_3879/sheets/proof_02.jpg",
+    "review/v161_abc_3840_3879/sheets/proof_03.jpg",
+    "review/v161_abc_3840_3879/sheets/proof_04.jpg"
+  ],
+  "original_png_atlas_paths": [
+    "Tiles/2x/walls_exterior_roofs_09.png",
+    "Tiles/2x/walls_exterior_roofs_10.png"
+  ],
+  "original_png_full_content_access": "two raw PNG fetches yielded Git blob SHA but empty binary content; original A sprites observed via historical generated unmodified contact sheets and individual A proof crops",
+  "original_png_SHA256_source": "review/v119_selected_A_new4633/MANIFEST.json archived registry",
+  "archived_A_png_sha256_crosschecked": 2,
+  "original_PNG_bytes_SHA256_recomputed_this_round": false,
+  "source_metadata_crosscheck_rows": 37,
+  "source_metadata_mismatch_count": 0,
+  "source_metadata_fields_checked": [
+    "tile_set_name",
+    "local_id",
+    "A_png",
+    "A_png_sha256 (archived)",
+    "A_crop_xyxy",
+    "A_rgba_pixel_sha256 (archived)",
+    "B_tmx_file",
+    "B_tmx_sha256 (archived)",
+    "level",
+    "layer_index",
+    "x",
+    "y",
+    "raw_gid",
+    "firstgid",
+    "B_entry",
+    "C_entry",
+    "DELTA_entry",
+    "B_C_changed_pixels"
+  ],
+  "A_RGBA_pixel_hash_recomputed_this_round": false,
+  "TMX_directly_reparsed_this_round": false,
+  "B_C_scene_independently_rerendered_this_round": false,
+  "precise_wall_or_upper_layer_masked_diagnostic_performed": false,
+  "official_same_key_alternative_A_for_user_defined_D_verified": false,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_final_certification": 0,
+  "new_provisional_promotions": 0,
+  "new_observation_promotions": 0,
+  "user_manually_undecided_10_active_exclusions_reopened": 0,
+  "user_manual23_verbatim_preserved": true,
+  "older_user_manual80_and_prior_excluded14_unchanged": true,
+  "previous_scoped_Afirst_QA": 3442,
+  "current_scoped_Afirst_QA": 3479,
+  "previous_held_238": 238,
+  "current_historical_held": 241,
+  "previous_individual_pending": 953,
+  "current_individual_pending": 913,
+  "new_scope_denominator": 4633,
+  "new_scope_coverage_fraction": 0.7509173321821714,
+  "scope_reconciliation": "3479 A/B/C audit-scoped + 241 historical held + 913 not yet reaudited = 4633. Audit scoped does not mean finally identified.",
+  "historical_unique_tiles": 10042,
+  "historical_provisional_image_observed": 10007,
+  "historical_reported_not_observed": 35,
+  "historical_actual_missing": 33,
+  "historical_accounting_gap": 2,
+  "parent_physical_database_version": "v196",
+  "parent_sqlite_table_count_prior_manifest": 256,
+  "parent_sqlite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_physical_SQLite_reconstructed_rehashed_or_integrity_checked_this_round": false,
+  "policy": "append-only QA artifacts; never overwrite source PNG/TMX, prior reviews, manual verdicts, physical v196 SQLite",
+  "next_source_indices": [
+    3880,
+    3919
+  ]
+}
