@@ -1,0 +1,131 @@
+{
+  "version": "v208_A_first_roof_semantic_QA_overlay",
+  "date": "2026-10-29",
+  "main_base_sha": "547d67b9f2502935bf9cf6cf16c579c84eb10f36",
+  "scope": [
+    2320,
+    2479
+  ],
+  "counts": {
+    "version": "v208_Afirst_exclusive_QA_change_counts",
+    "date": "2026-10-29",
+    "reviewed_source_indices": [
+      2320,
+      2479
+    ],
+    "scope_indices": 160,
+    "prior_v149_provisional_candidates_reaudited": 159,
+    "exclusive_QA_class_counts": {
+      "role_narrowing_recommended": 39,
+      "A_morphology_refined": 27,
+      "historical_candidate_supported": 93
+    },
+    "exclusive_class_sum": 159,
+    "changed_or_more_precise_QA_note_recommendations": 66,
+    "source_A_explicitly_reworded_pixel_description": 42,
+    "source_A_prior_pixel_specific_observation_rechecked_retained": 117,
+    "prior_excluded_B_map_edge_truncated_preserved": 1,
+    "prior_excluded_index": 2330,
+    "prior_excluded_source_key": "roofs_05/1",
+    "low_B_minus_C_delta_50_or_less": [
+      {
+        "index": 2362,
+        "key": "roofs_05/114",
+        "pixels": 11
+      },
+      {
+        "index": 2363,
+        "key": "roofs_05/115",
+        "pixels": 3
+      },
+      {
+        "index": 2395,
+        "key": "roofs_30_01/75",
+        "pixels": 25
+      }
+    ],
+    "low_delta_count": 3,
+    "source_meta_rows_matched_original": 159,
+    "source_meta_mismatches": 0,
+    "source_PNG_atlas_SHA_values_verified_against_archived_registry": 7,
+    "original_PNG_bytes_independently_rehashed_this_turn": 0,
+    "original_A_RGBA_hashes_recomputed_this_turn": 0,
+    "TMX_BC_freshly_rerendered_this_turn": false,
+    "D_official_alternate_A_experiment_this_turn": false,
+    "wall_upper_layer_cover_root_cause_proven": 0,
+    "certified_old_identity_errors_fixed": 0,
+    "old_SQLite_rows_modified": 0,
+    "user_undecided10_reactivated": 0,
+    "new_observed": 0,
+    "new_provisional": 0,
+    "new_mapping_verified": 0,
+    "new_tilezed_verified": 0,
+    "new_certified": 0,
+    "prior_scope_Afirst_screened": 1995,
+    "current_scope_new_rechecked": 159,
+    "cumulative_source_Afirst_screened": 2154,
+    "previous_historical_held_or_user_excluded": 165,
+    "held_after": 166,
+    "previous_unreviewed_source_indices": 2473,
+    "unreviewed_after": 2313,
+    "source_scope_size": 4633,
+    "source_scope_accounting": "2154 screened + 166 historical held/excluded + 2313 pending = 4633",
+    "interpretation": "39 are source-A-only role interpretation cautions, 27 are image-shape refinements, 93 historical candidate shapes supported. All QA classes mutually exclusive, not proof of historical misclassification. 42 rewritten A descriptions overlap these classes and must not be added to 39+27+93. Extremely small B-C values are non-disjoint warnings."
+  },
+  "source_prior_v149": "review/v149_abc_2320_2479/VISUAL_REVIEW.csv",
+  "original_A_contact_sheets_directly_opened": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_029.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_030.jpg"
+  ],
+  "original_B_C_one_gid_removed_delta_sheets_directly_opened": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_029.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_030.jpg"
+  ],
+  "source_PNG_atlas_directly_opened": [
+    "Tiles/2x/roofs_30_04.png"
+  ],
+  "source_PNG_atlas_blobs_fetched_but_empty_base64": [
+    "Tiles/2x/roofs_05.png"
+  ],
+  "source_PNG_atlas_hash_reference": "review/v119_selected_A_new4633/MANIFEST.json",
+  "all_A_source_crops_visible_in_original_contacts": true,
+  "full_independent_A_sprite_RGBA_hash_recomputed": false,
+  "source_meta_fields_compared": [
+    "tile_set_name",
+    "local_id",
+    "prior_candidate",
+    "observed_features",
+    "B_C_changed_pixels",
+    "A_png",
+    "A_png_sha256",
+    "A_crop_xyxy",
+    "A_rgba_pixel_sha256",
+    "B_tmx_file",
+    "B_tmx_sha256",
+    "level",
+    "layer_index",
+    "x",
+    "y",
+    "raw_gid",
+    "firstgid",
+    "B_entry",
+    "C_entry",
+    "DELTA_entry"
+  ],
+  "physical_SQLite_version_not_modified": "v196",
+  "previous_SQLite_256_tables": true,
+  "previous_SQLite_SHA256_from_v196_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_integrity_check_reexecuted_this_turn": false,
+  "parent_source_PNG_TMX_user_manual_data_untouched": true,
+  "user_uploaded_33_potential_23_verbatim_untouched": true,
+  "user_undecided_10_active_excluded": true,
+  "historical_unique_keys": 10042,
+  "historical_provisional_observed": 10007,
+  "reported_unobserved": 35,
+  "actual_unobserved": 33,
+  "accounting_gap": 2,
+  "next_reaudit_indices": [
+    2480,
+    2639
+  ]
+}
