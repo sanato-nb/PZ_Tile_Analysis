@@ -1,0 +1,38 @@
+{
+  "version": "v205_source_crosscheck",
+  "crosscheck_of": "review/v146_abc_1840_1999/VISUAL_REVIEW.csv",
+  "reviewed": 155,
+  "prior": 155,
+  "independentA": 155,
+  "uniqueSourceKeys": 155,
+  "sourceAtlasPaths": 9,
+  "priorAtlasSHARegistryMatches": true,
+  "sourceMetadataMismatches": 0,
+  "exclusionCount": 5,
+  "userExcluded10Overlap": 0,
+  "categoryCount": {
+    "A_morphology_refined": 65,
+    "historical_candidate_supported": 50,
+    "candidate_role_narrowing_recommended": 40
+  },
+  "nearZero": [
+    {
+      "index": 1895,
+      "key": "location_shop_accessories_01/23",
+      "pixels": 1
+    },
+    {
+      "index": 1911,
+      "key": "location_shop_fossoil_01/9",
+      "pixels": 11
+    }
+  ],
+  "errors": [],
+  "sourceGitBlobs": {
+    "v146": "5e5bc044117a51efbb11978d3fae0d4aab3ead01",
+    "v119Registry": "6431159ab4c9169ce7416cb0576e5ef8465a155c",
+    "user33": "30b67367bd07ba5f7ea3f332e30fa36474311503"
+  },
+  "provenance_status": "All registry hashes are previously recorded values, not newly calculated raw PNG/RGBA SHA. Existing original TMX/GID/B/C pixels not freshly rerendered; original A sheets and two PNG atlases visually inspected.",
+  "certifications_added": 0
+}
