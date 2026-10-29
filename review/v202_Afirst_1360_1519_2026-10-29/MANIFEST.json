@@ -1,0 +1,104 @@
+{
+  "version": "v202_A_original_first_reaudit_overlay",
+  "date": "2026-10-29",
+  "parent_main_sha": "6755fa20eeab9f389eb36887d15d95e3fd516747",
+  "scope_start": 1360,
+  "scope_end": 1519,
+  "scope_source_keys": 160,
+  "historical_v143_provisional_candidates_reaudited": 152,
+  "change_type_counts": {
+    "candidate_role_narrowed": 49,
+    "A_morphology_refined": 69,
+    "historical_candidate_supported": 34
+  },
+  "audit_note_changes_total": 118,
+  "historical_held_exclusions_preserved": 8,
+  "historical_exclusion_indices": [
+    1362,
+    1363,
+    1461,
+    1462,
+    1501,
+    1502,
+    1503,
+    1504
+  ],
+  "near_zero_BC_source_indices": [
+    1375,
+    1389,
+    1417,
+    1419,
+    1499,
+    1500
+  ],
+  "near_zero_BC_count": 6,
+  "metadata_crosscheck": {
+    "rows": 152,
+    "missing_or_mismatched": 0,
+    "source_atlases": 5,
+    "source_atlas_sha256_values_against_v119_registry_matched": 5,
+    "original_PNG_SHA256_byte_recomputed_here": false,
+    "original_RGBA_crop_SHA256_recomputed_here": false,
+    "original_TMX_raw_gid_layer_coordinate_independently_reparsed_here": false,
+    "original_BC_delta_pixels_recomputed_here": false
+  },
+  "source_A_evidence_opened": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_017.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_018.jpg",
+    "Tiles/2x/location_community_park_01.png",
+    "Tiles/2x/location_community_police_01.png",
+    "Tiles/2x/location_community_school_02.png"
+  ],
+  "source_B_C_evidence_opened": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_017.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_018.jpg"
+  ],
+  "source_zoom_ABCD_proof_sample": [
+    "review/v143_public_1360_1519/sheets/proof_00.jpg",
+    "review/v143_public_1360_1519/sheets/proof_08.jpg",
+    "review/v143_public_1360_1519/sheets/proof_12.jpg",
+    "review/v143_public_1360_1519/sheets/proof_15.jpg"
+  ],
+  "interpretation_of_change_counts": "49 role narrowing recommendations based on source A morphology, 69 A descriptive refinements, 34 retained; mutually exclusive categories for the 152. No proof of 49 mistaken identities, no status promotion.",
+  "known_cautions": [
+    "location_community_medical_01/139 index1364 has microscope-like observation; do not call pixel fragment",
+    "location_community_park_01/28,29 indices1392,1393 are short boards without A-only proof of bench",
+    "location_community_police_01/41 index1420 shows narrow iron grating, not bedding",
+    "location_community_school_01/24,25 indices1499,1500 visible original A panels but B−C 14 pixels each; occlusion cause not verified",
+    "location_community_school_02 index1514..1519 contains light color pattern on largely transparent A; full B floor does not belong to one A"
+  ],
+  "post_scope_unique_A_B_C_screened": 1240,
+  "post_scope_historical_held": 120,
+  "post_scope_unreviewed": 3273,
+  "post_scope_check": "1240+120+3273=4633",
+  "prior_scope_screened": 1088,
+  "prior_held": 112,
+  "prior_unreviewed": 3433,
+  "all_scope_v119_new_keys": 4633,
+  "all_historical_unique_keys": 10042,
+  "all_historical_provisional_image_observed": 10007,
+  "historically_reported_unobserved": 35,
+  "actual_unobserved_keys": 33,
+  "unresolved_accounting_discrepancy": 2,
+  "user_manual33_provisional_verbatim_preserved": 23,
+  "user_undecided10_active_excluded_preserved": 10,
+  "prior_user_manual80_prior_excluded14_unmodified": true,
+  "originals_and_prior_db_untouched": true,
+  "new_observed_promotions": 0,
+  "new_provisional_identity_promotions": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "parent_physical_SQLite_version": "v196",
+  "parent_physical_SQLite_tables_previous_manifest": 256,
+  "parent_physical_SQLite_sha256_previous_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_SQLite_reconstructed_rehashed_or_pragma_integrity_check_rerun_this_turn": false,
+  "exact_original_wall_and_upper_layer_hidden_diagnostic_render_performed": false,
+  "official_D_verified_same_key_alternate_A_rendered": false,
+  "new_original_TMXX_B_C_renders_performed": false,
+  "files_policy": "additive review/v202 only; previous source, PNG, TMX, physical SQLite, manual records unchanged",
+  "next_target_indices": [
+    1520,
+    1679
+  ]
+}
