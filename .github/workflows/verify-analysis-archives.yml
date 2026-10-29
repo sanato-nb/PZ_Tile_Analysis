@@ -40,7 +40,7 @@ jobs:
           s=json.loads(pathlib.Path("PROJECT_STATE.json").read_text())
           r=s["reconciliation"]
           assert r["status"] == "VERIFIED"
-          assert s["scope"]["unique_tiles"] == 5409
+          assert s.get("previous_scope_5409", s["scope"])["unique_tiles"] == 5409  # historic v36-v46 scope, not latest v240 scope
           assert r["merged_unique_observed"] == 2584
           assert r["v36_v46_overlap_count"] == 402
           assert r["remaining_unobserved"] == 2825
