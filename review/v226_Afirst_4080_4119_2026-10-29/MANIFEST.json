@@ -1,0 +1,128 @@
+{
+  "version": "v226_A_first_source_key_guarded_reaudit",
+  "date": "2026-10-29",
+  "parent_main_commit": "3603051f131a6fe1aa3aafbc2074d827b05e8c3f",
+  "source_index_window": [
+    4080,
+    4119
+  ],
+  "window_count": 40,
+  "previous_review": "review/v167_abc_4080_4119",
+  "individual_A_keymatched_reaudited": 31,
+  "historical_held_preserved": 9,
+  "disjoint_QA_classes": {
+    "A_single_sprite_shape_refinement": 13,
+    "partial_B_C_visibility_cause_unverified": 8,
+    "old_A_candidate_coarsely_supported": 10
+  },
+  "refinement_or_occlusion_caution_items": 21,
+  "visual_delta_ambiguity_key_examples": [
+    {
+      "index": 4099,
+      "key": "walls_exterior_roofs_30_09/69",
+      "old_B_C_changed_pixels": 7355,
+      "warning": "B-C mask includes letter-shaped COM-like cutout; A itself is unmarked solid green-gray siding",
+      "cause_proven": false
+    },
+    {
+      "index": 4119,
+      "key": "walls_exterior_roofs_30_10/58",
+      "old_B_C_changed_pixels": 3675,
+      "warning": "B-C mask has negative window-like hole; original A is solid dark tan brick panel without hole",
+      "cause_proven": false
+    },
+    {
+      "index": 4051,
+      "scope": "prior v225 only",
+      "old_B_C_changed_pixels": 12
+    },
+    {
+      "index": 4081,
+      "scope": "current held only",
+      "reason": "previous B-C zero not transparency"
+    }
+  ],
+  "source_atlases_original_PNG_directly_viewed": [
+    "Tiles/2x/walls_exterior_roofs_30_09.png",
+    "Tiles/2x/walls_exterior_roofs_30_10.png"
+  ],
+  "source_A_contact_sheet_directly_viewed": "review/v119_selected_A_new4633/sheets/SELECTED_A_051.jpg",
+  "source_true_BC_keymatched_proof_sheets_directly_viewed": [
+    "review/v167_abc_4080_4119/sheets/proof_00.jpg",
+    "review/v167_abc_4080_4119/sheets/proof_01.jpg",
+    "review/v167_abc_4080_4119/sheets/proof_02.jpg",
+    "review/v167_abc_4080_4119/sheets/proof_03.jpg"
+  ],
+  "global_sheet_display_index_not_used_for_join": true,
+  "global_sheet_index_issue": "review/v224_Afirst_4000_4039_2026-10-29/SOURCE_INDEX_ALIGNMENT_ALERT.json",
+  "source_PNG_atlases_historical_SHA256_index_checked": 2,
+  "original_PNG_byte_SHA256_recomputed_this_round": 0,
+  "original_individual_crop_RGBA_SHA256_recomputed_this_round": 0,
+  "source_metadata_comparison_rows": 31,
+  "source_metadata_comparison_mismatches": 0,
+  "compared_fields": [
+    "tile_set_name",
+    "local_id",
+    "A_png",
+    "A_png_sha256 previously archived",
+    "A_rgba_pixel_sha256 previously archived",
+    "A_crop_xyxy",
+    "B_tmx_file",
+    "B_tmx_sha256 previously archived",
+    "level",
+    "layer_index",
+    "x",
+    "y",
+    "raw_gid",
+    "firstgid",
+    "B_entry",
+    "C_entry",
+    "DELTA_entry",
+    "B_C_changed_pixels"
+  ],
+  "new_original_TMX_reparsed": false,
+  "new_true_B_C_rerendered": false,
+  "wall_upper_layer_occlusion_cause_experiment_performed": false,
+  "official_D_same_key_alt_A_experiment": false,
+  "new_observed": 0,
+  "new_provisional": 0,
+  "new_official_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_final_identity_certified": 0,
+  "old_v225_progress": {
+    "qa_scoped": 3635,
+    "held": 285,
+    "pending": 713
+  },
+  "new_v226_progress": {
+    "qa_scoped": 3666,
+    "held": 294,
+    "pending": 673
+  },
+  "new_source_4633_scope_balanced": true,
+  "coverage_percent": 79.1279948197712,
+  "historical_10042_key_scope": {
+    "unique_keys": 10042,
+    "provisional_image_observed": 10007,
+    "reported_unobserved": 35,
+    "unobserved_distinct": 33,
+    "unresolved_counting_gap": 2
+  },
+  "user_manual_provisional23_preserved": true,
+  "user_manual_undecided10_active_excluded_preserved": true,
+  "older_user_manual80_excluded14_preserved": true,
+  "prior_v196_SQLite_256_table_manifest_unchanged": true,
+  "prior_SQLite_SHA256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_byte_sha_or_PRAGMA_checked_this_round": false,
+  "source_file_edits": 0,
+  "append_only_files": [
+    "A_B_C_SOURCE_KEY_REAUDIT_31.csv",
+    "HISTORICAL_HELD_9_PRESERVED.csv",
+    "MANIFEST.json",
+    "README.md"
+  ],
+  "next_scope": [
+    4120,
+    4159
+  ]
+}
