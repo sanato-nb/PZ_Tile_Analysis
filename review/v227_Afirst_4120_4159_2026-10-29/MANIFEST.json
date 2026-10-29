@@ -1,0 +1,130 @@
+{
+  "version": "v227_A_first_source_key_matched_reaudit",
+  "date": "2026-10-29",
+  "parent_main_commit": "1a551651e76bd9d27e657f391eb6508a00f990f2",
+  "source_scope": [
+    4120,
+    4159
+  ],
+  "source_index_count": 40,
+  "parent_prior_review": "review/v168_abc_4120_4159",
+  "new_reaudited_candidate_A_keys": 31,
+  "previous_held_unchanged": 9,
+  "exclusive_quality_groups": {
+    "A_geometry_and_material_refinement": 14,
+    "B_overlay_or_compositing_caution": 6,
+    "prior_A_shape_coarsely_supported": 11
+  },
+  "refinement_or_caution_recommendations": 20,
+  "actual_A_atlases_visually_inspected": [
+    "Tiles/2x/walls_exterior_roofs_30_10.png",
+    "Tiles/2x/walls_exterior_roofs_30_11.png",
+    "Tiles/2x/walls_exterior_roofs_30_12.png",
+    "Tiles/2x/walls_exterior_roofs_30_14.png"
+  ],
+  "original_A_contact_sheets_visually_inspected": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_051.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_052.jpg"
+  ],
+  "original_B_C_same_key_proof_sheets_visually_inspected": [
+    "review/v168_abc_4120_4159/sheets/proof_00.jpg",
+    "review/v168_abc_4120_4159/sheets/proof_01.jpg",
+    "review/v168_abc_4120_4159/sheets/proof_02.jpg",
+    "review/v168_abc_4120_4159/sheets/proof_03.jpg"
+  ],
+  "global_v119_v121_contact_sheet_index_only_join_used": false,
+  "known_display_index_mismatch_alert": "review/v224_Afirst_4000_4039_2026-10-29/SOURCE_INDEX_ALIGNMENT_ALERT.json",
+  "noteworthy_A_vs_B_context": [
+    {
+      "index": 4137,
+      "key": "walls_exterior_roofs_30_12/3",
+      "original_B_contains": "BLOCK-3 building lettering",
+      "original_A_visible": "plain tan large-block tiled surface with no text",
+      "result": "B lettering not A standalone pixels",
+      "cause_of_occlusion_not_proven": true
+    },
+    {
+      "index": 4159,
+      "key": "walls_exterior_roofs_30_14/4",
+      "original_B_contains": "door/window opening assembled with roof and wall",
+      "original_A_visible": "pale smooth solid wall plane with no aperture",
+      "result": "Do not infer A window/door from assembled B",
+      "cause_of_occlusion_not_proven": true
+    },
+    {
+      "index": 4129,
+      "action": "historical_hold_preserved",
+      "reason": "prior B-C zero does not certify transparency"
+    },
+    {
+      "index": 4130,
+      "action": "historical_hold_preserved",
+      "reason": "prior B-C zero does not certify transparency"
+    }
+  ],
+  "crosscheck_metadata_source_csv": "review/v168_abc_4120_4159/VISUAL_REVIEW.csv",
+  "crosscheck_row_count": 31,
+  "crosscheck_mismatch_count": 0,
+  "crosscheck_fields": [
+    "tile_set_name",
+    "local_id",
+    "A_png",
+    "A_png_sha256 archived",
+    "A_rgba_pixel_sha256 archived",
+    "A_crop_xyxy",
+    "B_tmx_file",
+    "B_tmx_sha256 archived",
+    "level",
+    "layer_index",
+    "x",
+    "y",
+    "raw_gid",
+    "firstgid",
+    "B_entry",
+    "C_entry",
+    "DELTA_entry",
+    "B_C_changed_pixels"
+  ],
+  "source_atlases_prior_archive_PNG_SHA256_registry_matches": 4,
+  "original_PNG_atlas_raw_byte_SHA256_recomputed_this_round": false,
+  "source_RGBA_crop_individually_rehashed_this_round": false,
+  "original_TMX_reparsed_this_round": false,
+  "true_B_C_rerendered_this_round": false,
+  "actual_wall_upper_layer_occlusion_mask_experiment": false,
+  "official_D_same_key_alt_A_experiment": false,
+  "new_observed": 0,
+  "new_provisional_promotions": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "previous_v226_progress": {
+    "source_reaudit_scoped": 3666,
+    "held": 294,
+    "pending": 673
+  },
+  "new_v227_progress": {
+    "source_reaudit_scoped": 3697,
+    "held": 303,
+    "pending": 633
+  },
+  "source_scope_denominator": 4633,
+  "progress_percent": 79.79710770559034,
+  "progress_scope_balance_verified": true,
+  "all_unique_historical_keys": 10042,
+  "all_provisional_observed_keys": 10007,
+  "old_unobserved_reported": 35,
+  "actual_distinct_missing33": 33,
+  "accounting_gap_2_not_resolved": true,
+  "user_undecided10_active_excluded_unchanged": true,
+  "user_provisional23_verbatim_unchanged": true,
+  "older_manual80_excluded14_unchanged": true,
+  "parent_v196_SQLite_256_tables_preserved": true,
+  "parent_v196_SQLite_previous_SHA256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_integrity_check_rerun_this_round": false,
+  "original_PNG_TMX_or_parent_records_modified": false,
+  "github_write_policy": "only 4 append-only files in review/v227",
+  "next_range": [
+    4160,
+    4199
+  ]
+}
