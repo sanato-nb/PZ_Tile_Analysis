@@ -1,0 +1,56 @@
+name: v240 verified full 10042 tile physical merger
+on:
+  push:
+    branches: [work/v240-physical-master-10042-20261030]
+    paths:
+      - scripts/build_v240_physical_10042.py
+      - .github/workflows/build-v240-physical-master.yml
+permissions:
+  contents: write
+jobs:
+  merge_verified_source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_v240_physical_10042.py
+            /analysis/current/v196/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v238_integrated_master_2026-10-29/*
+            /review/v196_user_manual33/USER_UPLOADED_33_VERBATIM.csv
+            /review/v185_crop3102_source/VISUAL_REVIEW_1.csv
+            /checkpoints/v113/user_review.csv
+            /checkpoints/v116/user_exclude_six.csv
+            /review/v240_unified_10042_2026-10-30/*
+            /analysis/current/v240/*
+      - name: Independently reconstruct, hash-check, and copy all 256 SQLite parent tables
+        run: python3 -u scripts/build_v240_physical_10042.py
+      - name: Double-check counts and persist all outputs to the audit branch
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv,json
+          r=Path('review/v240_unified_10042_2026-10-30')
+          m=json.loads((r/'MANIFEST.json').read_text('utf-8'))
+          for f,n in [('MASTER_ALL_10042.csv',10042),('ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv',9587),('EXCLUDED_ARCHIVE_455.csv',455)]:
+              with (r/f).open('r',encoding='utf-8-sig',newline='') as io:
+                  data=list(csv.DictReader(io))
+              assert len(data)==n,(f,len(data))
+              assert len({x['source_key'] for x in data})==n
+          assert m['v240_sqlite_tables']==258 and m['integrity_check']=='ok'
+          for p in m['v240_parts']: assert Path(p).exists()
+          print('PASS workflow output 10042 = 9587 active + 455 archived; parent 256 tables preserved')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v240_unified_10042_2026-10-30/ analysis/current/v240/
+          if ! git diff --cached --quiet; then
+            git commit -m "v240: physically join v196 5409 and v238 4633 with excluded 455 preserved"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
