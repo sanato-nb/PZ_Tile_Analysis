@@ -1,0 +1,113 @@
+{
+  "version": "v218_A_first_40_QA_overlay",
+  "date": "2026-10-29",
+  "parent_main_sha": "cd4e7d37329db539b2e4db581dcabe535f3c5729",
+  "source_review": "review/v159_abc_3760_3799",
+  "source_range": [
+    3760,
+    3799
+  ],
+  "source_indices": 40,
+  "original_individual_A_sprites_looked_at": 40,
+  "prior_provisional_candidates": 40,
+  "prior_held": 0,
+  "updated_qa_notes": 40,
+  "mutually_exclusive_QA_classification": {
+    "A_material_or_color_conflict": 4,
+    "part_role_overreach": 17,
+    "A_morphology_refined": 15,
+    "prior_general_candidate_supported": 4
+  },
+  "change_recommendation_total": 36,
+  "nonchanging_supported_total": 4,
+  "confirmed_official_identity_corrections": 0,
+  "changed_legacy_SQLite_records": 0,
+  "observed_or_provisional_promotions": 0,
+  "one_original_B_C_delta_le_50": {
+    "index": 3777,
+    "key": "walls_exterior_roofs_05/67",
+    "changed_pixels": 29,
+    "occlusion_source_diagnosed": false
+  },
+  "explicit_A_morphology_corrections": [
+    {
+      "index": 3760,
+      "key": "walls_exterior_roofs_05/15",
+      "old_candidate_material_color": "연베이지",
+      "A_direct": "청회색 사선의 작은 쐐기형 판"
+    },
+    {
+      "index": 3775,
+      "key": "walls_exterior_roofs_05/59",
+      "old_candidate_material_color": "황베이지",
+      "A_direct": "거의 단색의 회청색 가는 직립 선"
+    },
+    {
+      "index": 3785,
+      "key": "walls_exterior_roofs_06/0",
+      "old_candidate_material_color": "짙은 갈색 목재결",
+      "A_direct": "벽돌 줄눈 모양이 반복된 회갈색 삼각판"
+    },
+    {
+      "index": 3786,
+      "key": "walls_exterior_roofs_06/8",
+      "old_candidate_material_color": "짙은 갈색 목재결",
+      "A_direct": "작은 회갈색 벽돌 무늬 삼각판"
+    }
+  ],
+  "original_A_source_atlases_directly_opened": [
+    "Tiles/2x/walls_exterior_roofs_05.png",
+    "Tiles/2x/walls_exterior_roofs_06.png",
+    "Tiles/2x/walls_exterior_roofs_07.png"
+  ],
+  "original_A_40_sprite_sheet_directly_opened": "review/v119_selected_A_new4633/sheets/SELECTED_A_047.jpg",
+  "original_B_C_per_source_verified_proof_5_sheets_directly_opened": [
+    "review/v159_abc_3760_3799/sheets/proof_00.jpg",
+    "review/v159_abc_3760_3799/sheets/proof_01.jpg",
+    "review/v159_abc_3760_3799/sheets/proof_02.jpg",
+    "review/v159_abc_3760_3799/sheets/proof_03.jpg",
+    "review/v159_abc_3760_3799/sheets/proof_04.jpg"
+  ],
+  "warning_on_unaligned_canonical_contact_sheet": {
+    "path": "review/v121_C_diff_new4632/sheets/C_B_DIFF_047.jpg",
+    "example": "At label 03760, generic v121 sheet presents Local ID 24 and delta 1572; v159 original reviewed key at source index 3760 is walls_exterior_roofs_05/15 delta 1925. The per-key v159 proof_00 and VISUAL_REVIEW take priority. Do not join unaligned images by display index.",
+    "count_of_other_alignment_errors_proven": 0
+  },
+  "original_source_atlas_registry": "review/v119_selected_A_new4633/MANIFEST.json",
+  "archived_3_PNG_SHA256_values_crosschecked_against_registry": 3,
+  "A_RGBA_SHA_from_v159_not_independently_rehashed": true,
+  "original_PNG_byte_SHA256_new_independent_runs": 0,
+  "original_TMX_paths_GIDs_and_B_C_deltas_from_v159_untouched": 40,
+  "original_TMX_parsing_new": false,
+  "B_C_new_render": false,
+  "wall_or_upper_layer_unmask_diagnostic_new": false,
+  "official_same_key_different_A_D_experiment": false,
+  "metadata_compared_previous_v159_rows": 40,
+  "metadata_mismatches": 0,
+  "user_manual_undecided10_active_excluded_and_none_in_40": true,
+  "user_manual_23_provisional_verbatim_unchanged": true,
+  "parent_SQLite_version": "v196",
+  "parent_SQLite_256_tables_untouched": true,
+  "parent_SQLite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "new_SQLite_PRAGMA_integrity_run": false,
+  "original_SQLite_bytes_rehashed": false,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "previous_cumulative_source_A_first_scope": 3375,
+  "new_scope_source_keys": 40,
+  "new_cumulative_source_A_first_scope": 3415,
+  "new_cumulative_held_source_keys": 225,
+  "new_pending_distinct_source_indices": 993,
+  "scope_accounting": "3415+225+993=4633",
+  "historical_total_unique_keys": 10042,
+  "historical_provisional_image_observed": 10007,
+  "historical_reported_unobserved": 35,
+  "historical_actual_unobserved": 33,
+  "historical_2_count_gap_unresolved": true,
+  "next_source_range": [
+    3800,
+    4632
+  ],
+  "write_policy": "add new QA overlay only; preserve original PNG/TMX, all old review files, v196 physical SQLite, user's original 80 and excluded14 and manual33"
+}
