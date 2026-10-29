@@ -1,0 +1,32 @@
+{
+  "version": "v216",
+  "scope": [
+    3600,
+    3679
+  ],
+  "total_indices": 80,
+  "prior_provisional_candidates_reaudited": 77,
+  "mutually_exclusive_QA_classes": {
+    "candidate_role_narrowed": 25,
+    "A_morphology_refined": 37,
+    "historical_candidate_supported": 15
+  },
+  "QA_change_recommendations": 62,
+  "prior_candidate_kept": 15,
+  "historical_held_preserved": 3,
+  "B_C_pixels_le_50": [
+    {
+      "index": 3667,
+      "key": "walls_exterior_house_low_01/58",
+      "pixels": 29
+    }
+  ],
+  "source_metadata_mismatches": 0,
+  "confirmed_errors": 0,
+  "actual_status_changes": 0,
+  "physical_SQLite_modified_rows": 0,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "definitions": "62 = 25 over-specific historical roles narrowed + 37 source-A visual shape refinements; QA notes only, not proof of 62 wrong identities. Existing candidate statuses and original records not overwritten."
+}
