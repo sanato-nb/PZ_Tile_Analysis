@@ -1,0 +1,24 @@
+{
+  "version": "v243_floorplan_v240_preferred",
+  "source_engine": "floorplan/legacy/v22_1_recovered_source.html",
+  "original_engine_sha256": "aa0b32025d2a095b913073911f6d0393a453a78fd916c730dc021a0c33ac4059",
+  "source_master": "review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv",
+  "source_master_sha256": "945973f18b176bfc8efc2dc02399b886d073d7b71fbff21848feebf11af661cc",
+  "output_html": "floorplan/current/v243_floorplan_v240_priority.html",
+  "output_sha256": "a995ae7cd1c6c2d9463cf1dfd7db65a910c3f1ebb42f761c774741761e3527eb",
+  "total": 10042,
+  "active": 9587,
+  "inactive": 455,
+  "inactive_reasons": {
+    "USER_V196_MANUAL_UNDECIDED": 10,
+    "USER_V116_PREVIOUS_EXCLUSION": 6,
+    "HISTORICAL_HELD_439": 439
+  },
+  "legacy_definitions_preserved": 60174,
+  "semantic_priority": "v240 manual candidate > v240 provisional candidate > v22",
+  "geometry_priority": "explicit v240 A-only shape > v22 wall edge flags",
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "identity_certified": 0,
+  "notes": "A shape role inferred by conservative heuristic, not official mapping; all v240 data has provisional status"
+}
