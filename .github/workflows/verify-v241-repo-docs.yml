@@ -1,0 +1,73 @@
+name: v241 Repository v240 State and Navigation Verify
+on:
+  push:
+    branches: [chore/v241-repository-index-20261030]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  repository_integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /README.md
+            /docs/*
+            /scripts/restore_v240_master.py
+            /scripts/restore_latest_unified.py
+            /scripts/generate_handoff.py
+            /scripts/validate_project.py
+            /analysis/current/v240/*
+            /review/v240_unified_10042_2026-10-30/MANIFEST.json
+      - name: Validate Python syntax, JSON, state, doc links and current pointers
+        run: |
+          python3 -m py_compile scripts/restore_v240_master.py scripts/restore_latest_unified.py scripts/generate_handoff.py scripts/validate_project.py
+          python3 scripts/validate_project.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path("PROJECT_STATE.json").read_text("utf8"))
+          m=json.loads(Path("analysis/current/v240/MANIFEST.json").read_text("utf8"))
+          assert s["latest_checkpoint"]["version"]==s["unified_database"]["version"]=="v240"
+          assert s["scope"]["unique_tiles"]==m["integrated_total_unique"]==10042
+          assert s["scope"]["tmx_sources_count"]==len(s["scope"]["tmx_sources"])==84
+          assert (m["active_total"],m["excluded_total_unique"],m["v240_sqlite_tables"])==(9587,455,258)
+          assert s["unified_database"]["sqlite_sha256"]==m["v240_sqlite_sha256"]
+          assert len(set(s["scope"]["tmx_sources"]))==84
+          assert "v240" in Path("README.md").read_text("utf8")
+          assert "v240" in Path("docs/HANDOFF.md").read_text("utf8")[:1500]
+          assert "v240" in Path("docs/NEXT_CHAT_PROMPT.md").read_text("utf8")
+          assert s["previous_checkpoint_v196"]["version"]=="v196"
+          print("PASS source metadata, current state and navigation")
+          PY
+      - name: Confirm current generator does not revert v240 pointer
+        run: |
+          python3 scripts/generate_handoff.py
+          python3 - <<'PY'
+          from pathlib import Path
+          readme=Path("README.md").read_text("utf8")
+          hand=Path("docs/HANDOFF.md").read_text("utf8")
+          assert "최신 통합: v240" in readme
+          assert "v240" in hand[:2500]
+          assert "analysis/current/v196/MANIFEST.json" not in readme[:2000]
+          print("PASS latest handoff remains v240")
+          PY
+      - name: Restore complete verified v240 database and check original tables
+        run: |
+          python3 scripts/restore_latest_unified.py /tmp/PZ_RESTORE_V241.sqlite
+          python3 - <<'PY'
+          import sqlite3
+          with sqlite3.connect('/tmp/PZ_RESTORE_V241.sqlite') as con:
+              assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              assert con.execute('SELECT count(*) FROM v240_tile_master_10042').fetchone()[0]==10042
+              assert con.execute('SELECT count(*) FROM v240_active_tile_master').fetchone()[0]==9587
+              assert con.execute('SELECT count(*) FROM v240_excluded_archive_455').fetchone()[0]==455
+              assert con.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+              assert con.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").fetchone()[0]==258
+          print('PASS physical DB integrity and 256 previous tables preserved')
+          PY
