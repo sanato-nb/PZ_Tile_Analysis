@@ -1,0 +1,92 @@
+{
+  "version": "v217_Afirst_QA_overlay",
+  "date": "2026-10-29",
+  "parent_main_sha": "a19868d0453dacb2ae7a5a74c97cf04b61f10f1d",
+  "source_v158": "review/v158_roofgables_3680_3759",
+  "range": [
+    3680,
+    3759
+  ],
+  "source_scope": 80,
+  "source_A_individual_recheck_count": 76,
+  "original_held_count": 4,
+  "held_indices": [
+    3730,
+    3737,
+    3748,
+    3749
+  ],
+  "classification": {
+    "candidate_role_narrowed": 22,
+    "A_morphology_refined": 46,
+    "historical_candidate_supported": 8
+  },
+  "QA_note_change_count": 68,
+  "mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "new_promotions": 0,
+  "new_identity_corrections_applied_to_previous_SQLite": 0,
+  "A_source_original_contact_sheet": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_046.jpg"
+  ],
+  "authentic_B_C_single_gid_removed_comparison_sheets": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_046.jpg"
+  ],
+  "prior_enlarged_proof_sheets": [
+    "review/v158_roofgables_3680_3759/sheets/proof_00.jpg",
+    "review/v158_roofgables_3680_3759/sheets/proof_09.jpg"
+  ],
+  "source_atlas_existing_sha_registry_consistent": 5,
+  "source_metadata_76_rows_mismatched": 0,
+  "previous_source_png_byte_sha256_independently_recomputed": false,
+  "previous_A_RGBA_sha256_independently_recomputed": false,
+  "original_TMX_reparsed": false,
+  "new_B_C_rerender": false,
+  "independent_wall_occlusion_diagnostic": false,
+  "official_same_key_D_alternate_A_verified": false,
+  "small_original_B_C_delta": [
+    {
+      "index": 3738,
+      "key": "walls_exterior_roofs_03/48",
+      "pixels": 26
+    }
+  ],
+  "not_reactivated_v158_held": [
+    {
+      "index": 3730,
+      "reason": "B_C_zero_not_transparency"
+    },
+    {
+      "index": 3737,
+      "reason": "manual_visual_insufficient"
+    },
+    {
+      "index": 3748,
+      "reason": "B_C_zero_not_transparency"
+    },
+    {
+      "index": 3749,
+      "reason": "B_C_zero_not_transparency"
+    }
+  ],
+  "parent_v196_SQLite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_tables_prior_manifest": 256,
+  "physical_SQLite_PRAGMA_integrity_reexecuted": false,
+  "older_source_and_user_manual_records_unmodified": true,
+  "user_undecided10_active_excluded": true,
+  "prior_Afirst_reviewed_scope": 3299,
+  "current_Afirst_reviewed_scope": 3375,
+  "current_held": 225,
+  "current_pending": 1033,
+  "scope_reconciliation": "3375+225+1033=4633",
+  "historical_provisional_images_observed": 10007,
+  "historical_unique_source_tiles": 10042,
+  "historical_reported_unobserved": 35,
+  "final_certifications_total": 0,
+  "next_source_range": [
+    3760,
+    3799
+  ],
+  "limitations": "This turn reviewed source original A sprites and actual previously generated TMX B/C evidence images. No new TMX render, physical parent DB integrity run, source atlas byte hash or official D. Role narrowing means caution, not a proven error."
+}
