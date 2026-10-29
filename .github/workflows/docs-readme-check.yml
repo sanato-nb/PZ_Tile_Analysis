@@ -1,20 +1,20 @@
-name: README 최신 상태 및 물리 DB 복원 검증
+name: README 최신 v240 상태 및 통합 DB 복원 검증
 on:
-  push:
-    branches: [docs/sync-readme-v146-20261027]
   pull_request:
     paths:
       - README.md
+      - PROJECT_STATE.json
+      - docs/**
       - scripts/generate_handoff.py
       - scripts/restore_latest_unified.py
-      - .github/workflows/sync-handoff.yml
+      - scripts/restore_v240_master.py
       - .github/workflows/docs-readme-check.yml
 permissions:
   contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,54 +24,59 @@ jobs:
             /PROJECT_STATE.json
             /README.md
             /AGENTS.md
-            /docs/HANDOFF.md
+            /docs/*
             /scripts/generate_handoff.py
             /scripts/validate_project.py
             /scripts/restore_latest_unified.py
-            /analysis/current/v146/*
+            /scripts/restore_v240_master.py
+            /analysis/current/v240/*
+            /review/v240_unified_10042_2026-10-30/MANIFEST.json
             /.github/workflows/docs-readme-check.yml
-      - name: Python syntax + canonical state validation
+      - name: Python syntax and current state schema
         run: |
-          python3 -m py_compile scripts/generate_handoff.py scripts/validate_project.py scripts/restore_latest_unified.py
+          python3 -m py_compile scripts/generate_handoff.py scripts/validate_project.py scripts/restore_latest_unified.py scripts/restore_v240_master.py
           python3 scripts/validate_project.py
-      - name: README summary stays in sync and reflects corrected D
+      - name: README summary stays current and verified
         run: |
           python3 - <<'PY'
-          import sys, json
+          import sys,json
           from pathlib import Path
           sys.path.insert(0,'scripts')
-          from generate_handoff import render_readme, README_START, README_END
-          state=json.loads(Path('PROJECT_STATE.json').read_text())
-          cp=state['latest_checkpoint']; db=state['unified_database']
-          assert cp['version']=='v146' and db['version']=='v146'
-          assert cp['expanded_unique_observed']==7209 and cp['expanded_unique_unobserved']==2833
-          assert db['table_count']==208 and cp['mapping_verified']==cp['tilezed_verified']==cp['approved_final_certifications']==0
-          readme=Path('README.md').read_text()
+          from generate_handoff import render_readme,README_START,README_END
+          s=json.loads(Path('PROJECT_STATE.json').read_text(encoding='utf8'))
+          cp=s['latest_checkpoint'];db=s['unified_database']
+          m=json.loads(Path('analysis/current/v240/MANIFEST.json').read_text(encoding='utf8'))
+          assert cp['version']==db['version']=='v240'
+          assert (cp['expanded_84_tmx_unique_total'],cp['expanded_unique_observed'],cp['expanded_unique_unobserved'])==(10042,10007,35)
+          assert (m['active_total'],m['excluded_total_unique'],m['v240_sqlite_tables'])==(9587,455,258)
+          assert db['sqlite_sha256']==m['v240_sqlite_sha256']
+          assert (cp['mapping_verified'],cp['tilezed_verified'],cp['approved_final_certifications'])==(0,0,0)
+          readme=Path('README.md').read_text(encoding='utf8')
           assert readme.count(README_START)==readme.count(README_END)==1
-          _, rest=readme.split(README_START,1)
-          old, _=rest.split(README_END,1)
-          assert (README_START+old+README_END)==render_readme(state)
-          assert '동일 `(tile_set_name, local_id)`' in readme
-          assert '동일한 TMX 위치' not in readme or '다른 사용 위치' in readme
-          assert 'v80 당시 기록' in readme
-          assert '## 1. 현재 작업 상태' in readme
-          print('PASS README v146 summary and D definition')
+          _,rest=readme.split(README_START,1)
+          content,_=rest.split(README_END,1)
+          assert README_START+content+README_END==render_readme(s),'README latest block stale: run generate_handoff.py'
+          assert '10,042' in readme and '9,587' in readme
+          assert 'B−C=0' in readme
+          print('PASS README latest v240 summary and A/B/C occlusion cautions')
           PY
-      - name: Full v146 physical SQLite restore, SHA and integrity test
+      - name: Restore complete v240 SQLite, check all source keys and non-overwrite
         run: |
-          python3 scripts/restore_latest_unified.py /tmp/pz_latest_v146.sqlite
+          python3 scripts/restore_latest_unified.py /tmp/pz_latest_v240_check.sqlite
           python3 - <<'PY'
           import sqlite3
-          from pathlib import Path
-          db=sqlite3.connect('/tmp/pz_latest_v146.sqlite')
-          assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
-          assert db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==208
-          assert db.execute('SELECT count(*) FROM v146_visual_review').fetchone()[0]==155
-          print('PASS latest SQLite v146 fully restored',Path('/tmp/pz_latest_v146.sqlite').stat().st_size)
+          with sqlite3.connect('/tmp/pz_latest_v240_check.sqlite') as c:
+              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              assert c.execute("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").fetchone()[0]==258
+              assert c.execute('SELECT COUNT(*) FROM v240_tile_master_10042').fetchone()[0]==10042
+              assert c.execute('SELECT COUNT(*) FROM v240_active_tile_master').fetchone()[0]==9587
+              assert c.execute('SELECT COUNT(*) FROM v240_excluded_archive_455').fetchone()[0]==455
+              assert c.execute('SELECT COUNT(*) FROM tile_catalog').fetchone()[0]==5409
+          print('PASS physical v240 master restored')
           PY
-          if python3 scripts/restore_latest_unified.py /tmp/pz_latest_v146.sqlite; then
-            echo 'FAIL: accidentally overwrote existing database'
+          if python3 scripts/restore_latest_unified.py /tmp/pz_latest_v240_check.sqlite; then
+            echo 'FAIL existing SQLite output overwritten'
             exit 1
           else
-            echo 'PASS existing output overwritten: NO'
+            echo 'PASS existing SQLite was not overwritten'
           fi
