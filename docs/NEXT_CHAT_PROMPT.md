@@ -1,9 +1,17 @@
-# 새 채팅 / Work에서 이어가기 (v47 기준)
+# 다음 채팅에서 프로젝트 이어가기 — v240 최신 기준
 
-> 이 GitHub 저장소 `sanato-nb/PZ_Tile_Analysis`에서 **AGENTS.md, PROJECT_STATE.json, docs/HANDOFF.md, docs/ANALYSIS_RULES.md**를 먼저 읽어.
->
-> v36와 v46 원본 SQLite는 `analysis/archive/v36/`, `analysis/archive/v46/`에 **압축 분할 보존**되어 있어. 나에게 파일 재첨부를 요구하지 말고 `scripts/restore_source_databases.py`로 SHA-256 검증 복구해. 이미 검증된 통합 이미지 직접 관찰은 **2,584/5,409종(47.77%)**, 미관찰 **2,825종**, 최종 정체 인증 **0종**이야. 중복 402종을 검사해 계산한 결과야.
->
-> 잠정 후보 2,302종은 증거로 감사 가능한 후보 키 수이지 정체 확정이 아냐. v36 과거 후보 보고 2,291종과 실제 후보 키 2,156종 사이의 차이 135종, 두 계보의 후보명 충돌 256종은 보류하고 증거를 확인해.
->
-> 원본 PNG 픽셀과 실제 TMX 주변 타일을 합성해 A/B/C/D를 관찰해 정체/부품 역할을 기록하고, 불확실한 Local ID·TileZed 정합은 절대 확정하지 마. 완료 후 GitHub에 체크포인트·PROJECT_STATE.json을 갱신해.
+이 저장소는 **좀보이드 B42 원본 타일 10,042종의 잠정 정체·부품 분석**과 Minecraft 월드 변환 준비 작업을 담습니다.
+
+## 시작 시 우선 확인할 파일
+
+1. [현재 상태](CURRENT_STATUS.md), [파일/폴더 안내](REPOSITORY_MAP.md).
+2. [PROJECT_STATE.json](../PROJECT_STATE.json) (최신 `v240`; 과거 버전 스냅샷은 별도 필드에 보존).
+3. [v240 전체10,042종 CSV](../review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv), [활성9,587 CSV](../review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv), [비활성455 CSV](../review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv).
+4. [v240 물리DB](../analysis/current/v240/MANIFEST.json), [복원 스크립트](../scripts/restore_v240_master.py).
+5. [ANALYSIS_RULES.md](ANALYSIS_RULES.md), [AGENTS.md](../AGENTS.md), [v238 신규키 증거](../review/v238_integrated_master_2026-10-29/), [v239 보류439 감사](../review/v239_held439_independent_source_crosscheck_2026-10-30/).
+
+## 채팅에 전달할 핵심 지시
+
+**"GitHub `sanato-nb/PZ_Tile_Analysis`의 `main`을 먼저 가져와 최신 상태를 확인해. v240 기준 전체10,042종, 활성9,587종, 비활성455종(보류439·사용자미판정10·이전사용자제외6). 기존 439종과 수동 제외는 내가 새 방법을 지시하기 전까지 활성화하지 마. 원본 PNG/TMX 및 과거 256개 부모 SQLite 테이블, 수동검수 원문을 삭제·덮어쓰지 마. A 실제 픽셀을 먼저 보고 B 실제 TMX 장면·C 단독 제거 및 가림을 별도로 판단하며, 공식 같은 키 대체 A가 없는 D는 검증 완료로 주장하지 마. 활성 목록도 확정 블록 매핑이 아니며 공식 정체/TileZed 인증은 0이야. 새 작업은 출처·무결성을 검증해 버전별 파일과 매니페스트로 남겨."**
+
+이전 [v196 새 채팅 프롬프트](NEW_CHAT_START_PROMPT_V196_2026-10-29.txt)는 **역사적 참고 자료**이며 현재 v240 명세를 대체하지 않습니다.
