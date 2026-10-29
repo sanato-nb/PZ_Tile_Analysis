@@ -1,0 +1,137 @@
+{
+  "version": "v224_A_first_source_key_guarded_reaudit",
+  "date": "2026-10-29",
+  "parent_main_commit": "375eb7ac21dacd45c0b01008df0e583a06870781",
+  "prior_review": "review/v165_abc_4000_4039",
+  "scope": [
+    4000,
+    4039
+  ],
+  "source_indices_total": 40,
+  "source_keys_reaudited": 33,
+  "historical_held_preserved": 7,
+  "exclusive_quality_classes": {
+    "A_morphology_geometry_refinement_recommended": 13,
+    "small_BC_or_masked_context_caution": 4,
+    "old_A_basic_morphology_supported": 16
+  },
+  "refinement_or_caution_suggestions_total": 17,
+  "original_shape_supported_without_new_flag": 16,
+  "proven_historical_identity_errors": 0,
+  "status_changed": 0,
+  "observed_promotions": 0,
+  "provisional_promotions": 0,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "source_A_contact_sheet_directly_inspected": "review/v119_selected_A_new4633/sheets/SELECTED_A_050.jpg",
+  "source_A_original_PNG_atlases_directly_inspected": [
+    "Tiles/2x/walls_exterior_roofs_30_05.png",
+    "Tiles/2x/walls_exterior_roofs_30_06.png",
+    "Tiles/2x/walls_exterior_roofs_30_07.png"
+  ],
+  "independent_original_PNG_raw_file_sha256_this_round": [
+    {
+      "path": "Tiles/2x/walls_exterior_roofs_30_05.png",
+      "bytes": 422390,
+      "sha256": "94ad16125c17c6f3c59b97d6eef0b86a496480faf3ab77f165a033eca4f12ac9",
+      "archive_match": true
+    },
+    {
+      "path": "Tiles/2x/walls_exterior_roofs_30_06.png",
+      "bytes": 392714,
+      "sha256": "7e8c6788805d6eeff856627aa8f19c1f333c3647f8e69c273fb320abfddbf8e8",
+      "archive_match": true
+    },
+    {
+      "path": "Tiles/2x/walls_exterior_roofs_30_07.png",
+      "bytes": 431208,
+      "sha256": "b6adc421b73dfc1600cf71178a9386d0e269a7f7a074904ddb9edba7f452a500",
+      "archive_match": true
+    }
+  ],
+  "source_TRUE_B_C_key_matched_zoom_sheets_directly_inspected": [
+    "review/v165_abc_4000_4039/sheets/proof_00.jpg",
+    "review/v165_abc_4000_4039/sheets/proof_01.jpg",
+    "review/v165_abc_4000_4039/sheets/proof_02.jpg",
+    "review/v165_abc_4000_4039/sheets/proof_03.jpg",
+    "review/v165_abc_4000_4039/sheets/proof_04.jpg"
+  ],
+  "source_global_BC_sheet_directly_inspected_but_NOT_as_direct_index_join": "review/v121_C_diff_new4632/sheets/C_B_DIFF_050.jpg",
+  "cross_sheet_index_mismatch_critical": {
+    "A_v119_display_4000": "walls_exterior_roofs_30_05/68",
+    "BC_v121_display_4000": "walls_exterior_roofs_30_05/69",
+    "A_v119_display_4007": "walls_exterior_roofs_30_06/4",
+    "BC_v121_display_4007": "walls_exterior_roofs_30_06/5",
+    "source_key_repaired_by_proof_v165": true,
+    "reason_of_shift_NOT_independently_verified": true,
+    "scope_of_potential_prior_overlay_impact_NOT_yet_quantified": true,
+    "alert_path": "review/v224_Afirst_4000_4039_2026-10-29/SOURCE_INDEX_ALIGNMENT_ALERT.json"
+  },
+  "archived_source_metadata_crosscheck_rows": 33,
+  "archived_source_metadata_mismatch_count": 0,
+  "crosschecked": [
+    "tile_set_name",
+    "local_id",
+    "A_png",
+    "prior_A_png_SHA256",
+    "prior_A_RGBA_SHA256",
+    "crop_xyxy",
+    "TMX file path and SHA prior",
+    "level",
+    "layer_index",
+    "x",
+    "y",
+    "raw_gid",
+    "firstgid",
+    "B_entry",
+    "C_entry",
+    "DELTA_entry",
+    "B_C_changed_pixels"
+  ],
+  "source_RGBA_pixel_crop_SHA_recomputed_this_round": false,
+  "original_TMX_reparsed_this_round": false,
+  "new_true_B_C_reassembled_this_round": false,
+  "wall_layer_occlusion_cause_verified": false,
+  "official_D_other_A_same_key_replacement_performed": false,
+  "B_C_example_small_pixel_changes_prior": [
+    {
+      "source_index": 4006,
+      "delta": 314
+    },
+    {
+      "source_index": 4023,
+      "delta": 203
+    }
+  ],
+  "B_C_negative_inference_exception": "4029 A is solid yellow-beige siding slab but B-C compositing delta appears window-like or void-shaped; no original A hole certified",
+  "parent_review_old_BC_zero_held_index": 4030,
+  "user_manual33_verbatim_unchanged": true,
+  "user_manual_undecided10_active_excluded_unchanged": true,
+  "user_old_manual80_excluded14_unchanged": true,
+  "source_scope_total": 4633,
+  "previous_QA_scoped": 3576,
+  "new_QA_scoped": 33,
+  "cumulative_QA_scoped": 3609,
+  "prior_historical_held": 264,
+  "cumulative_historical_held": 271,
+  "prior_pending": 793,
+  "cumulative_pending": 753,
+  "percent_QA_scoped": 77.89769048132959,
+  "scope_balance_verified": true,
+  "historical_unique_tiles": 10042,
+  "historical_provisional_image_observed": 10007,
+  "historical_reported_unobserved": 35,
+  "historical_real_missing_distinct": 33,
+  "historical_accounting_gap": 2,
+  "physical_SQLite_latest_prior": "v196",
+  "parent_tables_prior_recorded": 256,
+  "parent_SQLite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_file_rehashed_or_integrity_check_this_round": false,
+  "existing_source_files_modified": 0,
+  "next_scope": [
+    4040,
+    4079
+  ],
+  "write_policy": "append-only review/v224; original PNG/TMX/physical SQLite/user manual decisions unchanged"
+}
