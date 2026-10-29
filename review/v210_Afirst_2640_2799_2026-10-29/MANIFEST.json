@@ -1,0 +1,115 @@
+{
+  "version": "v210_A_first_review_overlay_only",
+  "date": "2026-10-29",
+  "base_main_sha": "0d32d369be05c8c3acd4e3b4dd72e38528aa4a3a",
+  "scope": [
+    2640,
+    2799
+  ],
+  "source_scope_total": 160,
+  "source_prior_v151_provisional_reaudited": 150,
+  "source_prior_v151_held_not_reactivated": 10,
+  "exclusive_change_class_counts": {
+    "role_narrowing": 51,
+    "A_morphology_refinement": 74,
+    "retain_prior_A_shape": 25
+  },
+  "QA_proposal_changes": 125,
+  "proven_identity_errors": 0,
+  "source_sqlite_status_changes": 0,
+  "source_A_contact_sheets_directly_inspected": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_033.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_034.jpg"
+  ],
+  "original_B_C_contact_sheets_directly_inspected": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_033.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_034.jpg"
+  ],
+  "original_A_atlas_opened": [
+    "Tiles/2x/rooftop_furniture.png",
+    "Tiles/2x/roofs_accents_01.png"
+  ],
+  "original_A_atlas_not_fully_downloaded": [
+    "Tiles/2x/signs_one-off_09.png"
+  ],
+  "distinct_source_A_atlas_archived_SHA256_checked": 12,
+  "metadata_crosscheck": {
+    "prior_v151_rows": 150,
+    "QA_rows": 150,
+    "exact_fields": [
+      "tile_set_name",
+      "local_id",
+      "old_candidate",
+      "A_visible_features",
+      "B_C_changed_pixels",
+      "A_PNG_path",
+      "prior_PNG_SHA256",
+      "prior_RGBA_SHA256",
+      "prior_A_crop_bounds",
+      "TMX_path",
+      "level",
+      "layer_index",
+      "x",
+      "y",
+      "raw_gid",
+      "B_entry",
+      "C_entry",
+      "delta_entry"
+    ],
+    "mismatches": 0
+  },
+  "low_B_C_changes": [
+    {
+      "index": 2657,
+      "key": "roofs_accents_01/49",
+      "pixels": 71
+    },
+    {
+      "index": 2692,
+      "key": "rooftop_furniture/34",
+      "pixels": 1
+    },
+    {
+      "index": 2697,
+      "key": "rooftop_furniture/50",
+      "pixels": 49
+    }
+  ],
+  "occlusion_diagnosed_actual_wall_removal": false,
+  "D_alternate_official_A_same_key_verified": 0,
+  "source_TMX_raw_GID_reparsed_this_turn": false,
+  "source_BC_new_renders_performed": false,
+  "source_PNG_sha256_fresh_byte_recomputed": false,
+  "A_RGBA_pixel_sha256_fresh_recomputed": false,
+  "user_manual33_preserved": true,
+  "user_undecided10_not_reactivated": true,
+  "previous_scope_seen": 2312,
+  "source_key_QA_scope_seen_after": 2462,
+  "prior_held": 168,
+  "held_after": 178,
+  "prior_pending": 2153,
+  "pending_after": 1993,
+  "scope_denominator": 4633,
+  "check": "2462+178+1993=4633",
+  "historical_unique": 10042,
+  "historical_provisionally_image_observed": 10007,
+  "historical_unobserved_recorded": 35,
+  "actual_missing_keys": 33,
+  "unreconciled_count_gap": 2,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "new_observed_promoted": 0,
+  "new_provisional_promoted": 0,
+  "physical_sqlite_current_snapshot": "v196",
+  "physical_sqlite_prior_table_count": 256,
+  "physical_sqlite_prior_SHA256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_sqlite_PRAGMA_integrity_check_rerun": false,
+  "physical_sqlite_reconstructed_or_modified": false,
+  "write_policy": "append-only review/v210 files; original PNG TMX prior manual 33 and prior 256-table v196 SQLite unchanged",
+  "next_scope": [
+    2800,
+    2959
+  ],
+  "interpretation": "exclusive QA suggestions for A-visible sprite parts, NOT official identity corrections nor certified accuracy changes"
+}
