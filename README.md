@@ -2,7 +2,7 @@
 
 **현재 기준: v240 통합 데이터베이스 (2026-10-30)** · 원본 PNG/TMX로 개별 타일의 사물·부품·연결·방향을 분석하고, 나중에 Minecraft 월드로 재현하기 위한 프로젝트입니다.
 
-> **빠른 시작:** [현재 상태](docs/CURRENT_STATUS.md) · [저장소 사용 안내](docs/REPOSITORY_MAP.md) · [새 채팅/작업 이어가기](docs/NEXT_CHAT_PROMPT.md) · [검수 원칙](docs/ANALYSIS_RULES.md)
+> **빠른 시작:** [현재 상태](docs/CURRENT_STATUS.md) · [저장소 안내](docs/REPOSITORY_MAP.md) · **[v242 이미지/스프라이트 분석 매뉴얼](docs/SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md)** · [빠른 판정표](docs/SPRITE_ANALYSIS_QUICK_REFERENCE.md) · [새 채팅/작업 이어가기](docs/NEXT_CHAT_PROMPT.md)
 
 ## 최신 기준 데이터
 
