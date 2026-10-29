@@ -1,0 +1,86 @@
+{
+  "version": "v216_Afirst_QA_overlay",
+  "date": "2026-10-29",
+  "base_main_sha": "cb6c7a6d1d3f186f6b63b9e4194a150594f135f7",
+  "parent_review": "review/v157_housewalls_3600_3679",
+  "source_indices": [
+    3600,
+    3679
+  ],
+  "total_scope": 80,
+  "historical_candidates_A_individually_reaudited": 77,
+  "held_excluded_preserved": 3,
+  "held_indices": [
+    3638,
+    3662,
+    3668
+  ],
+  "exclusive_change_classes": {
+    "candidate_role_narrowed": 25,
+    "A_morphology_refined": 37,
+    "historical_candidate_supported": 15
+  },
+  "QA_proposed_description_changes": 62,
+  "confirmed_wrong_identifications": 0,
+  "independently_certified_tiles": 0,
+  "old_status_promotions": 0,
+  "old_source_or_SQLite_rows_modified": 0,
+  "small_BC_delta_50_or_less": [
+    {
+      "index": 3667,
+      "key": "walls_exterior_house_low_01/58",
+      "pixels": 29
+    }
+  ],
+  "original_A_contact_sheet_directly_examined": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_045.jpg"
+  ],
+  "authentic_B_C_sheet_directly_examined": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_045.jpg"
+  ],
+  "prior_enlarged_A_B_C_proof_images_examined": [
+    "review/v157_housewalls_3600_3679/sheets/proof_00.jpg",
+    "review/v157_housewalls_3600_3679/sheets/proof_05.jpg",
+    "review/v157_housewalls_3600_3679/sheets/proof_09.jpg"
+  ],
+  "source_original_PNG_atlas_directly_retrieved_but_binary_unavailable": [
+    "Tiles/2x/walls_exterior_house_09.png",
+    "Tiles/2x/walls_exterior_roofs_01.png"
+  ],
+  "metadata_crosscheck_rows": 77,
+  "metadata_crosscheck_mismatch_count": 0,
+  "unique_source_atlases_prior_SHA_registry_matched": 9,
+  "historical_PNG_sha256_independently_recomputed_this_run": false,
+  "individual_RGBA_hash_independently_recomputed_this_run": false,
+  "original_TMX_file_reparsed_this_run": false,
+  "original_BC_rerendered_this_run": false,
+  "wall_occlusion_root_cause_diagnosed_this_run": false,
+  "official_D_same_key_other_official_A_experiment_performed": false,
+  "v196_parent_SQLite_version": "v196",
+  "v196_parent_SQLite_tables_prior_manifest": 256,
+  "v196_parent_SQLite_sha256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "v196_parent_SQLite_binary_rehashed_or_integrity_check_reexecuted": false,
+  "user_undecided10_reactivated": 0,
+  "user_manual23_verbatim_and_manual80_excluded14_preserved": true,
+  "new_observed": 0,
+  "new_provisional": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "prior_Afirst_scope_screened": 3222,
+  "current_Afirst_scope_screened": 3299,
+  "historical_held_total": 221,
+  "remaining_not_reaudited": 1113,
+  "scope_check": "3299 + 221 + 1113 = 4633",
+  "original_new_key_total": 4633,
+  "whole_catalog_unique_keys": 10042,
+  "provisional_image_observed_historical": 10007,
+  "reported_unobserved": 35,
+  "actual_unobserved_keys": 33,
+  "accounting_difference": 2,
+  "next_target": [
+    3680,
+    3759
+  ],
+  "limitations": "This is per-key visual second opinion on archived A and actual B/C evidence; source PNG not rehashed, original TMX not rebuilt, wall/occlusion diagnosis not rendered, no official D, no final identity promotions. 25 role narrowing recommendations are not confirmed mistakes."
+}
