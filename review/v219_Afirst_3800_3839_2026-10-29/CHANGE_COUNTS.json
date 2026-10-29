@@ -1,0 +1,103 @@
+{
+  "version": "v219_A_first_3800_3839_QA",
+  "date": "2026-10-29",
+  "parent_main_sha": "4b6d26212a5c289fd750941bf5c799803420132d",
+  "historical_review": "review/v160_abc_3800_3839",
+  "review_range": [
+    3800,
+    3839
+  ],
+  "source_indices": 40,
+  "individual_A_sprites_rechecked": 27,
+  "historical_candidates": 27,
+  "protected_historical_held": 13,
+  "mutually_exclusive_QA_classification": {
+    "A_pattern_missing_or_material_caution": 7,
+    "B_role_overreach_restrict_to_A": 8,
+    "A_shape_detail_refined": 4,
+    "historical_general_shape_supported": 8
+  },
+  "A_description_change_recommendations": 19,
+  "previous_general_description_retained": 8,
+  "confirmed_original_identity_reclassifications": 0,
+  "historical_SQLite_rows_changed": 0,
+  "new_observed_or_provisional_status_promotions": 0,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "explicit_A_pattern_update_indices": [
+    3811,
+    3812,
+    3816,
+    3817,
+    3818,
+    3819,
+    3820
+  ],
+  "context_role_overreach_indices": [
+    3802,
+    3803,
+    3808,
+    3810,
+    3836,
+    3837,
+    3838,
+    3839
+  ],
+  "original_B_C_delta_le50": [
+    {
+      "index": 3816,
+      "key": "walls_exterior_roofs_08/5",
+      "changed_pixels": 9,
+      "wall_occlusion_cause_proven": false
+    }
+  ],
+  "old_held_zero_BC_reason_count": 6,
+  "old_held_manual_insufficient_reason_count": 10,
+  "counts_note": "Historical held reasons overlap: 3 held keys have both manual insufficiency and B-C=0. QA changed=7+8+4=19, supported unchanged=8; labels are recommendations, not proven official mismappings.",
+  "A_direct_evidence_paths": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_047.jpg",
+    "review/v160_abc_3800_3839/sheets/proof_00.jpg",
+    "review/v160_abc_3800_3839/sheets/proof_01.jpg",
+    "review/v160_abc_3800_3839/sheets/proof_02.jpg",
+    "review/v160_abc_3800_3839/sheets/proof_03.jpg"
+  ],
+  "B_C_source": "Same v160 proof_00–03 source row-labeled actual TMX B and one-raw-GID removed C; prior changed_pixels from original v160 VISUAL_REVIEW.csv. No fresh TMX rendering.",
+  "source_atlases_directly_opened": [
+    "Tiles/2x/walls_exterior_roofs_07.png",
+    "Tiles/2x/walls_exterior_roofs_08.png"
+  ],
+  "source_atlas_09_status": "Original Git blob located, connector base64 body empty; original sprite A visible in v119 and key-specific v160 proof sheets.",
+  "atlas_archived_SHA256_catalog": "review/v119_selected_A_new4633/MANIFEST.json",
+  "atlas_SHA256_archival_values_crossmatched": 3,
+  "original_PNG_bytes_independently_rehashed": false,
+  "source_A_pixel_RGBA_hash_independently_recomputed": false,
+  "source_TMX_reparsed": false,
+  "B_C_rerendered": false,
+  "wall_and_upper_layer_unmask_diagnostic": false,
+  "same_key_alternate_official_A_D": false,
+  "user_undecided10_active_excluded": true,
+  "user_23_verbatim_provisional_preserved": true,
+  "previous_manual80_and_excluded14_preserved": true,
+  "previous_v218_A_first_scope": 3415,
+  "added_unique_screened": 27,
+  "new_total_A_first_scope": 3442,
+  "new_total_historical_held": 238,
+  "new_total_pending": 953,
+  "scope_total": 4633,
+  "scope_check": "3442+238+953=4633",
+  "global_prior_provisional_observed": 10007,
+  "global_unique": 10042,
+  "global_unobserved_reported": 35,
+  "global_true_unobserved_keys": 33,
+  "global_unresolved_accounting_diff": 2,
+  "parent_SQLite_version": "v196",
+  "previous_SQLite_tables": 256,
+  "previous_SQLite_SHA256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "new_SQLite_integrity_check_executed": false,
+  "original_PNG_TMX_previous_SQlite_and_manual_records_modified": false,
+  "next_range": [
+    3840,
+    3879
+  ]
+}
