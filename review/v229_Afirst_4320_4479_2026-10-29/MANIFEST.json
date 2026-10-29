@@ -1,0 +1,171 @@
+{
+  "version": "v229_Afirst_bulk_160_source_key_protected_existing_QA",
+  "date": "2026-10-29",
+  "parent_main_sha": "08fb53bee5385f882863af75c1eb5dae27c055bf",
+  "scope_source_index_first": 4320,
+  "scope_source_index_last": 4479,
+  "scope_source_indices_total": 160,
+  "parents": [
+    {
+      "path": "review/v170_large_4200_4359",
+      "parent_slice": [
+        4320,
+        4359
+      ],
+      "original_provisional_reaudited": 30,
+      "historical_held_retained": 10
+    },
+    {
+      "path": "review/v171_interior_4360_4519",
+      "parent_slice": [
+        4360,
+        4479
+      ],
+      "original_provisional_reaudited": 70,
+      "historical_held_retained": 50
+    }
+  ],
+  "total_original_provisional_individual_A_morphology_rewritten": 100,
+  "total_historical_held_source_records_preserved": 60,
+  "all_reaudited_A_morphology_descriptions_distinct": 100,
+  "original_A_contact_sheets_visually_reviewed": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_054.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_055.jpg"
+  ],
+  "original_TMXS_B_and_single_GID_removed_C_true_B_minus_C_keylabelled_proof_sheets": [
+    "review/v170_large_4200_4359/sheets/proof_12.jpg",
+    "review/v170_large_4200_4359/sheets/proof_13.jpg",
+    "review/v170_large_4200_4359/sheets/proof_14.jpg",
+    "review/v170_large_4200_4359/sheets/proof_15.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_00.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_01.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_02.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_03.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_04.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_05.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_06.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_07.jpg",
+    "review/v171_interior_4360_4519/sheets/proof_08.jpg"
+  ],
+  "original_png_atlas_directly_visually_opened": [
+    "Tiles/2x/walls_interior_detailing_bathroom_02.png"
+  ],
+  "original_png_atlas_bytes_unavailable_despite_blob_metadata": [
+    "Tiles/2x/walls_interior_bathroom_01.png",
+    "Tiles/2x/walls_interior_house_02.png"
+  ],
+  "source_png_archive_SHA256_registration_crosscheck": {
+    "unique_atlases": 9,
+    "rows_matched": 100,
+    "mismatches": 0,
+    "source": "review/v119_selected_A_new4633/MANIFEST.json"
+  },
+  "original_PNG_atlas_byte_SHA256_recomputed_this_round": false,
+  "individual_RGBA_crop_pixel_SHA256_recomputed_this_round": false,
+  "original_TMXS_parsed_again_this_round": false,
+  "new_B_C_rerenders_this_round": false,
+  "wall_upper_layer_masking_experiment_performed": false,
+  "official_D_same_key_other_source_A_performed": false,
+  "original_source_CSV_crosscheck": {
+    "rows": 100,
+    "matched_original_metadata_records": 100,
+    "mismatches": 0,
+    "fields": [
+      "tile_set_name",
+      "local_id",
+      "A_png",
+      "historical A PNG sha256",
+      "historical A RGBA crop sha256",
+      "historical A crop xyxy",
+      "TMX path",
+      "historical TMX sha256",
+      "level",
+      "layer_index",
+      "x",
+      "y",
+      "raw_gid",
+      "firstgid",
+      "B_entry",
+      "C_entry",
+      "DELTA_entry",
+      "B_C_changed_pixels"
+    ],
+    "proof_path_joined_by_prior_source_ordinal_and_exact_label": 100,
+    "global_contact_sheet_same_index_join_assumed": false,
+    "known_global_index_mismatch_issue": "review/v224_Afirst_4000_4039_2026-10-29/SOURCE_INDEX_ALIGNMENT_ALERT.json"
+  },
+  "all_indices_contiguous_and_accounted": 160,
+  "candidate_and_held_overlap": 0,
+  "user_manual_undecided_10_excluded_overlap": 0,
+  "B_C_delta_50_pixels_or_less_for_active_candidates": 0,
+  "low_delta_held_BC_zero_not_certified_as_transparency": true,
+  "A_vs_B_context_examples": [
+    {
+      "source_index": 4389,
+      "source_key": "walls_interior_detailing_bathroom_01/2",
+      "A": "white tiled wall two intersecting perpendicular faces",
+      "B": "completed bathroom with plumbing and surrounding objects",
+      "caution": "tile A cannot be bathroom room"
+    },
+    {
+      "source_index": 4412,
+      "source_key": "walls_interior_detailing_bathroom_02/98",
+      "A": "pink green mosaic stripe continues across two perpendicular white tile faces",
+      "B": "completed kitchen/bathroom furniture arrangement",
+      "caution": "mosaic A is a wall segment only"
+    },
+    {
+      "source_index": 4440,
+      "source_key": "walls_interior_house_01/12",
+      "A": "purple painted wall with real rectangular opening",
+      "caution": "A itself has genuine opening, do not misdiagnose as B layer masking"
+    },
+    {
+      "source_index": 4465,
+      "source_key": "walls_interior_house_02/12",
+      "A": "blue wall with a real window cutout",
+      "caution": "A itself has genuine cutout"
+    },
+    {
+      "source_index": 4320,
+      "source_key": "walls_garage_01/56",
+      "A": "grey upper shutter header and slender frame post",
+      "caution": "do not identify entire garage building as one tile"
+    }
+  ],
+  "old_held_reactivated": 0,
+  "new_observed": 0,
+  "new_provisional_identity_promotions": 0,
+  "new_official_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "previous_progress": {
+    "reaudited": 3821,
+    "held": 339,
+    "pending": 473
+  },
+  "updated_progress": {
+    "reaudited": 3921,
+    "held": 399,
+    "pending": 313
+  },
+  "new_source_denominator": 4633,
+  "progress_percent": 84.63198791279949,
+  "scope_balance_verified": true,
+  "historical_all_unique_keys": 10042,
+  "historical_image_provisionally_observed": 10007,
+  "historical_unobserved_reported": 35,
+  "historical_actual_distinct_unobserved": 33,
+  "historical_count_gap_2_still_unresolved": true,
+  "older_user_manual_80_and_held_14_preserved": true,
+  "user_manual33_23_verbatim_provisional_10_excluded_preserved": true,
+  "original_PNG_TMX_older_reaudits_untouched": true,
+  "parent_v196_SQLite_256_table_file_untouched": true,
+  "parent_v196_SQLite_previous_SHA256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_PRAGMA_integrity_check_not_run_this_round": true,
+  "write_policy": "append-only: review/v229 only, no deletion/change of source TIFF/PNG/TMX, prior QA, manual, SQLite",
+  "next_original_source_scope": [
+    4480,
+    4632
+  ]
+}
