@@ -1,0 +1,109 @@
+{
+  "version": "v212_A_first_QA_only",
+  "date": "2026-10-29",
+  "base_main_sha": "2b1cdad18ab299e63e599ae31f19404c0c522761",
+  "historical_source_review": "review/v153_roads_farm_2960_3119",
+  "source_indices": [
+    2960,
+    3119
+  ],
+  "source_total_160": 160,
+  "A_original_sprite_reexamined_previous_provisional": 155,
+  "original_excluded_preserved": 5,
+  "mutually_exclusive_QA_change_class_counts": {
+    "role_narrowing": 79,
+    "A_morphology_refinement": 42,
+    "retain_prior_A_shape": 34
+  },
+  "QA_change_recommendations_total": 121,
+  "proven_historical_identity_errors": 0,
+  "small_B_C_delta_at_most_50": {
+    "count": 10,
+    "source_indices": [
+      2960,
+      2965,
+      2966,
+      2970,
+      2972,
+      3004,
+      3016,
+      3019,
+      3023,
+      3043
+    ],
+    "pixel_values": [
+      5,
+      39,
+      6,
+      1,
+      45,
+      50,
+      9,
+      28,
+      26,
+      28
+    ],
+    "interpretation": "small B-C difference shows limited actual pixel difference; wall/upper-layer/neighbor occlusion not independently diagnosed; cannot call transparent or certify part"
+  },
+  "source_atlas_distinct_paths_prior_sha256_registry_crosschecked": 12,
+  "source_metadata_crosscheck": {
+    "rows": 155,
+    "compared_against": "review/v153_roads_farm_2960_3119/VISUAL_REVIEW.csv",
+    "mismatches": 0,
+    "fields": "source index/tile_set/local ID, previous candidate and observed features, A PNG/atlas SHA and RGBA crop SHA, A crop, B TMX SHA, map level/layer/index x/y/raw GID/firstgid, B/C/diff path and B-C delta"
+  },
+  "A_contacts_original_RGBA_sprite_directly_inspected": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_037.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_038.jpg"
+  ],
+  "original_TMX_B_one_GID_removed_C_difference_sheets_directly_inspected": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_037.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_038.jpg"
+  ],
+  "source_original_atlases_directly_opened": [
+    "Tiles/2x/street_curbs_01_diag_2.png",
+    "Tiles/2x/street_trafficlines_curb_white_faded.png"
+  ],
+  "source_original_atlas_read_empty_image_data": [
+    "Tiles/2x/vegetation_farming_01b.png"
+  ],
+  "atlas_original_PNG_sha256_bytes_independently_recomputed_this_round": false,
+  "individual_RGBA_pixel_hash_independently_recomputed_this_round": false,
+  "original_TMX_independently_reparsed_this_round": false,
+  "original_B_C_rerendered_this_round": false,
+  "wall_layer_occlusion_masked_render_performed": false,
+  "official_same_key_other_A_D_replacement_performed": false,
+  "user_manual33_23_provisional_verbatim_preserved": true,
+  "user_manual33_undecided10_remain_excluded": true,
+  "manual80_prior_excluded14_preserved": true,
+  "historical_held5_reactivated": 0,
+  "prior_v211_screened": 2620,
+  "new_v212_screened": 155,
+  "total_A_B_C_scope_screened": 2775,
+  "prior_v211_held": 180,
+  "held_v212": 185,
+  "remaining_active_unreviewed_v212": 1673,
+  "denominator_new_tile_source_scope": 4633,
+  "source_scope_sum_check": "2775+185+1673=4633",
+  "historical_total_unique_source_keys": 10042,
+  "historical_provisional_image_observed": 10007,
+  "historical_reported_unobserved": 35,
+  "actual_key_unobserved": 33,
+  "remaining_count_gap": 2,
+  "new_observed_promotions": 0,
+  "new_provisional_promotions": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_final_certified": 0,
+  "source_physical_DB": "v196",
+  "source_SQLite_tables_previous_manifest": 256,
+  "source_SQLite_sha256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_DB_reconstructed_or_modified": false,
+  "physical_DB_integrity_check_rerun": false,
+  "write_isolation": "append-only new QA files under review/v212; no PNG/TMX/SQLite/previous manual or review edits",
+  "next_reaudit_range": [
+    3120,
+    3279
+  ],
+  "accuracy_caution": "121 proposed changes are QA wording/role recommendations, not 121 independently proven wrong tile identities nor official certifications"
+}
