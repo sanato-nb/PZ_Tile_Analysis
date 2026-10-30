@@ -1,5 +1,7 @@
 # 프로젝트 문서 — v240 기준 안내
 
+**최신 보류 이미지 재검수:** [v248 — 188종 제외 후 251종 A 원본·다른 실제 TMX 위치 정밀 분석](HELD_251_V248_STATUS.md). v240은 여전히 물리 데이터베이스·활성 상태의 기준이며, v248은 그 위의 잠정 판독 감사 오버레이입니다.
+
 **현재 통합 데이터**는 [현재 상태](CURRENT_STATUS.md) → [저장소 지도](REPOSITORY_MAP.md) 순으로, **새 이미지 분석**은 [v242 경험 기반 분석 매뉴얼](SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md) → [빠른 판정표](SPRITE_ANALYSIS_QUICK_REFERENCE.md) 순으로 읽으세요.
 
 | 안내 | 용도 |
