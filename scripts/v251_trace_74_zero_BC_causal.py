@@ -26,7 +26,6 @@ def filesha(p):
 ledger={int(r["source_index"]):r for r in readcsv(ROOT/"review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv")}
 v119={(r["tile_set_name"],int(r["local_id"])):r for r in readcsv(ROOT/"review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv")}
 v117={(r["tile_set_name"],int(r["local_id"])):r for r in readcsv(ROOT/"review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv")}
-best=readcsv(ROOT/"review/v246_held439_real_alt_TMX_2026-10-30/BEST_FIVE_REAL_ALTERNATE_SITES.csv")
 v117manifest=json.loads((ROOT/"review/v117_A_candidates_10042/MANIFEST.json").read_text("utf8"))
 tsha={r["tmx"]:r["sha256"] for r in v117manifest["source_tmx"]}
 real=readcsv(ROOT/"review/v251_held188_single_location_Afirst_2026-10-30/REAL_ORIGINAL_SINGLE_188_BC.csv")
