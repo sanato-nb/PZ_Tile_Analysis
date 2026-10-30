@@ -1,0 +1,126 @@
+name: v248 A-first real alternate B-C for all 251 held keys
+on:
+  push:
+    branches: [review/v248_held251_full_alt_BC_20261030]
+    paths:
+      - scripts/v248_render_all237_held_alternates.py
+      - .github/workflows/v248-all251-held-true-alternates.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [0, 1, 2, 3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      V248_GROUP: ${{ matrix.group }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v248_render_all237_held_alternates.py
+            /review/v246_held439_real_alt_TMX_2026-10-30/*
+            /review/v247_held439_alternate_true_BC_selected_2026-10-30/TRUE_ALTERNATE_ORIGINAL_TMX_BC_SELECTED.csv
+            /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v117_A_candidates_10042/MANIFEST.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v248_held251_full_alternate_BC_2026-10-30/*
+      - name: Install Pillow for original RGBA processing
+        run: python3 -m pip install --quiet Pillow --break-system-packages
+      - name: Add authentic TMX files referenced by this batch
+        run: |
+          python3 scripts/v248_render_all237_held_alternates.py --list-tmx > /tmp/tmx
+          cat > /tmp/sparse <<'EOF'
+          /scripts/v248_render_all237_held_alternates.py
+          /review/v246_held439_real_alt_TMX_2026-10-30/*
+          /review/v247_held439_alternate_true_BC_selected_2026-10-30/TRUE_ALTERNATE_ORIGINAL_TMX_BC_SELECTED.csv
+          /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+          /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+          /review/v117_A_candidates_10042/MANIFEST.json
+          /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+          /review/v248_held251_full_alternate_BC_2026-10-30/*
+          EOF
+          sed 's|^|/|' /tmp/tmx >> /tmp/sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/sparse
+          echo "Genuine TMXs required:"; wc -l /tmp/tmx
+      - name: Add original PNG atlases referenced by actual layered scene
+        run: |
+          python3 scripts/v248_render_all237_held_alternates.py --list-png > /tmp/png
+          sed 's|^|/|' /tmp/png >> /tmp/sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/sparse
+          echo "Source PNG atlases required:"; wc -l /tmp/png
+      - name: Render A/B/C, one raw GID removed, and target-layer occlusion diagnostics
+        run: python3 -u scripts/v248_render_all237_held_alternates.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v248-g${{ matrix.group }}
+          path: review/v248_held251_full_alternate_BC_2026-10-30/groups/g${{ matrix.group }}/
+          retention-days: 7
+          compression-level: 4
+          if-no-files-found: error
+  integrate:
+    needs: [render]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /review/v248_held251_full_alternate_BC_2026-10-30/*
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v248-g*
+          path: /tmp/v248-results
+      - name: Copy all four disjoint evidence batches and aggregate manifest
+        run: |
+          mkdir -p review/v248_held251_full_alternate_BC_2026-10-30/groups
+          for g in 0 1 2 3; do
+            mkdir -p review/v248_held251_full_alternate_BC_2026-10-30/groups/g$g
+            cp -a /tmp/v248-results/v248-g$g/. review/v248_held251_full_alternate_BC_2026-10-30/groups/g$g/
+          done
+          python3 - <<'PY'
+          import csv,json, pathlib
+          r=pathlib.Path('review/v248_held251_full_alternate_BC_2026-10-30')
+          data=[json.load(open(r/'groups'/f'g{i}'/'MANIFEST.json')) for i in range(4)]
+          rows=[]
+          for g in range(4):
+            with open(r/'groups'/f'g{g}'/'PER_KEY_BEST_ALTERNATE.csv',encoding='utf-8-sig',newline='') as f:
+              rr=list(csv.DictReader(f))
+            assert len(rr)==data[g]['selected_keys']
+            for x in rr:
+              x['v248_group']=g
+              rows.append(x)
+          assert len(rows)==237 and len({r['source_key'] for r in rows})==237
+          with open(r/'V248_NEW237_BEST_EVIDENCE.csv','w',encoding='utf-8-sig',newline='') as f:
+            w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(sorted(rows,key=lambda x:int(x['source_index'])))
+          s=dict(version='v248',new_keys=237,previous_v247_keys=14,total_key_scope=251,excluded_no_alternative_keys=188,
+            newly_rendered_source_positions=sum(d['genuine_alternate_locations_rendered'] for d in data),
+            verified_source_A_pixel_positions=sum(d['source_A_crops_rgba_hash_checked'] for d in data),
+            full_BC_positive=sum(d['full_BC_positive'] for d in data),
+            full_BC_zero=sum(d['full_BC_zero'] for d in data),
+            neighbor_source_incomplete=sum(d['incomplete_neighbor_scene'] for d in data),
+            layer_limited_extra_exposure=sum(d['layer_limited_extra_exposure'] for d in data),
+            keys_with_any_BC_positive=sum(int(x['any_exposed_B_C'])>0 for x in rows),
+            key_best_csv='V248_NEW237_BEST_EVIDENCE.csv',
+            per_group_manifest=data, old_originals_modified=False, original_master_modified=False,
+            identity_final_certified=0, pending_visual_semantic_independent_per_key_review=True)
+          (r/'MANIFEST.json').write_text(json.dumps(s,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({k:v for k,v in s.items() if k!='per_group_manifest'}))
+          PY
+      - name: Commit only source-grounded new evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v248_held251_full_alternate_BC_2026-10-30/
+          git diff --cached --quiet || (git commit -m "v248: render remaining 237 held keys at genuine alternate TMX sites with source A and B/C proofs" && git pull --rebase origin "$GITHUB_REF_NAME" && git push)
