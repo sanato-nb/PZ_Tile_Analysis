@@ -1,5 +1,7 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+> **v254 필수 교체 (2026-10-30):** v253 수동검수기에서 로컬 PNG 410개 선택 후에도 이미지가 표시되지 않았으므로 [원본 A + 실제 B/C 68종 전부 내장 오프라인 검수기](review/v254_manual68_embedded_original_images_2026-10-30/PZ_USER_MANUAL_REVIEW_68_IMAGES_INCLUDED.html)로 교체했다. 실제 Chrome 오프라인 렌더 확인/PNG·RGBA 해시 검증 성공. 65+3 사용자가 직접 판정할 때 v254 HTML을 사용할 것. v251/v252/v253 사용자 미판정 및 보류·활성 상태 그대로.
+
 > **v253 사용자 직접 판독 대기 (2026-10-30):** v251에서 `medium`인65종 + 정체불명 `low` 3종 = **68종 사용자 수동검수용 HTML/빈 CSV** [review/v253_user_manual68_reviewkit_2026-10-30/README.md](review/v253_user_manual68_reviewkit_2026-10-30/README.md) 제공. **사용자 판정 수신 전에는 정체 확정·활성/보류 변경 금지**. 기존 v252 65종 AI 재판독 자료는 보존하고 v253 입력은 새 사용자 원장으로 받아야 한다.
 
 > **v252 (2026-10-30) 보류65종 직접 재판독:** [원본 A와 실제 B 수동 정밀 검수65종](review/v252_manual_medium65_A_B_2026-10-30/README.md) · [65행 독립 수정 원장](review/v252_manual_medium65_A_B_2026-10-30/ALL65_A_FIRST_MANUAL_REVIEW_AND_CORRECTIONS.csv). v251 medium65에 한정, 49종 부품 후보 구체화·6종 과잉기능 수정·10종 기능 미검증. **공식 정체 인증0, 보류/사용자 제외/원본 v240 불변**, 새 후보를 평면도에 자동 활성화하지 않는다.
