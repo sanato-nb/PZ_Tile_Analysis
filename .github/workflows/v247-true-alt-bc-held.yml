@@ -26,6 +26,8 @@ jobs:
             /review/v117_A_candidates_10042/MANIFEST.json
             /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
             /review/v247_held439_alternate_true_BC_selected_2026-10-30/*
+      - name: Install renderer dependency before discovery
+        run: python3 -m pip install --quiet Pillow --break-system-packages
       - name: Add real TMX source maps for selected alternative sites (no guessed locations)
         run: |
           python3 scripts/v247_render_selected_held_real_alternates.py --list-tmx > /tmp/selmap
