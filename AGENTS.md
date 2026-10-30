@@ -1,5 +1,7 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+> **최근 보류 재검수 v248 / 2026-10-30:** 사용자 지시로 원래 439종 중 **다른 실제 TMX 사용 위치가 없는 188종을 이번 검수에서 제외**, 나머지 **251종**만 [v248 251종 재검수 현황](docs/HELD_251_V248_STATUS.md)과 [251행 잠정 정체/부품 원장](review/v248_held251_full_alternate_BC_2026-10-30/ALL_251_A_FIRST_OBJECT_PART_HYPOTHESES.csv)을 사용한다. 원본84 TMX 전수 SHA 검증, A 기반 다른 진짜 B/C **420곳**, 213키 노출·38키 노출 미확인, 새 구체 A 역할 주석107+이전 v247 14, 계열 가설130. **이는 공식 정체 인증이 아니며 기존 v240 활성9,587/제외455 및 원본 DB는 불변**. 같은 타일의 다른 실제 위치는 D가 아님.
+
 > **이미지 시각 분석 방법 표준 — v242 / 2026-10-30:** [원본 A 우선 분석 매뉴얼](docs/SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md), [모서리·기둥·부품·방향·피/오염·B/C 가림 빠른 판정표](docs/SPRITE_ANALYSIS_QUICK_REFERENCE.md), [타일별 JSON 기록 양식](docs/SPRITE_REVIEW_RECORD_TEMPLATE.json), [다음 이미지 분석 재사용 지시](docs/SPRITE_VISUAL_NEXT_CHAT_PROMPT.md)를 우선 참조. **A 직접 관찰 전 B의 완성 사물명을 A에 붙이지 않는다.** A 단독형상/연결된 부품역할/방향/overlay/실제 B/C와 진단 가림/공식 인증을 독립 기록. 이 문서 아래 과거 검수 이력은 보존.
 
 > **현재 우선 적용 기준 — 2026-10-30 / v240**: 최신 작업은 [v240 통합 상태](docs/CURRENT_STATUS.md), [전체 10,042종 마스터](review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv), [활성 9,587종](review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv), [비활성 455종](review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv), [v240 물리 DB](analysis/current/v240/MANIFEST.json)를 먼저 읽어야 함. 아래 v196 이하의 '최신'·진행률·다음 작업 지시는 **작성 당시의 역사적 메모**임. 원본 PNG/TMX, 이전 256테이블, 사용자 잠정23/미판정10·과거 제외 기록 유지. 보류439와 사용자제외16은 **활성에서 제외, 삭제 아님**. 공식 PNG↔Local ID, TileZed, 정체 인증은 모두0. [새 채팅 안내](docs/NEXT_CHAT_PROMPT.md)를 따를 것.
