@@ -36,7 +36,7 @@ for idx in SELECTED:
  chosen.extend(entries[:LIMIT])
 assert len(chosen)>=10,(len(chosen),SELECTED)
 def layerlevel(ly):
- if "level" in ly.attrib:return int(ly["level"])
+ if "level" in ly.attrib:return int(ly.get("level"))
  p=ly.find("properties/property[@name='level']")
  return int((p.get("value") or p.text or "0") if p is not None else "0")
 @lru_cache(maxsize=20)
