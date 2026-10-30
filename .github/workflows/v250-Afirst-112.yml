@@ -4,6 +4,7 @@ on:
     branches: [review/v250_held112_Afirst_individual_20261030]
     paths:
       - scripts/v250_build_112_A_contact.py
+      - scripts/v250_aggregate_112.py
       - .github/workflows/v250-Afirst-112.yml
   workflow_dispatch:
 permissions:
@@ -20,6 +21,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /scripts/v250_build_112_A_contact.py
+            /scripts/v250_aggregate_112.py
             /review/v250_held112_Afirst_individual_2026-10-30/*
             /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
             /review/v119_selected_A_new4633/MANIFEST.json
@@ -32,7 +34,7 @@ jobs:
           a=list(csv.DictReader(open(p,encoding='utf-8-sig',newline='')))
           assert len(a)==112 and len({x['source_key'] for x in a})==112
           with open('/tmp/paths','w') as f:
-            for line in ['/scripts/v250_build_112_A_contact.py','/review/v250_held112_Afirst_individual_2026-10-30/*','/review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv','/review/v119_selected_A_new4633/MANIFEST.json','/review/v119_selected_A_new4633/selected_png_shards/*']:
+            for line in ['/scripts/v250_build_112_A_contact.py','/scripts/v250_aggregate_112.py','/review/v250_held112_Afirst_individual_2026-10-30/*','/review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv','/review/v119_selected_A_new4633/MANIFEST.json','/review/v119_selected_A_new4633/selected_png_shards/*']:
               f.write(line+'\n')
             for x in a:f.write('/'+x['exact_source_qualified_BC_panel']+'\n')
           print('112 true original B evidence panels referenced')
@@ -42,6 +44,8 @@ jobs:
         run: |
           python3 -m pip install --quiet Pillow --break-system-packages
           python3 -u scripts/v250_build_112_A_contact.py
+      - name: Consolidate all 112 human A morphology notes
+        run: python3 scripts/v250_aggregate_112.py
       - name: Commit only new evidence, preserve original source
         run: |
           git config user.name "github-actions[bot]"
