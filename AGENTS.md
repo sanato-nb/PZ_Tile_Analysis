@@ -1,5 +1,7 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+> **v253 사용자 직접 판독 대기 (2026-10-30):** v251에서 `medium`인65종 + 정체불명 `low` 3종 = **68종 사용자 수동검수용 HTML/빈 CSV** [review/v253_user_manual68_reviewkit_2026-10-30/README.md](review/v253_user_manual68_reviewkit_2026-10-30/README.md) 제공. **사용자 판정 수신 전에는 정체 확정·활성/보류 변경 금지**. 기존 v252 65종 AI 재판독 자료는 보존하고 v253 입력은 새 사용자 원장으로 받아야 한다.
+
 > **v252 (2026-10-30) 보류65종 직접 재판독:** [원본 A와 실제 B 수동 정밀 검수65종](review/v252_manual_medium65_A_B_2026-10-30/README.md) · [65행 독립 수정 원장](review/v252_manual_medium65_A_B_2026-10-30/ALL65_A_FIRST_MANUAL_REVIEW_AND_CORRECTIONS.csv). v251 medium65에 한정, 49종 부품 후보 구체화·6종 과잉기능 수정·10종 기능 미검증. **공식 정체 인증0, 보류/사용자 제외/원본 v240 불변**, 새 후보를 평면도에 자동 활성화하지 않는다.
 
 > **v251 (2026-10-30) 보류 타일 최신 검수:** [보류439종 누적 현황](docs/HELD_439_V251_STATUS.md), [v251 유일 위치188종 원본 A/B/C와 가림 검증](review/v251_held188_single_location_Afirst_2026-10-30/README.md). v247~v250 상세251 + v251 상세188 = **439종 A 원본 개별 형태/부품 잠정 주석**. 공식 Local ID/TileZed/정체 인증0, v240 활성9,587/비활성455 및 기존 자료 불변. 사용자 요청에 따라 188종의 시각 분석을 재개했으나 평면도 자동 활성화 금지.
