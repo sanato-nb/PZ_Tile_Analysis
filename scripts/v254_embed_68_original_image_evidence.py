@@ -118,6 +118,9 @@ html=html.replace(old,new,1)
 old_notice="GitHub 비공개 저장소 이미지가 브라우저에 직접 표시되지 않으면 링크를 클릭해 확인하세요. 로컬 폴더의 같은 이름 PNG를 선택하면 카드에 미리보기가 생깁니다."
 assert old_notice in html
 html=html.replace(old_notice,"v254에서는 모든 68종의 원본 A와 실제 B/C 증거가 HTML에 직접 포함되어 있어 폴더 선택이 필요 없습니다.",1)
+folderrow='<div class="row" style="margin-top:9px"><label>로컬 증거 이미지 폴더 (선택사항)<input id="files" type="file" multiple webkitdirectory></label><span class="small">v254에서는 모든 68종의 원본 A와 실제 B/C 증거가 HTML에 직접 포함되어 있어 폴더 선택이 필요 없습니다.</span></div>'
+assert folderrow in html
+html=html.replace(folderrow,'<div class="row" style="margin-top:9px"><span style="color:#126b57;font-weight:700">✓ 원본 A 이미지와 실제 B/C 전체 68종 자동 표시 — 파일 선택 불필요</span><input id="files" type="file" multiple webkitdirectory hidden></div>',1)
 old_warning="임시 판정은 현재 브라우저에 저장을 시도하지만, 브라우저/로컬 파일 제한으로 보장되지 않습니다."
 assert old_warning in html
 html=html.replace(old_warning,"원본 A와 실제 B/C 이미지가 전부 이 HTML 안에 포함돼 있습니다. 별도 이미지 폴더를 선택하지 않아도 아래에 표시됩니다. 판정값은 현재 브라우저에 임시 저장을 시도하지만, 브라우저/로컬 파일 제한으로 보장되지 않습니다.",1)
