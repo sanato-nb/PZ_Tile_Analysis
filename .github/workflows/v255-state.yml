@@ -1,0 +1,38 @@
+name: v255 sync central state after verified integrated artifacts
+on:
+  push:
+    branches: [integration/v255_latest439_user68_floorplan_20261030]
+    paths:
+      - scripts/v255_sync_project_state.py
+      - .github/workflows/v255-state.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /scripts/v255_sync_project_state.py
+            /review/v255_latest_integrated_10042_2026-10-30/MANIFEST.json
+            /analysis/current/v255/MANIFEST.json
+            /floorplan/current/MANIFEST_V255.json
+      - name: Check source manifests and update latest pointers
+        run: python3 scripts/v255_sync_project_state.py
+      - name: Commit state only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add PROJECT_STATE.json
+          if ! git diff --cached --quiet; then
+            git commit -m "v255 central state: physical SQLite 260, latest held439 and user68, floorplan ready"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi
