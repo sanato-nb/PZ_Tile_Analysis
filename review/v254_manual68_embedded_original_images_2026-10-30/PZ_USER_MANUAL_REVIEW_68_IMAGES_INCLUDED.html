@@ -46,7 +46,7 @@ label>input,label>select{font-size:13px}
 <label>대상<select id="group"><option value="all">68종 전체</option><option value="unknown">정체 불명 3종</option><option value="medium">재검수 65종</option></select></label>
 <label>진행<select id="progressFilter"><option value="all">전체</option><option value="todo">미판정</option><option value="done">판정 입력됨</option></select></label>
 </div>
-<div class="row" style="margin-top:9px"><label>로컬 증거 이미지 폴더 (선택사항)<input id="files" type="file" multiple webkitdirectory></label><span class="small">v254에서는 모든 68종의 원본 A와 실제 B/C 증거가 HTML에 직접 포함되어 있어 폴더 선택이 필요 없습니다.</span></div>
+<div class="row" style="margin-top:9px"><span style="color:#126b57;font-weight:700">✓ 원본 A 이미지와 실제 B/C 전체 68종 자동 표시 — 파일 선택 불필요</span><input id="files" type="file" multiple webkitdirectory hidden></div>
 <div class="row" style="margin-top:9px"><label>기존 JSON 판정 불러오기<input id="loadJSON" type="file" accept=".json,application/json"></label><button id="clear" type="button">현재 화면 판정 초기화</button></div>
 </section>
 <div id="cards"></div>
