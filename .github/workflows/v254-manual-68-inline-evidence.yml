@@ -61,6 +61,25 @@ jobs:
           print('68 exact sprite sources and full B/C proof panels embedded; no missing image',len(html))
           PY
           node --check /tmp/v254-js-only.js
+      - name: Browser smoke screenshot of truly offline embedded A and B-C
+        run: |
+          CHROME=$(command -v google-chrome-stable || command -v google-chrome || true)
+          if [ -z "$CHROME" ]; then
+            echo "Chrome missing; node JS/static asset integrity still tested"
+          else
+            OUT=review/v254_manual68_embedded_original_images_2026-10-30/OFFLINE_FIRST_CARD_BROWSER_PROOF.png
+            PAGE=file://"$PWD"/review/v254_manual68_embedded_original_images_2026-10-30/PZ_USER_MANUAL_REVIEW_68_IMAGES_INCLUDED.html
+            timeout 50 "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --virtual-time-budget=4000 --window-size=1440,1500 --screenshot="$OUT" "$PAGE" > /tmp/v254-chrome.log 2>&1
+            test -s "$OUT"
+            python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          p=Path('review/v254_manual68_embedded_original_images_2026-10-30/OFFLINE_FIRST_CARD_BROWSER_PROOF.png')
+          im=Image.open(p).convert('RGB')
+          assert im.width>=1200 and im.height>=1100,(im.size, p.stat().st_size)
+          print('OFFLINE CHROME RENDER',im.size,p.stat().st_size)
+          PY
+          fi
       - name: Commit only new self-contained reviewer (leave history and master untouched)
         run: |
           git config user.name "github-actions[bot]"
