@@ -1,0 +1,38 @@
+name: v255 regenerate bounded handoff and README latest blocks
+on:
+  push:
+    branches: [integration/v255_latest439_user68_floorplan_20261030]
+    paths:
+      - scripts/generate_handoff.py
+      - .github/workflows/v255-refresh-handoff.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /README.md
+            /docs/HANDOFF.md
+            /scripts/generate_handoff.py
+            /scripts/validate_project.py
+      - name: Refresh bounded current summaries without replacing historical text
+        run: python3 scripts/generate_handoff.py
+      - name: Commit only bounded current summaries
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v255 latest README/HANDOFF bounded progress summary"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi
