@@ -4,6 +4,7 @@ on:
     branches: [review/v249_held251_occlusion38_source_diagnostics_20261030]
     paths:
       - scripts/v249_causal_occlusion_38.py
+      - scripts/v249_build_A_uncovered38_contacts.py
       - .github/workflows/v249-causal-38.yml
   workflow_dispatch:
 permissions:
@@ -20,6 +21,8 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /scripts/v249_causal_occlusion_38.py
+          /scripts/v249_build_A_uncovered38_contacts.py
+            /scripts/v249_build_A_uncovered38_contacts.py
             /review/v248_held251_full_alternate_BC_2026-10-30/ALL_251_A_FIRST_OBJECT_PART_HYPOTHESES.csv
             /review/v248_held251_full_alternate_BC_2026-10-30/STILL_NOT_EXPOSED_IN_ALTERNATE_38.csv
             /review/v246_held439_real_alt_TMX_2026-10-30/HELD439_ALTERNATE_SITE_CENSUS.csv
@@ -59,6 +62,8 @@ jobs:
           echo "Source atlas PNGs:"; wc -l /tmp/png
       - name: Measure before and after each actual later sprite in original draw order
         run: python3 -u scripts/v249_causal_occlusion_38.py
+      - name: Build A original against uncovered diagnostic sheets
+        run: python3 -u scripts/v249_build_A_uncovered38_contacts.py
       - name: Commit only appended v249 evidence
         run: |
           git config user.name "github-actions[bot]"
