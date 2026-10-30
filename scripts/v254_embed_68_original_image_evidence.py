@@ -27,7 +27,7 @@ manifest=json.loads((V119/"MANIFEST.json").read_text(encoding="utf-8"))
 assert sha(ledgerfile.read_bytes())==manifest["selected_ledger_sha256"]
 ledger=readcsv(ledgerfile)
 archives={Path(r["path"]).name:r["sha256"] for r in manifest["png_archive_shards"]}
-zip_paths=sorted({ledger[int(r["source_index"])]["selected_shard"] for r in users})
+zip_paths=sorted({str(V119.relative_to(R)/ledger[int(r["source_index"])]["selected_shard"]) for r in users})
 for p in zip_paths:assert Path(p).name in archives
 def paths():
  return sorted({r["true_TMX_B_C_evidence_path"] for r in users}|set(zip_paths))
@@ -64,7 +64,7 @@ total_original_panel_bytes=0
 for j,r in enumerate(users):
  idx=int(r["source_index"]);tile=ledger[idx]
  assert tile["tile_set_name"]+"/"+str(int(tile["local_id"]))==r["source_key"]
- archive=tile["selected_shard"]
+ archive=str(V119.relative_to(R)/tile["selected_shard"])
  A_png=zips[archive].read(tile["selected_zip_entry"])
  assert sha(A_png)==tile["selected_png_file_sha256"],("A PNG hash failure",r["source_key"])
  with Image.open(io.BytesIO(A_png)) as source:A=source.convert("RGBA")
