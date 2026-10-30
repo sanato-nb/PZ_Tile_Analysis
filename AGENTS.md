@@ -1,5 +1,7 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+> **v256 최신 평면도 (2026-10-30):** [단독 HTML](floorplan/current/v256_floorplan_unified_10042.html) · [설명서](floorplan/README_V256.md) · [매니페스트](floorplan/current/MANIFEST_V256.json). v255 최신 마스터 **10,042종 전부** 실제 코드에 압축 내장; v254 사용자68 우선. 원본 TMX 층/레이어·좌표 이동, 키/사물 검색, PNG/층별 CSV, 비활성455 점선 미리보기 추가. v240/v255 데이터베이스 및 모든 원본/과거 HTML은 불변. **439보류+16기존제외는 자동 벽/가구 활성화 금지; 공식 정체 인증0**. 다음 평면도 작업은 v256 사용.
+
 > **v255 최신 실제 통합 (2026-10-30):** [10,042종 전수 마스터+보류439 최신 이미지 정의+사용자68 우선판정](review/v255_latest_integrated_10042_2026-10-30/README.md) · [실물 SQLite 260테이블](analysis/current/v255/MANIFEST.json) · [최신 2D 평면도](floorplan/current/v255_floorplan_latest_user_priority.html). **우선순위 명시 사용자판정16 > 미선택 동의52의 기존 v252/v251 후보 > v252 > v251 / v250 > v249 > v248.** 활성9587/비활성455 불변, 439종은 시각 잠정값만 인스펙터에 표시, 게임 정체 최종 인증0. v240/v243 원본과 모든 PNG/TMX/사용자 CSV/SQLite 보존. 차기 채팅은 v255 우선 사용.
 
 > **v254 사용자 68종 CSV 반영 (2026-10-30):** [사용자 원문 CSV/수동 판정 해석](review/v254_user_manual68_2026-10-30/README.md). 사용자가 **미선택=기존 잠정 정체에 동의**한다고 직접 설명했으므로 52종은 `user_implicit_accept_prior_provisional`, 직접 판정 16종(identified4/part_only12)은 명시 선택으로 별도 보존. 원문 SHA256 `93f28b76503458c895847a080bb9da78e4514c2de7a0e6fdece9e80992fb0d04` 일치. **공식 TileZed/LocalID 최종 정체 인증0, 기존 보류/비활성/원본 SQLite/PNG/TMX 변경0.** 이전 v253 검수기에서 다시 68종 입력을 요청하지 말 것.
