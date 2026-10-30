@@ -1,0 +1,64 @@
+name: v247 selected held tiles true alternate TMX B-C
+on:
+  push:
+    branches: [review/v246_held439_real_alt_TMX_20261030]
+    paths:
+      - scripts/v247_render_selected_held_real_alternates.py
+      - .github/workflows/v247-true-alt-bc-held.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render_original_TMX_alternate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v247_render_selected_held_real_alternates.py
+            /review/v246_held439_real_alt_TMX_2026-10-30/*
+            /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v117_A_candidates_10042/MANIFEST.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v247_held439_alternate_true_BC_selected_2026-10-30/*
+      - name: Install renderer dependency before discovery
+        run: python3 -m pip install --quiet Pillow --break-system-packages
+      - name: Add real TMX source maps for selected alternative sites (no guessed locations)
+        run: |
+          python3 scripts/v247_render_selected_held_real_alternates.py --list-tmx > /tmp/selmap
+          cat > /tmp/v247sparse <<'EOF'
+          /scripts/v247_render_selected_held_real_alternates.py
+          /review/v246_held439_real_alt_TMX_2026-10-30/*
+          /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+          /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+          /review/v117_A_candidates_10042/MANIFEST.json
+          /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+          /review/v247_held439_alternate_true_BC_selected_2026-10-30/*
+          EOF
+          cat /tmp/selmap >> /tmp/v247sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/v247sparse
+      - name: Include only real original source PNG atlases actually referenced in those scenes
+        run: |
+          python3 scripts/v247_render_selected_held_real_alternates.py --list-png > /tmp/selpng
+          echo "Need original source PNG atlas count:"; wc -l /tmp/selpng
+          cat /tmp/selpng | sed 's|^|/|' >> /tmp/v247sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/v247sparse
+      - name: Verify original A and TMX hashes, render true alternative B/C and through-layer diagnostic
+        run: |
+          python3 -m pip install --quiet Pillow --break-system-packages
+          python3 -u scripts/v247_render_selected_held_real_alternates.py
+      - name: Commit only new v247 generated evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v247_held439_alternate_true_BC_selected_2026-10-30/
+          if ! git diff --cached --quiet; then
+            git commit -m "v247: render true alternate B/C at selected real original TMX locations"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
