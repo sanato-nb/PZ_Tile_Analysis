@@ -1,5 +1,7 @@
 # 프로젝트 좀보이드 B42 → Minecraft 맵 변환을 위한 타일 분석
 
+> **최신 상태 v255 (2026-10-30):** [최신 타일 통합 정의 10,042종 및 보류439·사용자68](review/v255_latest_integrated_10042_2026-10-30/README.md) · [최신 평면도 HTML](floorplan/current/v255_floorplan_latest_user_priority.html) · [실물 SQLite 260테이블/복원](analysis/current/v255/MANIFEST.json). 원본 9587 활성 / 455 비활성 보존, 사용자 동의/잠정 관찰과 공식 TileZed 인증을 구분(최종인증0).
+
 **현재 기준: v240 통합 데이터베이스 (2026-10-30)** · 원본 PNG/TMX로 개별 타일의 사물·부품·연결·방향을 분석하고, 나중에 Minecraft 월드로 재현하기 위한 프로젝트입니다.
 
 > **빠른 시작:** [현재 상태](docs/CURRENT_STATUS.md) · [저장소 안내](docs/REPOSITORY_MAP.md) · **[v242 이미지/스프라이트 분석 매뉴얼](docs/SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md)** · [빠른 판정표](docs/SPRITE_ANALYSIS_QUICK_REFERENCE.md) · [새 채팅/작업 이어가기](docs/NEXT_CHAT_PROMPT.md)
