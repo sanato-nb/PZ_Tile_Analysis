@@ -1,5 +1,7 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
+> **v254 사용자 68종 CSV 반영 (2026-10-30):** [사용자 원문 CSV/수동 판정 해석](review/v254_user_manual68_2026-10-30/README.md). 사용자가 **미선택=기존 잠정 정체에 동의**한다고 직접 설명했으므로 52종은 `user_implicit_accept_prior_provisional`, 직접 판정 16종(identified4/part_only12)은 명시 선택으로 별도 보존. 원문 SHA256 `93f28b76503458c895847a080bb9da78e4514c2de7a0e6fdece9e80992fb0d04` 일치. **공식 TileZed/LocalID 최종 정체 인증0, 기존 보류/비활성/원본 SQLite/PNG/TMX 변경0.** 이전 v253 검수기에서 다시 68종 입력을 요청하지 말 것.
+
 > **v254 필수 교체 (2026-10-30):** v253 수동검수기에서 로컬 PNG 410개 선택 후에도 이미지가 표시되지 않았으므로 [원본 A + 실제 B/C 68종 전부 내장 오프라인 검수기](review/v254_manual68_embedded_original_images_2026-10-30/PZ_USER_MANUAL_REVIEW_68_IMAGES_INCLUDED.html)로 교체했다. 실제 Chrome 오프라인 렌더 확인/PNG·RGBA 해시 검증 성공. 65+3 사용자가 직접 판정할 때 v254 HTML을 사용할 것. v251/v252/v253 사용자 미판정 및 보류·활성 상태 그대로.
 
 > **v253 사용자 직접 판독 대기 (2026-10-30):** v251에서 `medium`인65종 + 정체불명 `low` 3종 = **68종 사용자 수동검수용 HTML/빈 CSV** [review/v253_user_manual68_reviewkit_2026-10-30/README.md](review/v253_user_manual68_reviewkit_2026-10-30/README.md) 제공. **사용자 판정 수신 전에는 정체 확정·활성/보류 변경 금지**. 기존 v252 65종 AI 재판독 자료는 보존하고 v253 입력은 새 사용자 원장으로 받아야 한다.

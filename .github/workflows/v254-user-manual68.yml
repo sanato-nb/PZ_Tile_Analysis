@@ -1,0 +1,37 @@
+name: v254 recover and apply user's 68 manual reviews
+on:
+  push:
+    branches: [review/v254_user_manual68_blank_means_agree_20261030]
+    paths:
+      - scripts/v254_apply_user_manual68.py
+      - review/v254_user_manual68_2026-10-30/USER_NONEMPTY_FIELDS_VERBATIM.json
+      - .github/workflows/v254-user-manual68.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify_and_preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v254_apply_user_manual68.py
+            /review/v254_user_manual68_2026-10-30/*
+            /review/v253_user_manual68_reviewkit_2026-10-30/USER_REVIEW_68_BLANK_TEMPLATE.csv
+      - name: Reconstruct exact uploaded user CSV and audit 68 decisions
+        run: python3 scripts/v254_apply_user_manual68.py
+      - name: Commit only new versioned user evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v254_user_manual68_2026-10-30/
+          if ! git diff --cached --quiet; then
+            git commit -m "v254: user-uploaded 68 CSV exact SHA + 52 implicit agreement overlays"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
