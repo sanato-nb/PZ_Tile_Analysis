@@ -1,0 +1,44 @@
+name: v255 Integrate latest 439 A-first plus user68 into master and SQLite
+on:
+  push:
+    branches: [integration/v255_latest439_user68_floorplan_20261030]
+    paths:
+      - scripts/build_v255_latest_integration.py
+      - .github/workflows/v255-latest-integration.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_v255_latest_integration.py
+            /review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv
+            /review/v248_held251_full_alternate_BC_2026-10-30/ALL_251_A_FIRST_OBJECT_PART_HYPOTHESES.csv
+            /review/v249_held251_occlusion38_diagnostics_2026-10-30/A_FIRST_38_INDIVIDUAL_MORPHOLOGY_AND_PARTS.csv
+            /review/v250_held112_Afirst_individual_2026-10-30/ALL112_DETAILED.csv
+            /review/v251_held188_single_location_Afirst_2026-10-30/ALL188_COMPLETE_A_ORIGINAL_BC_AND_OCCLUDER_AUDIT.csv
+            /review/v252_manual_medium65_A_B_2026-10-30/ALL65_A_FIRST_MANUAL_REVIEW_AND_CORRECTIONS.csv
+            /review/v254_user_manual68_2026-10-30/ALL68_USER_PRIORITY_PROVISIONAL_OVERLAY.csv
+            /analysis/current/v240/*
+            /review/v255_latest_integrated_10042_2026-10-30/*
+            /analysis/current/v255/*
+      - name: SHA verify parent DB and generate latest master, append-only DB
+        run: python3 -u scripts/build_v255_latest_integration.py
+      - name: Store only v255 generated outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v255_latest_integrated_10042_2026-10-30/ analysis/current/v255/
+          if ! git diff --cached --quiet; then
+            git commit -m "v255: 10042 master/latest 439 and user68, SHA-verified append-only 260-table SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi

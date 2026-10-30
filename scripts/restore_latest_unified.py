@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 import shutil
 import sqlite3
+import subprocess
+import sys
 import tempfile
 import zlib
 
@@ -35,6 +37,18 @@ def restore(target: Path) -> dict:
     state = json.loads(repo_file("PROJECT_STATE.json").read_text(encoding="utf-8"))
     cp = state["latest_checkpoint"]
     db_state = state["unified_database"]
+    if db_state.get("version") == "v255":
+        if cp.get("version") != "v255":
+            raise ValueError("v255 physical manifest and checkpoint mismatch")
+        if target.expanduser().resolve().exists():
+            raise FileExistsError(f"Refusing to overwrite: {target}")
+        manifest = json.loads(repo_file("analysis/current/v255/MANIFEST.json").read_text("utf-8"))
+        if manifest["new_sqlite_sha256"] != db_state["sqlite_sha256"] or manifest["table_count"] != 260:
+            raise ValueError("Central v255 hash or physical table count differs")
+        output = target.expanduser().resolve()
+        subprocess.run([sys.executable, str(repo_file("scripts/restore_v255_master.py")), str(output)],check=True)
+        return {"version":"v255","table_count":260,"sha256":db_state["sqlite_sha256"],"path":str(output)}
+
     if db_state.get("version") == "v240":
         if cp.get("version") != "v240":
             raise ValueError("v240 physical manifest and checkpoint mismatch")

@@ -71,6 +71,29 @@ def render_readme(state):
     remaining = int(cp["expanded_unique_unobserved"])
     if observed + remaining != total:
         raise ValueError("README expanded observation total mismatch")
+    if version == "v255":
+        return (
+            f"{README_START}\n"
+            f"> **최신 통합: v255 ({cp['date']})** — 타일 정체 후보를 최신 자료로 통합했으며 공식 정체 인증과는 다릅니다.\n\n"
+            "| 항목 | 최신 기준 |\n|---|---:|\n"
+            "| 전체 TMX 고유 타일 | **10,042종** (기존 5,409 + 신규 4,633) |\n"
+            "| 이미지 잠정 관찰 기록 | **10,007/10,042 (99.65%)**, 역사적 기록 유지 |\n"
+            "| 활성 잠정 목록 / 비활성 보존 | **9,587종 / 455종** |\n"
+            "| 최근 A 우선 시각 재판독 통합 | **439종** (실제 다른 위치 251 + 단일 위치 188) |\n"
+            "| 사용자 수동 판정 우선 | **68종** (명시 16, 미선택=기존 잠정에 동의 52) |\n"
+            f"| 물리 SQLite | **{db['table_count']}테이블**, 부모 v240 258테이블 보존 |\n"
+            "| 공식 PNG↔Local ID / TileZed / 정체 최종 인증 | **0 / 0 / 0종** |\n\n"
+            "- [v255 전체 10,042종 잠정 마스터](review/v255_latest_integrated_10042_2026-10-30/MASTER_ALL_10042_LATEST_PREFERRED.csv)"
+            " · [보류439 최신 후보](review/v255_latest_integrated_10042_2026-10-30/HELD439_LATEST_VISUAL_USER_PRIORITY.csv)"
+            " · [사용자68 우선 판정](review/v255_latest_integrated_10042_2026-10-30/USER68_EFFECTIVE_ROWS.csv)\n"
+            f"- [물리 SQLite 매니페스트]({db['repo_manifest']})"
+            " · [복원 스크립트](scripts/restore_v255_master.py)"
+            " · [v255 최신 평면도](floorplan/current/v255_floorplan_latest_user_priority.html).\n"
+            "- B−C=0은 후속 레이어의 가림일 수 있습니다. 보류439와 사용자 제외16은 활성으로 승격하지 않았습니다."
+            " 사용자 의견과 AI 잠정 이름은 공식 게임 ID·Minecraft 블록 인증이 아닙니다.\n"
+            f"- SQLite SHA256: \`{db['sqlite_sha256']}\`. 기존 84 TMX, 원본 PNG, 과거 SQLite, 수동 기록, v240/v243 아티팩트 모두 보존합니다.\n"
+            f"{README_END}"
+        )
     if version == "v240":
         return (
             f"{README_START}\n"

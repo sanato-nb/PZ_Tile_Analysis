@@ -1,4 +1,4 @@
-name: README 최신 v240 상태 및 통합 DB 복원 검증
+name: README current integrated state and SQLite integrity verification
 on:
   pull_request:
     paths:
@@ -8,6 +8,7 @@ on:
       - scripts/generate_handoff.py
       - scripts/restore_latest_unified.py
       - scripts/restore_v240_master.py
+      - scripts/restore_v255_master.py
       - .github/workflows/docs-readme-check.yml
 permissions:
   contents: read
@@ -29,54 +30,69 @@ jobs:
             /scripts/validate_project.py
             /scripts/restore_latest_unified.py
             /scripts/restore_v240_master.py
-            /analysis/current/v240/*
+            /scripts/restore_v255_master.py
+            /analysis/current/v240/MANIFEST.json
+            /analysis/current/v255/*
             /review/v240_unified_10042_2026-10-30/MANIFEST.json
+            /review/v255_latest_integrated_10042_2026-10-30/MANIFEST.json
             /.github/workflows/docs-readme-check.yml
-      - name: Python syntax and current state schema
+      - name: Python syntax and state schema
         run: |
-          python3 -m py_compile scripts/generate_handoff.py scripts/validate_project.py scripts/restore_latest_unified.py scripts/restore_v240_master.py
+          python3 -m py_compile scripts/generate_handoff.py scripts/validate_project.py scripts/restore_latest_unified.py scripts/restore_v240_master.py scripts/restore_v255_master.py
           python3 scripts/validate_project.py
-      - name: README summary stays current and verified
+      - name: Latest README and handoff summary match authoritative manifests
         run: |
           python3 - <<'PY'
-          import sys,json
+          import json,sys
           from pathlib import Path
           sys.path.insert(0,'scripts')
-          from generate_handoff import render_readme,README_START,README_END
-          s=json.loads(Path('PROJECT_STATE.json').read_text(encoding='utf8'))
+          from generate_handoff import render_readme,render,README_START,README_END,START,END
+          s=json.loads(Path('PROJECT_STATE.json').read_text('utf8'))
           cp=s['latest_checkpoint'];db=s['unified_database']
-          m=json.loads(Path('analysis/current/v240/MANIFEST.json').read_text(encoding='utf8'))
-          assert cp['version']==db['version']=='v240'
-          assert (cp['expanded_84_tmx_unique_total'],cp['expanded_unique_observed'],cp['expanded_unique_unobserved'])==(10042,10007,35)
-          assert (m['active_total'],m['excluded_total_unique'],m['v240_sqlite_tables'])==(9587,455,258)
-          assert db['sqlite_sha256']==m['v240_sqlite_sha256']
+          m0=json.loads(Path('analysis/current/v240/MANIFEST.json').read_text('utf8'))
+          m=json.loads(Path('analysis/current/v255/MANIFEST.json').read_text('utf8'))
+          i=json.loads(Path('review/v255_latest_integrated_10042_2026-10-30/MANIFEST.json').read_text('utf8'))
+          assert cp['version']==db['version']=='v255'
+          assert cp['expanded_84_tmx_unique_total']==10042
+          assert (cp['expanded_unique_observed'],cp['expanded_unique_unobserved'])==(10007,35)
+          assert (cp['active_source_keys'],cp['inactive_source_keys'])==(9587,455)
+          assert (m['active'],m['inactive'],m['table_count'],m['integrity_check'])==(9587,455,260,'ok')
+          assert m['parent_sqlite_sha256']==m0['v240_sqlite_sha256']
+          assert db['sqlite_sha256']==m['new_sqlite_sha256']==i['new_db_sha256']
           assert (cp['mapping_verified'],cp['tilezed_verified'],cp['approved_final_certifications'])==(0,0,0)
-          readme=Path('README.md').read_text(encoding='utf8')
+          assert (i['held_439_enriched'],i['total_keys'])==(439,10042)
+          readme=Path('README.md').read_text('utf8')
           assert readme.count(README_START)==readme.count(README_END)==1
           _,rest=readme.split(README_START,1)
           content,_=rest.split(README_END,1)
-          assert README_START+content+README_END==render_readme(s),'README latest block stale: run generate_handoff.py'
-          assert '10,042' in readme and '9,587' in readme
-          assert 'B−C=0' in readme
-          print('PASS README latest v240 summary and A/B/C occlusion cautions')
+          assert README_START+content+README_END==render_readme(s),'README auto block stale: run generate_handoff.py'
+          handoff=Path('docs/HANDOFF.md').read_text('utf8')
+          assert handoff.count(START)==handoff.count(END)==1
+          _,rest=handoff.split(START,1)
+          content,_=rest.split(END,1)
+          assert START+content+END in render(s),'Handoff auto block stale'
+          assert '10,042' in readme and '9,587' in readme and 'B−C=0' in readme
+          print('PASS latest v255 summary, original v240 hash, historical constraints')
           PY
-      - name: Restore complete v240 SQLite, check all source keys and non-overwrite
+      - name: Restore latest verified SQLite and check existing records untouched
         run: |
-          python3 scripts/restore_latest_unified.py /tmp/pz_latest_v240_check.sqlite
+          python3 scripts/restore_latest_unified.py /tmp/pz_latest_v255_check.sqlite
           python3 - <<'PY'
           import sqlite3
-          with sqlite3.connect('/tmp/pz_latest_v240_check.sqlite') as c:
-              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
-              assert c.execute("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").fetchone()[0]==258
-              assert c.execute('SELECT COUNT(*) FROM v240_tile_master_10042').fetchone()[0]==10042
-              assert c.execute('SELECT COUNT(*) FROM v240_active_tile_master').fetchone()[0]==9587
-              assert c.execute('SELECT COUNT(*) FROM v240_excluded_archive_455').fetchone()[0]==455
-              assert c.execute('SELECT COUNT(*) FROM tile_catalog').fetchone()[0]==5409
-          print('PASS physical v240 master restored')
+          with sqlite3.connect('/tmp/pz_latest_v255_check.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert c.execute("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").fetchone()[0]==260
+            assert c.execute('SELECT COUNT(*) FROM v240_tile_master_10042').fetchone()[0]==10042
+            assert c.execute('SELECT COUNT(*) FROM v240_active_tile_master').fetchone()[0]==9587
+            assert c.execute('SELECT COUNT(*) FROM v240_excluded_archive_455').fetchone()[0]==455
+            assert c.execute('SELECT COUNT(*) FROM v255_latest_held439').fetchone()[0]==439
+            assert c.execute('SELECT COUNT(*) FROM v255_user68_manual_verdict').fetchone()[0]==68
+            assert c.execute('SELECT COUNT(*) FROM tile_catalog').fetchone()[0]==5409
+          print('PASS v255 integrity, source v240 snapshot and new 439 + 68 overlay')
           PY
-          if python3 scripts/restore_latest_unified.py /tmp/pz_latest_v240_check.sqlite; then
-            echo 'FAIL existing SQLite output overwritten'
+          if python3 scripts/restore_latest_unified.py /tmp/pz_latest_v255_check.sqlite; then
+            echo 'FAIL existing DB overwritten'
             exit 1
           else
-            echo 'PASS existing SQLite was not overwritten'
+            echo 'PASS existing database overwrite prevented'
           fi
