@@ -1,5 +1,7 @@
 # 프로젝트 문서 — v240 기준 안내
 
+**최신 보류 정체 이미지 분석 v251:** [역사적 보류439종 누적 검수 상태](HELD_439_V251_STATUS.md) · [188종 원본 A 이미지/유일한 TMX B/C/가림 추적](../review/v251_held188_single_location_Afirst_2026-10-30/README.md). 439종 개별 A 형태 기술과 공식 사물 인증을 혼동하지 않습니다.
+
 **최신 보류 이미지 재검수:** [v248 — 188종 제외 후 251종 A 원본·다른 실제 TMX 위치 정밀 분석](HELD_251_V248_STATUS.md). v240은 여전히 물리 데이터베이스·활성 상태의 기준이며, v248은 그 위의 잠정 판독 감사 오버레이입니다.
 
 **현재 통합 데이터**는 [현재 상태](CURRENT_STATUS.md) → [저장소 지도](REPOSITORY_MAP.md) 순으로, **새 이미지 분석**은 [v242 경험 기반 분석 매뉴얼](SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md) → [빠른 판정표](SPRITE_ANALYSIS_QUICK_REFERENCE.md) 순으로 읽으세요.
