@@ -1,5 +1,7 @@
 # v253 — 사용자가 직접 수동 판독할 68종 검수 키트
 
+> **중요 — 이미지 자동 표시 수정본 v254:** 이 문서의 이전 v253 HTML은 원본 A/B/C PNG가 자동 표시되지 않아, 사용자가 파일 410개를 선택해도 빈 카드로 보일 수 있다. **[A 원본·확대·B/C 증거가 68종 모두 자동 표시되는 최신 v254 오프라인 HTML](../v254_manual68_embedded_original_images_2026-10-30/PZ_USER_MANUAL_REVIEW_68_IMAGES_INCLUDED.html)**을 다운로드해 사용하라. 폴더 선택 불필요. [사용법/브라우저 검증](../v254_manual68_embedded_original_images_2026-10-30/README.md). 판정 CSV/JSON은 v253과 호환된다.
+
 사용자 요청: **"재검수대상이랑 정체 불명은 내가 수동으로 검수할게"**.
 
 **범위:** `review/v251_held188_single_location_Afirst_2026-10-30` 전체188종에서 `visual_confidence_not_official=medium`인 **65종** + `low` **3종**, 고유 `(tile_set_name, local_id)` 총 **68종**만 추출했다. `high_visual` 120종과 예전 다른 위치 검수 251종은 여기에 섞지 않았다.
