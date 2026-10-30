@@ -44,7 +44,9 @@ try:
   p=Path(td)/"single_held.tmx"
   a=["0"]*25;a[12]="19"
   p.write_text('<map version="1.10" tiledversion="1.10" orientation="orthogonal" width="5" height="5" tilewidth="32" tileheight="32"><tileset firstgid="1" name="constructedobjects_01" tilewidth="32" tileheight="32" tilecount="100" columns="10"/><layer name="FloorOverlay" width="5" height="5"><data encoding="csv">'+",".join(a)+'</data></layer></map>',encoding="utf8")
-  driver.find_element(By.ID,"files").send_keys(str(p))
+  file_input=driver.find_element(By.ID,"files")
+  driver.execute_script("arguments[0].value=''",file_input)
+  file_input.send_keys(str(p))
   w.until(lambda d:d.execute_script("return model!==null&&model.filename==='single_held.tmx'&&model.stats.placed===1"))
   driver.execute_script("inspect(2,2)")
   detail=driver.find_element(By.ID,"details").text
