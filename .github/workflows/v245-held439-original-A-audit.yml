@@ -1,0 +1,41 @@
+name: v245 verify all held439 original A pixels
+on:
+  push:
+    branches: [review/v245_held439_originalA_full_pixel_audit_20261030]
+    paths:
+      - scripts/v245_held439_all_A_png_sha.py
+      - .github/workflows/v245-held439-original-A-audit.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify_original_A_all_439:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v245_held439_all_A_png_sha.py
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v119_selected_A_new4633/MANIFEST.json
+            /review/v119_selected_A_new4633/selected_png_shards/*
+            /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+            /review/v244_held439_Afirst_visual_reopen_2026-10-30/A_FIRST_DIRECT_VISUAL_28_EXPERIMENT_QUEUE.csv
+            /review/v245_held439_complete_A_png_sha_2026-10-30/*
+      - run: python3 -m pip install --quiet Pillow --break-system-packages
+      - name: Verify every held A original raw RGBA pixel SHA and produce tight A-only contact
+        run: python3 -u scripts/v245_held439_all_A_png_sha.py
+      - name: Persist immutable evidence from new version only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v245_held439_complete_A_png_sha_2026-10-30/
+          if ! git diff --cached --quiet; then
+             git commit -m "v245: verify all 439 held A original PNG/RGBA hashes; six contact sheets"
+             git pull --rebase origin "$GITHUB_REF_NAME"
+             git push
+          fi
