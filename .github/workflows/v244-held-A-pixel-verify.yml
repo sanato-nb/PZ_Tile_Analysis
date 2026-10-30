@@ -1,0 +1,41 @@
+name: v244 verify 28 held true A RGBA and export evidence
+on:
+  push:
+    branches: [review/v244_reopen_held439_Afirst_batch28_20261030]
+    paths:
+      - scripts/v244_verify_held_A_RGBA_28.py
+      - .github/workflows/v244-held-A-pixel-verify.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify_source_pixel_crops:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          persist-credentials: true
+          sparse-checkout: |
+            /scripts/v244_verify_held_A_RGBA_28.py
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v119_selected_A_new4633/MANIFEST.json
+            /review/v119_selected_A_new4633/selected_png_shards/PZ_REP_A_00.zip
+            /review/v119_selected_A_new4633/selected_png_shards/PZ_REP_A_06.zip
+            /review/v244_held439_Afirst_visual_reopen_2026-10-30/*
+      - name: Install Pillow
+        run: python3 -m pip install --quiet Pillow --break-system-packages
+      - name: Reconstruct and hash-check exact A RGBAs from archived original crops
+        run: python3 -u scripts/v244_verify_held_A_RGBA_28.py
+      - name: Commit only append-only v244 evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v244_held439_Afirst_visual_reopen_2026-10-30/
+          if ! git diff --cached --quiet; then
+            git commit -m "v244: verified original A PNG/RGBA pixels for 28 held keys with evidence contact"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
