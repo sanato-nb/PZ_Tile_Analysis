@@ -1,0 +1,60 @@
+name: Real Minecraft mod 3D geometry vs completed PZ Rosewood furniture
+on:
+  push:
+    branches:
+      - work/rosewood-mc-real-model-matching-20261101
+    paths:
+      - .github/workflows/rosewood-real-mc-vs-pz-geometry.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/render_real_mc_mod_geometry_vs_pz_complete_furniture.py
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v2/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/geometry_samples/
+      - name: Install pillow
+        run: python3 -m pip install --quiet pillow
+      - name: Download selected mod jars temporarily and render mesh-neutral comparisons
+        run: |
+          python3 -m py_compile scripts/render_real_mc_mod_geometry_vs_pz_complete_furniture.py
+          python3 -u scripts/render_real_mc_mod_geometry_vs_pz_complete_furniture.py
+      - name: Verify actual geometry sources and zip
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,zipfile
+          p=Path("analysis/rosewood_furniture/2026-10-31/minecraft_model_geometry_comparison_v1")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          with (p/"REAL_MC_MODEL_GEOMETRY_COMPARISONS.csv").open(encoding="utf-8-sig",newline="") as f:
+              a=list(csv.DictReader(f))
+          assert m["samples"]==len(a)>=15
+          assert m["mc_actual_json_model_geometry_rendered"]>=5
+          assert len(list(p.glob("MC_REAL_MODEL_COMPARE_*.jpg")))==(len(a)+3)//4
+          assert all((p/x["comparison_image"]).is_file() for x in a)
+          assert all(x["pz_full_3d_vs_mc_full_3d_certified"]=="NO" for x in a)
+          with zipfile.ZipFile(p/"MC_REAL_GEOMETRY_COMPARISON_SHEETS.zip") as z:
+              assert z.testzip() is None
+          print("PASS ACTUAL JAR GEOMETRY",m)
+          PY
+      - name: Publish copyright-safe geometry comparison data
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/minecraft_model_geometry_comparison_v1/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(rosewood): visual neutral 3D render of actual Minecraft JAR models versus PZ assembled furniture"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
