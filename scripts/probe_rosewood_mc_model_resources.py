@@ -4,7 +4,7 @@ import json,urllib.request,zipfile,io
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 p=ROOT/"analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json"
-out=ROOT/"analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v1/MODEL_DIAGNOSTICS.json"
+out=ROOT/"analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v1/MODEL_DIAGNOSTICS_BBMODEL.json"
 data=json.loads(p.read_text("utf8"))
 targets={"decocraft":["double_bed_oak_white","piano_black","school_chair_gray","crt_tv"],
 "paladins":["white_fridge","basic_toilet"],
@@ -43,9 +43,27 @@ for label,ids in targets.items():
       if parentpath in files:
        modeltext+="\nPARENT "+parentpath+"\n"+z.read(parentpath).decode("utf8","replace")[:2500]
     except Exception:pass
+   bbmodel_info={}
+   try:
+    model=json.loads(z.read(modelpath).decode("utf8"))
+    if "bbmodel" in model.get("loader",""):
+     key=model["model"]
+     bns,brel=key.split(":",1) if ":" in key else (ns,key)
+     bp="assets/"+bns+"/"+brel
+     if bp in files:
+      raw=z.read(bp).decode("utf8")
+      blob=json.loads(raw)
+      bbmodel_info=dict(path=bp,bytes=len(raw),keys=list(blob),
+         elements_count=len(blob.get("elements",[])),
+         outliner_count=len(blob.get("outliner",[])),
+         textures_count=len(blob.get("textures",[])),
+         sample_elements=blob.get("elements",[])[:2],
+         sample_textures=blob.get("textures",[])[:2],
+         sample_outliner=blob.get("outliner",[])[:1])
+   except Exception as e:bbmodel_info={"error":str(e)}
    evidence.append(dict(mod=label,id=id,filetype_counts=all_filetypes,
      modelpath=modelpath,modelcontent=modeltext,substrings=candidates,
-     blockstate_exists=blockstate in files))
+     blockstate_exists=blockstate in files,bbmodel_info=bbmodel_info))
 out.parent.mkdir(parents=True,exist_ok=True)
 out.write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
 print("MODEL_PROBE_RECORDS",len(evidence))
