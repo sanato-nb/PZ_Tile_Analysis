@@ -31,3 +31,14 @@
 - previews/: 357장 개별 가구 원본 PNG 기반 조립 예시.
 - COMPLETE_FURNITURE_CONTACT_SHEETS.zip: 전체 접촉시트와 CSV, 보고서.
 - **아직 아님:** 공개 3D 모델 OBJ의 실제 색상·비례 렌더 확인; 실제 Minecraft 모드 블록 3D 모델의 화면 비교/레지스트리 ID 확정.
+
+
+## 3D 모델 정점/면까지 직접 읽은 대표 비교 샘플 추가
+
+- `geometry_samples/3D_GEOMETRY_EVIDENCE.csv`: 원본 타일 부품과 실제 Viewpoint OBJ의 기하 크기·면 개수·출처(20개 가구 사례).
+- 공개 OBJ 파일은 **26개 실제 로드 성공**, **17개 대표 가구의 모든 부품**을 형상 참고도로 조립해 비교. 나머지 3개(서부 피아노/PAWS 핀볼/주크박스)는 Viewpoint 0.1.19 바인딩이 없음을 확인.
+- `geometry_samples/SAMPLE_SHEET_01.jpg` 등 5장은 원본 **완성형 PNG / 3D 모델 형상**을 나란히 놓은 비교판. 색상·재질이 빠진 단색 3D 투영이므로 화면에 없는 모델 디테일은 확정 불가.
+- `geometry_samples/VISUAL_INSPECTION_20_FURNITURE.csv`: 형태·크기·마크 가구 후보를 개별 검토하고 미검증을 표시.
+- `geometry_samples/VISUAL_INSPECTION_README_KO.md`: 자세한 한국어 조립·대응 가이드.
+
+이 소스는 공개된 Viewpoint 3D 자료를 분석한 결과이며, **sour_kisel의 6244/6282 PZ3D 모델팩 전체를 직접 입수·대조한 것은 아니다.** 해당 팩은 별도 확보해야 실제 커버리지 확인 가능하다.
