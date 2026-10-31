@@ -37,3 +37,11 @@ python3 scripts/build_v257_original_properties.py --source-zip Tiles/B42_2026_09
 ZIP이 없으면 GitHub 메인·레거시 두 파일만으로 테스트할 수 있지만, 그것은 **정식 전체 7종 입력 병합이 아님**.
 
 빌드가 끝나면 `analysis/current/v257/MANIFEST.json`과 `v257.part*.b64`로 결과를 확인한다.
+
+## GitHub에 기록된 v257 병합 SQLite 복원
+
+```bash
+python3 scripts/restore_v257_master.py PZ_v257_repo_merge.sqlite
+```
+
+복원 도구는 v257 매니페스트의 zlib/SHA-256, SQLite 크기, `integrity_check`, 10,042개 타일·보류439·사용자68·활성9587·비활성455를 확인한다. 기존 SQLite를 덮어쓰지 않는다. 결과는 **GitHub의 메인+레거시 두 정의 파일만 사용한 잠정 속성 병합**이다.
