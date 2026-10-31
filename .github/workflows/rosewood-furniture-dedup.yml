@@ -1,0 +1,67 @@
+name: rosewood furniture true object duplicate audit
+
+on:
+  push:
+    branches:
+      - work/rosewood-dedup-furniture-20261031
+    paths:
+      - .github/workflows/rosewood-furniture-dedup.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  dedup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/deduplicate_rosewood_furniture_objects.py
+            /analysis/rosewood_furniture/2026-10-31/furniture_object_counts_v1/OBJECT_INSTANCES.csv
+            /analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1/
+      - name: Compile and inspect input
+        run: |
+          python3 -m py_compile scripts/deduplicate_rosewood_furniture_objects.py
+          test -s analysis/rosewood_furniture/2026-10-31/furniture_object_counts_v1/OBJECT_INSTANCES.csv
+      - name: Distinguish repeated models from actual duplicate location records
+        run: python3 -u scripts/deduplicate_rosewood_furniture_objects.py
+      - name: Verify no discarded independent objects and archive integrity
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile,sqlite3
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1")
+          m=json.loads((p/"MANIFEST.json").read_text("utf-8"))
+          assert m["original_object_instance_records"]==24363
+          assert m["original_object_instance_records"]==m["deduplicated_instance_records"]+m["exact_duplicate_removed"]
+          with (p/"OBJECT_INSTANCES_DEDUPLICATED.csv").open(encoding="utf-8-sig",newline="") as f:
+              a=list(csv.DictReader(f))
+          assert len(a)==m["deduplicated_instance_records"]
+          with (p/"REMOVED_EXACT_DUPLICATE_OBJECTS.csv").open(encoding="utf-8-sig",newline="") as f:
+              assert sum(1 for _ in csv.DictReader(f))==m["exact_duplicate_removed"]
+          from collections import Counter
+          c=Counter((x["zone"],x["scope"]) for x in a)
+          for r in m["counts_by_zone_scope"]:
+              assert c[r["zone"],r["scope"]]==r["deduplicated_placed_object_candidates"]
+          with sqlite3.connect(p/"ROSEWOOD_DEDUP_OBJECTS.sqlite") as con:
+              assert con.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          with zipfile.ZipFile(p/"ROSEWOOD_DEDUP_FURNITURE.zip") as z:
+              assert z.testzip() is None
+          print("SUCCESS",m["exact_duplicate_removed"],"identical records removed")
+          PY
+      - name: Commit audit to isolated review branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(rosewood): deduplicate identical object coordinates and inventory unique models"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
