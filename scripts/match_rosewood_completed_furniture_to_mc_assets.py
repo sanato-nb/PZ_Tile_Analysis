@@ -7,7 +7,7 @@ from pathlib import Path
 from collections import defaultdict,Counter
 
 D=Path(__file__).resolve().parents[1]/"analysis/rosewood_furniture/2026-10-31"
-OUT=D/"minecraft_real_furniture_matches_v1"
+OUT=D/"minecraft_real_furniture_matches_v2"
 ASSETS=D/"minecraft_actual_mod_registry_v2/REAL_MOD_ASSET_CANDIDATES.csv"
 PZ=D/"complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv"
 GEO=D/"complete_furniture_visual_3d_v1/geometry_samples/3D_GEOMETRY_EVIDENCE.csv"
@@ -54,6 +54,39 @@ SYN={
 "corner":{"corner"},"bunk":{"bunk"},"wall":{"wall"},
 "large":{"large","double"},"small":{"small","mini"}
 }
+# Curated direct checks from actual downloaded JAR blockstate filenames, never invented IDs.
+# "visual" means source complete furniture was viewed against the PZ neutral 3D sample,
+# but MC model is still NOT visually verified until its geometry is inspected.
+CURATED={
+ ("Bed","Large Oak"):("decocraft:double_bed_oak_white","DOUBLE_OAK_BED_FOOTPRINT_REVIEW"),
+ ("Couch","Blue Rattan"):("mcwfurnitures:blue_couch","COLOR_AND_SEATING_SIMILARITY_RATTAN_NOT_VERIFIED"),
+ ("Shelves","Large Metal"):("","NO_SUITABLE_METAL_SHELVING_BLOCK_IN_INSPECTED_JAR_IDS"),
+ ("Chair","Grey"):("pfm:gray_arm_chair","CHAIR_GRAY_COLOR_MATCH_SHAPE_REVIEW"),
+ ("Table","Large Oak"):("mcwfurnitures:oak_table","OAK_TABLE_NAME_AND_MATERIAL"),
+ ("Fridge","White"):("pfm:white_fridge","WHITE_FRIDGE_FUNCTION_AND_COLOR"),
+ ("Oven","Modern"):("pfm:gray_stove","STOVE_REPLACES_OVEN_CHECK_FRONT_SHAPE"),
+ ("Toilet","Fancy"):("pfm:basic_toilet","TOILET_FUNCTION_SHAPE_STYLE_REVIEW"),
+ ("Wardrobe","Oak"):("mcwfurnitures:oak_double_wardrobe","OAK_DOUBLE_WARDROBE"),
+ ("Computer","Desktop"):("refurbished_furniture:computer","COMPUTER_FUNCTION_BUT_PZ_CRT_1990S_STYLE_UNVERIFIED"),
+ ("Television","Antique"):("decocraft:crt_tv","RETRO_CRT_TV_SHAPE_MORE_PROMISING"),
+ ("Microwave","Chrome"):("pfm:iron_microwave","SILVER_MICROWAVE_STYLE_REVIEW"),
+ ("Counter","Steel"):("","WOODEN_COUNTERS_NOT_A_METAL_WORK_COUNTER"),
+ ("Machine","PAWS Pinball"):("","NO_PINBALL_MACHINE_IN_INSPECTED_JAR_ASSETS"),
+ ("Jukebox","Oldies"):("decocraft:jukebox","JUKEBOX_FUNCTION_MODEL_REVIEW"),
+ ("Piano","Western"):("decocraft:piano_upright_spruce","UPRIGHT_WOODEN_PIANO_MODEL_REVIEW"),
+ ("Grand Piano","Black"):("decocraft:piano_black","BLACK_PIANO_NOT_YET_VERIFIED_AS_GRAND"),
+ ("Locker","Metal"):("","METAL_LOCKER_SHAPE_UNVERIFIED"),
+ ("Table","Pool"):("decocraft:pool_table","POOL_TABLE_FUNCTION_SHAPE_REVIEW"),
+ ("Machine","Kaboom Arcade"):("decocraft:arcade_machine_pacman","ARCADE_MACHINE_DIFFERENT_GAME_SKIN"),
+ ("Machine","Dr. Oids Arcade"):("decocraft:arcade_machine_space_invaders","ARCADE_MACHINE_DIFFERENT_GAME_SKIN")
+}
+BAD_ACCESSORIES={
+ "Piano":["bench","stool"],"Grand Piano":["bench","stool"],
+ "Oven":["hood","extractor","stovetop"],"Bed":["bedside"],
+ "Television":["flipbook"],
+ "Table":["coffee","end","side","bedside"],
+ "Fridge":["open_bottom","open_top","open_full"]
+}
 def read(p):
  with p.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
 def write(p,rows):
@@ -73,6 +106,8 @@ def score(pz,mc):
  aliases=primary_aliases(name,group)
  hits=[a for a in aliases if a and alias_hit(mc["path_id"]+" "+mc["display_name"],a)]
  if not hits:return None
+ if any(word in mc["path_id"] for word in BAD_ACCESSORIES.get(name,[])):
+  return None
  hit=max(hits,key=len)
  candidate=set(tokens(mc["path_id"]+" "+mc["display_name"]))
  group_tokens=tokens(group)
@@ -127,10 +162,29 @@ def main():
    choices.append(x);seen.add(mod)
    if len(choices)==3:break
   best=choices[0] if choices else None
+  reviewed=CURATED.get((row["CustomName"],row["GroupName"]))
+  override_note=""
+  if reviewed is not None:
+   required_id,override_note=reviewed
+   if not required_id:
+    best=None
+    choices=[]
+   else:
+    asset=next((m for m in mods if m["registry_id"]==required_id),None)
+    if asset is None:raise RuntimeError("Curated ID not found in actual jar: "+required_id)
+    hit=score(row,asset)
+    if hit is None:
+     hit=dict(score=50,hit="CURATED_CATEGORY",style="",conflict="",mc=asset)
+    choices=[hit]+[c for c in choices if c["mc"]["registry_id"]!=required_id][:2]
+    best=choices[0]
   if not best or best["score"]<43:state="NO_REAL_ASSET_CANDIDATE"
   elif best["score"]>=67 and best["style"]:state="NAME_AND_STYLE_CANDIDATE"
   elif best["score"]>=56:state="FUNCTION_OR_NAME_CANDIDATE"
   else:state="BROAD_SUBSTITUTE_CANDIDATE"
+  if reviewed is not None and not reviewed[0]:
+   state="NO_SUITABLE_SHAPE_OR_MATERIAL_IN_INSPECTED_MODS"
+  elif reviewed is not None and reviewed[0]:
+   state="MANUALLY_SELECTED_REAL_JAR_ASSET_REVIEW_GEOMETRY"
   geo=geokeys.get((row["CustomName"],row["GroupName"]),{})
   data=dict(pz_model_name=row["CustomName"],pz_model_style=row["GroupName"],
       pz_complete_png_path=row["preview_path"],
@@ -142,6 +196,8 @@ def main():
       pz_original_sprite_grid=row["representative_sprite_grid_positions"],
       rosewood_core_provisional_instances=row["core_placed_object_candidates"],
       match_class=state,
+      curated_asset_verification_note=override_note,
+      manual_curated_from_verified_jar_asset="YES" if reviewed else "NO",
       mc_primary_mod=best["mc"]["source_mod"] if best else "",
       mc_primary_blockstate_id=best["mc"]["registry_id"] if best else "",
       mc_primary_blockstate_resource=best["mc"]["evidence_path"] if best else "",
