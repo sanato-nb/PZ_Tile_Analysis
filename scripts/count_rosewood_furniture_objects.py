@@ -264,7 +264,7 @@ def main():
       counts=counts,
       objects_by_zone_scope_kind_category=[dict(zone=z,scope=s,kind=k,category=cat,objects=qty) for (z,s,k,cat),qty in objects.most_common()],
       unresolved_by_zone_scope_reason=[dict(zone=z,scope=s,reason=why,parts=qty) for (z,s,why),qty in orphanCounts.most_common()],
-      examples=examples,
+      examples={scope+' | '+cat: examples[(scope,cat)] for scope,cat in examples},
       known_limits=[
        "Counts are not an exact complete-game physical furniture inventory. Rectangular TMX cell survey is a Rosewood core proxy plus buffer.",
        "Source SpriteGridPos only yields an anchored coordinate candidate; best of eight transforms selected via complete support, which needs visual checks.",
