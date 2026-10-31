@@ -67,10 +67,12 @@ def main():
             prior[k]=r
     if len(prior)!=10042:raise ValueError("v255 does not have 10042 keys")
     choices={}
+    props_by_slot=defaultdict(dict)
     collisions=[]
     for k,versions in values.items():
         ordered=sorted(versions,key=lambda x:(-PRIOR.get(x[0],0),x[0]))
         choices[k]=ordered[0][1]
+        props_by_slot[(k[0],k[1])][k[2]]=ordered[0][1]
         if len({v for f,v in versions})>1:
             collisions.append((k[0],k[1],k[2],json.dumps(ordered,ensure_ascii=False)))
     pngs=sorted(TILES.rglob("*.png"))
@@ -154,10 +156,7 @@ def main():
             else:
                 linked=False;state="LOCAL_ID_MAPPING_NOT_VERIFIED"
             counters["cell_"+state]+=1
-            props={a:choices[(name,i,a)] for (n,j,a) in []} if False else {}
-            if linked:
-                # Preserve all source values in SQLite; this is the display-preferred projection only.
-                props={attr:val for (n,j,attr),val in choices.items() if n==name and j==i}
+            props=props_by_slot.get((name,i),{}) if linked else {}
             old=prior.get((name,i),{}) if status=="MATCHED_TILESET_AND_GRID" else {}
             if old:counters["v255_image_cells_linked"]+=1
             files="|".join(sorted(original[(name,i)])) if linked else ""
