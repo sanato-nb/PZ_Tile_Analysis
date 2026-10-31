@@ -16,7 +16,7 @@ import cv2
 
 ROOT=Path(__file__).resolve().parents[1]
 D=ROOT/"analysis/rosewood_furniture/2026-10-31"
-OUT=D/"visual_pz_vs_mc_357_v2"
+OUT=D/"visual_pz_vs_mc_357_v3"
 SOURCE=D/"minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv"
 PZIMG=D/"complete_furniture_visual_3d_v1"
 CROSS=D/"complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv"
@@ -125,17 +125,18 @@ def texture(z,ns,texkey,texmap,cache):
    with Image.open(io.BytesIO(raw)) as im:cache[path]=im.convert("RGBA")
   except Exception:cache[path]=None
  return cache[path],path
-def rotate_elem(point,rotation):
+def rotate_elem(point,rotation,pivot=None):
  if not rotation:return point
  if isinstance(rotation,(list,tuple)):
-  x,y,z=point
+  if not isinstance(pivot,(list,tuple)) or len(pivot)!=3:pivot=(0,0,0)
+  x,y,z=[float(point[j])-float(pivot[j]) for j in range(3)]
   for axis,theta in zip(("x","y","z"),rotation):
    if abs(float(theta))<.0001:continue
    a=float(theta)*math.pi/180;c=math.cos(a);v=math.sin(a)
    if axis=="x":y,z=c*y-v*z,v*y+c*z
    elif axis=="y":x,z=c*x+v*z,-v*x+c*z
    else:x,y=c*x-v*y,v*x+c*y
-  return x,y,z
+  return tuple(x+float(o) for x,o in zip((x,y,z),pivot))
  axis=rotation.get("axis","y");angle=float(rotation.get("angle",0))*math.pi/180
  origin=rotation.get("origin",[8,8,8])
  x,y,z=[point[i]-origin[i] for i in range(3)]
@@ -165,7 +166,12 @@ def faces_for_element(e):
   if direction not in vertices or not isinstance(face,dict):continue
   a=face.get("uv",defaultuv(direction))
   if not isinstance(a,list) or len(a)!=4:continue
-  coords=[rotate_elem(v,e.get("rotation")) for v in vertices[direction]]
+  coords=[]
+  for v in vertices[direction]:
+   v=rotate_elem(v,e.get("rotation"),e.get("origin"))
+   for group in e.get("_bb_outliner_transforms",[]):
+    v=rotate_elem(v,group.get("rotation"),group.get("origin"))
+   coords.append(v)
   out.append((coords,face,a,direction))
  return out
 def project(p):
@@ -185,6 +191,17 @@ def read_bbmodel(z,namespace,basedata):
   elements=[e for e in bb.get("elements",[]) if isinstance(e,dict) and
     e.get("type")=="cube" and isinstance(e.get("faces"),dict)]
   uv=(float(res.get("width",64) or 64),float(res.get("height",64) or 64))
+  transforms={}
+  def outliner_walk(nodes,chain):
+   for node in nodes:
+    if isinstance(node,str):
+     transforms[node]=chain
+    elif isinstance(node,dict):
+     rot=node.get("rotation")
+     tr=[{"rotation":rot,"origin":node.get("origin",[0,0,0])}] if rot else []
+     outliner_walk(node.get("children",[]),tr+chain)
+  outliner_walk(bb.get("outliner",[]),[])
+  elements=[dict(e,_bb_outliner_transforms=transforms.get(e.get("uuid"),[])) for e in elements]
   result=(elements,uv)
  except Exception:result=(None,None)
  BBMODEL_CACHE[path]=result
@@ -192,7 +209,7 @@ def read_bbmodel(z,namespace,basedata):
 
 def render_model(z,ns,id,cache):
  refs,properties,state=state_refs(z,ns,id)
- triples=[];origins=[];textures_evidence=[];missing=[]
+ triples=[];origins=[];textures_evidence=[];missing=[];uses_bbmodel=False
  for ref in refs[:9]:
   model=ref["model"];pathmodel,texmap,elements,chain=resolve_model(z,ns,model)
   origins.extend(chain)
@@ -200,6 +217,7 @@ def render_model(z,ns,id,cache):
   if not elements and isinstance(pathmodel,dict) and pathmodel.get("loader")=="decocraft:bbmodel":
    bb_elements,bb_uv=read_bbmodel(z,ns,pathmodel)
    if bb_elements:
+    uses_bbmodel=True
     material=pathmodel.get("material","")
     if isinstance(material,str) and material:
      elements=[]
@@ -295,7 +313,7 @@ def render_model(z,ns,id,cache):
  out=Image.fromarray(cv2.cvtColor(canvas,cv2.COLOR_BGR2RGB))
  dims["texture_mapped_faces"]=true_textured
  dims["geometry_face_count"]=len(triples)
- return out,spans,("REAL_MOD_TEXTURED_JSON_ELEMENTS" if true_textured else "REAL_MOD_UNTEXTURED_JSON_ELEMENTS"),dims
+ return out,spans,("REAL_MOD_TEXTURED_BBMODEL_APPROX" if uses_bbmodel and true_textured else "REAL_MOD_UNTEXTURED_BBMODEL_APPROX" if uses_bbmodel else "REAL_MOD_TEXTURED_JSON_ELEMENTS" if true_textured else "REAL_MOD_UNTEXTURED_JSON_ELEMENTS"),dims
 def pzprops(con,representative):
  accum=defaultdict(set)
  ids=representative.get("representative_source_tile_ids","").split("|")
@@ -314,6 +332,32 @@ def gridbbox(data):
   if m:pos.append(tuple(map(int,m.groups())))
  if not pos:return None
  return [max(x for x,y in pos)-min(x for x,y in pos)+1,max(y for x,y in pos)-min(y for x,y in pos)+1]
+def crop_original_completed_sprite(preview):
+ # The upstream 550x460 source preview includes a title and neutral panel.
+ # Extract only actual completed furniture pixels, preserving the source image
+ # rather than passing a small screenshot of an earlier card.
+ source=preview.convert("RGB").crop((24,95,526,402))
+ rgb=np.asarray(source).astype(np.int16)
+ bg=np.array([224,231,234],dtype=np.int16)
+ diff=np.max(np.abs(rgb-bg),axis=2)
+ mask=(diff>22).astype(np.uint8)*255
+ # remove anything touching the panel border
+ mask[:8,:]=0;mask[-8:,:]=0;mask[:,:8]=0;mask[:,-8:]=0
+ n,labels,stats,centroids=cv2.connectedComponentsWithStats(mask,8)
+ approved=np.zeros(mask.shape,dtype=np.uint8)
+ for i in range(1,n):
+  area=stats[i,cv2.CC_STAT_AREA]
+  if area>=6:approved[labels==i]=255
+ ys,xs=np.nonzero(approved)
+ if len(xs)<6:return preview
+ pad=8
+ left=max(0,int(xs.min())-pad);top=max(0,int(ys.min())-pad)
+ right=min(source.width,int(xs.max())+pad+1)
+ bottom=min(source.height,int(ys.max())+pad+1)
+ image=source.convert("RGBA")
+ image.putalpha(Image.fromarray(approved))
+ return image.crop((left,top,right,bottom))
+
 def card(left,right,record,n):
  canvas=Image.new("RGB",(1170,535),(247,249,251));d=ImageDraw.Draw(canvas)
  f1=font_ko(23);f2=font_ko(15);f3=font_ko(14)
@@ -391,7 +435,7 @@ def build_html(rows):
  크기는 PZ 공개 3D 좌표 경계치/원본 SpriteGridPos, MC 모델 요소 경계치를 별도로 표기합니다. 충돌 박스와 혼동하지 마세요.</aside>
  <div class="search"><input id="q" placeholder="가구명·모드·블록 ID 검색" aria-label="검색">
  <select id="filter"><option value="">전체</option><option value="REAL_MOD_TEXTURED_JSON_ELEMENTS">원본 텍스처 3D 렌더 성공</option>
- <option value="NO_MODEL_GEOMETRY_IN_CURRENT_RENDERER">3D 렌더 미지원</option>
+ <option value="REAL_MOD_TEXTURED_BBMODEL_APPROX">Blockbench 텍스처 모델(근사)</option><option value="NO_MODEL_GEOMETRY_IN_CURRENT_RENDERER">3D 렌더 미지원</option>
  <option value="NO_MATCH">매칭 없음</option></select>
  <span id="count"></span></div></header><main id="main">__CONTENT__</main>
  <footer>소스: private PZ_Tile_Analysis; Java 1.20.1 Forge 모드 JAR 검사; Copyright belongs to original mod authors.</footer>
@@ -422,7 +466,7 @@ def main():
   footprint=gridbbox(src["representative_sprite_grid_positions"])
   widthheight=(f"{footprint[0]}×{footprint[1]}" if footprint else "1×1 (임시)")
   leftpath=PZIMG/row["pz_complete_png_path"]
-  with Image.open(leftpath) as loaded:left=loaded.convert("RGBA")
+  with Image.open(leftpath) as loaded:left=crop_original_completed_sprite(loaded)
   mod=row["mc_primary_mod"];rid=row["mc_primary_blockstate_id"]
   key=(mod,rid)
   if rid and mod in jars:
