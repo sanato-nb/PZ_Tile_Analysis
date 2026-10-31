@@ -66,9 +66,25 @@ def sources(zip_path):
     return {p.name: p.read_bytes() for p in paths}, "repository_main_plus_legacy_NOT_canonical"
 
 def create(args):
-    if OUT.exists() and any(OUT.iterdir()):
-        raise FileExistsError(f"Refusing to overwrite existing v257 release: {OUT}")
     src, source_status = sources(args.source_zip)
+    # An earlier repo-only one-file artifact on THIS working branch may be
+    # superseded by the richer two-file repo-only artifact. Never overwrite
+    # any canonical seven-source release, nor any unrecognized existing files.
+    if OUT.exists():
+        previous = OUT / "MANIFEST.json"
+        extra = [p for p in OUT.iterdir() if p.name != "README.md"]
+        if extra:
+            if not previous.is_file():
+                raise FileExistsError("Unrecognized v257 files, refusing overwrite")
+            meta = json.loads(previous.read_text("utf-8"))
+            if not (meta.get("source_status")=="repository_main_only_NOT_canonical"
+                    and source_status=="repository_main_plus_legacy_NOT_canonical"):
+                raise FileExistsError("Refusing to overwrite an existing v257 release")
+            expected = {previous.name}|{Path(p).name for p in meta["parts"]}
+            if {p.name for p in extra}!=expected:
+                raise FileExistsError("Unexpected files in v257 output directory")
+            for p in extra:
+                p.unlink()
     with tempfile.TemporaryDirectory(prefix="pz_v257_") as td:
         td = Path(td)
         parent = td/"v255.sqlite"
