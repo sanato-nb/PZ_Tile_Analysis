@@ -1,5 +1,7 @@
 # 프로젝트 좀보이드 B42 → Minecraft 맵 변환을 위한 타일 분석
 
+> **v257 타일 원본 속성 물리 병합 (2026-10-31):** [v257 출처·검증 매니페스트](analysis/current/v257/MANIFEST.json) · [SHA 검증 복원 도구](scripts/restore_v257_master.py) · [주의사항](analysis/current/v257/README.md). v255 260개 테이블을 유지하고 B42 `.tiles` 원본 속성을 새 테이블에 연결함. 10,042개 중 10,003개 대응, 39개 미대응. **이 릴리스는 GitHub에 있던 메인+레거시 두 파일 기준(잠정)이며, 사용자가 업로드한 정확한 7개 파일 ZIP 전체를 합친 정식 완료본은 아님.** 사용자68·보류439·활성9587/제외455 보존, 새 공식 정체 인증0. v256 평면도와 기존 판정은 그대로 유지.
+
 > **실행 가능한 최신 평면도 v256 (2026-10-30):** [단독 HTML 파일](floorplan/current/v256_floorplan_unified_10042.html) · [사용 방법](floorplan/README_V256.md). v255 통합 10,042종·사용자68 우선·보류439 표시를 실제 TMX 레이어/좌표 조회·검색·PNG/CSV 출력에 연결. 비활성455는 잠정 후보 위치만 점선 표시, 구조로 자동 활성화 금지. 본문 v255 DB 및 검수 기록은 원본 유지.
 
 > **최신 상태 v255 (2026-10-30):** [최신 타일 통합 정의 10,042종 및 보류439·사용자68](review/v255_latest_integrated_10042_2026-10-30/README.md) · [최신 평면도 HTML](floorplan/current/v255_floorplan_latest_user_priority.html) · [실물 SQLite 260테이블/복원](analysis/current/v255/MANIFEST.json). 원본 9587 활성 / 455 비활성 보존, 사용자 동의/잠정 관찰과 공식 TileZed 인증을 구분(최종인증0).
