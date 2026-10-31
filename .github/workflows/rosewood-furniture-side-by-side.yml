@@ -1,0 +1,70 @@
+name: Rosewood actual completed PZ vs Minecraft furniture visual comparison with size and properties
+on:
+  push:
+    branches:
+      - work/rosewood-furniture-visual-side-by-side-20261101
+    paths:
+      - .github/workflows/rosewood-furniture-side-by-side.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  visual-gallery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_rosewood_side_by_side_gallery.py
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/current/v259/PZ_v259_all_png_tile_definitions.sqlite
+      - name: Install image renderer
+        run: python3 -m pip install -q pillow numpy opencv-python-headless
+      - name: Render original PZ completed PNG and actual Minecraft mod JAR texture model when supported
+        run: |
+          python3 -m py_compile scripts/build_rosewood_side_by_side_gallery.py
+          python3 -u scripts/build_rosewood_side_by_side_gallery.py
+      - name: Verify original source evidence, 357 cards and property extraction
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v3")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["total_pz_style_comparison_cards"]==357
+          assert m["source_PZ_previews"]==357
+          assert m["source_MC_mod_JARs"]>=4
+          assert len(list((p/"cards").glob("*.jpg")))==357
+          assert len(list((p/"contact_sheets").glob("*.jpg")))==90
+          with (p/"ALL_357_PZ_MC_VISUAL_SIZE_PROPERTIES.csv").open(encoding="utf-8-sig",newline="") as f:
+              r=list(csv.DictReader(f))
+          assert len(r)==357
+          assert all(x["pz_properties_json"].startswith("{") for x in r)
+          assert all(x["mc_functional_capabilities"]=="NOT_VERIFIED_BY_RUNTIME" for x in r)
+          assert all(x["pz_original_to_mc_visual_match"]=="NOT_CERTIFIED" for x in r)
+          assert (p/"INDEX.html").read_text("utf8").count('<article class="tile"')==357
+          assert sum(m["render_state_counts"].values())==357
+          with zipfile.ZipFile(p/"ROSEWOOD_357_SIDE_BY_SIDE_SIZE_PROPERTIES.zip") as z:
+              assert z.testzip() is None
+              assert "INDEX.html" in z.namelist()
+          print("VALID",json.dumps(m))
+          PY
+      - name: Commit resulting review cards, not original mod copyrighted files
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v3/
+          if ! git diff --cached --quiet; then
+            git commit -m "gallery(rosewood): 357 side-by-side PZ completed furniture vs source MC textured models with dimensions and original properties"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
