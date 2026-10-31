@@ -1,0 +1,87 @@
+name: rosewood original TMX furniture inventory
+
+on:
+  push:
+    branches:
+      - work/rosewood-furniture-inventory-20261031
+    paths:
+      - .github/workflows/rosewood-furniture-inventory.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_rosewood_furniture_inventory.py
+            /analysis/current/v259/PZ_v259_all_png_tile_definitions.sqlite
+            /review/v255_latest_integrated_10042_2026-10-30/MASTER_ALL_10042_LATEST_PREFERRED.csv
+            /B4220.3_MapExport_256/tmx/28_4[2-9].tmx
+            /B4220.3_MapExport_256/tmx/29_4[2-9].tmx
+            /B4220.3_MapExport_256/tmx/30_4[2-9].tmx
+            /B4220.3_MapExport_256/tmx/31_4[2-9].tmx
+            /B4220.3_MapExport_256/tmx/32_4[2-9].tmx
+            /B4220.3_MapExport_256/tmx/33_4[2-9].tmx
+            /B4220.3_MapExport_256/tmx/34_4[2-9].tmx
+      - name: Check source and compile extractor
+        shell: bash
+        run: |
+          python3 -m py_compile scripts/build_rosewood_furniture_inventory.py
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("B4220.3_MapExport_256/tmx")
+          targets=[p/f"{x}_{y}.tmx" for x in range(28,35) for y in range(42,50)]
+          missing=[str(x) for x in targets if not x.is_file()]
+          assert not missing, missing
+          assert Path("analysis/current/v259/PZ_v259_all_png_tile_definitions.sqlite").is_file()
+          print("TMX sources:",len(targets),"total bytes",sum(x.stat().st_size for x in targets))
+          PY
+      - name: Extract all furniture and fixture candidates from 56 TMX maps
+        run: python3 -u scripts/build_rosewood_furniture_inventory.py
+      - name: Verify complete coordinate catalog and source-grounding
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,gzip,zipfile,sqlite3
+          p=Path("analysis/rosewood_furniture/2026-10-31")
+          d=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          c=d["counts"]
+          assert c["scanned_tmx"]==56
+          assert c["scanned_layers"]>100
+          assert c["all_gid_placements"]>c["selected_sprite_part_placements"]>100
+          assert c["distinct_selected_tile_ids"]==c["unique_direct_ids"]+c["unique_special_review_ids"]
+          with (p/"ALL_FURNITURE_TILE_IDS.csv").open(encoding="utf-8-sig",newline="") as f:
+              a=list(csv.DictReader(f))
+          assert len(a)==c["distinct_selected_tile_ids"]
+          with sqlite3.connect(p/"ROSEWOOD_FURNITURE.sqlite") as con:
+              assert con.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+              assert con.execute("SELECT COUNT(*) FROM furniture_tiles").fetchone()[0]==len(a)
+          with gzip.open(p/"FURNITURE_PLACEMENTS.csv.gz","rt",encoding="utf-8-sig",newline="") as f:
+              n=sum(1 for row in csv.reader(f))-1
+          assert n==c["selected_sprite_part_placements"]
+          for archive in ["ROSEWOOD_FURNITURE_CSV.zip","ROSEWOOD_FURNITURE_SQLITE.zip"]:
+              with zipfile.ZipFile(p/archive) as z:assert z.testzip() is None
+          print("PASS",json.dumps(c,ensure_ascii=False))
+          PY
+      - name: Save inventory to new non-destructive branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(rosewood): source-grounded complete furniture tile inventory"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
