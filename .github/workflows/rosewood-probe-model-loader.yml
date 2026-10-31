@@ -21,7 +21,7 @@ jobs:
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v1/MODEL_DIAGNOSTICS.json
+          git add --sparse analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v1/MODEL_DIAGNOSTICS_BBMODEL.json
           git commit -m "analysis(rosewood): model loader metadata for real MC furniture image renderer"
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push origin "HEAD:$GITHUB_REF_NAME"
