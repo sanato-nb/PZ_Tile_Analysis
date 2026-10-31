@@ -1,0 +1,64 @@
+name: Package Rosewood completed PZ furniture and real Minecraft matches
+on:
+  push:
+    branches:
+      - work/rosewood-mc-real-model-matching-20261101
+    paths:
+      - .github/workflows/rosewood-mc-match-package.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v3/
+            /analysis/rosewood_furniture/2026-10-31/minecraft_model_geometry_comparison_v1/
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/geometry_samples/SAMPLE_SHEET_*.jpg
+      - name: Build complete self-contained 357 PZ-to-MC comparison evidence archive
+        run: |
+          python3 - <<'PY'
+          import json,csv,zipfile
+          from pathlib import Path
+          base=Path("analysis/rosewood_furniture/2026-10-31")
+          m=base/"minecraft_real_furniture_matches_v3"
+          g=base/"minecraft_model_geometry_comparison_v1"
+          img=base/"complete_furniture_visual_3d_v1/previews"
+          original=json.loads((m/"MANIFEST.json").read_text("utf8"))
+          assert original["pz_styles"]==357
+          assert len(list(img.glob("*.png")))==357
+          allfiles=[]
+          for p in sorted(m.glob("*")):
+              if p.is_file() and p.suffix.lower() in (".csv",".md",".json"):allfiles.append((p,"MC_357_MATCHES/"+p.name))
+          for p in sorted(g.glob("*")):
+              if p.is_file() and p.suffix.lower() in (".csv",".md",".json",".jpg",".png"):allfiles.append((p,"MC_3D_SHAPE_SAMPLES/"+p.name))
+          for p in sorted(img.glob("*.png")):allfiles.append((p,"PZ_357_COMPLETE_FURNITURE_PREVIEWS/"+p.name))
+          x=base/"minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json"
+          allfiles.append((x,"MOD_RELEASE_SOURCE_HASHES.json"))
+          dest=m/"ROSEWOOD_357_PZ_COMPLETE_TO_REAL_MC_MOD_REVIEW_ALL.zip"
+          with zipfile.ZipFile(dest,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+              for file,arcname in allfiles:z.write(file,arcname)
+          with zipfile.ZipFile(dest) as z:
+              assert z.testzip() is None
+              assert len(z.namelist())==len(allfiles)
+          print("COMPLETE MATCH REVIEW ARCHIVE",dest.stat().st_size,len(allfiles),"files")
+          PY
+      - name: Publish review archive on isolated research branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v3/ROSEWOOD_357_PZ_COMPLETE_TO_REAL_MC_MOD_REVIEW_ALL.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "package(rosewood): 357 completed PZ furniture images, exact MC jar asset candidates and 18 geometry reviews"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
