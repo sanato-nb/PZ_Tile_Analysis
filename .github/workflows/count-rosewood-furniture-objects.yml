@@ -1,0 +1,71 @@
+name: count actual Rosewood multi-tile furniture objects
+
+on:
+  push:
+    branches:
+      - work/rosewood-furniture-objects-20261031
+    paths:
+      - .github/workflows/count-rosewood-furniture-objects.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/count_rosewood_furniture_objects.py
+            /analysis/rosewood_furniture/2026-10-31/FURNITURE_PLACEMENTS.csv.gz
+            /analysis/rosewood_furniture/2026-10-31/FURNITURE_ASSEMBLY_TEMPLATE_CANDIDATES.csv
+            /analysis/rosewood_furniture/2026-10-31/MINECRAFT_MATCH_PRIORITY.csv
+            /analysis/rosewood_furniture/2026-10-31/furniture_object_counts_v1/
+      - name: Compile and check prerequisites
+        run: |
+          python3 -m py_compile scripts/count_rosewood_furniture_objects.py
+          echo 'JSON key fix verified; building preserved-source inventory'
+          test -s analysis/rosewood_furniture/2026-10-31/FURNITURE_PLACEMENTS.csv.gz
+          test -s analysis/rosewood_furniture/2026-10-31/FURNITURE_ASSEMBLY_TEMPLATE_CANDIDATES.csv
+          test -s analysis/rosewood_furniture/2026-10-31/MINECRAFT_MATCH_PRIORITY.csv
+      - name: Assemble complete furniture instances from original sprite grid metadata
+        run: python3 -u scripts/count_rosewood_furniture_objects.py
+      - name: Verify instance-to-sprite conservation and SQLite
+        run: |
+          python3 - <<'PY'
+          import csv,json,sqlite3,zipfile
+          from pathlib import Path
+          p=Path('analysis/rosewood_furniture/2026-10-31/furniture_object_counts_v1')
+          j=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          c=j['counts']
+          assert c['total_sprite_placements']==94073
+          assert c['core_primary_count']+c['buffer_primary_count']==c['primary_furniture_objects']
+          with (p/'OBJECT_INSTANCES.csv').open(encoding='utf-8-sig',newline='') as f:
+            rows=list(csv.DictReader(f))
+          assert sum(int(r['sprite_part_count']) for r in rows)+c['unresolved_sprite_parts']==94073
+          assert len(rows)==c['reconstructed_full_multisprite_instances']+c['provisional_single_sprite_instances']
+          with sqlite3.connect(p/'ROSEWOOD_FURNITURE_OBJECTS.sqlite') as con:
+            assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert con.execute('SELECT COUNT(*) FROM objects').fetchone()[0]==len(rows)
+          with zipfile.ZipFile(p/'ROSEWOOD_OBJECT_COUNTS_COMPLETE.zip') as z:
+            assert z.testzip() is None
+          print('VALID',json.dumps(c,ensure_ascii=False))
+          PY
+      - name: Commit only object-based count results
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_object_counts_v1/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(rosewood): full multi-tile furniture objects and unresolved tile pieces"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
