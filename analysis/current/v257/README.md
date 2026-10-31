@@ -14,7 +14,7 @@
 
 현재 GitHub 저장소의 `Tiles/newtiledefinitions.tiles` 크기는 **2,973,137바이트**이고, 2026-10-31 채팅에서 사용자가 전달한 `tiledef.zip` 내부의 `newtiledefinitions.tiles` 크기는 **2,972,120바이트**야. **동일한 파일로 간주하면 안 된다.**
 
-- **현재 GitHub 소스만 이용한 빌드:** `repository_main_only_NOT_canonical`. 기존 누적 DB에 GitHub 메인 타일 정의 *한 파일*의 속성을 추가한 미완전 통합. `canonical_full_source=false`.
+- **현재 GitHub 소스만 이용한 빌드:** `repository_main_only_NOT_canonical`. 기존 누적 DB에 GitHub 메인·레거시 타일 정의 *두 파일*의 속성을 추가한 미완전 통합. `canonical_full_source=false`.
 - **사용자가 올린 정확한 ZIP을 GitHub에도 추가한 빌드:** `Tiles/B42_2026_09_29_tiledef.zip`에 바이너리 그대로 추가. ZIP SHA256은 `ffba6f55e178ef0c4622906bfdd670c6a7cae779cf6dbe4e7d4b0dce45c18171`이어야 함. 이 7개 .tiles 파일을 모두 사용해 완전한 원본 정의층 생성. `canonical_full_source=true`.
 
 **이 README가 있다고 해서 최종 물리 병합이 이미 완료되었다는 뜻은 아니다.** GitHub Action이 실행되어 `analysis/current/v257/MANIFEST.json`을 게시하고 SHA 및 `integrity_check`를 통과해야 완료 상태가 된다. 어떤 소스로 빌드됐는지는 반드시 그 매니페스트의 `source_status`를 확인할 것.
@@ -34,6 +34,6 @@
 python3 scripts/build_v257_original_properties.py --source-zip Tiles/B42_2026_09_29_tiledef.zip
 ```
 
-ZIP이 없으면 GitHub 메인 파일만으로 테스트할 수 있지만, 그것은 **정식 전체 7종 입력 병합이 아님**.
+ZIP이 없으면 GitHub 메인·레거시 두 파일만으로 테스트할 수 있지만, 그것은 **정식 전체 7종 입력 병합이 아님**.
 
 빌드가 끝나면 `analysis/current/v257/MANIFEST.json`과 `v257.part*.b64`로 결과를 확인한다.
