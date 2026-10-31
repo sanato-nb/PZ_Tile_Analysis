@@ -28,7 +28,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import json,csv
-          p=Path("analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v1")
+          p=Path("analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2")
           x=json.loads((p/"MANIFEST.json").read_text("utf8"))
           assert x["mods_jar_inspected"]>=3,(x["mods_jar_inspected"],(p/"ERRORS.csv").read_text("utf8")[:800])
           with (p/"REAL_MOD_ASSET_CANDIDATES.csv").open(encoding="utf-8-sig",newline="") as f:
@@ -43,7 +43,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v1/
+          git add --sparse analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/
           if ! git diff --cached --quiet; then
             git commit -m "data(rosewood): actual Forge 1.20.1 mod JAR asset IDs and SHA provenance"
             git pull --rebase origin "$GITHUB_REF_NAME"
