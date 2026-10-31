@@ -1,0 +1,68 @@
+name: v257 Preserve v255 and physically merge repository B42 tile definitions
+on:
+  push:
+    branches:
+      - integration/v257-official-tiles-20261031
+    paths:
+      - scripts/v257_merge_repo_tiledefs.py
+      - .github/workflows/v257-repo-definitions-merge.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/restore_v255_master.py
+            /scripts/v257_merge_repo_tiledefs.py
+            /analysis/current/v255/*
+            /Tiles/newtiledefinitions.tiles
+            /Tiles/tiledefinitions.tiles
+            /.github/workflows/v257-repo-definitions-merge.yml
+      - name: Restore SHA verified 260 table v255 and merge source tile definitions
+        run: python3 -u scripts/v257_merge_repo_tiledefs.py
+      - name: Verify reproducible compressed payload
+        run: |
+          python3 - <<'PY'
+          import json,hashlib,base64,zlib,sqlite3,tempfile,pathlib
+          root=pathlib.Path("analysis/current/v257")
+          m=json.loads((root/"MANIFEST.json").read_text("utf8"))
+          b64="".join(pathlib.Path(p).read_text("ascii").strip() for p in m["parts"])
+          data=zlib.decompress(base64.b64decode(b64,validate=True))
+          assert hashlib.sha256(data).hexdigest()==m["merged_sqlite_sha256"]
+          assert len(data)==m["merged_sqlite_bytes"]
+          with tempfile.TemporaryDirectory() as tmp:
+           p=pathlib.Path(tmp)/"v257.sqlite";p.write_bytes(data)
+           c=sqlite3.connect(p)
+           assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+           assert c.execute("SELECT count(*) FROM v257_master_10042").fetchone()[0]==10042
+           assert c.execute("SELECT count(*) FROM v255_user68_manual_verdict").fetchone()[0]==68
+           assert c.execute("SELECT count(*) FROM v255_latest_held439").fetchone()[0]==439
+           assert c.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'").fetchone()[0]>=260
+          print("PASS v257 physical merge archive integrity and historical preservation")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v257-repository-tiledefs-physical-merged-parts
+          path: |
+            analysis/current/v257/*.b64
+            analysis/current/v257/MANIFEST.json
+            analysis/current/v257/REPORT.md
+          retention-days: 30
+      - name: Commit validated v257 result only on integration branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v257/
+          if ! git diff --cached --quiet; then
+            git commit -m "v257: SHA verified physical 260 table v255 plus repository B42 definitions"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi
