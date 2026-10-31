@@ -1,0 +1,62 @@
+name: Rosewood complete PZ 3D geometry visual comparison samples
+on:
+  push:
+    branches:
+      - work/rosewood-3d-complete-furniture-20261101
+    paths:
+      - .github/workflows/rosewood-pz3d-geometry-samples.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+jobs:
+  examine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/render_rosewood_pz3d_geometry_samples.py
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Install image library
+        run: python3 -m pip install --quiet pillow
+      - name: Read authored OBJ geometry for diverse complete object shapes
+        run: |
+          python3 -m py_compile scripts/render_rosewood_pz3d_geometry_samples.py
+          python3 -u scripts/render_rosewood_pz3d_geometry_samples.py
+      - name: Validate actual geometry evidence, sample sheets, and ZIP
+        run: |
+          python3 - <<'PY'
+          import json,csv,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/geometry_samples")
+          j=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          with (p/"3D_GEOMETRY_EVIDENCE.csv").open(encoding="utf-8-sig",newline="") as f:
+              a=list(csv.DictReader(f))
+          assert len(a)==j["count"]
+          assert j["count"]>=15
+          assert j["3d_meshes_fetched_ok"]>=10
+          assert len(list(p.glob("SAMPLE_SHEET_*.jpg")))==(len(a)+3)//4
+          for x in a:
+              assert (p/x["side_by_side_preview"]).is_file()
+              if x["source_parts_with_rendered_3d_meshes"]!="0":
+                  assert int(x["triangles"])>0
+          with zipfile.ZipFile(p/"3D_GEOMETRY_REVIEW_SAMPLE.zip") as z:
+              assert z.testzip() is None
+          print("VALID GEOMETRY EVIDENCE",json.dumps(j))
+          PY
+      - name: Save derived non-texture research geometry evidence
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/geometry_samples/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(rosewood): compare complete original PNG forms with authored 3D OBJ geometry samples"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
