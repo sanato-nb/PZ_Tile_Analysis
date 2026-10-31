@@ -11,7 +11,7 @@ import csv,hashlib,io,json,re,time,urllib.parse,urllib.request,zipfile
 from collections import Counter,defaultdict
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/"analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v1"
+OUT=ROOT/"analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2"
 MODS=[
  ("paladins","paladins-furniture"),
  ("macaws","macaws-furniture"),
@@ -39,17 +39,28 @@ def main():
     for label,slug in MODS:
       rec={"label":label,"modrinth_project_slug":slug,"minecraft":TARGET,"loader":"forge"}
       try:
-        params=urllib.parse.urlencode({"loaders":json.dumps(["forge"]),
-                 "game_versions":json.dumps([TARGET]),"include_changelog":"false"})
-        versions=get_json(f"https://api.modrinth.com/v2/project/{slug}/version?{params}")
-        versions=[v for v in versions if "forge" in v.get("loaders",[]) and TARGET in v.get("game_versions",[]) 
-          and v.get("version_type")=="release" and v.get("date_published","")<"2026-11-02"]
-        if not versions:raise RuntimeError("No matching release versions")
-        versions.sort(key=lambda v:(v["date_published"],v["id"]),reverse=True)
-        selected=versions[0]
-        modfiles=[f for f in selected["files"] if f["filename"].endswith(".jar")]
-        if not modfiles:raise RuntimeError("No .jar in Modrinth version")
-        best=sorted(modfiles,key=lambda f:(not f.get("primary",False),"-sources" in f["filename"],"-dev" in f["filename"]))[0]
+        if label=="refurbished":
+            # The author publishes the 1.20.1 Forge release on CurseForge;
+            # it does not have the Modrinth project slug used above.
+            file_id=7110922
+            filename="refurbished_furniture-forge-1.20.1-1.0.20.jar"
+            selected=dict(id="curseforge-7110922",version_number="1.0.20",
+                date_published="2025-10-15T00:00:00Z")
+            best=dict(filename=filename,primary=True,hashes={},
+                url="https://mediafilez.forgecdn.net/files/7110/922/"+filename)
+            rec["source_url"]="https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture/files/7110922"
+        else:
+            params=urllib.parse.urlencode({"loaders":json.dumps(["forge"]),
+                     "game_versions":json.dumps([TARGET]),"include_changelog":"false"})
+            versions=get_json(f"https://api.modrinth.com/v2/project/{slug}/version?{params}")
+            versions=[v for v in versions if "forge" in v.get("loaders",[]) and TARGET in v.get("game_versions",[]) 
+              and v.get("version_type")=="release" and v.get("date_published","")<"2026-11-02"]
+            if not versions:raise RuntimeError("No matching release versions")
+            versions.sort(key=lambda v:(v["date_published"],v["id"]),reverse=True)
+            selected=versions[0]
+            modfiles=[f for f in selected["files"] if f["filename"].endswith(".jar")]
+            if not modfiles:raise RuntimeError("No .jar in Modrinth version")
+            best=sorted(modfiles,key=lambda f:(not f.get("primary",False),"-sources" in f["filename"],"-dev" in f["filename"]))[0]
         jar_bytes=fetch(best["url"],180)
         sha=hashlib.sha512(jar_bytes).hexdigest()
         if sha!=best.get("hashes",{}).get("sha512",sha):raise RuntimeError("File hash mismatch")
