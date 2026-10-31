@@ -1,0 +1,26 @@
+{
+  "project": "Rosewood PZ finished sprite vs actual MC mod model",
+  "total_pz_style_comparison_cards": 357,
+  "source_PZ_previews": 357,
+  "source_MC_mod_JARs": 5,
+  "distinct_mod_blockstates_render_attempted": 113,
+  "render_state_counts": {
+    "NO_MODEL_GEOMETRY_IN_CURRENT_RENDERER": 117,
+    "REAL_MOD_UNTEXTURED_JSON_ELEMENTS": 125,
+    "REAL_MOD_TEXTURED_JSON_ELEMENTS": 93,
+    "NO_MC_ASSET_SELECTED": 22
+  },
+  "contact_sheet_count": 90,
+  "source_tile_properties": "v259 SQLite source_attributes raw attribute-values",
+  "source_pz_bbox": "Original public Viewpoint 3D sample bbox if available; not collision size",
+  "source_mc_bbox": "Sampled JSON cuboid elements bounding box; model-local, not collision shape or whole multi-part block footprint",
+  "no_false_claims": [
+    "Textures used only when actual source texture path resolved",
+    "Minecraft non-JSON loaders cannot be rendered accurately by simple JSON element renderer",
+    "Original PZ multi-tile completed visual subject to provisional isometric assumptions",
+    "PZ properties and MC game runtime interaction states not interchangeable",
+    "No 1:1 visual identical match certified",
+    "JAR textures/models not redistributed, derived research comparison contact cards only"
+  ],
+  "mc_version": "1.20.1 Forge"
+}
