@@ -18,7 +18,7 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v3/
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/
             /analysis/rosewood_furniture/2026-10-31/minecraft_model_geometry_comparison_v1/
             /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
             /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
@@ -29,7 +29,7 @@ jobs:
           import json,csv,zipfile
           from pathlib import Path
           base=Path("analysis/rosewood_furniture/2026-10-31")
-          m=base/"minecraft_real_furniture_matches_v3"
+          m=base/"minecraft_real_furniture_matches_v4"
           g=base/"minecraft_model_geometry_comparison_v1"
           img=base/"complete_furniture_visual_3d_v1/previews"
           original=json.loads((m/"MANIFEST.json").read_text("utf8"))
@@ -56,7 +56,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v3/ROSEWOOD_357_PZ_COMPLETE_TO_REAL_MC_MOD_REVIEW_ALL.zip
+          git add --sparse analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_COMPLETE_TO_REAL_MC_MOD_REVIEW_ALL.zip
           if ! git diff --cached --quiet; then
             git commit -m "package(rosewood): 357 completed PZ furniture images, exact MC jar asset candidates and 18 geometry reviews"
             git pull --rebase origin "$GITHUB_REF_NAME"
