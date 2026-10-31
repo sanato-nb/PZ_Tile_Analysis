@@ -109,30 +109,18 @@ jobs:
                 r["mapping_status"],r["source_custom_name"],r["source_group_name"],r["source_facing"],
                 r["category_flags"],r["functional_source_keys"],r["prior_identity_candidate"],
                 r["prior_visual_candidate"],json.dumps(r["properties"],ensure_ascii=False,sort_keys=True)])
-          readme=f"""# v259 투명 PNG 셀과 기능 속성 교차 검수
-
-이 보고서는 완전 투명(Alpha 채널 전체 0) 논리 셀 **{total:,}개**와
-원본 7개 .tiles의 속성을 대조한 결과이다.
-
-- 원본 속성 1개 이상: **{counts['has_original_properties']:,}개**
-- 원본 속성 0개: **{counts['no_original_properties']:,}개**
-- 충돌/물리/벽·문/창 구조 속성 힌트: **{counts['hard_physical_hint']:,}개**
-- 충돌/설치 제한/인터랙션 등 넓은 동작 힌트: **{counts['broad_runtime_hint']:,}개**
-- 조명/오버레이 힌트: **{counts['light_or_overlay_hint']:,}개**
-- 이름 힌트만 존재할 수도 있음: {counts['has_object_name_hint']:,}개
-
-## 매우 중요한 구분
-
-**투명 셀에 속성이 있다 ≠ 게임에서 실제 보이지 않는 충돌체가 작동한다.**
-이 값들은 메타데이터이며, 투명한 그림 영역·예약 슬롯·게임 내부 엔진 규칙의
-차이로 실제 충돌/상호작용이 발생하지 않을 수도 있다. 실제 작동 확정은
-TMX 레이어에 사용되는지와 게임/엔진의 타일 동작 해석을 별도로 확인해야 한다.
-
-투명 여부는 파일의 PNG 알파 픽셀을 실제로 판정했다.
-`TRANSPARENT_FUNCTION_CANDIDATES.csv`에는 기능성 **후보**를 전부 기재했고
-`TRANSPARENT_FUNCTION_AUDIT.json`에는 카테고리별 세부 집계와 사례를 남겼다.
-원본 PNG, 기존 v255/v257/v259 데이터는 수정하지 않았다.
-"""
+          readme=(
+            f"# v259 투명 PNG 셀과 기능 속성 교차 검수\n\n"
+            f"원본 논리 셀 중 알파가 완전 투명한 {total:,}개를 기준으로 조사했다.\n\n"
+            f"- 원본 속성 1개 이상: {counts['has_original_properties']:,}개\n"
+            f"- 충돌/물리/벽·문·창 구조 힌트: {counts['hard_physical_hint']:,}개\n"
+            f"- 설치 제한 등 넓은 동작 힌트: {counts['broad_runtime_hint']:,}개\n"
+            f"- 이름 힌트: {counts['has_object_name_hint']:,}개\n\n"
+            "원본 .tiles 속성은 동작 가능성을 나타내는 단서이며, 실제 게임 엔진의 충돌/상호작용이 발생함을 직접 증명하지 않는다.\n"
+            "투명한 슬롯이 게임에서 쓰이는지는 TMX 배치와 엔진 동작을 별도로 검증해야 한다.\n"
+            "TRANSPARENT_FUNCTION_CANDIDATES.csv와 TRANSPARENT_FUNCTION_AUDIT.json에 세부 결과를 기록했다.\n"
+            "기존 원본과 마스터 DB는 수정하지 않았다.\n"
+          )
           (root/"TRANSPARENT_FUNCTION_README_KO.md").write_text(readme,encoding="utf8")
           print(json.dumps({"counts":dict(counts),"property_top30":key_freq.most_common(30),
                 "hard_samples":hard_samples[:8],"other_samples":other_samples[:6]},
