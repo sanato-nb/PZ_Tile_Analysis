@@ -7,7 +7,7 @@ from pathlib import Path
 from collections import defaultdict,Counter
 
 D=Path(__file__).resolve().parents[1]/"analysis/rosewood_furniture/2026-10-31"
-OUT=D/"minecraft_real_furniture_matches_v3"
+OUT=D/"minecraft_real_furniture_matches_v4"
 ASSETS=D/"minecraft_actual_mod_registry_v2/REAL_MOD_ASSET_CANDIDATES.csv"
 PZ=D/"complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv"
 GEO=D/"complete_furniture_visual_3d_v1/geometry_samples/3D_GEOMETRY_EVIDENCE.csv"
@@ -227,7 +227,7 @@ def main():
  counts=[dict(mod=x,status=y,count=v) for (x,y),v in sorted(Counter((r["mc_primary_mod"],r["match_class"]) for r in found).items())]
  write(OUT/"STATUS_BY_MOD.csv",counts)
  manifest=dict(pz_styles=357,mc_blockstate_asset_ids_audited=len(mods),
-    mapped_styles=sum(v for k,v in stat.items() if k!="NO_REAL_ASSET_CANDIDATE"),
+    mapped_styles=sum(bool(r["mc_primary_blockstate_id"]) for r in found),
     no_blockstate_name_match=stat["NO_REAL_ASSET_CANDIDATE"],
     status_counts=dict(stat),candidate_rows=len(candidates),
     actual_3d_equivalence_verified=0,
