@@ -1,0 +1,1674 @@
+{
+  "type": "source-grounded object-instance count with explicit uncertainty",
+  "source_placements": "analysis/rosewood_furniture/2026-10-31/FURNITURE_PLACEMENTS.csv.gz",
+  "input_rows": 94073,
+  "counts": {
+    "total_sprite_placements": 94073,
+    "reconstructed_full_multisprite_instances": 5302,
+    "provisional_single_sprite_instances": 19061,
+    "unresolved_sprite_parts": 62789,
+    "primary_furniture_objects": 21278,
+    "primary_full_multisprite_objects": 3460,
+    "primary_provisional_single_objects": 17818,
+    "primary_unresolved_sprite_parts": 75,
+    "core_primary_count": 15957,
+    "buffer_primary_count": 5321,
+    "named_special_furniture_objects": 1603,
+    "primary_plus_named_special_objects": 22881,
+    "decoration_and_fixture_objects": 588,
+    "assembly_families": 435,
+    "assembly_complete_families": 414,
+    "transform_tie_families": 389,
+    "full_assembly_parts_consumed": 12223
+  },
+  "objects_by_zone_scope_kind_category": [
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "가구",
+      "objects": 6381
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "가구",
+      "objects": 2640
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "가구",
+      "objects": 2142
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "욕실설비",
+      "objects": 1723
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "가전",
+      "objects": 1594
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "카운터",
+      "objects": 1468
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "쓰레기통",
+      "objects": 1012
+    },
+    {
+      "zone": "CORE",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "특수 건물 비품",
+      "objects": 1009
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "욕실설비",
+      "objects": 819
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "싱크대",
+      "objects": 795
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "가구",
+      "objects": 787
+    },
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "특수 건물 비품",
+      "objects": 588
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "가전",
+      "objects": 364
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "오락용 가구",
+      "objects": 279
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "카운터",
+      "objects": 262
+    },
+    {
+      "zone": "CORE",
+      "scope": "DECOR_OR_FIXTURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "조명",
+      "objects": 257
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "특수 건물 비품",
+      "objects": 253
+    },
+    {
+      "zone": "CORE",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "특수 건물 비품",
+      "objects": 229
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "특수 건물 비품",
+      "objects": 185
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "DECOR_OR_FIXTURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "조명",
+      "objects": 167
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "욕실설비",
+      "objects": 157
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "싱크대",
+      "objects": 153
+    },
+    {
+      "zone": "CORE",
+      "scope": "DECOR_OR_FIXTURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "벽 장식",
+      "objects": 152
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "쓰레기통",
+      "objects": 147
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "오락용 가구",
+      "objects": 130
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "벽난로",
+      "objects": 111
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "쓰레기통",
+      "objects": 85
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "가전",
+      "objects": 80
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "특수 건물 비품",
+      "objects": 69
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "오락용 가구",
+      "objects": 62
+    },
+    {
+      "zone": "CORE",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "캠핑 물품",
+      "objects": 45
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "오락용 가구",
+      "objects": 33
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "목공 물체",
+      "objects": 25
+    },
+    {
+      "zone": "CORE",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "목공 물체",
+      "objects": 24
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "캠핑 물품",
+      "objects": 16
+    },
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "캠핑 물품",
+      "objects": 16
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "욕실설비",
+      "objects": 16
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "쓰레기통",
+      "objects": 16
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "가전",
+      "objects": 14
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "DECOR_OR_FIXTURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "벽 장식",
+      "objects": 12
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "목공 물체",
+      "objects": 10
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "캠핑 물품",
+      "objects": 8
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "kind": "PROVISIONAL_NO_GRID_SINGLE",
+      "category": "벽난로",
+      "objects": 8
+    },
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "간판",
+      "objects": 6
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "목공 물체",
+      "objects": 5
+    },
+    {
+      "zone": "CORE",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "목공 물체",
+      "objects": 4
+    },
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "가로 시설",
+      "objects": 4
+    },
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "kind": "FULL_MULTI_SPRITE_GRID",
+      "category": "목공 물체",
+      "objects": 1
+    }
+  ],
+  "unresolved_by_zone_scope_reason": [
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "reason": "NO_SPRITE_GRIDPOS_AND_NOT_PRIMARY_FURNITURE",
+      "parts": 20843
+    },
+    {
+      "zone": "CORE",
+      "scope": "NOT_FURNITURE",
+      "reason": "NO_SPRITE_GRIDPOS_AND_NOT_PRIMARY_FURNITURE",
+      "parts": 15084
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "reason": "NO_SPRITE_GRIDPOS_AND_NOT_PRIMARY_FURNITURE",
+      "parts": 11958
+    },
+    {
+      "zone": "CORE",
+      "scope": "DECOR_OR_FIXTURE",
+      "reason": "NO_SPRITE_GRIDPOS_AND_NOT_PRIMARY_FURNITURE",
+      "parts": 8034
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "NOT_FURNITURE",
+      "reason": "NO_SPRITE_GRIDPOS_AND_NOT_PRIMARY_FURNITURE",
+      "parts": 4238
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "DECOR_OR_FIXTURE",
+      "reason": "NO_SPRITE_GRIDPOS_AND_NOT_PRIMARY_FURNITURE",
+      "parts": 1679
+    },
+    {
+      "zone": "CORE",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "reason": "SOURCE_TEMPLATE_AMBIGUOUS",
+      "parts": 392
+    },
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "reason": "SOURCE_TEMPLATE_AMBIGUOUS",
+      "parts": 165
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "reason": "SOURCE_TEMPLATE_AMBIGUOUS",
+      "parts": 149
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "NAMED_SPECIAL_FURNITURE",
+      "reason": "SOURCE_TEMPLATE_AMBIGUOUS",
+      "parts": 104
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "reason": "SOURCE_TEMPLATE_AMBIGUOUS",
+      "parts": 62
+    },
+    {
+      "zone": "CORE",
+      "scope": "DECOR_OR_FIXTURE",
+      "reason": "SOURCE_TEMPLATE_AMBIGUOUS",
+      "parts": 40
+    },
+    {
+      "zone": "CORE",
+      "scope": "UNCLASSIFIED_SPECIAL",
+      "reason": "INCOMPLETE_OR_OVERLAPPED_GRID",
+      "parts": 24
+    },
+    {
+      "zone": "BUFFER",
+      "scope": "CORE_FURNITURE",
+      "reason": "SOURCE_TEMPLATE_AMBIGUOUS",
+      "parts": 12
+    },
+    {
+      "zone": "CORE",
+      "scope": "DECOR_OR_FIXTURE",
+      "reason": "INCOMPLETE_OR_OVERLAPPED_GRID",
+      "parts": 4
+    },
+    {
+      "zone": "CORE",
+      "scope": "CORE_FURNITURE",
+      "reason": "INCOMPLETE_OR_OVERLAPPED_GRID",
+      "parts": 1
+    }
+  ],
+  "examples": {
+    "CORE_FURNITURE | 가전": [
+      {
+        "type": "Antenna",
+        "group": "Old TV",
+        "source": "appliances_com_01/82|appliances_com_01/83",
+        "z": 2,
+        "pos": [
+          7916,
+          11460
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Antenna",
+        "group": "Old TV",
+        "source": "appliances_com_01/82|appliances_com_01/83",
+        "z": 1,
+        "pos": [
+          7694,
+          11877
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Antenna",
+        "group": "Old TV",
+        "source": "appliances_com_01/82|appliances_com_01/83",
+        "z": 1,
+        "pos": [
+          7927,
+          12158
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Antenna",
+        "group": "Old TV",
+        "source": "appliances_com_01/82|appliances_com_01/83",
+        "z": 2,
+        "pos": [
+          8005,
+          11405
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Antenna",
+        "group": "Old TV",
+        "source": "appliances_com_01/82|appliances_com_01/83",
+        "z": 2,
+        "pos": [
+          8093,
+          11487
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Antenna",
+        "group": "Old TV",
+        "source": "appliances_com_01/82|appliances_com_01/83",
+        "z": 2,
+        "pos": [
+          8093,
+          11515
+        ],
+        "parts": 2
+      }
+    ],
+    "UNCLASSIFIED_SPECIAL | 캠핑 물품": [
+      {
+        "type": "Stack",
+        "group": "5 Log",
+        "source": "camping_01/34|camping_01/35",
+        "z": 0,
+        "pos": [
+          7434,
+          11869
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Stack",
+        "group": "5 Log",
+        "source": "camping_01/34|camping_01/35",
+        "z": 0,
+        "pos": [
+          7433,
+          11871
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Stack",
+        "group": "5 Log",
+        "source": "camping_01/34|camping_01/35",
+        "z": 0,
+        "pos": [
+          7990,
+          11037
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Stack",
+        "group": "5 Log",
+        "source": "camping_01/34|camping_01/35",
+        "z": 0,
+        "pos": [
+          7984,
+          11400
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Stack",
+        "group": "5 Log",
+        "source": "camping_01/34|camping_01/35",
+        "z": 0,
+        "pos": [
+          7984,
+          11402
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Stack",
+        "group": "5 Log",
+        "source": "camping_01/34|camping_01/35",
+        "z": 0,
+        "pos": [
+          8334,
+          11557
+        ],
+        "parts": 2
+      }
+    ],
+    "NAMED_SPECIAL_FURNITURE | 캠핑 물품": [
+      {
+        "type": "Table",
+        "group": "Picknic",
+        "source": "camping_01/12|camping_01/13|camping_01/14|camping_01/15",
+        "z": 0,
+        "pos": [
+          7476,
+          10835
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Table",
+        "group": "Picknic",
+        "source": "camping_01/12|camping_01/13|camping_01/14|camping_01/15",
+        "z": 0,
+        "pos": [
+          8035,
+          11434
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Table",
+        "group": "Picknic",
+        "source": "camping_01/12|camping_01/13|camping_01/14|camping_01/15",
+        "z": 0,
+        "pos": [
+          8039,
+          11434
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Table",
+        "group": "Picknic",
+        "source": "camping_01/12|camping_01/13|camping_01/14|camping_01/15",
+        "z": 0,
+        "pos": [
+          8080,
+          11702
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Table",
+        "group": "Picknic",
+        "source": "camping_01/12|camping_01/13|camping_01/14|camping_01/15",
+        "z": 0,
+        "pos": [
+          8084,
+          11702
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Table",
+        "group": "Picknic",
+        "source": "camping_01/12|camping_01/13|camping_01/14|camping_01/15",
+        "z": 0,
+        "pos": [
+          8133,
+          11721
+        ],
+        "parts": 4
+      }
+    ],
+    "NAMED_SPECIAL_FURNITURE | 목공 물체": [
+      {
+        "type": "Table",
+        "group": "Exceptional Large",
+        "source": "carpentry_01/34|carpentry_01/35",
+        "z": 0,
+        "pos": [
+          7450,
+          11857
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Table",
+        "group": "Exceptional Large",
+        "source": "carpentry_01/34|carpentry_01/35",
+        "z": 0,
+        "pos": [
+          7991,
+          10964
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Table",
+        "group": "Exceptional Large",
+        "source": "carpentry_01/34|carpentry_01/35",
+        "z": 0,
+        "pos": [
+          8039,
+          11548
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Table",
+        "group": "Exceptional Large",
+        "source": "carpentry_01/32|carpentry_01/33",
+        "z": 0,
+        "pos": [
+          7566,
+          12376
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Table",
+        "group": "Exceptional Large",
+        "source": "carpentry_01/32|carpentry_01/33",
+        "z": 0,
+        "pos": [
+          8009,
+          11010
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Table",
+        "group": "Exceptional Large",
+        "source": "carpentry_01/32|carpentry_01/33",
+        "z": 0,
+        "pos": [
+          8155,
+          11907
+        ],
+        "parts": 2
+      }
+    ],
+    "UNCLASSIFIED_SPECIAL | 목공 물체": [
+      {
+        "type": "Mattress",
+        "group": "Makeshift",
+        "source": "carpentry_02/76|carpentry_02/77",
+        "z": 0,
+        "pos": [
+          7381,
+          11717
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Mattress",
+        "group": "Makeshift",
+        "source": "carpentry_02/76|carpentry_02/77",
+        "z": -1,
+        "pos": [
+          7629,
+          11810
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Mattress",
+        "group": "Makeshift",
+        "source": "carpentry_02/76|carpentry_02/77",
+        "z": -1,
+        "pos": [
+          7636,
+          11807
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Mattress",
+        "group": "Makeshift",
+        "source": "carpentry_02/76|carpentry_02/77",
+        "z": -1,
+        "pos": [
+          8091,
+          11560
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Mattress",
+        "group": "Makeshift",
+        "source": "carpentry_02/76|carpentry_02/77",
+        "z": 0,
+        "pos": [
+          8847,
+          11585
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Mattress",
+        "group": "Makeshift",
+        "source": "carpentry_02/78|carpentry_02/79",
+        "z": 0,
+        "pos": [
+          7379,
+          11715
+        ],
+        "parts": 2
+      }
+    ],
+    "CORE_FURNITURE | 욕실설비": [
+      {
+        "type": "Bath",
+        "group": "Large Deluxe",
+        "source": "fixtures_bathroom_01/26|fixtures_bathroom_01/27",
+        "z": 0,
+        "pos": [
+          7335,
+          10761
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bath",
+        "group": "Large Deluxe",
+        "source": "fixtures_bathroom_01/26|fixtures_bathroom_01/27",
+        "z": 0,
+        "pos": [
+          7293,
+          10869
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bath",
+        "group": "Large Deluxe",
+        "source": "fixtures_bathroom_01/26|fixtures_bathroom_01/27",
+        "z": 0,
+        "pos": [
+          7571,
+          12384
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bath",
+        "group": "Large Deluxe",
+        "source": "fixtures_bathroom_01/26|fixtures_bathroom_01/27",
+        "z": 1,
+        "pos": [
+          7922,
+          11460
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bath",
+        "group": "Large Deluxe",
+        "source": "fixtures_bathroom_01/26|fixtures_bathroom_01/27",
+        "z": 1,
+        "pos": [
+          7886,
+          11535
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bath",
+        "group": "Large Deluxe",
+        "source": "fixtures_bathroom_01/26|fixtures_bathroom_01/27",
+        "z": 1,
+        "pos": [
+          7972,
+          11076
+        ],
+        "parts": 2
+      }
+    ],
+    "CORE_FURNITURE | 가구": [
+      {
+        "type": "Bed",
+        "group": "Blue",
+        "source": "furniture_bedding_01/10|furniture_bedding_01/11",
+        "z": 1,
+        "pos": [
+          7912,
+          11406
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bed",
+        "group": "Blue",
+        "source": "furniture_bedding_01/10|furniture_bedding_01/11",
+        "z": 1,
+        "pos": [
+          7890,
+          11503
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bed",
+        "group": "Blue",
+        "source": "furniture_bedding_01/10|furniture_bedding_01/11",
+        "z": 1,
+        "pos": [
+          8176,
+          11633
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bed",
+        "group": "Blue",
+        "source": "furniture_bedding_01/10|furniture_bedding_01/11",
+        "z": 1,
+        "pos": [
+          8125,
+          11679
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bed",
+        "group": "Blue",
+        "source": "furniture_bedding_01/10|furniture_bedding_01/11",
+        "z": 0,
+        "pos": [
+          7987,
+          12339
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bed",
+        "group": "Blue",
+        "source": "furniture_bedding_01/10|furniture_bedding_01/11",
+        "z": 0,
+        "pos": [
+          8284,
+          11665
+        ],
+        "parts": 2
+      }
+    ],
+    "DECOR_OR_FIXTURE | 조명": [
+      {
+        "type": "Wall Light",
+        "group": "Double Fluorescent",
+        "source": "lighting_indoor_02/48|lighting_indoor_02/49",
+        "z": 0,
+        "pos": [
+          7387,
+          11717
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Wall Light",
+        "group": "Double Fluorescent",
+        "source": "lighting_indoor_02/48|lighting_indoor_02/49",
+        "z": 0,
+        "pos": [
+          7372,
+          11858
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Wall Light",
+        "group": "Double Fluorescent",
+        "source": "lighting_indoor_02/48|lighting_indoor_02/49",
+        "z": 0,
+        "pos": [
+          7467,
+          11794
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Wall Light",
+        "group": "Double Fluorescent",
+        "source": "lighting_indoor_02/48|lighting_indoor_02/49",
+        "z": 0,
+        "pos": [
+          7467,
+          11796
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Wall Light",
+        "group": "Double Fluorescent",
+        "source": "lighting_indoor_02/48|lighting_indoor_02/49",
+        "z": 0,
+        "pos": [
+          7817,
+          11286
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Wall Light",
+        "group": "Double Fluorescent",
+        "source": "lighting_indoor_02/48|lighting_indoor_02/49",
+        "z": 0,
+        "pos": [
+          8128,
+          11446
+        ],
+        "parts": 2
+      }
+    ],
+    "NAMED_SPECIAL_FURNITURE | 특수 건물 비품": [
+      {
+        "type": "Counter",
+        "group": "Oak Employee Bank",
+        "source": "location_business_bank_01/30|location_business_bank_01/31",
+        "z": 0,
+        "pos": [
+          8082,
+          11613
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Counter",
+        "group": "Oak Employee Bank",
+        "source": "location_business_bank_01/30|location_business_bank_01/31",
+        "z": 0,
+        "pos": [
+          8084,
+          11613
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Counter",
+        "group": "Oak Employee Bank",
+        "source": "location_business_bank_01/30|location_business_bank_01/31",
+        "z": 0,
+        "pos": [
+          8087,
+          11613
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Counter",
+        "group": "Oak Employee Bank",
+        "source": "location_business_bank_01/30|location_business_bank_01/31",
+        "z": 0,
+        "pos": [
+          8089,
+          11613
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Desk",
+        "group": "Office 2",
+        "source": "location_business_office_generic_01/88|location_business_office_generic_01/89|location_business_office_generic_01/90",
+        "z": 0,
+        "pos": [
+          7653,
+          11787
+        ],
+        "parts": 3
+      },
+      {
+        "type": "Desk",
+        "group": "Office 2",
+        "source": "location_business_office_generic_01/88|location_business_office_generic_01/89|location_business_office_generic_01/90",
+        "z": 0,
+        "pos": [
+          7671,
+          11797
+        ],
+        "parts": 3
+      }
+    ],
+    "UNCLASSIFIED_SPECIAL | 특수 건물 비품": [
+      {
+        "type": "Pegboard",
+        "group": "Wood",
+        "source": "location_business_machinery_01/26|location_business_machinery_01/27",
+        "z": 0,
+        "pos": [
+          7387,
+          11717
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Pegboard",
+        "group": "Wood",
+        "source": "location_business_machinery_01/26|location_business_machinery_01/27",
+        "z": 0,
+        "pos": [
+          7372,
+          11858
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Pegboard",
+        "group": "Wood",
+        "source": "location_business_machinery_01/26|location_business_machinery_01/27",
+        "z": 0,
+        "pos": [
+          8028,
+          11594
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Pegboard",
+        "group": "Wood",
+        "source": "location_business_machinery_01/26|location_business_machinery_01/27",
+        "z": 0,
+        "pos": [
+          8176,
+          11624
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Pegboard",
+        "group": "Wood",
+        "source": "location_business_machinery_01/26|location_business_machinery_01/27",
+        "z": 0,
+        "pos": [
+          7988,
+          11554
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Pegboard",
+        "group": "Wood",
+        "source": "location_business_machinery_01/26|location_business_machinery_01/27",
+        "z": 0,
+        "pos": [
+          7952,
+          12078
+        ],
+        "parts": 2
+      }
+    ],
+    "CORE_FURNITURE | 오락용 가구": [
+      {
+        "type": "Grand Piano",
+        "group": "Black",
+        "source": "recreational_01/40|recreational_01/41|recreational_01/42|recreational_01/43|recreational_01/44|recreational_01/45",
+        "z": 0,
+        "pos": [
+          8124,
+          11662
+        ],
+        "parts": 6
+      },
+      {
+        "type": "Lamp",
+        "group": "Fancy Green",
+        "source": "recreational_01/86|recreational_01/87",
+        "z": 2,
+        "pos": [
+          8090,
+          11561
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Lamp",
+        "group": "Fancy Green",
+        "source": "recreational_01/86|recreational_01/87",
+        "z": -1,
+        "pos": [
+          8956,
+          12118
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Lamp",
+        "group": "Fancy Green",
+        "source": "recreational_01/86|recreational_01/87",
+        "z": -1,
+        "pos": [
+          8959,
+          12118
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Lamp",
+        "group": "Fancy Green",
+        "source": "recreational_01/84|recreational_01/85",
+        "z": -1,
+        "pos": [
+          7773,
+          11918
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Lamp",
+        "group": "Fancy Green",
+        "source": "recreational_01/84|recreational_01/85",
+        "z": 0,
+        "pos": [
+          8051,
+          11460
+        ],
+        "parts": 2
+      }
+    ],
+    "UNCLASSIFIED_SPECIAL | 간판": [
+      {
+        "type": "Sign",
+        "group": "Ominous",
+        "source": "signs_church/14|signs_church/15",
+        "z": 0,
+        "pos": [
+          8283,
+          11565
+        ],
+        "parts": 2
+      },
+      {
+        "type": "",
+        "group": "",
+        "source": "signs_one-off_09/152|signs_one-off_09/153|signs_one-off_09/154",
+        "z": 0,
+        "pos": [
+          8202,
+          11374
+        ],
+        "parts": 3
+      },
+      {
+        "type": "Sign",
+        "group": "Bingo",
+        "source": "signs_one-off_09/156|signs_one-off_09/157|signs_one-off_09/158|signs_one-off_09/159",
+        "z": 1,
+        "pos": [
+          8202,
+          11373
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Sign",
+        "group": "Melos Records",
+        "source": "signs_one-off_09/60|signs_one-off_09/61|signs_one-off_09/62|signs_one-off_09/63",
+        "z": 1,
+        "pos": [
+          8007,
+          11351
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Sign",
+        "group": "Music School",
+        "source": "signs_one-off_09/80|signs_one-off_09/81|signs_one-off_09/82|signs_one-off_09/83",
+        "z": 1,
+        "pos": [
+          8001,
+          11351
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Sign",
+        "group": "Rosewood Community Center",
+        "source": "signs_one-off_09/84|signs_one-off_09/85|signs_one-off_09/86|signs_one-off_09/87",
+        "z": 1,
+        "pos": [
+          8229,
+          11340
+        ],
+        "parts": 4
+      }
+    ],
+    "UNCLASSIFIED_SPECIAL | 가로 시설": [
+      {
+        "type": "Post",
+        "group": "Barrier",
+        "source": "street_decoration_01/64|street_decoration_01/65|street_decoration_01/66|street_decoration_01/67",
+        "z": 0,
+        "pos": [
+          8044,
+          11685
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Post",
+        "group": "Barrier",
+        "source": "street_decoration_01/56|street_decoration_01/57|street_decoration_01/58|street_decoration_01/59",
+        "z": 0,
+        "pos": [
+          8094,
+          11634
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Post",
+        "group": "Barrier",
+        "source": "street_decoration_01/68|street_decoration_01/69|street_decoration_01/70|street_decoration_01/71",
+        "z": 0,
+        "pos": [
+          8094,
+          11630
+        ],
+        "parts": 4
+      },
+      {
+        "type": "Post",
+        "group": "Barrier",
+        "source": "street_decoration_01/60|street_decoration_01/61|street_decoration_01/62|street_decoration_01/63",
+        "z": 0,
+        "pos": [
+          8048,
+          11685
+        ],
+        "parts": 4
+      }
+    ],
+    "CORE_FURNITURE | 쓰레기통": [
+      {
+        "type": "Dumpster",
+        "group": "Blue",
+        "source": "trashcontainers_01/8|trashcontainers_01/9",
+        "z": 0,
+        "pos": [
+          7432,
+          11853
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Dumpster",
+        "group": "Blue",
+        "source": "trashcontainers_01/8|trashcontainers_01/9",
+        "z": 0,
+        "pos": [
+          8151,
+          11457
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Dumpster",
+        "group": "Blue",
+        "source": "trashcontainers_01/8|trashcontainers_01/9",
+        "z": 0,
+        "pos": [
+          8142,
+          11429
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Dumpster",
+        "group": "Blue",
+        "source": "trashcontainers_01/8|trashcontainers_01/9",
+        "z": 0,
+        "pos": [
+          8037,
+          11629
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Dumpster",
+        "group": "Blue",
+        "source": "trashcontainers_01/8|trashcontainers_01/9",
+        "z": 0,
+        "pos": [
+          8037,
+          11631
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Dumpster",
+        "group": "Blue",
+        "source": "trashcontainers_01/8|trashcontainers_01/9",
+        "z": 0,
+        "pos": [
+          8041,
+          11708
+        ],
+        "parts": 2
+      }
+    ],
+    "DECOR_OR_FIXTURE | 벽 장식": [
+      {
+        "type": "Bunting",
+        "group": "Red, white and blue",
+        "source": "walls_decoration_01/66|walls_decoration_01/67",
+        "z": 1,
+        "pos": [
+          8141,
+          11729
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bunting",
+        "group": "Red, white and blue",
+        "source": "walls_decoration_01/66|walls_decoration_01/67",
+        "z": 1,
+        "pos": [
+          8141,
+          11731
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bunting",
+        "group": "Red, white and blue",
+        "source": "walls_decoration_01/66|walls_decoration_01/67",
+        "z": 0,
+        "pos": [
+          8027,
+          12410
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bunting",
+        "group": "Red, white and blue",
+        "source": "walls_decoration_01/66|walls_decoration_01/67",
+        "z": 0,
+        "pos": [
+          8027,
+          12412
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bunting",
+        "group": "Red, white and blue",
+        "source": "walls_decoration_01/64|walls_decoration_01/65",
+        "z": 0,
+        "pos": [
+          8074,
+          11493
+        ],
+        "parts": 2
+      },
+      {
+        "type": "Bunting",
+        "group": "Red, white and blue",
+        "source": "walls_decoration_01/64|walls_decoration_01/65",
+        "z": 0,
+        "pos": [
+          8076,
+          11493
+        ],
+        "parts": 2
+      }
+    ],
+    "CORE_FURNITURE | 카운터": [
+      {
+        "type": "Counter",
+        "group": "Oak",
+        "source": "fixtures_counters_01/55",
+        "z": 0,
+        "pos": [
+          7338,
+          10763
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Counter",
+        "group": "Birchwood",
+        "source": "fixtures_counters_01/41",
+        "z": 0,
+        "pos": [
+          7297,
+          10869
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Counter",
+        "group": "Birchwood",
+        "source": "fixtures_counters_01/41",
+        "z": 0,
+        "pos": [
+          7298,
+          10869
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Counter",
+        "group": "Birchwood Corner",
+        "source": "fixtures_counters_01/42",
+        "z": 0,
+        "pos": [
+          7295,
+          10869
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Counter",
+        "group": "Oak",
+        "source": "fixtures_counters_01/51",
+        "z": 0,
+        "pos": [
+          7335,
+          10764
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Counter",
+        "group": "Oak Corner",
+        "source": "fixtures_counters_01/50",
+        "z": 0,
+        "pos": [
+          7335,
+          10766
+        ],
+        "parts": 1
+      }
+    ],
+    "CORE_FURNITURE | 싱크대": [
+      {
+        "type": "Sink",
+        "group": "Chrome",
+        "source": "fixtures_sinks_01/11",
+        "z": 0,
+        "pos": [
+          7297,
+          10869
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Sink",
+        "group": "White",
+        "source": "fixtures_sinks_01/1",
+        "z": 0,
+        "pos": [
+          7293,
+          10867
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Sink",
+        "group": "White Standing",
+        "source": "fixtures_sinks_01/13",
+        "z": 0,
+        "pos": [
+          7335,
+          10759
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Sink",
+        "group": "Chrome",
+        "source": "fixtures_sinks_01/8",
+        "z": 0,
+        "pos": [
+          7335,
+          10765
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Sink",
+        "group": "White Hanging",
+        "source": "fixtures_sinks_01/31",
+        "z": 0,
+        "pos": [
+          7266,
+          11756
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Sink",
+        "group": "White Hanging",
+        "source": "fixtures_sinks_01/31",
+        "z": 0,
+        "pos": [
+          7266,
+          11757
+        ],
+        "parts": 1
+      }
+    ],
+    "CORE_FURNITURE | 벽난로": [
+      {
+        "type": "",
+        "group": "",
+        "source": "fixtures_fireplaces_01/24",
+        "z": 0,
+        "pos": [
+          7911,
+          11412
+        ],
+        "parts": 1
+      },
+      {
+        "type": "",
+        "group": "",
+        "source": "fixtures_fireplaces_01/19",
+        "z": 0,
+        "pos": [
+          7890,
+          11492
+        ],
+        "parts": 1
+      },
+      {
+        "type": "Fireplace",
+        "group": "",
+        "source": "fixtures_fireplaces_01/0",
+        "z": 0,
+        "pos": [
+          7891,
+          11492
+        ],
+        "parts": 1
+      },
+      {
+        "type": "",
+        "group": "",
+        "source": "fixtures_fireplaces_01/21",
+        "z": 0,
+        "pos": [
+          7892,
+          11492
+        ],
+        "parts": 1
+      },
+      {
+        "type": "",
+        "group": "",
+        "source": "fixtures_fireplaces_01/26",
+        "z": 0,
+        "pos": [
+          7911,
+          11410
+        ],
+        "parts": 1
+      },
+      {
+        "type": "",
+        "group": "",
+        "source": "fixtures_fireplaces_01/25",
+        "z": 0,
+        "pos": [
+          7911,
+          11411
+        ],
+        "parts": 1
+      }
+    ]
+  },
+  "known_limits": [
+    "Counts are not an exact complete-game physical furniture inventory. Rectangular TMX cell survey is a Rosewood core proxy plus buffer.",
+    "Source SpriteGridPos only yields an anchored coordinate candidate; best of eight transforms selected via complete support, which needs visual checks.",
+    "PROVISIONAL_NO_GRID_SINGLE is one sprite placement treated provisionally as one object, NOT certified furniture instance.",
+    "No automatic cross-family grouping of furniture parts without original source identity.",
+    "Multi-grid templates with repeated position variants or incomplete coordinate groups are not counted as complete objects.",
+    "Original RoomDefs rectangular room labels are not precise TBX mask geometry.",
+    "Tilesets and original CustomName overlap with utility/floor/decor; excluded and unknown categories are separately preserved.",
+    "No original TMX/PNG/previous analysis file modified."
+  ]
+}
