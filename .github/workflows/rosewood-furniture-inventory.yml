@@ -59,10 +59,10 @@ jobs:
           assert c["scanned_tmx"]==56
           assert c["scanned_layers"]>100
           assert c["all_gid_placements"]>c["selected_sprite_part_placements"]>100
-          assert c["distinct_selected_tile_ids"]==c["unique_direct_ids"]+c["unique_special_review_ids"]
+          assert c["unique_selected_tile_ids"]==c["unique_direct_ids"]+c["unique_special_review_ids"]
           with (p/"ALL_FURNITURE_TILE_IDS.csv").open(encoding="utf-8-sig",newline="") as f:
               a=list(csv.DictReader(f))
-          assert len(a)==c["distinct_selected_tile_ids"]
+          assert len(a)==c["unique_selected_tile_ids"]
           with sqlite3.connect(p/"ROSEWOOD_FURNITURE.sqlite") as con:
               assert con.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
               assert con.execute("SELECT COUNT(*) FROM furniture_tiles").fetchone()[0]==len(a)
