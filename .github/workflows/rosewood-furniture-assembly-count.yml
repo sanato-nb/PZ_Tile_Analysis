@@ -26,7 +26,7 @@ jobs:
             /analysis/rosewood_furniture/2026-10-31/ALL_FURNITURE_TILE_IDS.csv
             /analysis/rosewood_furniture/2026-10-31/MINECRAFT_MATCH_PRIORITY.csv
             /analysis/rosewood_furniture/2026-10-31/FURNITURE_ASSEMBLY_TEMPLATE_CANDIDATES.csv
-            /analysis/rosewood_furniture/2026-10-31/assembled_count_v1/
+            /analysis/rosewood_furniture/2026-10-31/assembled_count_v2/
       - name: Check script
         run: python3 -m py_compile scripts/count_rosewood_furniture_assemblies.py
       - name: Assemble furniture from exact source grid positions
@@ -36,7 +36,7 @@ jobs:
           python3 - <<'PY'
           import json,csv,zipfile
           from pathlib import Path
-          p=Path("analysis/rosewood_furniture/2026-10-31/assembled_count_v1")
+          p=Path("analysis/rosewood_furniture/2026-10-31/assembled_count_v2")
           m=json.loads((p/"MANIFEST.json").read_text("utf-8"))
           assert m["source_total_candidate_sprite_parts"]==94073
           assert m["priority_furniture_sprite_parts"]==25212
@@ -65,7 +65,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse analysis/rosewood_furniture/2026-10-31/assembled_count_v1/
+          git add --sparse analysis/rosewood_furniture/2026-10-31/assembled_count_v2/
           if ! git diff --cached --quiet; then
             git commit -m "data(rosewood): count assembled furniture objects separately from sprite parts"
             git pull --rebase origin "$GITHUB_REF_NAME"
