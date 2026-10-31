@@ -1,0 +1,54 @@
+name: v112 bundle verified source evidence and ZIP CRC
+on:
+  push:
+    branches: [work/v112-unresolved-source-audit-20261026]
+    paths:
+      - scripts/package_v112_source_audit.py
+      - .github/workflows/package-v112-source-evidence.yml
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /audits/v112_remaining9/*
+            /checkpoints/v112_jumbo_preview/*
+            /checkpoints/v112_jumbo_preview/review_sheets/*
+            /docs/V112_SOURCE_AUDIT.md
+            /scripts/package_v112_source_audit.py
+            /.github/workflows/package-v112-source-evidence.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify and package the 9 unresolved source findings and JPEG/PNG
+        run: python3 scripts/package_v112_source_audit.py
+      - name: Verify ZIP testzip CRC and unchanged counters
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,hashlib,zipfile
+          p=pathlib.Path('audits/v112_remaining9')
+          s=json.loads((p/'ZIP_CRC_REPORT.json').read_text())
+          f=p/'v112_nine_unresolved_source_evidence.zip'
+          assert s['zip_crc']=='PASS' and s['zip_items']==24 and s['baseline_observed']==5400
+          assert s['remaining_unobserved']==9 and s['official_final_certified']==0
+          assert s['jumbo_provisional_rechecks']==3 and s['jumbo_delta_positive']==0
+          assert hashlib.sha256(f.read_bytes()).hexdigest()==s['zip_sha256']
+          with zipfile.ZipFile(f) as z:
+            assert len(z.namelist())==24 and z.testzip() is None
+          print('PASS 24 ZIP files, all CRC good, no observed promotion')
+          PY
+      - name: Commit verified diagnostic ZIP and report only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse audits/v112_remaining9/
+          if ! git diff --cached --quiet; then
+            git commit -m "진단(v112): 누락원본·레벨·JUMBO 가설 검수 9종·증거 ZIP CRC PASS (관찰 증가 0)"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

@@ -1,0 +1,16 @@
+# Git 추적 제외 규칙: 원본과 분석 결과 중 불필요한 로컬 생성물은 저장하지 않습니다.
+# 새 분석 작업용 임시 파일만 제외 (기존 원본은 추적 유지)
+__pycache__/
+*.py[cod]
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+scratch/
+.cache/
+.env
+.env.*
+!.env.example

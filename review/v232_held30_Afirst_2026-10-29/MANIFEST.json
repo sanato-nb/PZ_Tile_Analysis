@@ -1,0 +1,97 @@
+{
+  "version": "v232_held30_A_original_visible_and_BC_experiment_triage",
+  "date": "2026-10-29",
+  "parent_main_commit": "335507f87b6e49dfcb6d455d3c351ab97d060070",
+  "target": "historical held source keys, no status promotions",
+  "old_remaining_all_4633_scope": {
+    "provisional_A_first_reaudited": 4196,
+    "held": 437,
+    "pending_untriaged_source_indices": 0
+  },
+  "new_held30_rechecked": 30,
+  "new_held30_kept_held": 30,
+  "not_yet_in_this_focused_held_pass": 407,
+  "overall_held_unchanged": 437,
+  "focused_held_review_percent": 6.864988558352403,
+  "rechecked_cohorts": {
+    "v122_held": 16,
+    "v134_excluded": 11,
+    "v135_excluded": 3
+  },
+  "disjoint_evidence_blocker_classes": {
+    "original_A_visible_role_unresolved": 7,
+    "B_C_zero_ambiguous": 15,
+    "B_map_edge_truncated": 6,
+    "B_neighbor_unavailable": 2
+  },
+  "source_A_contact_sheets_opened": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_000.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_001.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_002.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_003.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_005.jpg"
+  ],
+  "source_A_original_full_atlas_images_opened_in_this_v232_round": [
+    "Tiles/2x/camping_02.png",
+    "Tiles/2x/camping_04.png",
+    "Tiles/2x/carpentry_01.png",
+    "Tiles/2x/construction_01.png",
+    "Tiles/2x/d_plants_1.png",
+    "Tiles/2x/d_wallcracks_1.png"
+  ],
+  "atlas_blob_SHA_returned_but_image_body_empty": [
+    "Tiles/2x/carpentry_02.png",
+    "Tiles/2x/constructedobjects_01.png",
+    "Tiles/2x/crafted_05.png"
+  ],
+  "prior_v231_original_A_atlases_seen_for_v122_keys": [
+    "Tiles/2x/advertising_01.png",
+    "Tiles/2x/appliances_com_01.png",
+    "Tiles/2x/blends_natural_01.png",
+    "Tiles/2x/boulders.png"
+  ],
+  "historical_key_labelled_approximate_ABC_sheets_inspected": [
+    "review/v121_ABCD_first160/ABCD_sheet_00.jpg",
+    "review/v121_ABCD_first160/ABCD_sheet_01.jpg",
+    "review/v121_ABCD_first160/ABCD_sheet_02.jpg",
+    "review/v123_ABCD_next160/ABCD_sheet_00.jpg",
+    "review/v123_ABCD_next160/ABCD_sheet_01.jpg",
+    "review/v123_ABCD_next160/ABCD_sheet_02.jpg",
+    "review/v123_ABCD_next160/ABCD_sheet_03.jpg"
+  ],
+  "prior_v135_excluded3_individually_keylabelled_BC_available": false,
+  "v135_BC_pixel_numbers_not_invented": true,
+  "source_parents": [
+    "review/v121_ABCD_first160/ABCD_160.csv",
+    "review/v122_AI_ABCD_160/AI_VISUAL_REVIEW_160.csv",
+    "review/v123_ABCD_next160/ABCD_160_319.csv",
+    "review/v134_visual_180_319/EXCLUDED_EXCEPTIONS.csv",
+    "review/v135_visual_400_479/EXCLUDED_EXCEPTIONS.csv"
+  ],
+  "source_key_crosscheck_30_of_30": true,
+  "prior_held_reason_verbatim_retained": true,
+  "source_BC_prior_values_matched_for_v121_v123": 27,
+  "v135_3_BC_pixel_values_unavailable_not_fabricated": true,
+  "source_metadata_mismatch_count": 0,
+  "old_held_16_BC_zero": 9,
+  "old_v134_11_BC_zero": 4,
+  "old_v135_3_historic_zero_reason": 2,
+  "old_held_BC_no_delta_reinterpreted_as_transparent": 0,
+  "proven_wall_occlusion_causes": 0,
+  "original_TMXS_reparsed_in_v232": false,
+  "layer_by_layer_BC_masks_rerendered_in_v232": false,
+  "independent_all_atlas_bytes_SHA256_recomputed": false,
+  "individual_A_RGBA_pixel_hashes_recomputed": false,
+  "same_key_official_D_substitution_performed": false,
+  "mapping_verified_new": 0,
+  "tilezed_verified_new": 0,
+  "final_certified_new": 0,
+  "historical_global_provisional_image_observed": 10007,
+  "historical_global_unique_keys": 10042,
+  "v196_SQLite_physical_file_rehashed_or_PRAGMA_checked": false,
+  "parent_source_Tiles_TMX_SQLite_and_manual_records_modified": false,
+  "user_manual33_provisional23_undecided10_excluded_unchanged": true,
+  "user_manual80_and_old_excluded14_unchanged": true,
+  "changes_policy": "new audit-only file directory; nothing mutated",
+  "next_priority": "continue other historical held keys using precise original per-key evidence; prioritize B-C zero and missing neighbors; only promote with independently verified source mapping and occlusion layer experiment"
+}

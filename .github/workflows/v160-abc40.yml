@@ -1,0 +1,107 @@
+name: v160 40 original A B C visual reviews with parent SQLite preservation
+on:
+  push:
+    branches: [work/v160-abc-3800-3839-20261028-0252]
+    paths:
+      - scripts/v160_abc_gables40.py
+      - scripts/v160_finalize_checkpoint.py
+      - review/v160_abc_3800_3839/MANUAL_VISUAL_NOTES.json
+      - .github/workflows/v160-abc40.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - scripts/v160_abc_gables40.py
+      - scripts/v160_finalize_checkpoint.py
+      - review/v160_abc_3800_3839/MANUAL_VISUAL_NOTES.json
+      - .github/workflows/v160-abc40.yml
+permissions:
+  contents: write
+concurrency:
+  group: v160-abc-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v160_abc_gables40.py
+            /scripts/v160_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /review/v160_abc_3800_3839/MANUAL_VISUAL_NOTES.json
+            /analysis/current/v159/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/b_png_shards/*
+            /review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv
+            /review/v121_C_diff_new4632/c_png_shards/*
+            /review/v121_C_diff_new4632/difference_png_shards/*
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/*
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify actual source pixels, raw TMX GIDs, B/C/DELTA, and append-only SQLite
+        run: python3 -u scripts/v160_abc_gables40.py
+      - name: Independent ZIP SHA CRC SQLite parent rows and candidate uniqueness verification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,zipfile,base64,zlib,sqlite3,csv
+          R=Path('review/v160_abc_3800_3839')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v160/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v159/MANIFEST.json').read_text())
+          assert m['manual_image_annotations']==40 and m['original_scope']==[3800,3839]
+          assert m['promoted_provisional']+m['excluded_unverified']==40
+          assert d['new_rows']==m['promoted_provisional'] and d['skipped_rows']==m['excluded_unverified']
+          assert d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==222 and d['prior_tables_preserved']==221
+          assert m['mapping_verified']==m['tilezed_verified']==m['certified']==0
+          for name,h in m['files_sha256'].items():
+           assert hashlib.sha256((R/name).read_bytes()).hexdigest()==h,name
+          with zipfile.ZipFile(R/'ABC_EVIDENCE_VERIFIED.zip') as f:
+           assert f.testzip() is None and len(f.namelist())==4*m['promoted_provisional']
+          with (R/'VISUAL_REVIEW.csv').open(encoding='utf-8-sig') as f:
+           rows=list(csv.DictReader(f))
+          assert len(rows)==m['promoted_provisional']
+          assert len({(r['tile_set_name'],r['local_id']) for r in rows})==len(rows)
+          assert all(r['visual_status']=='provisional_candidate' and r['certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in rows)
+          def dbraw(man):
+           packed=base64.b64decode(''.join(Path(part).read_text('ascii').strip() for part in man['parts']),validate=True)
+           assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+           raw=zlib.decompress(packed)
+           assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+           return raw
+          old=sqlite3.connect(':memory:');old.deserialize(dbraw(p))
+          new=sqlite3.connect(':memory:');new.deserialize(dbraw(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          oldcounts={t[0]:old.execute('SELECT count(*) FROM "'+t[0]+'"').fetchone()[0] for t in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          newcounts={t[0]:new.execute('SELECT count(*) FROM "'+t[0]+'"').fetchone()[0] for t in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(oldcounts)==221 and len(newcounts)==222
+          assert all(newcounts[k]==v for k,v in oldcounts.items())
+          assert set(newcounts)-set(oldcounts)=={'v160_visual_review'}
+          assert newcounts['v160_visual_review']==len(rows)
+          assert newcounts['tile_catalog']==5409
+          print('PASS v160 independent checks',len(rows),'provisional,',m['excluded_unverified'],'held, 222 physical SQLite tables')
+          PY
+      - name: Update latest checkpoint only after verification
+        run: python3 -u scripts/v160_finalize_checkpoint.py
+      - name: Commit verified results only to isolated work branch
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v160_abc_3800_3839 analysis/current/v160 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v160: verified A/B/C observations and 222-table physical SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

@@ -1,0 +1,92 @@
+name: v254 Embed all 68 original A and real TMX B-C images offline
+on:
+  push:
+    branches: [review/v254_manual68_embedded_original_images_20261030]
+    paths:
+      - scripts/v254_embed_68_original_image_evidence.py
+      - .github/workflows/v254-manual-68-inline-evidence.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  embed_verified_images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v254_embed_68_original_image_evidence.py
+            /review/v253_user_manual68_reviewkit_2026-10-30/PZ_USER_MANUAL_REVIEW_68.html
+            /review/v119_selected_A_new4633/MANIFEST.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v254_manual68_embedded_original_images_2026-10-30/*
+      - name: Install source image processing
+        run: python3 -m pip install --quiet Pillow --break-system-packages
+      - name: Checkout only all 68 exact original proof PNG and required lossless A archives
+        run: |
+          python3 scripts/v254_embed_68_original_image_evidence.py --list-images > /tmp/v254-required
+          cat > /tmp/v254-sparse <<'EOF'
+          /scripts/v254_embed_68_original_image_evidence.py
+          /review/v253_user_manual68_reviewkit_2026-10-30/PZ_USER_MANUAL_REVIEW_68.html
+          /review/v119_selected_A_new4633/MANIFEST.json
+          /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+          /review/v254_manual68_embedded_original_images_2026-10-30/*
+          EOF
+          sed 's|^|/|' /tmp/v254-required >> /tmp/v254-sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/v254-sparse
+          echo "Source PNG and archives:"; wc -l /tmp/v254-required
+      - name: Embed original A pixels and true B-C evidence, checking original SHA
+        run: python3 -u scripts/v254_embed_68_original_image_evidence.py
+      - name: Validate HTML JavaScript and embedded asset count
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,re
+          root=Path('review/v254_manual68_embedded_original_images_2026-10-30')
+          html=(root/'PZ_USER_MANUAL_REVIEW_68_IMAGES_INCLUDED.html').read_text(encoding='utf-8')
+          match=re.search(r'const IMAGE_ASSETS=(\{.*?\});\s*\nconst repo=',html,re.S)
+          assert match
+          assets=json.loads(match.group(1))
+          assert len(assets)==68 and len(set(assets))==68
+          assert all(set(a)=={'a_raw','a_zoom','bc'} for a in assets.values())
+          assert html.count('data:image/png;base64,')==68*3
+          assert 'PZ_manual68_v253' in html
+          rows=list(csv.DictReader((root/'EMBEDDED_68_ORIGINAL_A_AND_REAL_BC_SHA.csv').open(encoding='utf-8-sig',newline='')))
+          assert len(rows)==68 and set(r['source_key'] for r in rows)==set(assets)
+          (Path('/tmp')/'v254-js-only.js').write_text(html.split('<script>',1)[1].split('</script>',1)[0],encoding='utf-8')
+          print('68 exact sprite sources and full B/C proof panels embedded; no missing image',len(html))
+          PY
+          node --check /tmp/v254-js-only.js
+      - name: Browser smoke screenshot of truly offline embedded A and B-C
+        run: |
+          CHROME=$(command -v google-chrome-stable || command -v google-chrome || true)
+          if [ -z "$CHROME" ]; then
+            echo "Chrome missing; node JS/static asset integrity still tested"
+          else
+            OUT=review/v254_manual68_embedded_original_images_2026-10-30/OFFLINE_FIRST_CARD_BROWSER_PROOF.png
+            PAGE=file://"$PWD"/review/v254_manual68_embedded_original_images_2026-10-30/PZ_USER_MANUAL_REVIEW_68_IMAGES_INCLUDED.html
+            timeout 50 "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --virtual-time-budget=4000 --window-size=1440,1500 --screenshot="$OUT" "$PAGE" > /tmp/v254-chrome.log 2>&1
+            test -s "$OUT"
+            python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          p=Path('review/v254_manual68_embedded_original_images_2026-10-30/OFFLINE_FIRST_CARD_BROWSER_PROOF.png')
+          im=Image.open(p).convert('RGB')
+          assert im.width>=1200 and im.height>=1100,(im.size, p.stat().st_size)
+          print('OFFLINE CHROME RENDER',im.size,p.stat().st_size)
+          PY
+          fi
+      - name: Commit only new self-contained reviewer (leave history and master untouched)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v254_manual68_embedded_original_images_2026-10-30/
+          if ! git diff --cached --quiet; then
+            git commit -m "v254: standalone 68-key manual reviewer with verified A PNG and real B-C images embedded"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

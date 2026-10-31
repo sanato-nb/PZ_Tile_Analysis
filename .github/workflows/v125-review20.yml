@@ -1,0 +1,69 @@
+name: v125 independent 20 tile ABCD visual reviews
+on:
+  push:
+    branches: [work/v125-visual20-20261027]
+    paths:
+      - scripts/v125_append_visual20.py
+      - .github/workflows/v125-review20.yml
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v125_append_visual20.py
+            /analysis/current/v124/*
+            /review/v123_ABCD_next160/ABCD_160_319.csv
+            /review/v123_ABCD_next160/MANIFEST.json
+            /review/v123_ABCD_next160/ABCD_sheet_00.jpg
+      - name: Append independently visual-reviewed observations to preserved DB
+        run: python3 -u scripts/v125_append_visual20.py
+      - name: Verify 20 unique keys, SHA and restored SQLite
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import sqlite3,json,csv,hashlib,base64,zlib
+          R=Path('.')
+          m=json.loads((R/'review/v125_AI_ABCD_20/MANIFEST.json').read_text())
+          d=json.loads((R/'analysis/current/v125/MANIFEST.json').read_text())
+          assert m['individually_visually_observed']==20 and m['provisional']==18 and m['held']==2
+          assert hashlib.sha256((R/m['csv_path']).read_bytes()).hexdigest()==m['csv_sha256']
+          with (R/m['csv_path']).open(encoding='utf-8-sig',newline='') as f: a=list(csv.DictReader(f))
+          assert len(a)==20 and len({(x['tile_set_name'],x['local_id']) for x in a})==20
+          assert all(x['mapping_verified']==x['tilezed_verified']==x['final_certified']=='0' for x in a)
+          packed=base64.b64decode(''.join((R/p).read_text('ascii') for p in d['parts']))
+          assert hashlib.sha256(packed).hexdigest()==d['compressed_sha256']
+          b=zlib.decompress(packed)
+          assert hashlib.sha256(b).hexdigest()==d['sqlite_sha256']
+          q=Path('/tmp/v125-check.sqlite');q.write_bytes(b)
+          with sqlite3.connect(q) as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            for t,n in [('tile_catalog',5409),('v121_abcd_evidence',160),('v122_ai_visual_review_160',160),('v123_abcd_evidence_next160',160),('v124_d_placement_4472',4472),('v125_ai_visual_spotcheck_20',20)]:
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n
+            assert c.execute('SELECT COUNT(*) FROM tile_catalog WHERE observed_any=1').fetchone()[0]==5400
+          print('PASS independent v125')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v125-20-AI-visually-observed-verified
+          path: |
+            review/v125_AI_ABCD_20/
+            analysis/current/v125/
+          retention-days: 90
+          compression-level: 0
+      - name: Commit validated new source records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v125_AI_ABCD_20/ analysis/current/v125/
+          if ! git diff --cached --quiet; then
+            git commit -m "v125: 20 direct A/B/C/D observations; preserve v124 historical tables"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

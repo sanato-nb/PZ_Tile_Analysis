@@ -1,0 +1,119 @@
+name: v187 audit six B-C positive held tiles missing original neighbor A sprites while preserving 248 tables
+on:
+  push:
+    branches: [work/v187-six-held-missing-neighbor-source-audit-20261028]
+    paths:
+      - scripts/v187_missing_neighbor_six.py
+      - scripts/v187_finalize_checkpoint.py
+      - .github/workflows/v187-missing-neighbor6.yml
+permissions:
+  contents: write
+concurrency:
+  group: v187-missing-neighbors-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v187_missing_neighbor_six.py
+            /scripts/v187_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v186/*
+            /review/v180_remnant239_multisite/UNOBSERVED_239_ADDITIONAL_SITE_CENSUS.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v182_occlusion202/SOURCE_OCCLUSION_202.csv
+            /review/v183_original_BC_visual65/HELD_137.csv
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/32_47.tmx
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+      - name: Fetch original atlas PNGs referenced by source sprite crops
+        run: |
+          python3 - <<'PY' >/tmp/v187_required_atlases.txt
+          import csv
+          paths=set()
+          for name,field in [
+            ('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv','source_image_path'),
+            ('review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv','source_png_path')]:
+           with open(name,encoding='utf-8-sig') as f:
+            for r in csv.DictReader(f):
+             if r.get(field):paths.add(r[field])
+          for p in sorted(paths):
+           assert p.startswith('Tiles/') and '..' not in p
+           print('/'+p)
+          PY
+          git sparse-checkout add --stdin </tmp/v187_required_atlases.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Render six original source scenes, exact neighbor-missing key ledger and true B-C pixel differences
+        run: python3 -u scripts/v187_missing_neighbor_six.py
+      - name: Independently verify six true-TMX sources and all 248 parent SQLite tables, source blockers never observed
+        run: |
+          python3 - <<'PY'
+          import base64,csv,hashlib,json,sqlite3,zipfile,zlib
+          from pathlib import Path
+          R=Path('review/v187_missing_neighbor6')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v186/MANIFEST.json').read_text())
+          n=json.loads(Path('analysis/current/v187/MANIFEST.json').read_text())
+          assert m['source_incomplete_true_BC_positive_cases']==m['original_B_C_positive']==6
+          assert m['original_A_and_TMX_source_verified']==6 and m['new_observed']==0
+          assert m['original_checkpoint_observed']==9898 and m['original_checkpoint_unobserved']==144
+          assert m['final_identity_certified']==m['official_mapping_verified']==m['tilezed_verified']==0
+          assert n['version']=='v187' and n['parent']=='v186' and n['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert n['new_rows']==6 and n['new_observed_rows']==0 and n['table_count']==249 and n['prior_tables_preserved']==248
+          with (R/'SOURCE_BLOCKED_6.csv').open(encoding='utf-8-sig') as f:a=list(csv.DictReader(f))
+          with (R/'MISSING_NEIGHBOR_KEYS.csv').open(encoding='utf-8-sig') as f:b=list(csv.DictReader(f))
+          assert sorted(int(x['index']) for x in a)==[197,198,685,3104,4408,4409]
+          assert len(b)==m['missing_neighbor_occurrences']
+          assert len({(x['tile_set_name'],x['local_id']) for x in b})==m['missing_neighbor_unique_keys']
+          assert all(int(x['B_C_pixels'])>=100 and int(x['missing_neighbor_occurrences'])>=1 and x['identity_observed']==x['final_certified']=='0' for x in a)
+          assert hashlib.sha256((R/'SOURCE_BLOCKED_6.csv').read_bytes()).hexdigest()==m['audit_csv_sha256']
+          assert hashlib.sha256((R/'MISSING_NEIGHBOR_KEYS.csv').read_bytes()).hexdigest()==m['missing_key_csv_sha256']
+          zip_path=R/'SOURCE_INCOMPLETE_SIX_ACTUAL_ABC.zip'
+          assert hashlib.sha256(zip_path.read_bytes()).hexdigest()==m['source_reconstruction_zip_sha256']
+          with zipfile.ZipFile(zip_path) as z:assert z.testzip() is None and len(z.namelist())==24
+          def raw(man):
+           packed=base64.b64decode(''.join(Path(f).read_text('ascii').strip() for f in man['parts']),validate=True)
+           assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+           r=zlib.decompress(packed)
+           assert len(r)==man['sqlite_bytes'] and hashlib.sha256(r).hexdigest()==man['sqlite_sha256']
+           return r
+          old=sqlite3.connect(':memory:');old.deserialize(raw(p))
+          new=sqlite3.connect(':memory:');new.deserialize(raw(n))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          prev={r[0]:old.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          curr={r[0]:new.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(prev)==248 and len(curr)==249
+          assert set(curr)-set(prev)=={'v187_missing_neighbor_audit'}
+          assert curr['v187_missing_neighbor_audit']==6 and all(curr[x]==prev[x] for x in prev)
+          for table in prev:
+           x=old.execute('SELECT * FROM "'+table+'"');y=new.execute('SELECT * FROM "'+table+'"')
+           while True:
+            aa=x.fetchmany(1024);bb=y.fetchmany(1024)
+            assert aa==bb,('parent_row_changed',table)
+            if not aa:break
+          assert new.execute('SELECT SUM(identity_observed),SUM(final_certified) FROM v187_missing_neighbor_audit').fetchone()==(0,0)
+          print('PASS v187 six original B-C positive source blockers, 249 SQLite tables, prior 248 row-identical, zero observed promotion')
+          PY
+      - name: Update checked progress and handoff
+        run: python3 -u scripts/v187_finalize_checkpoint.py
+      - name: Commit verified artifacts to isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v187_missing_neighbor6 analysis/current/v187 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v187 true original six B-C source-blocker audit, no observed promotions, 249 SQLite tables"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

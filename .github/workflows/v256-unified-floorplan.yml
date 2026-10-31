@@ -1,0 +1,68 @@
+name: Build v256 unified 10042 full floorplan and verify actual TMX
+on:
+  push:
+    branches: [floorplan/v256_master10042_interactive_20261030]
+    paths:
+      - floorplan/build_v256_floorplan.py
+      - floorplan/tests/smoke_v256_browser.py
+      - .github/workflows/v256-unified-floorplan.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /floorplan/build_v256_floorplan.py
+            /floorplan/tests/smoke_v256_browser.py
+            /floorplan/current/v255_floorplan_latest_user_priority.html
+            /floorplan/current/MANIFEST_V255.json
+            /review/v255_latest_integrated_10042_2026-10-30/MASTER_ALL_10042_LATEST_PREFERRED.csv
+            /review/v255_latest_integrated_10042_2026-10-30/MANIFEST.json
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /floorplan/current/v256_floorplan_unified_10042.html
+            /floorplan/current/MANIFEST_V256.json
+      - name: SHA-validated integration of latest all 10042 keys into standalone HTML
+        run: python3 -u floorplan/build_v256_floorplan.py
+      - name: Verify embedded latest 10042 snapshot and HTML JS syntax
+        run: |
+          python3 - <<'PY'
+          import base64,gzip,json,hashlib,re
+          from pathlib import Path
+          h=Path('floorplan/current/v256_floorplan_unified_10042.html').read_text('utf-8')
+          m=json.loads(Path('floorplan/current/MANIFEST_V256.json').read_text('utf-8'))
+          assert hashlib.sha256(h.encode()).hexdigest()==m['output_sha256']
+          a=json.loads(gzip.decompress(base64.b64decode(re.search(r'const V256_B64="([A-Za-z0-9+/=]+)";',h).group(1))))
+          assert len(a)==10042 and len({x[0] for x in a})==10042
+          assert sum(x[1]=='1' for x in a)==9587
+          assert sum(x[2]=='HISTORICAL_HELD_439' for x in a)==439
+          assert sum(bool(x[10]) for x in a)==68
+          assert 'v256MarkHeld(visible,show,v)' in h
+          assert 'v256Inspect(items);schedule()' in h
+          js=h.split('<script>',1)[1].split('</script>',1)[0]
+          Path('/tmp/v256.js').write_text(js,'utf-8')
+          print('PASS embedded full latest master, 68 user, no active promotion')
+          PY
+          node --check /tmp/v256.js
+      - uses: browser-actions/setup-chrome@v1
+      - name: Actual original TMX + user search + held roles in Chrome
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 floorplan/tests/smoke_v256_browser.py
+      - name: Commit tested v256 standalone HTML and manifest only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse floorplan/current/v256_floorplan_unified_10042.html floorplan/current/MANIFEST_V256.json
+          if ! git diff --cached --quiet; then
+            git commit -m "v256: verified latest all 10042 floorplan with user68 and held diagnostics"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi

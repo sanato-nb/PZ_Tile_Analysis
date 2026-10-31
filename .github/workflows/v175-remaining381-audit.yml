@@ -1,0 +1,115 @@
+name: v175 audit all 381 remaining original tile keys against 84 TMX GIDs and immutable SQLite
+on:
+  push:
+    branches: [work/v175-remaining381-forensic-audit-20261028]
+    paths:
+      - scripts/v175_remaining381_forensic.py
+      - scripts/v175_finalize_source_audit.py
+      - .github/workflows/v175-remaining381-audit.yml
+permissions:
+  contents: write
+concurrency:
+  group: v175-remaining-381-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  forensic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v175_remaining381_forensic.py
+            /scripts/v175_finalize_source_audit.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /analysis/current/v174/*
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv
+            /audits/map_range_26_43_to_37_49/SUMMARY.json
+            /B4220.3_MapExport_256/tmx/*
+      - name: Hydrate only atlas PNGs referenced by the original A candidate records
+        run: |
+          python3 - <<'PY' > /tmp/required_png_sparse.txt
+          import csv
+          with open('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv',encoding='utf-8-sig') as f:
+           rows=list(csv.DictReader(f))
+          paths=sorted({r['source_image_path'] for r in rows if r.get('source_image_path')})
+          assert 0<len(paths)<5000
+          for path in paths:
+           assert path.startswith('Tiles/') and '..' not in path
+           print('/'+path)
+          PY
+          echo "Selected atlas source file count: $(wc -l < /tmp/required_png_sparse.txt)"
+          git sparse-checkout add --stdin < /tmp/required_png_sparse.txt
+      - run: python3 -m pip install --quiet Pillow
+      - name: Enumerate ALL unobserved keys and every actual 84 TMX placement; preserve parent 236 tables
+        run: python3 -u scripts/v175_remaining381_forensic.py
+      - name: Independent 379 source-key audit plus historical 2-count discrepancy and physical SQLite whole-row preservation
+        run: |
+          python3 - <<'PY'
+          import base64,csv,hashlib,json,sqlite3,zlib
+          from pathlib import Path
+          R=Path('review/v175_remaining381_evidence_audit')
+          d=json.loads(Path('analysis/current/v175/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v174/MANIFEST.json').read_text())
+          m=json.loads((R/'MANIFEST.json').read_text())
+          assert m['total_remaining_in_checkpoint']==381 and m['source_keys_audited']==379 and m['new_source_missing']==370 and m['old_source_missing']==9 and m['bookkeeping_discrepancy']==2
+          assert m['observed_before']==m['observed_after']==9661 and m['remaining_after']==381
+          assert m['actual_tmx_maps_checked']==84
+          assert d['version']=='v175' and d['parent']=='v174'
+          assert d['new_rows']==379 and d['new_observed_rows']==0
+          assert d['table_count']==237 and d['prior_tables_preserved']==236
+          assert d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert m['identity_certifications']==m['official_mapping_verified']==m['tilezed_verified']==0
+          with (R/'REMAINING_381_EVIDENCE_AUDIT.csv').open(encoding='utf-8-sig') as f:
+           rows=list(csv.DictReader(f))
+          assert len(rows)==379 and len({(r['tile_set_name'],r['local_id']) for r in rows})==379
+          assert sum(r['origin']=='new_A_4633' for r in rows)==370
+          assert sum(r['origin']=='older_5409_unobserved' for r in rows)==9
+          assert all(r['original_observed']=='0' and r['identity_certified']=='0' for r in rows)
+          assert all(int(r['actual_occurrences_84'])>0 for r in rows)
+          assert hashlib.sha256((R/'REMAINING_381_EVIDENCE_AUDIT.csv').read_bytes()).hexdigest()==m['report_sha256']
+          def read(man):
+           z=base64.b64decode(''.join(Path(k).read_text('ascii').strip() for k in man['parts']),validate=True)
+           assert hashlib.sha256(z).hexdigest()==man['compressed_sha256']
+           raw=zlib.decompress(z)
+           assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+           return raw
+          old=sqlite3.connect(':memory:');old.deserialize(read(p))
+          new=sqlite3.connect(':memory:');new.deserialize(read(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          oldcounts={r[0]:old.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          newcounts={r[0]:new.execute('SELECT COUNT(*) FROM "'+r[0]+'"').fetchone()[0] for r in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(oldcounts)==236 and len(newcounts)==237
+          assert set(newcounts)-set(oldcounts)=={'v175_remaining_evidence_audit'}
+          for name,num in oldcounts.items():
+           assert newcounts[name]==num
+           a=old.execute('SELECT * FROM "'+name+'"')
+           b=new.execute('SELECT * FROM "'+name+'"')
+           while True:
+            x=a.fetchmany(1024);y=b.fetchmany(1024)
+            assert x==y,('prior_data_changed',name)
+            if not x:break
+          assert newcounts['v175_remaining_evidence_audit']==379
+          assert new.execute('SELECT SUM(original_observed),SUM(identity_certified) FROM v175_remaining_evidence_audit').fetchone()==(0,0)
+          print('PASS: 379 exact source keys audited; 2-checkpoint count discrepancy preserved; 237 tables with no parent row changes and zero identity promotion')
+          PY
+      - name: Update checkpoint only after original TMX census and SQLite validations succeed
+        run: python3 -u scripts/v175_finalize_source_audit.py
+      - name: Commit verified forensic audit evidence to isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v175_remaining381_evidence_audit analysis/current/v175 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v175 evidence audit: 379 physical missing keys and 2-count discrepancy and physical 237-table SQLite, no observation promotion"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

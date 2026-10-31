@@ -1,0 +1,31 @@
+{
+"version": "v103",
+"sqlite_file": "tile_visual_v103_unified.sqlite",
+"sqlite_size_bytes": 88403968,
+"sqlite_sha256": "77c2fd14ed8f341aefb16411583892e4132ac7aa6004bfaa75d147863f7b27a8",
+"compressed_sha256": "de336c8d0ca1bcccdaa74ea8b5b7f7770b56fb6c069063693ff37485473cf5ce",
+"compression": "zlib_base64",
+"parts": [
+"analysis/current/v103/v103.part000.b64",
+"analysis/current/v103/v103.part001.b64",
+"analysis/current/v103/v103.part002.b64",
+"analysis/current/v103/v103.part003.b64",
+"analysis/current/v103/v103.part004.b64",
+"analysis/current/v103/v103.part005.b64",
+"analysis/current/v103/v103.part006.b64"
+],
+"base_version": "v102",
+"base_sqlite_sha256": "1c81a1213fb64c095908618225dac6b3450c5b1edfd1db64fa4c2d241c2c557c",
+"new_records_repo_path": "checkpoints/v103/observations.tsv",
+"evidence_manifest": "checkpoints/v103_preview/EVIDENCE_MANIFEST.json",
+"source_record_count": 24,
+"observed": 5070,
+"provisional_candidates": 4255,
+"remaining": 339,
+"certified": 0,
+"all_prior_tables_preserved": true,
+"original_sprite_evidence_images_in_github": true,
+"mapping_verified": 0,
+"tilezed_verified": 0,
+"note": "v102 미관찰 24종 A/B/C 직접 판독. 실제 다른 D 0종, D 미확보 24종. 후보 19 보류 5; 공식 Local ID/TileZed 미검증, PNG 높이 불일치."
+}

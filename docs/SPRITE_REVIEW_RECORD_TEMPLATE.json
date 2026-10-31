@@ -1,0 +1,116 @@
+{
+  "_file_description_KO": "타일 1개를 검수할 때 복제해 채우는 예시 레코드. null/false는 작업 전 기본값이고 인증 증거가 아니다. 이전 판정/원본은 삭제하지 않는다.",
+  "schema_version": "v242_example_1",
+  "source": {
+    "source_key": null,
+    "tileset_name": null,
+    "local_id": null,
+    "original_png_path": null,
+    "original_png_sha256": null,
+    "a_crop_xyxy": null,
+    "a_crop_rgba_sha256": null,
+    "image_scale_or_tile_definition": null,
+    "source_verified_this_session": false,
+    "source_provenance_path": null
+  },
+  "A_original": {
+    "visually_opened_this_session": false,
+    "independent_blind_pixel_observation_ko": null,
+    "shape_silhouette_ko": null,
+    "colors_texture_visible_only_ko": null,
+    "alpha_observed_ko": null,
+    "nontransparent_pixels": null,
+    "edges_connectors_corners_ko": null,
+    "facts_not_visible_from_A_ko": null,
+    "role_candidate": "unknown",
+    "part_kind_candidate": "unknown",
+    "surface_overlay_candidate": "unknown",
+    "notes_from_preexisting_review_not_new_A_evidence": null
+  },
+  "orientation": {
+    "sprite_on_screen": null,
+    "game_world_direction": null,
+    "object_front_hypothesis": null,
+    "orientation_evidence": null,
+    "direction_uncertainty": null
+  },
+  "assembly": {
+    "connectivity_candidate": "unknown",
+    "real_map_neighbor_part_keys": [],
+    "real_map_relative_positions": [],
+    "assembled_object_candidate": null,
+    "assembled_object_is_verified": false,
+    "group_evidence": null
+  },
+  "B_original": {
+    "rendered_this_session": false,
+    "source_tmx_path": null,
+    "tmx_sha256": null,
+    "level": null,
+    "layer_index": null,
+    "x": null,
+    "y": null,
+    "firstgid": null,
+    "raw_gid": null,
+    "gid_transform_flags": null,
+    "render_crops_and_parameters": null,
+    "missing_neighbor_sources": null,
+    "map_edge_truncated": null,
+    "exposure": "not_checked",
+    "scene_context_not_individual_A_identity": null,
+    "original_B_evidence_path": null
+  },
+  "C_original": {
+    "rendered_this_session": false,
+    "removed_exactly_one_original_gid_placement": false,
+    "same_camera_layers_renderer_as_B": null,
+    "B_C_pixel_change_count": null,
+    "difference_region_ko": null,
+    "B_C_zero_cause": "unproven",
+    "original_C_evidence_path": null
+  },
+  "occlusion_diagnostics": {
+    "independently_tested_this_session": false,
+    "original_scene_preserved": true,
+    "masked_layer_or_cell_experiments": [],
+    "suspected_occluders": [],
+    "occlusion_proven": false,
+    "diagnostic_image_paths": [],
+    "alternate_real_B_C_occurrences": []
+  },
+  "D_same_key_official_A_test": {
+    "verified_alternative_official_A_exists": false,
+    "performed": false,
+    "official_alternative_A_source": null,
+    "same_original_B_placement": null,
+    "result_path": null,
+    "state": "not_performed"
+  },
+  "interpretation": {
+    "provisional_identity_candidate_ko": null,
+    "single_tile_part_role_hypothesis_ko": null,
+    "entire_assembled_object_hypothesis_ko": null,
+    "visual_evidence_supporting_identity": null,
+    "alternatives_ko": [],
+    "contradictions_with_previous_review_ko": [],
+    "uncertainty_flags": [],
+    "next_best_experiment_ko": null
+  },
+  "review_and_status": {
+    "reviewed_by": null,
+    "review_date": null,
+    "parent_version": null,
+    "original_historical_status": null,
+    "this_review_scope": "not_started",
+    "new_A_observation_counted": false,
+    "A_first_review_status": "not_started",
+    "mapping_verified": false,
+    "tilezed_verified": false,
+    "certified": false,
+    "official_identity_evidence_links": [],
+    "human_user_verdict_verbatim": null,
+    "user_excluded_from_active": null,
+    "old_sources_and_user_verdicts_preserved": true,
+    "evidence_artifacts_paths": []
+  }
+}

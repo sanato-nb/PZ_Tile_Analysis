@@ -1,0 +1,128 @@
+{
+  "version": "v211_A_first_semantic_QA_only",
+  "date": "2026-10-29",
+  "source_main_sha": "a25be4a70cebef6d64a70f6c58de6010338c0b18",
+  "original_v152_source_scope": [
+    2800,
+    2959
+  ],
+  "original_scope_total": 160,
+  "source_158_prior_provisional_reaudited": 158,
+  "historical_held_unchanged": 2,
+  "old_held_indices": [
+    2814,
+    2890
+  ],
+  "prior_held_reason": "B_map_edge_truncated",
+  "source_A_individual_QA_morphology_records": 158,
+  "exclusive_change_class_counts": {
+    "role_narrowing": 137,
+    "A_morphology_refinement": 14,
+    "retain_prior_A_shape": 7
+  },
+  "A_morphology_or_role_QA_change_recommendations": 151,
+  "prior_A_shape_retained": 7,
+  "confirmed_wrong_identifications": 0,
+  "source_PNG_atlas_paths_prior_hash_crosschecked": 10,
+  "original_A_source_sheets_directly_viewed": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_035.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_036.jpg"
+  ],
+  "original_B_and_one_gid_removed_C_diff_sheets_directly_viewed": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_035.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_036.jpg"
+  ],
+  "original_A_source_PNG_atlas_files_directly_viewed": [
+    "Tiles/2x/street_curbs_01_blend_dark_grass.png",
+    "Tiles/2x/street_curbs_01_blend_sand.png",
+    "Tiles/2x/street_curbs_01_diag.png"
+  ],
+  "sample_important_findings": [
+    "Green/dirt/sand patch A only: B gray pavement is a composite of other layers, cannot assign it as the individual original A sprite",
+    "signs_one-off_09/159 index2838: narrow upright pale shaft on original A, earlier curb role unsupported",
+    "signs_one-off_09/135 index2817: gray freestanding stone pedestal with finial; B full fence is not in A",
+    "street_curbs_01_diag/48 index2959: original A narrow green diagonal bar, not gray curb; description adjusted"
+  ],
+  "source_metadata_crosscheck": {
+    "rows": 158,
+    "comparison": "original review/v152_curbs_signs_2800_2959/VISUAL_REVIEW.csv",
+    "fields": [
+      "tile_set_name",
+      "local_id",
+      "prior_candidate",
+      "prior_features",
+      "A_PNG",
+      "A_PNG_sha256_prior",
+      "A_crop",
+      "A_RGBA_sha256_prior",
+      "B_tmx_path",
+      "B_tmx_sha256_prior",
+      "level",
+      "layer_index",
+      "x",
+      "y",
+      "raw_gid",
+      "firstgid",
+      "B_C_changed_pixels",
+      "B_entry",
+      "C_entry",
+      "delta_entry"
+    ],
+    "mismatches": 0,
+    "source_png_SHA_prior_registry": "review/v119_selected_A_new4633/MANIFEST.json",
+    "source_png_registry_matches": 10,
+    "original_PNG_bytes_rehashed_now": false,
+    "original_RGBA_crop_sha_recomputed_now": false,
+    "source_TMX_reparsed_now": false,
+    "original_BC_rerendered_now": false
+  },
+  "near_zero_BC_review_flags": [
+    {
+      "index": 2854,
+      "key": "street_curbs_01_blend_dark_grass/25",
+      "pixels": 97
+    },
+    {
+      "index": 2935,
+      "key": "street_curbs_01_blend_sand/32",
+      "pixels": 91
+    },
+    {
+      "index": 2955,
+      "key": "street_curbs_01_diag/39",
+      "pixels": 76
+    }
+  ],
+  "wall_or_upper_layer_occlusion_cause_directly_diagnosed": false,
+  "official_D_same_key_validated_other_A_replacement_render": false,
+  "parent_v196_SQLite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_v196_SQLite_tables_prior_manifest": 256,
+  "physical_sqlite_rebuilt_or_modified": false,
+  "sqlite_PRAGMA_integrity_check_rerun_now": false,
+  "user_manual33_23_verbatim_preserved": true,
+  "user_manual33_10_undecided_excluded_preserved": true,
+  "prior_user_manual80_and_excluded14_unmodified": true,
+  "source_A_BC_QA_scope_before": 2462,
+  "source_A_BC_QA_scope_after": 2620,
+  "source_scope_historical_held_before": 178,
+  "source_scope_historical_held_after": 180,
+  "source_scope_pending_before": 1993,
+  "source_scope_pending_after": 1833,
+  "source_key_scope_denominator": 4633,
+  "scope_reconciliation": "2620+180+1833=4633",
+  "total_historical_unique": 10042,
+  "total_historical_provisional_observed": 10007,
+  "historical_unobserved_reported": 35,
+  "unobserved_actual_keys": 33,
+  "unresolved_accounting_gap": 2,
+  "new_observed_status_promotions": 0,
+  "new_provisional_promotions": 0,
+  "mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "write_policy": "Only additive review/v211 QA files; do not modify/delete parent Tiles or TMX, prior audit records, physical SQLite, manual33",
+  "next_reaudit_range": [
+    2960,
+    3119
+  ]
+}

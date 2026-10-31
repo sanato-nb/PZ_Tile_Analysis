@@ -1,0 +1,36 @@
+name: v100 build observations from directly inspected review notes
+on:
+  push:
+    branches: [work/v100-visual-20261026]
+    paths:
+      - scripts/build_v100_observations.py
+      - .github/workflows/build-v100-observations.yml
+permissions:
+  contents: write
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_v100_observations.py
+            /checkpoints/v99/observations.tsv
+            /checkpoints/v97/observations.tsv
+            /checkpoints/v100/review_notes_*.psv
+            /checkpoints/v100_preview/EVIDENCE_MANIFEST.json
+      - name: Convert 216 directly reviewed tile descriptions to structured evidence
+        run: python3 scripts/build_v100_observations.py
+      - name: Commit per-tile records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse checkpoints/v100/observations.tsv checkpoints/v100/review_summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m "v100 216 direct image observations TSV and audit summary"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

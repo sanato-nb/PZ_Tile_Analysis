@@ -1,0 +1,43 @@
+name: "v58 미관찰 타일 증거판 생성 (검수 전)"
+on:
+  push:
+    branches:
+      - work/v58-evidence-20261025
+    paths:
+      - scripts/generate_v58_preview.py
+      - .github/workflows/v58-preview.yml
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: 원본 자료 필요한 경로만 가져오기
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /Tiles/*.png
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v57/*
+            /scripts/restore_unified_v57.py
+            /scripts/generate_v58_preview.py
+            /.github/workflows/v58-preview.yml
+      - name: 이미지 처리 도구 설치
+        run: python3 -m pip install --quiet Pillow
+      - name: 최신 DB 검증 후 원본 A/B/C/D 증거 생성
+        run: python3 scripts/generate_v58_preview.py
+      - name: 검수 전 증거만 별도 브랜치에 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse checkpoints/v58_preview/
+          if ! git diff --cached --quiet; then
+            git commit -m "증거: v58 후보 6종 A/B/C/D 검수 전 비교판 생성"
+            git push
+          fi

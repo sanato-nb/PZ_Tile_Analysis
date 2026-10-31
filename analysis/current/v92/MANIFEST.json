@@ -1,0 +1,31 @@
+{
+"version": "v92",
+"sqlite_file": "tile_visual_v92_unified.sqlite",
+"sqlite_size_bytes": 86433792,
+"sqlite_sha256": "1ba2d19fc7765c6d2e4f59035cfd3780f12a320730eb46be1cbfd884c54f591e",
+"compressed_sha256": "e08246e629a99535a3f85263cb7b2f3c58b5985aec5cd683c161cf117d02fa51",
+"compression": "zlib_base64",
+"parts": [
+"analysis/current/v92/v92.part000.b64",
+"analysis/current/v92/v92.part001.b64",
+"analysis/current/v92/v92.part002.b64",
+"analysis/current/v92/v92.part003.b64",
+"analysis/current/v92/v92.part004.b64",
+"analysis/current/v92/v92.part005.b64",
+"analysis/current/v92/v92.part006.b64"
+],
+"base_version": "v91",
+"base_sqlite_sha256": "ae36baf4e632ccecd7f80249813a12fc3da90a967699bed3e8ede67fd1170ecf",
+"new_records_repo_path": "checkpoints/v92/observations.tsv",
+"evidence_manifest": "checkpoints/v92_preview/EVIDENCE_MANIFEST.json",
+"source_record_count": 12,
+"observed": 4189,
+"provisional_candidates": 3530,
+"remaining": 1220,
+"certified": 0,
+"all_prior_tables_preserved": true,
+"original_sprite_evidence_images_in_github": true,
+"mapping_verified": 0,
+"tilezed_verified": 0,
+"note": "v91 미관찰 대기열에서 신규 12종의 A/B/C/D 직접 시각 판독. 잠정 후보 9, 보류 3. PNG height mismatch/TileZed 미검증."
+}

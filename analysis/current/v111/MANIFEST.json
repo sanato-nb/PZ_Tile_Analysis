@@ -1,0 +1,33 @@
+{
+"version": "v111",
+"sqlite_file": "tile_visual_v111_unified.sqlite",
+"sqlite_size_bytes": 89169920,
+"sqlite_sha256": "c2d31b708d5a706709007265ce44f0bd63efed27f8acd5fe5e9b3ecdd1dce73f",
+"compressed_sha256": "ebf37ce101171e4873b136cca28029296d423b8e4b261c9521516f786957968c",
+"compression": "zlib_base64",
+"parts": [
+"analysis/current/v111/v111.part000.b64",
+"analysis/current/v111/v111.part001.b64",
+"analysis/current/v111/v111.part002.b64",
+"analysis/current/v111/v111.part003.b64",
+"analysis/current/v111/v111.part004.b64",
+"analysis/current/v111/v111.part005.b64",
+"analysis/current/v111/v111.part006.b64"
+],
+"base_version": "v110",
+"base_sqlite_sha256": "cc004fb60f6df412da3068e909f9696b0d8cedf8a57d600abd383d1e214c7de0",
+"new_records_repo_path": "checkpoints/v111/observations.tsv",
+"unresolved_repo_path": "checkpoints/v111/unresolved_9.csv",
+"evidence_manifest": "checkpoints/v111_singleuse_preview/EVIDENCE_MANIFEST.json",
+"source_record_count": 12,
+"observed": 5400,
+"provisional_candidates": 4512,
+"remaining": 9,
+"unresolved_source_and_no_delta": 9,
+"certified": 0,
+"all_prior_tables_preserved": true,
+"original_sprite_evidence_images_in_github": true,
+"mapping_verified": 0,
+"tilezed_verified": 0,
+"note": "v110 미관찰 21종 중 단일 사용 PNG A와 TMX B/C 차이가 있는 12종 잠정 후보, B-C 0인 4종과 PNG 누락 5종은 미관찰로 유지. D 미확보, 공식 TileZed 검증 0."
+}

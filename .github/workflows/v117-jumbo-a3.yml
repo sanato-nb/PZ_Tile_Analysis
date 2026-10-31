@@ -1,0 +1,65 @@
+name: v117 A3 JUMBO whole sprite fallback
+on:
+  push:
+    branches: [work/v117-all-10042-a-candidate-atlas-20261026]
+    paths:
+      - scripts/v117_jumbo_a3_10042.py
+      - .github/workflows/v117-jumbo-a3.yml
+permissions:
+  contents: write
+jobs:
+  jumbo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v117_jumbo_a3_10042.py
+            /review/v117_A_candidates_10042/A_CANDIDATE_MASTER_10042.csv
+            /review/v117_A_candidates_10042/exceptions/EXCEPTIONS.json
+            /Tiles/*
+            /review/v117_A_candidates_10042/jumbo_a3/*
+      - run: python3 -m pip install --quiet Pillow
+      - name: Derive alternative large-tree A3 by actual source pixel grid
+        run: python3 -u scripts/v117_jumbo_a3_10042.py
+      - name: Validate A1 A2 A3 joined ledger
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import json,csv
+          root=Path('review/v117_A_candidates_10042')
+          s=json.loads((root/'jumbo_a3/A3_SUMMARY.json').read_text('utf8'))
+          assert s['all_keys']==10042
+          assert s['original_A1_A2_consistent']==3326
+          assert s['original_one_visible']==6673
+          assert (s['A3_jumbo_guessed']+s['still_no_visible']+s['still_no_source'])==43
+          assert s['new_mapping_verified']==s['AI_per_key_selected']==s['final_certified']==0
+          with (root/'A_CANDIDATE_COMBINED_10042.csv').open('r',encoding='utf-8-sig',newline='') as f:
+            d=list(csv.DictReader(f))
+          assert len(d)==10042
+          assert sum(x['new_preferred_A']=='A3' for x in d)==s['A3_jumbo_guessed']
+          with Image.open(root/'jumbo_a3/A3_JUMBO_review_sheet.jpg') as im:im.verify()
+          print('PASS 10,042 joined A source decisions, A3 exception sprite crops, no official mapping')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v117-10042-A1-A2-A3-combined
+          path: |
+            review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            review/v117_A_candidates_10042/jumbo_a3/
+          retention-days: 90
+      - name: Commit v117 full A source decisions and A3 gallery
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv review/v117_A_candidates_10042/jumbo_a3/
+          if ! git diff --cached --quiet; then
+            git commit -m "v117 A3 visually grounded alternate full-JUMBO sprite candidates for complete 10,042 A ledger"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

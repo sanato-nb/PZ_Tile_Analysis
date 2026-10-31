@@ -1,0 +1,87 @@
+name: v131 publish verified full D status from 12 saved artifacts
+on:
+  push:
+    branches: [work/v131-D-all-remaining-3832-parallel-20261027]
+    paths:
+      - .github/workflows/v131-D-publish.yml
+permissions:
+  contents: write
+  actions: read
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v131_D_aggregate_all.py
+            /scripts/restore_unified_v131.py
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v126_D_alt_A_B_160/D_ALTERNATIVE_A_B_160.csv
+            /review/v129_D_alt_A_B_320/D_ALTERNATIVE_A_B_320.csv
+            /review/v130_D_alt_A_B_320/D_ALTERNATIVE_A_B_320.csv
+            /analysis/current/v130/*
+            /review/v131_D_remaining_3832/*
+            /analysis/current/v131/*
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 40448959443
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: v131-*
+          path: .v131_bundles
+          merge-multiple: false
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 40447702885
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: v131-*
+          path: .v131_bundles
+          merge-multiple: false
+      - name: Merge all batches and restore full 193-table SQLite
+        run: |
+          mkdir -p review/v131_D_remaining_3832
+          for dir in .v131_bundles/v131-*; do
+            tag=${dir##*/v131-}
+            test -f "$dir/MANIFEST.json"
+            mv "$dir" "review/v131_D_remaining_3832/batch_$tag"
+          done
+          test "$(find review/v131_D_remaining_3832 -mindepth 1 -maxdepth 1 -type d | wc -l)" -eq 12
+          python3 -u scripts/v131_D_aggregate_all.py
+          python3 -u scripts/restore_unified_v131.py /tmp/PZ_v131_independent.sqlite
+      - name: Independently validate all 4633 scope keys and certification zero
+        run: |
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          p=Path('review/v131_D_remaining_3832')
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['new_3832_rows']==3832 and m['full_target_4632_status_indexed']==4632
+          assert m['new_scope_4633']==4633 and m['A_missing_1']==1 and len(m['batches'])==12
+          assert m['D_experimental_rendered']+m['D_held_with_A']==4632
+          assert m['official_same_key_A_mapping_verified']==m['tilezed_verified']==m['identity_final_certified']==0
+          with (p/'D_FULL_SCOPE_4633_STATUS.csv').open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==4633 and len({(r['tileset'],r['local_id']) for r in rows})==4633
+          assert all(r['mapping_verified']==r['final_certified']==r['tilezed_verified']=='0' for r in rows)
+          print('PASS all 4633 D status records')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v131-all-D-evidence-full-4633
+          path: |
+            review/v131_D_remaining_3832/
+            analysis/current/v131/
+          retention-days: 90
+          compression-level: 0
+      - name: Commit v131 evidence and full SQLite
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v131_D_remaining_3832/ analysis/current/v131/
+          git commit -m "v131: all 3832 outstanding D cases, 4633 full D status, historical SQLite preserved"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push

@@ -1,0 +1,120 @@
+name: v186 49 original PNG A B C source re-review distinguishes gas BBQ sofa and powered machines
+on:
+  push:
+    branches: [work/v186-reclassification-gasgrill-sofa-machines-20261028]
+    paths:
+      - scripts/v186_reclassify49.py
+      - scripts/v186_finalize_checkpoint.py
+      - .github/workflows/v186-reclassify49.yml
+      - review/v186_object_disambiguation_49/MANUAL_REINSPECTION.json
+permissions:
+  contents: write
+concurrency:
+  group: v186-reclassify-original-source-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  correction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v186_reclassify49.py
+            /scripts/v186_finalize_checkpoint.py
+            /review/v186_object_disambiguation_49/MANUAL_REINSPECTION.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv
+            /review/v119_selected_A_new4633/sheets/SELECTED_A_000.jpg
+            /review/v119_selected_A_new4633/sheets/SELECTED_A_012.jpg
+            /review/v119_selected_A_new4633/sheets/SELECTED_A_013.jpg
+            /review/v119_selected_A_new4633/sheets/SELECTED_A_014.jpg
+            /review/v120_B_context_new4632/sheets/B_5x5_000.jpg
+            /review/v120_B_context_new4632/sheets/B_5x5_012.jpg
+            /review/v120_B_context_new4632/sheets/B_5x5_013.jpg
+            /review/v120_B_context_new4632/sheets/B_5x5_014.jpg
+            /review/v121_C_diff_new4632/sheets/C_B_DIFF_000.jpg
+            /review/v121_C_diff_new4632/sheets/C_B_DIFF_012.jpg
+            /review/v121_C_diff_new4632/sheets/C_B_DIFF_013.jpg
+            /review/v121_C_diff_new4632/sheets/C_B_DIFF_014.jpg
+            /analysis/current/v185/*
+            /Tiles/2x/appliances_cooking_01.png
+            /Tiles/2x/furniture_seating_indoor_01.png
+            /Tiles/2x/furniture_seating_indoor_02.png
+            /Tiles/2x/furniture_seating_indoor_03.png
+            /Tiles/2x/industry_02.png
+            /Tiles/2x/industry_03.png
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+      - run: python3 -m pip install --quiet Pillow
+      - name: Reinspect 49 original source PNG RGBA crops and original B/C evidence, append immutable SQLite correction overlay
+        run: python3 -u scripts/v186_reclassify49.py
+      - name: Independently preserve 247 previous SQLite tables and verify all 49 correction records
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,base64,zlib,hashlib,sqlite3
+          R=Path('review/v186_object_disambiguation_49')
+          r=json.loads((R/'MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v185/MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v186/MANIFEST.json').read_text())
+          assert r['manually_reviewed_existing_objects']==49
+          assert r['source_A_rgba_crops_verified']==49 and r['source_png_atlases_verified']==6
+          assert r['original_B_C_evidence_keys_verified']==49 and r['source_contact_sheet_sha_verified']==12
+          assert r['previous_B_C_zero_held_preserved']==[70]
+          assert r['new_image_observations']==0
+          assert r['observed_before']==r['observed_after']==9898 and r['checkpoint_remaining']==144
+          assert r['mapping_verified']==r['tilezed_verified']==r['certified']==0
+          assert d['table_count']==248 and d['prior_tables_preserved']==247
+          assert d['new_rows']==49 and d['new_observed_rows']==0
+          assert d['parent_sqlite_sha256']==p['sqlite_sha256']
+          with (R/'RECLASSIFIED_49.csv').open(encoding='utf-8-sig',newline='') as f:
+            rows=list(csv.DictReader(f))
+          assert len(rows)==49 and len({(x['tile_set_name'],x['local_id']) for x in rows})==49
+          assert all(x['new_observed']==x['mapping_verified']==x['tilezed_verified']==x['certified']=='0' for x in rows)
+          assert sum(x['index']=='70' and x['status']=='held_original_B_minus_C_zero' for x in rows)==1
+          assert hashlib.sha256((R/'RECLASSIFIED_49.csv').read_bytes()).hexdigest()==r['correction_csv_sha256']
+          for path,hashv in r['source_sheets_sha256'].items():
+            assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==hashv
+          def read(man):
+            c=base64.b64decode(''.join(Path(k).read_text('ascii').strip() for k in man['parts']),validate=True)
+            assert hashlib.sha256(c).hexdigest()==man['compressed_sha256']
+            raw=zlib.decompress(c)
+            assert len(raw)==man['sqlite_bytes'] and hashlib.sha256(raw).hexdigest()==man['sqlite_sha256']
+            return raw
+          a=sqlite3.connect(':memory:');a.deserialize(read(p))
+          b=sqlite3.connect(':memory:');b.deserialize(read(d))
+          assert a.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert b.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          before={x[0]:a.execute('SELECT count(*) FROM "'+x[0]+'"').fetchone()[0] for x in a.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          after={x[0]:b.execute('SELECT count(*) FROM "'+x[0]+'"').fetchone()[0] for x in b.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(before)==247 and len(after)==248
+          assert set(after)-set(before)=={'v186_object_reclassification'}
+          assert after['v186_object_reclassification']==49
+          for table,n in before.items():
+            assert after[table]==n
+            c1=a.execute('SELECT * FROM "'+table+'"');c2=b.execute('SELECT * FROM "'+table+'"')
+            while True:
+              x,y=c1.fetchmany(512),c2.fetchmany(512)
+              assert x==y,('historical parent rows modified',table)
+              if not x:break
+          assert b.execute('SELECT SUM(new_observed),SUM(mapping_verified),SUM(tilezed_verified),SUM(certified) FROM v186_object_reclassification').fetchone()==(0,0,0,0)
+          print('PASS v186: 49 manually reviewed A/B/C category corrections, v185 all 247 parent tables preserved, 0 new observed, 0 certifications')
+          PY
+      - name: Update project checkpoint only after validations
+        run: python3 -u scripts/v186_finalize_checkpoint.py
+      - name: Commit verified correction overlay and physical DB to isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v186_object_disambiguation_49 analysis/current/v186 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v186 correct 49 BBQ/propane, sofas and machinery provisional classifications; 248 SQLite tables"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

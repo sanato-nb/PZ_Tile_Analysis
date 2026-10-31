@@ -1,0 +1,75 @@
+{
+  "schema": "PZ_TILE_ANALYSIS_VALIDATED_CHECKPOINT",
+  "version": "v122",
+  "date": "2026-10-27",
+  "physical_sqlite": {
+    "manifest": "analysis/current/v122/MANIFEST.json",
+    "restore_script": "scripts/restore_unified_v122.py",
+    "sha256": "abe9d410c4fb6dd4e86c19170831d00b60424270777f9155f79b9091d33c780d",
+    "integrity_check": "ok",
+    "prior_tables_preserved": 183,
+    "additional_review_table": "v122_ai_visual_review_160",
+    "additional_rows": 160
+  },
+  "catalog": {
+    "original_5409": 5409,
+    "original_observed": 5400,
+    "original_unobserved": 9,
+    "old_auditable_candidates": 4512,
+    "v115_candidates_separate": 882,
+    "expanded_unique": 10042,
+    "new_only": 4633,
+    "new_visually_observed": 160,
+    "new_unobserved": 4473,
+    "expanded_observed": 5560,
+    "expanded_unobserved": 4482,
+    "expanded_progress_percent": 55.36745668193587
+  },
+  "v121_all_new_C": {
+    "processed": 4632,
+    "positive_bc_difference": 4417,
+    "zero_bc_difference": 215,
+    "evidence": "review/v121_C_diff_new4632/MANIFEST.json",
+    "verified_run": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40354707694"
+  },
+  "v121_ABCD_first160": {
+    "A_B_C_D_evidence": 160,
+    "D_real_alternate": 106,
+    "D_not_found": 54,
+    "bc_zero": 9,
+    "evidence": "review/v121_ABCD_first160/MANIFEST.json",
+    "verified_run": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40428110463"
+  },
+  "v122_direct_visual": {
+    "visually_observed": 160,
+    "provisional_identity_part_candidate": 144,
+    "held": 16,
+    "zero_bc_held": 9,
+    "evidence_csv": "review/v122_AI_ABCD_160/AI_VISUAL_REVIEW_160.csv",
+    "evidence_csv_sha256": "e72820c38b99c272bb89ad3e3e2a0c1efc2461d70d219d90761c73b7b38bab45",
+    "evidence_zip": "review/v122_AI_ABCD_160/V122_AI_ABCD160_EVIDENCE.zip",
+    "evidence_zip_sha256": "7e4498504285b0182c658e7f8cbb8b35a2e0cf818a9b33fee95a8bd7d3bb070a",
+    "evidence_zip_crc": "PASS",
+    "image_embedded_HTML": "review/v121_ABCD_first160/ABCD_160_embedded.html",
+    "verified_run": "https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/40429858475"
+  },
+  "unchanged": {
+    "historical_v36_onward": true,
+    "all_prior_183_sqlite_tables": true,
+    "user_manual_80": true,
+    "user_excluded_14": true,
+    "source_TMX": true,
+    "source_PNG": true
+  },
+  "certifications": {
+    "official_mapping": 0,
+    "TileZed": 0,
+    "final_identity": 0
+  },
+  "merged_prs": [
+    73,
+    74,
+    75
+  ],
+  "important_note": "Image-generated contexts and tentative visual candidates do not constitute authoritative Local ID or TileZed certification. Original old 5400 unique tile observations are not counted anew."
+}

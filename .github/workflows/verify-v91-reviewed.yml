@@ -1,0 +1,33 @@
+name: v91 direct visual review evidence verification (pending v90 integration)
+on:
+  push:
+    branches: [work/v91-unique-after-v90-preview-20261026-1156]
+    paths:
+      - checkpoints/v91/observations.tsv
+      - checkpoints/v91/observations.csv
+      - checkpoints/v91/verify_delta.py
+      - .github/workflows/verify-v91-reviewed.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v89/*
+            /scripts/restore_unified_v89.py
+            /checkpoints/v91/*
+            /checkpoints/v91_preview/*
+            /.github/workflows/verify-v91-reviewed.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify original SHA-256, queue, no overlap, 60 JPEG and candidate/held separation
+        run: python3 checkpoints/v91/verify_delta.py

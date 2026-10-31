@@ -1,0 +1,40 @@
+name: Validate saved tile analysis databases
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/validate-source-archives.yml"
+      - "analysis/archive/**"
+      - "analysis/imports/**"
+      - "scripts/restore_source_databases.py"
+      - "scripts/restore_merged_evidence.py"
+      - "scripts/validate_reconciliation.py"
+      - "PROJECT_STATE.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-original-sqlite-and-merged-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /analysis/
+            /scripts/
+            /docs/
+            /checkpoints/
+            /PROJECT_STATE.json
+          sparse-checkout-cone-mode: false
+      - name: Check state schema
+        run: python3 scripts/validate_project.py
+      - name: Rebuild both archived originals
+        run: python3 scripts/restore_source_databases.py "$RUNNER_TEMP/pz_originals"
+      - name: Rebuild lightweight merged SQLite
+        run: python3 scripts/restore_merged_evidence.py "$RUNNER_TEMP/pz_merged.sqlite"
+      - name: Audit exact overlaps and tables
+        run: python3 scripts/validate_reconciliation.py "$RUNNER_TEMP/pz_originals"

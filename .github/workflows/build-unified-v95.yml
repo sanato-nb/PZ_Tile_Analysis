@@ -1,0 +1,64 @@
+name: v95 12 nearby second-site A/B/C/D visual review SQLite verification
+on:
+  push:
+    branches: [work/v95-evidence-20261026-1354]
+    paths:
+      - scripts/build_unified_v95.py
+      - scripts/restore_unified_v95.py
+      - scripts/build_v95_review_html.py
+      - checkpoints/v95/observations.tsv
+      - checkpoints/v95/verify_delta.py
+      - .github/workflows/build-unified-v95.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Tiles/2x/*
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v94/*
+            /scripts/*.py
+            /checkpoints/v95/*
+            /checkpoints/v95_preview/*
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+            /.github/workflows/build-unified-v95.yml
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify v94 SHA and restore complete base SQLite
+        run: python3 scripts/restore_unified_v94.py "$RUNNER_TEMP/v94.sqlite"
+      - name: Verify 12 A/B/C and real nearby D source evidence
+        run: python3 checkpoints/v95/verify_delta.py
+      - name: Build v95 integrated SQLite keeping all historical tables
+        run: python3 scripts/build_unified_v95.py "$RUNNER_TEMP/v94.sqlite"
+      - name: Restore v95 and validate counts
+        run: python3 scripts/restore_unified_v95.py "$RUNNER_TEMP/v95_rebuilt.sqlite"
+      - name: Build 2 HTML + CSV + evidence CRC ZIP
+        run: python3 scripts/build_v95_review_html.py
+      - name: Verify project state and refresh handoff
+        run: |
+          python3 scripts/validate_project.py
+          python3 scripts/generate_handoff.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-v95-unified-sqlite
+          path: ${{ runner.temp }}/tile_visual_v95_unified.sqlite
+          retention-days: 90
+      - name: Commit v95 provisional checkpoint artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v95/ checkpoints/v95/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "검증: v95 12종 실제 근접 D 판독·SQLite SHA·ZIP CRC"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

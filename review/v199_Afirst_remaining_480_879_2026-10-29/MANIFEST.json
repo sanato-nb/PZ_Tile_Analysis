@@ -1,0 +1,152 @@
+{
+  "version": "v199_A_first_reaudit_triage",
+  "date": "2026-10-29",
+  "source_main_commit": "4fdc41641d47a8467c298073a9d4e772d9717394",
+  "new_scoped_review_range": [
+    480,
+    879
+  ],
+  "source_keys_A_B_C_contact_sheet_screened": 384,
+  "source_cohorts": {
+    "v136_480_559": 80,
+    "v137_560_639": 79,
+    "v138_640_719": 76,
+    "v139_720_879": 149
+  },
+  "individual_explicit_A_morphology_notes": 130,
+  "family_level_A_morphology_only": 254,
+  "A_full_pixel_precise_independent_per_key_reaudit_complete": 130,
+  "source_atlas_distinct_paths_with_archived_hashes_crosschecked": 26,
+  "metadata_crosscheck_v136_v137_v138_v139": {
+    "unique_key_comparison": 384,
+    "historical_source_rows": 384,
+    "fields_checked": [
+      "tile_set_name",
+      "local_id",
+      "A_PNG_path",
+      "A_PNG_SHA256_from_prior",
+      "A_RGBA_pixel_SHA256_from_prior",
+      "source_tmx",
+      "raw_gid",
+      "B_minus_C_changed_pixels"
+    ],
+    "mismatches": 0,
+    "atlas_sha_registry": "review/v119_selected_A_new4633/MANIFEST.json",
+    "source_atlas_SHA_values_agree_with_v119": true,
+    "direct_full_atlas_png_rehashed_during_v199": false,
+    "source_rgba_pixels_rehashed_during_v199": false,
+    "source_tmx_reparsed_during_v199": false
+  },
+  "original_A_contact_sheets": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_006.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_007.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_008.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_009.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_010.jpg"
+  ],
+  "original_B_C_contact_sheets": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_006.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_007.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_008.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_009.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_010.jpg"
+  ],
+  "original_D_same_key_official_other_A_verified": 0,
+  "D_rendered": 0,
+  "B_C_original_trace_le_30": [
+    {
+      "index": 649,
+      "tile_set": "fencing_damaged_01",
+      "local_id": 130,
+      "changed_pixels": 23
+    },
+    {
+      "index": 665,
+      "tile_set": "fixtures_bathroom_02",
+      "local_id": 11,
+      "changed_pixels": 16
+    },
+    {
+      "index": 680,
+      "tile_set": "fixtures_counters_01",
+      "local_id": 65,
+      "changed_pixels": 19
+    },
+    {
+      "index": 791,
+      "tile_set": "fixtures_railings_01",
+      "local_id": 111,
+      "changed_pixels": 5
+    },
+    {
+      "index": 815,
+      "tile_set": "fixtures_windows_church",
+      "local_id": 26,
+      "changed_pixels": 3
+    },
+    {
+      "index": 836,
+      "tile_set": "fixtures_windows_curtains_02",
+      "local_id": 25,
+      "changed_pixels": 20
+    }
+  ],
+  "B_C_zero_in_384_prior_provisional": 0,
+  "parent_review_held_untouched": {
+    "v137": [
+      604
+    ],
+    "v138": [
+      644,
+      656,
+      669,
+      685
+    ],
+    "v139": [
+      741,
+      782,
+      783,
+      792,
+      794,
+      796,
+      797,
+      822,
+      833,
+      840,
+      876
+    ],
+    "v136": [],
+    "total_held_in_480_879": 16
+  },
+  "all_v119_new_key_scope": 4633,
+  "coverage_index": "review/v199_Afirst_remaining_480_879_2026-10-29/A_AUDIT_SCOPE_INDEX_0_4632.csv",
+  "combined_previous_A_source_screened_289_plus_this_turn_384": 673,
+  "still_not_reaudited_indices": 3913,
+  "historical_held_in_scope_index_do_not_reopen": 47,
+  "total_not_audit_completed_by_this_record": 3960,
+  "original_v119_A_selected": 4632,
+  "original_v119_source_missing": 1,
+  "original_v119_source_missing_key": "overlay_graffiti_wall_02/2",
+  "original_source_missing_index": "not assigned from verified ledger; do not invent",
+  "user_manual_v196_undecided10_active_excluded": 10,
+  "user_manual_v196_23_verbatim_preserved": true,
+  "active_manual_queue_remaining": 0,
+  "user_excluded10_supersedes_any_index_backlog_entry": true,
+  "historical_observed_unique": 10007,
+  "source_total_unique": 10042,
+  "reported_unobserved": 35,
+  "actual_missing_keys": 33,
+  "unresolved_accounting_discrepancy": 2,
+  "new_observed_in_v199": 0,
+  "new_provisional_promotions": 0,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "final_certified": 0,
+  "parent_physical_sqlite_version": "v196",
+  "parent_256_tables_untouched": true,
+  "parent_v196_sqlite_SHA256_prior_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_SQLite_SHA256_reconstructed_this_turn": false,
+  "parent_integrity_check_rerun_this_turn": false,
+  "change_policy": "Only new review/v199 QA files. Original source, v196 SQLite, previous manual and exclusion evidence not modified.",
+  "quality_boundary": "384 = historic A/B/C evidence visual screening, NOT 384 final independent A per-tile verified identities. Individual A descriptions 130; 254 conservative family-level. No new actual TMX render or official mapping."
+}

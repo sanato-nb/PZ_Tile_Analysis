@@ -1,0 +1,55 @@
+name: v124 verify latest handoff and full physical SQLite
+on:
+  push:
+    branches: [work/v124-sync-state-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - scripts/restore_unified_v124.py
+      - .github/workflows/v124-sync-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /scripts/restore_unified_v124.py
+            /analysis/current/v124/*
+            /review/v124_D_locations_new4472/MANIFEST.json
+            /review/v123_ABCD_next160/MANIFEST.json
+      - name: Verify latest project state cross references
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          m=json.loads(Path('analysis/current/v124/MANIFEST.json').read_text())
+          d=json.loads(Path('review/v124_D_locations_new4472/MANIFEST.json').read_text())
+          assert s['latest_checkpoint']['version']=='v124'
+          assert s['unified_database']['version']=='v124'
+          assert s['unified_database']['sqlite_sha256']==m['sqlite_sha256']
+          assert m['prior_tables_preserved']==185
+          assert m['new_rows']==4472
+          assert d['D_scan_targets']==4472 and d['primary_verified']==4472
+          assert d['D_actual_second_placement']==2791 and d['D_no_second_placement']==1681
+          assert d['D_new_images_generated']==0
+          assert s['latest_checkpoint']['ABCD_images_generated']==320
+          assert s['latest_checkpoint']['new_keys_observed_160']==160
+          assert s['latest_checkpoint']['approved_final_certifications']==0
+          assert 'v124' in Path('docs/HANDOFF.md').read_text()
+          assert 'v124' in Path('AGENTS.md').read_text()
+          print('PASS latest handoff consistency')
+          PY
+      - name: Restore full SQLite, check SHA and historical tables
+        run: python3 -u scripts/restore_unified_v124.py /tmp/pz-v124-recovered.sqlite

@@ -1,0 +1,161 @@
+name: v121 A B C D physical evidence first 160 new keys
+on:
+  push:
+    branches: [work/v121-abcd-first160-20261027]
+    paths:
+      - scripts/v121_build_abcd.py
+      - .github/workflows/v121-abcd-first160.yml
+permissions:
+  contents: write
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v121_build_abcd.py
+            /scripts/restore_unified_v116.py
+            /analysis/current/v116/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/MANIFEST.json
+            /review/v120_B_context_new4632/b_png_shards/B_5x5_00.zip
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+            /B4220.3_MapExport_256/tmx/26_44.tmx
+            /B4220.3_MapExport_256/tmx/26_45.tmx
+            /B4220.3_MapExport_256/tmx/26_46.tmx
+            /B4220.3_MapExport_256/tmx/26_47.tmx
+            /B4220.3_MapExport_256/tmx/26_48.tmx
+            /B4220.3_MapExport_256/tmx/26_49.tmx
+            /B4220.3_MapExport_256/tmx/27_43.tmx
+            /B4220.3_MapExport_256/tmx/27_44.tmx
+            /B4220.3_MapExport_256/tmx/27_45.tmx
+            /B4220.3_MapExport_256/tmx/27_46.tmx
+            /B4220.3_MapExport_256/tmx/27_47.tmx
+            /B4220.3_MapExport_256/tmx/27_48.tmx
+            /B4220.3_MapExport_256/tmx/27_49.tmx
+            /B4220.3_MapExport_256/tmx/28_43.tmx
+            /B4220.3_MapExport_256/tmx/28_44.tmx
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/28_46.tmx
+            /B4220.3_MapExport_256/tmx/28_47.tmx
+            /B4220.3_MapExport_256/tmx/28_48.tmx
+            /B4220.3_MapExport_256/tmx/28_49.tmx
+            /B4220.3_MapExport_256/tmx/29_43.tmx
+            /B4220.3_MapExport_256/tmx/29_44.tmx
+            /B4220.3_MapExport_256/tmx/29_45.tmx
+            /B4220.3_MapExport_256/tmx/29_46.tmx
+            /B4220.3_MapExport_256/tmx/29_47.tmx
+            /B4220.3_MapExport_256/tmx/29_48.tmx
+            /B4220.3_MapExport_256/tmx/29_49.tmx
+            /B4220.3_MapExport_256/tmx/30_43.tmx
+            /B4220.3_MapExport_256/tmx/30_44.tmx
+            /B4220.3_MapExport_256/tmx/30_45.tmx
+            /B4220.3_MapExport_256/tmx/30_46.tmx
+            /B4220.3_MapExport_256/tmx/30_47.tmx
+            /B4220.3_MapExport_256/tmx/30_48.tmx
+            /B4220.3_MapExport_256/tmx/30_49.tmx
+            /B4220.3_MapExport_256/tmx/31_43.tmx
+            /B4220.3_MapExport_256/tmx/31_44.tmx
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /B4220.3_MapExport_256/tmx/31_47.tmx
+            /B4220.3_MapExport_256/tmx/31_48.tmx
+            /B4220.3_MapExport_256/tmx/31_49.tmx
+            /B4220.3_MapExport_256/tmx/32_43.tmx
+            /B4220.3_MapExport_256/tmx/32_44.tmx
+            /B4220.3_MapExport_256/tmx/32_45.tmx
+            /B4220.3_MapExport_256/tmx/32_46.tmx
+            /B4220.3_MapExport_256/tmx/32_47.tmx
+            /B4220.3_MapExport_256/tmx/32_48.tmx
+            /B4220.3_MapExport_256/tmx/32_49.tmx
+            /B4220.3_MapExport_256/tmx/33_43.tmx
+            /B4220.3_MapExport_256/tmx/33_44.tmx
+            /B4220.3_MapExport_256/tmx/33_45.tmx
+            /B4220.3_MapExport_256/tmx/33_46.tmx
+            /B4220.3_MapExport_256/tmx/33_47.tmx
+            /B4220.3_MapExport_256/tmx/33_48.tmx
+            /B4220.3_MapExport_256/tmx/33_49.tmx
+            /B4220.3_MapExport_256/tmx/34_43.tmx
+            /B4220.3_MapExport_256/tmx/34_44.tmx
+            /B4220.3_MapExport_256/tmx/34_45.tmx
+            /B4220.3_MapExport_256/tmx/34_46.tmx
+            /B4220.3_MapExport_256/tmx/34_47.tmx
+            /B4220.3_MapExport_256/tmx/34_48.tmx
+            /B4220.3_MapExport_256/tmx/34_49.tmx
+            /B4220.3_MapExport_256/tmx/35_43.tmx
+            /B4220.3_MapExport_256/tmx/35_44.tmx
+            /B4220.3_MapExport_256/tmx/35_45.tmx
+            /B4220.3_MapExport_256/tmx/35_46.tmx
+            /B4220.3_MapExport_256/tmx/35_47.tmx
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+            /B4220.3_MapExport_256/tmx/35_49.tmx
+            /B4220.3_MapExport_256/tmx/36_43.tmx
+            /B4220.3_MapExport_256/tmx/36_44.tmx
+            /B4220.3_MapExport_256/tmx/36_45.tmx
+            /B4220.3_MapExport_256/tmx/36_46.tmx
+            /B4220.3_MapExport_256/tmx/36_47.tmx
+            /B4220.3_MapExport_256/tmx/36_48.tmx
+            /B4220.3_MapExport_256/tmx/36_49.tmx
+            /B4220.3_MapExport_256/tmx/37_43.tmx
+            /B4220.3_MapExport_256/tmx/37_44.tmx
+            /B4220.3_MapExport_256/tmx/37_45.tmx
+            /B4220.3_MapExport_256/tmx/37_46.tmx
+            /B4220.3_MapExport_256/tmx/37_47.tmx
+            /B4220.3_MapExport_256/tmx/37_48.tmx
+            /B4220.3_MapExport_256/tmx/37_49.tmx
+      - run: python3 -m pip install --quiet Pillow
+      - name: Generate actual A/B/C/D scenes and extend v116 SQLite immutably
+        run: python3 -u scripts/v121_build_abcd.py
+      - name: Verify evidence ZIP, HTML, database, preserved catalog
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,hashlib,zipfile,sqlite3,zlib,base64
+          v=Path('review/v121_ABCD_first160')
+          a=json.loads((v/'MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v121/MANIFEST.json').read_text())
+          assert a['new_keys_for_abcd']==160
+          assert a['mapping_verified']==a['tilezed_verified']==a['final_certified']==0
+          assert hashlib.sha256((v/'ABCD_160.csv').read_bytes()).hexdigest()==a['evidence_csv_sha256']
+          with (v/'ABCD_160.csv').open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==160 and len({(r['tile_set_name'],r['local_id']) for r in rows})==160
+          assert all(r['target_removed_exactly_one']=='1' for r in rows)
+          with zipfile.ZipFile(v/'ABCD_160_evidence.zip') as z:assert z.testzip() is None
+          assert d['old_catalog']==5409 and d['old_observed']==5400
+          blob=zlib.decompress(base64.b64decode(''.join(Path(p).read_text() for p in d['parts'])))
+          assert hashlib.sha256(blob).hexdigest()==d['sqlite_sha256']
+          p=Path('/tmp/v121_verify.sqlite');p.write_bytes(blob)
+          with sqlite3.connect(p) as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert c.execute('SELECT count(*) FROM v121_abcd_evidence').fetchone()[0]==160
+            assert c.execute('SELECT count(*) FROM v116_user_excluded_missing_image').fetchone()[0]==6
+            assert c.execute('SELECT count(*) FROM v113_user_review').fetchone()[0]>=9
+          print('PASS v121 pixel evidence and full historical SQLite')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v121-new160-ABCD-integrity
+          path: |
+            review/v121_ABCD_first160/
+            analysis/current/v121/
+          retention-days: 90
+          compression-level: 0
+      - name: Commit newly generated evidence only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v121_ABCD_first160/ analysis/current/v121/
+          if ! git diff --cached --quiet; then
+            git commit -m "v121: 160 A/B/C/D same-TMX C removal, actual D and v116 preserved SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

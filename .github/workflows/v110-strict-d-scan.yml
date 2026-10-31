@@ -1,0 +1,38 @@
+name: v110 strict D availability scan on v108 remaining queue
+on:
+  push:
+    branches: [work/v110-strict-d-20261026]
+    paths:
+      - scripts/audit_v110_remaining_d.py
+      - .github/workflows/v110-strict-d-scan.yml
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /analysis/current/v108/*
+            /scripts/restore_unified_v108.py
+            /scripts/audit_v110_remaining_d.py
+            /.github/workflows/v110-strict-d-scan.yml
+      - name: Scan original TMX for distinct actual D sites and verify v108 queue
+        run: python3 scripts/audit_v110_remaining_d.py
+      - name: Commit noncounting D eligibility audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse audits/v110_remaining_D_scan.json
+          if ! git diff --cached --quiet; then
+            git commit -m "감사(v110): v109와 중복 없는 미관찰 51종 실제 D 사용 위치 검사 (비계상)"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

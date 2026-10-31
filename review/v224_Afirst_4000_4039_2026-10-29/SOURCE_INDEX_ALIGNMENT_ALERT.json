@@ -1,0 +1,48 @@
+{
+  "title": "v119 source-index vs v121 B/C sheet display-index mismatch detected in page 050",
+  "date": "2026-10-29",
+  "evidence": [
+    {
+      "source": "review/v119_selected_A_new4633/sheets/SELECTED_A_050.jpg",
+      "display_index": 4000,
+      "tile_set_name": "walls_exterior_roofs_30_05",
+      "local_id": 68
+    },
+    {
+      "source": "review/v121_C_diff_new4632/sheets/C_B_DIFF_050.jpg",
+      "display_index": 4000,
+      "tile_set_name": "walls_exterior_roofs_30_05",
+      "local_id": 69
+    },
+    {
+      "source": "review/v165_abc_4000_4039/sheets/proof_00.jpg",
+      "display_index": 4000,
+      "tile_set_name": "walls_exterior_roofs_30_05",
+      "local_id": 68
+    },
+    {
+      "source": "review/v119_selected_A_new4633/sheets/SELECTED_A_050.jpg",
+      "display_index": 4007,
+      "tile_set_name": "walls_exterior_roofs_30_06",
+      "local_id": 4
+    },
+    {
+      "source": "review/v121_C_diff_new4632/sheets/C_B_DIFF_050.jpg",
+      "display_index": 4007,
+      "tile_set_name": "walls_exterior_roofs_30_06",
+      "local_id": 5
+    },
+    {
+      "source": "review/v165_abc_4000_4039/sheets/proof_00.jpg",
+      "display_index": 4007,
+      "tile_set_name": "walls_exterior_roofs_30_06",
+      "local_id": 4
+    }
+  ],
+  "impact": "The same printed/display sheet index must NOT be assumed to reference the same tile across v119 and v121. The v121 sequence has 4632 entries, whereas v119 A source scope has 4633 with one source-held key. The exact underlying index offset insertion point is not verified this round.",
+  "current_scope_mitigation": "Use v165 proof_00...04 labelled A/B/C keyed by exact tile_set_name/local_id, and v165 original CSV B_entry,C_entry,TMX raw_gid. Never pair v119 4000 with v121 4000 by index alone.",
+  "verification_level": "Manual visual header comparison on raw preserved contact sheets. v121 original CSV was not fully re-parsed this session; don't claim global mapping mechanism or number of affected indices proven.",
+  "next_action": "Audit v119-to-v121 source_key mapping for all earlier QA overlays before claiming per-index B/C confirmations where only unqualified contact-sheet indices were used.",
+  "original_data_preserved": true,
+  "status_promoted": 0
+}

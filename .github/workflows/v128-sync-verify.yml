@@ -1,0 +1,56 @@
+name: v128 verify corrected D main checkpoint and preserved SQLite
+on:
+  push:
+    branches: [work/v128-sync-D-handoff-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - scripts/restore_unified_v128.py
+      - .github/workflows/v128-sync-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /scripts/restore_unified_v128.py
+            /analysis/current/v128/*
+            /review/v128_D_alt_PNG_3/MANIFEST.json
+            /review/v127_D_A_candidates_full4633/MANIFEST.json
+      - name: Verify state, D stage definition and provenance
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          state=json.loads(Path('PROJECT_STATE.json').read_text())
+          m=json.loads(Path('review/v128_D_alt_PNG_3/MANIFEST.json').read_text())
+          v127=json.loads(Path('review/v127_D_A_candidates_full4633/MANIFEST.json').read_text())
+          db=json.loads(Path('analysis/current/v128/MANIFEST.json').read_text())
+          assert state['latest_checkpoint']['version']=='v128'
+          assert state['unified_database']['version']=='v128'
+          assert state['unified_database']['sqlite_sha256']==db['sqlite_sha256']==m['db_sha256']
+          assert m['D_same_B_scenes_built']==3 and m['no_other_local_id_neighbor_substitutions'] is True
+          assert state['latest_D_same_B_source_variants']['recomposed_B_as_D']==3
+          assert set(m['source_key_list'])=={'vegetation_foliage_01/0','vegetation_foliage_01/1','vegetation_foliage_01/3'}
+          assert v127['variant_other_atlas_tile_count']==3
+          assert v127['number_of_grid_probe_crops']==30249
+          assert db['prior_tables_preserved']==189 and db['new_rows']==3
+          assert state['latest_checkpoint']['expanded_unique_observed']==5580
+          assert state['latest_checkpoint']['mapping_verified']==0
+          assert 'v128' in Path('AGENTS.md').read_text()
+          assert 'v128' in Path('docs/HANDOFF.md').read_text()
+          print('PASS v128 handoff and no misidentified neighboring cell as D')
+          PY
+      - name: Full historical SQLite restore, SHA and old/new table audits
+        run: python3 -u scripts/restore_unified_v128.py /tmp/pz_v128_full_recovered.sqlite

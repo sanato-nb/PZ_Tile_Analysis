@@ -1,0 +1,153 @@
+{
+  "version": "v207_A_first_reaudit_overlay_only",
+  "date": "2026-10-29",
+  "base_main_sha": "c1ea338ec2d81e033e2f91cb084eb4c9a9d305d6",
+  "counts": {
+    "version": "v207_A_first_QA_exclusive_change_counts",
+    "date": "2026-10-29",
+    "source_scope": [
+      2160,
+      2319
+    ],
+    "scope_source_indices": 160,
+    "original_v148_provisional_rechecked": 155,
+    "independent_A_pixel_specific_notes": 118,
+    "prior_A_features_retained_without_new_independent_notes": 37,
+    "exclusive_QA_change_classes": {
+      "role_or_function_narrowing_recommended": 42,
+      "A_morphology_refined": 76,
+      "historical_candidate_retained": 37
+    },
+    "new_or_adjusted_QA_notes_total": 118,
+    "confirmed_A_vs_old_candidate_visible_morphology_conflict_cases": 1,
+    "confirmed_conflict_details": [
+      {
+        "index": 2226,
+        "key": "recreational_sports_01/160",
+        "old_candidate": "검정 기와 박공지붕 꼭짓점 조각",
+        "A_direct_visual_shape": "낮은 검회색 원형 고리/납작한 원반형 부품; 기와무늬 지붕 아님",
+        "interpretation": "A-description conflict in prior provisional record; no official identity / local ID certification"
+      }
+    ],
+    "tiny_BC_50_or_fewer": [
+      {
+        "index": 2176,
+        "key": "recreational_01/61",
+        "changed_pixels": 5
+      },
+      {
+        "index": 2247,
+        "key": "roofs_01/53",
+        "changed_pixels": 1
+      },
+      {
+        "index": 2268,
+        "key": "roofs_01/120",
+        "changed_pixels": 47
+      },
+      {
+        "index": 2270,
+        "key": "roofs_01/122",
+        "changed_pixels": 15
+      },
+      {
+        "index": 2284,
+        "key": "roofs_02/38",
+        "changed_pixels": 19
+      },
+      {
+        "index": 2318,
+        "key": "roofs_04/7",
+        "changed_pixels": 1
+      }
+    ],
+    "near_zero_pixels_total": 6,
+    "original_v148_B_C_zero_held_preserved": 4,
+    "source_A_missing_with_user_active_exclusion_preserved": 1,
+    "exact_original_A_missing_index": 2163,
+    "exact_original_A_missing_key": "overlay_graffiti_wall_02/2",
+    "prior_v148_original_source_metadata_fields_matched_rows": 155,
+    "metadata_mismatch_count": 0,
+    "prior_PNG_atlas_SHA_registry_source_paths_matched": 9,
+    "original_PNG_full_bytes_SHA_recomputed_now": 0,
+    "source_RGBA_individual_pixel_hash_recomputed_now": 0,
+    "original_TMX_reparsed_now": 0,
+    "original_B_C_re_rendered_now": 0,
+    "wall_upper_layer_occlusion_root_cause_proven_count": 0,
+    "official_same_key_D_experiment_completed_count": 0,
+    "historical_provisional_status_upgrades": 0,
+    "old_SQLite_rows_overwritten": 0,
+    "new_mapping_verified": 0,
+    "new_tilezed_verified": 0,
+    "new_certified": 0,
+    "prior_A_first_scope_screened": 1840,
+    "post_A_first_scope_screened": 1995,
+    "prior_held": 160,
+    "post_held_and_user_no_A_protected": 165,
+    "prior_individual_pending": 2633,
+    "post_individual_pending": 2473,
+    "total_new_key_scope": 4633,
+    "scope_accounting": "1995 A/B/C revisited +165 held/active exclusions +2473 still pending =4633",
+    "full_project_historical_unique_keys": 10042,
+    "historical_provisional_image_observed": 10007,
+    "reported_unobserved": 35,
+    "actual_unobserved": 33,
+    "unresolved_accounting_difference": 2,
+    "new_observed": 0,
+    "new_provisional": 0
+  },
+  "source_contact_sheets_A_directly_reviewed": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_027.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_028.jpg"
+  ],
+  "source_true_TMXLayers_B_removed_one_GID_C_diff_sheets_directly_reviewed": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_027.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_028.jpg"
+  ],
+  "original_atlas_directly_opened": [
+    "Tiles/2x/recreational_01.png",
+    "Tiles/2x/roofs_02.png"
+  ],
+  "original_atlas_GitHub_blob_only_no_base64_content": [
+    "Tiles/2x/roofs_01.png"
+  ],
+  "source_previous_v148_review": "review/v148_abc_2160_2319/VISUAL_REVIEW.csv",
+  "original_archived_PNG_sha_reference": "review/v119_selected_A_new4633/MANIFEST.json",
+  "metadata_fields_compared_exact": [
+    "tile_set_name",
+    "local_id",
+    "A_png",
+    "A_png_sha256",
+    "A_crop_xyxy",
+    "A_rgba_pixel_sha256",
+    "B_tmx_file",
+    "B_tmx_sha256",
+    "level",
+    "layer_index",
+    "x",
+    "y",
+    "raw_gid",
+    "firstgid",
+    "B_entry",
+    "C_entry",
+    "DELTA_entry",
+    "B_C_changed_pixels"
+  ],
+  "source_A_note_evidence_depth": "118 individually re-described A sprites; remaining 37 prior A-specific descriptions retained; all 155 source A original crops visible in contact sheets; no official mapping certified",
+  "parent_v196_SQLite_table_count_reported": 256,
+  "parent_v196_SQLite_SHA256_reported": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_SQLite_integrity_check_reported_from_prior_manifest": "ok",
+  "parent_SQLite_physically_rebuilt_or_PRAGMA_rerun_this_session": false,
+  "parent_user_manual80_excluded14_and_manual33_originals_preserved": true,
+  "user_manual33_23_provisional_verbatim_preserved": true,
+  "user_manual33_10_undecided_active_excluded": true,
+  "new_observed_status_promotions": 0,
+  "official_mapping_certifications": 0,
+  "tilezed_certifications": 0,
+  "final_identity_certifications": 0,
+  "important_integrity_boundary": "GitHub commit diff only establishes no original path modifications; it is not a new full SQLite PRAGMA integrity check or independent original TMX renderer validation.",
+  "next_candidate_scope": [
+    2320,
+    2479
+  ]
+}

@@ -1,0 +1,86 @@
+name: Build 888 tile bulk manual reviewer from v113 evidence
+on:
+  push:
+    branches: [work/reviewer-bulk-20261026]
+    paths:
+      - scripts/build_bulk_888_reviewer.py
+      - scripts/reviewer_888_bulk_template.html
+      - .github/workflows/build-bulk-888-reviewer.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v113/*
+            /scripts/build_bulk_888_reviewer.py
+            /scripts/reviewer_888_bulk_template.html
+            /scripts/restore_unified_v113.py
+            /Tiles/2x/*
+            /Tiles/2x/jumbo/*
+            /Tiles/2x/jumbo_xl/*
+            /Tiles/2x/jumbo_xxl/*
+            /Tiles/2x/stumps/*
+            /Tiles/tiledefinitions.tiles.txt
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /review/888_no_identity_candidate/*
+      - name: Install local image render library
+        run: python3 -m pip install --quiet Pillow
+      - name: Reconstruct and validate v113 full SQLite
+        run: python3 scripts/restore_unified_v113.py "$RUNNER_TEMP/v113_reviewer.sqlite"
+      - name: Render 888 provisional original/context scenes into offline browser
+        run: |
+          python3 -u scripts/build_bulk_888_reviewer.py "$RUNNER_TEMP/v113_reviewer.sqlite" | tee "$RUNNER_TEMP/v114_reviewer.log"
+      - name: Validate card count, source integrity and ZIP
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,zipfile
+          root=Path('review/888_no_identity_candidate')
+          m=json.loads((root/'MANIFEST.json').read_text('utf8'))
+          assert m['review_target_count']==m['images_embedded']==888
+          assert m['historical_observed']==5400 and m['historical_auditable_candidates']==4512
+          assert m['official_png_tmx_mapping_verified']==m['final_identity_certifications_added']==0
+          assert sum(m['status_counts'].values())==888
+          h=root/'PZ_888종_일괄수동검수.html'
+          assert h.stat().st_size<98_000_000
+          assert hashlib.sha256(h.read_bytes()).hexdigest()==m['review_html_sha256']
+          assert h.read_text('utf8').count('data:image/webp;base64,')==888
+          with zipfile.ZipFile(root/'PZ_888종_수동검수_HTML_CSV.zip') as z:
+            assert z.testzip() is None and len(z.namelist())==4
+          import csv
+          with (root/'PZ_888종_검수대기열.csv').open('r',encoding='utf-8-sig',newline='') as f:
+            a=list(csv.DictReader(f))
+          assert len(a)==888
+          assert len({(r['tile_set_locator'],r['local_id']) for r in a})==888
+          print('PASS 888 unique cards, 888 offline images, source SHA, CRC and 0 certified')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-888-bulk-review-offline-HTML-CSV
+          path: |
+            review/888_no_identity_candidate/*.html
+            review/888_no_identity_candidate/*.csv
+            review/888_no_identity_candidate/*.txt
+            review/888_no_identity_candidate/*.json
+            review/888_no_identity_candidate/*.zip
+          compression-level: 0
+          retention-days: 90
+      - name: Commit complete standalone reviewer and audit manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/888_no_identity_candidate/
+          if ! git diff --cached --quiet; then
+            git commit -m "검수용(v114): A 후보 2개·B/C/D 이미지 888종 내장 HTML, 일괄 확인·보류·CSV"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

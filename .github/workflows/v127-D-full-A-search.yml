@@ -1,0 +1,108 @@
+name: v127 Search every new tile for alternate A candidates (corrected D)
+on:
+  push:
+    branches: [work/v127-D-full-A-candidates-4633-20261027]
+    paths:
+      - scripts/v127_D_search_all_A_candidates.py
+      - .github/workflows/v127-D-full-A-search.yml
+permissions:
+  contents: write
+jobs:
+  full-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v127_D_search_all_A_candidates.py
+            /analysis/current/v126/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v117_A_candidates_10042/jumbo_a3/A3_SUMMARY.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v119_selected_A_new4633/MANIFEST.json
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/MANIFEST.json
+            /review/v126_D_alt_A_B_160/MANIFEST.json
+            /Tiles/*
+      - name: Install Pillow
+        run: python3 -m pip install --quiet Pillow
+      - name: Search all 4633 new keys from original PNG, test all A source hypotheses
+        run: python3 -u scripts/v127_D_search_all_A_candidates.py
+      - name: Independent comprehensive source, images, CSV and preserved SQLite verification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,zipfile,csv,zlib,base64,sqlite3
+          R=Path('.')
+          m=json.loads((R/'review/v127_D_A_candidates_full4633/MANIFEST.json').read_text())
+          d=json.loads((R/'analysis/current/v127/MANIFEST.json').read_text())
+          def hashfile(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+          assert m['version']=='v127' and m['new_total']==4633
+          assert m['searchable']==4632 and m['original_PNG_missing']==1
+          assert m['mapping_verified']==m['final_certified']==m['tilezed_verified']==0
+          assert m['D_scene_B_rerendered_by_this_stage']==0
+          assert m['visual_identity_observed_added']==0
+          assert hashfile(R/m['master_csv'])==m['master_csv_sha256']
+          assert hashfile(R/m['all_trials_csv'])==m['all_trials_sha256']
+          with (R/m['master_csv']).open(encoding='utf-8-sig',newline='') as f:ledger=list(csv.DictReader(f))
+          with (R/m['all_trials_csv']).open(encoding='utf-8-sig',newline='') as f:trial=list(csv.DictReader(f))
+          assert len(ledger)==4633 and len({(r['tile_set_name'],r['local_id']) for r in ledger})==4633
+          assert len(trial)==m['candidate_trials'] and len(trial)>=4632*11
+          assert sum(r['search_status']=='held_no_source_PNG' for r in ledger)==1
+          assert {r['tile_set_name']+'/'+r['local_id'] for r in ledger if r['search_status']=='held_no_source_PNG'}=={'overlay_graffiti_wall_02/2'}
+          assert sum(int(r['direct_other_A_candidates'])>0 for r in ledger)==m['direct_other_A_tile_count']
+          assert sum(int(r['adjacent_grid_probe_candidates']) for r in ledger)==m['number_of_grid_probe_crops']
+          assert all(r['final_certified']=='0' and r['mapping_verified']=='0' for r in ledger)
+          assert all(r['final_certified']=='0' and r['mapping_verified']=='0' for r in trial)
+          assert all(r['local_id_relation']=='different_local_id_possible_never_same_tile_verified' for r in trial if r['category']=='adjacent_grid_not_same_key')
+          assert len(m['contact_sheet_sha256'])==58
+          for name,digest in m['contact_sheet_sha256'].items():
+              assert hashfile(R/'review/v127_D_A_candidates_full4633'/name)==digest
+          for shard in m['image_preview_zip_shards']:
+              p=R/shard['path']
+              assert hashfile(p)==shard['sha256']
+              with zipfile.ZipFile(p) as z:
+                  assert z.testzip() is None
+                  assert len(z.namelist())==shard['entries']
+          packed=base64.b64decode(''.join((R/p).read_text() for p in d['parts']),validate=True)
+          assert hashlib.sha256(packed).hexdigest()==d['compressed_sha256']
+          raw=zlib.decompress(packed)
+          assert hashlib.sha256(raw).hexdigest()==d['sqlite_sha256']
+          assert len(raw)==d['sqlite_bytes']
+          p=Path('/tmp/pz_v127_independent.sqlite');p.write_bytes(raw)
+          with sqlite3.connect(p) as c:
+              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              tables={a[0] for a in c.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+              assert len(tables)==189
+              for table,n in [('tile_catalog',5409),('v121_abcd_evidence',160),
+                  ('v122_ai_visual_review_160',160),('v123_abcd_evidence_next160',160),
+                  ('v124_d_placement_4472',4472),('v125_ai_visual_spotcheck_20',20),
+                  ('v126_alt_A_B_160',160),('v127_d_candidate_catalog_4633',4633)]:
+                  assert c.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]==n
+              assert c.execute('SELECT COUNT(*) FROM tile_catalog WHERE observed_any=1').fetchone()[0]==5400
+              assert c.execute('SELECT COUNT(*) FROM tile_catalog WHERE identity_final_certified=1').fetchone()[0]==0
+          print('PASS v127 full 4633 alternative A hypotheses search, no invented same-ID, source and prior DB verified')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v127-D-all-4633-A-candidates-verified
+          path: |
+            review/v127_D_A_candidates_full4633/
+            analysis/current/v127/
+          retention-days: 90
+          compression-level: 0
+      - name: Commit v127 evidence only (never rewrite historical files)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v127_D_A_candidates_full4633/ analysis/current/v127/
+          if ! git diff --cached --quiet; then
+            git commit -m "v127: enumerate all 4633 D alternate A hypotheses with sources and original DB preserved"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

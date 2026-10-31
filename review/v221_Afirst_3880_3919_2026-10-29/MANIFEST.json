@@ -1,0 +1,128 @@
+{
+  "version": "v221_A_first_existing_tile_QA_overlay_only",
+  "date": "2026-10-29",
+  "base_main_sha": "03b6183a39163db38087191b8f6384e23e7af2e1",
+  "source_review": "review/v162_abc_3880_3919",
+  "source_indices": [
+    3880,
+    3919
+  ],
+  "source_count": 40,
+  "previous_provisional_reinspected_individually": 34,
+  "previous_held_preserved": 6,
+  "change_categories_mutually_exclusive": {
+    "role_narrowing_recommended": 17,
+    "A_morphology_refined": 6,
+    "historical_candidate_supported": 11
+  },
+  "QA_change_proposal_total": 23,
+  "definitive_wrong_classifications": 0,
+  "old_holds": [
+    {
+      "index": 3881,
+      "reason": "manual_visual_insufficient;B_map_edge_truncated"
+    },
+    {
+      "index": 3882,
+      "reason": "manual_visual_insufficient;B_map_edge_truncated"
+    },
+    {
+      "index": 3900,
+      "reason": "manual_visual_insufficient"
+    },
+    {
+      "index": 3901,
+      "reason": "manual_visual_insufficient;B_map_edge_truncated"
+    },
+    {
+      "index": 3910,
+      "reason": "manual_visual_insufficient;B_C_zero_not_transparency"
+    },
+    {
+      "index": 3911,
+      "reason": "manual_visual_insufficient"
+    }
+  ],
+  "original_A_sources_seen": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_048.jpg",
+    "Tiles/2x/walls_exterior_roofs_30_01.png",
+    "Tiles/2x/walls_exterior_roofs_30_02.png"
+  ],
+  "A_original_full_raw_atlas_empty_on_connector": [
+    "Tiles/2x/walls_exterior_roofs_10.png"
+  ],
+  "original_B_C_source": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_048.jpg"
+  ],
+  "zoom_proof_sheets_seen": [
+    "review/v162_abc_3880_3919/sheets/proof_00.jpg",
+    "review/v162_abc_3880_3919/sheets/proof_01.jpg",
+    "review/v162_abc_3880_3919/sheets/proof_02.jpg",
+    "review/v162_abc_3880_3919/sheets/proof_03.jpg",
+    "review/v162_abc_3880_3919/sheets/proof_04.jpg"
+  ],
+  "archived_PNG_SHA256_registry": "review/v119_selected_A_new4633/MANIFEST.json",
+  "atlas_paths_archival_SHA_crosschecked": 3,
+  "record_metadata_checked": [
+    "tile_set_name",
+    "local_id",
+    "A_png",
+    "archived A_png_sha256",
+    "A_crop_xyxy",
+    "archived A_rgba_pixel_sha256",
+    "B_tmx_file",
+    "B_tmx_sha256",
+    "level",
+    "layer_index",
+    "x",
+    "y",
+    "raw_gid",
+    "firstgid",
+    "B_entry",
+    "C_entry",
+    "DELTA_entry",
+    "B_C_changed_pixels",
+    "prior candidate/part"
+  ],
+  "record_metadata_crosschecked_rows": 34,
+  "record_metadata_mismatches": 0,
+  "original_PNG_SHA256_bytes_rehashed_in_v221": false,
+  "original_RGBA_hash_independently_recomputed_in_v221": false,
+  "original_TMX_independently_reparsed_in_v221": false,
+  "B_C_newly_rendered_in_v221": false,
+  "B_C_0_original_exclusion": "index 3910 / tile walls_exterior_roofs_30_02/12; A exists, real B exposure unknown; not proven transparent",
+  "B_C_12_original_exclusion": "index 3911 / tile walls_exterior_roofs_30_02/13; not reactivated",
+  "wall_or_upper_layer_hidden_diagnostic_rendered": false,
+  "D_official_same_key_different_A_verified": false,
+  "user_undecided_manual10_excluded_keys_overlap": 0,
+  "user_undecided_manual10_reactivated": 0,
+  "user_manual_provisional23_verbatim_preserved": true,
+  "user_manual80_and_prior14_preserved": true,
+  "new_observed_promotions": 0,
+  "new_provisional_promotions": 0,
+  "new_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_certified": 0,
+  "before_cumulative_scope_Afirst": 3479,
+  "after_cumulative_scope_Afirst": 3513,
+  "after_cumulative_held": 247,
+  "after_not_yet_reaudited": 873,
+  "scope_denominator": 4633,
+  "scope_check": "3513+247+873=4633",
+  "scope_percent": 75.82559896395425,
+  "historical_unique_source_keys": 10042,
+  "historical_provisional_image_observed": 10007,
+  "historical_reported_unobserved": 35,
+  "historical_actual_unobserved": 33,
+  "historical_accounting_gap": 2,
+  "physical_SQLite_version_unchanged": "v196",
+  "prior_SQLite_table_count": 256,
+  "prior_SQLite_sha256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "original_SQLite_integrity_check_prior": "ok",
+  "physical_SQLite_rehashed_or_PRAGMA_rerun_now": false,
+  "git_policy": "only create new v221 review files; never mutate PNG/TMX, old review, user decision, or physical SQLite",
+  "next_source_indices": [
+    3920,
+    3959
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "version": "v213_A_original_first_reaudit_QA_overlay",
+  "date": "2026-10-29",
+  "source_main_base_sha": "1b89824062d2699efe7eb5f02177f6e5275c4256",
+  "source_review": "review/v154_farm_walls_3120_3279",
+  "source_indices": [
+    3120,
+    3279
+  ],
+  "source_scope_count": 160,
+  "historical_candidate_rows_A_individual_morphology_reaudited": 141,
+  "exclusive_change_counts": {
+    "candidate_role_narrowed": 48,
+    "A_morphology_refined": 37,
+    "historical_candidate_supported": 56
+  },
+  "QA_change_recommendation_total": 85,
+  "unchanged_prior_candidate_count": 56,
+  "held_source_indices_preserved": 19,
+  "held_reason_counts": {
+    "B_C_zero_not_transparency": 14,
+    "B_map_edge_truncated": 2,
+    "previous_image_observation": 3
+  },
+  "old_visual_record_rows_compared": 141,
+  "metadata_crosscheck_mismatches": 0,
+  "original_PNG_atlases_unique_previous_registered_hashes_crosschecked": 11,
+  "source_A_original_RGBA_contact_sheets_directly_inspected": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_039.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_040.jpg"
+  ],
+  "original_TMX_B_one_raw_GID_removed_C_contact_sheets_inspected": [
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_039.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_040.jpg"
+  ],
+  "original_PNG_atlases_directly_opened": [
+    "Tiles/2x/walls_commercial_03.png",
+    "Tiles/2x/vegetation_farming_02.png"
+  ],
+  "atlas_without_binary_content_when_opened": [
+    "Tiles/2x/walls_decoration_01.png"
+  ],
+  "original_PNG_sha256_bytes_independently_recomputed_this_round": false,
+  "A_individual_RGBA_SHA256_independently_recomputed_this_round": false,
+  "actual_original_TMX_raw_GID_layer_coordinates_reparsed_this_round": false,
+  "actual_original_TMX_B_C_newly_rendered_this_round": false,
+  "source_B_C_changed_pixel_values_recomputed_this_round": false,
+  "source_B_C_metadata_values_compared_with_historical_csv": true,
+  "masked_wall_or_higher_layer_diagnostic_rerender_done": false,
+  "D_other_official_A_same_key_replaced_in_exact_B_done": false,
+  "trace_B_minus_C_at_most_50": {
+    "count": 1,
+    "index": 3241,
+    "key": "walls_commercial_03/87",
+    "pixels": 12,
+    "cause": "unknown, not certified as wall occlusion"
+  },
+  "source_user_manual_undecided10_intersection_with_reaudited": 0,
+  "prior_user_manual_80_and_user_excluded14_preserved": true,
+  "v196_user_manual33_23_provisional_verbatim_preserved": true,
+  "v196_user_manual33_undecided10_active_excluded": true,
+  "observed_status_promotions": 0,
+  "provisional_status_promotions": 0,
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "final_certified": 0,
+  "prior_v212_scope_source_keys_rechecked": 2775,
+  "this_round_new_source_keys_rechecked": 141,
+  "total_source_scope_A_BC_reaudit_coverage": 2916,
+  "prior_held": 185,
+  "new_held": 19,
+  "total_held": 204,
+  "remaining_not_reaudited": 1513,
+  "scope_denominator": 4633,
+  "scope_sum_check": "2916+204+1513=4633",
+  "total_historical_unique": 10042,
+  "historical_provisional_image_observed": 10007,
+  "reported_unobserved": 35,
+  "actual_unobserved": 33,
+  "history_count_gap": 2,
+  "physical_SQLite_version": "v196",
+  "physical_SQLite_previous_256_tables_untouched": true,
+  "physical_SQLite_previous_SHA256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "physical_SQLite_reconstructed_or_byte_rehashed_this_round": false,
+  "physical_SQLite_PRAGMA_integrity_check_rerun": false,
+  "write_policy": "append only five new files under review/v213; no originals or older SQLite / manual edits",
+  "next_indices": [
+    3280,
+    3439
+  ],
+  "review_limit": "Individual A descriptions are visual QA, not proof of formal identity. 85 changed QA descriptions/role warnings are not certified 85 corrections."
+}

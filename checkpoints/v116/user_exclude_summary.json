@@ -1,0 +1,77 @@
+{
+  "version": "v116",
+  "date": "2026-10-26",
+  "kind": "user_exclusion_of_image_missing_v115_held",
+  "historical_scope": {
+    "v113_source_unobserved": 9,
+    "v113_user_excluded": 8,
+    "v115_observed_without_prior_identity": 888,
+    "v115_ai_visual_candidates": 882,
+    "v115_ai_historical_held": 6
+  },
+  "user_excluded_from_active_ai_review": 6,
+  "remaining_active_held_no_image": 0,
+  "active_prior_ai_candidate_keys": 882,
+  "historical_image_observed": 5400,
+  "historical_auditable_candidates": 4512,
+  "new_observed": 0,
+  "new_identity_candidates": 0,
+  "new_certifications": 0,
+  "critical_caveat": "Exclude from future AI recheck only; original catalog, TMX/PNG, v115 held rows and source evidence preserved. Missing image or incorrect crop cannot certify transparent tile or absence of map object.",
+  "items": [
+    {
+      "key": [
+        "e_carolinasilverbellJUMBO_1",
+        1
+      ],
+      "index": 123,
+      "sheet": "review/v115_model_visual/sheet_010.jpg",
+      "user_action": "exclude_from_active_review"
+    },
+    {
+      "key": [
+        "e_dogwoodJUMBO_1",
+        1
+      ],
+      "index": 124,
+      "sheet": "review/v115_model_visual/sheet_010.jpg",
+      "user_action": "exclude_from_active_review"
+    },
+    {
+      "key": [
+        "e_redmapleJUMBO_1",
+        1
+      ],
+      "index": 125,
+      "sheet": "review/v115_model_visual/sheet_010.jpg",
+      "user_action": "exclude_from_active_review"
+    },
+    {
+      "key": [
+        "vegetation_groundcover_01",
+        22
+      ],
+      "index": 705,
+      "sheet": "review/v115_model_visual/sheet_058.jpg",
+      "user_action": "exclude_from_active_review"
+    },
+    {
+      "key": [
+        "vegetation_trees_01",
+        8
+      ],
+      "index": 712,
+      "sheet": "review/v115_model_visual/sheet_059.jpg",
+      "user_action": "exclude_from_active_review"
+    },
+    {
+      "key": [
+        "vegetation_trees_01",
+        10
+      ],
+      "index": 713,
+      "sheet": "review/v115_model_visual/sheet_059.jpg",
+      "user_action": "exclude_from_active_review"
+    }
+  ]
+}

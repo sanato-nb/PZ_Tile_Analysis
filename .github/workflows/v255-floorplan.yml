@@ -1,0 +1,66 @@
+name: v255 floorplan with latest user priority and held candidate inspector
+on:
+  push:
+    branches: [integration/v255_latest439_user68_floorplan_20261030]
+    paths:
+      - floorplan/build_v255_floorplan.py
+      - floorplan/tests/smoke_v255_browser.py
+      - .github/workflows/v255-floorplan.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /floorplan/build_v255_floorplan.py
+            /floorplan/current/v243_floorplan_v240_priority.html
+            /floorplan/current/MANIFEST.json
+            /floorplan/current/v255_floorplan_latest_user_priority.html
+            /floorplan/current/MANIFEST_V255.json
+            /floorplan/tests/smoke_v255_browser.py
+            /review/v255_latest_integrated_10042_2026-10-30/HELD439_LATEST_VISUAL_USER_PRIORITY.csv
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+      - name: Build v255 only after verified v255 439 rows exist
+        run: python3 -u floorplan/build_v255_floorplan.py
+      - name: Static original v243 preservation, v255 439 user68 and syntax audit
+        run: |
+          python3 - <<'PY'
+          import base64,gzip,hashlib,json,re
+          from pathlib import Path
+          p=Path('floorplan/current/v255_floorplan_latest_user_priority.html')
+          html=p.read_text('utf8')
+          m=json.loads(Path('floorplan/current/MANIFEST_V255.json').read_text('utf8'))
+          assert m['output_sha256']==hashlib.sha256(p.read_bytes()).hexdigest()
+          assert (m['held_latest_visual_candidates'],m['latest_user_choices'],m['active_preserved'],m['inactive_preserved'])==(439,68,9587,455)
+          a=json.loads(gzip.decompress(base64.b64decode(re.search(r'const V255_DATA_B64="([A-Za-z0-9+/=]+)";',html).group(1))))
+          assert len(a)==439 and len({x[0] for x in a})==439
+          assert sum(bool(x[4]) for x in a)==68
+          assert 'v243Inspect(items)' in html and 'v255Definitions=new Map' in html
+          js=re.search(r'<script>\s*([\s\S]*?)</script>',html).group(1)
+          Path('/tmp/pz-v255-floorplan.js').write_text(js,encoding='utf8')
+          print('PASS static 439 only as held with 68 user')
+          PY
+          node --check /tmp/pz-v255-floorplan.js
+      - uses: browser-actions/setup-chrome@v1
+      - name: Browser confirms user wording and original TMX without changing active flags
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 floorplan/tests/smoke_v255_browser.py
+      - name: Commit verified new v255 HTML and manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse floorplan/current/v255_floorplan_latest_user_priority.html floorplan/current/MANIFEST_V255.json
+          if ! git diff --cached --quiet; then
+            git commit -m "v255: new floorplan latest 439 and user68 inspector, real Chrome smoke pass"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi

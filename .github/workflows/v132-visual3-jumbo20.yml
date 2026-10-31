@@ -1,0 +1,149 @@
+name: v132 direct original PNG/TMX pixel audit and append-only SQLite
+on:
+  push:
+    branches: [work/v132-visual3-jumbo20-audit-20261027]
+    paths:
+      - scripts/v132_visual3_jumbo20_audit.py
+      - .github/workflows/v132-visual3-jumbo20.yml
+permissions:
+  contents: write
+jobs:
+  verify-and-produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v132_visual3_jumbo20_audit.py
+            /analysis/current/v131/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v128_D_alt_PNG_3/D_ALT_SOURCE_B_COMPARE_3.csv
+            /review/v128_D_alt_PNG_3/D_SAME_B_VARIANT_3.zip
+            /review/v122_AI_ABCD_160/AI_VISUAL_REVIEW_160.csv
+            /review/v125_AI_ABCD_20/AI_VISUAL_SPOTCHECK_20.csv
+            /review/v121_C_diff_new4632/ZERO_DELTA_REVIEW.csv
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+            /B4220.3_MapExport_256/tmx/26_44.tmx
+            /B4220.3_MapExport_256/tmx/26_45.tmx
+            /B4220.3_MapExport_256/tmx/26_46.tmx
+            /B4220.3_MapExport_256/tmx/26_47.tmx
+            /B4220.3_MapExport_256/tmx/26_48.tmx
+            /B4220.3_MapExport_256/tmx/26_49.tmx
+            /B4220.3_MapExport_256/tmx/27_43.tmx
+            /B4220.3_MapExport_256/tmx/27_44.tmx
+            /B4220.3_MapExport_256/tmx/27_45.tmx
+            /B4220.3_MapExport_256/tmx/27_46.tmx
+            /B4220.3_MapExport_256/tmx/27_47.tmx
+            /B4220.3_MapExport_256/tmx/27_48.tmx
+            /B4220.3_MapExport_256/tmx/27_49.tmx
+            /B4220.3_MapExport_256/tmx/28_43.tmx
+            /B4220.3_MapExport_256/tmx/28_44.tmx
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/28_46.tmx
+            /B4220.3_MapExport_256/tmx/28_47.tmx
+            /B4220.3_MapExport_256/tmx/28_48.tmx
+            /B4220.3_MapExport_256/tmx/28_49.tmx
+            /B4220.3_MapExport_256/tmx/29_43.tmx
+            /B4220.3_MapExport_256/tmx/29_44.tmx
+            /B4220.3_MapExport_256/tmx/29_45.tmx
+            /B4220.3_MapExport_256/tmx/29_46.tmx
+            /B4220.3_MapExport_256/tmx/29_47.tmx
+            /B4220.3_MapExport_256/tmx/29_48.tmx
+            /B4220.3_MapExport_256/tmx/29_49.tmx
+            /B4220.3_MapExport_256/tmx/30_43.tmx
+            /B4220.3_MapExport_256/tmx/30_44.tmx
+            /B4220.3_MapExport_256/tmx/30_45.tmx
+            /B4220.3_MapExport_256/tmx/30_46.tmx
+            /B4220.3_MapExport_256/tmx/30_47.tmx
+            /B4220.3_MapExport_256/tmx/30_48.tmx
+            /B4220.3_MapExport_256/tmx/30_49.tmx
+            /B4220.3_MapExport_256/tmx/31_43.tmx
+            /B4220.3_MapExport_256/tmx/31_44.tmx
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /B4220.3_MapExport_256/tmx/31_47.tmx
+            /B4220.3_MapExport_256/tmx/31_48.tmx
+            /B4220.3_MapExport_256/tmx/31_49.tmx
+            /B4220.3_MapExport_256/tmx/32_43.tmx
+            /B4220.3_MapExport_256/tmx/32_44.tmx
+            /B4220.3_MapExport_256/tmx/32_45.tmx
+            /B4220.3_MapExport_256/tmx/32_46.tmx
+            /B4220.3_MapExport_256/tmx/32_47.tmx
+            /B4220.3_MapExport_256/tmx/32_48.tmx
+            /B4220.3_MapExport_256/tmx/32_49.tmx
+            /B4220.3_MapExport_256/tmx/33_43.tmx
+            /B4220.3_MapExport_256/tmx/33_44.tmx
+            /B4220.3_MapExport_256/tmx/33_45.tmx
+            /B4220.3_MapExport_256/tmx/33_46.tmx
+            /B4220.3_MapExport_256/tmx/33_47.tmx
+            /B4220.3_MapExport_256/tmx/33_48.tmx
+            /B4220.3_MapExport_256/tmx/33_49.tmx
+            /B4220.3_MapExport_256/tmx/34_43.tmx
+            /B4220.3_MapExport_256/tmx/34_44.tmx
+            /B4220.3_MapExport_256/tmx/34_45.tmx
+            /B4220.3_MapExport_256/tmx/34_46.tmx
+            /B4220.3_MapExport_256/tmx/34_47.tmx
+            /B4220.3_MapExport_256/tmx/34_48.tmx
+            /B4220.3_MapExport_256/tmx/34_49.tmx
+            /B4220.3_MapExport_256/tmx/35_43.tmx
+            /B4220.3_MapExport_256/tmx/35_44.tmx
+            /B4220.3_MapExport_256/tmx/35_45.tmx
+            /B4220.3_MapExport_256/tmx/35_46.tmx
+            /B4220.3_MapExport_256/tmx/35_47.tmx
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+            /B4220.3_MapExport_256/tmx/35_49.tmx
+            /B4220.3_MapExport_256/tmx/36_43.tmx
+            /B4220.3_MapExport_256/tmx/36_44.tmx
+            /B4220.3_MapExport_256/tmx/36_45.tmx
+            /B4220.3_MapExport_256/tmx/36_46.tmx
+            /B4220.3_MapExport_256/tmx/36_47.tmx
+            /B4220.3_MapExport_256/tmx/36_48.tmx
+            /B4220.3_MapExport_256/tmx/36_49.tmx
+            /B4220.3_MapExport_256/tmx/37_43.tmx
+            /B4220.3_MapExport_256/tmx/37_44.tmx
+            /B4220.3_MapExport_256/tmx/37_45.tmx
+            /B4220.3_MapExport_256/tmx/37_46.tmx
+            /B4220.3_MapExport_256/tmx/37_47.tmx
+            /B4220.3_MapExport_256/tmx/37_48.tmx
+            /B4220.3_MapExport_256/tmx/37_49.tmx
+      - run: python3 -m pip install --quiet Pillow
+      - name: Recheck original TMX and source PNG pixels, derive visual evidence and append-only SQLite
+        run: python3 -u scripts/v132_visual3_jumbo20_audit.py
+      - name: Validate new evidence hashes and status separation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,csv,base64,zlib,sqlite3
+          o=Path('review/v132_visual3_jumbo20');m=json.loads((o/'MANIFEST.json').read_text())
+          assert m['direct_visual_reviews']==3 and m['jumbo_source_and_gid_verified_but_not_grid']==20
+          assert m['unreviewed_exception_rows']==271
+          assert m['mapping_verified']==m['tilezed_verified']==m['certified']==0
+          for name,d in {**m['images'],**m['csvs']}.items():assert hashlib.sha256((o/name).read_bytes()).hexdigest()==d
+          db=json.loads(Path('analysis/current/v132/MANIFEST.json').read_text())
+          data=zlib.decompress(base64.b64decode(''.join(Path(p).read_text().strip() for p in db['parts'])))
+          assert hashlib.sha256(data).hexdigest()==db['sqlite_sha256'] and len(data)==db['sqlite_bytes']
+          con=sqlite3.connect(':memory:');con.deserialize(data)
+          assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert len(con.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall())==194
+          assert con.execute('SELECT count(*) FROM v132_visual3_jumbo20').fetchone()[0]==23
+          assert con.execute('SELECT count(*) FROM v132_visual3_jumbo20 WHERE observed=1').fetchone()[0]==3
+          assert con.execute('SELECT count(*) FROM v132_visual3_jumbo20 WHERE certified!=0 OR mapping_verified!=0 OR tilezed_verified!=0').fetchone()[0]==0
+          print('PASS validated 194 physical SQLite tables',db['sqlite_sha256'])
+          PY
+      - name: Commit new v132 outputs on separate branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v132_visual3_jumbo20 analysis/current/v132
+          if ! git diff --cached --quiet; then
+            git commit -m "v132 evidence: 3 visual candidates, 20 jumbo source audits, append-only SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

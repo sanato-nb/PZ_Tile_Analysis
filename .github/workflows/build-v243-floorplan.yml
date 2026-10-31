@@ -1,0 +1,65 @@
+name: v243 floorplan integrated v240 prioritized definitions
+on:
+  push:
+    branches: [feature/v243-floorplan-v240-override-20261030]
+    paths:
+      - floorplan/**
+      - .github/workflows/build-v243-floorplan.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /floorplan/**
+            /review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+      - name: Build from authentic legacy floorplan and v240 CSV
+        run: python3 floorplan/build_v243_floorplan.py
+      - name: Independent source key, embedded metadata and JS syntax checks
+        run: |
+          python3 - <<'PY'
+          import base64,gzip,json,re,csv,hashlib
+          from pathlib import Path
+          html=Path('floorplan/current/v243_floorplan_v240_priority.html').read_text('utf8')
+          source=Path('floorplan/legacy/v22_1_recovered_source.html').read_bytes()
+          m=json.loads(Path('floorplan/current/MANIFEST.json').read_text('utf8'))
+          assert m['original_engine_sha256']==hashlib.sha256(source).hexdigest()
+          assert m['output_sha256']==hashlib.sha256(html.encode()).hexdigest()
+          assert m['source_master_sha256']==hashlib.sha256(Path('review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv').read_bytes()).hexdigest()
+          encoded=re.search(r'const V243_DATA_B64="([A-Za-z0-9+/=]+)";',html).group(1)
+          rows=json.loads(gzip.decompress(base64.b64decode(encoded)))
+          assert len(rows)==10042 and len({r[0] for r in rows})==10042
+          assert sum(r[1] for r in rows)==9587
+          assert sum(r[1]==0 for r in rows)==455
+          assert any(x[0]=='walls_exterior_house_01/35' for x in rows)
+          assert 'CONFIRMED_POSTS' in html and 'v243Preferred' in html
+          assert 'function parseTMX' in html and 'v243Inspect(items)' in html
+          assert m['legacy_definitions_preserved']==60174
+          assert (m['official_mapping_verified'],m['tilezed_verified'],m['identity_certified'])==(0,0,0)
+          js=re.search(r'<script>\s*([\s\S]*?)</script>',html).group(1)
+          Path('/tmp/v243-floorplan.js').write_text(js,encoding='utf8')
+          print('PASS: embedded 10042 master, active9587, archive455, fallback source untouched')
+          PY
+          node --check /tmp/v243-floorplan.js
+      - uses: browser-actions/setup-chrome@v1
+      - name: Real headless Chrome TMX smoke test
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 floorplan/tests/smoke_v243_browser.py
+      - name: Commit checked versioned HTML and manifest to feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse floorplan/current/v243_floorplan_v240_priority.html floorplan/current/MANIFEST.json
+          if ! git diff --cached --quiet; then
+            git commit -m "v243 평면도: v240 10042종 우선 사전이 내장된 실제 HTML과 SHA 매니페스트"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi

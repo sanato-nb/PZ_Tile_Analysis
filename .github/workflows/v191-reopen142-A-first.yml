@@ -1,0 +1,93 @@
+name: v191 reopen 142 excluded tiles source-A first, original sprite visual contact sheets
+on:
+  push:
+    branches: [work/v191-reopen142-A-first-20261028]
+    paths:
+      - scripts/v191_reopen142_A_image_first.py
+      - scripts/v191_finalize_A_visual_review.py
+      - review/v191_reopen142_A_first/MANUAL_A_IMAGE_OBSERVATIONS_142.json
+      - .github/workflows/v191-reopen142-A-first.yml
+permissions:
+  contents: write
+concurrency:
+  group: v191-original-A-142
+  cancel-in-progress: true
+jobs:
+  original_A:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v191_reopen142_A_image_first.py
+            /scripts/v191_finalize_A_visual_review.py
+            /review/v191_reopen142_A_first/MANUAL_A_IMAGE_OBSERVATIONS_142.json
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v175_remaining381_evidence_audit/OLD_NINE_UNOBSERVED.json
+      - name: Check out only original PNG atlases referenced by the reopened 133 new keys
+        run: |
+          python3 - <<'PY' > /tmp/v191_reopened_png_paths.txt
+          import csv
+          root=list(csv.DictReader(open('review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv',encoding='utf-8-sig')))
+          reopen=list(csv.DictReader(open('review/v188_active_review_exclusions/EXCLUDED_FROM_ACTIVE_REVIEW_142.csv',encoding='utf-8-sig')))
+          assert len(root)==4633 and len(reopen)==142
+          paths=set()
+          for row in reopen:
+            if row['origin']!='new_4633':continue
+            i=int(row['source_A_index'])
+            a=root[i]
+            assert (a['tile_set_name'],int(a['local_id']))==(row['tile_set_name'],int(row['local_id']))
+            if a['selection_status']=='selected_provisional':
+              p=a['source_image_path']
+              assert p.startswith('Tiles/') and '..' not in p
+              paths.add('/'+p)
+          assert 30<=len(paths)<=133
+          for p in sorted(paths):print(p)
+          PY
+          echo "A-original source atlases: $(wc -l </tmp/v191_reopened_png_paths.txt)"
+          git sparse-checkout add --stdin </tmp/v191_reopened_png_paths.txt
+      - name: Install Pillow
+        run: python3 -m pip install --quiet Pillow
+      - name: Verify original A PNG bytes and pixel RGBA plus render all 142 review cards
+        run: python3 -u scripts/v191_reopen142_A_image_first.py
+      - name: Independently audit 142 source keys and original A pixels, no invented observation
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          p=Path('review/v191_reopen142_A_first')
+          m=json.loads((p/'MANIFEST.json').read_text())
+          rows=list(csv.DictReader((p/'REOPEN_142_A_SOURCE_AUDIT.csv').open(encoding='utf-8-sig')))
+          assert len(rows)==142 and len({(x['tile_set_name'],x['local_id']) for x in rows})==142
+          assert sum(x['origin']=='new_4633' for x in rows)==133
+          assert sum(x['origin']=='original_5409' for x in rows)==9
+          assert sum(x['source_A_pixel_sha_verified']=='1' for x in rows)==m['original_A_rgba_sha_verified']
+          assert m['original_A_contact_sheets']==['A_ORIGINAL_%02d.jpg'%i for i in range(9)]
+          for x in rows:
+            assert x['review_reopened_by_user']=='1'
+            assert x['A_visual_identity_observed']==x['provisional_candidate']==x['mapping_verified']==x['tilezed_verified']==x['certified']=='0'
+          for name in m['original_A_contact_sheets']:
+            assert (p/'sheets'/name).stat().st_size>150000
+          assert m['observed_checkpoint_before']==m['observed_checkpoint_after']==9898
+          print('PASS 142 original tile keys, 9 actual contact sheets, no claimed image-identity observation')
+          PY
+      - name: Validate all 142 direct-image individual notes, preserve old SQLite and checkpoint, add handoff
+        run: python3 -u scripts/v191_finalize_A_visual_review.py
+      - name: Commit source-verified PNG enlarged evidence sheets, 132 real visual descriptions and handoff
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v191_reopen142_A_first PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v191 exact original PNG source A pixel evidence and 9 visual review sheets for 142 reopened keys"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

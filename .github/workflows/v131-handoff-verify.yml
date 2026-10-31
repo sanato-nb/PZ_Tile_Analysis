@@ -1,0 +1,54 @@
+name: v131 Verify full D scope and historical SQLite
+on:
+  push:
+    branches: [work/v131-sync-D-all-20261027]
+    paths:
+      - .github/workflows/v131-handoff-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /scripts/restore_unified_v131.py
+            /analysis/current/v131/*
+            /review/v131_D_remaining_3832/MANIFEST.json
+            /review/v131_D_remaining_3832/D_FULL_SCOPE_4633_STATUS.csv
+      - name: Verify v131 full D target coverage with zero certification
+        run: |
+          python3 - <<'PY'
+          import json,csv,hashlib
+          from pathlib import Path
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          m=json.loads(Path('review/v131_D_remaining_3832/MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v131/MANIFEST.json').read_text())
+          assert s['latest_checkpoint']['version']==s['unified_database']['version']=='v131'
+          assert d['version']=='v131' and d['parent']=='v130' and d['prior_tables_preserved']==192
+          assert s['unified_database']['sqlite_sha256']==d['sqlite_sha256']==m['sqlite_sha256']
+          assert m['D_experimental_rendered']==s['latest_checkpoint']['D_experiment_rendered']==4631
+          assert m['D_held_with_A']==1 and m['D_all_held_including_missing_A']==2
+          assert m['grid_neighbor_hypotheses_rendered']==4628 and m['different_basename_source_PNG_rendered']==3
+          assert m['B_D_changed']==4469 and m['B_D_zero']==162
+          assert m['new_3832_rows']==3832 and m['full_target_4632_status_indexed']==4632
+          assert m['official_same_key_A_mapping_verified']==m['tilezed_verified']==m['identity_final_certified']==0
+          path=Path('review/v131_D_remaining_3832/D_FULL_SCOPE_4633_STATUS.csv')
+          assert hashlib.sha256(path.read_bytes()).hexdigest()==m['full_status_sha256']
+          with path.open(encoding='utf-8-sig',newline='') as f:rows=list(csv.DictReader(f))
+          assert len(rows)==4633 and len({(x['tileset'],x['local_id']) for x in rows})==4633
+          assert all(x['mapping_verified']==x['tilezed_verified']==x['final_certified']=='0' for x in rows)
+          assert 'v131' in Path('AGENTS.md').read_text()
+          assert 'v131' in Path('docs/HANDOFF.md').read_text()
+          print('PASS full D 4633 statuses and 0 certified mappings')
+          PY
+      - name: Independently restore all 193 historical SQLite tables
+        run: python3 -u scripts/restore_unified_v131.py /tmp/pz_v131_handoff_verified.sqlite

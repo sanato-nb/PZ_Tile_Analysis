@@ -1,0 +1,128 @@
+{
+  "version": "v233_held100_exact_key_join_original_A_visual_and_historical_BC",
+  "date": "2026-10-29",
+  "parent_main_commit": "06fdcfc1cf30032881c99589763ad080afe3945f",
+  "previous_v232_pr": "https://github.com/sanato-nb/PZ_Tile_Analysis/pull/200",
+  "parent_held_count": 437,
+  "previous_focused_held_rechecked": 30,
+  "this_round_historical_held_rechecked": 100,
+  "focused_held_rechecked_cumulative": 130,
+  "focused_held_remaining_not_yet_rechecked": 307,
+  "historical_held_still_total": 437,
+  "focused_held_percent": 29.74828375286041,
+  "historical_held_promotion_count": 0,
+  "source_reaudit_scope": {
+    "first_index": 604,
+    "last_index": 1675,
+    "indices_not_contiguous": true,
+    "parent_held_counts_by_dir": {
+      "v137_foliage_fences_560_639": 1,
+      "v138_bath_counters_doors_640_719": 4,
+      "v139_abc_720_879": 11,
+      "v140_abc_880_1039": 28,
+      "v141_industry_1040_1199": 18,
+      "v142_community_1200_1359": 19,
+      "v143_public_1360_1519": 8,
+      "v144_abc_1520_1679": 11
+    }
+  },
+  "QA_disjoint_reason_counts": {
+    "B_C_zero_not_transparency": 81,
+    "B_map_edge_truncated": 17,
+    "B_neighbor_missing": 2
+  },
+  "exact_source_BC_changed_pixel_categories": {
+    "delta_zero": 81,
+    "delta_positive": 19,
+    "delta_missing": 0
+  },
+  "B_scene_edges_flag_true": 17,
+  "B_scene_neighbor_skipped_positive": 2,
+  "C_same_scene_single_target_raw_GID_removed_flag_true": 100,
+  "source_A_B_C_unique_exact_keys_joined": 100,
+  "source_A_to_B_to_C_prior_RGBA_pixel_SHA256_equal": 100,
+  "source_BC_TMX_level_layer_xy_raw_GID_consistent": 100,
+  "old_reason_vs_source_delta_or_edge_or_missing_conflicts": 0,
+  "v119_source_A_unique_PNG_atlases": 40,
+  "A_alpha_pixels_lt100_count": 3,
+  "A_alpha_lt100_details": [
+    {
+      "index": 1595,
+      "key": "location_entertainment_theatre_01/172",
+      "alpha_pixels_prior": 54
+    },
+    {
+      "index": 1597,
+      "key": "location_entertainment_theatre_01/174",
+      "alpha_pixels_prior": 44
+    },
+    {
+      "index": 1598,
+      "key": "location_entertainment_theatre_01/175",
+      "alpha_pixels_prior": 10
+    }
+  ],
+  "official_A_tilezed_mapping_verified_new": 0,
+  "identity_certified_new": 0,
+  "new_source_TMX_reparsed": false,
+  "new_compositing_B_C_rerendered": false,
+  "wall_upper_layer_explicit_occlusion_layer_mask_experiment": false,
+  "same_key_official_independent_A_D_experiment": false,
+  "full_PNG_bytes_rehashed_this_round": false,
+  "individual_A_RGBA_pixel_hashes_recomputed_this_round": false,
+  "historical_precomputed_hashes_compared_not_recomputed": true,
+  "A_contact_sheets_directly_visually_opened": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_007.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_008.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_009.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_010.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_011.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_012.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_013.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_014.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_015.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_016.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_017.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_018.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_019.jpg",
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_020.jpg"
+  ],
+  "selected_original_A_full_atlases_directly_visually_opened": [
+    "Tiles/2x/floors_exterior_street_01.png",
+    "Tiles/2x/fixtures_railings_01.png",
+    "Tiles/2x/lighting_indoor_02.png"
+  ],
+  "original_A_atlas_blob_sha_received_but_png_body_not_retrieved": [
+    "Tiles/2x/fencing_damaged_01.png",
+    "Tiles/2x/industry_02.png"
+  ],
+  "B_C_visual_contact_sheets_directly_opened": [
+    "review/v120_B_context_new4632/sheets/B_5x5_007.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_007.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_008.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_011.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_015.jpg"
+  ],
+  "B_C_all100_independently_visually_examined_in_individual_contact_cells": false,
+  "B_C_all100_verified_as_existing_record_matching_source_keys_and_SHA": true,
+  "global_index_only_A_BC_join_used": false,
+  "original_provenance_C_CSV_blob_sha": "afa4843417c84399584fd27d1ec039db2c568114",
+  "original_provenance_B_CSV_blob_sha": "a5570a9445356a4fa47a6fe791052a2456a04b4c",
+  "original_provenance_A_CSV_blob_sha": "2054b15a1acfbc840616c447581f52d7e875a835",
+  "original_review_excluded_CSVs_left_unmodified": true,
+  "source_Tiles_TMX_v196_SQLite_left_unmodified": true,
+  "user_manual80_and_excluded14_preserved": true,
+  "user_manual33_provisional23_and_undecided10_excluded_preserved": true,
+  "prior_source_QA_overall": {
+    "A_first_rechecked_provisional_candidates": 4196,
+    "historical_held": 437,
+    "unprocessed_source_indices": 0,
+    "new_source_keys_total": 4633
+  },
+  "overall_historical_image_provisional_observed": 10007,
+  "overall_unique_keys": 10042,
+  "source_identity_final_certified": 0,
+  "physical_SQLite_integrity_check_rerun": false,
+  "new_files_add_only": 6,
+  "future_action": "Recheck other 307 held with original A-first evidence. To resolve any held0, require new exact original TMX render with wall/upper layer occlusion isolation and/or proven official A-to-Local-ID mapping; do not promote based solely on A visible shape or existing approximate B/C."
+}

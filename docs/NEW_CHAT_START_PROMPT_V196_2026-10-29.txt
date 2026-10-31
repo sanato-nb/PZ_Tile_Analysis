@@ -1,0 +1,20 @@
+[새 채팅 첫 메시지 — 그대로 복사]
+
+이 대화는 '좀보이드 -> 마크 맵' 프로젝트의 연속 작업이야. 먼저 연결된 GitHub sanato-nb/PZ_Tile_Analysis의 main 최신 데이터를 직접 확인해줘.
+
+반드시 먼저 읽을 파일:
+1. docs/NEW_CHAT_HANDOFF_V196_2026-10-29.md
+2. docs/NEW_CHAT_CONVERSATION_CHRONOLOGY_2026-10-29.md
+3. docs/PR_91-162_2026-10-29.md
+4. PROJECT_STATE.json, AGENTS.md, docs/HANDOFF.md, docs/ANALYSIS_RULES.md
+5. analysis/current/v196/MANIFEST.json 및 review/v196_user_manual33/USER_UPLOADED_33_VERBATIM.csv
+6. review/v194_Afirst_second160_319/MANUAL_A_REASSESSMENT_FLAGS.json
+7. review/v195_A_first_independent_reaudit/MANUAL_A_ONLY_SECOND_OPINION_68.json
+
+최신 기준(인수인계 시점): v196, 총 고유키10,042, 이미지 잠정 관찰10,007(99.65%), 기록상 미관찰35(실제 키33 + 회계 차이2), 물리 SQLite256테이블 SHA256 d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424, 공식 매핑/TileZed/최종 정체 인증0. 수동33 중 사용자 잠정후보23 원문 보존, 미판정10 활성 검수에서 제외 완료(PR #162). 사용자 수동80·기존 제외14·원본 PNG/TMX·모든 이전 SQLite 레코드 보존.
+
+최신 사용자 요청의 핵심: 이전 두 번째 추가 배치 이후 이미지 정체가 원본 A 자체보다 B/C 조립 장면을 보고 과도하게 분류된 의심이 있음. **반드시 A 원본 스프라이트(투명 포함 실제 픽셀)를 먼저 직접 보고**, 타일 하나에 보이는 형태/재질/연결을 개별 설명한 뒤 B(실배치), C(그 타일 하나 제거), 사용자 정의 D(같은 키의 다른 공식 A를 기존 B 동일 위치 대입)로 교차 검증. PZwiki https://pzwiki.net/wiki/PZwiki:Tile_list 는 용어 참고일 뿐 공식 Local ID 인증 아님.
+
+v194 A-only 160종 재검수 위험25개, v195 A-only 독립 의견68종(다수 중복), **전체 과거 기록 A 우선 재감사 아직 진행 중**. 특히 외형/부품 역할 과잉 확정, 상위층에 가려 B-C=0인 부분을 실제 노출로 오인한 기록을 재확인해줘. 고유 검수 범위/보류/잠정/최종인증 숫자를 분리하고 실제 원본 증거 없이 상태를 높이지 마. 사용자가 미판정10을 제외하라고 했으니 되살리거나 다시 질문하지 마.
+
+이번 새 채팅에서는 계획만 작성하지 말고 GitHub main의 최신 문서/DB와 실제 원본 A 이미지 근거를 보면서 다음 미완료 재검수 작업을 직접 수행하고, 원본과 과거 데이터 보존/무결성 검증 후 증거를 GitHub에 반영해줘. 먼저 v196 이후 main이 바뀌었는지 확인해.

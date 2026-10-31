@@ -1,0 +1,80 @@
+{
+  "version": "v197_QA_overlay_only",
+  "date": "2026-10-29",
+  "base_main_sha": "6ba193c581558762fda6f2af2e771132d9ac6fd7",
+  "parent_database_version": "v196",
+  "physical_sqlite_new_version_created": false,
+  "parent_v196_sqlite_sha256_reported_in_existing_manifest": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "parent_v196_sqlite_tables_reported": 256,
+  "parent_v196_integrity_check": "ok (pre-existing v196 MANIFEST; not independently re-executed in this connector audit)",
+  "main_changes_prior_to_this_audit": "PR #163 only updated six documentation files; no source images or SQLite changed in comparison to v196 handoff",
+  "new_independent_A_first_reaudit_range": [
+    320,
+    359
+  ],
+  "new_range_unique_source_keys": 40,
+  "new_range_original_BC_positive": 37,
+  "new_range_original_BC_zero": 3,
+  "new_range_original_BC_zero_indices": [
+    324,
+    332,
+    333
+  ],
+  "old_v194_flags_revisited_rows": 25,
+  "v195_unresolved_second_opinions_revisited_rows": 6,
+  "v195_unresolved_overlap_with_v194_flags": 4,
+  "audit_records_total": 71,
+  "unique_source_keys_in_this_overlay": 67,
+  "additional_observed_statuses": 0,
+  "additional_provisional_promotions": 0,
+  "historical_source_unique_keys": 10042,
+  "historical_image_observed": 10007,
+  "historical_unobserved_reported": 35,
+  "historical_unobserved_true_keys": 33,
+  "historical_accounting_gap": 2,
+  "user_manual33_provisional_verbatim_preserved": 23,
+  "user_manual33_undecided_excluded": 10,
+  "active_user_manual_queue": 0,
+  "prior_user_manual80_and_excluded14": "preserved by non-modification",
+  "official_mapping_verified": 0,
+  "tilezed_verified": 0,
+  "certified": 0,
+  "D_same_key_alternative_official_A_verified": 0,
+  "original_A_png_paths": [
+    "Tiles/2x/construction_01.png",
+    "Tiles/2x/camping_01.png",
+    "Tiles/2x/camping_02.png",
+    "Tiles/2x/camping_03.png",
+    "Tiles/2x/constructedobjects_signs_01.png"
+  ],
+  "source_A_png_sha256_prior_manifest": {
+    "Tiles/2x/construction_01.png": "4c7dd8ebd9156ec92f0bfd844dfbead83b75571ec6e057b4108b0c0ebdfdfdaf",
+    "Tiles/2x/camping_01.png": "b9c933065367300787cbca081868d3144f3c72612419f79de9cf143d5fd75420",
+    "Tiles/2x/camping_03.png": "42d83e326545e20ed8292e492ee1f614060d3b2c973ce0e2e7be16f4252653a3",
+    "Tiles/2x/constructedobjects_signs_01.png": "98dbf66219a794a128277523dcea600ceceed1156d2e14d497eb3e78f06183e3"
+  },
+  "source_A_png_sha256_independently_recomputed_during_this_audit_and_matched_prior": [
+    "Tiles/2x/camping_01.png",
+    "Tiles/2x/camping_03.png",
+    "Tiles/2x/constructedobjects_signs_01.png"
+  ],
+  "source_construction_png": "direct GitHub original atlas visually opened and existing source sha listed in v119 manifest (not independently hashed here)",
+  "original_A_sheet": "review/v119_selected_A_new4633/sheets/SELECTED_A_004.jpg",
+  "original_B_sheet": "review/v120_B_context_new4632/sheets/B_5x5_004.jpg",
+  "original_C_delta_sheet": "review/v121_C_diff_new4632/sheets/C_B_DIFF_004.jpg",
+  "previous_v194_A_sheets": "review/v194_Afirst_second160_319/sheets/A_ONLY_BATCH_00..03.jpg",
+  "previous_v134_original_ABC_sheets": [
+    "review/v134_visual_180_319/sheets/proof_00.jpg",
+    "review/v134_visual_180_319/sheets/proof_01.jpg",
+    "review/v134_visual_180_319/sheets/proof_09.jpg",
+    "review/v134_visual_180_319/sheets/proof_14.jpg",
+    "review/v134_visual_180_319/sheets/proof_15.jpg"
+  ],
+  "source_BC_delta_reference": "existing prior recorded B-C delta values; visual proof inspected, not independently rerendered from TMX XML in this audit",
+  "quality_limits": [
+    "Do not equate displayed original A sprite + B/C with official TileZed local_id certification",
+    "D requires different independently validated official A of the same key at exact B coordinate; no official D in this audit",
+    "Physical SQLite integrity and parent table row-by-row comparison were NOT rerun; source SQLite untouched, v196 MANIFEST is prior evidence",
+    "Do not claim 40 newly observed or 25 proven errors; all rechecks are conservative QA evidence"
+  ]
+}

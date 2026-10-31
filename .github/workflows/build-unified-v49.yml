@@ -1,0 +1,56 @@
+name: Build verified integrated v49 SQLite database
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/build_unified_v49.py"
+      - "scripts/restore_unified_database.py"
+      - ".github/workflows/build-unified-v49.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout analyses and source archive shards only
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /analysis/archive/
+            /analysis/imports/
+            /analysis/current/
+            /checkpoints/v48/
+            /scripts/
+            /PROJECT_STATE.json
+            /docs/HANDOFF.md
+          sparse-checkout-cone-mode: false
+          persist-credentials: true
+      - name: Recover both original SQLite databases with SHA-256
+        run: python3 scripts/restore_source_databases.py "$RUNNER_TEMP/sources"
+      - name: Recover previous v47 merged SQLite
+        run: python3 scripts/restore_merged_evidence.py "$RUNNER_TEMP/merged_v47.sqlite"
+      - name: Build one physically consolidated database and check all counts
+        run: python3 scripts/build_unified_v49.py "$RUNNER_TEMP/sources" "$RUNNER_TEMP/merged_v47.sqlite"
+      - name: Verify compressed artifact is fully restorable
+        run: python3 scripts/restore_unified_database.py "$RUNNER_TEMP/roundtrip.sqlite"
+      - name: Attach the fully unified SQLite as a downloadable Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PZ-B42-unified-v49-SQLite
+          path: ${{ runner.temp }}/tile_visual_v49_unified.sqlite
+          retention-days: 90
+          if-no-files-found: error
+      - name: Regenerate handoff
+        run: python3 scripts/generate_handoff.py
+      - name: Publish v49 database shards and latest project state
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analysis/current/v49/ PROJECT_STATE.json docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "data: publish complete unified v49 SQLite with all past observations"
+            git push
+          fi

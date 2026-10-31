@@ -1,0 +1,76 @@
+name: v122 append 160 real image-observed new keys to preserved SQLite
+on:
+  push:
+    branches: [work/v122-reviewed160-sqlite-20261027]
+    paths:
+      - scripts/v122_append_visual160.py
+      - .github/workflows/v122-reviewed160.yml
+permissions:
+  contents: write
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v122_append_visual160.py
+            /analysis/current/v121/*
+            /review/v122_AI_ABCD_160/AI_VISUAL_REVIEW_160.csv
+            /review/v121_ABCD_first160/ABCD_160.csv
+            /review/v121_ABCD_first160/ABCD_160_embedded.html
+            /review/v121_ABCD_first160/ABCD_sheet_*.jpg
+      - name: Verify historical parent and append new visual observations
+        run: python3 -u scripts/v122_append_visual160.py
+      - name: Independent SQLite restoration and ZIP CRC
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zlib,base64,hashlib,zipfile,csv
+          from pathlib import Path
+          R=Path('.')
+          d=json.loads((R/'analysis/current/v122/MANIFEST.json').read_text())
+          content=''.join((R/p).read_text() for p in d['parts'])
+          packed=base64.b64decode(content)
+          assert hashlib.sha256(packed).hexdigest()==d['compressed_sha256']
+          raw=zlib.decompress(packed)
+          assert hashlib.sha256(raw).hexdigest()==d['sqlite_sha256']
+          p=Path('/tmp/verify_v122.sqlite');p.write_bytes(raw)
+          with sqlite3.connect(p) as c:
+              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              assert c.execute('SELECT count(*) FROM v122_ai_visual_review_160').fetchone()[0]==160
+              assert c.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+              assert c.execute('SELECT count(*) FROM tile_catalog WHERE observed_any=1').fetchone()[0]==5400
+              assert c.execute('SELECT count(*) FROM v115_ai_candidate_queue').fetchone()[0]==882
+              assert c.execute('SELECT count(*) FROM v116_user_excluded_missing_image').fetchone()[0]==6
+              assert c.execute('SELECT count(*) FROM v121_abcd_evidence').fetchone()[0]==160
+              assert c.execute('SELECT count(*) FROM v122_ai_visual_review_160 WHERE final_certified=1').fetchone()[0]==0
+          o=R/'review/v122_AI_ABCD_160'
+          with zipfile.ZipFile(o/'V122_AI_ABCD160_EVIDENCE.zip') as z:
+              assert z.testzip() is None and len(z.namelist())==8
+          with (o/'AI_VISUAL_REVIEW_160.csv').open(encoding='utf-8-sig',newline='') as f:
+              a=list(csv.DictReader(f))
+          assert len(a)==160 and sum(x['review_status']=='provisional_candidate' for x in a)==144
+          print('PASS independent v122 SHA, CRC, SQL, unique160, originals')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PZ-v122-160-visually-reviewed-SQLite-archive
+          path: |
+            review/v122_AI_ABCD_160/
+            analysis/current/v122/
+          compression-level: 0
+          retention-days: 90
+      - name: Commit validated visual evidence and SQLite manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v122_AI_ABCD_160/ analysis/current/v122/
+          if ! git diff --cached --quiet; then
+            git commit -m "v122: 160 source-image observed, 144 provisional, 16 held; append protected SQLite table"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

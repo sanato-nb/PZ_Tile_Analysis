@@ -1,0 +1,125 @@
+name: v251 original TMX B-C for 188 unique-location held tiles
+on:
+  push:
+    branches: [review/v251_held188_single_location_Afirst_20261030]
+    paths:
+      - scripts/v251_render_188_single_source_true_BC.py
+      - .github/workflows/v251-held188-real-BC.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render_source_BC:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      matrix:
+        g: [0, 1, 2, 3]
+    env:
+      V251_GROUP: ${{ matrix.g }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v251_render_188_single_source_true_BC.py
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v117_A_candidates_10042/MANIFEST.json
+            /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+            /review/v251_held188_single_location_Afirst_2026-10-30/A_ORIGINAL_188_SHA_AND_ONLY_REAL_TMX.csv
+      - name: Install Pillow
+        run: python3 -m pip install --quiet Pillow --break-system-packages
+      - name: Locate exact original TMX files used by this partition
+        run: |
+          python3 scripts/v251_render_188_single_source_true_BC.py --list-tmx > /tmp/maps
+          cat >/tmp/sparse <<'EOF'
+          /scripts/v251_render_188_single_source_true_BC.py
+          /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+          /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+          /review/v117_A_candidates_10042/MANIFEST.json
+          /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+          /review/v251_held188_single_location_Afirst_2026-10-30/A_ORIGINAL_188_SHA_AND_ONLY_REAL_TMX.csv
+          EOF
+          sed 's|^|/|' /tmp/maps >> /tmp/sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/sparse
+          wc -l /tmp/maps
+      - name: Locate original atlas images for these true TMX scenes
+        run: |
+          python3 scripts/v251_render_188_single_source_true_BC.py --list-png > /tmp/atlases
+          sed 's|^|/|' /tmp/atlases >> /tmp/sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/sparse
+          wc -l /tmp/atlases
+      - name: Render exactly 47 source A/B/C scenes, preserve raw GIDs
+        run: python3 -u scripts/v251_render_188_single_source_true_BC.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v251-g${{ matrix.g }}
+          path: review/v251_held188_single_location_Afirst_2026-10-30/real_BC/g${{ matrix.g }}/
+          retention-days: 7
+          compression-level: 4
+          if-no-files-found: error
+  integrate:
+    needs: [render_source_BC]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /review/v251_held188_single_location_Afirst_2026-10-30/*
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: v251-g*
+          path: /tmp/v251
+      - name: Verify four disjoint source partitions
+        run: |
+          mkdir -p review/v251_held188_single_location_Afirst_2026-10-30/real_BC
+          for g in 0 1 2 3; do
+            mkdir -p review/v251_held188_single_location_Afirst_2026-10-30/real_BC/g$g
+            cp -a /tmp/v251/v251-g$g/. review/v251_held188_single_location_Afirst_2026-10-30/real_BC/g$g/
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv
+          p=Path('review/v251_held188_single_location_Afirst_2026-10-30')
+          m=[json.load(open(p/'real_BC'/f'g{i}'/'MANIFEST.json')) for i in range(4)]
+          a=[]
+          for i in range(4):
+            with open(p/'real_BC'/f'g{i}'/'SINGLE_47_TRUE_BC.csv',encoding='utf-8-sig',newline='') as f:r=list(csv.DictReader(f))
+            assert len(r)==47
+            a.extend(r)
+          assert len(a)==len({r['source_key'] for r in a})==188
+          with open(p/'REAL_ORIGINAL_SINGLE_188_BC.csv','w',encoding='utf-8-sig',newline='') as f:
+            w=csv.DictWriter(f,fieldnames=list(a[0]));w.writeheader();w.writerows(sorted(a,key=lambda r:int(r['source_index'])))
+          data=dict(version='v251',unique_original_location_keys=188,
+           rendered_original_BC_scenes=188,all_original_TMX_sha_verified=True,
+           original_source_A_RGBA_SHA_verified=188,positive_original_BC=sum(x['B_C_nonzero'] for x in m),
+           zero_original_BC=sum(x['B_C_zero'] for x in m),
+           incomplete_neighbour_scenes=sum(x['source_neighbor_missing_some'] for x in m),
+           partial_map_edge_scenes=sum(x['map_boundary_5x5_partial'] for x in m),
+           layer_limited_extra_exposure=sum(x['upper_layer_delta_greater'] for x in m),
+           A_vs_original_B_contacts=sum(x['contact_A_B_pages'] for x in m),
+           source_GID_exactly_one_removed_per_scene=188,provisional_identities_only=True,
+           excluded_missing_or_transparent=0,official_final_certified=0,
+           v240_active_excluded_unchanged=True,prior_v250_251_unmodified=True,
+           groups=m)
+          (p/'REAL_BC_MANIFEST.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({k:v for k,v in data.items() if k!='groups'}))
+          PY
+      - name: Commit only new original TMX evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v251_held188_single_location_Afirst_2026-10-30/
+          if ! git diff --cached --quiet; then
+            git commit -m "v251: all188 genuine original single-location A/B/C image evidence"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

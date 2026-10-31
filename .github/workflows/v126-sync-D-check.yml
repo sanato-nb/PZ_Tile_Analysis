@@ -1,0 +1,55 @@
+name: v126 verify corrected D handoff and latest SQLite
+on:
+  push:
+    branches: [work/v126-sync-corrected-D-handoff-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - scripts/restore_unified_v126.py
+      - .github/workflows/v126-sync-D-check.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /scripts/restore_unified_v126.py
+            /analysis/current/v126/*
+            /review/v126_D_alt_A_B_160/MANIFEST.json
+      - name: Verify latest state and corrected D semantics
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          db=json.loads(Path('analysis/current/v126/MANIFEST.json').read_text())
+          m=json.loads(Path('review/v126_D_alt_A_B_160/MANIFEST.json').read_text())
+          assert s['latest_checkpoint']['version']=='v126'
+          assert s['unified_database']['version']=='v126'
+          assert s['unified_database']['sqlite_sha256']==db['sqlite_sha256']
+          assert s['latest_corrected_D']['tested']==160
+          assert s['latest_corrected_D']['legacy_second_placement_separate']
+          assert s['latest_checkpoint']['expanded_unique_observed']==5580
+          assert db['prior_tables_preserved']==187 and db['new_rows']==160
+          assert m['not_v124_second_placement'] is True
+          assert m['scope_new_only']==160
+          assert m['direct_A1_A2_alternatives']==0
+          assert m['grid_alignment_hypothesis_alternatives']==160
+          assert 'same' in m['corrected_D_definition']
+          assert 'D 단계 의미 정정' in Path('AGENTS.md').read_text()
+          assert 'D 단계 의미 정정' in Path('docs/HANDOFF.md').read_text()
+          print('PASS corrected D metadata and handoff')
+          PY
+      - name: Independently restore full historical v126 SQLite
+        run: python3 -u scripts/restore_unified_v126.py /tmp/pz_v126_handoff.sqlite

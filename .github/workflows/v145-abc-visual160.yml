@@ -1,0 +1,173 @@
+name: v145 military and restaurant A B C source review with physical SQLite
+on:
+  push:
+    branches: [work/v145-abc-1680-1839-final-only-20261027]
+    paths:
+      - scripts/v145_abc_visual160.py
+      - review/v145_abc_1680_1839/MANUAL_VISUAL_NOTES.json
+      - .github/workflows/v145-abc-visual160.yml
+permissions:
+  contents: write
+jobs:
+  examine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v145_abc_visual160.py
+            /scripts/v145_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /review/v145_abc_1680_1839/MANUAL_VISUAL_NOTES.json
+            /analysis/current/v144/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/b_png_shards/*
+            /review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv
+            /review/v121_C_diff_new4632/c_png_shards/*
+            /review/v121_C_diff_new4632/difference_png_shards/*
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/26_43.tmx
+            /B4220.3_MapExport_256/tmx/26_44.tmx
+            /B4220.3_MapExport_256/tmx/26_45.tmx
+            /B4220.3_MapExport_256/tmx/26_46.tmx
+            /B4220.3_MapExport_256/tmx/26_47.tmx
+            /B4220.3_MapExport_256/tmx/26_48.tmx
+            /B4220.3_MapExport_256/tmx/26_49.tmx
+            /B4220.3_MapExport_256/tmx/27_43.tmx
+            /B4220.3_MapExport_256/tmx/27_44.tmx
+            /B4220.3_MapExport_256/tmx/27_45.tmx
+            /B4220.3_MapExport_256/tmx/27_46.tmx
+            /B4220.3_MapExport_256/tmx/27_47.tmx
+            /B4220.3_MapExport_256/tmx/27_48.tmx
+            /B4220.3_MapExport_256/tmx/27_49.tmx
+            /B4220.3_MapExport_256/tmx/28_43.tmx
+            /B4220.3_MapExport_256/tmx/28_44.tmx
+            /B4220.3_MapExport_256/tmx/28_45.tmx
+            /B4220.3_MapExport_256/tmx/28_46.tmx
+            /B4220.3_MapExport_256/tmx/28_47.tmx
+            /B4220.3_MapExport_256/tmx/28_48.tmx
+            /B4220.3_MapExport_256/tmx/28_49.tmx
+            /B4220.3_MapExport_256/tmx/29_43.tmx
+            /B4220.3_MapExport_256/tmx/29_44.tmx
+            /B4220.3_MapExport_256/tmx/29_45.tmx
+            /B4220.3_MapExport_256/tmx/29_46.tmx
+            /B4220.3_MapExport_256/tmx/29_47.tmx
+            /B4220.3_MapExport_256/tmx/29_48.tmx
+            /B4220.3_MapExport_256/tmx/29_49.tmx
+            /B4220.3_MapExport_256/tmx/30_43.tmx
+            /B4220.3_MapExport_256/tmx/30_44.tmx
+            /B4220.3_MapExport_256/tmx/30_45.tmx
+            /B4220.3_MapExport_256/tmx/30_46.tmx
+            /B4220.3_MapExport_256/tmx/30_47.tmx
+            /B4220.3_MapExport_256/tmx/30_48.tmx
+            /B4220.3_MapExport_256/tmx/30_49.tmx
+            /B4220.3_MapExport_256/tmx/31_43.tmx
+            /B4220.3_MapExport_256/tmx/31_44.tmx
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /B4220.3_MapExport_256/tmx/31_47.tmx
+            /B4220.3_MapExport_256/tmx/31_48.tmx
+            /B4220.3_MapExport_256/tmx/31_49.tmx
+            /B4220.3_MapExport_256/tmx/32_43.tmx
+            /B4220.3_MapExport_256/tmx/32_44.tmx
+            /B4220.3_MapExport_256/tmx/32_45.tmx
+            /B4220.3_MapExport_256/tmx/32_46.tmx
+            /B4220.3_MapExport_256/tmx/32_47.tmx
+            /B4220.3_MapExport_256/tmx/32_48.tmx
+            /B4220.3_MapExport_256/tmx/32_49.tmx
+            /B4220.3_MapExport_256/tmx/33_43.tmx
+            /B4220.3_MapExport_256/tmx/33_44.tmx
+            /B4220.3_MapExport_256/tmx/33_45.tmx
+            /B4220.3_MapExport_256/tmx/33_46.tmx
+            /B4220.3_MapExport_256/tmx/33_47.tmx
+            /B4220.3_MapExport_256/tmx/33_48.tmx
+            /B4220.3_MapExport_256/tmx/33_49.tmx
+            /B4220.3_MapExport_256/tmx/34_43.tmx
+            /B4220.3_MapExport_256/tmx/34_44.tmx
+            /B4220.3_MapExport_256/tmx/34_45.tmx
+            /B4220.3_MapExport_256/tmx/34_46.tmx
+            /B4220.3_MapExport_256/tmx/34_47.tmx
+            /B4220.3_MapExport_256/tmx/34_48.tmx
+            /B4220.3_MapExport_256/tmx/34_49.tmx
+            /B4220.3_MapExport_256/tmx/35_43.tmx
+            /B4220.3_MapExport_256/tmx/35_44.tmx
+            /B4220.3_MapExport_256/tmx/35_45.tmx
+            /B4220.3_MapExport_256/tmx/35_46.tmx
+            /B4220.3_MapExport_256/tmx/35_47.tmx
+            /B4220.3_MapExport_256/tmx/35_48.tmx
+            /B4220.3_MapExport_256/tmx/35_49.tmx
+            /B4220.3_MapExport_256/tmx/36_43.tmx
+            /B4220.3_MapExport_256/tmx/36_44.tmx
+            /B4220.3_MapExport_256/tmx/36_45.tmx
+            /B4220.3_MapExport_256/tmx/36_46.tmx
+            /B4220.3_MapExport_256/tmx/36_47.tmx
+            /B4220.3_MapExport_256/tmx/36_48.tmx
+            /B4220.3_MapExport_256/tmx/36_49.tmx
+            /B4220.3_MapExport_256/tmx/37_43.tmx
+            /B4220.3_MapExport_256/tmx/37_44.tmx
+            /B4220.3_MapExport_256/tmx/37_45.tmx
+            /B4220.3_MapExport_256/tmx/37_46.tmx
+            /B4220.3_MapExport_256/tmx/37_47.tmx
+            /B4220.3_MapExport_256/tmx/37_48.tmx
+            /B4220.3_MapExport_256/tmx/37_49.tmx
+      - run: python3 -m pip install --quiet Pillow
+      - name: Physically inspect source image and map pixels, preserve prior SQLite
+        run: python3 -u scripts/v145_abc_visual160.py
+      - name: Independent CRC, SHA, parent table and row-count verification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,zipfile,base64,zlib,sqlite3,csv
+          R=Path('review/v145_abc_1680_1839')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v145/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v144/MANIFEST.json').read_text())
+          assert m['manual_image_annotations']==160
+          assert m['promoted_provisional']+m['excluded_unverified']==160
+          assert m['promoted_provisional']>=70
+          assert d['new_rows']==m['promoted_provisional']
+          assert d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==207 and d['prior_tables_preserved']==206
+          assert m['mapping_verified']==m['tilezed_verified']==m['certified']==0
+          for name,h in m['files_sha256'].items():
+           assert hashlib.sha256((R/name).read_bytes()).hexdigest()==h,name
+          with zipfile.ZipFile(R/'ABC_EVIDENCE_VERIFIED.zip') as f:
+           assert f.testzip() is None and len(f.namelist())==4*m['promoted_provisional']
+          with (R/'VISUAL_REVIEW.csv').open(encoding='utf-8-sig') as f:
+           rows=list(csv.DictReader(f))
+          assert len(rows)==m['promoted_provisional']
+          assert len({(r['tile_set_name'],r['local_id']) for r in rows})==len(rows)
+          assert all(r['visual_status']=='provisional_candidate' and r['certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in rows)
+          packed=base64.b64decode(''.join(Path(part).read_text('ascii').strip() for part in d['parts']),validate=True)
+          assert hashlib.sha256(packed).hexdigest()==d['compressed_sha256']
+          raw=zlib.decompress(packed)
+          assert hashlib.sha256(raw).hexdigest()==d['sqlite_sha256'] and len(raw)==d['sqlite_bytes']
+          db=sqlite3.connect(':memory:');db.deserialize(raw)
+          assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==207
+          assert db.execute('SELECT count(*) FROM tile_catalog').fetchone()[0]==5409
+          assert db.execute('SELECT count(*) FROM v144_visual_review').fetchone()[0]==149
+          assert db.execute('SELECT count(*) FROM v145_visual_review').fetchone()[0]==m['promoted_provisional']
+          assert db.execute('SELECT count(*) FROM v145_visual_review WHERE certified!=0 OR mapping_verified!=0 OR tilezed_verified!=0').fetchone()[0]==0
+          print('PASS v145',len(rows),'provisional new observations and physical SQLite SHA',d['sqlite_sha256'])
+          PY
+      - name: Apply v145 state and append history only after evidence verification
+        run: python3 -u scripts/v145_finalize_checkpoint.py
+      - name: Commit new evidence to isolated branch (never rewrite main or parent)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v145_abc_1680_1839 analysis/current/v145 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v145: final verified visual data SQLite and history in one results commit"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

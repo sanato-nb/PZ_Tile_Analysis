@@ -1,0 +1,76 @@
+name: v249 exactly identify 38 held tile overdraw GIDs
+on:
+  push:
+    branches: [review/v249_held251_occlusion38_source_diagnostics_20261030]
+    paths:
+      - scripts/v249_causal_occlusion_38.py
+      - scripts/v249_build_A_uncovered38_contacts.py
+      - .github/workflows/v249-causal-38.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  trace_original_source_draw_order:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v249_causal_occlusion_38.py
+            /scripts/v249_build_A_uncovered38_contacts.py
+            /review/v248_held251_full_alternate_BC_2026-10-30/ALL_251_A_FIRST_OBJECT_PART_HYPOTHESES.csv
+            /review/v248_held251_full_alternate_BC_2026-10-30/STILL_NOT_EXPOSED_IN_ALTERNATE_38.csv
+            /review/v246_held439_real_alt_TMX_2026-10-30/HELD439_ALTERNATE_SITE_CENSUS.csv
+            /review/v246_held439_real_alt_TMX_2026-10-30/BEST_FIVE_REAL_ALTERNATE_SITES.csv
+            /review/v247_held439_alternate_true_BC_selected_2026-10-30/TRUE_ALTERNATE_ORIGINAL_TMX_BC_SELECTED.csv
+            /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+            /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+            /review/v117_A_candidates_10042/MANIFEST.json
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v249_held251_occlusion38_diagnostics_2026-10-30/*
+      - name: Install Pillow before scanning source index
+        run: python3 -m pip install --quiet Pillow --break-system-packages
+      - name: Include actual source TMX files referenced by the 38 keys
+        run: |
+          python3 scripts/v249_causal_occlusion_38.py --list-tmx > /tmp/tmx
+          cat > /tmp/sparse <<'EOF'
+          /scripts/v249_causal_occlusion_38.py
+          /scripts/v249_build_A_uncovered38_contacts.py
+          /review/v248_held251_full_alternate_BC_2026-10-30/ALL_251_A_FIRST_OBJECT_PART_HYPOTHESES.csv
+          /review/v248_held251_full_alternate_BC_2026-10-30/STILL_NOT_EXPOSED_IN_ALTERNATE_38.csv
+          /review/v246_held439_real_alt_TMX_2026-10-30/HELD439_ALTERNATE_SITE_CENSUS.csv
+          /review/v246_held439_real_alt_TMX_2026-10-30/BEST_FIVE_REAL_ALTERNATE_SITES.csv
+          /review/v247_held439_alternate_true_BC_selected_2026-10-30/TRUE_ALTERNATE_ORIGINAL_TMX_BC_SELECTED.csv
+          /review/v238_integrated_master_2026-10-29/MASTER_HELD_439_SOURCE_VERIFIED.csv
+          /review/v117_A_candidates_10042/A_CANDIDATE_COMBINED_10042.csv
+          /review/v117_A_candidates_10042/MANIFEST.json
+          /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+          /review/v249_held251_occlusion38_diagnostics_2026-10-30/*
+          EOF
+          sed 's|^|/|' /tmp/tmx >> /tmp/sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/sparse
+          echo "Selected genuine maps:"; wc -l /tmp/tmx
+      - name: Include verified original PNG sources referenced in authentic scene
+        run: |
+          python3 scripts/v249_causal_occlusion_38.py --list-png > /tmp/png
+          sed 's|^|/|' /tmp/png >> /tmp/sparse
+          git sparse-checkout set --no-cone --stdin < /tmp/sparse
+          echo "Source atlas PNGs:"; wc -l /tmp/png
+      - name: Measure before and after each actual later sprite in original draw order
+        run: python3 -u scripts/v249_causal_occlusion_38.py
+      - name: Build A original against uncovered diagnostic sheets
+        run: python3 -u scripts/v249_build_A_uncovered38_contacts.py
+      - name: Commit only appended v249 evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v249_held251_occlusion38_diagnostics_2026-10-30/
+          if ! git diff --cached --quiet; then
+             git commit -m "v249: trace 38 still-hidden A source sprites and exact later raw GID pixel suppression"
+             git pull --rebase origin "$GITHUB_REF_NAME"
+             git push
+          fi

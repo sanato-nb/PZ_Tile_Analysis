@@ -1,0 +1,109 @@
+name: v171 bathroom mosaic interior house doors 160 A B C review and 232-table parent SQLite verification
+on:
+  push:
+    branches: [work/v171-large-interior-4360-4519-20261028]
+    paths:
+      - scripts/v171_abc_interior160.py
+      - scripts/v171_finalize_checkpoint.py
+      - review/v171_interior_4360_4519/MANUAL_VISUAL_NOTES.json
+      - .github/workflows/v171-interior-abc160.yml
+permissions:
+  contents: write
+concurrency:
+  group: v171-abc-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/v171_abc_interior160.py
+            /scripts/v171_finalize_checkpoint.py
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /review/v171_interior_4360_4519/MANUAL_VISUAL_NOTES.json
+            /analysis/current/v170/*
+            /analysis/imports/merged_catalog_5409.csv
+            /review/v119_selected_A_new4633/REPRESENTATIVE_A_4633.csv
+            /review/v120_B_context_new4632/MANIFEST.json
+            /review/v121_C_diff_new4632/MANIFEST.json
+            /review/v120_B_context_new4632/B_CONTEXT_4632.csv
+            /review/v120_B_context_new4632/b_png_shards/*
+            /review/v121_C_diff_new4632/C_B_DIFFERENCE_4632.csv
+            /review/v121_C_diff_new4632/c_png_shards/*
+            /review/v121_C_diff_new4632/difference_png_shards/*
+            /Tiles/*
+            /B4220.3_MapExport_256/tmx/*
+      - run: python3 -m pip install --quiet Pillow
+      - name: Verify actual source pixels, raw TMX GIDs, B/C/DELTA, and append-only SQLite
+        run: python3 -u scripts/v171_abc_interior160.py
+      - name: Independent ZIP SHA CRC SQLite parent rows and candidate uniqueness verification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,zipfile,base64,zlib,sqlite3,csv
+          R=Path('review/v171_interior_4360_4519')
+          m=json.loads((R/'MANIFEST.json').read_text())
+          d=json.loads(Path('analysis/current/v171/MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v170/MANIFEST.json').read_text())
+          assert m['manual_image_annotations']==160 and m['original_scope']==[4360,4519]
+          assert m['promoted_provisional']+m['excluded_unverified']==160
+          assert d['new_rows']==m['promoted_provisional'] and d['skipped_rows']==m['excluded_unverified']
+          assert d['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert d['table_count']==233 and d['prior_tables_preserved']==232
+          assert m['mapping_verified']==m['tilezed_verified']==m['certified']==0
+          for name,h in m['files_sha256'].items():
+           assert hashlib.sha256((R/name).read_bytes()).hexdigest()==h,name
+          with zipfile.ZipFile(R/'ABC_EVIDENCE_VERIFIED.zip') as f:
+           assert f.testzip() is None and len(f.namelist())==4*m['promoted_provisional']
+          with (R/'VISUAL_REVIEW.csv').open(encoding='utf-8-sig') as f:
+           rows=list(csv.DictReader(f))
+          assert len(rows)==m['promoted_provisional']
+          assert len({(r['tile_set_name'],r['local_id']) for r in rows})==len(rows)
+          assert all(r['visual_status']=='provisional_candidate' and r['certified']==r['mapping_verified']==r['tilezed_verified']=='0' for r in rows)
+          def dbraw(man):
+           packed=base64.b64decode(''.join(Path(part).read_text('ascii').strip() for part in man['parts']),validate=True)
+           assert hashlib.sha256(packed).hexdigest()==man['compressed_sha256']
+           raw=zlib.decompress(packed)
+           assert hashlib.sha256(raw).hexdigest()==man['sqlite_sha256'] and len(raw)==man['sqlite_bytes']
+           return raw
+          old=sqlite3.connect(':memory:');old.deserialize(dbraw(p))
+          new=sqlite3.connect(':memory:');new.deserialize(dbraw(d))
+          assert old.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert new.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          oldcounts={t[0]:old.execute('SELECT count(*) FROM "'+t[0]+'"').fetchone()[0] for t in old.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          newcounts={t[0]:new.execute('SELECT count(*) FROM "'+t[0]+'"').fetchone()[0] for t in new.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+          assert len(oldcounts)==232 and len(newcounts)==233
+          assert all(newcounts[k]==v for k,v in oldcounts.items())
+          for name in oldcounts:
+           oc=old.execute('SELECT * FROM "'+name+'"')
+           nc=new.execute('SELECT * FROM "'+name+'"')
+           while True:
+            a=oc.fetchmany(1024);b=nc.fetchmany(1024)
+            assert a==b,('parent_table_content_changed',name)
+            if not a:break
+          assert set(newcounts)-set(oldcounts)=={'v171_visual_review'}
+          assert newcounts['v171_visual_review']==len(rows)
+          assert newcounts['tile_catalog']==5409
+          print('PASS v171 independent checks',len(rows),'provisional,',m['excluded_unverified'],'held, 233 physical SQLite tables')
+          PY
+      - name: Update latest checkpoint only after verification
+        run: python3 -u scripts/v171_finalize_checkpoint.py
+      - name: Commit verified results only to isolated work branch
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse review/v171_interior_4360_4519 analysis/current/v171 PROJECT_STATE.json AGENTS.md docs/HANDOFF.md
+          if ! git diff --cached --quiet; then
+            git commit -m "v171: verified A/B/C observations and 232-table physical SQLite"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

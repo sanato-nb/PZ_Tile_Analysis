@@ -1,0 +1,575 @@
+{
+  "version": "v137",
+  "scope": [
+    560,
+    639
+  ],
+  "manual_sheets": [
+    "review/v119_selected_A_new4633/sheets/SELECTED_A_007.jpg",
+    "review/v120_B_context_new4632/sheets/B_5x5_007.jpg",
+    "review/v121_C_diff_new4632/sheets/C_B_DIFF_007.jpg"
+  ],
+  "identity_status": "provisional_candidate",
+  "notes": {
+    "560": {
+      "candidate": "얇은 회색 송전선",
+      "features": "사선으로 뻗은 금속선 두 가닥",
+      "material": "금속",
+      "part": "전선",
+      "confidence": "medium"
+    },
+    "561": {
+      "candidate": "금속 철탑 가로팔",
+      "features": "삼각 격자와 얇은 직선이 이어짐",
+      "material": "금속",
+      "part": "송전 구조",
+      "confidence": "medium"
+    },
+    "562": {
+      "candidate": "철제 가로팔 연결부",
+      "features": "회색 대각 지지 보와 세로선",
+      "material": "금속",
+      "part": "철탑 팔",
+      "confidence": "medium"
+    },
+    "563": {
+      "candidate": "청록색 전선 연결부",
+      "features": "작은 초록색 부품과 가는 회색 선",
+      "material": "금속/절연재 추정",
+      "part": "전선 단자",
+      "confidence": "medium"
+    },
+    "564": {
+      "candidate": "철제 송전탑 격자 기둥",
+      "features": "직립 직사각 철제 X자 프레임",
+      "material": "금속",
+      "part": "수직 지주",
+      "confidence": "medium"
+    },
+    "565": {
+      "candidate": "얇은 가로 전선",
+      "features": "청록색 작은 연결부와 긴 직선",
+      "material": "금속/절연재 추정",
+      "part": "전선 조각",
+      "confidence": "medium"
+    },
+    "566": {
+      "candidate": "철탑 수직 격자 골조",
+      "features": "높은 회색 쇠살 기둥이 X자로 연결",
+      "material": "금속",
+      "part": "지지기둥",
+      "confidence": "medium"
+    },
+    "567": {
+      "candidate": "자줏빛 관목",
+      "features": "붉고 자주색 잎이 낮게 모임",
+      "material": "식물",
+      "part": "수관",
+      "confidence": "medium"
+    },
+    "568": {
+      "candidate": "작은 밝은 초록 관목",
+      "features": "둥근 초록 잎 뭉치와 얇은 줄기",
+      "material": "식물",
+      "part": "잎",
+      "confidence": "low"
+    },
+    "569": {
+      "candidate": "초록 풀 모양 관목",
+      "features": "길고 뾰족한 초록 잎 다발",
+      "material": "식물",
+      "part": "수관",
+      "confidence": "medium"
+    },
+    "570": {
+      "candidate": "작은 녹색 풀",
+      "features": "작은 초록 식물이 가늘게 직립",
+      "material": "식물",
+      "part": "잎",
+      "confidence": "low"
+    },
+    "571": {
+      "candidate": "짙은 녹색 낮은 관목",
+      "features": "여러 진녹색 잎이 둥글게 모임",
+      "material": "식물",
+      "part": "수관",
+      "confidence": "medium"
+    },
+    "572": {
+      "candidate": "녹색 직립 관목",
+      "features": "잎이 단단히 겹쳐 자람",
+      "material": "식물",
+      "part": "관목 줄기",
+      "confidence": "medium"
+    },
+    "573": {
+      "candidate": "자줏빛 직립 덤불",
+      "features": "보랏빛 좁은 잎이 위로 모임",
+      "material": "식물",
+      "part": "가지·잎",
+      "confidence": "medium"
+    },
+    "574": {
+      "candidate": "둥근 밝은 초록 관목",
+      "features": "작은 잎들이 둥글게 부품 모양",
+      "material": "식물",
+      "part": "수관",
+      "confidence": "low"
+    },
+    "575": {
+      "candidate": "조밀한 초록 관목",
+      "features": "아주 짧은 녹색 잎 군집",
+      "material": "식물",
+      "part": "수관",
+      "confidence": "medium"
+    },
+    "576": {
+      "candidate": "연두색 관목",
+      "features": "밝은 녹색 잎이 둥근 군집",
+      "material": "식물",
+      "part": "잎",
+      "confidence": "medium"
+    },
+    "577": {
+      "candidate": "좁은 잎 녹색 관목",
+      "features": "얇은 초록 잎이 덤불을 이룸",
+      "material": "식물",
+      "part": "수관",
+      "confidence": "medium"
+    },
+    "578": {
+      "candidate": "둥근 녹색 생울타리",
+      "features": "짙은 녹색 잎으로 된 육면체형 수관",
+      "material": "식물",
+      "part": "잎",
+      "confidence": "medium"
+    },
+    "579": {
+      "candidate": "각진 녹색 생울타리",
+      "features": "어두운 육면체형 초록 잎덩이",
+      "material": "식물",
+      "part": "수관",
+      "confidence": "medium"
+    },
+    "580": {
+      "candidate": "작은 정사각 생울타리",
+      "features": "좁은 짙은 초록 잎 블록",
+      "material": "식물",
+      "part": "잎",
+      "confidence": "low"
+    },
+    "581": {
+      "candidate": "벽에 붙은 초록 덩굴",
+      "features": "긴 수직 직사각 식물잎이 빽빽함",
+      "material": "식물",
+      "part": "잎/줄기",
+      "confidence": "medium"
+    },
+    "582": {
+      "candidate": "초록 벽덩굴",
+      "features": "어두운 초록 잎이 수직 벽면처럼 자람",
+      "material": "식물",
+      "part": "등반 잎",
+      "confidence": "medium"
+    },
+    "583": {
+      "candidate": "수직 초록 덩굴",
+      "features": "좁고 긴 녹색 잎줄기",
+      "material": "식물",
+      "part": "덩굴",
+      "confidence": "medium"
+    },
+    "584": {
+      "candidate": "좁은 벽덩굴",
+      "features": "작은 녹색 잎이 좁고 길게 배열",
+      "material": "식물",
+      "part": "덩굴줄기",
+      "confidence": "medium"
+    },
+    "585": {
+      "candidate": "짙은 초록 덩굴",
+      "features": "정면으로 긴 짙은 잎 무늬",
+      "material": "식물",
+      "part": "수직 잎",
+      "confidence": "medium"
+    },
+    "586": {
+      "candidate": "밝은 초록 수직 덩굴",
+      "features": "길고 직립한 초록 잎 기둥",
+      "material": "식물",
+      "part": "등반 식물",
+      "confidence": "low"
+    },
+    "587": {
+      "candidate": "철제 울타리 작은 지주",
+      "features": "가늘고 검은 수직 금속막대",
+      "material": "금속",
+      "part": "세로말뚝",
+      "confidence": "low"
+    },
+    "588": {
+      "candidate": "갈색 판자 담장 모서리",
+      "features": "높은 목재 세로 널판 두 면이 꺾임",
+      "material": "목재",
+      "part": "모서리판",
+      "confidence": "medium"
+    },
+    "589": {
+      "candidate": "회색 철판 울타리",
+      "features": "회색 반투명 직사각 패널",
+      "material": "금속",
+      "part": "담장판",
+      "confidence": "medium"
+    },
+    "590": {
+      "candidate": "회색 담장 반대면",
+      "features": "사선으로 놓인 회색 얇은 패널",
+      "material": "금속",
+      "part": "울타리판",
+      "confidence": "low"
+    },
+    "591": {
+      "candidate": "금속 울타리 코너",
+      "features": "두 회색 평면 패널이 ㄱ자 연결",
+      "material": "금속",
+      "part": "모서리",
+      "confidence": "medium"
+    },
+    "592": {
+      "candidate": "회색 철제 기둥",
+      "features": "가늘고 높은 직립 회색 봉",
+      "material": "금속",
+      "part": "말뚝",
+      "confidence": "medium"
+    },
+    "593": {
+      "candidate": "회색 철망 울타리",
+      "features": "세로 금속살이 촘촘한 패널",
+      "material": "금속",
+      "part": "울타리망",
+      "confidence": "medium"
+    },
+    "594": {
+      "candidate": "회색 철망 패널 반대면",
+      "features": "격자 세로줄의 경사진 판",
+      "material": "금속",
+      "part": "망 패널",
+      "confidence": "low"
+    },
+    "595": {
+      "candidate": "금속 격자 담장",
+      "features": "가는 회색 철살이 반복되는 벽",
+      "material": "금속",
+      "part": "망 울타리",
+      "confidence": "medium"
+    },
+    "596": {
+      "candidate": "금속 담장 격자",
+      "features": "수직 가는 철제 선이 빽빽함",
+      "material": "금속",
+      "part": "울타리본체",
+      "confidence": "medium"
+    },
+    "597": {
+      "candidate": "철망 울타리 모서리",
+      "features": "철제 격자 패널 두 개가 직각 연결",
+      "material": "금속",
+      "part": "코너",
+      "confidence": "medium"
+    },
+    "598": {
+      "candidate": "회색 금속 울타리 지주",
+      "features": "얇고 긴 회색 세로막대",
+      "material": "금속",
+      "part": "지주",
+      "confidence": "medium"
+    },
+    "599": {
+      "candidate": "목재 울타리 코너",
+      "features": "갈색 나무판 벽 두 면이 만남",
+      "material": "목재",
+      "part": "담장",
+      "confidence": "medium"
+    },
+    "600": {
+      "candidate": "흰 울타리 패널",
+      "features": "옅은 회백색 세로 판들이 겹침",
+      "material": "금속 또는 목재",
+      "part": "벽 구간",
+      "confidence": "medium"
+    },
+    "601": {
+      "candidate": "흰 담장 판",
+      "features": "회백색 패널이 직립함",
+      "material": "금속 또는 목재",
+      "part": "수직 울타리",
+      "confidence": "medium"
+    },
+    "602": {
+      "candidate": "흰색 담장 구간",
+      "features": "세로줄 있는 희미한 흰 사각패널",
+      "material": "금속 또는 목재",
+      "part": "담장",
+      "confidence": "medium"
+    },
+    "603": {
+      "candidate": "흰 울타리 반대면",
+      "features": "흰 판재의 얇은 측면",
+      "material": "금속 또는 목재",
+      "part": "울타리",
+      "confidence": "low"
+    },
+    "604": {
+      "candidate": "흰 담장 코너",
+      "features": "밝은 흰 판 두 장이 ㄱ자 교차",
+      "material": "금속 또는 목재",
+      "part": "모서리",
+      "confidence": "medium"
+    },
+    "605": {
+      "candidate": "흰색 울타리 구간",
+      "features": "높은 옅은 회색 판면과 지지대",
+      "material": "금속 또는 목재",
+      "part": "담장",
+      "confidence": "medium"
+    },
+    "606": {
+      "candidate": "흰 울타리 반대쪽",
+      "features": "옅은 회백색의 가느다란 판",
+      "material": "금속 또는 목재",
+      "part": "울타리",
+      "confidence": "medium"
+    },
+    "607": {
+      "candidate": "밝은 철제 담장 패널",
+      "features": "회색 세로줄이 빽빽한 직사각",
+      "material": "금속",
+      "part": "울타리망",
+      "confidence": "low"
+    },
+    "608": {
+      "candidate": "흰색 코너 담장",
+      "features": "두 밝은 세로판이 직각으로 맞닿음",
+      "material": "금속 또는 목재",
+      "part": "코너",
+      "confidence": "medium"
+    },
+    "609": {
+      "candidate": "둥근 철선 고리",
+      "features": "나선으로 감긴 흰 철선 고리",
+      "material": "금속",
+      "part": "철선 두루마리",
+      "confidence": "medium"
+    },
+    "610": {
+      "candidate": "나선형 철망 롤",
+      "features": "여러 개 흰 동그라미가 겹친 코일",
+      "material": "금속",
+      "part": "말린 철선",
+      "confidence": "medium"
+    },
+    "611": {
+      "candidate": "목재 울타리 구간",
+      "features": "갈색 세로 판들과 양끝 기둥",
+      "material": "목재",
+      "part": "울타리 판",
+      "confidence": "medium"
+    },
+    "612": {
+      "candidate": "부러진 흰 나무 울타리",
+      "features": "흰색 울타리판 일부가 빠짐",
+      "material": "목재",
+      "part": "파손 세로살",
+      "confidence": "medium"
+    },
+    "613": {
+      "candidate": "흰 울타리 조각",
+      "features": "짧고 불규칙한 흰 난간살",
+      "material": "목재",
+      "part": "부러진 난간",
+      "confidence": "low"
+    },
+    "614": {
+      "candidate": "흰 울타리 절단면",
+      "features": "희게 칠한 작은 나무 세로살",
+      "material": "목재",
+      "part": "울타리 남은 부분",
+      "confidence": "medium"
+    },
+    "615": {
+      "candidate": "흰색 목재 담장 파손부",
+      "features": "짧은 흰 울타리 판 여러 개",
+      "material": "목재",
+      "part": "파손 패널",
+      "confidence": "low"
+    },
+    "616": {
+      "candidate": "흰색 판자 울타리 조각",
+      "features": "작은 흰 판재가 비스듬히 놓임",
+      "material": "목재",
+      "part": "잔해",
+      "confidence": "low"
+    },
+    "617": {
+      "candidate": "흰색 울타리 잔존부",
+      "features": "희고 가는 울타리살 조각",
+      "material": "목재",
+      "part": "남은 지지살",
+      "confidence": "medium"
+    },
+    "618": {
+      "candidate": "부러진 갈색 울타리판",
+      "features": "짙은 갈색 나무판이 쓰러짐",
+      "material": "목재",
+      "part": "파손 판재",
+      "confidence": "medium"
+    },
+    "619": {
+      "candidate": "갈색 목제 울타리 파편",
+      "features": "사선으로 놓인 길고 짧은 나무판",
+      "material": "목재",
+      "part": "울타리 조각",
+      "confidence": "low"
+    },
+    "620": {
+      "candidate": "철제 격자 울타리 조각",
+      "features": "회색 철망 세로 부분만 남음",
+      "material": "금속",
+      "part": "철망",
+      "confidence": "low"
+    },
+    "621": {
+      "candidate": "철망 파손부",
+      "features": "짧은 회색 그물판의 모서리",
+      "material": "금속",
+      "part": "파손망",
+      "confidence": "low"
+    },
+    "622": {
+      "candidate": "철제 울타리 그물판",
+      "features": "촘촘한 회색 철망 조각",
+      "material": "금속",
+      "part": "망",
+      "confidence": "medium"
+    },
+    "623": {
+      "candidate": "회색 철망 파편",
+      "features": "그물 무늬가 있는 짧은 직사각",
+      "material": "금속",
+      "part": "망 일부",
+      "confidence": "low"
+    },
+    "624": {
+      "candidate": "갈색 판자 울타리 조각",
+      "features": "짙은 갈색 넓은 세로판",
+      "material": "목재",
+      "part": "판자 담장",
+      "confidence": "low"
+    },
+    "625": {
+      "candidate": "목재 담장 파손부",
+      "features": "갈색 사선 판재와 세로줄",
+      "material": "목재",
+      "part": "남은 벽",
+      "confidence": "low"
+    },
+    "626": {
+      "candidate": "나무 울타리 판",
+      "features": "갈색 직사각 목제 패널",
+      "material": "목재",
+      "part": "울타리",
+      "confidence": "medium"
+    },
+    "627": {
+      "candidate": "짧은 갈색 나무 판자",
+      "features": "길고 얇은 진갈색 목재 조각",
+      "material": "목재",
+      "part": "파편",
+      "confidence": "medium"
+    },
+    "628": {
+      "candidate": "목제 울타리 파손판",
+      "features": "갈색 판이 수직으로 남음",
+      "material": "목재",
+      "part": "파손부",
+      "confidence": "low"
+    },
+    "629": {
+      "candidate": "갈색 목재 울타리판",
+      "features": "넓은 세로결 갈색 판과 두께",
+      "material": "목재",
+      "part": "담장 일부",
+      "confidence": "medium"
+    },
+    "630": {
+      "candidate": "목제 담장 조각",
+      "features": "작은 나무 널판의 측면",
+      "material": "목재",
+      "part": "판재",
+      "confidence": "low"
+    },
+    "631": {
+      "candidate": "나무 울타리 조각",
+      "features": "갈색 넓은 세로판 여러 장",
+      "material": "목재",
+      "part": "담장",
+      "confidence": "low"
+    },
+    "632": {
+      "candidate": "짧은 목재 울타리파편",
+      "features": "갈색 나무막대가 가로로 놓임",
+      "material": "목재",
+      "part": "파편",
+      "confidence": "low"
+    },
+    "633": {
+      "candidate": "목재 판자벽 파손부",
+      "features": "높은 갈색 세로판들",
+      "material": "목재",
+      "part": "남은 벽",
+      "confidence": "low"
+    },
+    "634": {
+      "candidate": "작은 갈색 판자 조각",
+      "features": "비스듬한 짧은 목재 각재",
+      "material": "목재",
+      "part": "잔해",
+      "confidence": "low"
+    },
+    "635": {
+      "candidate": "철망 담장 패널",
+      "features": "가는 회색 금속 격자판",
+      "material": "금속",
+      "part": "울타리망",
+      "confidence": "medium"
+    },
+    "636": {
+      "candidate": "회색 철망 잘린 부분",
+      "features": "가로 회색 선 여러 개가 짧게 보임",
+      "material": "금속",
+      "part": "파손 철망",
+      "confidence": "medium"
+    },
+    "637": {
+      "candidate": "철제 격자 울타리",
+      "features": "세로로 긴 회색 촘촘한 망",
+      "material": "금속",
+      "part": "울타리",
+      "confidence": "medium"
+    },
+    "638": {
+      "candidate": "금속 그물망 파편",
+      "features": "회색 철제 그물판의 높은 절단면",
+      "material": "금속",
+      "part": "철망",
+      "confidence": "low"
+    },
+    "639": {
+      "candidate": "작은 철제 울타리 조각",
+      "features": "비스듬히 놓인 작은 금속망",
+      "material": "금속",
+      "part": "잔존망",
+      "confidence": "low"
+    }
+  }
+}

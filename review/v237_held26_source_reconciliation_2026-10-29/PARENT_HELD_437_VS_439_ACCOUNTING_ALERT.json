@@ -1,0 +1,105 @@
+{
+  "version": "v237_source_grounded_historical_hold_accounting_conflict",
+  "date": "2026-10-29",
+  "status": "OPEN__DO_NOT_REWRITE_BASELINE_OR_PROMOTE_HELD",
+  "published_prior_baseline": {
+    "new_source_keys": 4633,
+    "prior_provisional_A_first_reviewed": 4196,
+    "prior_historical_held": 437,
+    "prior_pending": 0,
+    "previous_sum": 4633,
+    "last_published_focused_reviewed": 413,
+    "last_published_focused_remaining": 24
+  },
+  "historical_source_documents_held_row_counts": {
+    "review/v122_AI_ABCD_160/AI_VISUAL_REVIEW_160.csv": 16,
+    "review/v134_visual_180_319/EXCLUDED_EXCEPTIONS.csv": 11,
+    "review/v135_visual_400_479/EXCLUDED_EXCEPTIONS.csv": 3,
+    "review/v132_visual3_jumbo20/JUMBO_AUDIT_20.csv": 20,
+    "v137_to_v144_EXCLUDED_EXCEPTIONS_parent_sum": 100,
+    "v145_to_v160_EXCLUDED_EXCEPTIONS_parent_sum": 106,
+    "v161_to_v170_EXCLUDED_EXCEPTIONS_parent_sum": 111,
+    "v171_to_v172_EXCLUDED_EXCEPTIONS_parent_sum": 72
+  },
+  "historical_parent_record_sum": 439,
+  "parent_record_sum_minus_published_held": 2,
+  "last_26_source_records_checked": {
+    "JUMBO_20": {
+      "parent": "review/v132_visual3_jumbo20/JUMBO_AUDIT_20.csv",
+      "count": 20,
+      "original_v119_source_indices": [
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        451,
+        454,
+        455,
+        456,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465
+      ],
+      "distinct_source_keys": 20,
+      "original_A_B_C_registered_SHA_and_GID_matched": 20,
+      "cause_of_hold": "multipart JUMBO A3 atlas crop alignment unverified; independently validated official Local ID unavailable",
+      "original_v119_selection_status": "selected_provisional (this is selection scope, not v132 identity status)",
+      "original_v132_status": "held",
+      "do_not_conflate_source_selection_with_historical_review_status": true
+    },
+    "ROOF_6": {
+      "parent": "review/v160_abc_3800_3839/EXCLUDED_EXCEPTIONS.csv",
+      "count": 6,
+      "source_indices": [
+        3824,
+        3825,
+        3826,
+        3833,
+        3834,
+        3835
+      ],
+      "distinct_keys": 6,
+      "original_A_B_C_registered_SHA_and_GID_matched": 6,
+      "previous_B_C_changed_pixels": [
+        452,
+        0,
+        0,
+        6614,
+        4,
+        0
+      ],
+      "previous_held_status_preserved": true,
+      "global_sheet_display_index_shift_minus_one_verified_by_exact_source_key": true
+    }
+  },
+  "all_v237_source_new_keys_unique": 26,
+  "previous_focused_held_source_records_reviewed_230_to_v236": 413,
+  "new_focused_historical_parent_records_reexamined_total": 439,
+  "new_focused_parent_held_rows_not_yet_reexamined_by_scope_tracking": 0,
+  "CAVEAT": "The 439 figure is the sum of distinct-range parent held source rows, with 26 new A/B/C keys individually joined and compared this round; a fully independent physical 4633-row status reconstruction resolving the 2-row discrepancy is not executed. Do not change the published 437 to 439 or claim canonical population 439 without source-key-level provenance reconciliation.",
+  "canonical_held_status_changes": 0,
+  "new_official_mapping_verified": 0,
+  "new_tilezed_verified": 0,
+  "new_final_certified": 0,
+  "potential_conflict_dimensions_to_test": [
+    "Historical v119 selection_status selected_provisional for 20 JUMBO while later v132 records status held",
+    "Historically reported 2-key bookkeeping gap in 10042 unique global observations; possible relationship NOT proven",
+    "Provisional A-first reaudited 4196 + original held parent sum 439 = 4635, exceeding 4633 source denominator by 2",
+    "Check whether 2 parent held rows were later reclassified, excluded from historical canonical held baseline, or overlapped a scope boundary; do not guess"
+  ],
+  "next_reconciliation_steps": [
+    "Build a row-precise immutable source-index+source-key status ledger from all v122/v132/v134/v135/v137..v172 parent sources and v196/v231 canonical baselines",
+    "Audit source index, `(tileset,Local ID)`, historical status reason, provenance and timestamp for 2 net disagreements",
+    "Preserve manual 80/excluded14, user 33/undecided10, all v196 SQLite bytes and original Tiles/TMX",
+    "Separately conduct actual independent original TMX layer-by-layer B/C masks and official source mapping, since re-reading historical B/C cannot prove occlusion cause"
+  ]
+}

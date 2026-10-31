@@ -1,0 +1,136 @@
+{
+  "version": "v206_individual_A_first_source_reaudit_append_only",
+  "date": "2026-10-29",
+  "base_main_commit": "b10937518bd892f6e40829c0f6cbe5537d2e7e16",
+  "physical_database_checkpoint": "v196 unchanged",
+  "scope": [
+    2000,
+    2159
+  ],
+  "source_cohort": "review/v147_abc_2000_2159",
+  "original_scope_items": 160,
+  "rechecked_existing_unique_keys": 143,
+  "source_A_individual_morphology_notes": 143,
+  "original_held_17_preserved": true,
+  "source_validation": {
+    "source_CSV": "review/v147_abc_2000_2159/VISUAL_REVIEW.csv",
+    "source_verbatim_candidate_previous_A_hash_TMX_coordinates_BC_pixel_values_match_reaudit": 143,
+    "metadata_mismatches": 0,
+    "source_PNG_atlas_SHA_values_crosschecked_against_v119_registry": 9,
+    "archival_A_RGBA_pixel_hashes_recomputed_from_original_images": false,
+    "original_PNG_full_atlas_bytes_SHA256_recomputed_this_round": false,
+    "source_PNG_atlases_directly_rendered": [
+      "Tiles/2x/location_shop_greenes_01.png",
+      "Tiles/2x/location_trailer_02.png",
+      "Tiles/2x/overlay_graffiti_wall_01.png"
+    ],
+    "source_png_A_sheets_directly_viewed": [
+      "review/v119_selected_A_new4633/sheets/SELECTED_A_025.jpg",
+      "review/v119_selected_A_new4633/sheets/SELECTED_A_026.jpg"
+    ],
+    "original_true_B_one_GID_removed_C_diff_sheets_directly_viewed": [
+      "review/v121_C_diff_new4632/sheets/C_B_DIFF_025.jpg",
+      "review/v121_C_diff_new4632/sheets/C_B_DIFF_026.jpg"
+    ],
+    "source_TMX_original_bytes_reparsed": false,
+    "original_TMX_BC_rerendered": false,
+    "occluding_wall_hidden_diagnostic_render": false,
+    "D_official_different_same_key_A_in_same_B_position_verified": false
+  },
+  "change_counts": {
+    "version": "v206_A_first_QA_change_count",
+    "date": "2026-10-29",
+    "scope_indices": [
+      2000,
+      2159
+    ],
+    "all_scope_index_count": 160,
+    "previous_existing_candidate_reaudited": 143,
+    "previous_historical_excluded_held": 17,
+    "independent_A_shape_notes_written": 143,
+    "qa_change_recommendations_total": 135,
+    "qa_change_categories_mutually_exclusive": {
+      "role_or_function_narrowing_recommended": 40,
+      "more_precise_A_pixel_morphology_without_status_change": 95,
+      "historical_candidate_supported_no_change": 8
+    },
+    "confirmed_prior_identity_errors": 0,
+    "confirmed_pixel_or_technical_mapping_failures": 0,
+    "actual_prior_database_records_modified": 0,
+    "user_manual_records_modified": 0,
+    "status_promotions_to_observed_or_provisional": 0,
+    "new_verified_official_mapping": 0,
+    "new_tilezed_verified": 0,
+    "new_certified_identities": 0,
+    "original_B_minus_C_pixels_le_50": {
+      "count": 7,
+      "keys": [
+        [
+          "location_shop_mall_01/0",
+          4
+        ],
+        [
+          "location_shop_zippee_01/48",
+          2
+        ],
+        [
+          "location_trailer_02/4",
+          8
+        ],
+        [
+          "overlay_blood_floor_01/8",
+          41
+        ],
+        [
+          "overlay_blood_floor_01/10",
+          11
+        ],
+        [
+          "overlay_blood_wall_01/3",
+          10
+        ],
+        [
+          "overlay_graffiti_wall_01/22",
+          6
+        ]
+      ]
+    },
+    "wall_occlusion_confirmed_causes": 0,
+    "caution": "QA change recommendation 135 is not 135 confirmed misidentifications and not 135 SQLite record edits. B-C very-low is not proof of wall occlusion.",
+    "previous_cumulative_scope_1697": 1697,
+    "new_cumulative_scope": 1840,
+    "remaining_pending_individual_A_BC": 2633,
+    "previous_held_143": 143,
+    "after_held": 160,
+    "total_4633": 4633,
+    "next_scope": [
+      2160,
+      2319
+    ]
+  },
+  "prior_source_unique_keys_total": 10042,
+  "prior_image_provisionally_observed": 10007,
+  "prior_reported_unobserved": 35,
+  "prior_real_unobserved": 33,
+  "prior_accounting_gap": 2,
+  "user_manual33_preliminary_23_verbatim_preserved": true,
+  "user_manual_undecided_10_active_excluded_preserved": true,
+  "older_user_manual80_and_excluded14_preserved": true,
+  "user_undecided10_overlap_with_new_active": 0,
+  "previous_v205_A_BC_scoped": 1697,
+  "v206_A_BC_scoped": 1840,
+  "v206_scope_fraction": 0.3971508741636089,
+  "previous_historical_held": 143,
+  "v206_historical_held": 160,
+  "previous_individual_pending": 2793,
+  "v206_individual_pending": 2633,
+  "accounting": "1840 scoped + 160 historical held + 2633 not yet individually reaudited = 4633",
+  "status_mapping_verified": 0,
+  "status_tilezed_verified": 0,
+  "status_certified": 0,
+  "previous_v196_sqlite_table_count": 256,
+  "previous_v196_sqlite_SHA256": "d006c491097d2370dc3e965264632d161c6da1fd997348238bf0f1b5a5c1a424",
+  "sqlite_previous_integrity_check_manifest": "ok (prior manifest only)",
+  "sqlite_reconstructed_or_PRAGMA_integrity_check_rerun_this_round": false,
+  "write_policy": "only new review/v206 QA files; do not modify previous source PNG/TMX, older SQLite, or user manual data"
+}

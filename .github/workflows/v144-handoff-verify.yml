@@ -1,0 +1,97 @@
+name: v144 149 source-verified observations, 206 tables and safe handoff
+on:
+  push:
+    branches: [work/v144-abc-visual-1520-1679-20261027]
+    paths:
+      - PROJECT_STATE.json
+      - AGENTS.md
+      - docs/HANDOFF.md
+      - scripts/generate_handoff.py
+      - .github/workflows/v144-handoff-verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /PROJECT_STATE.json
+            /AGENTS.md
+            /docs/HANDOFF.md
+            /scripts/validate_project.py
+            /scripts/generate_handoff.py
+            /analysis/current/v143/MANIFEST.json
+            /analysis/current/v144/*
+            /review/v144_abc_1520_1679/MANIFEST.json
+            /review/v144_abc_1520_1679/VISUAL_REVIEW.csv
+            /review/v144_abc_1520_1679/EXCLUDED_EXCEPTIONS.csv
+            /review/v144_abc_1520_1679/MANUAL_VISUAL_NOTES.json
+            /review/v144_abc_1520_1679/ABC_EVIDENCE_VERIFIED.zip
+            /review/v144_abc_1520_1679/sheets/*
+      - name: Verify image ZIP CRC SHA256 historical tables and progress
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv,json,hashlib,zlib,base64,zipfile,sqlite3
+          d=Path('review/v144_abc_1520_1679')
+          r=json.loads((d/'MANIFEST.json').read_text())
+          p=json.loads(Path('analysis/current/v143/MANIFEST.json').read_text())
+          v=json.loads(Path('analysis/current/v144/MANIFEST.json').read_text())
+          s=json.loads(Path('PROJECT_STATE.json').read_text())
+          assert s['latest_checkpoint']['version']==v['version']=='v144'
+          assert s['latest_checkpoint']['expanded_unique_observed']==6901
+          assert s['latest_checkpoint']['expanded_unique_unobserved']==3141
+          assert s['latest_checkpoint']['approved_final_certifications']==0
+          assert r['manual_image_annotations']==160
+          assert r['promoted_provisional']==v['new_rows']==149
+          assert r['excluded_unverified']==v['skipped_rows']==11
+          assert r['mapping_verified']==r['tilezed_verified']==r['certified']==0
+          assert v['parent']=='v143' and v['parent_sqlite_sha256']==p['sqlite_sha256']
+          assert v['table_count']==206 and v['prior_tables_preserved']==205
+          for name,hashval in r['files_sha256'].items():
+              assert hashlib.sha256((d/name).read_bytes()).hexdigest()==hashval
+          assert hashlib.sha256((d/'MANUAL_VISUAL_NOTES.json').read_bytes()).hexdigest()==r['source_notes_sha256']
+          with (d/'VISUAL_REVIEW.csv').open(encoding='utf-8-sig') as f:
+              rows=list(csv.DictReader(f))
+          assert len(rows)==149 and len({(x['tile_set_name'],x['local_id']) for x in rows})==149
+          assert all(x['visual_status']=='provisional_candidate' and x['mapping_verified']==x['tilezed_verified']==x['certified']=='0' for x in rows)
+          with zipfile.ZipFile(d/'ABC_EVIDENCE_VERIFIED.zip') as archive:
+              assert archive.testzip() is None and len(archive.namelist())==596
+          comp=base64.b64decode(''.join(Path(x).read_text('ascii').strip() for x in v['parts']),validate=True)
+          assert hashlib.sha256(comp).hexdigest()==v['compressed_sha256']
+          raw=zlib.decompress(comp)
+          assert hashlib.sha256(raw).hexdigest()==v['sqlite_sha256'] and len(raw)==v['sqlite_bytes']
+          con=sqlite3.connect(':memory:');con.deserialize(raw)
+          assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          assert con.execute("SELECT COUNT(*) FROM sqlite_master WHERE type='table'").fetchone()[0]==206
+          assert con.execute('SELECT COUNT(*) FROM tile_catalog').fetchone()[0]==5409
+          assert con.execute('SELECT COUNT(*) FROM v143_visual_review').fetchone()[0]==152
+          assert con.execute('SELECT COUNT(*) FROM v144_visual_review').fetchone()[0]==149
+          assert con.execute('SELECT COUNT(*) FROM v144_visual_review WHERE certified!=0 OR mapping_verified!=0 OR tilezed_verified!=0').fetchone()[0]==0
+          assert all('v144' in Path(x).read_text() for x in ('AGENTS.md','docs/HANDOFF.md'))
+          print('PASS v144 6901 observed / 3141 pending; 206 physical SQLite tables')
+          PY
+      - name: Confirm repaired handoff generator preserves all prior content
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,hashlib,sys
+          p=Path('docs/HANDOFF.md')
+          before=p.read_text(encoding='utf8')
+          title,body=before.split('\n',1)
+          subprocess.run([sys.executable,'scripts/generate_handoff.py'],check=True)
+          after=p.read_text(encoding='utf8')
+          assert after.startswith(title+'\n')
+          assert '<!-- AUTO_CHECKPOINT_START -->' in after
+          assert '<!-- AUTO_CHECKPOINT_END -->' in after
+          assert after.split('<!-- AUTO_CHECKPOINT_END -->',1)[1].lstrip('\n')==body.lstrip('\n')
+          before_hash=hashlib.sha256(p.read_bytes()).hexdigest()
+          subprocess.run([sys.executable,'scripts/generate_handoff.py'],check=True)
+          assert hashlib.sha256(p.read_bytes()).hexdigest()==before_hash
+          print('PASS handoff: no historical content lost and generator idempotent')
+          PY
