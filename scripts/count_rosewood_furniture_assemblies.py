@@ -5,7 +5,7 @@ from pathlib import Path
 from collections import Counter,defaultdict
 
 D=Path(__file__).resolve().parents[1]/"analysis/rosewood_furniture/2026-10-31"
-O=D/"assembled_count_v1"
+O=D/"assembled_count_v2"
 TRANS={
 "xy":lambda x,y:(x,y),"x-y":lambda x,y:(x,-y),
 "-xy":lambda x,y:(-x,y),"-x-y":lambda x,y:(-x,-y),
@@ -61,7 +61,7 @@ def main():
         func=TRANS[transform];grp=defaultdict(list)
         for p,pos in items:
             dx,dy=func(*pos)
-            k=(p["zone"],p["z"],p["layer"],p["x"]-dx,p["y"]-dy)
+            k=(p["zone"],p["z"],p["x"]-dx,p["y"]-dy)
             grp[k].append((p,pos))
         out={}
         for anchor,parts in grp.items():
@@ -85,7 +85,7 @@ def main():
             sample=parts_here[0][0]
             accepted.append(dict(
                 instance_id="ROSEWOOD_MULTI_"+str(len(accepted)+1).zfill(7),
-                zone=anchor[0],z=anchor[1],layer=anchor[2],
+                zone=anchor[0],z=anchor[1],layer="|".join(sorted({p["layer"] for p,pos in parts_here})),
                 anchor_x=min(p["x"] for p,pos in parts_here),
                 anchor_y=min(p["y"] for p,pos in parts_here),
                 tile_set_name=family[0],CustomName=family[1],
@@ -94,7 +94,7 @@ def main():
                 part_ids="|".join(str(p["key"][1]) for p,pos in sorted(parts_here,key=lambda t:t[1])),
                 part_xy="|".join(str(p["x"])+":"+str(p["y"]) for p,pos in sorted(parts_here,key=lambda t:t[1])),
                 source_tmx="|".join(sorted({p["tmx"] for p,pos in parts_here})),
-                evidence="COMPLETE_GRID_IN_SAME_LAYER",
+                evidence="COMPLETE_GRID_SAME_LEVEL_CROSS_LAYER_ALLOWED",
                 note="Geometry only; object fidelity not certified"
             ))
         diagnostics.append([*family,n,len(items),best,len(common),len(candidates-common),
@@ -142,7 +142,7 @@ def main():
         "by_category":[dict(zone=z,category=cat,status=s,count=n) for (z,cat,s),n in sorted(category.items())],
         "top_assembled_names":[[name,group,n] for (name,group),n in
              Counter((a["CustomName"],a["GroupName"]) for a in accepted).most_common(50)],
-        "limitations":["Same TMX layer and level required; other-layer combinations left unresolved",
+        "limitations":["Same level and source sprite position required; the different TMX layers are preserved for subsequent verification",
           "The original SpriteGridPos and observed XY must form an entire grid; 8 transform ties must agree on identical part IDs",
           "Does not certify every group as a whole movable object; source custom names may be shared",
           "Unmatched multipart parts are never counted as whole objects",
