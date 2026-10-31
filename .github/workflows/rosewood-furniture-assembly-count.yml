@@ -1,0 +1,73 @@
+name: rosewood true furniture assembly count
+
+on:
+  push:
+    branches:
+      - work/rosewood-assembled-furniture-count-20261031
+    paths:
+      - .github/workflows/rosewood-furniture-assembly-count.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/count_rosewood_furniture_assemblies.py
+            /analysis/rosewood_furniture/2026-10-31/FURNITURE_PLACEMENTS.csv.gz
+            /analysis/rosewood_furniture/2026-10-31/ALL_FURNITURE_TILE_IDS.csv
+            /analysis/rosewood_furniture/2026-10-31/MINECRAFT_MATCH_PRIORITY.csv
+            /analysis/rosewood_furniture/2026-10-31/FURNITURE_ASSEMBLY_TEMPLATE_CANDIDATES.csv
+            /analysis/rosewood_furniture/2026-10-31/assembled_count_v2/
+      - name: Check script
+        run: python3 -m py_compile scripts/count_rosewood_furniture_assemblies.py
+      - name: Assemble furniture from exact source grid positions
+        run: python3 -u scripts/count_rosewood_furniture_assemblies.py
+      - name: Validate conservation, count, archive, and no duplicate parts
+        run: |
+          python3 - <<'PY'
+          import json,csv,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/assembled_count_v2")
+          m=json.loads((p/"MANIFEST.json").read_text("utf-8"))
+          assert m["source_total_candidate_sprite_parts"]==94073
+          assert m["priority_furniture_sprite_parts"]==25212
+          assert m["priority_tile_counts"]["CORE"]==18975
+          assert m["priority_tile_counts"]["BUFFER"]==6237
+          assert sum(m["counts_by_zone"][z]["ASSEMBLED_COMPONENT"] for z in ["CORE","BUFFER"])==m["assembled_parts_consumed"]
+          assert sum(m["counts_by_zone"][z]["ASSEMBLED_OBJECT_CANDIDATES"] for z in ["CORE","BUFFER"])==m["assembled_candidate_objects"]
+          with (p/"ALL_PRIORITY_FURNITURE_PART_STATUSES.csv").open(encoding="utf-8-sig",newline="") as f:
+              assert sum(1 for row in csv.DictReader(f))==25212
+          with (p/"ASSEMBLED_MULTI_FURNITURE_INSTANCES.csv").open(encoding="utf-8-sig",newline="") as f:
+              objects=list(csv.DictReader(f))
+          assert len(objects)==m["assembled_candidate_objects"]
+          assert all(int(r["part_count"])>=2 for r in objects)
+          seen=set()
+          for r in objects:
+              for x in r["part_xy"].split("|"):
+                  k=(r["zone"],r["z"],r["layer"],x,r["tile_set_name"])
+                  assert k not in seen,("duplicate assembly component",k)
+                  seen.add(k)
+          with zipfile.ZipFile(p/"ROSEWOOD_ASSEMBLY_COUNT.zip") as z:
+              assert z.testzip() is None
+          print("ASSEMBLY_COUNT_VALIDATED",m["assembled_candidate_objects"])
+          PY
+      - name: Commit only new non-destructive assembled count evidence
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/assembled_count_v2/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(rosewood): count assembled furniture objects separately from sprite parts"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi

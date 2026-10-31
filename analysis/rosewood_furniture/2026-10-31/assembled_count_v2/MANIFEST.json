@@ -1,0 +1,592 @@
+{
+  "basis": "v259 original SpriteGridPos + actual Rosewood TMX placements",
+  "scope": {
+    "CORE": "TMX X30-33 Y43-48",
+    "BUFFER": "remainder TMX X28-34 Y42-49"
+  },
+  "source_total_candidate_sprite_parts": 94073,
+  "priority_furniture_sprite_parts": 25212,
+  "source_full_multipart_template_families": 204,
+  "source_excluded_template_families": 2,
+  "assembled_candidate_objects": 3459,
+  "assembled_parts_consumed": 7315,
+  "priority_tile_counts": {
+    "CORE": 18975,
+    "BUFFER": 6237
+  },
+  "counts_by_zone": {
+    "CORE": {
+      "ASSEMBLED_COMPONENT": 5547,
+      "UNMATCHED_MULTIPART_COMPONENT": 3,
+      "UNNAMED_SPRITE_UNRESOLVED": 1221,
+      "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT": 12142,
+      "SOURCE_GRID_TEMPLATE_NOT_SAFE_TO_ASSEMBLE": 62,
+      "ASSEMBLED_OBJECT_CANDIDATES": 2594
+    },
+    "BUFFER": {
+      "ASSEMBLED_COMPONENT": 1768,
+      "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT": 4140,
+      "UNNAMED_SPRITE_UNRESOLVED": 315,
+      "SOURCE_GRID_TEMPLATE_NOT_SAFE_TO_ASSEMBLE": 12,
+      "UNMATCHED_MULTIPART_COMPONENT": 2,
+      "ASSEMBLED_OBJECT_CANDIDATES": 865
+    }
+  },
+  "by_category": [
+    {
+      "zone": "BUFFER",
+      "category": "가구",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 1610
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가구",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 786
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가구",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 2640
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가구",
+      "status": "SOURCE_GRID_TEMPLATE_NOT_SAFE_TO_ASSEMBLE",
+      "count": 12
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가구",
+      "status": "UNMATCHED_MULTIPART_COMPONENT",
+      "count": 2
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가전",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 28
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가전",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 14
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가전",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 348
+    },
+    {
+      "zone": "BUFFER",
+      "category": "가전",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 16
+    },
+    {
+      "zone": "BUFFER",
+      "category": "벽난로",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 1
+    },
+    {
+      "zone": "BUFFER",
+      "category": "벽난로",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 7
+    },
+    {
+      "zone": "BUFFER",
+      "category": "싱크대",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 153
+    },
+    {
+      "zone": "BUFFER",
+      "category": "쓰레기통",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 32
+    },
+    {
+      "zone": "BUFFER",
+      "category": "쓰레기통",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 16
+    },
+    {
+      "zone": "BUFFER",
+      "category": "쓰레기통",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 147
+    },
+    {
+      "zone": "BUFFER",
+      "category": "오락용 가구",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 66
+    },
+    {
+      "zone": "BUFFER",
+      "category": "오락용 가구",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 33
+    },
+    {
+      "zone": "BUFFER",
+      "category": "오락용 가구",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 2
+    },
+    {
+      "zone": "BUFFER",
+      "category": "오락용 가구",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 60
+    },
+    {
+      "zone": "BUFFER",
+      "category": "욕실설비",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 32
+    },
+    {
+      "zone": "BUFFER",
+      "category": "욕실설비",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 16
+    },
+    {
+      "zone": "BUFFER",
+      "category": "욕실설비",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 587
+    },
+    {
+      "zone": "BUFFER",
+      "category": "욕실설비",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 232
+    },
+    {
+      "zone": "BUFFER",
+      "category": "카운터",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 262
+    },
+    {
+      "zone": "CORE",
+      "category": "가구",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 4637
+    },
+    {
+      "zone": "CORE",
+      "category": "가구",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 2142
+    },
+    {
+      "zone": "CORE",
+      "category": "가구",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 6381
+    },
+    {
+      "zone": "CORE",
+      "category": "가구",
+      "status": "SOURCE_GRID_TEMPLATE_NOT_SAFE_TO_ASSEMBLE",
+      "count": 62
+    },
+    {
+      "zone": "CORE",
+      "category": "가구",
+      "status": "UNMATCHED_MULTIPART_COMPONENT",
+      "count": 3
+    },
+    {
+      "zone": "CORE",
+      "category": "가전",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 162
+    },
+    {
+      "zone": "CORE",
+      "category": "가전",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 80
+    },
+    {
+      "zone": "CORE",
+      "category": "가전",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 1484
+    },
+    {
+      "zone": "CORE",
+      "category": "가전",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 110
+    },
+    {
+      "zone": "CORE",
+      "category": "벽난로",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 11
+    },
+    {
+      "zone": "CORE",
+      "category": "벽난로",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 100
+    },
+    {
+      "zone": "CORE",
+      "category": "싱크대",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 795
+    },
+    {
+      "zone": "CORE",
+      "category": "쓰레기통",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 170
+    },
+    {
+      "zone": "CORE",
+      "category": "쓰레기통",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 85
+    },
+    {
+      "zone": "CORE",
+      "category": "쓰레기통",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 1012
+    },
+    {
+      "zone": "CORE",
+      "category": "오락용 가구",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 264
+    },
+    {
+      "zone": "CORE",
+      "category": "오락용 가구",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 130
+    },
+    {
+      "zone": "CORE",
+      "category": "오락용 가구",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 71
+    },
+    {
+      "zone": "CORE",
+      "category": "오락용 가구",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 208
+    },
+    {
+      "zone": "CORE",
+      "category": "욕실설비",
+      "status": "ASSEMBLED_COMPONENT",
+      "count": 314
+    },
+    {
+      "zone": "CORE",
+      "category": "욕실설비",
+      "status": "ASSEMBLED_OBJECT_CANDIDATES",
+      "count": 157
+    },
+    {
+      "zone": "CORE",
+      "category": "욕실설비",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 921
+    },
+    {
+      "zone": "CORE",
+      "category": "욕실설비",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 802
+    },
+    {
+      "zone": "CORE",
+      "category": "카운터",
+      "status": "NAMED_SINGLE_SPRITE_POSSIBLE_OBJECT",
+      "count": 1467
+    },
+    {
+      "zone": "CORE",
+      "category": "카운터",
+      "status": "UNNAMED_SPRITE_UNRESOLVED",
+      "count": 1
+    }
+  ],
+  "top_assembled_names": [
+    [
+      "Shelves",
+      "Large Metal",
+      411
+    ],
+    [
+      "Beds",
+      "Bunk",
+      300
+    ],
+    [
+      "Table",
+      "Large Oak",
+      188
+    ],
+    [
+      "Bath",
+      "Large Deluxe",
+      173
+    ],
+    [
+      "Table",
+      "Large Simple",
+      147
+    ],
+    [
+      "Bench",
+      "Oakwood",
+      140
+    ],
+    [
+      "Couch",
+      "Blue Rattan",
+      112
+    ],
+    [
+      "Bed",
+      "Large Oak",
+      88
+    ],
+    [
+      "Table",
+      "Large Smooth",
+      85
+    ],
+    [
+      "Bench",
+      "Park",
+      80
+    ],
+    [
+      "Wardrobe",
+      "Oak",
+      77
+    ],
+    [
+      "Table",
+      "Large Light Oak",
+      69
+    ],
+    [
+      "Table",
+      "Large Plastic",
+      69
+    ],
+    [
+      "Dumpster",
+      "Orange",
+      68
+    ],
+    [
+      "Bench",
+      "Fancy Outdoors",
+      67
+    ],
+    [
+      "Bed",
+      "Fancy",
+      60
+    ],
+    [
+      "Bench",
+      "Sports",
+      60
+    ],
+    [
+      "Wardrobe",
+      "Light Wood",
+      59
+    ],
+    [
+      "Antenna",
+      "Old TV",
+      58
+    ],
+    [
+      "Table",
+      "Fancy Low Glass",
+      57
+    ],
+    [
+      "Table",
+      "Large Brown",
+      54
+    ],
+    [
+      "Bed",
+      "Large Modern",
+      51
+    ],
+    [
+      "Bed",
+      "Hospital",
+      50
+    ],
+    [
+      "Wardrobe",
+      "Fancy Oak",
+      48
+    ],
+    [
+      "Couch",
+      "Brown Lazy",
+      47
+    ],
+    [
+      "Bed",
+      "Large Fancy",
+      43
+    ],
+    [
+      "Piano",
+      "Western",
+      41
+    ],
+    [
+      "Bed",
+      "Simple",
+      37
+    ],
+    [
+      "Table",
+      "Large Dark Oak",
+      37
+    ],
+    [
+      "Contraption",
+      "Fitness",
+      35
+    ],
+    [
+      "Couch",
+      "Light Blue",
+      33
+    ],
+    [
+      "Chair",
+      "Beach",
+      33
+    ],
+    [
+      "Dumpster",
+      "Blue",
+      33
+    ],
+    [
+      "Couch",
+      "Blue Comfy",
+      30
+    ],
+    [
+      "Couch",
+      "Green Comfy",
+      29
+    ],
+    [
+      "Couch",
+      "White Lazy",
+      28
+    ],
+    [
+      "Bench",
+      "Birchwood",
+      28
+    ],
+    [
+      "Low Table",
+      "Long",
+      28
+    ],
+    [
+      "Table",
+      "Pool",
+      28
+    ],
+    [
+      "Wardrobe",
+      "Fancy White",
+      26
+    ],
+    [
+      "Table",
+      "Large Dark Wooden",
+      25
+    ],
+    [
+      "Bench",
+      "Sturdy",
+      24
+    ],
+    [
+      "Desk",
+      "Lightwood",
+      24
+    ],
+    [
+      "Bed",
+      "Blue",
+      23
+    ],
+    [
+      "Stool",
+      "Piano",
+      23
+    ],
+    [
+      "Hamster Wheel",
+      "Human",
+      23
+    ],
+    [
+      "Wardrobe",
+      "White",
+      21
+    ],
+    [
+      "Cabinet",
+      "China",
+      16
+    ],
+    [
+      "Oven",
+      "Large Modern",
+      15
+    ],
+    [
+      "Wardrobe",
+      "Dark Fancy",
+      15
+    ]
+  ],
+  "limitations": [
+    "Same level and source sprite position required; the different TMX layers are preserved for subsequent verification",
+    "The original SpriteGridPos and observed XY must form an entire grid; 8 transform ties must agree on identical part IDs",
+    "Does not certify every group as a whole movable object; source custom names may be shared",
+    "Unmatched multipart parts are never counted as whole objects",
+    "Named single-sprite placements are candidate objects, not certified whole objects",
+    "Furniture-only priority subset excludes decoration, switches, rooftop utility, and special industries",
+    "Core rectangle is a town proxy, buffer includes nearby non-Rosewood places"
+  ]
+}
