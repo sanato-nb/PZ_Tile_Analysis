@@ -1,0 +1,2389 @@
+{
+  "basis": "v259 source-defined exact logical PNG cell + alpha=0",
+  "important_caveat": "Functional keys only indicate source-defined behavior hints. Engine active collision or interaction is not proven. Some source cells may be intentionally blank or unused.",
+  "counts": {
+    "source_mapped": 13228,
+    "no_original_properties": 13601,
+    "has_original_properties": 105,
+    "broad_runtime_hint": 36,
+    "placement_hint": 21,
+    "group_placement": 21,
+    "has_object_name_hint": 53,
+    "hard_physical_hint": 23,
+    "interactive_hint": 12,
+    "group_solid_collision": 19,
+    "group_interactive_container": 12,
+    "source_unmapped": 478,
+    "group_wall_door_window": 4,
+    "light_or_overlay_hint": 1,
+    "group_light_and_overlay": 1,
+    "transparent_total": 13706,
+    "labeled_categories_unique": 37,
+    "unique_mapped_transparent_tile_keys": 13177
+  },
+  "category_key_definitions": {
+    "solid_collision": [
+      "BlockAllTheSquare",
+      "PhysicsMesh",
+      "StopCar",
+      "collideN",
+      "collideW",
+      "solid",
+      "solidfloor",
+      "solidtrans"
+    ],
+    "wall_door_window": [
+      "Door",
+      "DoorWallN",
+      "DoorWallW",
+      "HoppableN",
+      "HoppableW",
+      "IsDoor",
+      "WallN",
+      "WallNW",
+      "WallSE",
+      "WallW",
+      "WindowN",
+      "WindowW",
+      "wall"
+    ],
+    "placement": [
+      "BlocksPlacement"
+    ],
+    "interactive_container": [
+      "CanBreak",
+      "CanScrap",
+      "ContainerCapacity",
+      "IsBreakable",
+      "IsMoveAble",
+      "IsThumpable",
+      "MoveType",
+      "Thumpable",
+      "container"
+    ],
+    "light_and_overlay": [
+      "FloorOverlay",
+      "ForceAmbient",
+      "Light",
+      "TileOverlay",
+      "WallOverlay",
+      "attachedFloor",
+      "lightB",
+      "lightG",
+      "lightR"
+    ]
+  },
+  "property_key_frequency_top100": [
+    [
+      "CustomName",
+      53
+    ],
+    [
+      "BlocksPlacement",
+      21
+    ],
+    [
+      "solidtrans",
+      19
+    ],
+    [
+      "MaterialType",
+      16
+    ],
+    [
+      "streetlight",
+      10
+    ],
+    [
+      "lightswitch",
+      10
+    ],
+    [
+      "alwaysDraw",
+      10
+    ],
+    [
+      "IsMoveAble",
+      8
+    ],
+    [
+      "Facing",
+      8
+    ],
+    [
+      "SpriteGridPos",
+      8
+    ],
+    [
+      "GroupName",
+      8
+    ],
+    [
+      "CustomItem",
+      7
+    ],
+    [
+      "container",
+      7
+    ],
+    [
+      "ContainerCapacity",
+      7
+    ],
+    [
+      "bed",
+      7
+    ],
+    [
+      "BedType",
+      7
+    ],
+    [
+      "ForceSingleItem",
+      7
+    ],
+    [
+      "BurntTile",
+      6
+    ],
+    [
+      "Material2",
+      5
+    ],
+    [
+      "CanScrap",
+      5
+    ],
+    [
+      "Material",
+      5
+    ],
+    [
+      "attachedN",
+      5
+    ],
+    [
+      "attachedW",
+      5
+    ],
+    [
+      "fireRequirement",
+      4
+    ],
+    [
+      "Surface",
+      4
+    ],
+    [
+      "wall",
+      4
+    ],
+    [
+      "CloseSneakBonus",
+      4
+    ],
+    [
+      "HitByCar",
+      4
+    ],
+    [
+      "WallNTrans",
+      4
+    ],
+    [
+      "HoppableN",
+      4
+    ],
+    [
+      "exterior",
+      3
+    ],
+    [
+      "PickUpWeight",
+      2
+    ],
+    [
+      "ThumpSound",
+      1
+    ],
+    [
+      "FenceTypeHigh",
+      1
+    ],
+    [
+      "ContainerCloseSound",
+      1
+    ],
+    [
+      "ContainerPutSound",
+      1
+    ],
+    [
+      "ContainerTakeSound",
+      1
+    ],
+    [
+      "ContainerOpenSound",
+      1
+    ],
+    [
+      "Material3",
+      1
+    ],
+    [
+      "invisible",
+      1
+    ],
+    [
+      "ScrapSize",
+      1
+    ],
+    [
+      "PickUpLevel",
+      1
+    ],
+    [
+      "PickUpTool",
+      1
+    ],
+    [
+      "PlaceTool",
+      1
+    ],
+    [
+      "FloorOverlay",
+      1
+    ],
+    [
+      "attachedFloor",
+      1
+    ]
+  ],
+  "category_examples": {
+    "placement": [
+      {
+        "png_path": "Tiles/2x/appliances_com_01.png",
+        "grid_id": 127,
+        "tileset": "appliances_com_01",
+        "local_id": 127,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "placement",
+        "functional_source_keys": "BlocksPlacement",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BlocksPlacement": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/appliances_com_01.png",
+        "grid_id": 128,
+        "tileset": "appliances_com_01",
+        "local_id": 128,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "placement",
+        "functional_source_keys": "BlocksPlacement",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BlocksPlacement": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/appliances_com_01.png",
+        "grid_id": 129,
+        "tileset": "appliances_com_01",
+        "local_id": 129,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "placement",
+        "functional_source_keys": "BlocksPlacement",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BlocksPlacement": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/appliances_com_01.png",
+        "grid_id": 130,
+        "tileset": "appliances_com_01",
+        "local_id": 130,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "placement",
+        "functional_source_keys": "BlocksPlacement",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BlocksPlacement": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/appliances_com_01.png",
+        "grid_id": 131,
+        "tileset": "appliances_com_01",
+        "local_id": 131,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "placement",
+        "functional_source_keys": "BlocksPlacement",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BlocksPlacement": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 32,
+        "tileset": "camping_03",
+        "local_id": 32,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "N",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "N",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 34,
+        "tileset": "camping_03",
+        "local_id": 34,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "W",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "W",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 35,
+        "tileset": "camping_03",
+        "local_id": 35,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "W",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "W",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 36,
+        "tileset": "camping_03",
+        "local_id": 36,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "E",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "E",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,1",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 37,
+        "tileset": "camping_03",
+        "local_id": 37,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "E",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "E",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 38,
+        "tileset": "camping_03",
+        "local_id": 38,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "S",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "S",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 39,
+        "tileset": "camping_03",
+        "local_id": 39,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "S",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "S",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "1,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      }
+    ],
+    "solid_collision": [
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 32,
+        "tileset": "camping_03",
+        "local_id": 32,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "N",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "N",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 34,
+        "tileset": "camping_03",
+        "local_id": 34,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "W",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "W",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 35,
+        "tileset": "camping_03",
+        "local_id": 35,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "W",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "W",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 36,
+        "tileset": "camping_03",
+        "local_id": 36,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "E",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "E",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,1",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 37,
+        "tileset": "camping_03",
+        "local_id": 37,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "E",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "E",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 38,
+        "tileset": "camping_03",
+        "local_id": 38,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "S",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "S",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 39,
+        "tileset": "camping_03",
+        "local_id": 39,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "S",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "S",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "1,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/location_community_medical_01.png",
+        "grid_id": 135,
+        "tileset": "location_community_medical_01",
+        "local_id": 135,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "solid_collision|placement",
+        "functional_source_keys": "BlocksPlacement|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BlocksPlacement": "",
+          "MaterialType": "Metal_Solid",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/location_community_park_01.png",
+        "grid_id": 53,
+        "tileset": "location_community_park_01",
+        "local_id": 53,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "solid_collision",
+        "functional_source_keys": "solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "exterior": "",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/location_community_park_01.png",
+        "grid_id": 54,
+        "tileset": "location_community_park_01",
+        "local_id": 54,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "solid_collision",
+        "functional_source_keys": "solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "exterior": "",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/location_community_park_01.png",
+        "grid_id": 55,
+        "tileset": "location_community_park_01",
+        "local_id": 55,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "solid_collision",
+        "functional_source_keys": "solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "exterior": "",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/location_farm_accesories_01.png",
+        "grid_id": 51,
+        "tileset": "location_farm_accesories_01",
+        "local_id": 51,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "solid_collision",
+        "functional_source_keys": "solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "solidtrans": ""
+        }
+      }
+    ],
+    "interactive_container": [
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 32,
+        "tileset": "camping_03",
+        "local_id": 32,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "N",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "N",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 34,
+        "tileset": "camping_03",
+        "local_id": 34,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "W",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "W",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 35,
+        "tileset": "camping_03",
+        "local_id": 35,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "W",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "W",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 36,
+        "tileset": "camping_03",
+        "local_id": 36,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "E",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "E",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,1",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 37,
+        "tileset": "camping_03",
+        "local_id": 37,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "E",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "E",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 38,
+        "tileset": "camping_03",
+        "local_id": 38,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "S",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "S",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "0,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/camping_03.png",
+        "grid_id": 39,
+        "tileset": "camping_03",
+        "local_id": 39,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Tent",
+        "source_group_name": "Tarp",
+        "source_facing": "S",
+        "category_flags": "solid_collision|placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BedType": "badBed",
+          "BlocksPlacement": "",
+          "ContainerCapacity": "20",
+          "CustomItem": "Base.HideTent",
+          "CustomName": "Tent",
+          "Facing": "S",
+          "ForceSingleItem": "",
+          "GroupName": "Tarp",
+          "IsMoveAble": "",
+          "MaterialType": "Fabric",
+          "SpriteGridPos": "1,0",
+          "Surface": "1",
+          "bed": "",
+          "container": "shelter",
+          "solidtrans": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 116,
+        "tileset": "fencing_01",
+        "local_id": 116,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 117,
+        "tileset": "fencing_01",
+        "local_id": 117,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 118,
+        "tileset": "fencing_01",
+        "local_id": 118,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 119,
+        "tileset": "fencing_01",
+        "local_id": 119,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/location_restaurant_spiffos_03.png",
+        "grid_id": 22,
+        "tileset": "location_restaurant_spiffos_03",
+        "local_id": 22,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "Spiffo",
+        "source_group_name": "The Glorious",
+        "source_facing": "S",
+        "category_flags": "placement|interactive_container",
+        "functional_source_keys": "BlocksPlacement|CanScrap|IsMoveAble",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "BlocksPlacement": "",
+          "CanScrap": "",
+          "CustomName": "Spiffo",
+          "Facing": "S",
+          "GroupName": "The Glorious",
+          "IsMoveAble": "",
+          "Material": "PlasticBag",
+          "Material2": "MetalPlates",
+          "Material3": "Transmission",
+          "MaterialType": "Plastic",
+          "PickUpLevel": "2",
+          "PickUpTool": "Hammer",
+          "PickUpWeight": "150",
+          "PlaceTool": "Hammer",
+          "ScrapSize": "Large",
+          "SpriteGridPos": "0,0",
+          "invisible": ""
+        }
+      }
+    ],
+    "wall_door_window": [
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 116,
+        "tileset": "fencing_01",
+        "local_id": 116,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 117,
+        "tileset": "fencing_01",
+        "local_id": 117,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 118,
+        "tileset": "fencing_01",
+        "local_id": 118,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      },
+      {
+        "png_path": "Tiles/2x/fencing_01.png",
+        "grid_id": 119,
+        "tileset": "fencing_01",
+        "local_id": 119,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "wall_door_window|interactive_container",
+        "functional_source_keys": "CanScrap|HoppableN|wall",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "CanScrap": "",
+          "CloseSneakBonus": "1000",
+          "HitByCar": "",
+          "HoppableN": "",
+          "Material": "Wood",
+          "Material2": "Screws",
+          "WallNTrans": "",
+          "wall": ""
+        }
+      }
+    ],
+    "light_and_overlay": [
+      {
+        "png_path": "Tiles/2x/street_curbs_01.png",
+        "grid_id": 58,
+        "tileset": "street_curbs_01",
+        "local_id": 58,
+        "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+        "has_original_properties": true,
+        "source_custom_name": "",
+        "source_group_name": "",
+        "source_facing": "",
+        "category_flags": "light_and_overlay",
+        "functional_source_keys": "",
+        "prior_identity_candidate": "",
+        "prior_visual_candidate": "",
+        "properties": {
+          "FloorOverlay": "",
+          "attachedFloor": ""
+        }
+      }
+    ]
+  },
+  "hard_physical_examples": [
+    {
+      "png_path": "Tiles/2x/camping_03.png",
+      "grid_id": 32,
+      "tileset": "camping_03",
+      "local_id": 32,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Tent",
+      "source_group_name": "Tarp",
+      "source_facing": "N",
+      "category_flags": "solid_collision|placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BedType": "badBed",
+        "BlocksPlacement": "",
+        "ContainerCapacity": "20",
+        "CustomItem": "Base.HideTent",
+        "CustomName": "Tent",
+        "Facing": "N",
+        "ForceSingleItem": "",
+        "GroupName": "Tarp",
+        "IsMoveAble": "",
+        "MaterialType": "Fabric",
+        "SpriteGridPos": "0,0",
+        "bed": "",
+        "container": "shelter",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/camping_03.png",
+      "grid_id": 34,
+      "tileset": "camping_03",
+      "local_id": 34,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Tent",
+      "source_group_name": "Tarp",
+      "source_facing": "W",
+      "category_flags": "solid_collision|placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BedType": "badBed",
+        "BlocksPlacement": "",
+        "ContainerCapacity": "20",
+        "CustomItem": "Base.HideTent",
+        "CustomName": "Tent",
+        "Facing": "W",
+        "ForceSingleItem": "",
+        "GroupName": "Tarp",
+        "IsMoveAble": "",
+        "MaterialType": "Fabric",
+        "SpriteGridPos": "0,1",
+        "bed": "",
+        "container": "shelter",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/camping_03.png",
+      "grid_id": 35,
+      "tileset": "camping_03",
+      "local_id": 35,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Tent",
+      "source_group_name": "Tarp",
+      "source_facing": "W",
+      "category_flags": "solid_collision|placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BedType": "badBed",
+        "BlocksPlacement": "",
+        "ContainerCapacity": "20",
+        "CustomItem": "Base.HideTent",
+        "CustomName": "Tent",
+        "Facing": "W",
+        "ForceSingleItem": "",
+        "GroupName": "Tarp",
+        "IsMoveAble": "",
+        "MaterialType": "Fabric",
+        "SpriteGridPos": "0,0",
+        "bed": "",
+        "container": "shelter",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/camping_03.png",
+      "grid_id": 36,
+      "tileset": "camping_03",
+      "local_id": 36,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Tent",
+      "source_group_name": "Tarp",
+      "source_facing": "E",
+      "category_flags": "solid_collision|placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BedType": "badBed",
+        "BlocksPlacement": "",
+        "ContainerCapacity": "20",
+        "CustomItem": "Base.HideTent",
+        "CustomName": "Tent",
+        "Facing": "E",
+        "ForceSingleItem": "",
+        "GroupName": "Tarp",
+        "IsMoveAble": "",
+        "MaterialType": "Fabric",
+        "SpriteGridPos": "0,1",
+        "Surface": "1",
+        "bed": "",
+        "container": "shelter",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/camping_03.png",
+      "grid_id": 37,
+      "tileset": "camping_03",
+      "local_id": 37,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Tent",
+      "source_group_name": "Tarp",
+      "source_facing": "E",
+      "category_flags": "solid_collision|placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BedType": "badBed",
+        "BlocksPlacement": "",
+        "ContainerCapacity": "20",
+        "CustomItem": "Base.HideTent",
+        "CustomName": "Tent",
+        "Facing": "E",
+        "ForceSingleItem": "",
+        "GroupName": "Tarp",
+        "IsMoveAble": "",
+        "MaterialType": "Fabric",
+        "SpriteGridPos": "0,0",
+        "Surface": "1",
+        "bed": "",
+        "container": "shelter",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/camping_03.png",
+      "grid_id": 38,
+      "tileset": "camping_03",
+      "local_id": 38,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Tent",
+      "source_group_name": "Tarp",
+      "source_facing": "S",
+      "category_flags": "solid_collision|placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BedType": "badBed",
+        "BlocksPlacement": "",
+        "ContainerCapacity": "20",
+        "CustomItem": "Base.HideTent",
+        "CustomName": "Tent",
+        "Facing": "S",
+        "ForceSingleItem": "",
+        "GroupName": "Tarp",
+        "IsMoveAble": "",
+        "MaterialType": "Fabric",
+        "SpriteGridPos": "0,0",
+        "Surface": "1",
+        "bed": "",
+        "container": "shelter",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/camping_03.png",
+      "grid_id": 39,
+      "tileset": "camping_03",
+      "local_id": 39,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Tent",
+      "source_group_name": "Tarp",
+      "source_facing": "S",
+      "category_flags": "solid_collision|placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|ContainerCapacity|IsMoveAble|container|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BedType": "badBed",
+        "BlocksPlacement": "",
+        "ContainerCapacity": "20",
+        "CustomItem": "Base.HideTent",
+        "CustomName": "Tent",
+        "Facing": "S",
+        "ForceSingleItem": "",
+        "GroupName": "Tarp",
+        "IsMoveAble": "",
+        "MaterialType": "Fabric",
+        "SpriteGridPos": "1,0",
+        "Surface": "1",
+        "bed": "",
+        "container": "shelter",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/fencing_01.png",
+      "grid_id": 116,
+      "tileset": "fencing_01",
+      "local_id": 116,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "wall_door_window|interactive_container",
+      "functional_source_keys": "CanScrap|HoppableN|wall",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "CanScrap": "",
+        "CloseSneakBonus": "1000",
+        "HitByCar": "",
+        "HoppableN": "",
+        "Material": "Wood",
+        "Material2": "Screws",
+        "WallNTrans": "",
+        "wall": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/fencing_01.png",
+      "grid_id": 117,
+      "tileset": "fencing_01",
+      "local_id": 117,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "wall_door_window|interactive_container",
+      "functional_source_keys": "CanScrap|HoppableN|wall",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "CanScrap": "",
+        "CloseSneakBonus": "1000",
+        "HitByCar": "",
+        "HoppableN": "",
+        "Material": "Wood",
+        "Material2": "Screws",
+        "WallNTrans": "",
+        "wall": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/fencing_01.png",
+      "grid_id": 118,
+      "tileset": "fencing_01",
+      "local_id": 118,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "wall_door_window|interactive_container",
+      "functional_source_keys": "CanScrap|HoppableN|wall",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "CanScrap": "",
+        "CloseSneakBonus": "1000",
+        "HitByCar": "",
+        "HoppableN": "",
+        "Material": "Wood",
+        "Material2": "Screws",
+        "WallNTrans": "",
+        "wall": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/fencing_01.png",
+      "grid_id": 119,
+      "tileset": "fencing_01",
+      "local_id": 119,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "wall_door_window|interactive_container",
+      "functional_source_keys": "CanScrap|HoppableN|wall",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "CanScrap": "",
+        "CloseSneakBonus": "1000",
+        "HitByCar": "",
+        "HoppableN": "",
+        "Material": "Wood",
+        "Material2": "Screws",
+        "WallNTrans": "",
+        "wall": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_medical_01.png",
+      "grid_id": 135,
+      "tileset": "location_community_medical_01",
+      "local_id": 135,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision|placement",
+      "functional_source_keys": "BlocksPlacement|solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": "",
+        "MaterialType": "Metal_Solid",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_park_01.png",
+      "grid_id": 53,
+      "tileset": "location_community_park_01",
+      "local_id": 53,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "exterior": "",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_park_01.png",
+      "grid_id": 54,
+      "tileset": "location_community_park_01",
+      "local_id": 54,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "exterior": "",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_park_01.png",
+      "grid_id": 55,
+      "tileset": "location_community_park_01",
+      "local_id": 55,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "exterior": "",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 51,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 51,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 52,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 52,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "MaterialType": "Wood",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 53,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 53,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 54,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 54,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "MaterialType": "Wood",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 67,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 67,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 68,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 68,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "MaterialType": "Wood",
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 69,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 69,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "solidtrans": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_farm_accesories_01.png",
+      "grid_id": 70,
+      "tileset": "location_farm_accesories_01",
+      "local_id": 70,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "solid_collision",
+      "functional_source_keys": "solidtrans",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "MaterialType": "Wood",
+        "solidtrans": ""
+      }
+    }
+  ],
+  "other_examples": [
+    {
+      "png_path": "Tiles/2x/appliances_com_01.png",
+      "grid_id": 127,
+      "tileset": "appliances_com_01",
+      "local_id": 127,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/appliances_com_01.png",
+      "grid_id": 128,
+      "tileset": "appliances_com_01",
+      "local_id": 128,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/appliances_com_01.png",
+      "grid_id": 129,
+      "tileset": "appliances_com_01",
+      "local_id": 129,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/appliances_com_01.png",
+      "grid_id": 130,
+      "tileset": "appliances_com_01",
+      "local_id": 130,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/appliances_com_01.png",
+      "grid_id": 131,
+      "tileset": "appliances_com_01",
+      "local_id": 131,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/electricity_pylon.png",
+      "grid_id": 46,
+      "tileset": "electricity_pylon",
+      "local_id": 46,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": "",
+        "MaterialType": "Metal"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/electricity_pylon.png",
+      "grid_id": 47,
+      "tileset": "electricity_pylon",
+      "local_id": 47,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": "",
+        "MaterialType": "Metal"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_business_machinery_01.png",
+      "grid_id": 53,
+      "tileset": "location_business_machinery_01",
+      "local_id": 53,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_park_01.png",
+      "grid_id": 5,
+      "tileset": "location_community_park_01",
+      "local_id": 5,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_park_01.png",
+      "grid_id": 6,
+      "tileset": "location_community_park_01",
+      "local_id": 6,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_park_01.png",
+      "grid_id": 8,
+      "tileset": "location_community_park_01",
+      "local_id": 8,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_community_park_01.png",
+      "grid_id": 9,
+      "tileset": "location_community_park_01",
+      "local_id": 9,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "placement",
+      "functional_source_keys": "BlocksPlacement",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_restaurant_spiffos_03.png",
+      "grid_id": 22,
+      "tileset": "location_restaurant_spiffos_03",
+      "local_id": 22,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "Spiffo",
+      "source_group_name": "The Glorious",
+      "source_facing": "S",
+      "category_flags": "placement|interactive_container",
+      "functional_source_keys": "BlocksPlacement|CanScrap|IsMoveAble",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "BlocksPlacement": "",
+        "CanScrap": "",
+        "CustomName": "Spiffo",
+        "Facing": "S",
+        "GroupName": "The Glorious",
+        "IsMoveAble": "",
+        "Material": "PlasticBag",
+        "Material2": "MetalPlates",
+        "Material3": "Transmission",
+        "MaterialType": "Plastic",
+        "PickUpLevel": "2",
+        "PickUpTool": "Hammer",
+        "PickUpWeight": "150",
+        "PlaceTool": "Hammer",
+        "ScrapSize": "Large",
+        "SpriteGridPos": "0,0",
+        "invisible": ""
+      }
+    },
+    {
+      "png_path": "Tiles/2x/street_curbs_01.png",
+      "grid_id": 58,
+      "tileset": "street_curbs_01",
+      "local_id": 58,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "light_and_overlay",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "FloorOverlay": "",
+        "attachedFloor": ""
+      }
+    }
+  ],
+  "transparent_properties_without_function_examples": [
+    {
+      "png_path": "Tiles/2x/boulders.png",
+      "grid_id": 36,
+      "tileset": "boulders",
+      "local_id": 36,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "fireRequirement": "900000"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/boulders.png",
+      "grid_id": 37,
+      "tileset": "boulders",
+      "local_id": 37,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "fireRequirement": "900000"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/boulders.png",
+      "grid_id": 38,
+      "tileset": "boulders",
+      "local_id": 38,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "fireRequirement": "900000"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/boulders.png",
+      "grid_id": 39,
+      "tileset": "boulders",
+      "local_id": 39,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "fireRequirement": "900000"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/fencing_damaged_06.png",
+      "grid_id": 190,
+      "tileset": "fencing_damaged_06",
+      "local_id": 190,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "FenceTypeHigh": "Metal",
+        "ThumpSound": "ZombieThumpChainlinkFence"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_business_office_generic_01.png",
+      "grid_id": 11,
+      "tileset": "location_business_office_generic_01",
+      "local_id": 11,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "ContainerCloseSound": "DrawerWoodClose",
+        "ContainerOpenSound": "DrawerWoodOpen",
+        "ContainerPutSound": "DrawerWoodTransferItem",
+        "ContainerTakeSound": "DrawerWoodTransferItem"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_entertainment_gallery_01.png",
+      "grid_id": 74,
+      "tileset": "location_entertainment_gallery_01",
+      "local_id": 74,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "MaterialType": "Wood",
+        "PickUpWeight": "100"
+      }
+    },
+    {
+      "png_path": "Tiles/2x/location_restaurant_bar_01.png",
+      "grid_id": 83,
+      "tileset": "location_restaurant_bar_01",
+      "local_id": 83,
+      "mapping_status": "SOURCE_SLOT_LINKED_GRID_VERIFIED",
+      "has_original_properties": true,
+      "source_custom_name": "CustomName",
+      "source_group_name": "",
+      "source_facing": "",
+      "category_flags": "",
+      "functional_source_keys": "",
+      "prior_identity_candidate": "",
+      "prior_visual_candidate": "",
+      "properties": {
+        "CustomName": "CustomName"
+      }
+    }
+  ],
+  "top_atlases_with_function_tags": [
+    [
+      "Tiles/2x/location_farm_accesories_01.png",
+      8
+    ],
+    [
+      "Tiles/2x/camping_03.png",
+      7
+    ],
+    [
+      "Tiles/2x/location_community_park_01.png",
+      7
+    ],
+    [
+      "Tiles/2x/appliances_com_01.png",
+      5
+    ],
+    [
+      "Tiles/2x/fencing_01.png",
+      4
+    ],
+    [
+      "Tiles/2x/electricity_pylon.png",
+      2
+    ],
+    [
+      "Tiles/2x/location_business_machinery_01.png",
+      1
+    ],
+    [
+      "Tiles/2x/location_community_medical_01.png",
+      1
+    ],
+    [
+      "Tiles/2x/location_restaurant_spiffos_03.png",
+      1
+    ],
+    [
+      "Tiles/2x/street_curbs_01.png",
+      1
+    ]
+  ]
+}

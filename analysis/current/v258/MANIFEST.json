@@ -1,0 +1,104 @@
+{
+  "version": "v258",
+  "basis": "all PNG image grid cells + seven original .tiles sources",
+  "source_zip_sha256": "ffba6f55e178ef0c4622906bfdd670c6a7cae779cf6dbe4e7d4b0dce45c18171",
+  "source_file_stats": [
+    {
+      "file": "jumbo_trees.tiles",
+      "version": 1,
+      "sha256": "bef3781d01d28db1a5c59c5d3d0ec247826a3a34d6ce33b8f2d5ff9185246c29",
+      "tilesets": 11,
+      "slots": 120,
+      "properties": 404,
+      "bytes": 6944
+    },
+    {
+      "file": "jumbo_trees_big.tiles",
+      "version": 1,
+      "sha256": "a2e77617f4258e92aa3aca7daf3c52faaaa27ff1cd35aca91adfd7cc1044a445",
+      "tilesets": 24,
+      "slots": 780,
+      "properties": 2196,
+      "bytes": 37133
+    },
+    {
+      "file": "newtiledefinitions.tiles",
+      "version": 1,
+      "sha256": "179e321d9123e58d791e535592102eab9422a409689661e9c38817f60e6bd5dc",
+      "tilesets": 425,
+      "slots": 56606,
+      "properties": 180015,
+      "bytes": 2972120
+    },
+    {
+      "file": "tiledefinitions_b42chunkcaching.tiles",
+      "version": 1,
+      "sha256": "d30f74ae75b8b9fd1bcca548043b9a67a41d87a2d2e536075071fa6ab4d1f3e6",
+      "tilesets": 1,
+      "slots": 256,
+      "properties": 397,
+      "bytes": 10382
+    },
+    {
+      "file": "tiledefinitions_erosion.tiles",
+      "version": 1,
+      "sha256": "b02fc044865be788f0980c1053b0bbff3429852a6ea58e185402869befa943e4",
+      "tilesets": 28,
+      "slots": 1706,
+      "properties": 3688,
+      "bytes": 59741
+    },
+    {
+      "file": "tiledefinitions_noiseworks.patch.tiles",
+      "version": 1,
+      "sha256": "e033e277d0a236e98e9f908e2964904a4d350a6b37b3138408602990081ccdef",
+      "tilesets": 95,
+      "slots": 11920,
+      "properties": 5977,
+      "bytes": 244785
+    },
+    {
+      "file": "tiledefinitions_overlays.tiles",
+      "version": 1,
+      "sha256": "5d3032741059a30b0e3dade4527d5d53fa29cda50da335b108a96e73a1bab4fd",
+      "tilesets": 32,
+      "slots": 2256,
+      "properties": 2588,
+      "bytes": 47294
+    }
+  ],
+  "counters": {
+    "atlas_GRID_DIMENSION_MISMATCH": 34,
+    "atlas_MATCHED_TILESET_AND_GRID": 367,
+    "atlas_NO_SOURCE_TILESET_NAME": 5,
+    "cell_LOCAL_ID_MAPPING_NOT_VERIFIED": 10186,
+    "cell_SOURCE_SLOT_LINKED_GRID_VERIFIED": 46520,
+    "grid_cells_total": 56706,
+    "image_files": 406,
+    "pixels_opaque_or_visible": 37410,
+    "pixels_transparent": 19296,
+    "v255_image_cells_linked": 10006
+  },
+  "source_unique_keys": 61418,
+  "original_unlinked_to_verified_image": 14898,
+  "v255_keys": 10042,
+  "v255_source_keys_missing": 3,
+  "source_conflict_instances": 8,
+  "sqlite_row_counts": {
+    "source_files": 7,
+    "source_tilesets": 616,
+    "source_slots": 73644,
+    "source_attributes": 195265,
+    "image_atlases": 406,
+    "image_cells": 56706
+  },
+  "sqlite_sha256": "b65d7b4264722682f4372827889ab6bcbbdca6d35ed5ee22b8e391ebbe6a2ac9",
+  "sqlite_integrity": "ok",
+  "limitations": [
+    "PNG grid cell is not necessarily a discrete visible object",
+    "PNG-to-Local-ID link is based on exact name and grid, not engine-level certification",
+    "Partial PNG grid or inconsistent definition dimensions are not force-mapped",
+    "Legacy v255 predictions remain unmodified and are never overwritten by original names",
+    "No previous data or source images were modified"
+  ]
+}

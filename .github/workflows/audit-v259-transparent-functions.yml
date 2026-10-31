@@ -1,0 +1,141 @@
+name: audit v259 transparent tile functional properties
+
+on:
+  push:
+    branches: [work/v258-png-original-definition-catalog-20261031]
+    paths:
+      - .github/workflows/audit-v259-transparent-functions.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v259/PZ_v259_all_png_tile_definitions.sqlite
+      - name: Analyze all completely transparent pixels with source behavior attributes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import csv, json, pathlib, sqlite3, collections
+          root=pathlib.Path("analysis/current/v259")
+          db=sqlite3.connect(f"file:{(root/'PZ_v259_all_png_tile_definitions.sqlite').resolve()}?mode=ro",uri=True)
+          total=db.execute("SELECT COUNT(*) FROM image_cells WHERE has_visible_pixels=0").fetchone()[0]
+          assert total==13706,(total,"changed source")
+          groups={
+            "solid_collision": {"solid","solidtrans","solidfloor","collideN","collideW","BlockAllTheSquare","PhysicsMesh","StopCar"},
+            "wall_door_window": {"wall","WallN","WallW","WallNW","WallSE","DoorWallN","DoorWallW","WindowN","WindowW","IsDoor","Door","HoppableN","HoppableW"},
+            "placement": {"BlocksPlacement"},
+            "interactive_container": {"container","ContainerCapacity","IsMoveAble","MoveType","Thumpable","IsThumpable","IsBreakable","CanBreak","CanScrap"},
+            "light_and_overlay": {"lightR","lightG","lightB","Light","FloorOverlay","WallOverlay","TileOverlay","attachedFloor","ForceAmbient"},
+          }
+          runtime_relevant=set().union(*[v for k,v in groups.items() if k!="light_and_overlay"])
+          hard_physical=groups["solid_collision"]|groups["wall_door_window"]
+          seen_source_keys=set()
+          counts=collections.Counter()
+          key_freq=collections.Counter()
+          hard_samples=[]
+          other_samples=[]
+          none_samples=[]
+          marked=[]
+          by_atlas=collections.Counter()
+          examples_by_type=collections.defaultdict(list)
+          query="""SELECT png_path,grid_id,tileset,local_id,has_visible_pixels,link_status,
+                    properties_json,custom_name,group_name,facing,structural_properties,
+                    v255_identity_candidate,v255_visual_candidate
+                    FROM image_cells WHERE has_visible_pixels=0 ORDER BY png_path,grid_id"""
+          for (path,idx,name,local,pix,status,prop_json,cn,gn,facing,struct,prior,visual) in db.execute(query):
+            props=json.loads(prop_json or "{}")
+            keys=set(props)
+            key_freq.update(keys)
+            tagged=[g for g,ks in groups.items() if keys&ks]
+            if status=="SOURCE_SLOT_LINKED_GRID_VERIFIED":
+              counts["source_mapped"]+=1
+              seen_source_keys.add((name,local))
+            else:
+              counts["source_unmapped"]+=1
+            if keys:counts["has_original_properties"]+=1
+            else:counts["no_original_properties"]+=1
+            if cn or gn:counts["has_object_name_hint"]+=1
+            if keys&hard_physical:counts["hard_physical_hint"]+=1
+            if keys&runtime_relevant:counts["broad_runtime_hint"]+=1
+            if keys&groups["interactive_container"]:counts["interactive_hint"]+=1
+            if keys&groups["placement"]:counts["placement_hint"]+=1
+            if keys&groups["light_and_overlay"]:counts["light_or_overlay_hint"]+=1
+            for g in tagged:counts["group_"+g]+=1
+            row={"png_path":path,"grid_id":idx,"tileset":name,"local_id":local,
+              "mapping_status":status,"has_original_properties":bool(keys),
+              "source_custom_name":cn,"source_group_name":gn,"source_facing":facing,
+              "category_flags":"|".join(tagged),"functional_source_keys":"|".join(sorted(keys&runtime_relevant)),
+              "prior_identity_candidate":prior,"prior_visual_candidate":visual,
+              "properties":props}
+            if tagged:
+              marked.append(row)
+              by_atlas[path]+=1
+              for g in tagged:
+                if len(examples_by_type[g])<12:examples_by_type[g].append(row)
+              if keys&hard_physical and len(hard_samples)<40:hard_samples.append(row)
+              elif len(other_samples)<40:other_samples.append(row)
+            elif len(none_samples)<8 and keys: none_samples.append(row)
+          counts["transparent_total"]=total
+          counts["labeled_categories_unique"]=len(marked)
+          counts["unique_mapped_transparent_tile_keys"]=len(seen_source_keys)
+          all_out={
+            "basis":"v259 source-defined exact logical PNG cell + alpha=0",
+            "important_caveat":"Functional keys only indicate source-defined behavior hints. Engine active collision or interaction is not proven. Some source cells may be intentionally blank or unused.",
+            "counts":dict(counts),
+            "category_key_definitions":{k:sorted(v) for k,v in groups.items()},
+            "property_key_frequency_top100":key_freq.most_common(100),
+            "category_examples":examples_by_type,
+            "hard_physical_examples":hard_samples,
+            "other_examples":other_samples,
+            "transparent_properties_without_function_examples":none_samples,
+            "top_atlases_with_function_tags":by_atlas.most_common(30),
+          }
+          (root/"TRANSPARENT_FUNCTION_AUDIT.json").write_text(json.dumps(all_out,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
+          columns=["png_path","grid_id","tileset","local_id","mapping_status","source_custom_name","source_group_name","source_facing","category_flags","functional_source_keys","prior_identity_candidate","prior_visual_candidate","all_source_properties_json"]
+          with (root/"TRANSPARENT_FUNCTION_CANDIDATES.csv").open("w",encoding="utf-8-sig",newline="") as f:
+            w=csv.writer(f);w.writerow(columns)
+            for r in marked:
+              w.writerow([r["png_path"],r["grid_id"],r["tileset"],r["local_id"],
+                r["mapping_status"],r["source_custom_name"],r["source_group_name"],r["source_facing"],
+                r["category_flags"],r["functional_source_keys"],r["prior_identity_candidate"],
+                r["prior_visual_candidate"],json.dumps(r["properties"],ensure_ascii=False,sort_keys=True)])
+          readme=(
+            f"# v259 투명 PNG 셀과 기능 속성 교차 검수\n\n"
+            f"원본 논리 셀 중 알파가 완전 투명한 {total:,}개를 기준으로 조사했다.\n\n"
+            f"- 원본 속성 1개 이상: {counts['has_original_properties']:,}개\n"
+            f"- 충돌/물리/벽·문·창 구조 힌트: {counts['hard_physical_hint']:,}개\n"
+            f"- 설치 제한 등 넓은 동작 힌트: {counts['broad_runtime_hint']:,}개\n"
+            f"- 이름 힌트: {counts['has_object_name_hint']:,}개\n\n"
+            "원본 .tiles 속성은 동작 가능성을 나타내는 단서이며, 실제 게임 엔진의 충돌/상호작용이 발생함을 직접 증명하지 않는다.\n"
+            "투명한 슬롯이 게임에서 쓰이는지는 TMX 배치와 엔진 동작을 별도로 검증해야 한다.\n"
+            "TRANSPARENT_FUNCTION_CANDIDATES.csv와 TRANSPARENT_FUNCTION_AUDIT.json에 세부 결과를 기록했다.\n"
+            "기존 원본과 마스터 DB는 수정하지 않았다.\n"
+          )
+          (root/"TRANSPARENT_FUNCTION_README_KO.md").write_text(readme,encoding="utf8")
+          print(json.dumps({"counts":dict(counts),"property_top30":key_freq.most_common(30),
+                "hard_samples":hard_samples[:8],"other_samples":other_samples[:6]},
+                ensure_ascii=False,indent=2),flush=True)
+          db.close()
+          PY
+      - name: Commit evidence only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v259/TRANSPARENT_FUNCTION_AUDIT.json analysis/current/v259/TRANSPARENT_FUNCTION_CANDIDATES.csv analysis/current/v259/TRANSPARENT_FUNCTION_README_KO.md
+          if ! git diff --cached --quiet; then
+            git commit -m "audit(v259): test invisible PNG cells against original functional definitions"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
