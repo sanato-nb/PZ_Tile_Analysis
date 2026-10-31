@@ -37,7 +37,7 @@ jobs:
           python3 - <<'PY'
           import csv,json,zipfile
           from pathlib import Path
-          p=Path("analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v1")
+          p=Path("analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v2")
           m=json.loads((p/"MANIFEST.json").read_text("utf8"))
           assert m["total_pz_style_comparison_cards"]==357
           assert m["source_PZ_previews"]==357
@@ -62,7 +62,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --sparse analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v1/
+          git add --sparse analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v2/
           if ! git diff --cached --quiet; then
             git commit -m "gallery(rosewood): 357 side-by-side PZ completed furniture vs source MC textured models with dimensions and original properties"
             git pull --rebase origin "$GITHUB_REF_NAME"
