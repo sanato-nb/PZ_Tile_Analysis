@@ -7,7 +7,7 @@ from pathlib import Path
 from collections import defaultdict,Counter
 
 D=Path(__file__).resolve().parents[1]/"analysis/rosewood_furniture/2026-10-31"
-OUT=D/"minecraft_real_furniture_matches_v2"
+OUT=D/"minecraft_real_furniture_matches_v3"
 ASSETS=D/"minecraft_actual_mod_registry_v2/REAL_MOD_ASSET_CANDIDATES.csv"
 PZ=D/"complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv"
 GEO=D/"complete_furniture_visual_3d_v1/geometry_samples/3D_GEOMETRY_EVIDENCE.csv"
@@ -61,11 +61,12 @@ CURATED={
  ("Bed","Large Oak"):("decocraft:double_bed_oak_white","DOUBLE_OAK_BED_FOOTPRINT_REVIEW"),
  ("Couch","Blue Rattan"):("mcwfurnitures:blue_couch","COLOR_AND_SEATING_SIMILARITY_RATTAN_NOT_VERIFIED"),
  ("Shelves","Large Metal"):("","NO_SUITABLE_METAL_SHELVING_BLOCK_IN_INSPECTED_JAR_IDS"),
- ("Chair","Grey"):("pfm:gray_arm_chair","CHAIR_GRAY_COLOR_MATCH_SHAPE_REVIEW"),
+ ("Chair","Grey"):("decocraft:school_chair_gray","GREY_SCHOOL_CHAIR_MORE_LIKELY_THAN_BULKY_ARMCHAIR_3D_NEEDS_TEXTURE_REVIEW"),
  ("Table","Large Oak"):("mcwfurnitures:oak_table","OAK_TABLE_NAME_AND_MATERIAL"),
  ("Fridge","White"):("pfm:white_fridge","WHITE_FRIDGE_FUNCTION_AND_COLOR"),
  ("Oven","Modern"):("pfm:gray_stove","STOVE_REPLACES_OVEN_CHECK_FRONT_SHAPE"),
  ("Toilet","Fancy"):("pfm:basic_toilet","TOILET_FUNCTION_SHAPE_STYLE_REVIEW"),
+ ("Bath","Large Deluxe"):("refurbished_furniture:white_bath","WHITE_BATH_SOURCE_SPRITE_2_PARTS_MC_LINKED_HEAD_FOOT_CHECK"),
  ("Wardrobe","Oak"):("mcwfurnitures:oak_double_wardrobe","OAK_DOUBLE_WARDROBE"),
  ("Computer","Desktop"):("refurbished_furniture:computer","COMPUTER_FUNCTION_BUT_PZ_CRT_1990S_STYLE_UNVERIFIED"),
  ("Television","Antique"):("decocraft:crt_tv","RETRO_CRT_TV_SHAPE_MORE_PROMISING"),
@@ -75,7 +76,7 @@ CURATED={
  ("Jukebox","Oldies"):("decocraft:jukebox","JUKEBOX_FUNCTION_MODEL_REVIEW"),
  ("Piano","Western"):("decocraft:piano_upright_spruce","UPRIGHT_WOODEN_PIANO_MODEL_REVIEW"),
  ("Grand Piano","Black"):("decocraft:piano_black","BLACK_PIANO_NOT_YET_VERIFIED_AS_GRAND"),
- ("Locker","Metal"):("","METAL_LOCKER_SHAPE_UNVERIFIED"),
+ ("Locker","Metal"):("decocraft:locker_gray","METAL_GREY_LOCKER_MODEL_ID_VERIFIED_VISUAL_NEEDS_INSPECTION"),
  ("Table","Pool"):("decocraft:pool_table","POOL_TABLE_FUNCTION_SHAPE_REVIEW"),
  ("Machine","Kaboom Arcade"):("decocraft:arcade_machine_pacman","ARCADE_MACHINE_DIFFERENT_GAME_SKIN"),
  ("Machine","Dr. Oids Arcade"):("decocraft:arcade_machine_space_invaders","ARCADE_MACHINE_DIFFERENT_GAME_SKIN")
