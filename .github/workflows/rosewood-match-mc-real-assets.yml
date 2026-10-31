@@ -1,0 +1,61 @@
+name: Match all 357 complete Project Zomboid furniture to actual Minecraft model asset candidates
+on:
+  push:
+    branches:
+      - work/rosewood-mc-real-model-matching-20261101
+    paths:
+      - .github/workflows/rosewood-match-mc-real-assets.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/match_rosewood_completed_furniture_to_mc_assets.py
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/REAL_MOD_ASSET_CANDIDATES.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/geometry_samples/3D_GEOMETRY_EVIDENCE.csv
+      - name: Match complete object names, styles and 3D references to real JAR blockstate ID evidence
+        run: |
+          python3 -m py_compile scripts/match_rosewood_completed_furniture_to_mc_assets.py
+          python3 -u scripts/match_rosewood_completed_furniture_to_mc_assets.py
+      - name: Validate all 357 rows and known resource provenance
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["pz_styles"]==357
+          with (p/"ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv").open(encoding="utf-8-sig",newline="") as f:
+              a=list(csv.DictReader(f))
+          assert len(a)==357
+          assert len(set((r["pz_model_name"],r["pz_model_style"]) for r in a))==357
+          assert all(r["mc_real_block_registry_confirmed"]=="NOT_TESTED" for r in a)
+          assert all(r["mc_visual_3d_equivalence_verified"]=="NO" for r in a)
+          for x in a:
+              if x["mc_primary_blockstate_id"]:
+                  assert x["mc_primary_blockstate_resource"].startswith("assets/")
+                  assert x["mc_primary_blockstate_resource"].endswith(".json")
+          with zipfile.ZipFile(p/"ROSEWOOD_357_REAL_MINECRAFT_MATCHES.zip") as z:
+              assert z.testzip() is None
+          print("PASS",m)
+          PY
+      - name: Save reproducible actual MC asset IDs to user isolated branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(rosewood): 357 actual Minecraft blockstate model candidate IDs with source"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
