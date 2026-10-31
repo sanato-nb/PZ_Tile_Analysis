@@ -1,0 +1,71 @@
+name: v259 normalized logical PNG sprite catalog
+
+on:
+  push:
+    branches: [work/v258-png-original-definition-catalog-20261031]
+    paths:
+      - .github/workflows/build-v259-normalized-tile-catalog.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_v259_png_tile_catalog.py
+            /tiledef/tiledef.zip
+            /Tiles/
+            /review/v255_latest_integrated_10042_2026-10-30/MASTER_ALL_10042_LATEST_PREFERRED.csv
+            /analysis/current/v259/
+      - name: Install Pillow
+        run: python3 -m pip install --quiet Pillow
+      - name: Compile
+        run: python3 -m py_compile scripts/build_v259_png_tile_catalog.py
+      - name: Build original-definition logical sprites and CSV/SQLite
+        run: python3 -u scripts/build_v259_png_tile_catalog.py
+      - name: Verify exact seven-source and logical-unit result
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,sqlite3,zipfile
+          p=Path('analysis/current/v259')
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['source_unique_keys']==61418
+          assert m['v255_keys']==10042
+          assert m['v255_source_keys_missing']==3
+          assert m['sqlite_integrity']=='ok'
+          assert m['counters']['image_files']==406
+          assert m['counters']['atlas_MATCHED_TILESET_AND_GRID']>=400
+          assert m['counters']['images_using_variable_original_sprite_dimensions']>=34
+          assert m['sqlite_row_counts']['image_cells']==m['counters']['grid_cells_total']
+          assert sum(x['properties'] for x in m['source_file_stats'])==195265
+          db=p/'PZ_v259_all_png_tile_definitions.sqlite'
+          assert hashlib.sha256(db.read_bytes()).hexdigest()==m['sqlite_sha256']
+          with sqlite3.connect(db) as con:
+              assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          for a in ['PZ_v259_full_CSV.zip','PZ_v259_full_SQLite.zip']:
+              with zipfile.ZipFile(p/a) as z:assert z.testzip() is None
+          print('PASS normalized sprite catalog',m['counters'])
+          PY
+      - name: Persist new v259 only, preserving v258
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v259/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(v259): source-based logical sprite cells including jumbo"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
