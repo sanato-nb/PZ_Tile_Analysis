@@ -1,0 +1,58 @@
+name: rosewood deduplicated furniture complete archive
+
+on:
+  push:
+    branches:
+      - work/rosewood-dedup-furniture-20261031
+    paths:
+      - .github/workflows/rosewood-furniture-dedup-package.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1/
+      - name: Validate and build full archive including unique model lists
+        run: |
+          python3 - <<'PY'
+          import json,csv,sqlite3,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1")
+          manifest=json.loads((p/"MANIFEST.json").read_text(encoding="utf8"))
+          assert manifest["exact_duplicate_removed"]==8
+          assert manifest["counts_by_zone_scope"][0]["deduplicated_placed_object_candidates"]==15949
+          with (p/"FURNITURE_MODELS_DEDUP_NAME_GROUP.csv").open(encoding="utf-8-sig",newline="") as f:
+              assert sum(1 for row in csv.DictReader(f))==357
+          with (p/"FURNITURE_NAMES_DEDUP.csv").open(encoding="utf-8-sig",newline="") as f:
+              assert sum(1 for row in csv.DictReader(f))==79
+          with sqlite3.connect(p/"ROSEWOOD_DEDUP_OBJECTS.sqlite") as db:
+              assert db.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          dest=p/"ROSEWOOD_DEDUP_FURNITURE_COMPLETE.zip"
+          with zipfile.ZipFile(dest,"w",zipfile.ZIP_DEFLATED,compresslevel=7) as z:
+              for f in sorted(p.iterdir()):
+                  if f.is_file() and f.name not in ("ROSEWOOD_DEDUP_FURNITURE.zip",dest.name):
+                      z.write(f,f.name)
+          with zipfile.ZipFile(dest) as z:
+              assert z.testzip() is None
+              print("VALID",len(z.namelist()),"files",dest.stat().st_size,"bytes")
+          PY
+      - name: Commit complete archive to dedicated review branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1/ROSEWOOD_DEDUP_FURNITURE_COMPLETE.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "package(rosewood): verified dedup placement and unique model lists"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
