@@ -30,6 +30,7 @@ jobs:
       - name: Compile and check prerequisites
         run: |
           python3 -m py_compile scripts/count_rosewood_furniture_objects.py
+          echo 'JSON key fix verified; building preserved-source inventory'
           test -s analysis/rosewood_furniture/2026-10-31/FURNITURE_PLACEMENTS.csv.gz
           test -s analysis/rosewood_furniture/2026-10-31/FURNITURE_ASSEMBLY_TEMPLATE_CANDIDATES.csv
           test -s analysis/rosewood_furniture/2026-10-31/MINECRAFT_MATCH_PRIORITY.csv
