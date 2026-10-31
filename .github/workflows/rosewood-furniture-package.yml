@@ -1,0 +1,59 @@
+name: rosewood full furniture list packaging
+
+on:
+  push:
+    branches:
+      - work/rosewood-furniture-inventory-20261031
+    paths:
+      - .github/workflows/rosewood-furniture-package.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/rosewood_furniture/2026-10-31/
+      - name: Pack entire verified catalog into one downloadable ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv,json,zipfile,sqlite3,gzip
+          p=Path("analysis/rosewood_furniture/2026-10-31")
+          manifest=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          expected=manifest["counts"]["unique_selected_tile_ids"]
+          for f in ["ALL_FURNITURE_TILE_IDS.csv","FURNITURE_BY_ORIGINAL_NAME.csv","MINECRAFT_MATCH_PRIORITY.csv",
+                    "CATEGORY_AND_PRIORITY_SUMMARY.csv","ROSEWOOD_FURNITURE.sqlite"]:
+              assert (p/f).is_file(),f
+          with (p/"MINECRAFT_MATCH_PRIORITY.csv").open(encoding="utf-8-sig") as f:
+              assert sum(1 for row in csv.DictReader(f))==expected
+          with sqlite3.connect(p/"ROSEWOOD_FURNITURE.sqlite") as c:
+              assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          dest=p/"ROSEWOOD_COMPLETE_FURNITURE_LIST.zip"
+          with zipfile.ZipFile(dest,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=7) as z:
+              for name in sorted([x for x in p.iterdir() if x.suffix in (".csv",".md",".json") or x.name.endswith(".csv.gz") or x.name=="ROSEWOOD_FURNITURE.sqlite"],key=lambda x:x.name):
+                  z.write(name,name.name)
+          with zipfile.ZipFile(dest) as z:
+              assert z.testzip() is None
+              print("Packed",len(z.namelist()),"files",dest.stat().st_size,"bytes")
+          PY
+      - name: Publish complete list ZIP on analysis branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ROSEWOOD_COMPLETE_FURNITURE_LIST.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "package(rosewood): all original furniture IDs and named matching priorities"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
