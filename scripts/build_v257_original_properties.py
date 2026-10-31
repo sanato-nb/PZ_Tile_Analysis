@@ -60,10 +60,10 @@ def sources(zip_path):
             if len(names) != 7:
                 raise ValueError("Canonical B42 archive must have exactly seven .tiles files")
             return {n: z.read(n) for n in names}, "canonical_user_zip_seven_sources"
-    path = ROOT / "Tiles/newtiledefinitions.tiles"
-    if not path.is_file():
-        raise FileNotFoundError(path)
-    return {path.name: path.read_bytes()}, "repository_main_only_NOT_canonical"
+    paths = [ROOT / "Tiles/newtiledefinitions.tiles", ROOT / "Tiles/tiledefinitions.tiles"]
+    if not all(p.is_file() for p in paths):
+        raise FileNotFoundError("Missing GitHub repository main/legacy .tiles source")
+    return {p.name: p.read_bytes() for p in paths}, "repository_main_plus_legacy_NOT_canonical"
 
 def create(args):
     if OUT.exists() and any(OUT.iterdir()):
@@ -196,7 +196,7 @@ JOIN v257_v255_join o ON m.source_key=o.source_key;
             parts.append(str(part.relative_to(ROOT)))
         manifest = {**stats,"sqlite_bytes":dbpath.stat().st_size,"sqlite_sha256":sha(dbpath.read_bytes()),
                     "zlib_sha256":sha(packed),"parts":parts,"sqlite_integrity":"ok",
-                    "source_warning":"GitHub Tiles/newtiledefinitions.tiles differs from canonical user ZIP; repo-only build is provisional" if not args.source_zip else ""}
+                    "source_warning":"Repository main/legacy .tiles differ from the canonical seven-source user ZIP; repo-only build is provisional" if not args.source_zip else ""}
         (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
         print(json.dumps({k:v for k,v in manifest.items() if k!="files"},ensure_ascii=False,indent=2))
 def main():
