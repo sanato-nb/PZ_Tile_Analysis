@@ -1,13 +1,13 @@
 {
   "version": "v257",
-  "source_status": "repository_main_only_NOT_canonical",
+  "source_status": "repository_main_plus_legacy_NOT_canonical",
   "canonical_full_source": false,
   "parent_sha256": "25df5bcd9ef1f332bc1178ae711ec09f43e070bbf8cc3c33b4e822a0a1766791",
   "parent_tables_preserved": 260,
   "tile_keys": 10042,
-  "matched_keys": 9879,
-  "unmatched_keys": 163,
-  "source_slot_rows": 56606,
+  "matched_keys": 10003,
+  "unmatched_keys": 39,
+  "source_slot_rows": 103486,
   "source_property_rows": 180083,
   "multipart_slots": 2694,
   "conflicting_attributes": 0,
@@ -16,6 +16,11 @@
       "bytes": 2973137,
       "sha256": "3df2a87930f48ce5935d93248e135455b869c6ca760e72456f592743d565a6d3",
       "slots": 56606
+    },
+    "tiledefinitions.tiles": {
+      "bytes": 211450,
+      "sha256": "95e4f98048994a26b137c0a29238cf021601d2364a3521ae3e5aa8eebd6eb966",
+      "slots": 46880
     }
   },
   "official_id_certifications_added": 0,
@@ -25,9 +30,9 @@
   "active": 9587,
   "excluded": 455,
   "patch_precedence": "candidate_only_not_engine_verified",
-  "sqlite_bytes": 177082368,
-  "sqlite_sha256": "3f4d31bbd2b8d4b6d08207a023b0dfba9f1be9e2f741f06a721ddfb076b99d0a",
-  "zlib_sha256": "f0553f39249b00666627dcd8889776edd9d27f9b10f3478fccca21d3e8205b25",
+  "sqlite_bytes": 185769984,
+  "sqlite_sha256": "fc984ebe57b4ce5a9826011231361cfbf44aa6a5c62ef595a19ff2a72a186de0",
+  "zlib_sha256": "c287518513e795b25fa8adcaaa6431ac4e688aec7f1524a51bc91ef11a347547",
   "parts": [
     "analysis/current/v257/v257.part000.b64",
     "analysis/current/v257/v257.part001.b64",
@@ -44,5 +49,5 @@
     "analysis/current/v257/v257.part012.b64"
   ],
   "sqlite_integrity": "ok",
-  "source_warning": "GitHub Tiles/newtiledefinitions.tiles differs from canonical user ZIP; repo-only build is provisional"
+  "source_warning": "Repository main/legacy .tiles differ from the canonical seven-source user ZIP; repo-only build is provisional"
 }
