@@ -1,0 +1,79 @@
+name: v257 B42 tile definitions append-only physical merge
+on:
+  push:
+    branches:
+      - work/v257-original-tile-properties-20261031
+    paths:
+      - scripts/build_v257_original_properties.py
+      - .github/workflows/build-v257-original-properties.yml
+      - Tiles/newtiledefinitions.tiles
+      - Tiles/B42_2026_09_29_tiledef.zip
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  merge_source_preserving:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: true
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_v257_original_properties.py
+            /scripts/restore_v255_master.py
+            /analysis/current/v255/*
+            /analysis/current/v257/*
+            /Tiles/newtiledefinitions.tiles
+            /Tiles/B42_2026_09_29_tiledef.zip
+      - name: Compile v257 builder
+        run: python3 -m py_compile scripts/build_v257_original_properties.py
+      - name: Rebuild v255 260-table parent and join B42 original properties
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f Tiles/B42_2026_09_29_tiledef.zip ]; then
+            python3 -u scripts/build_v257_original_properties.py --source-zip Tiles/B42_2026_09_29_tiledef.zip
+          else
+            echo "::warning::Canonical tiledef.zip is not in repository. Producing repo single-source provisional v257; not a canonical full-source integration."
+            python3 -u scripts/build_v257_original_properties.py
+          fi
+      - name: Check generated manifest and archive segments
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,hashlib,base64,zlib,sqlite3,tempfile
+          p=pathlib.Path('analysis/current/v257/MANIFEST.json')
+          m=json.loads(p.read_text('utf8'))
+          assert m['tile_keys']==10042 and m['parent_tables_preserved']==260
+          assert m['v255_held_439']==439 and m['v255_user_68']==68
+          assert m['active']==9587 and m['excluded']==455
+          assert m['matched_keys']+m['unmatched_keys']==10042
+          raw64=''.join(pathlib.Path(x).read_text('ascii').strip() for x in m['parts'])
+          data=base64.b64decode(raw64,validate=True)
+          assert hashlib.sha256(data).hexdigest()==m['zlib_sha256']
+          raw=zlib.decompress(data)
+          assert hashlib.sha256(raw).hexdigest()==m['sqlite_sha256']
+          with tempfile.TemporaryDirectory() as td:
+            filename=pathlib.Path(td)/'verify.sqlite';filename.write_bytes(raw)
+            db=sqlite3.connect(str(filename))
+            assert db.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert db.execute('SELECT COUNT(*) FROM v257_master_with_official').fetchone()[0]==10042
+            assert db.execute('SELECT COUNT(*) FROM v255_user68_manual_verdict').fetchone()[0]==68
+            db.close()
+          print('PASS v257 archive hash, SQLite, parent state and 10042 join; canonical source:',m['canonical_full_source'])
+          PY
+      - name: Persist new outputs only; leave v255/v256 untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/current/v257/
+          if ! git diff --cached --quiet; then
+            git commit -m "v257: append original tile properties to verified v255 physical master; retain all historical data"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi
