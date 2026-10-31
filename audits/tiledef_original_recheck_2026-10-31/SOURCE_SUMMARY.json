@@ -1,0 +1,92 @@
+{
+  "audit_date": "2026-10-31",
+  "base": "v255 10,042 latest preferred catalog",
+  "original_input": "tiledef/tiledef.zip 7 sources",
+  "original_zip_verified_sha256": "ffba6f55e178ef0c4622906bfdd670c6a7cae779cf6dbe4e7d4b0dce45c18171",
+  "source_validation": [
+    {
+      "filename": "newtiledefinitions.tiles",
+      "tilesets": 425,
+      "slots": 56606,
+      "with_props": 32284,
+      "property_records": 180015
+    },
+    {
+      "filename": "jumbo_trees.tiles",
+      "tilesets": 11,
+      "slots": 120,
+      "with_props": 108,
+      "property_records": 404
+    },
+    {
+      "filename": "jumbo_trees_big.tiles",
+      "tilesets": 24,
+      "slots": 780,
+      "with_props": 301,
+      "property_records": 2196
+    },
+    {
+      "filename": "tiledefinitions_erosion.tiles",
+      "tilesets": 28,
+      "slots": 1706,
+      "with_props": 909,
+      "property_records": 3688
+    },
+    {
+      "filename": "tiledefinitions_noiseworks.patch.tiles",
+      "tilesets": 95,
+      "slots": 11920,
+      "with_props": 3458,
+      "property_records": 5977
+    },
+    {
+      "filename": "tiledefinitions_b42chunkcaching.tiles",
+      "tilesets": 1,
+      "slots": 256,
+      "with_props": 81,
+      "property_records": 397
+    },
+    {
+      "filename": "tiledefinitions_overlays.tiles",
+      "tilesets": 32,
+      "slots": 2256,
+      "with_props": 1884,
+      "property_records": 2588
+    }
+  ],
+  "original_unique_slots": 61418,
+  "original_unique_conflicting_property_instances": 8,
+  "original_unique_conflicting_slot_keys": 4,
+  "summary": {
+    "count": 10042,
+    "matched": 10039,
+    "missing": 3,
+    "has_properties": 9938,
+    "empty_properties": 101,
+    "has_custom_name": 3597,
+    "has_group_name": 2701,
+    "has_either_name": 3606,
+    "has_facing": 3079,
+    "has_sprite_grid_pos": 1204,
+    "has_material": 4195,
+    "has_structural": 4510,
+    "source_overlap": 3802,
+    "held_matched": 439,
+    "held_either_name": 114,
+    "user_matched": 68,
+    "user_either_name": 23,
+    "source_property_conflicts_in_master": 4,
+    "possible_name_review": 2
+  },
+  "missing_source_keys": [
+    "camping_03 (ayrton orio's conflicted copy 2025-09-10)/19",
+    "jumbo_tree_01/0",
+    "overlay_graffiti_wall_02/2"
+  ],
+  "limits": [
+    "Name/ID agreement does not certify TileZed sprite mapping",
+    "CustomName and GroupName refer to named objects and may be shared by multiple individual sprite parts",
+    "Do not override 68 user verdicts, 439 held, or v255/v257 SQLite",
+    "Two raw files decoded directly; five text exports cross-validated against original binary counts and properties"
+  ]
+}
