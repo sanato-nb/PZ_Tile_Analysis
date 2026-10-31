@@ -16,7 +16,7 @@ import cv2
 
 ROOT=Path(__file__).resolve().parents[1]
 D=ROOT/"analysis/rosewood_furniture/2026-10-31"
-OUT=D/"visual_pz_vs_mc_357_v1"
+OUT=D/"visual_pz_vs_mc_357_v2"
 SOURCE=D/"minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv"
 PZIMG=D/"complete_furniture_visual_3d_v1"
 CROSS=D/"complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv"
@@ -127,6 +127,15 @@ def texture(z,ns,texkey,texmap,cache):
  return cache[path],path
 def rotate_elem(point,rotation):
  if not rotation:return point
+ if isinstance(rotation,(list,tuple)):
+  x,y,z=point
+  for axis,theta in zip(("x","y","z"),rotation):
+   if abs(float(theta))<.0001:continue
+   a=float(theta)*math.pi/180;c=math.cos(a);v=math.sin(a)
+   if axis=="x":y,z=c*y-v*z,v*y+c*z
+   elif axis=="y":x,z=c*x+v*z,-v*x+c*z
+   else:x,y=c*x-v*y,v*x+c*y
+  return x,y,z
  axis=rotation.get("axis","y");angle=float(rotation.get("angle",0))*math.pi/180
  origin=rotation.get("origin",[8,8,8])
  x,y,z=[point[i]-origin[i] for i in range(3)]
@@ -162,12 +171,54 @@ def faces_for_element(e):
 def project(p):
  x,y,z=p
  return ((x-z)*.866,(x+z)*.50-y*1.15)
+BBMODEL_CACHE={}
+def read_bbmodel(z,namespace,basedata):
+ key=basedata.get("model","")
+ if not isinstance(key,str) or not key:return None,None
+ n,p=key.split(":",1) if ":" in key else (namespace,key)
+ path="assets/"+n+"/"+p
+ if path in BBMODEL_CACHE:return BBMODEL_CACHE[path]
+ try:
+  bb=json.loads(z.read(path).decode("utf8"))
+  res=bb.get("resolution",{})
+  if not isinstance(res,dict):res={}
+  elements=[e for e in bb.get("elements",[]) if isinstance(e,dict) and
+    e.get("type")=="cube" and isinstance(e.get("faces"),dict)]
+  uv=(float(res.get("width",64) or 64),float(res.get("height",64) or 64))
+  result=(elements,uv)
+ except Exception:result=(None,None)
+ BBMODEL_CACHE[path]=result
+ return result
+
 def render_model(z,ns,id,cache):
  refs,properties,state=state_refs(z,ns,id)
  triples=[];origins=[];textures_evidence=[];missing=[]
  for ref in refs[:9]:
   model=ref["model"];pathmodel,texmap,elements,chain=resolve_model(z,ns,model)
   origins.extend(chain)
+  uv_base=(16.0,16.0)
+  if not elements and isinstance(pathmodel,dict) and pathmodel.get("loader")=="decocraft:bbmodel":
+   bb_elements,bb_uv=read_bbmodel(z,ns,pathmodel)
+   if bb_elements:
+    material=pathmodel.get("material","")
+    if isinstance(material,str) and material:
+     elements=[]
+     for source_element in bb_elements:
+      clone=dict(source_element)
+      clone["faces"]={key:dict(face,texture=material)
+       for key,face in source_element.get("faces",{}).items()}
+      elements.append(clone)
+     uv_base=bb_uv
+     origins.append("DECORCRAFT_BBMODEL:"+pathmodel.get("model",""))
+  if not elements and ns=="pfm" and id.endswith("fridge"):
+   folder=f"assets/pfm/models/block/{id}/"
+   candidates=[folder+"fridge_full.json",folder+"fridge.json",folder+"fridge_single.json"]
+   for candidate in candidates:
+    if candidate in z.namelist():
+     fallback=candidate.split("assets/pfm/models/",1)[1][:-5]
+     _,texmap,elements,chain=resolve_model(z,"pfm",fallback)
+     origins+=chain
+     if elements:break
   if not elements:
    missing.append("no_element_geometry:"+model)
    continue
@@ -175,7 +226,7 @@ def render_model(z,ns,id,cache):
    for coords,face,uv,direction in faces_for_element(element):
     im,path=texture(z,ns,face.get("texture",""),texmap,cache)
     if path:textures_evidence.append(path)
-    triples.append((coords,im,uv,direction,face.get("rotation",0)))
+    triples.append((coords,im,uv,direction,face.get("rotation",0),uv_base))
  if len(triples)>1500:
   triples=triples[:1500];missing.append("faces_truncated_at_1500")
  dims={}
@@ -204,7 +255,7 @@ def render_model(z,ns,id,cache):
  canvas=np.zeros((SIZE[1],SIZE[0],3),dtype=np.uint8)
  canvas[:]=np.array(MCBG,dtype=np.uint8)[::-1]
  true_textured=0
- for coords,tex,uv,direction,rot in triples:
+ for coords,tex,uv,direction,rot,uvbase in triples:
   dst=np.array([pix(p) for p in coords],dtype=np.float32)
   if not np.isfinite(dst).all():continue
   if np.max(dst[:,0])-np.min(dst[:,0])<.6 or np.max(dst[:,1])-np.min(dst[:,1])<.6:continue
@@ -220,8 +271,8 @@ def render_model(z,ns,id,cache):
   # Actual source texture atlas, UV mapped onto the cuboid face (no texture redistribution).
   tw,th=tex.size
   u0,v0,u1,v1=[float(q) for q in uv]
-  src=np.array([(u0/16*tw,v0/16*th),(u1/16*tw,v0/16*th),
-      (u1/16*tw,v1/16*th),(u0/16*tw,v1/16*th)],dtype=np.float32)
+  src=np.array([(u0/uvbase[0]*tw,v0/uvbase[1]*th),(u1/uvbase[0]*tw,v0/uvbase[1]*th),
+      (u1/uvbase[0]*tw,v1/uvbase[1]*th),(u0/uvbase[0]*tw,v1/uvbase[1]*th)],dtype=np.float32)
   # Model face rotation in 90-degree increments.
   k=(int(rot)//90)%4
   src=np.roll(src,k,axis=0)
