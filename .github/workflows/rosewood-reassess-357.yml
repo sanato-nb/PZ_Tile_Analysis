@@ -1,0 +1,73 @@
+name: Reassess all 357 PZ furniture matches using native Blockbench visual evidence
+on:
+  push:
+    branches: [work/rosewood-blockbench-357-rematch-20261101]
+    paths: [.github/workflows/rosewood-reassess-357.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  reassess:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/reassess_rosewood_357_with_blockbench.py
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/ALL_RANKED_MATCHED_MC_BLOCKSTATE_IDS.csv
+            /analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v3/ALL_357_PZ_MC_VISUAL_SIZE_PROPERTIES.csv
+            /analysis/rosewood_furniture/2026-10-31/visual_pz_vs_mc_357_v3/cards/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/blockbench_native_357_rematch_v1/
+      - name: Wait for actual Blockbench native evidence to be committed, never fabricate images
+        run: |
+          set -euo pipefail
+          BRANCH="$GITHUB_REF_NAME"
+          PROOF="analysis/rosewood_furniture/2026-10-31/blockbench_native_357_rematch_v1/NATIVE_BLOCKBENCH_PROOF.json"
+          READY=0
+          for i in $(seq 1 100); do
+            git fetch --depth=1 origin "$BRANCH" --quiet
+            if git cat-file -e "origin/$BRANCH:$PROOF" 2>/dev/null; then READY=1; break; fi
+            echo "Waiting for completed native Blockbench screenshots - check $i"
+            sleep 8
+          done
+          if [ "$READY" != 1 ]; then echo "Original native Blockbench 51 render not yet present"; exit 1; fi
+          git reset --hard "origin/$BRANCH"
+          test -s "$PROOF"
+      - name: Build all 357 side by side images and conservative rematch evidence table
+        run: |
+          python3 -m pip install -q --break-system-packages pillow numpy
+          python3 -m py_compile scripts/reassess_rosewood_357_with_blockbench.py
+          python3 -u scripts/reassess_rosewood_357_with_blockbench.py
+      - name: Validate every result, no false approval
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v2")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["total_pz_styles"]==357
+          assert m["manually_reassessed_representative_styles"]==50
+          assert m["native_unique_decocraft_models"]>=30
+          assert m["exact_pz_to_mc_3d_matches_certified"]==0
+          assert m["original_mc_candidates_replaced_automatically"]==0
+          assert len(list((p/"cards").glob("*.jpg")))==357
+          assert len(list((p/"contact_sheets").glob("*.jpg")))>=5
+          assert len(list(csv.DictReader((p/"ALL_357_REMATCH_REVIEW.csv").open(encoding="utf-8-sig"))))==357
+          with zipfile.ZipFile(p/"ROSEWOOD_357_BLOCKBENCH_REMATCH.zip") as z:
+              assert z.testzip() is None
+              assert "INDEX.html" in z.namelist()
+          print("357 REASSESS RESULTS VALIDATED",m)
+          PY
+      - name: Commit result to review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v2/
+          git commit -m "analysis(rosewood): 357 source images vs real native Blockbench Decocraft models and conservative shape/size re-evaluation"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

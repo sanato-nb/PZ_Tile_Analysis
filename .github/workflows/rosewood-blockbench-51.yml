@@ -1,0 +1,61 @@
+name: Native Blockbench render all 51 unique Decocraft candidate models
+on:
+  push:
+    branches: [work/rosewood-blockbench-357-rematch-20261101]
+    paths: [.github/workflows/rosewood-blockbench-51.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/native_blockbench_render_51_decocraft_for_rematch.py
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+      - name: Official Blockbench 5.2.2 verified binary
+        run: |
+          mkdir -p /tmp/blockbench-app
+          cd /tmp/blockbench-app
+          curl -fsSL --retry 3 -o Blockbench_5.2.2.AppImage https://github.com/JannisX11/blockbench/releases/download/v5.2.2/Blockbench_5.2.2.AppImage
+          echo "375fb8da33b8b9ad0f1f790836ed83020b6e987a56e23184d31d6ccf3132ac3b  Blockbench_5.2.2.AppImage" | sha256sum -c -
+          chmod +x Blockbench_5.2.2.AppImage
+          ./Blockbench_5.2.2.AppImage --appimage-extract >/dev/null
+      - name: Install Xvfb, CDP and screenshots
+        run: |
+          python3 -m pip install -q --break-system-packages pillow playwright numpy
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libasound2t64 libgtk-3-0 libgbm1 libnss3 >/dev/null
+      - name: Open each Decocraft matched .bbmodel with authentic Blockbench
+        run: |
+          python3 -u scripts/native_blockbench_render_51_decocraft_for_rematch.py
+      - name: Confirm source-backed native model render provenance
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/blockbench_native_357_rematch_v1")
+          a=json.loads((p/"NATIVE_BLOCKBENCH_PROOF.json").read_text("utf8"))
+          assert len(a)==51,(len(a),a[:2])
+          good=[x for x in a if x.get("loaded_verified") and x.get("native_model_screenshot")]
+          assert len(good)>=30,len(good)
+          for x in good:
+              assert x["version"]=="5.2.2",x
+              assert (p/x["native_model_screenshot"]).is_file()
+              assert len(x["source_sha256"])==len(x["variant_sha256"])==64
+          print("SOURCE_BACKED_NATIVE_ASSETS",len(good),"/",len(a))
+          PY
+      - name: Persist actual native screenshot evidence only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/blockbench_native_357_rematch_v1/
+          git commit -m "evidence(rosewood): actual Blockbench screenshot of all available Decocraft furniture candidate assets"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

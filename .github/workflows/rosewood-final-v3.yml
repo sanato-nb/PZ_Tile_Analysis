@@ -1,0 +1,55 @@
+name: Publish final 357 Blockbench PZ-to-Minecraft furniture matching and eight improved candidates
+on:
+  push:
+    branches: [work/rosewood-blockbench-357-rematch-20261101]
+    paths: [.github/workflows/rosewood-final-v3.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  final:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/compile_rosewood_357_replacement_review_v3.py
+            /analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v2/
+            /analysis/rosewood_furniture/2026-10-31/blockbench_native_replacement_candidates_v1/
+      - name: Re-evaluate eight substitutions and build final self-contained review package
+        run: |
+          python3 -m py_compile scripts/compile_rosewood_357_replacement_review_v3.py
+          python3 scripts/compile_rosewood_357_replacement_review_v3.py
+      - name: Validate full original-to-mod rematch and replacement source evidence
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v3")
+          d=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert d["total_pz_styles"]==357
+          assert d["manually_reassessed_representative_styles"]==50
+          assert d["new_replacement_candidates_visually_reviewed"]==8
+          assert d["original_357_data_overwritten"]==0
+          a=list(csv.DictReader((p/"REVISED_357_PZ_MC_MATCHES.csv").open(encoding="utf-8-sig")))
+          b=list(csv.DictReader((p/"EIGHT_BLOCKBENCH_VERIFIED_IMPROVED_CANDIDATES.csv").open(encoding="utf-8-sig")))
+          assert len(a)==357 and len(b)==8
+          assert all(x["new_mc_model_source_sha256"] and x["new_mc_texture_source_sha256"] for x in b)
+          assert len(list((p/"cards").glob("*.jpg")))==349
+          assert len(list((p/"better").glob("*.jpg")))==8
+          with zipfile.ZipFile(p/"ROSEWOOD_357_BLOCKBENCH_REMATCH_V3.zip") as z:
+              assert z.testzip() is None
+              assert "INDEX.html" in z.namelist()
+          print("FINAL_VERIFIED",d)
+          PY
+      - name: Persist improved models and final comparison gallery
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v3/
+          git commit -m "result(rosewood): 357 source PZ to real MC model review plus 8 better native Blockbench replacement candidates"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
