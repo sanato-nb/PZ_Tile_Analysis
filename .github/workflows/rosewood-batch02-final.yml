@@ -1,0 +1,67 @@
+name: Verify Rosewood furniture batch 011-020 manual re-matching and 36-batch progress
+on:
+  push:
+    branches: [work/rosewood-manual-batch02-011-020-20261101]
+    paths: [.github/workflows/rosewood-batch02-final.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_011_020.py
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/01_001_010/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/02_011_020/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_001_010_v1/BATCHES_ALL_357_PROGRESS.csv
+      - name: Install image comparison dependencies
+        run: python3 -m pip install -q --break-system-packages pillow numpy
+      - name: Create visually inspected batch 011 to 020
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_011_020.py
+          python3 -u scripts/complete_rosewood_batch_011_020.py
+      - name: Validate exact 10 records, real models and review states
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv,json,zipfile
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_011_020_v1")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["total_styles"]==357 and m["total_batches"]==36
+          assert m["batches_done"]==2 and m["batches_not_done"]==34
+          assert m["manually_reviewed_with_individual_rationales"]==10
+          assert m["native_source_comparison_images"]==10
+          assert m["exact_1to1_approved"]==0
+          rows=list(csv.DictReader((p/"BATCH_011_020_MANUAL_VISUAL_REVIEW.csv").open(encoding="utf-8-sig")))
+          assert [int(r["index"]) for r in rows]==list(range(11,21))
+          assert all(r["mc_real_model_visual_evidence"]=="ACTUAL_BLOCKBENCH_RENDER" for r in rows)
+          assert all(r["approved_for_automatic_world_placement"]=="NO" for r in rows)
+          assert len(list((p/"cards").glob("*.jpg")))==10
+          follow=list(csv.DictReader((p/"BATCH_011_020_FOLLOWUPS_OTHER_MODS.csv").open(encoding="utf-8-sig")))
+          assert [int(x["index"]) for x in follow]==[11,17,19]
+          groups=list(csv.DictReader((p/"BATCHES_ALL_357_PROGRESS.csv").open(encoding="utf-8-sig")))
+          assert len(groups)==36
+          assert all(g["review_status"]=="COMPLETED_CONDITIONAL_CANDIDATES" for g in groups[:2])
+          assert all(g["review_status"]=="QUEUED_FOR_MANUAL_IMAGE_REVIEW" for g in groups[2:])
+          assert groups[2]["range"]=="021-030"
+          with zipfile.ZipFile(p/"ROSEWOOD_BATCH_011_020_MANUAL_REVIEW.zip") as z:
+           assert z.testzip() is None
+           assert "INDEX.html" in z.namelist()
+          print("BATCH_2_VERIFIED",m)
+          PY
+      - name: Commit reviewed batch results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_011_020_v1/
+          git commit -m 'review(rosewood): finish batch 011-020 with ten model images, conditional mappings, 3 deferred designs and updated 36-batch tracker'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
