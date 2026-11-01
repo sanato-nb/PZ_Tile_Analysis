@@ -23,7 +23,7 @@ jobs:
             /scripts/rosewood_batch12_other_mod_research.json
             /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
             /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
-            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/11_111_120/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/12_111_120/extra_decocraft_render/
       - name: Install image and CSV processing dependencies
         run: python3 -m pip install -q --break-system-packages pillow numpy
       - name: Compile and generate evidence-backed manual review 111-120
