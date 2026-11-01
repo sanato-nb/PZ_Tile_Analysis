@@ -2,7 +2,7 @@ name: Open original Minecraft mod furniture in ACTUAL Blockbench desktop
 on:
   push:
     branches: [work/rosewood-native-blockbench-test-20261101]
-    paths: [.github/workflows/rosewood-native-blockbench.yml]
+    paths: [.github/workflows/rosewood-native-blockbench.yml, scripts/native_blockbench_verify_furniture.py]
   workflow_dispatch:
 permissions:
   contents: write
@@ -23,7 +23,7 @@ jobs:
           mkdir -p /tmp/blockbench-app
           cd /tmp/blockbench-app
           curl -fL --retry 3 -o Blockbench_5.2.2.AppImage https://github.com/JannisX11/blockbench/releases/download/v5.2.2/Blockbench_5.2.2.AppImage
-          echo "76ea903a2d0086a112f177586efdeba9a1a87ea0218b2f1bbb4b2dc3ce177031  none" | head -c 0 >/dev/null
+          echo "375fb8da33b8b9ad0f1f790836ed83020b6e987a56e23184d31d6ccf3132ac3b  Blockbench_5.2.2.AppImage" | sha256sum -c -
           chmod +x Blockbench_5.2.2.AppImage
           ./Blockbench_5.2.2.AppImage --appimage-extract >/dev/null
           test -x squashfs-root/AppRun
