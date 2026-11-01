@@ -1,0 +1,138 @@
+[
+  {
+    "index": 101,
+    "inspected_models": [
+      "closet_5_ebony",
+      "closet_6_oak"
+    ],
+    "candidate": "",
+    "secondary": "decocraft:closet_5_ebony [wicker/open front, rejected]; decocraft:closet_6_oak [single door, no drawers, rejected]; mcwfurnitures:dark_oak_double_wardrobe [top state only]",
+    "status": "DEFER_TWO_TILE_DARK_OAK_DOUBLE_WARDROBE_WITH_TWO_LOWER_DRAWERS",
+    "shape": "PZ 1×2 joined dark reddish oak full-height wardrobe: two tall upper hinged doors with two small brass circular pulls, two broad horizontal lower drawers with two ring pulls per drawer, projecting flat top and tall side panels.",
+    "size": "PZ two source sprites / 1×2 footprint. Decocraft closet single native asset may not reproduce two tile width and two lower drawers; no runtime placement tested.",
+    "why": "PZ 원본은 짙은 적갈색 양문 옷장과 아래 서랍 2단(각 금빛 원형 손잡이 2개)을 합친 1×2 가구다. 원본 Decocraft BBMODEL 렌더를 실제 확인하니 Closet 5 Ebony(8큐브)는 정면이 열린 등나무 바구니/선반 형태이며 옷장 문 자체가 없다. Closet 6 Oak(11큐브)는 좁은 단문 밝은 목재 옷장으로 하부 서랍이 전혀 없다. 기존 Macaw Dark Oak Double Wardrobe는 상단 상태 일부만 보였으므로 모두 반려한다.",
+    "followup": "2×1 full wardrobe with two doors AND two bottom drawers in 1.20.1 Forge; verify original blockstate full multi-part, collision, direction."
+  },
+  {
+    "index": 102,
+    "inspected_models": [
+      "filing_cabinet_white",
+      "filing_cabinet_black"
+    ],
+    "candidate": "decocraft:filing_cabinet_white",
+    "secondary": "decocraft:filing_cabinet_black [too dark]; refurbished_furniture:gray_kitchen_storage_cabinet [not a filing cabinet]",
+    "status": "CONDITIONAL_THREE_DRAWER_FILE_CABINET_WHITE_VS_GRAY_METAL",
+    "shape": "PZ 1×1 tall slim grey steel office filing cabinet with exactly three vertically stacked drawers, each recessed rectangular label holder and short horizontal metal pull; flat metal top and plain sides.",
+    "size": "PZ one source sprite; Decocraft white filing cabinet source model is a 3-drawer single prop, width/height/functional storage not tested in Minecraft.",
+    "why": "원본은 짙은 회색 철제 세로형 3단 파일 캐비닛이다. 기존 Refurbished 회색 주방 수납장은 전면 서랍이 없는 불완전한 상자여서 반려. Decocraft White Filing Cabinet의 실제 원본 렌더에서는 3개의 서랍, 라벨 틀, 가로 손잡이가 모두 보여 구조가 상당히 가깝지만 표면은 밝은 백색에 가까워 원본의 중간 회색 금속과 차이가 크다. 검정 변형도 회색이 아니므로 조건부다.",
+    "followup": "회색 3단 파일 캐비닛 색상 variant 및 실제 1×1 배치/저장 기능 검증."
+  },
+  {
+    "index": 103,
+    "inspected_models": [
+      "display_counter_bottom_oak",
+      "display_counter_bottom_white"
+    ],
+    "candidate": "",
+    "secondary": "decocraft:display_counter_bottom_oak [flat gray lid; rejected]; decocraft:display_counter_bottom_white [white box; rejected]; vanilla birch+glass inset concept untested",
+    "status": "DEFER_PALE_WOOD_OPEN_TOP_SHOP_DISPLAY_COUNTER",
+    "shape": "PZ 1×1 pale blond/beige wood box display counter with thick raised wooden perimeter rim around inset pale-gray open/display surface, plain front and side panels without doors, glass case or drawers.",
+    "size": "PZ one source sprite / 1×1; Decocraft bakery display counter modules may require separate top and bottom and are not proven to reproduce PZ recessed top.",
+    "why": "PZ 원본은 밝은 베이지 목재의 1칸 진열대로 윗면에 두꺼운 사각 목재 테두리와 안쪽으로 파인 연회색 진열 공간이 있고 앞·옆면에는 서랍이나 문이 없다. 실제 렌더한 Decocraft Display Counter Bottom Oak(6큐브)는 베이지 목재 몸체는 비슷하지만 상판이 회색 금속/석재의 완전히 평평한 뚜껑으로 덮여 있으며 테두리 안쪽 오목한 공간이 없다. White 변형은 몸체까지 백색이다. 기존 Macaw Acacia Counter의 붉은 상판/검은 몸체도 부적합하므로 보류.",
+    "followup": "Forge 1.20.1 single-block wood grocery bin with inset display tray and no glass showcase; confirm model geometry/texture and in-game surface."
+  },
+  {
+    "index": 104,
+    "inspected_models": [
+      "couch_left_leather_brown",
+      "couch_right_leather_brown"
+    ],
+    "candidate": "decocraft:couch_left_leather_brown",
+    "secondary": "decocraft:couch_right_leather_brown [must pair to form 2-seat loveseat]; mcwfurnitures:brown_couch [old one module partial]",
+    "status": "CONDITIONAL_BROWN_LEATHER_TWO_SEAT_SOFA_TWO_MODULE_ASSEMBLY",
+    "shape": "PZ two joined sprites form 1×2 dark reddish-brown leather two-seat loveseat, two thick seat cushions, split raised upholstered back, full left and right rounded armrests and solid low upholstered base.",
+    "size": "PZ 1×2 / two connected sprites; Decocraft left+right modules are independently source-rendered, not yet shown as an in-game connected two-block couch.",
+    "why": "PZ 원본은 짙은 붉은 갈색 가죽의 2인용 소파로 양끝 둥근 팔걸이, 두 좌석 쿠션, 분할된 부드러운 등받이가 있다. 실제 Decocraft Couch Left Leather Brown(6큐브)과 Right Leather Brown(6큐브)은 갈색 가죽 질감과 좌우 각 1개 팔걸이를 가진 별개 모듈이므로 두 개를 붙이면 기본 소파 유형이 맞는다. 그러나 모델은 PZ보다 밝은 주황 갈색, 팔걸이와 등받이가 각진 평판이며 2×1 완성 연결/중간 경계는 게임에서 확인하지 않았다. 기존 Macaw Brown Couch는 한쪽 모듈만 렌더돼 완성형을 재현하지 못했다.",
+    "followup": "Place left and right leather brown couch modules together in Forge 1.20.1 and capture 2×1 finished view; inspect seams/armrest placement/collision."
+  },
+  {
+    "index": 105,
+    "inspected_models": [
+      "wooden_table_white",
+      "diner_table_light_gray"
+    ],
+    "candidate": "",
+    "secondary": "minecraft:white_carpet + iron_bars [vanilla concept only, not native-verified]; decocraft:wooden_table_white [wrong carved wood legs]",
+    "status": "DEFER_TWO_TILE_WHITE_PLASTIC_FOLDING_BANQUET_TABLE",
+    "shape": "PZ 1×2 long rectangular matte off-white plastic folding table with center join seam, thin rounded edge, two pairs of dark gray tubular steel inverted-U folding legs and lower cross braces; no chairs or dishes.",
+    "size": "PZ two source sprites / 1×2. Existing Decocraft table_setting_double is only dishes and glasses, not a table; newly inspected dining table models differ in folding metal frame and material.",
+    "why": "PZ 원본은 2×1 흰색 플라스틱 접이식 긴 테이블로 중앙 상판 접합선과 어두운 금속 U자형 다리 2쌍/가로 보강대가 보인다. 기존 Decocraft table_setting_double은 접시와 컵만 렌더돼 테이블이 아니다. 새 Wooden Table White(25큐브)는 흰 목재의 굵고 장식된 다리 4개를 가진 일반 식탁이며, Diner Table Light Gray(12큐브)는 회색 판 아래 중앙 금속 기둥 1개가 있는 카페 테이블이다. 모두 원본의 접이식 다리 구조와 2칸 긴 상판을 재현하지 못해 보류한다.",
+    "followup": "Search source-backed 1.20.1 Forge 2×1 folding plastic banquet table with tubular metal legs; test actual placement and multi-block."
+  },
+  {
+    "index": 106,
+    "inspected_models": [
+      "trash_can",
+      "trash_can_open"
+    ],
+    "candidate": "",
+    "secondary": "decocraft:trash_can [closed rusty silver metal can; rejected]; decocraft:trash_can_open [lid off and trash exposed; rejected]; Trashcans Forever! https://modrinth.com/mod/trashcans-forever%21",
+    "status": "DEFER_CYLINDRICAL_PUBLIC_LITTER_BIN_SLATTED_DOME",
+    "shape": "PZ 1×1 cylindrical dark charcoal public metal trash bin with vertical narrow ribs, raised flared slotted metal collar at top and circular central open disposal hole, no green lid or square mesh.",
+    "size": "PZ one source sprite / 1×1; Decocraft trash cans require exact cylinder/slotted flared rim proof and in-game block collision.",
+    "why": "PZ 원본은 검은 철제 원통형 공공 쓰레기통으로 세로 철살 몸통과 방사형으로 벌어진 상단 테두리, 중앙의 열린 원형 투입구가 특징이다. Decocraft Trash Can(59큐브)은 녹슨 은회색 아연도금 원통에 손잡이 달린 닫힌 평평한 뚜껑이 있다. Trash Can Open(60큐브)은 뚜껑이 옆으로 젖혀지고 검은 쓰레기봉투가 드러나며, 어느 쪽도 PZ의 방사형 원형 투입구가 아니다. 기존 Paladin Mesh Trashcan은 사각형 그물망과 초록색 윗면으로 완전히 달라 반려한다.",
+    "followup": "Check 1.20.1 Forge Trashcans Forever!/Simple Trashcan original model for dark cylindrical slatted outdoor bin; source render before approval."
+  },
+  {
+    "index": 107,
+    "inspected_models": [
+      "armchair_leather_brown",
+      "cottage_armchair"
+    ],
+    "candidate": "decocraft:armchair_leather_brown",
+    "secondary": "pfm:brown_arm_chair [old source rendering resembles L slab without two arms]; decocraft:cottage_armchair [fabric rather than brown leather]",
+    "status": "CONDITIONAL_BROWN_LEATHER_UPHOLSTERED_ARMCHAIR",
+    "shape": "PZ 1×1 single-seat reddish brown leather club armchair with solid boxy base, thick padded left/right armrests, single broad seat cushion, rounded high back with upper seam, no visible legs.",
+    "size": "PZ one source sprite / 1×1; Decocraft single leather armchair model source, seat/collision and exact 1-block scale untested.",
+    "why": "PZ 원본은 104번과 같은 짙은 붉은 갈색 가죽의 1인용 안락의자로 둥근 높은 등받이와 두꺼운 양쪽 팔걸이, 넓은 좌석 쿠션이 있다. Decocraft Armchair Leather Brown의 원본 9큐브 모델을 실제 렌더했으며 두 팔걸이, 좌석, 등받이, 아래 가죽 받침이 모두 완전하게 나타나 의자 유형이 맞는다. 하지만 마크 모델은 더 밝은 주황 갈색이고 각진 직선 등받이/팔걸이로 원본의 둥근 쿠션형 실루엣과 다르다. Cottage Armchair는 꽃무늬 천이라 재질·색 모두 불일치한다.",
+    "followup": "Verify Decocraft leather armchair front and back, sitting behavior, 1×1 placement, color matching PZ 104 sofa."
+  },
+  {
+    "index": 108,
+    "inspected_models": [
+      "microwave"
+    ],
+    "candidate": "decocraft:microwave",
+    "secondary": "refurbished_furniture:light_microwave [not source-rendered this batch]; refurbished_furniture:dark_microwave [previous broken green column]",
+    "status": "CONDITIONAL_LIGHT_COLORED_COUNTERTOP_MICROWAVE",
+    "shape": "PZ 1×1 small ivory/white rectangular countertop microwave, front large black glass window with gray frame on left and narrow dark control panel/knobs on right, smooth white casing.",
+    "size": "PZ one sprite and tabletop appliance. Minecraft Decocraft source model size and placement on counter, door opening and cooking behavior untested.",
+    "why": "PZ 원본은 크림색/백색 소형 전자레인지로 왼쪽 어두운 전면 창, 오른쪽 세로 조작부가 있다. 새 Decocraft Microwave(14큐브) 원본 BBMODEL을 Blockbench로 확인하니 본체·검정 유리문·오른쪽 버튼 격자·아래 다이얼까지 완전하게 나타난다. 이전 Refurbished Dark Microwave의 녹색 기둥 하나짜리 부분 렌더보다 확실히 낫다. 다만 새 모델 몸체는 회색 금속이고 전면 버튼·다이얼이 PZ와 달라 색상/세부 외형은 조건부로 남긴다.",
+    "followup": "Check source Decocraft microwave body color and controls; alternatively source-render refurbished_furniture:light_microwave, test on-counter placement and heating."
+  },
+  {
+    "index": 109,
+    "inspected_models": [
+      "piano_upright_spruce",
+      "piano_spruce"
+    ],
+    "candidate": "decocraft:piano_upright_spruce",
+    "secondary": "decocraft:piano_spruce [check upright vs grand piano silhouette]",
+    "status": "CONDITIONAL_TWO_TILE_WESTERN_UPRIGHT_PIANO",
+    "shape": "PZ 2×1 reddish mahogany upright saloon piano with long black-and-white keyboard, curving/rolled side panels, exposed front bottom panel, gold pedals and compact music ledge.",
+    "size": "PZ two assembled source sprites / 2×1. Decocraft piano_upright_spruce native model appears about 2 blocks wide but actual block placement and interaction not tested.",
+    "why": "PZ 원본은 2×1 적갈색 서부풍 업라이트 피아노로 검은색/흰색 건반과 아래 금빛 페달 3개, 둥근 옆판이 있다. 실제 Decocraft Piano Upright Spruce(56큐브)는 가로로 긴 업라이트 목재 본체, 검은/흰 건반, 3개 금빛 페달이 전부 갖춰져 외형이 상당히 유사하다. 하지만 PZ보다 밝은 갈색이며 큰 흰 악보판, 직선적 사각 프레임과 하단 다리가 달라 조건부다. 별도 렌더한 Piano Spruce(245큐브)는 뚜껑을 연 그랜드 피아노이므로 구조상 대체할 수 없다.",
+    "followup": "Minecraft piano upright spruce exact 2×1 placement, musical interaction and key/pedal positions; compare piano_spruce alternative."
+  },
+  {
+    "index": 110,
+    "inspected_models": [],
+    "candidate": "",
+    "secondary": "minecraft:dark_oak_trapdoor x2 [two wall-mounted horizontal planks conceptual, not tested]; Aesthetic Shelving Forge 1.20.1 https://modrinth.com/mod/aesthetic-shelving/version/XTDFxorJ; Furnish shelves https://modrinth.com/project/5cWCtJmf",
+    "status": "DEFER_TWO_DARK_WOOD_FLOATING_WALL_SHELVES",
+    "shape": "PZ one source sprite / 1×1 wall object comprising TWO separate thin dark brown solid wood floating horizontal shelves, vertically spaced and supported invisibly by the wall; no side panels, backboard, books or cabinet.",
+    "size": "PZ wall-mounted high 1×1, two separate wooden shelves. Vanilla dark oak trapdoor x2 may require two vertical block positions and support, so not equivalent to one PZ tile.",
+    "why": "원본은 진갈색 목재 판자 2개가 벽에 간격을 두고 수평으로 붙은 단순 벽 선반이다. 기존 Handcrafted Acacia Shelf 렌더는 양옆 벽과 뒷판이 있는 두꺼운 책장형 상자여서 구조가 다르다. 현재 확인된 원본 모델 목록에서 같은 높이의 독립된 판자 2개를 한 블록 안에 배치하는 완성형 가구를 찾지 못했다. 마크 다크오크 덫문 2개를 벽에 펼쳐 만드는 방법은 바닐라 재현안일 뿐 실제 한 칸 배치는 미검증이다.",
+    "followup": "Aesthetic Shelving/Furnish/Wall Shelf Forge 1.20.1 source model for two floating planks; verify 1×1 wall mount and double-shelf height."
+  }
+]
