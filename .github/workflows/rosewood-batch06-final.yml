@@ -1,0 +1,75 @@
+name: Validate sixth Rosewood furniture matching group 051-060 and persist actual source screenshots
+on:
+  push:
+    branches: [work/rosewood-manual-batch06-051-060-20261101]
+    paths: [.github/workflows/rosewood-batch06-final.yml, scripts/complete_rosewood_batch_051_060.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  finish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_051_060.py
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/06_051_060/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/02_011_020/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/blockbench_native_357_rematch_v1/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_041_050_v1/BATCHES_ALL_357_PROGRESS.csv
+            /analysis/rosewood_furniture/2026-10-31/blockbench_native_replacement_candidates_v1/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_011_020_v1/BATCHES_ALL_357_PROGRESS.csv
+      - name: Install Python image dependencies
+        run: python3 -m pip install --break-system-packages -q pillow numpy
+      - name: Run visual quality-reviewed batch 051 to 060
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_051_060.py
+          python3 -u scripts/complete_rosewood_batch_051_060.py
+      - name: Verify all ten assembled original comparisons and six deferred
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_051_060_v1")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["total_pz_styles"]==357
+          assert m["total_batches"]==36
+          assert m["batches_reviewed"]==6 and m["batches_unreviewed"]==30
+          assert m["individual_items_checked_this_batch"]==10
+          assert m["unique_decocraft_models_rerendered"]==25
+          assert m["native_model_pz_comparison_cards"]==10
+          assert m["conditional_match_proposals"]==4
+          assert m["deferred_other_mod_or_vanilla_search"]==6
+          assert m["exact_1_to_1_matches_certified"]==0
+          a=list(csv.DictReader((p/"BATCH_051_060_MANUAL_VISUAL_REVIEW.csv").open(encoding="utf-8-sig")))
+          assert [int(x["index"]) for x in a]==list(range(51,61))
+          assert sum(len(x["native_source_model_sha256"])==64 for x in a)==9
+          assert a[3]["native_source_model_sha256"]=="" and a[3]["review_status"].startswith("DEFER")
+          assert all(x["approved_for_minecraft_world_replacement"]=="NO" for x in a)
+          assert len(list((p/"cards").glob("*_PZ_vs_MC.jpg")))==10
+          d=list(csv.DictReader((p/"BATCH_051_060_DEFERRED_OTHER_MODS.csv").open(encoding="utf-8-sig")))
+          assert [int(x["index"]) for x in d]==[52,54,57,58,59,60]
+          b=list(csv.DictReader((p/"BATCHES_ALL_357_PROGRESS.csv").open(encoding="utf-8-sig")))
+          assert len(b)==36
+          assert all(x["review_status"]=="COMPLETED_CONDITIONAL_CANDIDATES" for x in b[:6])
+          assert all(x["review_status"]=="QUEUED_FOR_MANUAL_IMAGE_REVIEW" for x in b[6:])
+          assert b[6]["range"]=="061-070"
+          with zipfile.ZipFile(p/"ROSEWOOD_BATCH_051_060_MANUAL_REVIEW.zip") as z:
+           assert z.testzip() is None
+           assert "INDEX.html" in z.namelist()
+          print("BATCH6_VALID",m)
+          PY
+      - name: Commit reviewed artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_051_060_v1/
+          git commit -m "review(rosewood): sixth group 051-060 native model vs complete tile furniture, 4 deferred and progress 60/357"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
