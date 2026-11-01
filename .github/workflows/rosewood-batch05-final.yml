@@ -1,7 +1,7 @@
 name: Validate fifth Rosewood furniture matching group 041-050 and persist actual source screenshots
 on:
   push:
-    branches: [work/rosewood-manual-batch04-041-050-20261101]
+    branches: [work/rosewood-manual-batch05-041-050-20261101]
     paths: [.github/workflows/rosewood-batch05-final.yml, scripts/complete_rosewood_batch_041_050.py]
   workflow_dispatch:
 permissions:
@@ -19,7 +19,7 @@ jobs:
             /scripts/complete_rosewood_batch_041_050.py
             /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
             /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
-            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/04_041_050/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/05_041_050/extra_decocraft_render/
             /analysis/rosewood_furniture/2026-10-31/ten_batch_review/02_011_020/extra_decocraft_render/
             /analysis/rosewood_furniture/2026-10-31/blockbench_native_357_rematch_v1/
             /analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_031_040_v1/BATCHES_ALL_357_PROGRESS.csv
@@ -27,7 +27,7 @@ jobs:
             /analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_011_020_v1/BATCHES_ALL_357_PROGRESS.csv
       - name: Install Python image dependencies
         run: python3 -m pip install --break-system-packages -q pillow numpy
-      - name: Run visual quality-reviewed batch 031 to 040
+      - name: Run visual quality-reviewed batch 041 to 050
         run: |
           python3 -m py_compile scripts/complete_rosewood_batch_041_050.py
           python3 -u scripts/complete_rosewood_batch_041_050.py
