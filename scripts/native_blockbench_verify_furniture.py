@@ -31,7 +31,7 @@ def prepare():
  objects=[]
  with zipfile.ZipFile(io.BytesIO(raw)) as z:
   for key,pzname,pzstyle in TESTS:
-   source=f"assets/decocraft/models/block/{key}.json"
+   source=f"assets/decocraft/models/{key}.json"
    if source not in z.namelist():
     refs=[f for f in z.namelist() if f.endswith("/"+key+".json") and "/models/" in f]
     if refs:source=refs[0]
