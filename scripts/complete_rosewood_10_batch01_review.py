@@ -47,11 +47,11 @@ DECISIONS=[
     reasons="Green Dinner는 목재 프레임·세로 등받이 살·녹색 방석. 기존 초록 안락의자는 기각. Spruce 의자는 목재 프레임과 등받이가 비슷하지만 녹색 방석이 없고, diner_chair_green은 방석 색상은 비슷하나 금속 프레임이어서 최종 승인 보류.",
     requirement="brown wooden 4-leg dining chair, vertical slat back, green cushion",
     source_file="chair_1_spruce_BLOCKBENCH_VIEWPORT.png",source_dir="decocraft"),
- dict(i=7,method="VANILLA_NATIVE",asset="minecraft:chiseled_bookshelf",secondary="Wan's Storage Shelves / Oak Shelf",
-    grade="VANILLA_ALTERNATIVE_NEEDS_VISUAL_PLACEMENT",dimension="1x1 vanilla full block; placement height approximate",
+ dict(i=7,method="VANILLA_BLOCK_OFFICIAL_NOT_RENDERED",asset="minecraft:chiseled_bookshelf",secondary="Wan's Storage Shelves / Oak Shelf",
+    grade="VANILLA_BLOCK_VISUAL_NOT_VERIFIED",dimension="1x1 vanilla full block; placement height approximate",
     reasons="기존 Handcrafted acacia_shelf는 렌더가 막힌 진열장처럼 보여 원본의 빈 3단 목제 개방형 선반과 다름. 바닐라 빈 조각된 책장은 2열x3행 슬롯을 제공해 선반 구획·재질이 더 가까우나 PZ는 가로로 긴 3개 층이고 임의 물품 수납 기능도 다름. 새 모드의 오크 선반 모델 재검증 가능.",
     requirement="open oak-brown storage bookshelf with 3 shelves, 40 capacity",
-    source_file="vanilla__chiseled_bookshelf.png",source_dir="vanilla"),
+    source_file="",source_dir="official_vanilla"),
  dict(i=8,method="NEW_MOD_OFFICIAL_INFO",asset="Wan's Storage Shelves / Modular Metal-frame Shelf",secondary="minecraft:iron_trapdoor + iron_bars [SCHEMATIC ONLY]",
     grade="PROMISING_NOT_YET_BLOCKBENCH_VERIFIED",dimension="PZ complete 2x1, ~2-block tall; modular 2x1 installation unverified",
     reasons="원본은 두 스프라이트로 조립된 폭 2칸, 높이 약 2칸 금속 3단랙. Wan 공식 이미지에는 검정/남색 금속 프레임과 3단 선반이 있어 기존 빈칸보다는 좋은 후보. 다만 나무판 재질·모듈의 실제 연결 폭은 달라서 2칸 배치/적재 가능 여부 확인 전 최종 확정 금지. 바닐라 철 덫문+쇠창살 조합은 같은 블록공간을 공유하기 어려워 외형 대안 검증 전.",
@@ -63,10 +63,10 @@ DECISIONS=[
     requirement="plain dark wood 4-leg dining chair; simple curved top backrest",
     source_file="chair_1_spruce_BLOCKBENCH_VIEWPORT.png",source_dir="decocraft"),
  dict(i=10,method="VANILLA_NATIVE",asset="minecraft:light_gray_shulker_box",secondary="minecraft:iron_block [visual fallback]; CUSTOM_BLOCKBENCH_MAY_BE_NEEDED",
-    grade="VANILLA_FALLBACK_NOT_EXACT",dimension="1x1 vanilla block, but legs/cabinet doors missing",
+    grade="VANILLA_FALLBACK_NOT_EXACT_NO_NATIVE_RENDER",dimension="1x1 vanilla block, but legs/cabinet doors missing",
     reasons="PZ는 낮은 철제 2도어 카운터와 4개의 다리, 하부 공간. 기존 적합 후보 미발견. 실버/라이트그레이 셜커 상자는 금속 느낌·1x1 크기·수납이라는 점에서 실용적 임시대체지만 정면 문 두 개와 다리를 표현하지 못함. Decocraft 하부장은 목재 상판이라 재질 차이가 큼. 정확 외형 유지하려면 별도 철제 카운터 모델 탐색/제작.",
     requirement="short stainless steel two-door cabinet with four legs and open bottom, 1x1 footprint",
-    source_file="vanilla__light_gray_shulker_box.png",source_dir="vanilla")
+    source_file="",source_dir="official_vanilla")
 ]
 def load_rows(path):
  with path.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
@@ -121,6 +121,11 @@ def card(dec,orig):
   d.text((739,178),"Wan's Storage Shelves (Forge 1.20.1)",font=font(18),fill=(50,70,89))
   d.text((739,223),"Official mod gallery; model not locally loaded",font=font(14),fill=(68,85,102))
   d.text((739,255),"See URL in HTML review page / CSV",font=font(13),fill=(70,85,101))
+ elif dec["source_dir"]=="official_vanilla":
+  d.rounded_rectangle((714,126,1266,401),radius=12,outline=(129,147,164),width=3)
+  d.text((733,200),"VANILLA BLOCK CANDIDATE",font=font(19),fill=(65,93,116))
+  d.text((733,238),dec["asset"],font=font(15),fill=(65,93,116))
+  d.text((733,280),"Native 1.20.1 rendering incomplete; see wiki",font=font(12),fill=(97,87,80))
  else:
   d.rounded_rectangle((714,126,1266,401),radius=12,outline=(169,106,99),width=3)
   d.text((733,210),"NO EQUIVALENT MATCH VERIFIED",font=font(19),fill=(143,67,61))
@@ -141,6 +146,10 @@ def index_html(report):
        if row["candidate_category"]=="NEW_MOD_OFFICIAL_INFO" else "")
   if url:
    url+=f'<p><a href="{WAN_PROMO}" target="_blank">공식 홍보 이미지 확인(게임 화면이 아닌 합성 홍보 이미지)</a></p>'
+   url+=f'<img loading="lazy" style="max-width:220px;aspect-ratio:1;object-fit:contain" src="{WAN_PROMO}" alt="Wan 모드 공식 홍보: 종이상자와 금속 프레임 선반"/>'
+  if row["candidate_category"]=="VANILLA_BLOCK_OFFICIAL_NOT_RENDERED":
+   u="https://minecraft.wiki/w/Chiseled_Bookshelf" if "bookshelf" in row["candidate_id"] else "https://minecraft.wiki/w/Shulker_Box"
+   url+=f'<a href="{u}" target="_blank" rel="noreferrer">바닐라 블록 실제 외형과 속성 확인 (Minecraft Wiki)</a>'
   sections.append('<article><img loading="lazy" src="'+pic+'" alt="'+html.escape(heading)+'">'+
    '<h2>'+html.escape(heading)+'</h2><p><b>새 후보:</b> '+html.escape(row["candidate_id"] or "일치품 없음")+'</p>'+
    '<p><b>보조 후보:</b> '+html.escape(row["secondary_id"])+'</p>'+
@@ -182,7 +191,7 @@ def main():
    "minecraft_placement_size":dec["dimension"],
    "shape_requirement":dec["requirement"],
    "manual_visual_review":dec["reasons"],
-   "mc_real_model_visual_evidence":"ACTUAL_BLOCKBENCH_RENDER" if native_source(dec) else "MOD_OFFICIAL_INFORMATION_ONLY" if dec["source_dir"]=="official_wan" else "NO_APPROPRIATE_RENDER",
+   "mc_real_model_visual_evidence":"ACTUAL_BLOCKBENCH_RENDER" if native_source(dec) else "MOD_OFFICIAL_INFORMATION_ONLY" if dec["source_dir"]=="official_wan" else "OFFICIAL_VANILLA_ID_NOT_NATIVE_RENDERED" if dec["source_dir"]=="official_vanilla" else "NO_APPROPRIATE_RENDER",
    "mc_source_image_file":str(native_source(dec).relative_to(D)) if native_source(dec) else "",
    "official_mod_page_url":WAN_URL if dec["source_dir"]=="official_wan" else "",
    "approved_for_automatic_world_placement":"NO",
