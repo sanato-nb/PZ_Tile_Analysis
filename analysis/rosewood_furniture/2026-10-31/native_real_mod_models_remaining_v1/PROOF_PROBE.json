@@ -1,0 +1,183 @@
+[
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:basic_toilet",
+    "cuboids": 60,
+    "textures": 5,
+    "source_models": [
+      "assets/pfm/models/block/basic_toilet/basic_toilet.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/quartz_block_bottom.png",
+      "assets/minecraft/textures/block/quartz_block_side.png",
+      "assets/minecraft/textures/block/stone.png",
+      "assets/minecraft/textures/block/water_still.png",
+      "assets/minecraft/textures/block/water_flow.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet",
+        "y": 90
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water",
+        "y": 90
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water",
+        "y": 270
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water"
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water",
+        "y": 90
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water",
+        "y": 270
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water"
+      }
+    ],
+    "selection_tags": [
+      "multipart_heuristic"
+    ],
+    "source_model_sha256": "4644d4ad108c3c6962c775545bb2c6d7d83ba867074855be36bc1ffde545bc43",
+    "version": "5.2.2",
+    "project": "paladins_basic_toilet",
+    "format": "free",
+    "cubes": 16,
+    "preview": true,
+    "image": "paladins__basic_toilet.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:blue_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/blue_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/blue_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/blue_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "bb5f3357c313aeccbd122ea506da161da62dc28136fed923a8260186ee39d47d",
+    "version": "5.2.2",
+    "project": "macaws_blue_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__blue_couch.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:computer",
+    "cuboids": 10,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/computer_off.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/computer.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/computer_off",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,powered=false"
+    ],
+    "source_model_sha256": "0eadf48912bb7b031299687c902bf61a9c4a702300bca65b1cfd1357831ee470",
+    "version": "5.2.2",
+    "project": "refurbished_computer",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__computer.png"
+  },
+  {
+    "mod": "handcrafted",
+    "blockstate_id": "handcrafted:acacia_shelf",
+    "cuboids": 2,
+    "textures": 6,
+    "source_models": [
+      "missing:assets/handcrafted/models/block/block.json",
+      "assets/handcrafted/models/block/shelf.json",
+      "assets/handcrafted/models/block/acacia_shelf_left_1.json"
+    ],
+    "source_texture_paths": [
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_left.png",
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_side_left.png",
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_back.png",
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_side_right.png",
+      "assets/minecraft/textures/block/acacia_planks.png",
+      "assets/handcrafted/textures/block/shelf/overlay/none.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "handcrafted:block/acacia_shelf_left_1",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left,type=1"
+    ],
+    "source_model_sha256": "e15bcf529adee7c427345f40b450ee72ecd02317874e5e893a97366bcfa9b3cf",
+    "version": "5.2.2",
+    "project": "handcrafted_acacia_shelf",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "handcrafted__acacia_shelf.png"
+  }
+]
