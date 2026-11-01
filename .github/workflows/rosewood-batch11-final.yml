@@ -1,0 +1,80 @@
+name: Rosewood batch 11 — validate 101-110 independent manual native comparison
+on:
+  push:
+    branches: [work/rosewood-manual-batch11-101-110-20261102]
+    paths:
+      - .github/workflows/rosewood-batch11-final.yml
+      - scripts/rosewood_batch11_101_110_decisions.json
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validate-and-commit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_101_110.py
+            /scripts/rosewood_batch11_101_110_decisions.json
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/11_101_110/extra_decocraft_render/
+      - name: Install image and CSV processing dependencies
+        run: python3 -m pip install -q --break-system-packages pillow numpy
+      - name: Compile and generate evidence-backed manual review 101-110
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_101_110.py
+          python3 -u scripts/complete_rosewood_batch_101_110.py
+      - name: Audit scope, source hashes, ten images, CSV, and ZIP CRC
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile,hashlib
+          from pathlib import Path
+          base=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review')
+          p=base/'batch_101_110_v1'
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['scope']=='101-110'
+          assert m['individual_items_checked_this_batch']==10
+          assert m['attempted_decocraft_models']==26
+          assert m['unique_decocraft_models_rerendered']==26
+          assert m['native_model_pz_comparison_cards']==10
+          assert m['conditional_match_proposals']==5
+          assert m['deferred_other_mod_or_vanilla_search']==5
+          assert m['exact_1_to_1_matches_certified']==0
+          assert m['minecraft_game_install_collision_verified']==0
+          assert not m['parallel_group_progress_overwritten']
+          def read(name):
+           with (p/name).open('r',encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          a=read('BATCH_101_110_MANUAL_VISUAL_REVIEW.csv')
+          d=read('BATCH_101_110_DEFERRED_OTHER_MODS.csv')
+          assert [int(x['index']) for x in a]==list(range(101,111))
+          assert [int(x['index']) for x in d]==[101,103,105,106,110]
+          assert all(x['approved_for_minecraft_world_replacement']=='NO' and x['exact_1_to_1_visual_match_approved']=='NO' for x in a)
+          assert all(len(x['pz_preview_sha256'])==64 for x in a)
+          assert all(len(h)==64 for x in a for h in x['native_source_model_sha256'].split('|') if h)
+          assert len(list((p/'cards').glob('*_PZ_vs_MC.jpg')))==10
+          for x in a:
+           f=p/x['card_path']
+           assert f.is_file() and f.stat().st_size>10000,(f,f.stat().st_size)
+          state=json.loads((p/'BATCH11_STANDALONE_PROGRESS.json').read_text('utf8'))
+          assert state['conditional']==[102,104,107,108,109]
+          assert state['deferred']==[101,103,105,106,110]
+          assert state['merged_into_global_progress'] is False
+          with zipfile.ZipFile(p/'ROSEWOOD_BATCH_101_110_MANUAL_REVIEW.zip') as z:
+           assert z.testzip() is None
+           assert 'INDEX.html' in z.namelist()
+           assert len([x for x in z.namelist() if x.startswith('cards/') and x.endswith('.jpg')])==10
+          print('BATCH11_SOURCE_VERIFIED_26_RENDERED_10_CARDS_5_CONDITIONAL_5_DEFERRED',m)
+          PY
+      - name: Commit results only in batch11 isolated directory
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_101_110_v1/
+          git commit -m 'review(rosewood): native source visual audit 101-110, 5 conditional and 5 deferred, 110/357'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
