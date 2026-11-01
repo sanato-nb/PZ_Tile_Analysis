@@ -62,17 +62,18 @@ def references(z,ns,id):
   tags.append("multipart_heuristic")
  refs=[x for x in refs if isinstance(x,dict) and x.get("model")]
  return refs[:40],tags
-def resolve(z,namespace,model,seen=None):
+def resolve(z,namespace,model,seen=None,vanilla=None):
  ns,path=model.split(":",1) if ":" in model else (namespace,model)
  full=f"assets/{ns}/models/{path}.json"
  seen=set() if seen is None else set(seen)
  if full in seen:return None,{},[],["model_cycle"]
  seen.add(full)
  obj=readjson(z,full)
+ if obj is None and vanilla is not None:obj=readjson(vanilla,full)
  if obj is None:return None,{},[],["missing:"+full]
  textures={};elems=None;roots=[]
  if obj.get("parent"):
-  _,base,elems,roots=resolve(z,ns,obj["parent"],seen)
+  _,base,elems,roots=resolve(z,ns,obj["parent"],seen,vanilla)
   textures.update(base)
  textures.update(obj.get("textures",{}))
  if isinstance(obj.get("elements"),list):elems=obj["elements"]
@@ -114,7 +115,7 @@ def convert(z,mod,blockid,vanilla):
  elements=[];texture_map=OrderedDict();source_files=[];missing=[]
  cache={}
  for i,ref in enumerate(refs):
-  model,aliases,cubes,source=resolve(z,ns,ref["model"])
+  model,aliases,cubes,source=resolve(z,ns,ref["model"],vanilla=vanilla)
   source_files.extend(source)
   if not cubes:
    missing.append("no_vanilla_cuboids:"+ref["model"])
