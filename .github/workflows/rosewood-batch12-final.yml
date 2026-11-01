@@ -1,0 +1,84 @@
+name: Rosewood batch 12 — validate 111-120 independent manual native comparison
+on:
+  push:
+    branches: [work/rosewood-manual-batch12-111-120-20261102]
+    paths:
+      - .github/workflows/rosewood-batch12-final.yml
+      - scripts/rosewood_batch12_111_120_decisions.json
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validate-and-commit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_111_120.py
+            /scripts/rosewood_batch12_111_120_decisions.json
+            /scripts/rosewood_batch12_other_mod_research.json
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/12_111_120/extra_decocraft_render/
+      - name: Install image and CSV processing dependencies
+        run: python3 -m pip install -q --break-system-packages pillow numpy
+      - name: Compile and generate evidence-backed manual review 111-120
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_111_120.py
+          python3 -u scripts/complete_rosewood_batch_111_120.py
+      - name: Audit scope, source hashes, ten images, CSV, and ZIP CRC
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile,hashlib
+          from pathlib import Path
+          base=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review')
+          p=base/'batch_111_120_v1'
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['scope']=='111-120'
+          assert m['individual_items_checked_this_batch']==10
+          assert m['attempted_decocraft_models']==33
+          assert m['unique_decocraft_models_rerendered']==33
+          assert m['native_model_pz_comparison_cards']==10
+          assert m['conditional_match_proposals']==2
+          assert m['deferred_other_mod_or_vanilla_search']==8
+          assert m['exact_1_to_1_matches_certified']==0
+          assert m['minecraft_game_install_collision_verified']==0
+          assert not m['parallel_group_progress_overwritten']
+          assert m['alternative_mod_links_researched']==8 and m['alternative_mod_models_visually_verified']==0
+          def read(name):
+           with (p/name).open('r',encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          a=read('BATCH_111_120_MANUAL_VISUAL_REVIEW.csv')
+          d=read('BATCH_111_120_DEFERRED_OTHER_MODS.csv')
+          alt=read('BATCH_111_120_OTHER_MOD_RESEARCH.csv')
+          assert len(alt)==8 and all(x['source_url'].startswith('https://') and x['visual_status']=='NOT_DOWNLOADED_NOT_RENDERED' for x in alt)
+          assert [int(x['index']) for x in a]==list(range(111,121))
+          assert [int(x['index']) for x in d]==[112,113,114,116,117,118,119,120]
+          assert all(x['approved_for_minecraft_world_replacement']=='NO' and x['exact_1_to_1_visual_match_approved']=='NO' for x in a)
+          assert all(len(x['pz_preview_sha256'])==64 for x in a)
+          assert all(len(h)==64 for x in a for h in x['native_source_model_sha256'].split('|') if h)
+          assert len(list((p/'cards').glob('*_PZ_vs_MC.jpg')))==10
+          for x in a:
+           f=p/x['card_path']
+           assert f.is_file() and f.stat().st_size>10000,(f,f.stat().st_size)
+          state=json.loads((p/'BATCH12_STANDALONE_PROGRESS.json').read_text('utf8'))
+          assert state['conditional']==[111,115]
+          assert state['deferred']==[112,113,114,116,117,118,119,120]
+          assert state['merged_into_global_progress'] is False
+          with zipfile.ZipFile(p/'ROSEWOOD_BATCH_111_120_MANUAL_REVIEW.zip') as z:
+           assert z.testzip() is None
+           assert 'INDEX.html' in z.namelist()
+           assert len([x for x in z.namelist() if x.startswith('cards/') and x.endswith('.jpg')])==10
+          print('BATCH12_SOURCE_VERIFIED_33_RENDERED_10_CARDS_2_CONDITIONAL_8_DEFERRED',m)
+          PY
+      - name: Commit results only in batch12 isolated directory
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_111_120_v1/
+          git commit -m 'review(rosewood): native source visual audit 111-120, 5 conditional and 5 deferred, 120/357'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
