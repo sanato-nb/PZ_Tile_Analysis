@@ -8,7 +8,7 @@ import hashlib,base64,csv,io,json,os,re,subprocess,time,urllib.request,zipfile
 from PIL import Image
 from playwright.sync_api import sync_playwright
 D=Path(__file__).resolve().parents[1]/"analysis/rosewood_furniture/2026-10-31"
-O=D/"blockbench_native_review_v2"
+O=D/"blockbench_native_review_v3"
 TEMP=Path("/tmp/blockbench_pz_mc_source")
 MOD="decocraft"
 VERS=json.loads((D/"minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json").read_text("utf8"))
@@ -123,10 +123,12 @@ def run_model(obj,app,idx):
      }
      const center=lo.map((v,i)=>(v+hi[i])/2);
      const span=Math.max(...lo.map((v,i)=>hi[i]-v));
-     const distance=Math.max(65,span*3.4);
+     const distance=Math.max(28,span*1.65);
      const cam=p.camera;
+     const oldTarget=(p.controls?.target?.clone?.()||new THREE.Vector3(0,0,0));
+     const direction=cam.position.clone().sub(oldTarget).normalize();
      if(p.controls?.target?.set)p.controls.target.set(...center);
-     cam.position.set(center[0]+distance,center[1]+distance*.67,center[2]+distance);
+     cam.position.set(center[0]+direction.x*distance,center[1]+direction.y*distance,center[2]+direction.z*distance);
      cam.lookAt(...center);
      if(cam.isOrthographicCamera){
        cam.zoom=Math.min(cam.zoom, 13/Math.max(12,span));
@@ -203,10 +205,25 @@ def main():
      panel.paste(a,(20+(620-a.width)//2,72+(480-a.height)//2),a)
     else:panel.paste(a,(20,70))
     b=mc.convert("RGBA")
-    # Crop empty transparent screenshot pixels, only after actual Blockbench render.
-    bounds=b.getbbox()
-    if bounds:b=b.crop(bounds)
+    # Mask the native transparent/black viewport background before cropping.
+    # The native pixel colors, geometry and textures are never repainted.
+    from PIL import ImageChops
+    import numpy as np
+    pixels=np.asarray(b)
+    rgb=pixels[:,:,:3]
+    mask=(rgb.max(axis=2)>12)
+    if pixels.shape[2]==4:
+     mask &= pixels[:,:,3]>7
+    yy,xx=np.where(mask)
+    if len(xx)>20:
+     pad=20
+     bounds=(max(0,int(xx.min())-pad),max(0,int(yy.min())-pad),
+             min(b.width,int(xx.max())+pad+1),min(b.height,int(yy.max())+pad+1))
+     b=b.crop(bounds)
     b.thumbnail((690,485))
+    if b.width<340 and b.height<250 and b.width>0 and b.height>0:
+     factor=min(690/max(1,b.width),485/max(1,b.height),2.5)
+     b=b.resize((round(b.width*factor),round(b.height*factor)),Image.Resampling.LANCZOS)
     panel.paste(b,(690+(690-b.width)//2,72+(480-b.height)//2),b)
     draw=ImageDraw.Draw(panel)
     draw.text((30,15),"PROJECT ZOMBOID · complete original PNG",fill=(20,36,54))
