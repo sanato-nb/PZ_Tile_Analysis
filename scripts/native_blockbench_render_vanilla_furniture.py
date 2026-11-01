@@ -266,14 +266,16 @@ def main():
  assert len(targets)>0
  OUT.mkdir(parents=True,exist_ok=True)
  meta=[];failed=[];success=0
- z=sourcezip(next(iter(targets.values())))
+ zips={}
  vanilla=vanilla_client_zip()
  for idx,(key,mod) in enumerate(targets.items()):
   ns,name=key.split(":",1)
   print("RENDER",mode,idx+1,"/",len(targets),key,flush=True)
   try:
-   model,evidence=convert(z,mod,key,vanilla)
+   if mod not in zips:zips[mod]=sourcezip(mod)
+   model,evidence=convert(zips[mod],mod,key,vanilla)
    if model is None:
+    print("NO_GEOMETRY",key,evidence.get("reason"),evidence.get("missing",[])[:3],flush=True)
     meta.append(evidence);failed.append(key);continue
    obj=TEMP/(mod+"_"+name+".bbmodel")
    obj.write_text(json.dumps(model,ensure_ascii=False),encoding="utf8")
@@ -283,11 +285,14 @@ def main():
     filename=mod+"__"+name+".png"
     (OUT/filename).write_bytes(pic);rv["image"]=filename
     success+=1
-   else:failed.append(key)
+   else:
+    print("NATIVE_ERROR",key,rv.get("error"),flush=True)
+    failed.append(key)
    meta.append({**evidence,**rv})
    try:obj.unlink()
    except Exception:pass
   except Exception as e:
+   print("RENDER_FAILURE",key,repr(e)[:400],flush=True)
    meta.append({"mod":mod,"blockstate_id":key,"error":repr(e)[:350]});failed.append(key)
   if (idx+1)%5==0:print("SUMMARY",success,idx+1,flush=True)
  (OUT/("PROOF_"+mode+".json")).write_text(json.dumps(meta,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
