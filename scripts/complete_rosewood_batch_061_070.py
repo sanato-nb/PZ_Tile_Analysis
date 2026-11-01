@@ -69,7 +69,7 @@ def build_card(a,original,source):
  label="Proposed: "+(a["candidate"] or "NO ACCEPTABLE MATCH – inspected model REJECTED")
  d.text((25,517),(label+"  / inspected "+a["model"])[:130],font=font(11),fill=(52,66,83))
  d.text((25,543),("Manual review: "+a["status"])[:128],font=font(12),fill=(131,64,59))
- d.text((25,574),"Source-backed render, not actual connected gameplay/size verification. Multipart sofa modules shown separately.",font=font(11),fill=(125,82,72))
+ d.text((25,574),"Source model image only. NOT actual Minecraft game placement or certified 1:1 visual/size equivalence.",font=font(11),fill=(125,82,72))
  return im
 def htmlpage(items):
  block=[]
