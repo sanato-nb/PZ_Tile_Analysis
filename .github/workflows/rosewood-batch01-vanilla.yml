@@ -1,0 +1,58 @@
+name: Render real vanilla Minecraft 1.20.1 blocks as possible Project Zomboid furniture replacements
+on:
+  push:
+    branches: [work/rosewood-manual-10-batches-20261101]
+    paths: [.github/workflows/rosewood-batch01-vanilla.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  vanilla:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/render_batch01_minecraft_vanilla_blocks.py
+            /analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v3/REVISED_357_PZ_MC_MATCHES.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+      - name: Verify official Blockbench 5.2.2
+        run: |
+          mkdir -p /tmp/blockbench-app
+          cd /tmp/blockbench-app
+          curl -fsSL --retry 3 -o Blockbench_5.2.2.AppImage https://github.com/JannisX11/blockbench/releases/download/v5.2.2/Blockbench_5.2.2.AppImage
+          echo '375fb8da33b8b9ad0f1f790836ed83020b6e987a56e23184d31d6ccf3132ac3b  Blockbench_5.2.2.AppImage' | sha256sum -c -
+          chmod +x Blockbench_5.2.2.AppImage
+          ./Blockbench_5.2.2.AppImage --appimage-extract >/dev/null
+      - name: Install desktop renderer dependencies
+        run: |
+          python3 -m pip install -q --break-system-packages pillow playwright numpy
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libasound2t64 libgtk-3-0 libgbm1 libnss3 >/dev/null
+      - name: Download SHA1 validated Mojang 1.20.1 JAR and render six vanilla blocks
+        run: |
+          python3 -u scripts/render_batch01_minecraft_vanilla_blocks.py VANILLA
+      - name: Validate generated vanilla block images
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/01_001_010/vanilla_native_render")
+          d=json.loads((p/"PROOF_VANILLA.json").read_text("utf8"))
+          good=[x for x in d if x.get("image")]
+          assert len(d)==6
+          assert len(good)>=4,good
+          assert all((p/x["image"]).exists() for x in good)
+          print("VANILLA_RENDERED",len(good),"/6")
+          PY
+      - name: Store screenshot evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/01_001_010/vanilla_native_render/
+          git commit -m 'evidence(rosewood): actual Mojang vanilla block models via native Blockbench, batch 001-010'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
