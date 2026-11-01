@@ -143,7 +143,7 @@ def main():
  deferred=[x for x in review if x["review_status"].startswith("DEFER")]
  assert [x["index"] for x in deferred]==[46,48,49,50]
  writecsv(OUT/"BATCH_041_050_DEFERRED_OTHER_MODS.csv",deferred)
- groups=rows(B/"batch_021_030_v1/BATCHES_ALL_357_PROGRESS.csv")
+ groups=rows(B/"batch_031_040_v1/BATCHES_ALL_357_PROGRESS.csv")
  assert len(groups)==36
  assert [x["range"] for x in groups[:5]]==["001-010","011-020","021-030","031-040","041-050"]
  assert all(x["review_status"]=="COMPLETED_CONDITIONAL_CANDIDATES" for x in groups[:4])
