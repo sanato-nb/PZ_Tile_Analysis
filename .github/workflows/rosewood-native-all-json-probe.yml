@@ -2,7 +2,7 @@ name: PROBE native Blockbench for Macaw Paladin Refurbished Handcrafted vanilla 
 on:
   push:
     branches: [work/rosewood-all-357-real-render-20261101]
-    paths: [.github/workflows/rosewood-native-all-json-probe.yml]
+    paths: [.github/workflows/rosewood-native-all-json-probe.yml, scripts/native_blockbench_render_vanilla_furniture.py]
   workflow_dispatch:
 permissions:
   contents: write
