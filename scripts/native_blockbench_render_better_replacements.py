@@ -207,6 +207,36 @@ def main():
   report.append(row)
   print("BLOCKBENCH_NATIVE_RESULT",json.dumps({k:v for k,v in row.items() if k in ["id","version","project","format","cubes","textures","error","native_model_screenshot","loaded_verified"]},ensure_ascii=False),flush=True)
  (O/"NATIVE_BLOCKBENCH_PROOF.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
+ # Side-by-side actual candidate comparison without doing a custom 3D render.
+ cross=D/"complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv"
+ if cross.exists():
+  with cross.open(encoding="utf-8-sig",newline="") as f:
+   lookup={(x["CustomName"],x["GroupName"]):x for x in csv.DictReader(f)}
+  from PIL import ImageDraw,ImageFont
+  import numpy as np
+  for row in report:
+   dest=O/(row["id"]+"_BLOCKBENCH_VIEWPORT.png")
+   source=lookup.get((row["pz_name"],row["pz_style"]))
+   if not source or not dest.exists():continue
+   original=D/"complete_furniture_visual_3d_v1"/source["preview_path"]
+   if not original.exists():continue
+   with Image.open(original) as p,Image.open(dest) as m:
+    left=p.convert("RGBA")
+    a=np.array(m.convert("RGBA"));bright=a[:,:,:3].max(2)>12
+    ys,xs=np.where(bright)
+    if len(xs)>12:
+     bb=(max(0,int(xs.min())-12),max(0,int(ys.min())-12),min(m.width,int(xs.max())+13),min(m.height,int(ys.max())+13))
+     right=m.crop(bb).convert("RGBA")
+    else:right=m.convert("RGBA")
+    left.thumbnail((610,490));right.thumbnail((640,490))
+    panel=Image.new("RGB",(1400,590),(247,249,251))
+    panel.paste(left,(int(332-left.width/2),int(290-left.height/2)),left)
+    panel.paste(right,(int(1040-right.width/2),int(290-right.height/2)),right)
+    d=ImageDraw.Draw(panel)
+    d.text((24,12),"PROJECT ZOMBOID: "+row["pz_name"]+" / "+row["pz_style"],fill=(35,54,71))
+    d.text((720,12),"MINECRAFT: decocraft:"+row["id"]+" / Native Blockbench 5.2.2",fill=(35,54,71))
+    d.text((24,564),"New candidate only — Minecraft game collision, color variant, placement and visual equivalence NOT confirmed",fill=(95,59,54))
+    panel.save(O/(row["id"]+"_PZ_VS_NEW_MC_CANDIDATE.jpg"),quality=89)
  assert any(x.get("loaded_verified") for x in report), "No verified native Blockbench model open; refuse claiming success"
  print("SUCCESS_NATIVE_BLOCKBENCH",sum(bool(x.get("loaded_verified")) for x in report),flush=True)
 if __name__=="__main__":main()
