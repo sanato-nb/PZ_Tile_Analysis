@@ -1,0 +1,61 @@
+name: Publish audited Project Zomboid first batch 001-010 and register 36 ten-item review groups
+on:
+  push:
+    branches: [work/rosewood-manual-10-batches-20261101]
+    paths: [.github/workflows/rosewood-ten-batch01-final.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  batch01:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_10_batch01_review.py
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/01_001_010/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/01_001_010/vanilla_native_render/
+      - name: Install safe asset image dependencies
+        run: python3 -m pip install --break-system-packages -q pillow numpy
+      - name: Verify first ten sources and render source-grounded cards
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_10_batch01_review.py
+          python3 -u scripts/complete_rosewood_10_batch01_review.py
+      - name: Validate 36 scheduled groups, source screenshots and no false visual approvals
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_001_010_v1")
+          d=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert d["manually_reviewed_with_individual_rationales"]==10
+          assert d["total_batches"]==36 and d["batches_done"]==1
+          assert d["exact_1to1_approved"]==0
+          assert len(list((p/"cards").glob("*.jpg")))==10
+          groups=list(csv.DictReader((p/"BATCHES_ALL_357_PROGRESS.csv").open(encoding="utf-8-sig")))
+          assert len(groups)==36
+          assert groups[-1]["range"]=="351-357"
+          rows=list(csv.DictReader((p/"BATCH_001_010_MANUAL_VISUAL_REVIEW.csv").open(encoding="utf-8-sig")))
+          assert len(rows)==10
+          assert [int(x["index"]) for x in rows]==list(range(1,11))
+          assert all(x["exact_visual_match_certified"]=="NO" for x in rows)
+          assert rows[2]["old_candidate_decision"]=="REJECT"
+          with zipfile.ZipFile(p/"ROSEWOOD_BATCH_001_010_MANUAL_REVIEW.zip") as z:
+            assert z.testzip() is None
+            assert "INDEX.html" in z.namelist()
+          print("BATCH01_VALID",d)
+          PY
+      - name: Commit actual per-batch comparison and progress tracker
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_001_010_v1/
+          git commit -m 'review(rosewood): manual furniture 001-010 with vanilla alternatives, real mod shape checks and 36-group progress'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
