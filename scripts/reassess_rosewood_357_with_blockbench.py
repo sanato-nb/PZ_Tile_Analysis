@@ -226,6 +226,21 @@ def main():
   makecard(row,d).save(O/row["card"],quality=84,optimize=True)
   out.append(row);stats[grade]+=1;stats[verdict]+=1
   if i%60==0:print("REASSESS",i,dict(stats),flush=True)
+ # Small contact sheets let the reviewer actually inspect different native models
+ # without confusing the same MC asset repeated across PZ variants.
+ contacts=O/"contact_sheets";contacts.mkdir()
+ seen=set();native_unique=[]
+ for row in out:
+  if row["image_evidence"]!="NATIVE_BLOCKBENCH_5_2_2" or row["mc_id"] in seen:continue
+  seen.add(row["mc_id"]);native_unique.append(row)
+ for start in range(0,len(native_unique),6):
+  group=native_unique[start:start+6]
+  sheet=Image.new("RGB",(1920,920),(248,250,252))
+  for k,row in enumerate(group):
+   with Image.open(O/row["card"]) as src:
+    a=src.convert("RGB");a.thumbnail((630,445),Image.Resampling.LANCZOS)
+    sheet.paste(a,((k%3)*640+5,(k//3)*460+5))
+  sheet.save(contacts/("NATIVE_BLOCKBENCH_REVIEW_%02d.jpg"%(start//6+1)),quality=85)
  writecsv(O/"ALL_357_REMATCH_REVIEW.csv",out)
  writecsv(O/"ALL_881_CANDIDATES_REPRIORITIZED_REVIEW_ONLY.csv",newrank)
  writecsv(O/"FOUR_VISUALLY_REVIEWED.csv",[r for r in out if r["visual_verdict"]!="NOT_VISUALLY_REVIEWED"])
