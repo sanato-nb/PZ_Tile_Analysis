@@ -1,0 +1,661 @@
+[
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:basic_toilet",
+    "cuboids": 60,
+    "textures": 5,
+    "source_models": [
+      "assets/pfm/models/block/basic_toilet/basic_toilet.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_flowing_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_still_water.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json",
+      "assets/pfm/models/block/basic_toilet/basic_toilet_empty.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/quartz_block_bottom.png",
+      "assets/minecraft/textures/block/quartz_block_side.png",
+      "assets/minecraft/textures/block/stone.png",
+      "assets/minecraft/textures/block/water_still.png",
+      "assets/minecraft/textures/block/water_flow.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet",
+        "y": 90
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water",
+        "y": 90
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water",
+        "y": 270
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_still_water"
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water",
+        "y": 90
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water",
+        "y": 270
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_toilet/basic_toilet_flowing_water"
+      }
+    ],
+    "selection_tags": [
+      "multipart_heuristic"
+    ],
+    "source_model_sha256": "485cb82822cc49fe3557b6d8042fe5e327b8e3c773bf03654afb7737da956917",
+    "version": "5.2.2",
+    "project": "paladins_basic_toilet",
+    "format": "free",
+    "cubes": 16,
+    "preview": true,
+    "image": "paladins__basic_toilet.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:arm_chair_leather",
+    "cuboids": 12,
+    "textures": 4,
+    "source_models": [
+      "assets/pfm/models/block/arm_chair_leather.json"
+    ],
+    "source_texture_paths": [
+      "assets/pfm/textures/block/leather_edgeless.png",
+      "assets/pfm/textures/block/leather_edge.png",
+      "assets/pfm/textures/block/leather.png",
+      "assets/minecraft/textures/block/dark_oak_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/arm_chair_leather",
+        "y": 180
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "dd04f86df7df693f72b3f13964f5f22791bddaad989dc5f2c3c9178bfb0504e9",
+    "version": "5.2.2",
+    "project": "paladins_arm_chair_leather",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "paladins__arm_chair_leather.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:mesh_trashcan",
+    "cuboids": 7,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/mesh_trashcan.json"
+    ],
+    "source_texture_paths": [
+      "assets/pfm/textures/block/mesh.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/mesh_trashcan",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "fd2672ee1da3fedbb4a6e6ba1c5d86a0d6f284bcbe775a4af90f54530b78e5fe",
+    "version": "5.2.2",
+    "project": "paladins_mesh_trashcan",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__mesh_trashcan.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:green_arm_chair",
+    "cuboids": 3,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/arm_chair/white/arm_chair_middle.json",
+      "assets/pfm/models/block/arm_chair/green/arm_chair_middle.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/green_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/arm_chair/green/arm_chair_middle",
+        "y": 90,
+        "uvlock": "true"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=middle"
+    ],
+    "source_model_sha256": "d83a87d1ef697ed1c87336bb88bd24477e2f5a1ab0523c2ce358c4fa40181c84",
+    "version": "5.2.2",
+    "project": "paladins_green_arm_chair",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__green_arm_chair.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:oak_chair_classic_black",
+    "cuboids": 14,
+    "textures": 2,
+    "source_models": [
+      "assets/pfm/models/block/chair_classic/wool/white/chair_classic_tucked.json",
+      "assets/pfm/models/block/chair_classic/wool/black/chair_classic_tucked.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/oak_log.png",
+      "assets/minecraft/textures/block/black_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/chair_classic/wool/black/chair_classic_tucked",
+        "y": 180
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,tucked=true"
+    ],
+    "source_model_sha256": "f6bce29d07b936e1a7ebcc763a9233127ef483cdd6b80a978f07fd78153e3e10",
+    "version": "5.2.2",
+    "project": "paladins_oak_chair_classic_black",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__oak_chair_classic_black.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:black_arm_chair",
+    "cuboids": 3,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/arm_chair/white/arm_chair_middle.json",
+      "assets/pfm/models/block/arm_chair/black/arm_chair_middle.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/black_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/arm_chair/black/arm_chair_middle",
+        "y": 90,
+        "uvlock": "true"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=middle"
+    ],
+    "source_model_sha256": "0b8ee002a3de5f7740f8bcfb48512e246b477b26def00f5817d97b264bdc693a",
+    "version": "5.2.2",
+    "project": "paladins_black_arm_chair",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__black_arm_chair.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:basic_sink",
+    "cuboids": 76,
+    "textures": 3,
+    "source_models": [
+      "assets/pfm/models/block/basic_sink/basic_sink.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level1.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level2.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_full.json",
+      "assets/pfm/models/block/basic_sink/basic_sink.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level1.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level2.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_full.json",
+      "assets/pfm/models/block/basic_sink/basic_sink.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level1.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level2.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_full.json",
+      "assets/pfm/models/block/basic_sink/basic_sink.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level1.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_level2.json",
+      "assets/pfm/models/block/basic_sink/basic_sink_full.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/quartz_block_side.png",
+      "assets/minecraft/textures/block/gray_concrete.png",
+      "assets/minecraft/textures/block/water_still.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/basic_sink/basic_sink"
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink_level1"
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink_level2"
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink_full"
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink_level1",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink_level2",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink_full",
+        "y": 180
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink",
+        "y": 90
+      },
+      {
+        "model": "pfm:block/basic_sink/basic_sink_level1",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "multipart_heuristic"
+    ],
+    "source_model_sha256": "7ca9c49b30dbc64beaa3d087fa618f6bcc8568fc0cf7799590371114b987c0d2",
+    "version": "5.2.2",
+    "project": "paladins_basic_sink",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "paladins__basic_sink.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:blue_arm_chair",
+    "cuboids": 3,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/arm_chair/white/arm_chair_middle.json",
+      "assets/pfm/models/block/arm_chair/blue/arm_chair_middle.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/blue_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/arm_chair/blue/arm_chair_middle",
+        "y": 90,
+        "uvlock": "true"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=middle"
+    ],
+    "source_model_sha256": "b554d265e9c48aa158836d0fb11e31ede7c08d5e615cfc582c116d214082edbf",
+    "version": "5.2.2",
+    "project": "paladins_blue_arm_chair",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__blue_arm_chair.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:oak_chair_classic_white",
+    "cuboids": 14,
+    "textures": 2,
+    "source_models": [
+      "assets/pfm/models/block/chair_classic/wool/white/chair_classic_tucked.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/oak_log.png",
+      "assets/minecraft/textures/block/white_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/chair_classic/wool/white/chair_classic_tucked",
+        "y": 180
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,tucked=true"
+    ],
+    "source_model_sha256": "25289a3b9de3254a6ca46f7b3b937b0926157889f1855cc28b80b131cab420d5",
+    "version": "5.2.2",
+    "project": "paladins_oak_chair_classic_white",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__oak_chair_classic_white.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:gray_stove",
+    "cuboids": 18,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/white_stove.json",
+      "assets/pfm/models/block/gray_stove.json"
+    ],
+    "source_texture_paths": [
+      "assets/pfm/textures/block/gray_stove.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/gray_stove",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:open=false,facing=east"
+    ],
+    "source_model_sha256": "7fae1f5601ac56aa3dc30dfd7ee518dbe00d8310f4fe85baa56b28be92fc5ef2",
+    "version": "5.2.2",
+    "project": "paladins_gray_stove",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "paladins__gray_stove.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:gray_arm_chair",
+    "cuboids": 3,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/arm_chair/white/arm_chair_middle.json",
+      "assets/pfm/models/block/arm_chair/gray/arm_chair_middle.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/gray_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/arm_chair/gray/arm_chair_middle",
+        "y": 90,
+        "uvlock": "true"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=middle"
+    ],
+    "source_model_sha256": "bca46ff04be70e08ce609166c9086236f0f99bb5094114941a85f5800787d142",
+    "version": "5.2.2",
+    "project": "paladins_gray_arm_chair",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__gray_arm_chair.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:oak_chair_classic_red",
+    "cuboids": 14,
+    "textures": 2,
+    "source_models": [
+      "assets/pfm/models/block/chair_classic/wool/white/chair_classic_tucked.json",
+      "assets/pfm/models/block/chair_classic/wool/red/chair_classic_tucked.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/oak_log.png",
+      "assets/minecraft/textures/block/red_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/chair_classic/wool/red/chair_classic_tucked",
+        "y": 180
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,tucked=true"
+    ],
+    "source_model_sha256": "d10b83ffdb48caf9fab64dcbada8f14df302b015dc161cd16515b0c059413a5c",
+    "version": "5.2.2",
+    "project": "paladins_oak_chair_classic_red",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__oak_chair_classic_red.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:iron_microwave",
+    "cuboids": 11,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/iron_microwave/iron_microwave.json"
+    ],
+    "source_texture_paths": [
+      "assets/pfm/textures/block/iron_microwave.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/iron_microwave/iron_microwave",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,open=false"
+    ],
+    "source_model_sha256": "cbf177ef126012cb70e74d863055780c47667e23b39448e70e423334e6b388b4",
+    "version": "5.2.2",
+    "project": "paladins_iron_microwave",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__iron_microwave.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:brown_arm_chair",
+    "cuboids": 3,
+    "textures": 1,
+    "source_models": [
+      "assets/pfm/models/block/arm_chair/white/arm_chair_middle.json",
+      "assets/pfm/models/block/arm_chair/brown/arm_chair_middle.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/brown_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/arm_chair/brown/arm_chair_middle",
+        "y": 90,
+        "uvlock": "true"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=middle"
+    ],
+    "source_model_sha256": "9278073641a58d3b2c759692c7f293678e818557b213aa1bcdebe13fbdf61c58",
+    "version": "5.2.2",
+    "project": "paladins_brown_arm_chair",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__brown_arm_chair.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:white_fridge",
+    "reason": "NO_RENDERABLE_CUBOIDS",
+    "source_models": [
+      "missing:assets/pfm/models/block/white_fridge.json"
+    ],
+    "missing": [
+      "no_vanilla_cuboids:pfm:block/white_fridge"
+    ],
+    "refs": [
+      {
+        "model": "pfm:block/white_fridge",
+        "y": 270,
+        "uvlock": "false"
+      }
+    ]
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:iron_fridge",
+    "reason": "NO_RENDERABLE_CUBOIDS",
+    "source_models": [
+      "missing:assets/pfm/models/block/iron_fridge.json"
+    ],
+    "missing": [
+      "no_vanilla_cuboids:pfm:block/iron_fridge"
+    ],
+    "refs": [
+      {
+        "model": "pfm:block/iron_fridge",
+        "y": 270,
+        "uvlock": "false"
+      }
+    ]
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:basic_shower_handle",
+    "cuboids": 12,
+    "textures": 3,
+    "source_models": [
+      "assets/pfm/models/block/shower/shower_handle.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/red_concrete.png",
+      "assets/minecraft/textures/block/light_gray_concrete.png",
+      "assets/minecraft/textures/block/blue_concrete.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/shower/shower_handle",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:powered=false,facing=east"
+    ],
+    "source_model_sha256": "b747f4b8758d5ac24db15c151211d17155c7c351bccbc019be0cf76c416d67c1",
+    "version": "5.2.2",
+    "project": "paladins_basic_shower_handle",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "paladins__basic_shower_handle.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:froggy_chair_yellow",
+    "cuboids": 12,
+    "textures": 3,
+    "source_models": [
+      "assets/pfm/models/block/froggy_chair/froggy_chair_tucked.json",
+      "assets/pfm/models/block/froggy_chair/froggy_chair_yellow_tucked.json"
+    ],
+    "source_texture_paths": [
+      "assets/pfm/textures/block/froggy_chair_back_yellow.png",
+      "assets/pfm/textures/block/froggy_chair_top_yellow.png",
+      "assets/pfm/textures/block/froggy_chair_yellow.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/froggy_chair/froggy_chair_yellow_tucked",
+        "y": 180
+      }
+    ],
+    "selection_tags": [
+      "state_selection:tucked=true,facing=east"
+    ],
+    "source_model_sha256": "79199970c9a9d07227a64f662d78403048e17e8bec76fbf4b135d1fefbdd47c2",
+    "version": "5.2.2",
+    "project": "paladins_froggy_chair_yellow",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "paladins__froggy_chair_yellow.png"
+  },
+  {
+    "mod": "paladins",
+    "blockstate_id": "pfm:oak_chair_classic_purple",
+    "cuboids": 14,
+    "textures": 2,
+    "source_models": [
+      "assets/pfm/models/block/chair_classic/wool/white/chair_classic_tucked.json",
+      "assets/pfm/models/block/chair_classic/wool/purple/chair_classic_tucked.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/oak_log.png",
+      "assets/minecraft/textures/block/purple_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "pfm:block/chair_classic/wool/purple/chair_classic_tucked",
+        "y": 180
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,tucked=true"
+    ],
+    "source_model_sha256": "adfd2b3c0630ea59fd196ad33cf6b83eab27eac858d2d85433dd8c9785f53381",
+    "version": "5.2.2",
+    "project": "paladins_oak_chair_classic_purple",
+    "format": "free",
+    "cubes": 3,
+    "preview": true,
+    "image": "paladins__oak_chair_classic_purple.png"
+  }
+]
