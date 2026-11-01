@@ -36,7 +36,7 @@ jobs:
           python3 - <<'PY'
           import csv,json,zipfile
           from pathlib import Path
-          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_021_030_v1")
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_031_040_v1")
           m=json.loads((p/"MANIFEST.json").read_text("utf8"))
           assert m["total_pz_styles"]==357
           assert m["total_batches"]==36
