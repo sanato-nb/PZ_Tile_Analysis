@@ -78,7 +78,7 @@ def htmlpage(items):
  article{background:white;border:1px solid #d4dfe8;border-radius:12px;padding:12px}article img{width:100%;border-radius:8px}
  h2{font-size:17px}p{line-height:1.55;margin:7px 0}code{overflow-wrap:anywhere}
  pre{background:#f0f3f7;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;padding:10px}
- </style></head><body><header><h1>좀보이드 가구 ↔ 마크 실제 가구 모델 — 3차 031~040</h1>
+ </style></head><body><header><h1>좀보이드 가구 ↔ 마크 실제 가구 모델 — 4차 031~040</h1>
  <p>원본 좀보이드 완성 가구와 실제 Minecraft Decocraft 원본 모델을 Blockbench에서 직접 렌더해 10종을 하나씩 수동 검수함.
  모양이 틀린 오른쪽 이미지는 명확하게 거절 상태로 표시함. 2개 스프라이트로 된 욕조·탁자는 조립 및 크기 추가 검증.
  보류 항목은 신규 가구 모드나 바닐라 조합을 후속 검토하며, 자동 월드 적용 확정 0개.</p></header><main>%%%BODY%%%</main></body></html>''').replace("%%%BODY%%%","\n".join(block))
@@ -138,7 +138,7 @@ def main():
  assert [x["range"] for x in groups[:3]]==["001-010","011-020","031-040"]
  assert all(x["review_status"]=="COMPLETED_CONDITIONAL_CANDIDATES" for x in groups[:3])
  groups[3]["review_status"]="COMPLETED_CONDITIONAL_CANDIDATES"
- groups[3]["review_file"]="batch_021_030_v1/BATCH_031_040_MANUAL_VISUAL_REVIEW.csv"
+ groups[3]["review_file"]="batch_031_040_v1/BATCH_031_040_MANUAL_VISUAL_REVIEW.csv"
  writecsv(OUT/"BATCHES_ALL_357_PROGRESS.csv",groups)
  (OUT/"INDEX.html").write_text(htmlpage(review),encoding="utf8")
  manifest={"scope":"031-040","total_pz_styles":357,"total_batches":36,
@@ -151,7 +151,7 @@ def main():
   "minecraft_game_install_collision_verified":0,
   "source_tables_overwritten":False}
  (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
- lines=["# 로즈우드 가구 357종 — 3차 031~040 실제 개별 시각 검수",
+ lines=["# 로즈우드 가구 357종 — 4차 031~040 실제 개별 시각 검수",
  "PZ 완성형 타일과 실제 배포 Decocraft 1.20.1 모델(.bbmodel/원본 텍스처)을 비교. 각 검수 사진의 오른쪽은 실제 Blockbench 모델이며 기존 자동 매칭은 정답으로 취급하지 않음.",
  "모델 파일 렌더링 성공=좀보이드 가구 형태 일치가 아님. 승인된 세계 적용/게임 내 작동 검증은 아직 0.",
  "## 10건 판정"]
@@ -166,7 +166,7 @@ def main():
  "## 파일",
  "- INDEX.html / cards/: 전체 10개 좌우 실제 렌더 근거",
  "- BATCH_031_040_MANUAL_VISUAL_REVIEW.csv: 원본 속성, 옛/새 모델, 형태·색상 차이와 소스 해시",
- "- BATCH_031_040_DEFERRED_OTHER_MODS.csv: 4건 추가 모드/바닐라 검색 목록",
+ "- BATCH_031_040_DEFERRED_OTHER_MODS.csv: 5건 추가 모드/바닐라 검색 목록",
  "- BATCHES_ALL_357_PROGRESS.csv: 그룹별 누적 검수현황",
  "- 원본 마크 모드 JAR/텍스처는 재배포하지 않고 이미지와 해시만 보관."
  ]
