@@ -1,0 +1,50 @@
+name: Rosewood 357 furniture match semantic and geometry-integrity audit (repair Green Dinner and Wooden chairs)
+on:
+  push:
+    branches: [work/rosewood-chair-match-audit-20261101]
+    paths: [.github/workflows/rosewood-chair-integrity-audit.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/audit_357_chair_matching_failures.py
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/chair_candidate_native_blockbench_v1/
+      - name: Build source verified quality gate and replacement candidates
+        run: |
+          python3 scripts/audit_357_chair_matching_failures.py
+      - name: Confirm source images and no falsely approved mappings
+        run: |
+          python3 - <<'PY'
+          import csv,json
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/chair_matching_integrity_audit_v1")
+          meta=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert meta["total"]==357
+          assert meta["real_source_chair_candidates_rendered"]==12
+          assert meta["two_replaced_as_conditional"]==2
+          assert meta["exactly_confirmed_matches"]==0
+          a=list(csv.DictReader((p/"ALL_357_MATCH_SAFETY_AUDIT.csv").open(encoding="utf-8-sig")))
+          assert len(a)==357
+          assert all(x["approved_for_game"]=="NO" for x in a)
+          assert all(x["previous_mc_id"] for x in a if x["index"] in ("6","9"))
+          assert len(list((p/"examples").glob("*.jpg")))==2
+          print("AUDIT_SUCCESS",meta)
+          PY
+      - name: Commit corrected review file without overwriting source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/chair_matching_integrity_audit_v1/
+          git commit -m "review(rosewood): flag all 357 for shape/geometry approval and source-verify two chair replacements"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
