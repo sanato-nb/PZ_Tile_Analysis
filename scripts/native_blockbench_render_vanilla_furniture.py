@@ -118,6 +118,7 @@ def convert(z,mod,blockid,vanilla):
   model,aliases,cubes,source=resolve(z,ns,ref["model"],vanilla=vanilla)
   source_files.extend(source)
   if not cubes:
+   print("DEBUG_MODEL",mod,blockid,ref["model"],"model",model,"textures",aliases,"sources",source,flush=True)
    missing.append("no_vanilla_cuboids:"+ref["model"])
    continue
   for j,e in enumerate(cubes):
@@ -127,6 +128,7 @@ def convert(z,mod,blockid,vanilla):
     if side not in ("north","south","east","west","up","down"):continue
     raw,path=source_texture(z,ns,face.get("texture",""),aliases,vanilla,cache)
     if raw is None:
+     if len(missing)<2:print("DEBUG_TEXTURE",mod,blockid,ref["model"],"key",face.get("texture"),"aliases",aliases,"sources",source,flush=True)
      missing.append("missing_texture:"+str(face.get("texture"))+":"+ref["model"]);continue
     if path not in texture_map:texture_map[path]=raw
     p=e["from"];q=e["to"];x,y,zz=p;X,Y,Z=q
