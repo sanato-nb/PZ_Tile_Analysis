@@ -31,7 +31,7 @@ jobs:
           test -x squashfs-root/AppRun
       - name: Install Playwright remote-debugging and screenshots
         run: |
-          python3 -m pip install --quiet --break-system-packages pillow playwright
+          python3 -m pip install --quiet --break-system-packages pillow playwright numpy
           sudo apt-get update -qq
           sudo apt-get install -y -qq xvfb libasound2t64 libgtk-3-0 libgbm1 libnss3 >/dev/null
       - name: Open exact source bbmodel in native Blockbench and capture screenshots
