@@ -2,7 +2,7 @@ name: Validate fourth Rosewood furniture matching group 031-040 and persist actu
 on:
   push:
     branches: [work/rosewood-manual-batch04-031-040-20261101]
-    paths: [.github/workflows/rosewood-batch04-final.yml]
+    paths: [.github/workflows/rosewood-batch04-final.yml, scripts/complete_rosewood_batch_031_040.py]
   workflow_dispatch:
 permissions:
   contents: write
