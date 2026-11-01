@@ -1,0 +1,61 @@
+name: Rosewood batch 04 — native Blockbench visual review 031–040, eighteen alternative models
+on:
+  push:
+    branches: [work/rosewood-manual-batch04-031-040-20261101]
+    paths: [.github/workflows/rosewood-batch04-native-18.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/render_rosewood_batch04_native_candidates.py
+            /scripts/render_rosewood_batch03_native_candidates.py
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Download source verified official Blockbench 5.2.2
+        run: |
+          mkdir -p /tmp/blockbench-app
+          cd /tmp/blockbench-app
+          curl -fsSL --retry 3 -o Blockbench_5.2.2.AppImage https://github.com/JannisX11/blockbench/releases/download/v5.2.2/Blockbench_5.2.2.AppImage
+          echo '375fb8da33b8b9ad0f1f790836ed83020b6e987a56e23184d31d6ccf3132ac3b  Blockbench_5.2.2.AppImage' | sha256sum -c -
+          chmod +x Blockbench_5.2.2.AppImage
+          ./Blockbench_5.2.2.AppImage --appimage-extract >/dev/null
+      - name: Install desktop rendering libraries
+        run: |
+          python3 -m pip install -q --break-system-packages pillow playwright numpy
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libasound2t64 libgtk-3-0 libgbm1 libnss3 >/dev/null
+      - name: Open and native-render all eighteen source mod candidates
+        run: |
+          python3 -u scripts/render_rosewood_batch04_native_candidates.py
+      - name: Audit native rendered files and expected source SHA
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/04_031_040/extra_decocraft_render")
+          a=json.loads((p/"NATIVE_BLOCKBENCH_PROOF.json").read_text("utf8"))
+          assert len(a)==18,len(a)
+          good=[x for x in a if x.get("loaded_verified") and x.get("native_model_screenshot")]
+          assert len(good)>=16,len(good)
+          assert all((p/x["native_model_screenshot"]).is_file() and len(x["source_sha256"])==64 for x in good)
+          print("NATIVE_MODEL_RENDERS",len(good),"/18")
+          PY
+      - name: Commit actual model screenshots to review branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/04_031_040/extra_decocraft_render/
+          git commit -m 'render(rosewood): verified Blockbench images and source hashes for batch02 011-020'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
