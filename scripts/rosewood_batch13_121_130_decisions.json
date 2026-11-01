@@ -1,0 +1,142 @@
+[
+  {
+    "index": 121,
+    "inspected_models": [
+      "fridge_small_silver",
+      "fridge_large"
+    ],
+    "candidate": "",
+    "secondary": "pfm:iron_fridge / pfm:gray_fridge [existing registry, native full model not verified in this batch]",
+    "status": "DEFER_STEEL_SINGLE_DOOR_FRIDGE_VS_DOUBLE_DOOR_DECOCRAFT",
+    "shape": "PZ B42 1×1 steel-gray tall rectangular refrigerator: one visually continuous large gray door panel, thin dark vertical seam/hinge along left side, gray top with slight bevel, darker base, no conspicuous freezer split or handles.",
+    "size": "PZ one original sprite, nominal 1×1. Decocraft Fridge Small Silver one model with two doors; Fridge Large broad double-door modern appliance; Minecraft placement/height/collision/storage untested.",
+    "why": "원본은 은회색 단일 전면판과 왼쪽 검정 세로 경계가 두드러지는 좁은 냉장고다. 실제 Decocraft Fridge Small Silver 원본 293큐브는 위·아래 두 문이 가로선으로 분리되고 전면에 은색 가로 손잡이 두 개와 상부 통풍구가 있어 외형이 다르다. Fridge Large 372큐브는 좌우 양문·디스펜서까지 있는 넓은 최신형이라 더 멀다. 이전 Paladin Iron Fridge는 이 묶음에서 실제 완성 모델 검증을 하지 않았으므로 승인하지 않는다.",
+    "followup": "Paladin iron/gray fridge의 실제 전체 원본 모델과 단일 전면문 여부 비교. Forge 1.20.1 실제 1×1 설치, 냉장 기능, 높이 확인."
+  },
+  {
+    "index": 122,
+    "inspected_models": [
+      "bottom_cabinet_1_spruce",
+      "bottom_cabinet_1_oak"
+    ],
+    "candidate": "",
+    "secondary": "minecraft:spruce_planks + spruce_trapdoor [untested vanilla panel concept]; Furnish wood kitchen cabinet [unrendered]",
+    "status": "DEFER_DARK_WOOD_BAR_COUNTER_SOLID_PANELS",
+    "shape": "PZ B42 1×1 compact bar counter: dark chocolate-brown overhanging flat wooden top, medium-dark warm brown vertical front and side panels without handles, dark stepped wooden plinth at bottom.",
+    "size": "PZ one sprite, 1×1 nominal; MC bottom cabinet variants have an upper drawer and lower hinged doors with a white countertop, unlike PZ plain wood bar front.",
+    "why": "원본은 상판·몸체·하단 몰딩이 모두 짙은 나무이며 서랍·손잡이·흰 조리대가 없다. 실제 Decocraft Bottom Cabinet 1 Spruce/Oak 13큐브를 열어 보니 두 모델 모두 흰색 두꺼운 상판, 앞쪽 상부 서랍 및 손잡이, 하부 문이 나타나 원본 바 카운터와 다르다. Diner Counter Yellow는 원본 파일이 있지만 이번 실행에서 Blockbench 모델 큐브 3개로 완성 렌더 판정을 받지 못해 비교 증거로 쓰지 않는다.",
+    "followup": "무광 짙은 원목 일체형 1칸 바 카운터의 1.20.1 Forge 모델을 찾고 실제 상판 높이, 연속 연결, 저장 기능 확인."
+  },
+  {
+    "index": 123,
+    "inspected_models": [
+      "armchair_cream",
+      "cottage_armchair"
+    ],
+    "candidate": "",
+    "secondary": "Create: Interiors colored chair [official 1.20.1 Forge; unrendered]; pfm:oak_chair_classic_white [prior source partial, rejected]",
+    "status": "DEFER_FANCY_CREAM_WINGBACK_ARMCHAIR_WITH_EXPOSED_WOOD_LEGS",
+    "shape": "PZ B42 1×1 traditional beige/ivory upholstered fancy armchair: tall softly rounded wingback with curved vertical channels, thick rounded padded armrests, layered separate seat cushion and four narrow exposed dark wood legs.",
+    "size": "PZ one sprite, nominal 1×1; MC Decocraft armchair one-piece low solid plinth, no exposed legs. In-game sitting and collision untested.",
+    "why": "원본의 핵심은 위로 둥글게 올라간 전통형 등받이, 부드러운 곡면 팔걸이, 얇게 드러난 어두운 나무 다리 네 개다. 실제 Decocraft Armchair Cream 9큐브는 크림색이 가깝지만 직선 평판 등받이와 네모 팔걸이·바닥까지 막힌 몸체로 구조가 크게 다르다. Cottage Armchair 23큐브는 꽃무늬와 아래 천 스커트가 있어 원본 단색 우아한 의자와 더 다르다. 색만 맞았다는 이유로 승인하지 않는다.",
+    "followup": "고전형 rounded wingback/rolled armchair와 4개 노출 목재 다리가 있는 실제 Forge 1.20.1 모델을 조사하고 앉기 기능 확인."
+  },
+  {
+    "index": 124,
+    "inspected_models": [
+      "fridge_small_cream",
+      "fridge_small_mint"
+    ],
+    "candidate": "decocraft:fridge_small_cream",
+    "secondary": "pfm:white_fridge [existing registry, not fully re-rendered in this batch]; decocraft:fridge_small_mint [green tint rejected]",
+    "status": "CONDITIONAL_WARM_WHITE_TWO_DOOR_FRIDGE_HANDLES_AND_VENTS_MISMATCH",
+    "shape": "PZ B42 1×1 tall warm ivory/white domestic top-freezer refrigerator with distinct small upper freezer door and larger lower door, simple vertical side handles, slightly weathered cream finish and dark bottom edge.",
+    "size": "PZ one sprite 1×1, original bounding box 0.94×0.95×1.74949 in PZ source; Decocraft Small Cream native model 293 cubes, actual Minecraft placement height, door collision, storage untested.",
+    "why": "원본은 위쪽 작은 냉동실과 아래쪽 큰 냉장실로 구분된 따뜻한 아이보리 2도어 냉장고다. Decocraft Fridge Small Cream 실제 293큐브 모델은 크림색 세로 직육면체, 위아래 2도어 분할이라는 중요한 실루엣이 일치한다. 다만 마크 모델에는 앞쪽 수평 은색 손잡이 두 개, 상단 4개 통풍구, 각진 윗모서리가 뚜렷하며 PZ는 옆면 세로 손잡이와 더 매끈한 면이다. 실물 외형은 조건부이며 게임 설치/냉장 기능은 확인하지 않았다.",
+    "followup": "원본 PZ 1×1과 마크 실제 점유·높이·방향 및 2문 열림/보관 기능 검증, 손잡이 위치가 더 비슷한 대안 검색."
+  },
+  {
+    "index": 125,
+    "inspected_models": [
+      "beach_chair_light_blue",
+      "beach_chair_blue"
+    ],
+    "candidate": "decocraft:beach_chair_light_blue",
+    "secondary": "decocraft:beach_chair_blue [darker navy stripes]; Let's Do Beachparty 2.0.2 Forge 1.20.1 [unrendered alternative]",
+    "status": "CONDITIONAL_STRONG_BLUE_WHITE_STRIPED_FOLDING_WOOD_BEACH_CHAIR",
+    "shape": "PZ B42 2-sprite 1×2 reclining beach deck chair: light tan thin folding wooden rails, blue-and-white vertical striped canvas stretched continuously from sloping back to curved low seat, crossed diagonal rear support and long ground rails.",
+    "size": "PZ 2 sprite parts with SpriteGridPos (0,0)|(0,1), footprint 1×2. Decocraft Beach Chair Light Blue source BBMODEL 18 cubes; in-game 1×2 placement, adjustable angle, seat and collision untested.",
+    "why": "원본은 나무 접이식 프레임과 하늘색·흰색 줄무늬 천이 연결된 낮은 비치 체어다. 실제 Decocraft Beach Chair Light Blue 원본 18큐브를 Blockbench로 렌더하니 흰색/하늘색 세로 줄무늬 천, 비스듬한 목재 등받이, 앞쪽으로 내려오는 좌석, 뒤 지지대가 모두 존재해 이전 Paladin Arm Chair Leather의 회색 세로판보다 훨씬 정확하다. Blue 변형은 줄무늬가 진한 남색이어서 PZ 밝은 파랑보다 멀다. PZ 프레임 각도·다리의 교차 위치·천 굴곡은 일부 다르고 실제 1×2 설치 여부는 미검증이다.",
+    "followup": "Forge 1.20.1 Decocraft 게임에 배치하여 1×2 점유·회전·앉기/접기·충돌·텍스처 실제 렌더를 확인. Beachparty Sun Lounger와 실물 비교."
+  },
+  {
+    "index": 126,
+    "inspected_models": [
+      "armchair_green",
+      "armchair_lime"
+    ],
+    "candidate": "",
+    "secondary": "pfm:green_arm_chair [existing registry, prior full source JSON but PZ detail mismatch]; Create: Interiors armrest chair [unrendered]",
+    "status": "DEFER_OLIVE_PADDED_LOW_COMFY_ARMCHAIR_VS_ANGULAR_GREEN",
+    "shape": "PZ B42 1×1 squat olive/khaki upholstered comfortable club chair with low curved back cushion, rounded padded broad arms, separate rounded seat cushion and dark burgundy wooden bottom plinth.",
+    "size": "PZ one sprite 1×1 nominal; Decocraft armchair single-source 9 cubes with full-height boxy body; actual seat/collision untested.",
+    "why": "PZ는 노란 기가 도는 올리브 천, 낮고 둥근 등받이, 쿠션 굴곡, 아래쪽 짙은 적갈색 받침이 특징이다. Decocraft Armchair Green 실제 9큐브 모델은 진한 녹색 직선 평판 등받이·각진 팔걸이·바닥까지 같은 녹색 몸체이며 둥근 쿠션과 목재 받침이 없다. Lime은 훨씬 선명한 연두라 색상도 다르다. 가구 분류만 같고 핵심 실루엣·재질이 달라 보류한다.",
+    "followup": "낮고 둥근 올리브 클럽체어, 별도 쿠션과 적갈색 베이스가 있는 1×1 모드 가구를 렌더 검증."
+  },
+  {
+    "index": 127,
+    "inspected_models": [
+      "bottom_cabinet_corner_outer_2_oak",
+      "bottom_cabinet_corner_inner_oak"
+    ],
+    "candidate": "",
+    "secondary": "decocraft:bottom_cabinet_corner_outer_1_oak [thin triangular partial source]; Furnish kitchen corner counter [not inspected]",
+    "status": "DEFER_ONE_TILE_ALL_OAK_L_NOTCHED_CORNER_COUNTER",
+    "shape": "PZ B42 1×1 oak corner counter with distinctive inward right-angle L-shaped notch at front, medium golden brown wooden top and full solid wood paneled body with matching narrow brown edge trim, no exposed metal handles.",
+    "size": "PZ one sprite 1×1 corner, top visibly concave/L-notched. Decocraft inner oak is square, outer models are wedge/partial cabinet modules with WHITE tops; assembly/footprint unverified.",
+    "why": "원본은 상판에 안쪽으로 파인 직각 ㄱ자 홈이 보이는 한 칸짜리 전체 원목 코너 카운터다. Decocraft Corner Inner Oak 실제 9큐브는 흰 상판을 가진 정사각형 캐비닛으로 홈이 없고, Corner Outer 2 Oak 실제 21큐브는 흰 상판+서랍·손잡이가 붙은 사다리꼴 모서리 부품이다. 둘을 임의로 합쳐 원본 1×1 ㄱ자 가구라고 간주할 근거가 없으므로 보류한다.",
+    "followup": "ㄱ자 안쪽 홈이 실제 1×1에서 형성되는 일체형 oak corner counter 모드 모델, 연속 배치/방향 및 충돌 검증."
+  },
+  {
+    "index": 128,
+    "inspected_models": [
+      "bottom_cabinet_corner_outer_1_white",
+      "bottom_cabinet_corner_inner_white"
+    ],
+    "candidate": "",
+    "secondary": "minecraft:smooth_quartz + quartz_stairs/slabs [untested vanilla L-shape concept]; Furnish ivory corner cabinet [unrendered]",
+    "status": "DEFER_ONE_TILE_MONOCHROME_IVORY_L_NOTCHED_CORNER_COUNTER",
+    "shape": "PZ B42 1×1 plain cream-white/ivory counter with concave L-notched top and matching light ivory solid front/side, continuous pale edge trim and no wood countertop or drawer pulls.",
+    "size": "PZ one sprite 1×1 nominal; Decocraft white corner variants use brown wood countertop, and outer_1 is only a partial corner module; Minecraft 1×1 exact L notch unverified.",
+    "why": "원본은 ㄱ자로 안쪽이 파인 상판과 몸체 전체가 아이보리색인 단순한 코너 카운터다. 실제 Decocraft Corner Outer 1 White 23큐브는 상판이 갈색 나무이고 몸체는 얇은 패널 조각이라 한 덩어리 가구가 아니다. Corner Inner White 9큐브도 나무색 정사각 상판에 흰 몸체인 평범한 정육면체로 ㄱ자 홈이 없다. 기존 후보의 색·형상·부품 완결성이 모두 달라 보류한다.",
+    "followup": "Forge 1.20.1 올아이보리 ㄱ자 코너 카운터를 실제 1×1 모델로 확인하거나 바닐라 석영 계단 조합의 점유·높이 차이를 검증."
+  },
+  {
+    "index": 129,
+    "inspected_models": [
+      "armchair_light_blue",
+      "armchair_ocean_blue"
+    ],
+    "candidate": "",
+    "secondary": "decocraft:armchair_cream [nearer lightness but not blue and no low curved base]; Brutalist Furniture 1.20.1 Forge [unrendered]",
+    "status": "DEFER_PALE_GRAY_BLUE_ROUNDED_CLUB_CHAIR_VS_SATURATED_BLOCKY_ARMCHAIR",
+    "shape": "PZ B42 1×1 very pale desaturated blue-gray cushioned club armchair: low curved back cushion, broad padded arms, distinct seat pad, slightly protruding light bottom plinth and soft rounded silhouette.",
+    "size": "PZ one sprite 1×1; Decocraft armchair 9-cube model 1 source, actual in-game placement/seat interaction not verified.",
+    "why": "PZ 이름은 Light Blue지만 실제 완성형 미리보기는 회색에 가까운 아주 옅은 청록빛 천과 둥근 등받이·쿠션을 가진 낮은 안락의자다. 실제 Decocraft Armchair Light Blue 9큐브는 채도 높은 밝은 파랑, Ocean Blue는 더 짙은 청록이며 둘 다 각진 높은 평판 등받이와 직각 팔걸이, 아래 받침이 없는 일체형이다. 이전 Paladin Blue Arm Chair 역시 검푸른 단순 L형 판으로 맞지 않았다. 색과 실루엣 차이가 커 보류한다.",
+    "followup": "밝고 채도 낮은 회청색 둥근 쿠션 안락의자 모델을 Forge 1.20.1에서 확인하고 1×1 설치/앉기 검증."
+  },
+  {
+    "index": 130,
+    "inspected_models": [
+      "couch_left_light_blue",
+      "couch_right_light_blue"
+    ],
+    "candidate": "",
+    "secondary": "decocraft:couch_left_cream + couch_right_cream [closer brightness, wrong hue; source modules not assembled]; Furnish woolen sofa [unrendered]",
+    "status": "DEFER_TWO_TILE_PALE_BLUE_SOFA_MODULAR_SHAPE_AND_COLOR_MISMATCH",
+    "shape": "PZ B42 two-sprite 2×1 two-seat couch in pale desaturated blue-gray upholstery: continuous low rounded back split by center seam, two individually padded seats, thick arms at both ends and narrow bottom base.",
+    "size": "PZ 2 sprites SpriteGridPos (0,0)|(1,0), footprint 2×1. Decocraft left/right modules are separate 6-cube BBMODEL screenshots, NOT a tested seamless two-block in-game assembly.",
+    "why": "원본은 회청색 2인 소파가 2×1로 이어지고 둥근 등받이와 좌석 쿠션이 중앙에서 구분된다. Decocraft Couch Left/Right Light Blue 원본을 각각 Blockbench로 열어 보니 좌·우 팔걸이가 있는 모듈은 실제로 존재하지만 마크의 선명한 파랑이 PZ의 회색에 가까운 색보다 진하고, 등받이는 직선 평판이며 원본의 쿠션 굴곡·하단 받침이 없다. 두 소스 모델을 한 게임에서 연결해 확인한 것도 아니므로 완성형 2인 소파로 승인하지 않는다.",
+    "followup": "Decocraft 2개 모듈 실제 2×1 연결/팔걸이/방향·앉기 기능 검증. 더 낮은 채도의 회청색 둥근 쿠션 소파 대체 모델 검색."
+  }
+]
