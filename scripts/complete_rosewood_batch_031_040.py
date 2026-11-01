@@ -135,7 +135,7 @@ def main():
  writecsv(OUT/"BATCH_031_040_DEFERRED_OTHER_MODS.csv",deferred)
  groups=rows(B/"batch_021_030_v1/BATCHES_ALL_357_PROGRESS.csv")
  assert len(groups)==36
- assert [x["range"] for x in groups[:3]]==["001-010","011-020","031-040"]
+ assert [x["range"] for x in groups[:4]]==["001-010","011-020","021-030","031-040"]
  assert all(x["review_status"]=="COMPLETED_CONDITIONAL_CANDIDATES" for x in groups[:3])
  groups[3]["review_status"]="COMPLETED_CONDITIONAL_CANDIDATES"
  groups[3]["review_file"]="batch_031_040_v1/BATCH_031_040_MANUAL_VISUAL_REVIEW.csv"
