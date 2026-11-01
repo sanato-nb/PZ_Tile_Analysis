@@ -158,8 +158,14 @@ def convert(z,mod,blockid,vanilla):
    if rot_axis in ("x","y","z"):angles[("x","y","z").index(rot_axis)]=angle
    # Free model BB format coordinates are Minecraft block cuboids in units of pixels.
    uid=str(uuid.uuid5(uuid.NAMESPACE_URL,blockid+str(i)+"-"+str(j)))
+   start=list(map(float,e["from"]));end=list(map(float,e["to"]))
+   lo=[min(a,b) for a,b in zip(start,end)];hi=[max(a,b) for a,b in zip(start,end)]
+   # Framework open_model may define zero-thickness quad surfaces and reversed axis endpoints.
+   for axis in range(3):
+    if hi[axis]-lo[axis]<.005:
+     lo[axis]-=.0075;hi[axis]+=.0075
    cube=dict(name=f"source_{i}_{j}",type="cube",uuid=uid,box_uv=False,
-    from_=list(e["from"]),to=list(e["to"]),origin=e.get("rotation",{}).get("origin",[8,8,8]),
+    from_=lo,to=hi,origin=e.get("rotation",{}).get("origin",[8,8,8]),
     rotation=angles,faces=faces)
    cube["from"]=cube.pop("from_")
    if all(abs(x)<0.01 for x in angles):cube.pop("rotation")
@@ -211,13 +217,23 @@ def open_native(project,idx):
    if not page:
     b.close();return {"error":"NO_BLOCKBENCH_PAGE"}
    info={}
-   for attempt in range(20):
+   expected=0
+   try:
+    expected=int(json.loads(project.read_text("utf8")).get("elements",[]).__len__())
+   except Exception:pass
+   last=0;stable=0
+   for attempt in range(55):
     info=page.evaluate("""() => ({version:Blockbench.version,
        project:Project?.name||'', format:Project?.format?.id||'',
        cubes:Cube?.all?.length||0,textures:Texture?.all?.length||0,
        preview:!!Preview.selected})""")
-    if info.get("cubes",0)>0:break
-    time.sleep(.7)
+    current=info.get("cubes",0)
+    if current==last and current>0:stable+=1
+    else:stable=0
+    last=current
+    if current>=expected and expected>0 and stable>=2:break
+    if stable>=5 and current>0 and attempt>=10:break
+    time.sleep(.25)
    if info.get("cubes",0)==0:
     b.close();return {**info,"error":"NO_LOADED_CUBES"}
    # Reframe viewport using camera center rather than page screenshot of UI.
