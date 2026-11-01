@@ -1,0 +1,91 @@
+name: Render ALL non-Decocraft Project Zomboid matched furniture in actual Blockbench
+on:
+  push:
+    branches: [work/rosewood-all-357-real-render-20261101]
+    paths: [.github/workflows/rosewood-all-mods-native.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render-mod:
+    strategy:
+      fail-fast: false
+      matrix:
+        mod: [paladins, macaws, refurbished, handcrafted]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/native_blockbench_render_vanilla_furniture.py
+            /analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v3/REVISED_357_PZ_MC_MATCHES.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+      - name: Download and verify authentic Blockbench 5.2.2
+        run: |
+          mkdir -p /tmp/blockbench-app
+          cd /tmp/blockbench-app
+          curl -fsSL --retry 3 -o Blockbench_5.2.2.AppImage https://github.com/JannisX11/blockbench/releases/download/v5.2.2/Blockbench_5.2.2.AppImage
+          echo "375fb8da33b8b9ad0f1f790836ed83020b6e987a56e23184d31d6ccf3132ac3b  Blockbench_5.2.2.AppImage" | sha256sum -c -
+          chmod +x Blockbench_5.2.2.AppImage
+          ./Blockbench_5.2.2.AppImage --appimage-extract >/dev/null
+      - name: Install source model render deps
+        run: |
+          python3 -m pip install -q --break-system-packages pillow numpy playwright
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libasound2t64 libgtk-3-0 libgbm1 libnss3 >/dev/null
+      - name: Render every referenced model in the selected actual JAR using Blockbench
+        run: |
+          python3 -u scripts/native_blockbench_render_vanilla_furniture.py ${{ matrix.mod }}
+      - name: Upload source-verified render outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: pz-mc-native-${{ matrix.mod }}
+          path: analysis/rosewood_furniture/2026-10-31/native_real_mod_models_remaining_v1/
+          retention-days: 7
+          if-no-files-found: error
+  publish:
+    needs: render-mod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/rosewood_furniture/2026-10-31/native_real_mod_models_remaining_v1/
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pz-mc-native-*
+          merge-multiple: true
+          path: analysis/rosewood_furniture/2026-10-31/native_real_mod_models_remaining_v1
+      - name: Inspect unique and valid native screenshots
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path("analysis/rosewood_furniture/2026-10-31/native_real_mod_models_remaining_v1")
+          counter={}
+          for mod in ("paladins","macaws","refurbished","handcrafted"):
+           f=p/("PROOF_"+mod+".json")
+           assert f.exists(),f
+           rows=json.loads(f.read_text("utf8"))
+           good=[x for x in rows if x.get("image") and (p/x["image"]).exists()]
+           counter[mod]={"attempted":len(rows),"native_rendered":len(good),
+            "no_geometry":len(rows)-len(good),"actual_native_elements":sum(int(x.get("cubes",0)) for x in good)}
+           print(mod,counter[mod])
+           assert len(good)>0
+          (p/"ALL_MODS_RENDER_COUNTS.json").write_text(json.dumps(counter,indent=2)+"\n",encoding="utf8")
+          PY
+      - name: Commit actual Blockbench PNG renders and model source hashes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/native_real_mod_models_remaining_v1/
+          if ! git diff --cached --quiet; then
+            git commit -m "render(rosewood): genuine native Blockbench model screenshots for all four other installed furniture mods"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi

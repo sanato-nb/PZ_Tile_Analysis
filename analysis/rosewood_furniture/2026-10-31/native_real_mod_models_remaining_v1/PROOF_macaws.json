@@ -1,0 +1,753 @@
+[
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_counter",
+    "cuboids": 2,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/counter.json",
+      "assets/mcwfurnitures/models/block/counter/acacia_counter.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_acacia_log.png",
+      "assets/minecraft/textures/block/acacia_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/counter/acacia_counter",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "6056c87fefb3d4fd5c6bad6fa1b55eca2570fb87c427b5882abcb45ba2e2cd2f",
+    "version": "5.2.2",
+    "project": "macaws_acacia_counter",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "macaws__acacia_counter.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:birch_counter",
+    "cuboids": 2,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/counter.json",
+      "assets/mcwfurnitures/models/block/counter/birch_counter.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_birch_log.png",
+      "assets/minecraft/textures/block/birch_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/counter/birch_counter",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "4501d9952f770eaeb4310323fe3c7ff3ed448bdeab0a968d8e71416a99f87c61",
+    "version": "5.2.2",
+    "project": "macaws_birch_counter",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "macaws__birch_counter.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_double_kitchen_cabinet",
+    "cuboids": 5,
+    "textures": 3,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/double_kitchen_cabinet.json",
+      "assets/mcwfurnitures/models/block/cabinet/acacia_double_kitchen_cabinet.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/acacia_log.png",
+      "assets/minecraft/textures/block/stripped_acacia_log.png",
+      "assets/mcwfurnitures/textures/block/acacia_handle.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/cabinet/acacia_double_kitchen_cabinet",
+        "y": 0
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "f577b126b6c005de492d2e1285aca22633833169edc3c74bf0954bab74a4076c",
+    "version": "5.2.2",
+    "project": "macaws_acacia_double_kitchen_cabinet",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "macaws__acacia_double_kitchen_cabinet.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:dark_oak_bookshelf_drawer",
+    "cuboids": 9,
+    "textures": 4,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/book_shelf_left.json",
+      "assets/mcwfurnitures/models/block/drawer/dark_oak_book_shelf_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/bookshelf.png",
+      "assets/minecraft/textures/block/stripped_dark_oak_log.png",
+      "assets/minecraft/textures/block/dark_oak_log.png",
+      "assets/mcwfurnitures/textures/block/dark_oak_handle.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/drawer/dark_oak_book_shelf_left",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,connection=left"
+    ],
+    "source_model_sha256": "8bda2ce13406d6cd3c6a9dfd17a4e02780f376c2b23d20dbe8bd59c1603a4def",
+    "version": "5.2.2",
+    "project": "macaws_dark_oak_bookshelf_drawer",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__dark_oak_bookshelf_drawer.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:oak_table",
+    "cuboids": 1,
+    "textures": 1,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/table_center.json",
+      "assets/mcwfurnitures/models/block/table/oak_table_center.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/oak_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/table/oak_table_center",
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:north=true,east=true,west=true,south=true"
+    ],
+    "source_model_sha256": "50bf0d0e3d7f73655e63bff1f748fd1b439f94b9f5a84943502a7f262590df8e",
+    "version": "5.2.2",
+    "project": "macaws_oak_table",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__oak_table.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:dark_oak_counter",
+    "cuboids": 2,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/counter.json",
+      "assets/mcwfurnitures/models/block/counter/dark_oak_counter.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_dark_oak_log.png",
+      "assets/minecraft/textures/block/dark_oak_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/counter/dark_oak_counter",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "36deda8c483df02d914cc0a95818adcc4584e0736bb97d42a1685899bf6d309e",
+    "version": "5.2.2",
+    "project": "macaws_dark_oak_counter",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "macaws__dark_oak_counter.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_bookshelf_drawer",
+    "cuboids": 9,
+    "textures": 4,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/book_shelf_left.json",
+      "assets/mcwfurnitures/models/block/drawer/acacia_book_shelf_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/bookshelf.png",
+      "assets/minecraft/textures/block/stripped_acacia_log.png",
+      "assets/minecraft/textures/block/acacia_log.png",
+      "assets/mcwfurnitures/textures/block/acacia_handle.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/drawer/acacia_book_shelf_left",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,connection=left"
+    ],
+    "source_model_sha256": "47783c48aaa2b5e3fa42a32e766ecf2305348320ef5ceb63f5b6211b36014f70",
+    "version": "5.2.2",
+    "project": "macaws_acacia_bookshelf_drawer",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__acacia_bookshelf_drawer.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:blue_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/blue_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/blue_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/blue_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "a85968c5e4d7187c726fc464c8b91fa3955496b8ff44391f25c6a706d60bdf97",
+    "version": "5.2.2",
+    "project": "macaws_blue_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__blue_couch.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_coffee_table",
+    "cuboids": 1,
+    "textures": 1,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/coffee_table_middle.json",
+      "assets/mcwfurnitures/models/block/table/acacia_coffee_table_middle.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/acacia_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/table/acacia_coffee_table_middle",
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:connection=center"
+    ],
+    "source_model_sha256": "ecd9683168d291a2b82475dc9f65267696364bda23779dc4b445349d1294db0c",
+    "version": "5.2.2",
+    "project": "macaws_acacia_coffee_table",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__acacia_coffee_table.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:oak_double_wardrobe",
+    "cuboids": 4,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/double_wardrobe_top.json",
+      "assets/mcwfurnitures/models/block/wardrobe/oak_double_wardrobe_top.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/oak_log.png",
+      "assets/minecraft/textures/block/stripped_oak_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/wardrobe/oak_double_wardrobe_top",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,connection=top"
+    ],
+    "source_model_sha256": "6da94cd9191d5f8acf79e742c04044244d6cf21d1774edb3c8d3f703e35d93de",
+    "version": "5.2.2",
+    "project": "macaws_oak_double_wardrobe",
+    "format": "free",
+    "cubes": 4,
+    "preview": true,
+    "image": "macaws__oak_double_wardrobe.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:dark_oak_glass_table",
+    "cuboids": 5,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/glass_table_center.json",
+      "assets/mcwfurnitures/models/block/table/dark_oak_glass_table_center.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/glass.png",
+      "assets/minecraft/textures/block/dark_oak_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/table/dark_oak_glass_table_center"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:north=true,east=true,west=true,south=true"
+    ],
+    "source_model_sha256": "dd724b07d200ac1b31704ab5b866ae54d527058d6b5e4c8a9525b54e52a352f4",
+    "version": "5.2.2",
+    "project": "macaws_dark_oak_glass_table",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__dark_oak_glass_table.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_glass_table",
+    "cuboids": 5,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/glass_table_center.json",
+      "assets/mcwfurnitures/models/block/table/acacia_glass_table_center.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/glass.png",
+      "assets/minecraft/textures/block/acacia_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/table/acacia_glass_table_center"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:north=true,east=true,west=true,south=true"
+    ],
+    "source_model_sha256": "004c7a8c64e94ec948902cba4605d729ff68a1ea3dbac933a5948db3f1547bad",
+    "version": "5.2.2",
+    "project": "macaws_acacia_glass_table",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__acacia_glass_table.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_double_wardrobe",
+    "cuboids": 4,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/double_wardrobe_top.json",
+      "assets/mcwfurnitures/models/block/wardrobe/acacia_double_wardrobe_top.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/acacia_log.png",
+      "assets/minecraft/textures/block/stripped_acacia_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/wardrobe/acacia_double_wardrobe_top",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,connection=top"
+    ],
+    "source_model_sha256": "83599ed348f5de128c75cc5585237062949de2d074cfe4bfc9c42ed11d683e31",
+    "version": "5.2.2",
+    "project": "macaws_acacia_double_wardrobe",
+    "format": "free",
+    "cubes": 4,
+    "preview": true,
+    "image": "macaws__acacia_double_wardrobe.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:dark_oak_double_wardrobe",
+    "cuboids": 4,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/double_wardrobe_top.json",
+      "assets/mcwfurnitures/models/block/wardrobe/dark_oak_double_wardrobe_top.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/dark_oak_log.png",
+      "assets/minecraft/textures/block/stripped_dark_oak_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/wardrobe/dark_oak_double_wardrobe_top",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,connection=top"
+    ],
+    "source_model_sha256": "20efb7d5a30c55e00e26953a1134a12f65641fa168212cbf57e00285f874cdee",
+    "version": "5.2.2",
+    "project": "macaws_dark_oak_double_wardrobe",
+    "format": "free",
+    "cubes": 4,
+    "preview": true,
+    "image": "macaws__dark_oak_double_wardrobe.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:brown_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/brown_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/brown_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/brown_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "9d067d10f00bfc30f94fd252c906e1e3e8c578b13b11e8124921c7c02feb3b18",
+    "version": "5.2.2",
+    "project": "macaws_brown_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__brown_couch.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:white_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/white_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/white_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/white_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "5f897bd02b2d4419e5788642965bca13c9a0da0bf66a8911aa9b5631ea025ab6",
+    "version": "5.2.2",
+    "project": "macaws_white_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__white_couch.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:green_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/green_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/green_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/green_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "fc4a6d393ecb467f7395fd22f1cbfe63ce7d2f3233f6f13eb1f01166d7d27fc7",
+    "version": "5.2.2",
+    "project": "macaws_green_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__green_couch.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_covered_desk",
+    "cuboids": 2,
+    "textures": 1,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/covered_desk_left.json",
+      "assets/mcwfurnitures/models/block/desk/acacia_covered_desk_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/acacia_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/desk/acacia_covered_desk_left",
+        "y": 270
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,connection=left"
+    ],
+    "source_model_sha256": "9c5a1bded55143f51c36a4219f9a398f0d2b84c5d0ea3e321e7f6a169dfa8591",
+    "version": "5.2.2",
+    "project": "macaws_acacia_covered_desk",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__acacia_covered_desk.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_stool_chair",
+    "cuboids": 6,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/stool_chair.json",
+      "assets/mcwfurnitures/models/block/chair/acacia_stool_chair.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_acacia_log.png",
+      "assets/minecraft/textures/block/acacia_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/chair/acacia_stool_chair"
+      }
+    ],
+    "selection_tags": [
+      "state_selection:"
+    ],
+    "source_model_sha256": "3b83cbe20a88916598b9a8dabbc72ab62d436f98eda0029c23cc2e5e190cb50d",
+    "version": "5.2.2",
+    "project": "macaws_acacia_stool_chair",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__acacia_stool_chair.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:purple_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/purple_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/purple_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/purple_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "1ba5b6277ff9830854b2a6b8d4d38d35b0e15ef61c9206d0e3aa6e00396f89cb",
+    "version": "5.2.2",
+    "project": "macaws_purple_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__purple_couch.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:yellow_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/yellow_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/yellow_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/yellow_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "a04333832fded1c38bf9cf7327e71ba7fcfa40987177085a31e9b1557ea11fa9",
+    "version": "5.2.2",
+    "project": "macaws_yellow_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__yellow_couch.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:acacia_modern_chair",
+    "cuboids": 10,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/modern_chair.json",
+      "assets/mcwfurnitures/models/block/chair/acacia_modern_chair.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/acacia_log.png",
+      "assets/minecraft/textures/block/stripped_acacia_log.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/chair/acacia_modern_chair",
+        "y": 180
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "f0ce4d00ff97f46bd727df25ea20017bb1a966e61272f9d97f3d7a8aa097076e",
+    "version": "5.2.2",
+    "project": "macaws_acacia_modern_chair",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "macaws__acacia_modern_chair.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:red_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/red_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/red_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/red_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "3568fe73801c87e5ec409e560e88a0f7172a0585a495b59a8e8058942c8413e4",
+    "version": "5.2.2",
+    "project": "macaws_red_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__red_couch.png"
+  },
+  {
+    "mod": "macaws",
+    "blockstate_id": "mcwfurnitures:black_couch",
+    "cuboids": 8,
+    "textures": 2,
+    "source_models": [
+      "assets/mcwfurnitures/models/block/parent/sofa_left.json",
+      "assets/mcwfurnitures/models/block/couch/black_sofa_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/minecraft/textures/block/stripped_spruce_log.png",
+      "assets/minecraft/textures/block/black_wool.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "mcwfurnitures:block/couch/black_sofa_left",
+        "y": 180,
+        "uvlock": true
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left"
+    ],
+    "source_model_sha256": "259bad9ea420f3427ec944b193721aac0c725d91d800537346374ba4d2e1dad7",
+    "version": "5.2.2",
+    "project": "macaws_black_couch",
+    "format": "free",
+    "cubes": 8,
+    "preview": true,
+    "image": "macaws__black_couch.png"
+  }
+]

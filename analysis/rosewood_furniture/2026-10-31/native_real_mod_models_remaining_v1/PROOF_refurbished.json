@@ -1,0 +1,449 @@
+[
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:recycle_bin",
+    "cuboids": 4,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/recycle_bin_closed.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/rubbish_bin.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/recycle_bin_closed",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,open=false"
+    ],
+    "source_model_sha256": "d7a2657ea264a29e892fb1ec2b137d0b4569fd6caa4cd09ff177cc473f488abf",
+    "version": "5.2.2",
+    "project": "refurbished_recycle_bin",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__recycle_bin.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:white_kitchen_storage_cabinet",
+    "cuboids": 2,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/kitchen_storage_cabinet_closed_hinge_left.json",
+      "assets/refurbished_furniture/models/block/white_kitchen_storage_cabinet_closed_hinge_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/white_kitchen_storage_cabinet.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/white_kitchen_storage_cabinet_closed_hinge_left",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,hinge=left,open=false"
+    ],
+    "source_model_sha256": "727688eb6e91e23f7ed8738e3a5a1f9acb041486e667ba9e95f7efe25907d442",
+    "version": "5.2.2",
+    "project": "refurbished_white_kitchen_storage_cabinet",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__white_kitchen_storage_cabinet.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:dark_range_hood",
+    "cuboids": 9,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/range_hood_off.json",
+      "assets/refurbished_furniture/models/block/dark_range_hood_off.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/dark_range_hood.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/dark_range_hood_off",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,powered=false"
+    ],
+    "source_model_sha256": "50013c4bdbcd2436756d9d2e9a98f70dc6cfc4d26146a49a5a2af3435f7fe372",
+    "version": "5.2.2",
+    "project": "refurbished_dark_range_hood",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__dark_range_hood.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:white_kitchen_sink",
+    "cuboids": 11,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/kitchen_sink.json",
+      "assets/refurbished_furniture/models/block/white_kitchen_sink.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/white_kitchen_sink.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/white_kitchen_sink",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "45d15bff6e079f871ebabe86c5d24cb7ad4d085bdd879229af741ce041d95c8c",
+    "version": "5.2.2",
+    "project": "refurbished_white_kitchen_sink",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__white_kitchen_sink.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:white_bath",
+    "cuboids": 11,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/bath_head.json",
+      "assets/refurbished_furniture/models/block/white_bath_head.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/white_bath.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/white_bath_head",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,type=head"
+    ],
+    "source_model_sha256": "0f32cf2d85e6bb9ec701c350f3e1c11b8dce34ac10ce2c60108703b0120c80f7",
+    "version": "5.2.2",
+    "project": "refurbished_white_bath",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__white_bath.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:television",
+    "cuboids": 2,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/television_off.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/television.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/television_off",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,powered=false"
+    ],
+    "source_model_sha256": "b340b64b717bc5d44cfe863e19ec3712869d47b04416bba8c12aa827ded407ea",
+    "version": "5.2.2",
+    "project": "refurbished_television",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "refurbished__television.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:computer",
+    "cuboids": 10,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/computer_off.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/computer.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/computer_off",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,powered=false"
+    ],
+    "source_model_sha256": "1ab74d93a195e7bcdf85cc622c760afb597c50b89887da833e1909916d4c01cf",
+    "version": "5.2.2",
+    "project": "refurbished_computer",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__computer.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:acacia_mail_box",
+    "cuboids": 5,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/mail_box_unchecked.json",
+      "assets/refurbished_furniture/models/block/acacia_mail_box_unchecked.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/acacia_mail_box.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/acacia_mail_box_unchecked",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:enabled=true,facing=east"
+    ],
+    "source_model_sha256": "a0329add5723d68d2e346ea47448fabf1a81e684a3972ed40e727957d513c9b1",
+    "version": "5.2.2",
+    "project": "refurbished_acacia_mail_box",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__acacia_mail_box.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:dark_toaster",
+    "cuboids": 3,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/toaster.json",
+      "assets/refurbished_furniture/models/block/dark_toaster.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/dark_toaster.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/dark_toaster",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,powered=false"
+    ],
+    "source_model_sha256": "ed0031d4f4e5b07634c4fe017ad09171323c6867caaf2d035f6392852a884641",
+    "version": "5.2.2",
+    "project": "refurbished_dark_toaster",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "refurbished__dark_toaster.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:gray_kitchen_storage_cabinet",
+    "cuboids": 2,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/kitchen_storage_cabinet_closed_hinge_left.json",
+      "assets/refurbished_furniture/models/block/gray_kitchen_storage_cabinet_closed_hinge_left.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/gray_kitchen_storage_cabinet.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/gray_kitchen_storage_cabinet_closed_hinge_left",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,hinge=left,open=false"
+    ],
+    "source_model_sha256": "956cdd9a14eedc97676614aaf169698e5d855832e32425c6d26ab1f27840eec6",
+    "version": "5.2.2",
+    "project": "refurbished_gray_kitchen_storage_cabinet",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__gray_kitchen_storage_cabinet.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:dark_microwave",
+    "cuboids": 7,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/microwave_closed.json",
+      "assets/refurbished_furniture/models/block/dark_microwave_closed.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/dark_microwave.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/dark_microwave_closed",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,open=false"
+    ],
+    "source_model_sha256": "bd84fbd549561cc75a8906ee6c1d5d38dcc9306aa4cd9466dc9afe4be9019053",
+    "version": "5.2.2",
+    "project": "refurbished_dark_microwave",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__dark_microwave.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:dark_fridge",
+    "cuboids": 4,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/fridge_closed.json",
+      "assets/refurbished_furniture/models/block/dark_fridge_closed.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/dark_fridge.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/dark_fridge_closed",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,open=false"
+    ],
+    "source_model_sha256": "6216f3abb7d30e1c176be65ac9fc3280bff093fbc115323cb00999facdeef5df",
+    "version": "5.2.2",
+    "project": "refurbished_dark_fridge",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__dark_fridge.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:dark_freezer",
+    "cuboids": 4,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/freezer_closed.json",
+      "assets/refurbished_furniture/models/block/dark_freezer_closed.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/dark_fridge.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/dark_freezer_closed",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,open=false"
+    ],
+    "source_model_sha256": "4c55238c6868e0bd591a7267fb93e0dbbee211332809aa81f3b8b298cd5f4309",
+    "version": "5.2.2",
+    "project": "refurbished_dark_freezer",
+    "format": "free",
+    "cubes": 1,
+    "preview": true,
+    "image": "refurbished__dark_freezer.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:black_grill",
+    "cuboids": 14,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/grill.json",
+      "assets/refurbished_furniture/models/block/black_grill.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/black_grill.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/black_grill",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east"
+    ],
+    "source_model_sha256": "8872979ff8a1a4ae9a21c93e4e43f07ab0bb44b1538ec45c6d3cb34d3dedcb43",
+    "version": "5.2.2",
+    "project": "refurbished_black_grill",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "refurbished__black_grill.png"
+  },
+  {
+    "mod": "refurbished",
+    "blockstate_id": "refurbished_furniture:dark_electricity_generator",
+    "cuboids": 4,
+    "textures": 1,
+    "source_models": [
+      "assets/refurbished_furniture/models/block/electricity_generator_off.json",
+      "assets/refurbished_furniture/models/block/dark_electricity_generator_off.json"
+    ],
+    "source_texture_paths": [
+      "assets/refurbished_furniture/textures/block/dark_electricity_generator.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "refurbished_furniture:block/dark_electricity_generator_off",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,powered=false"
+    ],
+    "source_model_sha256": "8d2b8cef0cc10a2b0bda7a9b430b0362948cb7d551cedf65f1ac268c715013c6",
+    "version": "5.2.2",
+    "project": "refurbished_dark_electricity_generator",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "refurbished__dark_electricity_generator.png"
+  }
+]

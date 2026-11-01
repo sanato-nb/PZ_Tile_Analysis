@@ -1,0 +1,140 @@
+[
+  {
+    "mod": "handcrafted",
+    "blockstate_id": "handcrafted:acacia_shelf",
+    "cuboids": 2,
+    "textures": 6,
+    "source_models": [
+      "missing:assets/handcrafted/models/block/block.json",
+      "assets/handcrafted/models/block/shelf.json",
+      "assets/handcrafted/models/block/acacia_shelf_left_1.json"
+    ],
+    "source_texture_paths": [
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_left.png",
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_side_left.png",
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_back.png",
+      "assets/handcrafted/textures/block/shelf/acacia/shelf_side_right.png",
+      "assets/minecraft/textures/block/acacia_planks.png",
+      "assets/handcrafted/textures/block/shelf/overlay/none.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "handcrafted:block/acacia_shelf_left_1",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left,type=1"
+    ],
+    "source_model_sha256": "57dd29e5e5ea4b497e014086f7e52c97318b40fb3f8261b8c78beac82683ab8e",
+    "version": "5.2.2",
+    "project": "handcrafted_acacia_shelf",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "handcrafted__acacia_shelf.png"
+  },
+  {
+    "mod": "handcrafted",
+    "blockstate_id": "handcrafted:birch_bench",
+    "cuboids": 9,
+    "textures": 2,
+    "source_models": [
+      "missing:assets/handcrafted/models/block/block.json",
+      "assets/handcrafted/models/block/base/bench_block.json",
+      "assets/handcrafted/models/block/bench/left.json",
+      "assets/handcrafted/models/block/birch_bench_left_red.json"
+    ],
+    "source_texture_paths": [
+      "assets/handcrafted/textures/block/bench/birch_bench.png",
+      "assets/handcrafted/textures/block/bench/cushion/red_cushion.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "handcrafted:block/birch_bench_left_red",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:color=red,facing=east,shape=left,waterlogged=false"
+    ],
+    "source_model_sha256": "c10a4e251f11110ac40b5d3c30e24651825799eda486e2e482c1b0b68e6cbb2a",
+    "version": "5.2.2",
+    "project": "handcrafted_birch_bench",
+    "format": "free",
+    "cubes": 9,
+    "preview": true,
+    "image": "handcrafted__birch_bench.png"
+  },
+  {
+    "mod": "handcrafted",
+    "blockstate_id": "handcrafted:dark_oak_bench",
+    "cuboids": 9,
+    "textures": 2,
+    "source_models": [
+      "missing:assets/handcrafted/models/block/block.json",
+      "assets/handcrafted/models/block/base/bench_block.json",
+      "assets/handcrafted/models/block/bench/left.json",
+      "assets/handcrafted/models/block/dark_oak_bench_left_red.json"
+    ],
+    "source_texture_paths": [
+      "assets/handcrafted/textures/block/bench/dark_oak_bench.png",
+      "assets/handcrafted/textures/block/bench/cushion/red_cushion.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "handcrafted:block/dark_oak_bench_left_red",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:color=red,facing=east,shape=left,waterlogged=false"
+    ],
+    "source_model_sha256": "0a42b1fc09ec2cc9dd7c2586ffb23350eeb145977fcb6fc259e95d42c2718ae8",
+    "version": "5.2.2",
+    "project": "handcrafted_dark_oak_bench",
+    "format": "free",
+    "cubes": 9,
+    "preview": true,
+    "image": "handcrafted__dark_oak_bench.png"
+  },
+  {
+    "mod": "handcrafted",
+    "blockstate_id": "handcrafted:dark_oak_shelf",
+    "cuboids": 2,
+    "textures": 6,
+    "source_models": [
+      "missing:assets/handcrafted/models/block/block.json",
+      "assets/handcrafted/models/block/shelf.json",
+      "assets/handcrafted/models/block/dark_oak_shelf_left_1.json"
+    ],
+    "source_texture_paths": [
+      "assets/handcrafted/textures/block/shelf/dark_oak/shelf_left.png",
+      "assets/handcrafted/textures/block/shelf/dark_oak/shelf_side_left.png",
+      "assets/handcrafted/textures/block/shelf/dark_oak/shelf_back.png",
+      "assets/handcrafted/textures/block/shelf/dark_oak/shelf_side_right.png",
+      "assets/minecraft/textures/block/dark_oak_planks.png",
+      "assets/handcrafted/textures/block/shelf/overlay/none.png"
+    ],
+    "missing": [],
+    "state_refs": [
+      {
+        "model": "handcrafted:block/dark_oak_shelf_left_1",
+        "y": 90
+      }
+    ],
+    "selection_tags": [
+      "state_selection:facing=east,shape=left,type=1"
+    ],
+    "source_model_sha256": "96735f374431e1a4b75534d94e1d6613730b88e490d7cbec95151bb249e752cc",
+    "version": "5.2.2",
+    "project": "handcrafted_dark_oak_shelf",
+    "format": "free",
+    "cubes": 2,
+    "preview": true,
+    "image": "handcrafted__dark_oak_shelf.png"
+  }
+]
