@@ -77,6 +77,7 @@ def resolve(z,namespace,model,seen=None,vanilla=None):
   textures.update(base)
  textures.update(obj.get("textures",{}))
  if isinstance(obj.get("elements"),list):elems=obj["elements"]
+ elif isinstance(obj.get("components"),list):elems=obj["components"]  # Refurbished Framework open_model source cubes
  roots.append(full)
  return obj,textures,elems,roots
 def unalias(key,tex):
@@ -89,17 +90,30 @@ def unalias(key,tex):
 def source_texture(z,ns,key,texmap,vanilla,cache):
  val=unalias(key,texmap)
  if not val:return None,None
- tns,rel=val.split(":",1) if ":" in val else (ns,val)
+ explicit=":" in val
+ tns,rel=val.split(":",1) if explicit else (ns,val)
  if rel.startswith("textures/"):rel=rel[9:]
- full=f"assets/{tns}/textures/{rel}.png"
- zips=[z,vanilla] if vanilla else [z]
- if full in cache:return cache[full],full
- for file in zips:
-  if file is not None and full in file.namelist():
-   raw=file.read(full)
-   cache[full]=raw;return raw,full
- cache[full]=None
+ paths=[f"assets/{tns}/textures/{rel}.png"]
+ # In vanilla Java model JSON an unqualified texture location such as
+ # block/stone refers to the standard Minecraft namespace, even when
+ # declared in a model provided by another mod.
+ if not explicit and ns!="minecraft":
+  paths.append(f"assets/minecraft/textures/{rel}.png")
+ for full in paths:
+  if full in cache:
+   raw=cache[full]
+   if raw is not None:return raw,full
+   continue
+  for file in (z,vanilla):
+   if file is None:continue
+   try:
+    raw=file.read(full)
+    cache[full]=raw
+    return raw,full
+   except KeyError:pass
+  cache[full]=None
  return None,None
+
 def vanilla_client_zip():
  # Mojang source hashes from version manifest; used only for source vanilla block texture.
  manifest=json.loads(fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"))
