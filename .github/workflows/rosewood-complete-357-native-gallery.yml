@@ -1,0 +1,76 @@
+name: Build final 357 complete Project Zomboid to real Minecraft mod Blockbench images
+on:
+  push:
+    branches: [work/rosewood-all-357-real-render-20261101]
+    paths: [.github/workflows/rosewood-complete-357-native-gallery.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  complete:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_rosewood_complete_357_native_gallery.py
+            /analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v3/REVISED_357_PZ_MC_MATCHES.csv
+            /analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v3/cards/
+            /analysis/rosewood_furniture/2026-10-31/pz_mc_furniture_357_rematch_v3/better/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/blockbench_native_357_rematch_v1/
+            /analysis/rosewood_furniture/2026-10-31/blockbench_native_replacement_candidates_v1/
+            /analysis/rosewood_furniture/2026-10-31/native_real_mod_models_remaining_v1/
+      - name: Wait for four-mod native Blockbench evidence, not approximation
+        run: |
+          set -euo pipefail
+          FILE="analysis/rosewood_furniture/2026-10-31/native_real_mod_models_remaining_v1/ALL_MODS_RENDER_COUNTS.json"
+          FOUND=0
+          for i in $(seq 1 120); do
+            git fetch --depth=1 origin "$GITHUB_REF_NAME" --quiet
+            if git cat-file -e "origin/$GITHUB_REF_NAME:$FILE" 2>/dev/null; then FOUND=1; break; fi
+            echo "Native proof not yet committed - check $i"
+            sleep 7
+          done
+          if [ "$FOUND" != 1 ]; then echo "Missing full native model evidence";exit 1;fi
+          git reset --hard "origin/$GITHUB_REF_NAME"
+          test -s "$FILE"
+      - name: Create full 357 comparison catalog and distinguish never-rendered/unmatched
+        run: |
+          python3 -m pip install -q --break-system-packages pillow numpy
+          python3 -m py_compile scripts/build_rosewood_complete_357_native_gallery.py
+          python3 -u scripts/build_rosewood_complete_357_native_gallery.py
+      - name: Verify all 357 PZ originals shown, full 3D evidence and no fabricated mod equivalence
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,zipfile
+          p=Path("analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["pz_style_count"]==357
+          assert m["all_original_PZ_complete_previews_present"]==357
+          assert m["total_full_size_side_by_side_cards"]==357
+          assert len(list((p/"cards").glob("*.jpg")))==357
+          assert m["contact_sheets"]==90
+          assert m["certified_1to1_matching_count"]==0
+          assert m["minecraft_missing_or_unverified_match_count"]==22
+          data=list(csv.DictReader((p/"ALL_357_FULL_RENDER_MATCHING.csv").open(encoding="utf-8-sig")))
+          assert len(data)==357
+          assert all(x["pz_original_properties_json"].startswith("{") for x in data)
+          assert all(x["is_1to1_approved"]=="NO" for x in data)
+          with zipfile.ZipFile(p/"ROSEWOOD_ALL_357_FURNITURE_SOURCE_NATIVE_VISUAL_COMPARISONS.zip") as z:
+           assert z.testzip() is None
+           assert "INDEX.html" in z.namelist()
+          print("ALL_357_GALLERY_COMPLETE",json.dumps(m,ensure_ascii=False))
+          PY
+      - name: Commit all 357 comparison images and searchable review dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/
+          git commit -m "gallery(rosewood): 357 PZ complete furniture images vs five-mod actual Blockbench model imports with explicit nonmatches"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
