@@ -55,11 +55,6 @@ env["main"].__globals__["TESTS"]=[
     "Fancy White"
   ],
   [
-    "armchair_light_gray",
-    "Chair",
-    "Fancy White"
-  ],
-  [
     "cottage_armchair",
     "Chair",
     "Fancy White"
