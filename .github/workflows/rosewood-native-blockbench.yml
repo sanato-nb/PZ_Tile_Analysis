@@ -1,0 +1,62 @@
+name: Open original Minecraft mod furniture in ACTUAL Blockbench desktop
+on:
+  push:
+    branches: [work/rosewood-native-blockbench-test-20261101]
+    paths: [.github/workflows/rosewood-native-blockbench.yml, scripts/native_blockbench_verify_furniture.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  blockbench:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/native_blockbench_verify_furniture.py
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Download exact Blockbench 5.2.2 official AppImage and verify author SHA256
+        run: |
+          mkdir -p /tmp/blockbench-app
+          cd /tmp/blockbench-app
+          curl -fL --retry 3 -o Blockbench_5.2.2.AppImage https://github.com/JannisX11/blockbench/releases/download/v5.2.2/Blockbench_5.2.2.AppImage
+          echo "375fb8da33b8b9ad0f1f790836ed83020b6e987a56e23184d31d6ccf3132ac3b  Blockbench_5.2.2.AppImage" | sha256sum -c -
+          chmod +x Blockbench_5.2.2.AppImage
+          ./Blockbench_5.2.2.AppImage --appimage-extract >/dev/null
+          test -x squashfs-root/AppRun
+      - name: Install Playwright remote-debugging and screenshots
+        run: |
+          python3 -m pip install --quiet --break-system-packages pillow playwright numpy
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libasound2t64 libgtk-3-0 libgbm1 libnss3 >/dev/null
+      - name: Open exact source bbmodel in native Blockbench and capture screenshots
+        run: |
+          python3 -u scripts/native_blockbench_verify_furniture.py
+      - name: Verify authentic application/version and actual model loaded
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/blockbench_native_review_v3")
+          a=json.loads((p/"NATIVE_BLOCKBENCH_PROOF.json").read_text("utf8"))
+          verified=[x for x in a if x.get("loaded_verified")]
+          assert verified,"No real Blockbench success, do not commit"
+          assert all(x.get("version","").startswith("5.2.") for x in verified),verified
+          assert all((p/x["native_desktop_screenshot"]).is_file() for x in verified)
+          assert len(list(p.glob("*_PZ_VS_NATIVE_BLOCKBENCH.jpg")))>=3
+          print("VERIFIED_NATIVE_BLOCKBENCH",len(verified))
+          PY
+      - name: Commit screenshot evidence only (no copyrighted native model redistribution)
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/blockbench_native_review_v3/
+          git commit -m 'proof(rosewood): native Blockbench 5.2 desktop opens exact source MC furniture and renders viewport'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
