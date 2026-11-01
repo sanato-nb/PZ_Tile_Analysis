@@ -8,7 +8,7 @@ import hashlib,base64,csv,io,json,os,re,subprocess,time,urllib.request,zipfile
 from PIL import Image
 from playwright.sync_api import sync_playwright
 D=Path(__file__).resolve().parents[1]/"analysis/rosewood_furniture/2026-10-31"
-O=D/"blockbench_native_review_v1"
+O=D/"blockbench_native_review_v2"
 TEMP=Path("/tmp/blockbench_pz_mc_source")
 MOD="decocraft"
 VERS=json.loads((D/"minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json").read_text("utf8"))
@@ -112,6 +112,32 @@ def run_model(obj,app,idx):
      })""")
     if info.get("cubes",0)>4:break
     time.sleep(1)
+   # Frame the WHOLE authored object in Blockbench's own camera, especially
+   # models larger than one Minecraft block (beds, pianos).
+   try:
+    info["camera"] = page.evaluate("""() => {
+     const p=Preview.selected, cubes=Cube.all;
+     let lo=[Infinity,Infinity,Infinity],hi=[-Infinity,-Infinity,-Infinity];
+     for(const c of cubes)for(const pt of [c.from,c.to])for(let i=0;i<3;i++){
+       lo[i]=Math.min(lo[i],pt[i]);hi[i]=Math.max(hi[i],pt[i]);
+     }
+     const center=lo.map((v,i)=>(v+hi[i])/2);
+     const span=Math.max(...lo.map((v,i)=>hi[i]-v));
+     const distance=Math.max(65,span*3.4);
+     const cam=p.camera;
+     if(p.controls?.target?.set)p.controls.target.set(...center);
+     cam.position.set(center[0]+distance,center[1]+distance*.67,center[2]+distance);
+     cam.lookAt(...center);
+     if(cam.isOrthographicCamera){
+       cam.zoom=Math.min(cam.zoom, 13/Math.max(12,span));
+       cam.updateProjectionMatrix();
+     }
+     if(p.controls?.update)p.controls.update();
+     if(p.render)p.render();
+     return {center,span,distance,camera_type:cam.type};
+    }""")
+    time.sleep(1)
+   except Exception as e:info["camera_frame_error"]=str(e)[:240]
    # Verified image is from native Electron Blockbench app viewport, never from our Python rasterizer.
    page.screenshot(path=str(O/f"{obj['id']}_BLOCKBENCH_DESKTOP.png"),full_page=False)
    result=None
@@ -157,6 +183,36 @@ def main():
   report.append(row)
   print("BLOCKBENCH_NATIVE_RESULT",json.dumps({k:v for k,v in row.items() if k in ["id","version","project","format","cubes","textures","error","native_model_screenshot","loaded_verified"]},ensure_ascii=False),flush=True)
  (O/"NATIVE_BLOCKBENCH_PROOF.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
+ # Attach the ORIGINAL PZ full-sprite assembly as a left panel.
+ # Native model screenshot is right panel. No source JAR/models copied.
+ cross=D/"complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv"
+ if cross.exists():
+  with cross.open(encoding="utf-8-sig",newline="") as cf:
+   source_rows={(x["CustomName"],x["GroupName"]):x for x in csv.DictReader(cf)}
+  from PIL import ImageDraw,ImageFont
+  for obj in report:
+   match=source_rows.get((obj["pz_name"],obj["pz_style"]))
+   right=O/(obj["id"]+"_BLOCKBENCH_VIEWPORT.png")
+   if not match or not right.exists():continue
+   source=D/"complete_furniture_visual_3d_v1"/match["preview_path"]
+   if not source.exists():continue
+   with Image.open(source) as pz,Image.open(right) as mc:
+    panel=Image.new("RGB",(1400,600),(246,248,251))
+    a=pz.convert("RGBA");a.thumbnail((610,485))
+    if a.mode=="RGBA":
+     panel.paste(a,(20+(620-a.width)//2,72+(480-a.height)//2),a)
+    else:panel.paste(a,(20,70))
+    b=mc.convert("RGBA")
+    # Crop empty transparent screenshot pixels, only after actual Blockbench render.
+    bounds=b.getbbox()
+    if bounds:b=b.crop(bounds)
+    b.thumbnail((690,485))
+    panel.paste(b,(690+(690-b.width)//2,72+(480-b.height)//2),b)
+    draw=ImageDraw.Draw(panel)
+    draw.text((30,15),"PROJECT ZOMBOID · complete original PNG",fill=(20,36,54))
+    draw.text((723,15),"MINECRAFT MOD · native Blockbench 5.2.2 render",fill=(20,36,54))
+    draw.text((20,563),obj["pz_name"]+"/"+obj["pz_style"]+"  —  MC decocraft:"+obj["id"]+"  | Not an in-game screenshot",fill=(57,68,82))
+    panel.save(O/(obj["id"]+"_PZ_VS_NATIVE_BLOCKBENCH.jpg"),quality=90,subsampling=0)
  assert any(x.get("loaded_verified") for x in report), "No verified native Blockbench model open; refuse claiming success"
  print("SUCCESS_NATIVE_BLOCKBENCH",sum(bool(x.get("loaded_verified")) for x in report),flush=True)
 if __name__=="__main__":main()
