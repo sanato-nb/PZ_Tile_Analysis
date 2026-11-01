@@ -18,6 +18,8 @@ jobs:
           sparse-checkout: |
             /scripts/native_blockbench_verify_furniture.py
             /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
       - name: Download exact Blockbench 5.2.2 official AppImage and verify author SHA256
         run: |
           mkdir -p /tmp/blockbench-app
@@ -40,12 +42,13 @@ jobs:
           python3 - <<'PY'
           import json
           from pathlib import Path
-          p=Path("analysis/rosewood_furniture/2026-10-31/blockbench_native_review_v1")
+          p=Path("analysis/rosewood_furniture/2026-10-31/blockbench_native_review_v2")
           a=json.loads((p/"NATIVE_BLOCKBENCH_PROOF.json").read_text("utf8"))
           verified=[x for x in a if x.get("loaded_verified")]
           assert verified,"No real Blockbench success, do not commit"
           assert all(x.get("version","").startswith("5.2.") for x in verified),verified
           assert all((p/x["native_desktop_screenshot"]).is_file() for x in verified)
+          assert len(list(p.glob("*_PZ_VS_NATIVE_BLOCKBENCH.jpg")))>=3
           print("VERIFIED_NATIVE_BLOCKBENCH",len(verified))
           PY
       - name: Commit screenshot evidence only (no copyrighted native model redistribution)
@@ -53,7 +56,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add --sparse analysis/rosewood_furniture/2026-10-31/blockbench_native_review_v1/
+          git add --sparse analysis/rosewood_furniture/2026-10-31/blockbench_native_review_v2/
           git commit -m 'proof(rosewood): native Blockbench 5.2 desktop opens exact source MC furniture and renders viewport'
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push origin "HEAD:$GITHUB_REF_NAME"
