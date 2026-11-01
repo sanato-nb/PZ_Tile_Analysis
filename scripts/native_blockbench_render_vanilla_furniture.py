@@ -162,8 +162,9 @@ def convert(z,mod,blockid,vanilla):
    lo=[min(a,b) for a,b in zip(start,end)];hi=[max(a,b) for a,b in zip(start,end)]
    # Framework open_model may define zero-thickness quad surfaces and reversed axis endpoints.
    for axis in range(3):
-    if hi[axis]-lo[axis]<.005:
-     lo[axis]-=.0075;hi[axis]+=.0075
+    if hi[axis]-lo[axis]<.125:
+     mid=(hi[axis]+lo[axis])/2
+     lo[axis]=mid-.125;hi[axis]=mid+.125
    cube=dict(name=f"source_{i}_{j}",type="cube",uuid=uid,box_uv=False,
     from_=lo,to=hi,origin=e.get("rotation",{}).get("origin",[8,8,8]),
     rotation=angles,faces=faces)
