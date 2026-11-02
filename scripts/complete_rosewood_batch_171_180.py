@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 ROOT=Path(__file__).resolve().parents[1]
 D=ROOT/"analysis/rosewood_furniture/2026-10-31"
 OUT=D/"ten_batch_review/batch_171_180_v1"
-NATIVE=D/"ten_batch_review/15_171_180/extra_decocraft_render"
+NATIVE=D/"ten_batch_review/18_171_180/extra_decocraft_render"
 BASE=D/"all_357_complete_native_comparisons_v1"
 PREVIEW=D/"complete_furniture_visual_3d_v1"
 DECISIONS=ROOT/"scripts/rosewood_batch18_171_180_decisions.json"
