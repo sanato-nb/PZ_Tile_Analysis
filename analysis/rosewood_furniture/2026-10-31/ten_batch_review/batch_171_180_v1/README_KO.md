@@ -59,7 +59,7 @@ MC 모델 SHA-256: `1640d476be17089159fef35e9f63fead1afc6694b21cdab115e668a4229e
 
 PZ 형태: PZ 흰색 정육면체 빨래 건조기. 뒤로 솟은 검은 조작 패널과 오른쪽 다이얼, 상판은 막혀 있고 전면 큰 평면 직사각형 문과 수직 손잡이.
 
-수동 비교: Decocraft Dryer 원본 모델은 정면 큰 둥근 유리 도어, 앞면 상단 디지털 표시창·노브가 있는 드럼형 세탁/건조기. PZ의 상단 뒤 조작패널과 네모 문이 없어 디자인 불일치.
+수동 비교: Blockbench 5.2.2에서 새로 렌더한 Decocraft Dryer는 전면 상단 디지털 화면·왼쪽 다이얼, 전면의 사선 큰 손잡이와 각진 패널이 확인된다. PZ는 뒤쪽 상단으로 솟은 검은 제어판과 전면 왼쪽의 작은 세로 손잡이, 단순 직사각형 문을 가진다. 같은 건조기 계열이지만 조작부 위치·도어/손잡이 구조가 달라 1:1 승인 불가.
 
 추가 검증: 뒤쪽 상단 제어 패널+직사각 문을 가진 흰색 상업용 건조기 모델과 건조기 기능 검증.
 
@@ -113,11 +113,11 @@ MC 모델 SHA-256: `630ffe7f31d8c5b84a5f112221f8e13d97084f820c76d7312c89a8daccc1
 ### 178 Chair / Red Theatre
 판정: **DEFER_RED_THEATRE_DOUBLE_SEAT_VS_ARMCHAIR**. 후보: 보류
 
-PZ 형태: PZ 극장식 붉은 2인 연속 좌석. 진홍색 쿠션형 등받이 2개, 검정 뒷판, 붉은 팔걸이, 얇은 검정 철제 다리·받침.
+PZ 형태: PZ 1타일 극장식 붉은 좌석 부품. 붉은 두툼한 등받이에 세로 분할선, 검정 뒷판, 한쪽 붉은 팔걸이, 검정 금속 받침/가로 다리가 보인다. 좌석이 실제 2인인지 또는 연결용 단일 모듈인지는 이 그림만으로 확정할 수 없다.
 
-수동 비교: 기존 Paladin Oak Chair Classic Red는 갈색 막대 프레임 일부만 렌더되어 의자 전체를 입증하지 못한다. Decocraft Cottage Armchair는 꽃무늬 패브릭 1인용 의자여서 붉은 연속 2좌석·검정 금속 다리와 형태가 다르다.
+수동 비교: 기존 Paladin Oak Chair Classic Red는 막대 프레임 일부만 렌더되어 의자 전체를 입증하지 못한다. 새 Decocraft Cottage Armchair는 꽃무늬 쿠션과 크고 둥근 양팔걸이의 1인 가정용 의자이며, PZ 극장식 붉은 등받이/검정 금속 다리·연결형 구조와 다르다. PZ 좌석 개수는 추가 확인이 필요하다.
 
-추가 검증: 극장 좌석 연결형 2인 또는 두 모듈의 실제 Forge 모델, 좌석 연결·팔걸이·고정 설치와 충돌/착석 검증.
+추가 검증: 극장식 붉은 모듈형 의자 원본 모델 탐색. PZ 1타일의 좌석 수와 연결 방향, 팔걸이, 검정 금속 다리, 실제 착석/충돌 확인.
 
 PZ SHA-256: `d8fcb589f1e2964de8e32bf2f12b67e8eaa7ae11ecbb7af2ef3d4371c123420d`
 MC 모델 SHA-256: `34b37379ca11b74db0546d02ca155f7b8047ded9c95debb49e08a1a55380674c`
@@ -125,17 +125,17 @@ MC 모델 SHA-256: `34b37379ca11b74db0546d02ca155f7b8047ded9c95debb49e08a1a55380
 
 
 ### 179 Drawers / Pale
-판정: **DEFER_PALE_THREE_DRAWER_CHEST_VS_DESK_DRAWERS**. 후보: 보류
+판정: **DEFER_PALE_THREE_DRAWERS_VS_TWO_DRAWER_OAK_DESK**. 후보: 보류
 
 PZ 형태: PZ 밝은 크림/황토색 1×1 3단 서랍장. 전면 3개 수평 서랍, 별도 손잡이 없는 얇은 가로 틈, 단순한 직사각 본체.
 
-수동 비교: 기존 Macaw Acacia Bookshelf Drawer 네이티브 화면은 초록 판 하나만 나오는 불완전 모델. Decocraft Modular Desk Drawers Oak는 서랍 기능은 유사할 수 있지만 원본의 세 단, 무손잡이 가로 홈, 연한 색과 정확히 일치하는지 확인되지 않아 보류.
+수동 비교: 새 Blockbench 원본 렌더에서 Decocraft Modular Desk Drawers Oak는 전면 두 개의 큰 서랍, 돌출 회색 손잡이 두 개, 장식된 네 기둥/다리로 구성된다. PZ는 밝은 베이지 직육면체에 세 개의 얇은 수평 서랍과 돌출 손잡이 없는 평면이므로 서랍 수·손잡이·프레임이 명백히 다르다.
 
 추가 검증: 3단 밝은 나무 서랍장 원본 모델의 실제 완성형 렌더와 서랍 개폐·1×1 높이 검증.
 
 PZ SHA-256: `5fcc6859b098e726a73531ad9fa0a62f46f766cf0f277a5dd03c75b27176cea2`
 MC 모델 SHA-256: `14a5ddcaebae394d1e9f0b4543e5144b70d35ae298521a77b6c45fc0df6622b1`
-비교 이미지 SHA-256: `b6f4426f8100f18fd9cefeb57b2e357b719ec676a130b0f78f7abcb954282a5d`
+비교 이미지 SHA-256: `a2a70c402e9e435832d8377b5f7a383c0c51d0332fcbbc85e3afc7e368c944e5`
 
 
 ### 180 Counter / Birchwood Floating
