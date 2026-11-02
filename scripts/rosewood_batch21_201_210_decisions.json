@@ -21,7 +21,7 @@
     "index": 203,
     "model": "diner_table_black",
     "candidate": "",
-    "status": "DEFER_DARK_RECTANGULAR_TABLE_VS_TABLE_SETTING",
+    "status": "DEFER_DARK_FOUR_LEG_TABLE_VS_METAL_PEDESTAL_DINER",
     "shape": "2×1의 넓은 짙은 회갈색 직사각형 평판 상판과 네 모서리의 얇은 검정 사각 다리, 별도 식기 없음.",
     "why": "기존 decocraft:table_setting_double 렌더는 접시·컵·수저만 있는 식기 장식이다. 새로 실제 Blockbench에서 diner_table_black(12 cubes)을 열어 보니 어두운 직사각 상판은 유사하지만 은색 테두리와 중앙 단일 금속 받침/넓은 발판이며 PZ의 짙은 목재 상판·네 모서리 가는 다리와 다르다. wooden_table_oak(25 cubes)도 네 다리 구조는 있으나 밝은 참나무 정사각 상판과 굵고 장식적인 다리로 PZ의 2×1 짙은 긴 테이블과 다르다.",
     "followup": "어두운 2블록 길이 4다리 식탁 원본, 양 끝 연결부·회전 및 바닥 충돌 검증."
@@ -30,7 +30,7 @@
     "index": 204,
     "model": "school_chair_gray",
     "candidate": "",
-    "status": "DEFER_ROUGH_PLANK_CHAIR_VS_LEATHER_ARMCHAIR_PARTIAL",
+    "status": "DEFER_ROUGH_PLANK_CHAIR_VS_GRAY_METAL_SCHOOL_CHAIR",
     "shape": "거친 갈색 목재 널빤지로 만든 낮은 임시 의자, 판자 좌판, 짧은 수직 등받이, 겹친 판재 받침대, 팔걸이 없음.",
     "why": "기존 pfm:arm_chair_leather 네이티브 캡처는 회색 판 한 장만 보이는 부분 모델이다. 새 Decocraft school_chair_gray 원본 BBMODEL 37 cubes를 Blockbench로 렌더한 결과 얇은 회색 금속 네 다리, 평평한 금속 좌판과 분리된 회색 등받이의 교실 의자다. PZ의 두꺼운 거친 목재 널빤지 좌판, 판재 바닥 받침 및 짧은 판자 등받이와 형태·재질·높이가 불일치.",
     "followup": "원목 널빤지/팔레트로 제작된 낮은 등받이 의자, 1×1 바닥 점유 및 앉기 동작."
@@ -48,7 +48,7 @@
     "index": 206,
     "model": "kitchen_table_oak",
     "candidate": "",
-    "status": "DEFER_BEIGE_ROUNDED_TRAILER_TABLE_VS_PARTIAL_GLASS_TABLE",
+    "status": "DEFER_ROUNDED_TRAILER_TABLE_VS_WHITE_TOP_FOUR_WOOD_LEGS",
     "shape": "1×2의 연한 베이지색 길고 모서리가 둥근 직사각형 상판, 중앙 아래로 내려오는 두 개의 가느다란 회색 금속 지지 다리.",
     "why": "기존 mcwfurnitures:acacia_glass_table 네이티브 캡처는 얇은 나무판 한 장만 보이는 부분 렌더다. 새 Decocraft kitchen_table_oak BBMODEL 29 cubes는 흰색 상판과 밝은 참나무의 굵은 4다리 식탁으로 확인했다. PZ는 베이지색 모서리 둥근 1×2 길이 상판과 중앙 금속 기둥 2개이므로 상판 색·모서리·다리 수·재질·길이 모두 불일치.",
     "followup": "연베이지 라운드 1×2 상판 + 중앙 금속 2다리 테이블의 실제 2블록 결합 모델."
@@ -75,7 +75,7 @@
     "index": 209,
     "model": "bamboo_chair_yellow",
     "candidate": "",
-    "status": "DEFER_YELLOW_UPHOLSTERED_ARMCHAIR_VS_PARTIAL_FROGGY_PANEL",
+    "status": "DEFER_YELLOW_CUSHION_ARMCHAIR_VS_BAMBOO_WOVEN_CHAIR",
     "shape": "넓은 겨자색 1인 패브릭 소파/암체어, 두꺼운 양쪽 팔걸이와 둥근 쿠션 등받이, 노란 좌판, 매우 낮은 검은 네 다리.",
     "why": "기존 pfm:froggy_chair_yellow 네이티브 캡처는 노란 평판 한 장뿐이다. 새 Decocraft bamboo_chair_yellow BBMODEL 30 cubes의 실제 렌더는 노란빛 대나무/라탄 짜임 좌판, X자 등받이, 높은 나무 네 다리, 팔걸이 없는 개방형 의자다. PZ의 두꺼운 겨자색 패브릭 팔걸이·쿠션 등받이·낮은 다리 1인 소파와 전혀 다르다.",
     "followup": "겨자색 통쿠션 양팔걸이 소파형 1인 의자, 1×1 크기·앉기 기능·낮은 다리 검증."
