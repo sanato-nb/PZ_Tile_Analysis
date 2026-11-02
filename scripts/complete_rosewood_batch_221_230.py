@@ -147,7 +147,7 @@ def main():
  }
  (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
  progress={"batch":"22","scope":"221-230","lane":"A","this_scope_reviewed":list(range(221,231)),"conditional":cond,"deferred":defer,"approved_for_world":[],"merged_into_global_progress":False}
- (OUT/"BATCH21_STANDALONE_PROGRESS.json").write_text(json.dumps(progress,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
+ (OUT/"BATCH22_STANDALONE_PROGRESS.json").write_text(json.dumps(progress,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
  notes=["# 로즈우드 가구 22차 221~230번 개별 시각 검수",
  "PZ B42 원본 완성형 미리보기 10장과 이전 Minecraft 원본 Blockbench 비교판 10장을 실제로 육안 검수했다. 별도 GitHub Actions는 Decocraft 3.0.4-1.20.1 Forge 원본 BBMODEL/텍스처를 검증한 뒤 Blockbench 5.2.2로 새로 렌더해 추가 대조한다.",
  "이전 A 레인 131~140, 161~170 및 191~200번은 별도 Draft PR로 보존했으며, 이번 221~230번만 독립 검수했다. 다른 레인과 원본 파일은 건드리지 않았다.",
@@ -161,7 +161,7 @@ def main():
  "- BATCH_221_230_MANUAL_VISUAL_REVIEW.csv : 상세 수동 판정, 기존 자동 매칭의 오차, 모델 출처와 SHA",
  "- BATCH_221_230_DEFERRED_OTHER_MODS.csv : 다른 모드·바닐라·신규 모델 후속 검토 목록",
  "- BATCH_221_230_SHA256_PROVENANCE.csv : 원본 PZ/BBMODEL/텍스처/Blockbench 캡처/카드 해시",
- "- MANIFEST.json / BATCH21_STANDALONE_PROGRESS.json : 독립 검수 범위·상태",
+ "- MANIFEST.json / BATCH22_STANDALONE_PROGRESS.json : 독립 검수 범위·상태",
  "- INDEX.html : 10개 비교판 탐색",
  "- ROSEWOOD_BATCH_221_230_MANUAL_REVIEW.zip : 카드·CSV·README·인덱스 일괄 보관",
  "원본 게임 TMX/PNG/SQLite와 기존 357종 누적 검수 CSV, 다른 레인 결과를 수정하지 않는다."]
@@ -178,5 +178,5 @@ def main():
   assert len([x for x in archive.namelist() if x.startswith("cards/") and x.endswith(".jpg")])==10
  assert [int(r["index"]) for r in rows]==list(range(221,231))
  assert all(r["exact_1_to_1_visual_match_approved"]=="NO" and r["approved_for_minecraft_world_replacement"]=="NO" for r in rows)
- print("BATCH21_VALIDATED",json.dumps(manifest,ensure_ascii=False),flush=True)
+ print("BATCH22_VALIDATED",json.dumps(manifest,ensure_ascii=False),flush=True)
 if __name__=="__main__":main()

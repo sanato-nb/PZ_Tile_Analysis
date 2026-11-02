@@ -60,9 +60,9 @@ jobs:
           with zipfile.ZipFile(z) as f:
            assert f.testzip() is None
            assert len([n for n in f.namelist() if n.startswith('cards/') and n.endswith('.jpg')])==10
-          pr=json.loads((p/'BATCH21_STANDALONE_PROGRESS.json').read_text('utf8'))
+          pr=json.loads((p/'BATCH22_STANDALONE_PROGRESS.json').read_text('utf8'))
           assert pr['scope']=='221-230' and pr['batch']=='22' and pr['lane']=='A' and not pr['merged_into_global_progress']
-          print('BATCH21_AUDIT_OK',json.dumps(m,ensure_ascii=False))
+          print('BATCH22_AUDIT_OK',json.dumps(m,ensure_ascii=False))
           PY
       - name: Commit standalone manual review evidence
         run: |
