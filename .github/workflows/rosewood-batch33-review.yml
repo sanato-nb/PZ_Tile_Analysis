@@ -58,7 +58,7 @@ jobs:
           assert [int(x['index']) for x in rows]==list(range(331,341))
           assert len(held)==9 and len(hashes)==10
           assert [int(x['index']) for x in rows if x['review_status']=='CONDITIONAL']==[336]
-          assert {int(x['index']) for x in held}==set(range(331,341))
+          assert {int(x['index']) for x in held}==(set(range(331,341))-{336})
           for r in rows:
             card=p/r['new_comparison_card_path']
             assert card.is_file() and card.stat().st_size>10000
