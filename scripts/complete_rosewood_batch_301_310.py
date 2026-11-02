@@ -109,7 +109,7 @@ def main():
        "baseline_branch":"work/rosewood-manual-batch10-091-100-20261101",
        "limitations":["No fresh Blockbench model render this run.","308 has no verified Minecraft model; 310 is a partial JSON model.","No Minecraft Forge 1.20.1 installation or collision/function testing.","Independent Draft PR; global progress not merged."]}
     (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    (OUT/"BATCH30_STANDALONE_PROGRESS.json").write_text(json.dumps({"lane":"A","scope":"301-310","batch":"30","individually_reviewed":10,"merged_into_global_progress":False,"next_lane_C_scope":"331-340"},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    (OUT/"BATCH30_STANDALONE_PROGRESS.json").write_text(json.dumps({"lane":"C","scope":"301-310","batch":"30","individually_reviewed":10,"merged_into_global_progress":False,"next_lane_C_scope":"331-340"},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     readme=[
        "# 로즈우드 가구 C 레인 — 301~310 독립 시각 검수","",
        "PZ 완성 스프라이트 10종과 기존 소스 기반 Minecraft 렌더 비교 JPG 10종을 직접 대조했다. 새 Blockbench 렌더는 없으며 인게임 1:1 인증은 0건이다.","",
