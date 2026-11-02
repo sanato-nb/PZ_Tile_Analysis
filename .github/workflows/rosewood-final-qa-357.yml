@@ -19,8 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          sparse-checkout: |
+            analysis/rosewood_furniture/2026-10-31/ten_batch_review/FINAL_QA_357_20261102
+            scripts/verify_rosewood_final_qa_357.py
+          sparse-checkout-cone-mode: false
       - name: Verify 357 unique records and status/backlog consistency
-        run: python scripts/verify_rosewood_final_qa_357.py
+        run: python3 scripts/verify_rosewood_final_qa_357.py
