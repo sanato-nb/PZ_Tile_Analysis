@@ -1,4 +1,4 @@
-# 로즈우드 가구 20차 201~210번 개별 시각 검수
+# 로즈우드 가구 21차 201~210번 개별 시각 검수
 
 PZ B42 원본 완성형 미리보기 10장과 이전 Minecraft 원본 Blockbench 비교판 10장을 실제로 육안 검수했다. 별도 GitHub Actions는 Decocraft 3.0.4-1.20.1 Forge 원본 BBMODEL/텍스처를 검증한 뒤 Blockbench 5.2.2로 새로 렌더해 추가 대조한다.
 
