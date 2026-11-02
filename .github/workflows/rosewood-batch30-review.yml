@@ -27,6 +27,10 @@ jobs:
             /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
             /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
             /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Refresh checkout to current branch tip to avoid duplicate-run rebase conflicts
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B "$GITHUB_REF_NAME" "origin/$GITHUB_REF_NAME"
       - name: Install Pillow
         run: python3 -m pip install -q --break-system-packages pillow
       - name: Generate reviewed 10 JPG cards and CSV/ZIP
