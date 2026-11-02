@@ -12,7 +12,7 @@ PZ 원본 완성형 조립 미리보기 7종과 기존 Minecraft 원본 소스 �
 
 ## 검증 자료
 
-- cards/: 기존 이미지로부터 새로 제작한 개별 좌우 비교 JPG 10장.
+- cards/: 기존 이미지로부터 새로 제작한 개별 좌우 비교 JPG 7장.
 - BATCH_351_357_MANUAL_VISUAL_REVIEW.csv: 7개 외형·재질·색상·구조·점유·한계 판정.
 - BATCH_351_357_DEFERRED_OTHER_MODS.csv: 다른 모드 또는 바닐라 재검색 대상 7종.
 - SOURCE_SHA256.csv: PZ PNG, 기존 MC 비교 JPG, 새 JPG의 SHA-256 및 기존 Git blob SHA-1.
