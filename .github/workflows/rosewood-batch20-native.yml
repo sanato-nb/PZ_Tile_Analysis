@@ -43,7 +43,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import json
-          p=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review/17_191_200/extra_decocraft_render')
+          p=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review/20_191_200/extra_decocraft_render')
           rows=json.loads((p/'NATIVE_BLOCKBENCH_PROOF.json').read_text('utf8'))
           assert len(rows)==4,len(rows)
           good=[r for r in rows if r.get('loaded_verified') and r.get('native_model_screenshot') and (p/r['native_model_screenshot']).is_file()]
@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/17_191_200/extra_decocraft_render/
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/20_191_200/extra_decocraft_render/
           git commit -m 'render(rosewood): original Blockbench screenshots for 191-200 candidate review'
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push origin "HEAD:$GITHUB_REF_NAME"
