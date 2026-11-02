@@ -36,7 +36,17 @@ def card(idx,src,decision,proof):
  dr.text((30,76),"PROJECT ZOMBOID | assembled original PZ preview",font=font(15),fill=(38,66,83))
  dr.text((780,76),"MINECRAFT | verified native source / fallback",font=font(15),fill=(38,66,83))
  with Image.open(pz) as im:
-  im=ImageOps.contain(im.convert("RGBA"),(670,430),Image.Resampling.LANCZOS)
+  # Crop the preview's header, footer and empty template, retaining only
+  # source pixels. Never redraw or alter the PZ sprite geometry.
+  import numpy as np
+  inner=im.convert("RGBA").crop((35,115,515,397))
+  rgb=np.asarray(inner.convert("RGB")).astype("int16")
+  bg=rgb[0,0,:]
+  ys,xs=np.where(np.max(np.abs(rgb-bg),axis=2)>25)
+  if len(xs)>15:
+   inner=inner.crop((max(0,int(xs.min())-22),max(0,int(ys.min())-22),
+                     min(inner.width,int(xs.max())+23),min(inner.height,int(ys.max())+23)))
+  im=ImageOps.contain(inner,(670,430),Image.Resampling.LANCZOS)
   out.paste(im,(375-im.width//2,326-im.height//2),im)
  evidence="NO_VERIFIED_NATIVE_SOURCE"
  if verified:
@@ -75,7 +85,10 @@ def main():
  assert len(proofs)==10
  by_model={x["id"]:x for x in proofs}
  assert all(d["model"] in by_model for d in decisions)
- assert not OUT.exists(),"Do not overwrite an existing completed review"
+ if OUT.exists():
+  import os
+  assert os.environ.get("ROSEWOOD_BATCH24_REBUILD")=="1","Existing review must not be overwritten without explicit rebuild flag"
+  shutil.rmtree(OUT)  # Only this independent batch_231_240_v1 directory
  (OUT/"cards").mkdir(parents=True)
  shutil.copyfile(NATIVE/"NATIVE_BLOCKBENCH_PROOF.json",OUT/"NATIVE_BLOCKBENCH_PROOF.json")
  rows=[];deferred=[];provenance=[]
