@@ -33,7 +33,7 @@ def build_card(row,decision,src_card,pz_file):
         out.paste(p,(376-p.width//2,326-p.height//2),p)
     with Image.open(src_card) as b:
         b=b.convert("RGB")
-        mc=b.crop((max(0,b.width//2+8),72,b.width-17,max(75,b.height-122)))
+        mc=b.crop((max(0,b.width//2+8),110,b.width-17,max(113,b.height-122)))
         mc=ImageOps.contain(mc,(655,420),Image.Resampling.LANCZOS)
         out.paste(mc,(1124-mc.width//2,329-mc.height//2))
     dr=ImageDraw.Draw(out)
