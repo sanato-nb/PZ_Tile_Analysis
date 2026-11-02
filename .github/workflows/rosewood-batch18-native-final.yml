@@ -1,0 +1,96 @@
+name: Rosewood batch18 — original Blockbench and manual review 171-180
+on:
+  push:
+    branches: [work/rosewood-manual-batch18-171-180-20261102]
+    paths: [.github/workflows/rosewood-batch18-native-final.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render-and-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/render_rosewood_batch03_native_candidates.py
+            /scripts/render_rosewood_batch18_native_candidates.py
+            /scripts/complete_rosewood_batch_171_180.py
+            /scripts/rosewood_batch18_171_180_decisions.json
+            /analysis/rosewood_furniture/2026-10-31/minecraft_real_furniture_matches_v4/ROSEWOOD_357_PZ_TO_REAL_MINECRAFT_BLOCKSTATE_MATCH.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
+      - name: Download and SHA256 verify official Blockbench 5.2.2
+        run: |
+          mkdir -p /tmp/blockbench-app
+          cd /tmp/blockbench-app
+          curl -fsSL --retry 3 -o Blockbench_5.2.2.AppImage https://github.com/JannisX11/blockbench/releases/download/v5.2.2/Blockbench_5.2.2.AppImage
+          echo '375fb8da33b8b9ad0f1f790836ed83020b6e987a56e23184d31d6ccf3132ac3b  Blockbench_5.2.2.AppImage' | sha256sum -c -
+          chmod +x Blockbench_5.2.2.AppImage
+          ./Blockbench_5.2.2.AppImage --appimage-extract >/dev/null
+      - name: Install native desktop and Python dependencies
+        run: |
+          python3 -m pip install -q --break-system-packages pillow playwright numpy
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libasound2t64 libgtk-3-0 libgbm1 libnss3 >/dev/null
+      - name: Run 10 real Decocraft source Blockbench model inspections
+        run: |
+          python3 -m py_compile scripts/render_rosewood_batch18_native_candidates.py
+          python3 -u scripts/render_rosewood_batch18_native_candidates.py
+      - name: Generate 10 PZ/MC visual review JPEG cards and CSV/ZIP
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_171_180.py
+          python3 -u scripts/complete_rosewood_batch_171_180.py
+      - name: Validate scope, source provenance, independent PR evidence
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib,zipfile
+          from pathlib import Path
+          p=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_171_180_v1')
+          native=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review/18_171_180/extra_decocraft_render')
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['scope']=='171-180' and m['this_batch_individual_reviews']==10
+          assert m['attempted_original_decocraft_models']==10
+          assert m['new_comparison_cards']==10
+          assert m['conditional_candidates']+m['deferred_other_mods_or_vanilla']==10
+          assert m['certified_1_to_1_matches']==m['minecraft_game_install_collision_verified']==0
+          assert not m['source_tables_overwritten'] and not m['parallel_group_progress_overwritten']
+          def rows(name):
+           with (p/name).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          a=rows('BATCH_171_180_MANUAL_VISUAL_REVIEW.csv')
+          b=rows('BATCH_171_180_DEFERRED_OTHER_MODS.csv')
+          h=rows('BATCH_171_180_SHA256_PROVENANCE.csv')
+          assert [int(x['index']) for x in a]==list(range(171,181))
+          assert len(b)==m['deferred_other_mods_or_vanilla'] and len(h)==10
+          assert all(x['exact_1_to_1_visual_match_approved']=='NO' and x['approved_for_minecraft_world_replacement']=='NO' for x in a)
+          for x in a:
+           img=p/x['card_path']
+           assert img.is_file() and img.stat().st_size>10000
+           assert hashlib.sha256(img.read_bytes()).hexdigest()==x['new_comparison_card_sha256']
+           assert len(x['pz_preview_sha256'])==64
+          proofs=json.loads((native/'NATIVE_BLOCKBENCH_PROOF.json').read_text('utf8'))
+          assert len(proofs)==10
+          assert sum(bool(x.get('loaded_verified') and x.get('native_model_screenshot')) for x in proofs)>=8
+          z=p/'ROSEWOOD_BATCH_171_180_MANUAL_REVIEW.zip'
+          with zipfile.ZipFile(z) as f:
+           assert f.testzip() is None
+           assert len([n for n in f.namelist() if n.startswith('cards/') and n.endswith('.jpg')])==10
+          progress=json.loads((p/'BATCH18_STANDALONE_PROGRESS.json').read_text('utf8'))
+          assert progress['scope']=='171-180' and progress['lane']=='B' and not progress['merged_into_global_progress']
+          print('BATCH18_AUDIT_OK',json.dumps(m,ensure_ascii=False))
+          PY
+      - name: Commit only independent batch18 artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/18_171_180/extra_decocraft_render/
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_171_180_v1/
+          git commit -m 'review(rosewood): 171-180 source-native 3D visual evidence and 10 individual verdicts'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

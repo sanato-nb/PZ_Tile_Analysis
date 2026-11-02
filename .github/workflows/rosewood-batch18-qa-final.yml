@@ -1,0 +1,76 @@
+name: Rosewood batch18 — post-render visual QA corrections
+on:
+  push:
+    branches: [work/rosewood-manual-batch18-171-180-20261102]
+    paths: [.github/workflows/rosewood-batch18-qa-final.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify-and-correct:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_171_180.py
+            /scripts/rosewood_batch18_171_180_decisions.json
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/18_171_180/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_171_180_v1/
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
+      - name: Install offline image QA dependencies
+        run: python3 -m pip install -q --break-system-packages pillow numpy
+      - name: Rebuild only own batch 171-180 with corrected manual judgments
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil,subprocess
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_171_180_v1")
+          assert p.is_dir() and (p/"MANIFEST.json").is_file()
+          shutil.rmtree(p)
+          subprocess.run(["python3","-u","scripts/complete_rosewood_batch_171_180.py"],check=True)
+          PY
+      - name: Verify native screenshots, corrected reasons, cards, CSV and ZIP
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,csv,zipfile,hashlib
+          root=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review")
+          p=root/"batch_171_180_v1"
+          native=root/"18_171_180/extra_decocraft_render"
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["scope"]=="171-180" and m["new_comparison_cards"]==10
+          assert m["successful_native_blockbench_viewports"]==10
+          assert m["conditional_candidates"]==0 and m["deferred_other_mods_or_vanilla"]==10
+          assert m["certified_1_to_1_matches"]==0 and m["minecraft_game_install_collision_verified"]==0
+          with (p/"BATCH_171_180_MANUAL_VISUAL_REVIEW.csv").open(encoding="utf-8-sig") as f: rows=list(csv.DictReader(f))
+          assert [int(r["index"]) for r in rows]==list(range(171,181))
+          assert "전면 상단 디지털" in rows[3]["manual_review_reason"]
+          assert "좌석 개수" in rows[7]["manual_review_reason"]
+          assert "전면 두 개의 큰 서랍" in rows[8]["manual_review_reason"]
+          proofs=json.loads((native/"NATIVE_BLOCKBENCH_PROOF.json").read_text("utf8"))
+          assert len(proofs)==10 and all(x["loaded_verified"] for x in proofs)
+          for r in rows:
+            f=p/r["card_path"]
+            assert f.is_file() and hashlib.sha256(f.read_bytes()).hexdigest()==r["new_comparison_card_sha256"]
+            assert r["approved_for_minecraft_world_replacement"]=="NO"
+          z=p/"ROSEWOOD_BATCH_171_180_MANUAL_REVIEW.zip"
+          with zipfile.ZipFile(z) as archive:
+            assert archive.testzip() is None
+            assert len([x for x in archive.namelist() if x.startswith("cards/") and x.endswith(".jpg")])==10
+          print("BATCH18_POST_RENDER_QA_CORRECTED",json.dumps(m,ensure_ascii=False))
+          PY
+      - name: Commit corrected batch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_171_180_v1/
+          git commit -m 'review(rosewood): correct post-render visual evidence for 174 178 179'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
