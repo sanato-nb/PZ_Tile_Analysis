@@ -1,0 +1,97 @@
+{
+  "scope": "331-340",
+  "lane": "C",
+  "method": "Ten source-backed PZ/MC comparison JPEGs inspected visually on 2026-11-02; no new Blockbench render",
+  "decisions": [
+    {
+      "index": 331,
+      "pz_style": "Fossoil Low",
+      "pz_shape": "연한 목재 2단 개방형 낮은 선반, 파란 상판, 옆판",
+      "reason": "Handcrafted 아카시아 후보는 주황빛 닫힌 상자처럼 보이고 어두운 전면 구멍만 있으며 파란 상판·밝은 2단 오픈 선반 구조가 없음",
+      "next_action": "2단 개방형 밝은 선반에 파란 상판을 갖춘 원본 모델을 찾아 전체 모델 계층 렌더",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 332,
+      "pz_style": "Generic Shop Low",
+      "pz_shape": "연한 황갈색 상판과 측판, 앞면 2단 열린 선반",
+      "reason": "Handcrafted 아카시아 후보는 어두운 주황 갈색 상자형 렌더이며 열린 밝은 선반판 두 개가 나타나지 않음",
+      "next_action": "밝은 목재 낮은 진열 선반의 완전한 모델/텍스처 재검증",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 333,
+      "pz_style": "Greene's Grocery",
+      "pz_shape": "4×1 길이의 밝은 목재 3단 상점 진열대, 양 끝 두꺼운 지지대, 오른쪽 금속 걸이",
+      "reason": "MC 1×1 상자형 아카시아 선반은 4블록 길이와 3단 선반, 측면 걸이 및 개방형 구조를 재현하지 못함",
+      "next_action": "4×1 다칸 상점 선반과 양 끝 기둥·측면 후크를 갖춘 모델 또는 모듈 조합 검증",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 334,
+      "pz_style": "Organs",
+      "pz_shape": "어두운 적갈색 직사각 좁은 긴 의자/벤치, 네 개의 가는 다리와 단단한 상판",
+      "reason": "Macaw 아카시아 스툴은 얇은 평판 일부만 렌더되어 네 다리·측면 프레임이 전혀 검증되지 않으며 색도 밝은 주황 계열",
+      "next_action": "스툴 JSON 부모 모델/블록상태와 텍스처 완전 재렌더 후 가늘고 긴 벤치 후보 재검색",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 335,
+      "pz_style": "Morgue",
+      "pz_shape": "2칸 길이 은색 금속 부검대, 테두리 있는 트레이형 상판, 수도꼭지와 중앙 기둥",
+      "reason": "MC 아카시아 유리 탁자 후보는 노란색 평판 부분만 보이며 금속 트레이·수도꼭지·중앙 기둥 및 1×2 길이가 없음",
+      "next_action": "금속 시체안치대/부검대 모델의 완전한 원본 소스 확보와 1×2 배치 확인",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 336,
+      "pz_style": "Oak",
+      "pz_shape": "2×1 밝은 참나무 아기 침대, 세로 나무 난간과 네 다리, 개방형 상단",
+      "reason": "Decocraft crib_oak는 밝은 목재 난간·다리의 전체적인 사물 종류와 형태가 상당히 비슷하지만 상부 모빌과 장식물이 추가되고 높이·크기 및 설치 점유가 불확실",
+      "next_action": "모빌 제거 가능 여부, 2×1 점유·방향·충돌·사용 기능 및 1.20.1 Forge 설치를 확인한 뒤에만 승인",
+      "decision": "CONDITIONAL",
+      "certified": false
+    },
+    {
+      "index": 337,
+      "pz_style": "Victorian C3",
+      "pz_shape": "2×1 청색·크림색 줄무늬 곡선 등받이 빅토리아 소파, 나무 프레임과 가는 다리",
+      "reason": "MC 검정 소파는 단색 검정 직각 쿠션과 블록형 형태로 줄무늬·곡선 팔걸이·목재 장식 다리가 전혀 다름",
+      "next_action": "줄무늬 빅토리아 곡선 소파의 실물 원본 모델/텍스처 검색 및 2×1 배치 검증",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 338,
+      "pz_style": "Victorian C6",
+      "pz_shape": "2×1 크림색 단추 장식 곡선 등받이 소파, 짙은 갈색 목재 하부와 가는 다리",
+      "reason": "MC 검정 직선형 소파는 색상과 등받이 곡률, 크림색 버튼 장식, 다리 구조가 전부 불일치",
+      "next_action": "밝은 크림색 터프팅/곡선 등받이 빅토리아 소파 원본 모델 검색",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 339,
+      "pz_style": "Oakwood Floating Corner",
+      "pz_shape": "갈색 목재 ㄱ자 모서리 상부 벽장/오버헤드 카운터, 평평한 상판과 직각 패널",
+      "reason": "Decocraft 검정·은색 줄무늬 다이너 코너 카운터는 재질·색·전면 패널이 다르고 바닥형 모델로 벽면 부착 상부 가구를 대체할 수 없음",
+      "next_action": "나무 벽걸이 코너 캐비닛의 실제 벽 부착·방향·상부 높이 모델 검증",
+      "decision": "DEFER",
+      "certified": false
+    },
+    {
+      "index": 340,
+      "pz_style": "Steel Floating Corner",
+      "pz_shape": "은색/회색 금속 ㄱ자 모서리 상부 벽장, 평평한 상판과 직각 금속 측면",
+      "reason": "Decocraft 검정·은색 줄무늬 다이너 코너 카운터는 검정 바닥형 가구로 회색 벽걸이 코너 금속장의 색상·재질·설치 높이가 다름",
+      "next_action": "회색 금속 벽걸이 코너 캐비닛 원본 모델과 벽 부착/충돌 확인",
+      "decision": "DEFER",
+      "certified": false
+    }
+  ]
+}
