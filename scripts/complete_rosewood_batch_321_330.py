@@ -149,8 +149,8 @@ def main():
         "review_method": "Assistant visually inspected ten baseline PZ/MC cards 321-330 and annotated ten new cards. Existing source-backed renders reused; no new Blockbench run.",
         "limitations": [
             "PZ 321 has 3x1 SpriteGridPos; other provisional 1x1 footprints and rotations require verification.",
-            "323 show incomplete native JSON imports; not proof of complete 3D geometry.",
-            "322 have no verified Minecraft source model; placeholder is not an actual render.",
+            "323 shows an incomplete native JSON model import; not proof of complete 3D geometry.",
+            "322 has no verified Minecraft source model; placeholder is not an actual render.",
             "No fresh native BBMODEL or texture rendering in this run.",
             "No Minecraft Java 1.20.1 Forge installation, collision, interaction, multi-tile placement or 1:1 certification.",
             "This is an independent draft PR, not a global merge."
@@ -162,14 +162,14 @@ def main():
         "conditional": 0, "deferred": 10, "merged_into_global_progress": False,
         "next_lane_B_scope": "351-357"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     readme = [
-        "# 로즈우드 B 레인 31차 — 321~330 개별 시각 검수", "",
+        "# 로즈우드 B 레인 33차 — 321~330 개별 시각 검수", "",
         "PZ 원본 완성형 조립 미리보기 10종과 기존 Minecraft 원본 소스 기반 비교 JPG 10개를 실제로 열어 각각 관찰했다.",
         "이번 실행에서 Blockbench를 새로 구동한 것은 아니며, 기존 원본 소스 기반 렌더를 재사용했다.",
         "원본 PZ 미리보기는 임시 조립 상태일 수 있어 구조적 불일치 판정의 제한을 함께 기록한다.", "",
         "- 개별 검수 10종 / 조건부 0종 / 보류 10종 / 1:1 인증 0종.",
-        "- 323의 Minecraft JSON 스크린샷은 부분 렌더이므로 완성 모델의 외형 증거로 승인하지 않는다.",
+        "- 323번의 Minecraft JSON 스크린샷은 부분 렌더이므로 완성 모델의 외형 증거로 승인하지 않는다.",
         "- 322에는 검증된 MC 모델이 없으며 우측은 안내 카드이므로 실제 모델 비교가 아니다.",
-        "- 325·326·327는 서로 반대 방향의 유리 진열 코너인데 동일한 불투명 검정 카운터가 후보로 지정돼 있다.",
+        "- 325·326·327은 서로 다른 색상의 L자 코너 카운터인데 동일한 검정·은색 줄무늬 카운터가 후보로 지정돼 있다.",
         "- Minecraft Forge 1.20.1 설치·충돌·방향·기능 검증은 수행되지 않았다.", "",
         "## 검증 자료", "",
         "- cards/: 기존 이미지로부터 새로 제작한 개별 좌우 비교 JPG 10장.",
