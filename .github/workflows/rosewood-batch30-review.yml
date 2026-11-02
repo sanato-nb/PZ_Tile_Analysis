@@ -1,0 +1,80 @@
+name: Rosewood lane C batch30 301-310 visual review
+on:
+  push:
+    branches: [work/rosewood-manual-batch30-301-310-20261102]
+    paths:
+      - .github/workflows/rosewood-batch30-review.yml
+      - scripts/complete_rosewood_batch_301_310.py
+      - scripts/rosewood_batch30_301_310_decisions.json
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: rosewood-batch30-301-310
+  cancel-in-progress: false
+jobs:
+  generate-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_301_310.py
+            /scripts/rosewood_batch30_301_310_decisions.json
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Install Pillow
+        run: python3 -m pip install -q --break-system-packages pillow
+      - name: Generate reviewed 10 JPG cards and CSV/ZIP
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_301_310.py
+          python3 -u scripts/complete_rosewood_batch_301_310.py
+      - name: Verify evidence and no false certification
+        run: |
+          python3 - <<'PY'
+          import csv,hashlib,json,zipfile
+          from pathlib import Path
+          p=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_301_310_v1')
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['scope']=='301-310' and m['lane']=='C'
+          assert m['this_batch_individual_image_reviews']==m['new_comparison_cards']==10
+          assert m['conditional_candidates']==0 and m['deferred_other_mods_or_vanilla']==10
+          assert m['fresh_native_blockbench_renders_this_run']==0
+          assert m['certified_1_to_1_matches']==m['minecraft_game_install_collision_verified']==0
+          assert not m['source_tables_overwritten'] and not m['parallel_group_progress_overwritten']
+          def read(name):
+            with (p/name).open(encoding='utf-8-sig',newline='') as f: return list(csv.DictReader(f))
+          rows=read('BATCH_301_310_MANUAL_VISUAL_REVIEW.csv')
+          held=read('BATCH_301_310_DEFERRED_OTHER_MODS.csv')
+          hashes=read('BATCH_301_310_SHA256_PROVENANCE.csv')
+          assert [int(x['index']) for x in rows]==list(range(301,311))
+          assert len(held)==10 and len(hashes)==10
+          assert {int(x['index']) for x in held}==set(range(301,311))
+          for r in rows:
+            card=p/r['new_comparison_card_path']
+            assert card.is_file() and card.stat().st_size>10000
+            assert hashlib.sha256(card.read_bytes()).hexdigest()==r['new_comparison_card_sha256']
+            assert len(r['pz_preview_sha256'])==len(r['baseline_comparison_sha256'])==64
+            assert r['exact_1_to_1_visual_match_approved']=='NO'
+            assert r['approved_for_minecraft_world_replacement']=='NO'
+            assert r['game_install_collision_function_verified']=='NO'
+            assert r['fresh_native_blockbench_render_this_run']=='NO'
+          z=p/'ROSEWOOD_BATCH_301_310_MANUAL_REVIEW.zip'
+          with zipfile.ZipFile(z) as f:
+            assert f.testzip() is None
+            assert len([n for n in f.namelist() if n.startswith('cards/') and n.endswith('.jpg')])==10
+          print('ROSEWOOD_301_310_VERIFIED',len(rows),len(held))
+          PY
+      - name: Commit generated review evidence only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_301_310_v1/
+          git diff --cached --quiet && exit 0
+          git commit -m 'review(rosewood): 301-310 manual cards, CSV, provenance, ZIP'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
