@@ -1,0 +1,107 @@
+{
+  "scope": "321-330",
+  "lane": "B",
+  "review_basis": "2026-11-02: ten baseline source-backed PZ/MC images were visually inspected; previous source-based renders reused, no new Blockbench. 321 PZ has 3x1 SpriteGridPos; others provisional 1x1.",
+  "decisions": [
+    {
+      "index": 321,
+      "name": "Table / Long White",
+      "candidate": "decocraft:kitchen_table_white",
+      "shape": "연한 회백색 나뭇결의 3×1 직사각 테이블, 네 다리와 긴 하부 가로 지지대",
+      "why": "PZ는 3×1 길이의 연한 목재 상판과 긴 가로 지지대가 있는 테이블이다. MC kitchen_table_white는 정사각형 1블록 갈색 상판·밝은 다리로 렌더되어 길이·색·지지대·멀티타일 점유가 불일치한다.",
+      "short": "3x1 pale table vs 1-block brown square table",
+      "followup": "3블록 길이 연한 원목 테이블의 실제 모델과 멀티블록 배치 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 322,
+      "name": "Walkie Talkie / Toys-R-Mine",
+      "candidate": "",
+      "shape": "검정 소형 휴대용 무전기, 긴 안테나, 전면 버튼과 붉은 표시부",
+      "why": "PZ는 작은 검정 무전기지만 검증된 Minecraft 모드 원본 모델이 없다. 우측은 안내 카드로 실제 3D 렌더가 아니다. 통신 기능도 검증되지 않았다.",
+      "short": "Black handheld radio vs no verified Minecraft model",
+      "followup": "Forge 1.20.1 휴대용 무전기 원본 모델·텍스처와 아이템/장식 배치 조사",
+      "status": "DEFER"
+    },
+    {
+      "index": 323,
+      "name": "Cabinet / Wide Medical",
+      "candidate": "mcwfurnitures:acacia_double_kitchen_cabinet",
+      "shape": "은회색 높은 의료용 금속 수납장, 검정 상단, 경사진 상부 전면과 옅은 청색 패널, 아래 양문형 문짝",
+      "why": "PZ는 금속 의료 수납장에 경사진 상단과 밝은 패널·하단 양문이 있지만 MC 후보는 어두운 아카시아 통나무 질감과 붉은 문처럼 보이는 부분 JSON 렌더다. 재질·색·형상이 다르고 완성 모델 증거도 부족하다.",
+      "short": "Metal medical cabinet vs partial dark wood cabinet",
+      "followup": "은색 금속 의료 수납장 상하부 전체 모델 및 상단 경사 구조 조사",
+      "status": "DEFER"
+    },
+    {
+      "index": 324,
+      "name": "Counter / Crafted",
+      "candidate": "mcwfurnitures:acacia_counter",
+      "shape": "진갈색 수제 목재 카운터, 상판 나무 판재 줄무늬, 전면 수직 목재 패널",
+      "why": "PZ는 짙은 갈색 판재를 수직으로 조립한 카운터인데 MC acacia_counter는 주황 상판과 회흑색 나무껍질 질감의 단순 상자다. 판재 배열·재질·색상이 다르다.",
+      "short": "Rustic dark wooden counter vs orange acacia bark cube",
+      "followup": "바닐라 목재 조합 또는 Forge 목재 판재 카운터 원본 모델 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 325,
+      "name": "Counter / Dark Bar Corner",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "어두운 갈색 목재 L자 코너 카운터, 균일한 상판과 수직 목재 하부",
+      "why": "둘 다 코너형이지만 PZ는 짙은 갈색 목재이고 MC는 검정 몸체에 굵은 은회색 가로 줄무늬가 반복되는 식당 카운터다. 상판·전면 질감이 다르다.",
+      "short": "Dark wood L-corner vs black silver-striped diner corner",
+      "followup": "짙은 목재 단색 L자 카운터의 연결·회전 모델 검증",
+      "status": "DEFER"
+    },
+    {
+      "index": 326,
+      "name": "Counter / Motel Corner",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "크림색·아이보리색 L자 코너 카운터, 밝은 상판과 연한 수직 판재 하부",
+      "why": "PZ는 밝은 아이보리색 모텔 코너 카운터인데 MC 후보는 검정 몸체와 은회색 띠의 식당 카운터다. 코너 실루엣 외 색상·패널·재질이 다르다.",
+      "short": "Ivory motel corner vs black striped diner corner",
+      "followup": "밝은 아이보리색 코너 카운터 원본 모델과 방향 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 327,
+      "name": "Counter / Zippee Corner",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "빨간 L자 상판과 낡은 흰색/회색 하부로 구성된 매장 코너 카운터",
+      "why": "PZ는 빨간 상판과 흰색 하부의 Zippee 코너인데 MC 후보는 검정·은색 줄무늬 카운터다. 상판·하부 색상과 패널 질감이 다르다.",
+      "short": "Red top white base vs black silver-striped corner",
+      "followup": "빨간 상판·흰색 하부 L자 카운터 모델 및 회전 상태 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 328,
+      "name": "Counter / Zippee Display",
+      "candidate": "mcwfurnitures:acacia_counter",
+      "shape": "빨간 직사각 상판, 흰색 외벽, 전면에 밝은 목재 선반 두 층이 노출된 진열대",
+      "why": "PZ는 빨간 상판 아래 열린 진열 선반이 있지만 MC acacia_counter는 주황 상판과 어두운 나무껍질 질감의 불투명 상자다. 열린 진열공간·색상·재질이 다르다.",
+      "short": "Red open-front display vs opaque orange acacia counter",
+      "followup": "빨간 상판과 2단 개방 진열부가 있는 매대 원본 모델 조사",
+      "status": "DEFER"
+    },
+    {
+      "index": 329,
+      "name": "Shelves / Clothing Shop",
+      "candidate": "handcrafted:acacia_shelf",
+      "shape": "벽에 부착되는 검정 가로 금속 봉 두 줄과 갈색 목재 받침/패널",
+      "why": "PZ는 검정 의류 걸이 봉과 갈색 받침이 분리된 벽걸이 구조인데 MC acacia_shelf는 두꺼운 갈색 목재 덩어리 형태의 선반이다. 금속 봉·벽 고정 구조·빈 공간이 다르다.",
+      "short": "Wall clothes rails vs chunky enclosed acacia shelf",
+      "followup": "의류 걸이 봉/벽 부착 선반 원본 모델과 회전·충돌 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 330,
+      "name": "Shelves / Crafted Wooden",
+      "candidate": "handcrafted:dark_oak_shelf",
+      "shape": "거친 갈색 원목의 높고 좁은 개방형 3칸 선반, 수평 선반판과 수직 목재 기둥",
+      "why": "PZ는 전면이 크게 열린 3단 원목 선반인데 MC dark_oak_shelf JSON 렌더는 어두운 목재의 닫힌 상자처럼 보여 개방된 3단 구조가 확인되지 않는다. 승인할 수 없다.",
+      "short": "Open three-tier rustic shelves vs closed dark-oak block",
+      "followup": "3단 개방형 원목 선반의 완전한 모델·텍스처와 높이 확인",
+      "status": "DEFER"
+    }
+  ]
+}
