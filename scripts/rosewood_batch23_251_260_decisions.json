@@ -1,7 +1,7 @@
 {
   "scope": "251-260",
   "lane": "A",
-  "basis": "Visually inspected 10 existing source PZ-vs-native Minecraft comparison JPGs from baseline; no new native Blockbench execution claimed",
+  "basis": "Visually inspected 10 existing source PZ-vs-native Minecraft comparison JPGs from baseline; no new native Blockbench execution claimed; 4 Decocraft BBMODEL/texture hashes are transcribed from preexisting v3 source provenance, not newly rehashed",
   "decisions": [
     {
       "index": 251,
@@ -11,7 +11,11 @@
       "shape": "높은 위치에 설치하는 밝은 자작나무색 ㄱ자 벽걸이 코너 수납장. 단색 목재 표면, 안쪽으로 꺾인 ㄱ자 전면.",
       "why": "PZ 원본은 밝은 자작나무색의 높은 벽걸이 ㄱ자 코너 수납장(IsHigh, WallObject)인데 Decocraft 후보는 검은색/흰 줄무늬의 바닥형 식당 카운터 코너다. 코너 윤곽만 일부 유사하고 재질·색상·설치 높이·수납 구조가 다르다.",
       "followup": "밝은 목재의 벽걸이 코너 수납장, 설치 높이와 1×1 점유 검증.",
-      "short": "Wall-mounted birch corner vs black floor diner counter"
+      "short": "Wall-mounted birch corner vs black floor diner counter",
+      "prior_v3_source_bbmodel_path": "assets/decocraft/models/bbmodel/diner_counter_corner.bbmodel",
+      "prior_v3_source_texture_path": "assets/decocraft/textures/block/diner_set_black.png",
+      "prior_v3_source_bbmodel_sha256": "25ef3b784df0de583daad5bbf2d506ceeeadb62db760d80521b8cff7860de13a",
+      "prior_v3_source_texture_sha256": "9e337ca9490e8d0262b68d77491db2a72ab25bf373338641b5b77cda9928ee22"
     },
     {
       "index": 252,
@@ -31,7 +35,11 @@
       "shape": "밝은 청록색의 둥근 모서리 2도어 냉장고. 상단 큰 문과 하단 작은 문, 두 개의 흰 손잡이.",
       "why": "Decocraft의 청색 소형 2도어 냉장고는 전체 외곽, 높이, 냉장고 문 2개 구조가 유사하다. 그러나 PZ는 청록색이며 상하 문 비율·문턱 위치·손잡이 형태가 다르고 후보는 더 탁한 회청색이다. 조건부 외형 후보만 유지한다.",
       "followup": "색상·상하 문 비율/냉동칸 위치·1×1 설치/충돌 및 실제 냉장 기능 검증.",
-      "short": "Two-door shape close; cyan color and door proportions differ"
+      "short": "Two-door shape close; cyan color and door proportions differ",
+      "prior_v3_source_bbmodel_path": "assets/decocraft/models/bbmodel/fridge_small.bbmodel",
+      "prior_v3_source_texture_path": "assets/decocraft/textures/block/fridge_small_blue.png",
+      "prior_v3_source_bbmodel_sha256": "c508cf92ce6adedc83b969869ffb0cdf6fe8d006bed6a18a878b5c7e3e1d3a48",
+      "prior_v3_source_texture_sha256": "1348b393c8c7309df627f327bfc9b8a26c0d894f8e688558e53b910ace7dc4a8"
     },
     {
       "index": 254,
@@ -41,7 +49,11 @@
       "shape": "진홍색 레트로 2도어 냉장고. 작은 상부 냉동실, 큰 하부 문, 은색 띠와 측면 손잡이.",
       "why": "Decocraft의 적색 소형 2도어 냉장고는 빨간 외장·상단 작은 문/하단 큰 문 구조가 유사하다. 하지만 PZ는 더 둥글고 은색 가로 띠가 두드러지며 후보는 손잡이가 전면으로 튀어나오고 문 비율·테두리가 다르다. 조건부 외형 후보만 유지한다.",
       "followup": "실제 색상·문턱/손잡이 차이, 1×1 설치와 냉장/냉동 기능 검증.",
-      "short": "Red retro fridge close; handles and door trim differ"
+      "short": "Red retro fridge close; handles and door trim differ",
+      "prior_v3_source_bbmodel_path": "assets/decocraft/models/bbmodel/fridge_small.bbmodel",
+      "prior_v3_source_texture_path": "assets/decocraft/textures/block/fridge_small_red.png",
+      "prior_v3_source_bbmodel_sha256": "c508cf92ce6adedc83b969869ffb0cdf6fe8d006bed6a18a878b5c7e3e1d3a48",
+      "prior_v3_source_texture_sha256": "395646322d78a9c92918ec2acf23d84a867e13d9555d8ac12979d36bbe4c6d02"
     },
     {
       "index": 255,
@@ -61,7 +73,11 @@
       "shape": "백색 상부 투입식 세탁기. 상판 덮개와 뒤쪽 검정 조작 패널/컬러 버튼.",
       "why": "PZ는 위로 여는 탑로더 세탁기이고 Decocraft 후보는 전면 원형 투입구와 앞쪽 조작판이 있는 프런트로더다. 핵심 투입 방향·뚜껑·조작 패널이 달라 대체 불가.",
       "followup": "상부 투입식 세탁기 실제 3D 모델 및 세탁 기능 검증.",
-      "short": "Top-load washer vs front-load washer"
+      "short": "Top-load washer vs front-load washer",
+      "prior_v3_source_bbmodel_path": "assets/decocraft/models/bbmodel/washer.bbmodel",
+      "prior_v3_source_texture_path": "assets/decocraft/textures/block/washer_dryer.png",
+      "prior_v3_source_bbmodel_sha256": "01897644a1a46631cdcf229315246386b858e4f75dfa780e068528a99e2905a2",
+      "prior_v3_source_texture_sha256": "d134cffc7a3c52b049b8c383009698386889263a2ac9bb4e333e546db5a863d1"
     },
     {
       "index": 257,
