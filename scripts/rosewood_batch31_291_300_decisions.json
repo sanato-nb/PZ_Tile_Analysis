@@ -1,0 +1,107 @@
+{
+  "scope": "291-300",
+  "lane": "B",
+  "review_basis": "2026-11-02: assistant visually inspected each of the 10 source-backed PZ vs MC comparison cards through the connected GitHub file reader. Existing native-source screenshots reused, not freshly rendered. PZ sprite-grid assemblies and footprints are provisional.",
+  "decisions": [
+    {
+      "index": 291,
+      "name": "Ottoman / Orange",
+      "candidate": "decocraft:cottage_footstool",
+      "shape": "밝은 주황색 단색 정사각 쿠션, 짙은 짧은 네 다리, 낮은 발받침",
+      "why": "PZ는 무늬 없는 주황색 작은 발받침이지만 MC 원본 cottage_footstool은 흰 바탕에 꽃무늬가 반복되는 두꺼운 발받침이다. 용도만 같고 색상·무늬·비례가 다르다.",
+      "short": "Orange plain ottoman vs floral white footstool",
+      "followup": "단색 주황색 발받침 모델·텍스처와 다리/높이 검증",
+      "status": "DEFER"
+    },
+    {
+      "index": 292,
+      "name": "Oven / Antique",
+      "candidate": "decocraft:pizza_oven",
+      "shape": "검정 철제 독립형 장작 난로, 직사각 몸체, 긴 가느다란 수직 연통",
+      "why": "PZ는 검정 철제 장작난로와 가는 금속 연통이지만 MC pizza_oven은 붉은 벽돌 바닥과 넓은 돔 화실·굵은 벽돌 굴뚝의 야외 피자 화덕이다. 재질·실루엣·기능이 다르다.",
+      "short": "Black iron wood stove vs brick pizza oven",
+      "followup": "검정 철제 장작난로 전체 원본 모델과 연통·난방 기능 조사",
+      "status": "DEFER"
+    },
+    {
+      "index": 293,
+      "name": "Shelves / Big Wall Corner",
+      "candidate": "handcrafted:acacia_shelf",
+      "shape": "높이 3단 L자 코너형 개방형 갈색 벽 선반, 뒤쪽 벽판",
+      "why": "PZ는 직각으로 꺾인 개방형 3단 코너 선반인데 MC acacia_shelf는 단일 목재 상자형 덩어리처럼 보이고 열린 L자 코너와 세 선반 층이 보이지 않는다.",
+      "short": "Open triple L-corner shelves vs closed acacia block",
+      "followup": "코너 연결형 벽 선반 3단 모델과 방향/벽 고정 상태 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 294,
+      "name": "Speaker Cabinet / Guitar",
+      "candidate": "",
+      "shape": "높고 좁은 검정 직사각 앰프/스피커 캐비닛, 통풍구와 조작부",
+      "why": "PZ는 검정 세로형 기타 스피커 캐비닛이지만 기존 모드 조사에서 대응 MC 원본 모델이 확인되지 않았다. 오른쪽은 미검증 안내판으로 실제 MC 모델 렌더가 아니다.",
+      "short": "Black guitar speaker cabinet vs no verified MC asset",
+      "followup": "Forge 1.20.1 기타 앰프/스피커 모드의 실제 원본 모델 확보",
+      "status": "DEFER"
+    },
+    {
+      "index": 295,
+      "name": "Speaker Cabinet / Wood",
+      "candidate": "",
+      "shape": "갈색 목재 스피커 캐비닛, 전면 검정 원형 스피커 유닛 두 개",
+      "why": "PZ는 두 원형 드라이버가 노출된 목재 스피커인데 기존 MC 원본 후보가 없고 오른쪽은 안내판이다. 실제 모델 비교가 없어 승인 불가다.",
+      "short": "Wooden two-driver speaker vs no verified MC asset",
+      "followup": "목재 2웨이 스피커 캐비닛 원본 모델·텍스처와 점유 조사",
+      "status": "DEFER"
+    },
+    {
+      "index": 296,
+      "name": "Terminal / CeroSec",
+      "candidate": "refurbished_furniture:computer",
+      "shape": "은색 산업용 보안 제어 콘솔, 경사진 상단에 키패드·여러 계기·작은 화면",
+      "why": "PZ는 버튼과 디스플레이가 다수 있는 경사형 보안 콘솔이지만 MC computer 비교는 베이지색 단순 상자형 부분 JSON 렌더다. 화면·키패드·경사 제어판이 보이지 않고 완성 모델도 검증되지 않았다.",
+      "short": "Silver angled security terminal vs partial beige cube",
+      "followup": "산업용 보안 콘솔 전체 모델과 버튼·화면 텍스처 검증",
+      "status": "DEFER"
+    },
+    {
+      "index": 297,
+      "name": "Chair / Exceptionally crafted",
+      "candidate": "pfm:arm_chair_leather",
+      "shape": "진갈색 원목 식탁 의자, 높은 살대 등받이와 평평한 목재 좌석, 네 다리",
+      "why": "PZ는 팔걸이 없는 목재 의자지만 MC arm_chair_leather는 가죽 안락의자 종류이며 기존 Blockbench JSON 화면도 회색 판형 부분 렌더다. 종류·재질·등받이 구조가 불일치한다.",
+      "short": "Slatted wooden dining chair vs partial leather armchair",
+      "followup": "갈색 원목 높은 살대 등받이 의자 원본 모델 확보",
+      "status": "DEFER"
+    },
+    {
+      "index": 298,
+      "name": "Counter / Corner A",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "은회색 식품 진열 코너, 투명 경사 유리막과 위쪽 수평 프레임, 움푹 파인 진열부",
+      "why": "PZ는 금속/유리 코너 진열대와 투명 가림막이지만 MC는 검정 몸체와 회색 줄무늬의 불투명 카운터다. 유리·진열홈·상부 프레임이 없다.",
+      "short": "Glass metal display corner vs opaque striped diner counter",
+      "followup": "투명 유리 진열 코너 모델과 좌우 회전 상태 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 299,
+      "name": "Counter / Corner B",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "298의 반대 방향 은회색 진열 코너, 높은 투명 유리 가림막",
+      "why": "PZ는 298번과 프레임 방향이 반대인 유리 진열 코너인데 MC는 298과 동일한 불투명 검정 카운터를 재사용한다. 유리와 상단 구조도 없고 회전별 차이도 입증되지 않았다.",
+      "short": "Opposite glass corner vs same opaque diner counter",
+      "followup": "좌우 회전 2종을 지원하는 유리 진열 코너 원본 모델 확보",
+      "status": "DEFER"
+    },
+    {
+      "index": 300,
+      "name": "Counter / Fossoil",
+      "candidate": "mcwfurnitures:acacia_counter",
+      "shape": "밝은 베이지색 카운터 몸체와 선명한 파란색 평평한 상판",
+      "why": "PZ는 크림색 몸체와 파란 상판의 주유소 카운터인데 MC acacia_counter는 주황색 아카시아 상판과 회색/갈색 나무껍질 질감 몸체다. 색상·재질·패널이 불일치한다.",
+      "short": "Blue-top cream counter vs orange acacia bark counter",
+      "followup": "파란 상판/밝은 하부의 주유소 카운터 모델 조사",
+      "status": "DEFER"
+    }
+  ]
+}
