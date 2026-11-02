@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 ROOT=Path(__file__).resolve().parents[1]
 D=ROOT/"analysis/rosewood_furniture/2026-10-31"
 OUT=D/"ten_batch_review/batch_221_230_v1"
-NATIVE=D/"ten_batch_review/21_221_230/extra_decocraft_render"
+NATIVE=D/"ten_batch_review/22_221_230/extra_decocraft_render"
 BASE=D/"all_357_complete_native_comparisons_v1"
 PREVIEW=D/"complete_furniture_visual_3d_v1"
 DECISIONS=ROOT/"scripts/rosewood_batch22_221_230_decisions.json"
@@ -60,7 +60,7 @@ def make_card(row,decision,proof):
    # Black background is from native Blockbench viewport, not generated geometry.
    out.paste(im,(1124-im.width//2,323-im.height//2))
   evidence="NATIVE_BLOCKBENCH_5_2_2_VERIFIED_SOURCE_BBMODEL"
- elif baseline.is_file() and idx!=201:
+ elif baseline.is_file() and idx!=221:
   with Image.open(baseline) as im:
    im=im.convert("RGB").crop((max(0,im.width//2),88,im.width,max(89,im.height-110)))
    im=ImageOps.contain(im,(650,430),Image.Resampling.LANCZOS)
@@ -148,9 +148,9 @@ def main():
  (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
  progress={"batch":"22","scope":"221-230","lane":"A","this_scope_reviewed":list(range(221,231)),"conditional":cond,"deferred":defer,"approved_for_world":[],"merged_into_global_progress":False}
  (OUT/"BATCH21_STANDALONE_PROGRESS.json").write_text(json.dumps(progress,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
- notes=["# 로즈우드 가구 21차 201~210번 개별 시각 검수",
+ notes=["# 로즈우드 가구 22차 221~230번 개별 시각 검수",
  "PZ B42 원본 완성형 미리보기 10장과 이전 Minecraft 원본 Blockbench 비교판 10장을 실제로 육안 검수했다. 별도 GitHub Actions는 Decocraft 3.0.4-1.20.1 Forge 원본 BBMODEL/텍스처를 검증한 뒤 Blockbench 5.2.2로 새로 렌더해 추가 대조한다.",
- "이전 B 레인 141~150 및 171~180번은 별도 Draft PR로 보존했으며, 이번 201~210번만 독립 검수했다. 다른 레인과 원본 파일은 건드리지 않았다.",
+ "이전 A 레인 131~140, 161~170 및 191~200번은 별도 Draft PR로 보존했으며, 이번 221~230번만 독립 검수했다. 다른 레인과 원본 파일은 건드리지 않았다.",
  f"원본 Decocraft JAR SHA-512: {decocraft['sha512']} | https://modrinth.com/mod/decocraft/version/{decocraft['version_id']}",
  f"검수 10종: 조건부 {len(cond)}종, 보류 {len(defer)}종. 네이티브 Blockbench 캡처 {manifest['successful_native_blockbench_viewports']}/{len(proofs)}개 모델. 비교 JPG 10장. 인게임 1:1 확정 0종.",
  "일부 원본 스프라이트의 SpriteGridPos 조립과 마크 모델의 동적 블록 상태는 잠정이다. 1×1/2×1/1×2 점유·방향·충돌·상호작용·색상/재질은 인게임 미검증. 부분 모델 캡처는 완성형으로 승인하지 않는다.",
@@ -167,7 +167,7 @@ def main():
  "원본 게임 TMX/PNG/SQLite와 기존 357종 누적 검수 CSV, 다른 레인 결과를 수정하지 않는다."]
  (OUT/"README_KO.md").write_text("\n\n".join(notes)+"\n",encoding="utf8")
  cards="\n".join(f'<article><h2>{r["index"]} {html.escape(r["pz_name"])} / {html.escape(r["pz_style"])}</h2><p>{html.escape(r["review_status"])} | {html.escape(r["new_conditional_candidate_id"] or "DEFER")}</p><img src="{html.escape(r["card_path"])}" loading="lazy" alt="PZ vs Minecraft comparison"/><p>{html.escape(r["manual_review_reason"])}</p></article>' for r in rows)
- page=f'<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rosewood 221-230 manual review</title><style>body{{font-family:system-ui,sans-serif;background:#f1f4f8;color:#183044;max-width:1250px;margin:0 auto;padding:25px}}article{{background:white;border-radius:14px;margin:25px 0;padding:18px;box-shadow:0 2px 12px #0001}}img{{width:100%;height:auto;border-radius:10px}}p{{line-height:1.7}}</style></head><body><h1>로즈우드 201~210 개별 검수</h1><p>조건부 {len(cond)} · 보류 {len(defer)} · 인게임 최종 인증 0</p>{cards}</body></html>'
+ page=f'<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rosewood 221-230 manual review</title><style>body{{font-family:system-ui,sans-serif;background:#f1f4f8;color:#183044;max-width:1250px;margin:0 auto;padding:25px}}article{{background:white;border-radius:14px;margin:25px 0;padding:18px;box-shadow:0 2px 12px #0001}}img{{width:100%;height:auto;border-radius:10px}}p{{line-height:1.7}}</style></head><body><h1>로즈우드 221~230 개별 검수</h1><p>조건부 {len(cond)} · 보류 {len(defer)} · 인게임 최종 인증 0</p>{cards}</body></html>'
  (OUT/"INDEX.html").write_text(page,encoding="utf8")
  z=OUT/"ROSEWOOD_BATCH_221_230_MANUAL_REVIEW.zip"
  with zipfile.ZipFile(z,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as archive:
