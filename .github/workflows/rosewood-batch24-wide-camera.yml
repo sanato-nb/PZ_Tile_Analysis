@@ -2,7 +2,7 @@ name: Rosewood batch24 — full-frame Blockbench recheck
 on:
   push:
     branches: [work/rosewood-manual-batch24-231-240-20261102]
-    paths: [.github/workflows/rosewood-batch24-wide-camera.yml]
+    paths: [.github/workflows/rosewood-batch24-wide-camera.yml, scripts/render_rosewood_batch24_wide_camera.py]
   workflow_dispatch:
 permissions:
   contents: write
