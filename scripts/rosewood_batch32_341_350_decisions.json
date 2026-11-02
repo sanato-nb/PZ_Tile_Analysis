@@ -1,0 +1,97 @@
+{
+  "lane": "A",
+  "scope": "341-350",
+  "review_method": "Independent visual inspection of ten baseline PZ-vs-MC image pairs on 2026-11-02; existing source-backed evidence reused; no new Blockbench render or Minecraft in-game validation",
+  "decisions": [
+    {
+      "index": 341,
+      "status": "DEFER",
+      "candidate": "decocraft:diner_counter_corner_cyan",
+      "short": "Ivory wall corner block vs turquoise silver-striped diner floor counter.",
+      "shape": "아이보리/백색 단색의 1×1 ㄱ자 코너 블록, 위쪽 한 귀퉁이 홈과 직각 모서리",
+      "why": "PZ는 밝은 아이보리색의 ㄱ자 형태로 한쪽에 파인 홈이 있으며 금속 줄무늬가 없다. Decocraft 후보는 청록색 금속 띠가 둘러진 검정 바닥 받침형 카운터로 색상, 표면, 설치 높이와 구조가 모두 다르다.",
+      "followup": "흰색 벽부착 코너 캐비닛/카운터의 실제 모델, 배치 높이와 회전 방향 검증."
+    },
+    {
+      "index": 342,
+      "status": "DEFER",
+      "candidate": "",
+      "short": "Gray desk HAM radio with corded microphone; no Minecraft asset.",
+      "shape": "회색 직육면체 무전 통신기 본체, 검정 유선 마이크, 1×1",
+      "why": "PZ Premium Technologies Ham은 작은 회색 직육면체 본체와 검정 유선 핸드마이크가 연결된 탁상형 무전기다. Minecraft 측은 원본 검증 모델이 없어 형상·재질·기능 비교 자체가 불가능하다.",
+      "followup": "HAM 무전기 본체·유선 마이크를 포함한 Forge 1.20.1 호환 모델/텍스처와 통신 기능 검증."
+    },
+    {
+      "index": 343,
+      "status": "DEFER",
+      "candidate": "",
+      "short": "Olive-green military HAM radio and black microphone; no MC asset.",
+      "shape": "올리브색 사각 군용 HAM 통신기, 검정 유선 핸드마이크, 1×1",
+      "why": "PZ US ARMY COMM. Ham은 짙은 올리브색 군용 통신기 본체와 검정 유선 마이크를 갖는다. 원본 검증된 Minecraft 모델이 없으며 342번 회색 민간용과 색상·외형이 다르다.",
+      "followup": "군용 올리브색 HAM 통신기 모델을 342와 별개로 검증하고 케이블·핸드셋·기능 확인."
+    },
+    {
+      "index": 344,
+      "status": "DEFER",
+      "candidate": "",
+      "short": "Small black portable radio with antenna; no verified Minecraft model.",
+      "shape": "검정/회색 직사각 휴대용 라디오, 긴 가느다란 안테나, 전면 조작부, 1×1",
+      "why": "PZ ValuTech는 작은 검정/회색 휴대용 라디오이며 상부 안테나와 전면 다이얼/표시부가 있다. Minecraft 후보 모델이 비어 있어 정확한 모델 비교가 불가능하다.",
+      "followup": "휴대용 라디오 원본 모델·안테나·전면 조작부와 Forge 1.20.1 작동 여부 확인."
+    },
+    {
+      "index": 345,
+      "status": "DEFER",
+      "candidate": "refurbished_furniture:dark_electricity_generator",
+      "short": "Yellow exposed engine and metal frame vs solid dark vented cuboid.",
+      "shape": "노란 원형 발전기 커버, 노출 엔진, 회색 금속 프레임/손잡이, 1×1",
+      "why": "PZ Old 발전기는 원형 황색 부품과 노출된 엔진을 금속 파이프 프레임이 감싼 구조다. 기존 Minecraft 렌더는 검정 통풍구가 있는 막힌 직육면체로 원형 엔진·파이프 프레임이 없다. 또한 JSON 렌더는 부분 증거여서 전체 모델도 미확인.",
+      "followup": "원형 발전기 하우징과 프레임을 갖춘 모델의 원본 전체 렌더 및 작동·충돌 검증."
+    },
+    {
+      "index": 346,
+      "status": "CONDITIONAL",
+      "candidate": "decocraft:piano_black",
+      "short": "Both black grand pianos; closed vs open lid and proportions differ.",
+      "shape": "검정 그랜드 피아노, 닫힌 곡면 뚜껑, 흑백 건반, 다리와 페달, 2×3 여섯 타일",
+      "why": "PZ와 Decocraft 후보는 모두 검정 그랜드 피아노이고 건반·페달·다리가 확인돼 물체 종류는 잘 맞는다. 그러나 PZ는 닫힌 둥근 곡면 상판인 반면 후보는 뚜껑이 열려 내부 현과 악보대가 드러난다. 다리 수·몸통 비율·2×3 배치와 기능은 확인되지 않았다.",
+      "followup": "Decocraft 실제 배치 크기·회전·뚜껑 닫힘 변형·페달·충돌 및 Forge 1.20.1 게임 테스트."
+    },
+    {
+      "index": 347,
+      "status": "DEFER",
+      "candidate": "",
+      "short": "Cream-and-black video camera on tall tripod; no verified MC asset.",
+      "shape": "크림/검정 촬영용 카메라 본체, 뷰파인더, 삼각대 다리, 1×1",
+      "why": "PZ HK533p Imekagi는 높은 삼각대에 설치된 크림색/검정 카메라로 상부 뷰파인더와 렌즈/손잡이가 보인다. Minecraft 후보가 없어서 삼각대와 카메라 구조를 비교할 수 없다.",
+      "followup": "삼각대 일체형 방송/영상 카메라 원본 모델 확보, 높이·방향·충돌 검증."
+    },
+    {
+      "index": 348,
+      "status": "DEFER",
+      "candidate": "handcrafted:acacia_shelf",
+      "short": "Two thin L-shaped wall shelves vs thick closed acacia cuboid.",
+      "shape": "진갈색 얇은 ㄱ자 코너 벽 선반 2단, 열린 측면과 빈 하부, 1×1",
+      "why": "PZ Hardwood Wall Corner는 벽 모서리에 걸린 두 개의 얇은 ㄱ자 선반 판이며 하부가 완전히 열려 있다. Minecraft Handcrafted acacia_shelf 렌더는 큰 육면체 상자에 두 개의 검은 전면 틈이 있는 구조로 ㄱ자 판, 벽 코너 결합, 개방성이 재현되지 않는다.",
+      "followup": "두 단의 ㄱ자 코너 벽선반을 실제 모드 모델 또는 바닐라 조합으로 렌더, 부착/방향 검증."
+    },
+    {
+      "index": 349,
+      "status": "DEFER",
+      "candidate": "decocraft:bus_stop_sign",
+      "short": "Four-tile horizontal Laundromat fascia vs vertical bus-stop sign.",
+      "shape": "4×1 긴 흰색 세탁소 간판, 파란 Laundromat 글씨와 주황/파랑 로고, 가로형",
+      "why": "PZ는 가로로 네 타일 이어지는 세탁소 간판이다. 기존 후보는 세로형 파란 버스정류장 표지판으로 문구, 방향, 길이, 설치 방식이 전혀 다르며 기존 렌더도 LEGACY_3D_APPROXIMATION 등급이다.",
+      "followup": "4×1 가로 간판 실제 텍스처·모델 확보, 4개 블록 연속 설치와 벽부착 검증."
+    },
+    {
+      "index": 350,
+      "status": "DEFER",
+      "candidate": "decocraft:bunk_bed_birch_black",
+      "short": "Single low wooden bed vs tall two-level bunk bed with ladder.",
+      "shape": "1×2 낮은 단층 수제 목재 침대, 흰 침구와 베개, 낮은 머리판/발판",
+      "why": "PZ Crafted Bed는 낮은 단층 침대 1개로 갈색 목재 프레임과 흰 매트리스가 보인다. Minecraft 후보는 밝은 목재 사다리·난간이 있는 2층 침대여서 층수, 높이, 프레임 색상, 1×2 구조가 다르다.",
+      "followup": "단층 1×2 갈색 목재 침대 원본 모델/바닐라 침대와 실제 설치·방향·기능 검증."
+    }
+  ]
+}
