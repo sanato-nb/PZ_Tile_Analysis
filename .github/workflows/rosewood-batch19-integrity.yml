@@ -1,0 +1,30 @@
+name: Rosewood Batch 181-190 Evidence Integrity
+
+on:
+  push:
+    branches:
+      - work/rosewood-manual-batch19-181-190-20261102
+    paths:
+      - 'analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_181_190_v1/**'
+      - '.github/workflows/rosewood-batch19-integrity.yml'
+  pull_request:
+    paths:
+      - 'analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_181_190_v1/**'
+      - '.github/workflows/rosewood-batch19-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_181_190_v1
+          sparse-checkout-cone-mode: false
+      - name: Verify original comparison evidence, manifest and ZIP
+        run: python3 analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_181_190_v1/verify_batch.py
