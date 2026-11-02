@@ -60,7 +60,7 @@ def make_card(row,decision,proof):
    # Black background is from native Blockbench viewport, not generated geometry.
    out.paste(im,(1124-im.width//2,323-im.height//2))
   evidence="NATIVE_BLOCKBENCH_5_2_2_VERIFIED_SOURCE_BBMODEL"
- elif baseline.is_file() and idx!=221:
+ elif baseline.is_file():
   with Image.open(baseline) as im:
    im=im.convert("RGB").crop((max(0,im.width//2),88,im.width,max(89,im.height-110)))
    im=ImageOps.contain(im,(650,430),Image.Resampling.LANCZOS)
