@@ -132,7 +132,7 @@ def main():
  source_versions=json.loads((D/"minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json").read_text("utf8"))
  decocraft=next(x for x in source_versions if x["label"]=="decocraft")
  manifest={
-  "scope":"221-230","total_pz_styles":357,"previous_verified_individual_scope":"001-210 (independent draft PRs, not merged; 211-220 belongs to lane C)"",
+  "scope":"221-230","total_pz_styles":357,"previous_verified_individual_scope":"001-210 (independent draft PRs, not merged; 211-220 belongs to lane C)",
   "this_batch_individual_reviews":10,"attempted_original_decocraft_models":len(proofs),
   "successful_native_blockbench_viewports":sum(bool(x.get("loaded_verified") and x.get("native_model_screenshot") and (NATIVE/x["native_model_screenshot"]).is_file()) for x in proofs),
   "new_comparison_cards":len(list((OUT/"cards").glob("*_PZ_vs_MC.jpg"))),
