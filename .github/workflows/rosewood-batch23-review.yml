@@ -9,6 +9,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: rosewood-batch23-251-260
+  cancel-in-progress: false
 jobs:
   generate-and-verify:
     runs-on: ubuntu-24.04
