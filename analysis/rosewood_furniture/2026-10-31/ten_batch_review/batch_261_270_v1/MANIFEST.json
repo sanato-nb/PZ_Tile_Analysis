@@ -1,0 +1,30 @@
+{
+  "scope": "261-270",
+  "lane": "B",
+  "total_pz_styles": 357,
+  "this_batch_individual_image_reviews": 10,
+  "new_comparison_cards": 10,
+  "conditional_candidates": 0,
+  "deferred_other_mods_or_vanilla": 10,
+  "fresh_native_blockbench_renders_this_run": 0,
+  "preexisting_source_render_grade_counts": {
+    "ACTUAL_NATIVE_BLOCKBENCH_FULL_SOURCE_JSON": 1,
+    "ACTUAL_NATIVE_BLOCKBENCH_SOURCE_BBMODEL": 6,
+    "NATIVE_BLOCKBENCH_PARTIAL_SOURCE_JSON": 3
+  },
+  "certified_1_to_1_matches": 0,
+  "minecraft_game_install_collision_verified": 0,
+  "source_tables_overwritten": false,
+  "parallel_group_progress_overwritten": false,
+  "merged_into_global_progress": false,
+  "baseline_branch": "work/rosewood-manual-batch10-091-100-20261101",
+  "review_method": "Assistant directly inspected ten PZ-vs-MC images and annotated ten new cards. Source-backed preexisting screenshots reused; no new Blockbench run.",
+  "limitations": [
+    "PZ assembled previews are marked provisional; item 266 may have incomplete sprite assembly.",
+    "262, 263 and 266 show incomplete native JSON source imports; not proof of complete 3D geometry.",
+    "267 PZ preview resembles a crib despite source category Bed / Light Wood; source tile metadata requires recheck.",
+    "No fresh native BBMODEL or texture rendering in this run.",
+    "No Minecraft Java 1.20.1 Forge installation, collision, interaction, multi-tile placement or 1:1 certification.",
+    "This is an independent draft PR, not a global merge."
+  ]
+}
