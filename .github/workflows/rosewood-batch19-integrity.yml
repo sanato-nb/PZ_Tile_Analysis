@@ -22,5 +22,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_181_190_v1
+          sparse-checkout-cone-mode: false
       - name: Verify original comparison evidence, manifest and ZIP
         run: python3 analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_181_190_v1/verify_batch.py
