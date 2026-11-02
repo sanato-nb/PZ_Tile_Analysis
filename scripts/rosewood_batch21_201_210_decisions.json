@@ -14,7 +14,7 @@
     "candidate": "",
     "status": "DEFER_STAINLESS_DOUBLE_OVEN_VS_BRICK_PIZZA_OVEN",
     "shape": "2×1 회색 스테인리스 대형 오븐, 전면 상하 2개의 검은 유리문과 왼쪽 세로 조작 패널, 매끈한 금속 상판 및 낮은 다리.",
-    "why": "기존 실제 Decocraft pizza_oven Blockbench 화면은 붉은 벽돌 화덕, 커다란 굴뚝, 아치형 입구와 불꽃이 보여 현대식 이중 금속 오븐과 전혀 다르다. 추가 원본 렌더가 동일한 자산인지 확인하되 종류만으로 승인하지 않는다.",
+    "why": "PZ 원본은 은색 스테인리스 2단 전기 오븐과 전면 검정 유리문 2개·좌측 조작 패널이다. 공식 Blockbench 5.2.2에서 실제 Decocraft pizza_oven BBMODEL 31 cubes를 다시 렌더해 확인했으나 붉은 벽돌 화덕, 높은 벽돌 굴뚝, 둥근 입구와 불꽃, 삽이 있는 완전히 다른 장치다. 2×1 점유와 전기 오븐 기능도 일치하지 않아 보류.",
     "followup": "두 개의 독립 오븐문과 금속 상판을 가진 2블록 폭 산업용 전기 오븐 모델 및 조리 상호작용."
   },
   {
@@ -23,7 +23,7 @@
     "candidate": "",
     "status": "DEFER_DARK_RECTANGULAR_TABLE_VS_TABLE_SETTING",
     "shape": "2×1의 넓은 짙은 회갈색 직사각형 평판 상판과 네 모서리의 얇은 검정 사각 다리, 별도 식기 없음.",
-    "why": "기존 decocraft:table_setting_double Blockbench 화면은 접시·컵·수저만 있는 식기 장식으로 상판과 네 다리가 없다. 실제 원본 diner_table_black을 새로 렌더해 비교할 예정이며, 비율·2블록 길이가 확인되기 전까지 보류한다.",
+    "why": "기존 decocraft:table_setting_double 렌더는 접시·컵·수저만 있는 식기 장식이다. 새로 실제 Blockbench에서 diner_table_black(12 cubes)을 열어 보니 어두운 직사각 상판은 유사하지만 은색 테두리와 중앙 단일 금속 받침/넓은 발판이며 PZ의 짙은 목재 상판·네 모서리 가는 다리와 다르다. wooden_table_oak(25 cubes)도 네 다리 구조는 있으나 밝은 참나무 정사각 상판과 굵고 장식적인 다리로 PZ의 2×1 짙은 긴 테이블과 다르다.",
     "followup": "어두운 2블록 길이 4다리 식탁 원본, 양 끝 연결부·회전 및 바닥 충돌 검증."
   },
   {
@@ -32,7 +32,7 @@
     "candidate": "",
     "status": "DEFER_ROUGH_PLANK_CHAIR_VS_LEATHER_ARMCHAIR_PARTIAL",
     "shape": "거친 갈색 목재 널빤지로 만든 낮은 임시 의자, 판자 좌판, 짧은 수직 등받이, 겹친 판재 받침대, 팔걸이 없음.",
-    "why": "기존 pfm:arm_chair_leather Blockbench 화면은 회색 직육면체 판 하나뿐인 부분 모델이다. PZ의 목재 팔레트형 의자와 색·형상·좌판·등받이가 모두 다르다. Decocraft school_chair_gray도 실제 원본을 비교하되 거친 목재 의자로 자동 승인하지 않는다.",
+    "why": "기존 pfm:arm_chair_leather 네이티브 캡처는 회색 판 한 장만 보이는 부분 모델이다. 새 Decocraft school_chair_gray 원본 BBMODEL 37 cubes를 Blockbench로 렌더한 결과 얇은 회색 금속 네 다리, 평평한 금속 좌판과 분리된 회색 등받이의 교실 의자다. PZ의 두꺼운 거친 목재 널빤지 좌판, 판재 바닥 받침 및 짧은 판자 등받이와 형태·재질·높이가 불일치.",
     "followup": "원목 널빤지/팔레트로 제작된 낮은 등받이 의자, 1×1 바닥 점유 및 앉기 동작."
   },
   {
@@ -50,17 +50,17 @@
     "candidate": "",
     "status": "DEFER_BEIGE_ROUNDED_TRAILER_TABLE_VS_PARTIAL_GLASS_TABLE",
     "shape": "1×2의 연한 베이지색 길고 모서리가 둥근 직사각형 상판, 중앙 아래로 내려오는 두 개의 가느다란 회색 금속 지지 다리.",
-    "why": "기존 mcwfurnitures:acacia_glass_table 화면에는 노란 목재판 한 장만 있어 다리와 전체 테이블 구조가 누락된 부분 모델이다. 새 Decocraft kitchen_table_oak 렌더도 금속 중앙 2다리와 1×2 형태를 실제 확인하기 전에는 승인하지 않는다.",
+    "why": "기존 mcwfurnitures:acacia_glass_table 네이티브 캡처는 얇은 나무판 한 장만 보이는 부분 렌더다. 새 Decocraft kitchen_table_oak BBMODEL 29 cubes는 흰색 상판과 밝은 참나무의 굵은 4다리 식탁으로 확인했다. PZ는 베이지색 모서리 둥근 1×2 길이 상판과 중앙 금속 기둥 2개이므로 상판 색·모서리·다리 수·재질·길이 모두 불일치.",
     "followup": "연베이지 라운드 1×2 상판 + 중앙 금속 2다리 테이블의 실제 2블록 결합 모델."
   },
   {
     "index": 207,
     "model": "grill_black",
-    "candidate": "",
-    "status": "DEFER_PROPANE_GRILL_VS_INCOMPLETE_BLACK_GRILL_JSON",
+    "candidate": "decocraft:grill_black",
+    "status": "CONDITIONAL_PROPANE_GRILL_SIMILAR_BODY_SIDE_SHELVES_BUT_WHEELS_LID_DIFFER",
     "shape": "검정 직립 가스 바비큐, 밝은 은색 둥근 뚜껑, 양옆 짙은 갈색 목재 보조 선반, 오른쪽 작은 바퀴, 검정 프레임과 하단 공간.",
-    "why": "기존 refurbished_furniture:black_grill Blockbench 화면은 은회색 기둥과 검은 작은 직육면체만 보여 전체 그릴이 아니다. 새 Decocraft grill_black의 실제 원본을 확인하여 뚜껑·양쪽 선반·바퀴·프레임을 비교할 예정이며 그 전에는 보류한다.",
-    "followup": "가스 그릴 1×1 전체 프레임/은색 뚜껑/양측 목재 선반/바퀴, 조리 기능·회전 검증."
+    "why": "기존 refurbished_furniture:black_grill 캡처는 부분 소스만 보여 완성형 근거가 없다. 새로 Decocraft grill_black 원본 BBMODEL 70 cubes를 Blockbench 5.2.2로 열어 확인하니 검정 가스그릴 몸체, 양쪽 갈색 목재 보조 선반, 회색 프레임, 하부 선반이 PZ와 구조적으로 유사하다. 그러나 Minecraft는 뚜껑이 열린 검정색이며 내부 음식과 가스통이 보이고, PZ는 은회색 닫힌 둥근 뚜껑과 측면 바퀴가 있으며 Decocraft 화면에는 바퀴가 보이지 않는다. 따라서 1:1 승인 없이 조건부 후보만 유지한다.",
+    "followup": "Minecraft 1.20.1 Forge 실제 설치에서 grill_black의 뚜껑 닫힌 상태/회전/바퀴 여부/1×1 배치/충돌·요리 기능 확인. PZ 은색 뚜껑·바퀴가 없으면 다른 모드 후보 또는 커스텀 모델 필요."
   },
   {
     "index": 208,
@@ -77,7 +77,7 @@
     "candidate": "",
     "status": "DEFER_YELLOW_UPHOLSTERED_ARMCHAIR_VS_PARTIAL_FROGGY_PANEL",
     "shape": "넓은 겨자색 1인 패브릭 소파/암체어, 두꺼운 양쪽 팔걸이와 둥근 쿠션 등받이, 노란 좌판, 매우 낮은 검은 네 다리.",
-    "why": "기존 pfm:froggy_chair_yellow의 실제 Blockbench 캡처는 노란 평판 한 장만 보여 팔걸이·쿠션·좌판·다리가 없다. 새 Decocraft bamboo_chair_yellow 원본을 비교하되 대나무 프레임이 PZ의 두꺼운 패브릭 암체어와 다르면 보류한다.",
+    "why": "기존 pfm:froggy_chair_yellow 네이티브 캡처는 노란 평판 한 장뿐이다. 새 Decocraft bamboo_chair_yellow BBMODEL 30 cubes의 실제 렌더는 노란빛 대나무/라탄 짜임 좌판, X자 등받이, 높은 나무 네 다리, 팔걸이 없는 개방형 의자다. PZ의 두꺼운 겨자색 패브릭 팔걸이·쿠션 등받이·낮은 다리 1인 소파와 전혀 다르다.",
     "followup": "겨자색 통쿠션 양팔걸이 소파형 1인 의자, 1×1 크기·앉기 기능·낮은 다리 검증."
   },
   {
@@ -86,7 +86,7 @@
     "candidate": "",
     "status": "DEFER_DARK_WOOD_L_COUNTER_VS_STRIPED_DINER_CORNER",
     "shape": "1×1 짙은 갈색 목재 L자형 코너 카운터, 평평한 상판 안쪽에 직각 홈/모서리, 전면은 문 없는 어두운 목재 패널.",
-    "why": "기존 Decocraft diner_counter_corner_black Blockbench 원본은 검정/은색 수평 줄무늬가 여러 겹인 둥근 모서리 다이너 카운터다. PZ는 나뭇결 있는 짙은 갈색 직각 모서리 카운터이므로 색·재질·상판 형태가 다르다.",
+    "why": "실제 Decocraft diner_counter_corner_black BBMODEL 11 cubes를 공식 Blockbench 5.2.2로 재렌더한 결과, 검정색 본체에 흰색/은색 가로 줄무늬가 반복되고 전면 모서리가 둥글게 꺾이는 다이너 카운터다. PZ는 어두운 갈색 나뭇결, 장식 없는 평평한 상판과 직각 안쪽 홈이 있는 L자 목재 코너다. 색·재질·모서리 및 인접 카운터 연결이 달라 보류.",
     "followup": "짙은 목재 L자 코너 1×1 카운터 실제 모델, 양측 직선 카운터 연결과 코너 회전/충돌 검증."
   }
 ]
