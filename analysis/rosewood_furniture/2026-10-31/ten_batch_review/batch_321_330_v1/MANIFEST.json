@@ -22,8 +22,8 @@
   "review_method": "Assistant visually inspected ten baseline PZ/MC cards 321-330 and annotated ten new cards. Existing source-backed renders reused; no new Blockbench run.",
   "limitations": [
     "PZ 321 has 3x1 SpriteGridPos; other provisional 1x1 footprints and rotations require verification.",
-    "323 show incomplete native JSON imports; not proof of complete 3D geometry.",
-    "322 have no verified Minecraft source model; placeholder is not an actual render.",
+    "323 shows an incomplete native JSON model import; not proof of complete 3D geometry.",
+    "322 has no verified Minecraft source model; placeholder is not an actual render.",
     "No fresh native BBMODEL or texture rendering in this run.",
     "No Minecraft Java 1.20.1 Forge installation, collision, interaction, multi-tile placement or 1:1 certification.",
     "This is an independent draft PR, not a global merge."
