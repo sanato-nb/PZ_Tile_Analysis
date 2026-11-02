@@ -1,0 +1,77 @@
+{
+  "scope": "351-357",
+  "lane": "B",
+  "review_basis": "2026-11-02: individually visually inspected all seven PZ assembled previews and seven baseline MC comparison cards. Existing source-backed renders reused; no fresh Blockbench or in-game validation. Seven remaining items only.",
+  "decisions": [
+    {
+      "index": 351,
+      "name": "Chair / Dentist Patient",
+      "candidate": "pfm:arm_chair_leather",
+      "shape": "남청색 길게 젖혀지는 치과 진료 의자, 분리된 머리받침·팔걸이·금속 기계식 받침, PZ 1×2",
+      "why": "PZ는 1×2 진료용 리클라이닝 체어와 발받침·금속 프레임이 일체화되어 있다. 기존 MC pfm:arm_chair_leather의 Blockbench 결과는 회색 평판처럼 보이는 부분 JSON 렌더라 팔걸이·발받침·기울기·1×2 형상을 검증할 수 없다. 용도도 일반 가죽 안락의자여서 승인 불가.",
+      "short": "Blue 1x2 reclining dental chair vs incomplete gray armchair render",
+      "followup": "Forge 1.20.1 의료/치과용 리클라이너 전체 모델과 1×2 회전·충돌·상호작용 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 352,
+      "name": "Counter / Crafter Corner",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "진갈색 수제 원목 판재 상판, 나무판이 수직으로 결합된 L자 코너 카운터",
+      "why": "PZ는 거친 갈색 목재 판재로 만든 L자 수제 코너이고, MC는 검정 본체와 은회색 가로띠가 두드러지는 식당 카운터다. 코너 실루엣만 비슷하며 색상·재질·판재 방향이 다르다.",
+      "short": "Rustic brown plank corner vs black gray-striped diner counter",
+      "followup": "갈색 원목 L자 코너 카운터 원본 모델·방향별 연결 및 상판 판재 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 353,
+      "name": "Counter / Oak Corner Bar",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "밝은 참나무 상판, 세로 나뭇결이 있는 짙은 갈색 하부, 비대칭 L자 바 카운터",
+      "why": "PZ는 밝은 오크 상판과 진한 목재 세로 패널을 조합한 코너 바인데 MC는 검정 상판과 회색 수평 줄무늬가 있는 식당 카운터다. 상판 색·세로 나뭇결·L자 길이와 방향이 불일치한다.",
+      "short": "Light oak top with dark wood vertical panels vs black striped corner",
+      "followup": "참나무 상판과 어두운 목재 하부를 가진 L자 바 카운터 회전형 모델 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 354,
+      "name": "Counter / Pizzawhirled Corner",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "진한 적갈색 상판, 빨강·흰색·진홍색 격자 타일 하부의 피자 가게 코너",
+      "why": "PZ는 붉은 상판과 빨강·흰색 체크 타일 벽면이 특징인데 MC는 검정 본체와 회색 가로 띠다. 색상·체커보드 패턴·매장 정체성이 모두 다르다.",
+      "short": "Red top with red-white checker tiles vs black silver stripes",
+      "followup": "빨간/흰색 타일형 식당 코너 카운터 원본 모델 및 연결 상태 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 355,
+      "name": "Counter / Seahorse Coffee Corner",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "밝은 황갈색 상판, 어두운 초콜릿색 목재 하부의 코너 카운터",
+      "why": "PZ는 밝은 황토색 상판과 어두운 갈색의 무늬 없는 목재 몸체로 구성되지만 MC는 검정 상판과 은회색 가로 줄무늬다. 상판 색상·하부 재질·띠 유무가 다르다.",
+      "short": "Tan top dark brown base vs black silver-striped diner corner",
+      "followup": "밝은 황갈색 상판과 짙은 갈색 몸체의 L자 커피숍 카운터 조사",
+      "status": "DEFER"
+    },
+    {
+      "index": 356,
+      "name": "Counter / Spiffos Corner",
+      "candidate": "decocraft:diner_counter_corner_black",
+      "shape": "주황색 상판, 붉은 갈색 몸체, 앞면의 얇은 초록색 가로띠가 있는 코너 카운터",
+      "why": "PZ는 주황 상판·갈색 몸체·초록색 장식 띠가 핵심인데 MC는 검정 상판과 은회색 줄무늬다. 주황/초록 배색과 전면 패널 구조가 모두 불일치한다.",
+      "short": "Orange top green accent vs black silver-striped diner corner",
+      "followup": "Spiffo's 주황·녹색 배색과 유사한 Forge 카운터 모델/텍스처 확인",
+      "status": "DEFER"
+    },
+    {
+      "index": 357,
+      "name": "Table / Quality",
+      "candidate": "mcwfurnitures:acacia_glass_table",
+      "shape": "거친 진갈색 나무 판재로 된 작은 정사각 테이블, 두꺼운 네 다리와 판재 이음새",
+      "why": "PZ는 짙은 갈색 원목 상판과 네 개의 굵은 다리가 있는 소형 목재 테이블이다. MC acacia_glass_table의 비교 이미지는 밝은 주황색 평판만 보이는 불완전한 부분 JSON 렌더이며 유리/다리 구조가 확인되지 않는다. 재질·색상·형상이 일치하지 않는다.",
+      "short": "Dark wooden four-leg table vs incomplete pale flat glass-table render",
+      "followup": "짙은 원목 네 다리 소형 테이블의 실제 전체 모델 및 1블록 배치 확인",
+      "status": "DEFER"
+    }
+  ]
+}
