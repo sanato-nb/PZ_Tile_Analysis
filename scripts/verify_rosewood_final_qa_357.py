@@ -28,10 +28,13 @@ def main() -> None:
     conditional = read_csv("CONDITIONAL_RECHECK_068.csv")
     batches = read_csv("BATCH_STATUS_36.csv")
     categories = read_csv("CATEGORY_PRIORITY.csv")
+    binary_samples = read_csv("BINARY_SAMPLE_SHA256_351_357.csv")
     ids = [r["index"] for r in rows]
     assert ids == list(range(1, 358)), "missing, duplicate or unordered index"
     assert len(rows) == len(master) == 357
     assert len(manifests) == len(batches) == 36
+    assert len(binary_samples) == 8
+    assert all(len(s["actual_sha256"]) == 64 and s["actual_sha256"] == s["expected_sha256"] and s["match"] == "TRUE" and int(s["bytes"]) > 0 for s in binary_samples)
     assert sum(int(c["total"]) for c in categories) == 357
     assert sum(int(c["deferred"]) for c in categories) == 289
     assert sum(int(c["conditional"]) for c in categories) == 68
@@ -69,8 +72,11 @@ def main() -> None:
     assert summary["verdicts"]["conditional"] == 68 and summary["verdicts"]["deferred"] == 289
     assert summary["verdicts"]["approved"] == {"exact_1to1": 0, "world": 0, "game": 0}
     assert summary["ci"]["success"] == 32 and len(summary["ci"]["no_run"]) == 4
+    assert summary["integrity"]["binary_sample_sha256_verified"] == 8
+    assert summary["integrity"]["binary_sample_sha256_mismatches"] == 0
     print("PASS: 357 unique records, 36 PR/manifests, 68 conditional, 289 deferred, 0 approved.")
-    print("NOTE: binary JPG/ZIP SHA-256 and CRC32 are not independently recomputed here.")
+    print("NOTE: 8 final-batch binary hashes were independently recomputed before recording; this script checks their recorded values only.")
+    print("NOTE: other JPG/ZIP SHA-256 and all ZIP CRC32 are not independently recomputed by this script.")
 
 if __name__ == "__main__":
     main()
