@@ -1,20 +1,20 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "range": [
     271,
     280
   ],
   "lane": "C",
   "reviewed_count": 10,
-  "deferred_count": 10,
   "conditional_count": 0,
+  "deferred_count": 10,
   "game_certified_count": 0,
   "new_blockbench_renders": 0,
   "source_image_count": 20,
   "comparison_jpg_count": 10,
   "pz_preview_png_count": 10,
   "source_image_sha256_file": "SOURCE_SHA256.csv",
-  "source_image_location": "The ten PNG previews are available as separate files in the same GitHub directory; ZIP includes the ten JPG comparison cards.",
+  "source_image_reused": true,
   "zip_entries": [
     "cards/271_PZ_MC.jpg",
     "cards/272_PZ_MC.jpg",
@@ -30,11 +30,20 @@
     "BATCH_271_280_DEFERRED_OTHER_MODS.csv",
     "SOURCE_SHA256.csv",
     "README_KO.md",
+    "pz_previews/271_Drum_Tom.png",
+    "pz_previews/272_Machine_Kaboom_Arcade.png",
+    "pz_previews/273_Radio_Premium_Technologies.png",
+    "pz_previews/274_Shelves_Dark_Wall.png",
+    "pz_previews/275_Stool_Drum.png",
+    "pz_previews/276_Table_Long_Light.png",
+    "pz_previews/277_Chair_Patient.png",
+    "pz_previews/278_Counter_Middle.png",
+    "pz_previews/279_Counter_Mobile_Tool.png",
+    "pz_previews/280_Counter_Oak_Employee_Bank.png",
     "MANIFEST.json"
   ],
   "zip_compression": "STORE",
   "source_branch": "work/rosewood-manual-batch10-091-100-20261101",
   "target_branch": "work/rosewood-manual-batch28-271-280-20261102",
-  "source_image_reused": true,
   "review_date": "2026-11-02"
 }
