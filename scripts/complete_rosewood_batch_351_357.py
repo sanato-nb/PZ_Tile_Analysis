@@ -158,7 +158,7 @@ def main():
     }
     (OUT / "MANIFEST.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (OUT / "BATCH36_STANDALONE_PROGRESS.json").write_text(json.dumps({
-        "lane": "B", "scope": "351-357", "batch": 36, "individually_reviewed": 10,
+        "lane": "B", "scope": "351-357", "batch": 36, "individually_reviewed": 7,
         "conditional": 0, "deferred": 7, "merged_into_global_progress": False,
         "next_lane_B_scope": "COMPLETE"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     readme = [
@@ -172,7 +172,7 @@ def main():
         "- 352~356번은 서로 다른 색상·재질의 코너 카운터인데 동일한 검정·은색 줄무늬 모델이 후보로 지정돼 있다.",
         "- Minecraft Forge 1.20.1 설치·충돌·방향·기능 검증은 수행되지 않았다.", "",
         "## 검증 자료", "",
-        "- cards/: 기존 이미지로부터 새로 제작한 개별 좌우 비교 JPG 10장.",
+        "- cards/: 기존 이미지로부터 새로 제작한 개별 좌우 비교 JPG 7장.",
         "- BATCH_351_357_MANUAL_VISUAL_REVIEW.csv: 7개 외형·재질·색상·구조·점유·한계 판정.",
         "- BATCH_351_357_DEFERRED_OTHER_MODS.csv: 다른 모드 또는 바닐라 재검색 대상 7종.",
         "- SOURCE_SHA256.csv: PZ PNG, 기존 MC 비교 JPG, 새 JPG의 SHA-256 및 기존 Git blob SHA-1.",
@@ -194,7 +194,7 @@ def main():
         '<!doctype html><html lang="ko"><meta charset="utf-8"><title>Rosewood 351–357 visual review</title>'
         '<style>body{max-width:1200px;margin:auto;font:16px sans-serif;background:#f5f7fa;color:#263444}'
         'article{background:white;padding:18px;margin:24px 0;border-radius:12px}img{height:auto}</style>'
-        '<h1>Rosewood 351–357 · Lane B</h1><p>10 deferred. Prior source screenshots only; no new native render or in-game certification.</p>'
+        '<h1>Rosewood 351–357 · Lane B</h1><p>7 deferred. Prior source screenshots only; no new native render or in-game certification.</p>'
         + "\n".join(sections) + "</html>\n", encoding="utf-8")
     archive = OUT / "ROSEWOOD_BATCH_351_357_MANUAL_REVIEW.zip"
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=7) as z:
