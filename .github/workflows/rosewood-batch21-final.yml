@@ -61,7 +61,7 @@ jobs:
            assert f.testzip() is None
            assert len([n for n in f.namelist() if n.startswith('cards/') and n.endswith('.jpg')])==10
           pr=json.loads((p/'BATCH21_STANDALONE_PROGRESS.json').read_text('utf8'))
-          assert pr['scope']=='201-210' and pr['lane']=='B' and not pr['merged_into_global_progress']
+          assert pr['scope']=='201-210' and pr['batch']=='21' and pr['lane']=='B' and not pr['merged_into_global_progress']
           print('BATCH21_AUDIT_OK',json.dumps(m,ensure_ascii=False))
           PY
       - name: Commit standalone manual review evidence
@@ -74,3 +74,5 @@ jobs:
           git push origin "HEAD:$GITHUB_REF_NAME"
 
 # Revalidate after native-viewport visual QA: statuses 203, 204, 206, 209 now name the actual inspected model.
+
+# Final re-run: correct batch metadata and enforce batch==21 in integrity checks.
