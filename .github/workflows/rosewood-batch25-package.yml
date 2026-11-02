@@ -1,0 +1,39 @@
+name: Rosewood batch25 241-250 package and verify
+on:
+  push:
+    branches:
+      - 'work/rosewood-manual-batch25-241-250-20261102'
+    paths:
+      - 'analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_241_250_v1/**'
+      - '.github/workflows/rosewood-batch25-package.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    if: "!contains(github.event.head_commit.message, '[batch25 package]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build hashes and ZIP
+        run: |
+          python analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_241_250_v1/package_batch.py
+          python analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_241_250_v1/verify_batch.py
+      - name: Commit generated integrity artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          dir=analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_241_250_v1
+          git add "$dir/SOURCE_SHA256.csv" "$dir/MANIFEST.json" "$dir/ZIP_SHA256.txt" "$dir/ROSEWOOD_BATCH_241_250_REVIEW.zip"
+          if ! git diff --cached --quiet; then
+            git commit -m 'review(rosewood): [batch25 package] 241-250 SHA256 and ZIP'
+            git push origin HEAD:work/rosewood-manual-batch25-241-250-20261102
+          fi
+      - name: Re-verify committed working tree
+        run: |
+          python analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_241_250_v1/verify_batch.py
