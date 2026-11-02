@@ -1,0 +1,29 @@
+{
+  "scope": "351-357",
+  "lane": "B",
+  "total_pz_styles": 357,
+  "this_batch_individual_image_reviews": 7,
+  "new_comparison_cards": 7,
+  "conditional_candidates": 0,
+  "deferred_other_mods_or_vanilla": 7,
+  "fresh_native_blockbench_renders_this_run": 0,
+  "preexisting_source_render_grade_counts": {
+    "ACTUAL_NATIVE_BLOCKBENCH_SOURCE_BBMODEL": 5,
+    "NATIVE_BLOCKBENCH_PARTIAL_SOURCE_JSON": 2
+  },
+  "certified_1_to_1_matches": 0,
+  "minecraft_game_install_collision_verified": 0,
+  "source_tables_overwritten": false,
+  "parallel_group_progress_overwritten": false,
+  "merged_into_global_progress": false,
+  "baseline_branch": "work/rosewood-manual-batch10-091-100-20261101",
+  "review_method": "Assistant visually inspected seven baseline PZ/MC cards 351-357 and annotated seven new cards. Existing source-backed renders reused; no new Blockbench run.",
+  "limitations": [
+    "PZ 351 has 1x2 SpriteGridPos; all rotations and other provisional 1x1 footprints require verification.",
+    "351 and 357 show incomplete native JSON model imports; neither proves complete 3D geometry.",
+    "351 and 357 are partial model renders; these cannot certify complete Minecraft model geometry.",
+    "No fresh native BBMODEL or texture rendering in this run.",
+    "No Minecraft Java 1.20.1 Forge installation, collision, interaction, multi-tile placement or 1:1 certification.",
+    "This is an independent draft PR, not a global merge."
+  ]
+}
