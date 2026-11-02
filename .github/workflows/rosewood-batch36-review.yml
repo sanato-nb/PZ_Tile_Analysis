@@ -1,0 +1,90 @@
+name: Rosewood lane B batch36 351-357 independent review
+on:
+  push:
+    branches: [work/rosewood-manual-batch36-351-357-20261102]
+    paths:
+      - .github/workflows/rosewood-batch36-review.yml
+      - scripts/complete_rosewood_batch_351_357.py
+      - scripts/rosewood_batch36_351_357_decisions.json
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: rosewood-batch36-351-357
+  cancel-in-progress: false
+jobs:
+  generate-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_351_357.py
+            /scripts/rosewood_batch36_351_357_decisions.json
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Install Pillow
+        run: python3 -m pip install -q --break-system-packages pillow
+      - name: Generate seven independent visual review cards and evidence
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_351_357.py
+          python3 -u scripts/complete_rosewood_batch_351_357.py
+      - name: Verify exact scope, SHA-256, Git blob hashes, ZIP and no false certification
+        run: |
+          python3 - <<'PY'
+          import csv,hashlib,json,zipfile
+          from pathlib import Path
+          d=Path("analysis/rosewood_furniture/2026-10-31")
+          p=d/"ten_batch_review/batch_351_357_v1"
+          m=json.loads((p/"MANIFEST.json").read_text("utf-8"))
+          assert m["scope"]=="351-357" and m["lane"]=="B"
+          assert m["this_batch_individual_image_reviews"]==m["new_comparison_cards"]==7
+          assert m["conditional_candidates"]==0 and m["deferred_other_mods_or_vanilla"]==7
+          assert m["fresh_native_blockbench_renders_this_run"]==0
+          assert m["certified_1_to_1_matches"]==m["minecraft_game_install_collision_verified"]==0
+          assert m["source_tables_overwritten"] is False and m["parallel_group_progress_overwritten"] is False
+          def rows(name):
+            with (p/name).open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          review=rows("BATCH_351_357_MANUAL_VISUAL_REVIEW.csv")
+          hold=rows("BATCH_351_357_DEFERRED_OTHER_MODS.csv")
+          prov=rows("SOURCE_SHA256.csv")
+          assert [int(x["index"]) for x in review]==list(range(351,358))
+          assert len(hold)==len(prov)==7
+          def sha(b):return hashlib.sha256(b).hexdigest()
+          def gitsha(b):return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
+          for row in review:
+            assert row["manual_review_status"]=="DEFER"
+            assert row["exact_1_to_1_visual_match_approved"]=="NO"
+            assert row["approved_for_minecraft_world_replacement"]=="NO"
+            assert row["fresh_native_blockbench_render_this_run"]=="NO"
+            assert row["game_install_collision_function_verified"]=="NO"
+            paths=[
+              (d/"complete_furniture_visual_3d_v1"/row["pz_preview_path"],row["pz_preview_sha256"],row["pz_preview_git_blob_sha1"]),
+              (d/"all_357_complete_native_comparisons_v1"/row["baseline_comparison_path"],row["baseline_comparison_sha256"],row["baseline_comparison_git_blob_sha1"])
+            ]
+            for f,h,g in paths:
+              b=f.read_bytes()
+              assert sha(b)==h and gitsha(b)==g,(f,h,g)
+            card=p/row["new_comparison_card_path"]
+            assert card.is_file() and card.stat().st_size>10000
+            assert sha(card.read_bytes())==row["new_comparison_card_sha256"]
+          z=p/"ROSEWOOD_BATCH_351_357_MANUAL_REVIEW.zip"
+          assert (p/"ZIP_SHA256.txt").read_text().split()[0]==sha(z.read_bytes())
+          with zipfile.ZipFile(z) as f:
+            assert f.testzip() is None
+            assert len([n for n in f.namelist() if n.startswith("cards/") and n.endswith(".jpg")])==7
+          print("ROSEWOOD_BATCH36_351_357_VERIFIED",len(review),"DEFER",len(hold),"ZIP_BYTES",z.stat().st_size)
+          PY
+      - name: Commit generated batch-only files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_351_357_v1/
+          git diff --cached --quiet && exit 0
+          git commit -m 'review(rosewood): 351-357 visual cards, source SHA256, CSV and ZIP'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
