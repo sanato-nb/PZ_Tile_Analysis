@@ -1,0 +1,85 @@
+name: Rosewood batch 14 — validate independent 131-140 source-native visual review
+on:
+  push:
+    branches: [work/rosewood-manual-batch14-131-140-20261102]
+    paths:
+      - scripts/rosewood_batch14_131_140_decisions.json
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validate-and-commit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_131_140.py
+            /scripts/rosewood_batch14_131_140_decisions.json
+            /scripts/rosewood_batch14_other_mod_research.json
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/14_131_140/extra_decocraft_render/
+      - name: Install image processing
+        run: python3 -m pip install -q --break-system-packages pillow numpy
+      - name: Create completed PZ vs native Minecraft model review 131-140
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_131_140.py
+          python3 -u scripts/complete_rosewood_batch_131_140.py
+      - name: Audit all ten reviews, SHA provenance, deferred rows, ZIP and standalone scope
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile,hashlib
+          from pathlib import Path
+          b=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review')
+          p=b/'batch_131_140_v1'
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          dec=json.loads(Path('scripts/rosewood_batch14_131_140_decisions.json').read_text('utf8'))
+          assert [x['index'] for x in dec]==list(range(131,141))
+          assert m['scope']=='131-140'
+          assert m['individual_items_checked_this_batch']==10
+          assert m['attempted_decocraft_models']==33
+          assert m['unique_decocraft_models_rerendered']>=29
+          assert m['native_model_pz_comparison_cards']==10
+          assert m['conditional_match_proposals']+m['deferred_other_mod_or_vanilla_search']==10
+          assert m['conditional_match_proposals']==sum(x['status'].startswith('CONDITIONAL') for x in dec)
+          assert m['deferred_other_mod_or_vanilla_search']==sum(x['status'].startswith('DEFER') for x in dec)
+          assert m['source_mod_version']=='3.0.4-1.20.1'
+          assert len(m['source_mod_jar_sha512'])==128
+          assert m['exact_1_to_1_matches_certified']==0 and m['minecraft_game_install_collision_verified']==0
+          assert not m['source_tables_overwritten'] and not m['parallel_group_progress_overwritten']
+          assert m['alternative_mod_links_researched']==10 and m['alternative_mod_models_visually_verified']==0
+          def read(name):
+           with (p/name).open('r',encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          rows=read('BATCH_131_140_MANUAL_VISUAL_REVIEW.csv')
+          d=read('BATCH_131_140_DEFERRED_OTHER_MODS.csv')
+          alt=read('BATCH_131_140_OTHER_MOD_RESEARCH.csv')
+          assert [int(x['index']) for x in rows]==list(range(131,141))
+          assert [int(x['index']) for x in d]==[x['index'] for x in dec if x['status'].startswith('DEFER')]
+          assert len(alt)==10 and all(x['visual_status']=='NOT_DOWNLOADED_NOT_RENDERED' for x in alt)
+          assert all(x['approved_for_minecraft_world_replacement']=='NO' and x['exact_1_to_1_visual_match_approved']=='NO' for x in rows)
+          assert all(len(x['pz_preview_sha256'])==64 for x in rows)
+          assert all(len(x['native_source_model_sha256'])>=64 for x in rows if x['new_candidate_id'])
+          assert len(list((p/'cards').glob('*_PZ_vs_MC.jpg')))==10
+          assert '<html' in (p/'INDEX.html').read_text('utf8')
+          progress=json.loads((p/'BATCH14_STANDALONE_PROGRESS.json').read_text('utf8'))
+          assert progress['scope']=='131-140' and len(progress['this_scope_reviewed'])==10
+          assert progress['merged_into_global_progress'] is False
+          with zipfile.ZipFile(p/'ROSEWOOD_BATCH_131_140_MANUAL_REVIEW.zip') as z:
+           assert z.testzip() is None
+           assert len([x for x in z.namelist() if x.startswith('cards/') and x.endswith('.jpg')])==10
+           assert 'INDEX.html' in z.namelist()
+          print('BATCH14_AUDIT_OK',m)
+          PY
+      - name: Save batch14 review to its dedicated branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_131_140_v1/
+          git commit -m 'review(rosewood): source-evidenced 131-140 comparison cards, independent scope and 14th batch ZIP'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
