@@ -55,11 +55,14 @@
     "binary_sha256_recomputed": false,
     "zip_crc_independently_recomputed": false,
     "source_files_mutated": false,
-    "prs_merged": false
+    "prs_merged": false,
+    "binary_sample_sha256_verified": 8,
+    "binary_sample_scope": "351-357 seven comparison JPGs and one review ZIP",
+    "binary_sample_sha256_mismatches": 0
   },
   "issues": [],
   "limitations": [
-    "GitHub PR/manifest/CSV and recent CI metadata verified; comparison JPG/ZIP binary bytes not independently downloaded and rehashed in this audit.",
+    "351-357의 비교 JPG 7개 및 ZIP 1개 SHA-256은 바이너리 원문에서 직접 재계산하여 일치했다. 나머지 전체 JPG/ZIP은 이번 감사에서 전수 재계산하지 않았다.",
     "All 36 PRs remain Draft/unmerged, so 357-row index is an external cross-branch aggregation, not a merged game mapping.",
     "Conditional visual similarity is not a Forge 1.20.1 in-game 1:1 certification."
   ]
