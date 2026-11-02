@@ -1,0 +1,80 @@
+name: Rosewood batch24 — validate 231-240 independent manual review
+on:
+  push:
+    branches: [work/rosewood-manual-batch24-231-240-20261102]
+    paths: [.github/workflows/rosewood-batch24-final.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_231_240.py
+            /scripts/rosewood_batch24_231_240_decisions.json
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+            /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/24_231_240/extra_decocraft_render/
+      - name: Install image tools
+        run: python3 -m pip install -q --break-system-packages pillow numpy
+      - name: Compile and build ten source-backed comparison cards
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_231_240.py
+          python3 -u scripts/complete_rosewood_batch_231_240.py
+      - name: Audit exact scope, SHA256, JPEG, ZIP, no approvals and lane isolation
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile,hashlib
+          from pathlib import Path
+          p=Path('analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_231_240_v1')
+          m=json.loads((p/'MANIFEST.json').read_text('utf8'))
+          assert m['scope']=='231-240' and m['lane']=='B' and m['this_batch_individual_reviews']==10
+          assert m['attempted_original_decocraft_models']==10
+          assert m['successful_native_blockbench_viewports']==10
+          assert m['full_native_model_visible_viewports']==9 and m['cropped_native_viewports']==[238]
+          assert m['new_comparison_cards']==10
+          assert m['conditional_candidates']+m['deferred_other_mods_or_vanilla']==10
+          assert m['certified_1_to_1_matches']==m['minecraft_game_install_collision_verified']==0
+          assert not m['source_tables_overwritten'] and not m['parallel_group_progress_overwritten']
+          def rows(name):
+           with (p/name).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
+          a=rows('BATCH_231_240_MANUAL_VISUAL_REVIEW.csv')
+          b=rows('BATCH_231_240_DEFERRED_OTHER_MODS.csv')
+          h=rows('BATCH_231_240_SHA256_PROVENANCE.csv')
+          assert [int(x['index']) for x in a]==list(range(231,241))
+          assert len(b)==m['deferred_other_mods_or_vanilla'] and len(h)==10
+          assert all(x['exact_1_to_1_visual_match_approved']=='NO' and x['approved_for_minecraft_world_replacement']=='NO' for x in a)
+          assert next(x for x in a if x['index']=='238')['full_native_model_in_frame_verified']=='NO'
+          for x in a:
+           img=p/x['card_path']
+           assert img.is_file() and img.stat().st_size>10000
+           assert hashlib.sha256(img.read_bytes()).hexdigest()==x['new_comparison_card_sha256']
+           assert len(x['pz_preview_sha256'])==64
+           assert len(x['native_source_model_sha256'])==64
+           assert len(x['native_source_texture_sha256'])==64
+          z=p/'ROSEWOOD_BATCH_231_240_MANUAL_REVIEW.zip'
+          with zipfile.ZipFile(z) as f:
+           assert f.testzip() is None
+           assert len([n for n in f.namelist() if n.startswith('cards/') and n.endswith('.jpg')])==10
+          pr=json.loads((p/'BATCH24_STANDALONE_PROGRESS.json').read_text('utf8'))
+          assert pr['scope']=='231-240' and pr['batch']=='24' and pr['lane']=='B' and not pr['merged_into_global_progress']
+          print('BATCH24_AUDIT_OK',json.dumps(m,ensure_ascii=False))
+          PY
+      - name: Commit standalone B lane 231-240 evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_231_240_v1/
+          git diff --cached --quiet && exit 0
+          git commit -m 'review(rosewood): 231-240 native-source cards, individual decisions, SHA256 and ZIP'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+# Lane B 231-240 only. Never merge independent PRs or edit global source datasets.
