@@ -146,9 +146,9 @@ def main():
   "native_image_fallback_count":sum(r["native_model_provenance"]!="NATIVE_BLOCKBENCH_5_2_2_VERIFIED_SOURCE_BBMODEL" for r in rows)
  }
  (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
- progress={"batch":"20","scope":"201-210","lane":"B","this_scope_reviewed":list(range(201,211)),"conditional":cond,"deferred":defer,"approved_for_world":[],"merged_into_global_progress":False}
+ progress={"batch":"21","scope":"201-210","lane":"B","this_scope_reviewed":list(range(201,211)),"conditional":cond,"deferred":defer,"approved_for_world":[],"merged_into_global_progress":False}
  (OUT/"BATCH21_STANDALONE_PROGRESS.json").write_text(json.dumps(progress,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
- notes=["# 로즈우드 가구 20차 201~210번 개별 시각 검수",
+ notes=["# 로즈우드 가구 21차 201~210번 개별 시각 검수",
  "PZ B42 원본 완성형 미리보기 10장과 이전 Minecraft 원본 Blockbench 비교판 10장을 실제로 육안 검수했다. 별도 GitHub Actions는 Decocraft 3.0.4-1.20.1 Forge 원본 BBMODEL/텍스처를 검증한 뒤 Blockbench 5.2.2로 새로 렌더해 추가 대조한다.",
  "이전 B 레인 141~150 및 171~180번은 별도 Draft PR로 보존했으며, 이번 201~210번만 독립 검수했다. 다른 레인과 원본 파일은 건드리지 않았다.",
  f"원본 Decocraft JAR SHA-512: {decocraft['sha512']} | https://modrinth.com/mod/decocraft/version/{decocraft['version_id']}",
