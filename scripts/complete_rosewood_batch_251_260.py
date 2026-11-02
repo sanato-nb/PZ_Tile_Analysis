@@ -77,6 +77,10 @@ def main():
           "existing_model_render_grade":grade,
           "source_model_paths_from_baseline":" | ".join(mcmeta.get("source_models",[])),
           "source_model_sha256_from_baseline":mcmeta.get("source_model_sha256",""),
+          "prior_v3_decocraft_bbmodel_path":d.get("prior_v3_source_bbmodel_path",""),
+          "prior_v3_decocraft_texture_path":d.get("prior_v3_source_texture_path",""),
+          "prior_v3_decocraft_bbmodel_sha256":d.get("prior_v3_source_bbmodel_sha256",""),
+          "prior_v3_decocraft_texture_sha256":d.get("prior_v3_source_texture_sha256",""),
           "baseline_comparison_path":r["card_path"],"baseline_comparison_sha256":sha(original),
           "new_comparison_card_path":f"cards/{idx:03d}_PZ_vs_MC.jpg",
           "new_comparison_card_sha256":sha(card),
@@ -85,18 +89,20 @@ def main():
           "approved_for_minecraft_world_replacement":"NO",
           "game_install_collision_function_verified":"NO"}
         rows.append(row)
-        evidence.append({k:row[k] for k in ("index","pz_preview_path","pz_preview_sha256","baseline_comparison_path","baseline_comparison_sha256","existing_model_render_grade","source_model_paths_from_baseline","source_model_sha256_from_baseline","new_comparison_card_path","new_comparison_card_sha256")})
+        evidence.append({k:row[k] for k in ("index","pz_preview_path","pz_preview_sha256","baseline_comparison_path","baseline_comparison_sha256","existing_model_render_grade","source_model_paths_from_baseline","source_model_sha256_from_baseline","prior_v3_decocraft_bbmodel_path","prior_v3_decocraft_texture_path","prior_v3_decocraft_bbmodel_sha256","prior_v3_decocraft_texture_sha256","new_comparison_card_path","new_comparison_card_sha256")})
         if d["status"]=="DEFER":
             deferred.append({k:row[k] for k in ("index","pz_name","pz_style","previous_mc_candidate_id","manual_review_reason","followup_requirement")})
     csvwrite(OUT/"BATCH_251_260_MANUAL_VISUAL_REVIEW.csv",rows,list(rows[0]))
     csvwrite(OUT/"BATCH_251_260_DEFERRED_OTHER_MODS.csv",deferred,list(deferred[0]))
     csvwrite(OUT/"BATCH_251_260_SHA256_PROVENANCE.csv",evidence,list(evidence[0]))
     counts={g:sum(r["existing_model_render_grade"]==g for r in rows) for g in sorted(allowed)}
+    assert sum(len(r["prior_v3_decocraft_bbmodel_sha256"])==64 and len(r["prior_v3_decocraft_texture_sha256"])==64 for r in rows)==4
     manifest={"scope":"251-260","lane":"A","total_pz_styles":357,
        "this_batch_individual_image_reviews":10,"new_comparison_cards":10,
        "conditional_candidates":2,"deferred_other_mods_or_vanilla":8,
        "fresh_native_blockbench_renders_this_run":0,
        "preexisting_source_render_grade_counts":counts,
+       "prior_v3_recorded_decocraft_bbmodel_and_texture_hashes":4,
        "certified_1_to_1_matches":0,"minecraft_game_install_collision_verified":0,
        "source_tables_overwritten":False,"parallel_group_progress_overwritten":False,
        "review_method":"Independent visual comparison of PZ previews against preexisting Minecraft Blockbench/JSON screenshot evidence; annotated cards generated with Pillow.",
@@ -117,7 +123,7 @@ def main():
        "- cards/: 원본 PZ 미리보기와 기존 Minecraft 원본 소스 비교 이미지에서 새로 구성한 판정 카드 10장",
        "- BATCH_251_260_MANUAL_VISUAL_REVIEW.csv: 개별 외형·색상·재질·조립/기능 한계 및 후속 조건",
        "- BATCH_251_260_DEFERRED_OTHER_MODS.csv: 보류 8종과 대체 모드 재검색 요구",
-       "- BATCH_251_260_SHA256_PROVENANCE.csv: 원본 PZ 이미지·기존 비교 카드·새 카드의 SHA-256",
+       "- BATCH_251_260_SHA256_PROVENANCE.csv: 원본 PZ 이미지·기존 비교 카드·새 카드의 SHA-256 및 과거 v3에서 기록된 Decocraft 원본 BBMODEL/텍스처 SHA-256 (이번 실행에서 재해시한 값 아님)",
        "- MANIFEST.json, INDEX.html, ZIP: 독립 검수 결과와 검증 가능 파일 묶음","",
        "기존 기준 브랜치 원본 PNG/TMX/SQLite/357종 누적표, 다른 레인 결과는 변경하지 않았다. Draft PR을 자동 병합하지 않는다.","",
        "## 개별 판정",""]
