@@ -7,7 +7,7 @@ import runpy
 original=Path(__file__).with_name("render_rosewood_batch03_native_candidates.py")
 wrapper=Path(__file__).with_name("render_rosewood_batch24_native_candidates.py")
 prev=runpy.run_path(str(wrapper),run_name="batch24_camera_test")
-tests=prev["main"].__globals__["TESTS"]
+tests=prev["env"]["main"].__globals__["TESTS"]
 source=original.read_text("utf8")
 old="const distance=Math.max(28,span*1.65);"
 new="const distance=Math.max(110,span*6);"
