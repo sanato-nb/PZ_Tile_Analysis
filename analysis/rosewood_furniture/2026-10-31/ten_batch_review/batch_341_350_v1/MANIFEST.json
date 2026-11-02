@@ -1,0 +1,30 @@
+{
+  "scope": "341-350",
+  "lane": "A",
+  "total_pz_styles": 357,
+  "this_batch_individual_image_reviews": 10,
+  "new_comparison_cards": 10,
+  "conditional_candidates": 1,
+  "deferred_other_mods_or_vanilla": 9,
+  "fresh_native_blockbench_renders_this_run": 0,
+  "preexisting_source_render_grade_counts": {
+    "ACTUAL_NATIVE_BLOCKBENCH_FULL_SOURCE_JSON": 1,
+    "ACTUAL_NATIVE_BLOCKBENCH_SOURCE_BBMODEL": 3,
+    "LEGACY_3D_APPROXIMATION": 1,
+    "NATIVE_BLOCKBENCH_PARTIAL_SOURCE_JSON": 1,
+    "NO_REAL_MOD_ASSET": 4
+  },
+  "prior_v3_recorded_decocraft_bbmodel_and_texture_hashes": 0,
+  "certified_1_to_1_matches": 0,
+  "minecraft_game_install_collision_verified": 0,
+  "source_tables_overwritten": false,
+  "parallel_group_progress_overwritten": false,
+  "review_method": "Independent visual comparison of 10 PZ previews against preexisting Minecraft source renders or explicitly missing/legacy evidence; annotated cards generated with Pillow.",
+  "baseline_branch": "work/rosewood-manual-batch10-091-100-20261101",
+  "limitations": [
+    "No new original mod BBMODEL opened in Blockbench this run.",
+    "342/343/344/347 have no source-verified Minecraft model; 345 has a partial JSON render and 349 a legacy approximation.",
+    "No Minecraft Forge 1.20.1 installation or collision/function testing.",
+    "Independent Draft PR; global progress not merged."
+  ]
+}
