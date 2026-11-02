@@ -60,6 +60,12 @@
 - 초기 001~020은 후속 CSV와 판정 코드가 달라 원본 상태 문자열을 보존하고 보수적으로 분류했다. `CLOSE_VISUAL_FUNCTION` 3건은 **조건부**(실제 인게임 인증 아님), `PROMISING_NOT_YET_BLOCKBENCH_VERIFIED`, `SEARCH_ANOTHER_MOD`, `VANILLA_FALLBACK_NOT_EXACT_NO_NATIVE_RENDER` 등 6건은 **보류**로 분류했다.
 - `exact_1_to_1_approved`, `world_replacement_approved`, `game_verified` 중 YES/TRUE/1로 승인된 항목은 0건이다.
 
+## 추가 독립 바이너리 SHA-256 표본 검사
+
+마지막 351~357번의 **비교 JPG 7개**와 해당 **ZIP 1개**를 GitHub 원본 바이너리(base64)로 직접 읽어 SHA-256을 새로 계산했다. 8개 모두 원래 `SOURCE_SHA256.csv` 및 `ZIP_SHA256.txt`에 기록된 값과 정확히 일치했다. 바이트 수·기대 해시·재계산 해시는 `BINARY_SAMPLE_SHA256_351_357.csv`에 남겼다.
+
+**이는 8개 표본의 해시 검증이지 36개 전체 배치 바이너리의 전수 검증은 아니다.** ZIP 내부 모든 항목의 CRC32를 별도로 풀어서 검사하지도 않았다.
+
 ## CI가 확인되지 않은 4개 독립 PR
 
 1. [#258 — 151~160](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/258)
