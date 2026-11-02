@@ -148,7 +148,7 @@ def main():
  (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
  progress={"batch":"15","scope":"141-150","lane":"B","this_scope_reviewed":list(range(141,151)),"conditional":cond,"deferred":defer,"approved_for_world":[],"merged_into_global_progress":False}
  (OUT/"BATCH15_STANDALONE_PROGRESS.json").write_text(json.dumps(progress,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
- notes=["# 로즈우드 가구 15차 161~170번 개별 시각 검수",
+ notes=["# 로즈우드 가구 15차 141~150번 개별 시각 검수",
  "이번 검수는 PZ B42 완성형 미리보기와 이전 실제 Minecraft 원본 모델 Blockbench 비교판을 먼저 수동 관찰하고, 별도 GitHub Actions에서 Decocraft 3.0.4-1.20.1 Forge의 실제 BBMODEL/텍스처를 검증 후 Blockbench 5.2.2로 새로 렌더한 화면을 추가 대조한다.",
  "이전 131~140번은 PR #254에서 이미 검수되어 재작업하지 않았다. 이번 141~150번만 레인 B로 검수하며 레인 A의 161~170번과 레인 C의 151~160번을 건드리지 않았다.",
  f"원본 Decocraft JAR SHA-512: {decocraft['sha512']} | https://modrinth.com/mod/decocraft/version/{decocraft['version_id']}",
@@ -167,7 +167,7 @@ def main():
  "원본 게임 TMX/PNG/SQLite와 기존 357종 누적 검수 CSV, 다른 레인 결과를 수정하지 않는다."]
  (OUT/"README_KO.md").write_text("\n\n".join(notes)+"\n",encoding="utf8")
  cards="\n".join(f'<article><h2>{r["index"]} {html.escape(r["pz_name"])} / {html.escape(r["pz_style"])}</h2><p>{html.escape(r["review_status"])} | {html.escape(r["new_conditional_candidate_id"] or "DEFER")}</p><img src="{html.escape(r["card_path"])}" loading="lazy" alt="PZ vs Minecraft comparison"/><p>{html.escape(r["manual_review_reason"])}</p></article>' for r in rows)
- page=f'<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rosewood 141-150 manual review</title><style>body{{font-family:system-ui,sans-serif;background:#f1f4f8;color:#183044;max-width:1250px;margin:0 auto;padding:25px}}article{{background:white;border-radius:14px;margin:25px 0;padding:18px;box-shadow:0 2px 12px #0001}}img{{width:100%;height:auto;border-radius:10px}}p{{line-height:1.7}}</style></head><body><h1>로즈우드 161~170 개별 검수</h1><p>조건부 {len(cond)} · 보류 {len(defer)} · 인게임 최종 인증 0</p>{cards}</body></html>'
+ page=f'<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rosewood 141-150 manual review</title><style>body{{font-family:system-ui,sans-serif;background:#f1f4f8;color:#183044;max-width:1250px;margin:0 auto;padding:25px}}article{{background:white;border-radius:14px;margin:25px 0;padding:18px;box-shadow:0 2px 12px #0001}}img{{width:100%;height:auto;border-radius:10px}}p{{line-height:1.7}}</style></head><body><h1>로즈우드 141~150 개별 검수</h1><p>조건부 {len(cond)} · 보류 {len(defer)} · 인게임 최종 인증 0</p>{cards}</body></html>'
  (OUT/"INDEX.html").write_text(page,encoding="utf8")
  z=OUT/"ROSEWOOD_BATCH_141_150_MANUAL_REVIEW.zip"
  with zipfile.ZipFile(z,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as archive:
