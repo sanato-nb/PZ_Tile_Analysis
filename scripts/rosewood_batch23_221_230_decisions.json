@@ -1,0 +1,92 @@
+[
+  {
+    "index": 221,
+    "model": "",
+    "candidate": "",
+    "status": "DEFER_PURPLE_RATTAN_ARMCHAIR_VS_PARTIAL_OAK_CHAIR",
+    "shape": "서향 1타일, 갈색 짜임/라탄 사각 프레임과 분홍·연보라 좌방석 및 낮은 등 쿠션이 결합된 넓은 1인 소파형 의자.",
+    "why": "원본 PZ는 낮고 넓은 라탄 프레임과 연보라 쿠션을 가진 암체어다. 기존 pfm:oak_chair_classic_purple Blockbench 비교 화면은 두 개의 수직 나무 기둥과 청록색 가로막대만 표시되는 부분 렌더로 좌방석·등쿠션·라탄 측판이 보이지 않는다. 부분 모델로는 일치 판단 불가.",
+    "followup": "라탄 짜임 측면과 연보라 쿠션을 함께 가진 1×1 팔걸이 의자 완성형 Forge 1.20.1 원본 모델·텍스처·방향을 확인."
+  },
+  {
+    "index": 222,
+    "model": "",
+    "candidate": "",
+    "status": "DEFER_RED_BOX_ARMCHAIR_VS_PARTIAL_CLASSIC_CHAIR",
+    "shape": "북향 1타일, 적주황색 두툼한 등받이·양팔걸이·상자형 좌방석과 짧은 어두운 다리를 갖춘 푹신한 1인 암체어.",
+    "why": "PZ는 붉은 패브릭 쿠션형 소파 의자인 반면 pfm:oak_chair_classic_red 캡처에는 갈색 기둥 2개와 연녹색 가로대만 보인다. 붉은 천과 두꺼운 쿠션, 좌석, 팔걸이가 전혀 재현되지 않아 이전 후보는 보류.",
+    "followup": "붉은 쿠션·양쪽 두꺼운 팔걸이·낮은 다리가 있는 원본 3D 모델을 새로 확인."
+  },
+  {
+    "index": 223,
+    "model": "",
+    "candidate": "",
+    "status": "DEFER_TWO_TILE_RATTAN_SOFA_VS_ONE_END_MODULE",
+    "shape": "남향 2타일(2×1 잠정), 짙은 갈색 라탄 프레임과 분홍·보랏빛 좌방석 2~3분절, 둥근 등쿠션, 양끝 짜임 팔걸이의 긴 소파.",
+    "why": "기존 mcwfurnitures:purple_couch Blockbench 원본 JSON은 진한 보라색 소파의 한쪽 끝 블록만 보여준다. PZ는 갈색 라탄 외장과 연보라 분절 쿠션, 완성 2칸 폭이다. 재질·색상·팔걸이·멀티블록 조립이 일치하지 않으며 한쪽 블록만으로 완제품을 인증할 수 없다.",
+    "followup": "Macaw's 소파 좌·중·우 모델의 완전한 2블록 배치와 라탄 질감 대체 후보를 함께 렌더·검수."
+  },
+  {
+    "index": 224,
+    "model": "",
+    "candidate": "",
+    "status": "DEFER_TWO_TILE_OLIVE_SOFA_VS_BRIGHT_YELLOW_END_MODULE",
+    "shape": "동향 2타일(1×2 잠정), 탁한 황록/올리브색의 직선형 2인 소파. 등받이와 양쪽 팔걸이가 낮고 네 모서리의 짧은 다리.",
+    "why": "PZ는 올리브빛 낮은 완성 소파인데 mcwfurnitures:yellow_couch 비교 화면은 선명한 황금색 한쪽 소파 모듈이다. 단독 모듈로 양쪽 팔걸이·2타일 완성 형태를 확인할 수 없고 색상 채도·등받이 비례도 다르다.",
+    "followup": "Forge 1.20.1 소파의 좌·우 블록 조립, 올리브색 텍스처 가능 여부, 실제 1×2 설치를 확인."
+  },
+  {
+    "index": 225,
+    "model": "diner_counter_corner_green",
+    "candidate": "decocraft:diner_counter_corner_green",
+    "status": "CONDITIONAL_CORNER_COUNTER_SHAPE_BUT_GREEN_STRIPES_DIFFER",
+    "shape": "남향 1타일, 채도 낮은 회녹색의 직각/L형 코너 카운터. 평평한 한 색 상판과 아래까지 내려오는 각진 판넬 몸체.",
+    "why": "PZ와 Decocraft diner_counter_corner_green 기존 원본 BBMODEL 화면은 모두 한 블록의 ㄱ자 코너 카운터라는 기본 형태가 같다. 다만 PZ는 단색 회녹색 평판, Minecraft는 짙은 초록/흰색 수평 줄무늬와 검정 바닥 장식이 강하다. 재질·색상과 실제 회전 상태가 달라 원본 모델을 새로 확인하더라도 조건부만 가능.",
+    "followup": "새 원본 BBMODEL 재렌더와 무늬 없는 올리브/회녹 텍스처 대체 여부, 실제 코너 회전·연결·충돌을 확인."
+  },
+  {
+    "index": 226,
+    "model": "",
+    "candidate": "",
+    "status": "DEFER_WALL_MOUNTED_TWO_DOOR_WOOD_CABINET_VS_FLOOR_COUNTER",
+    "shape": "남향 1타일, 진한 갈색 목재의 벽걸이 상부 수납장. 평평한 상판, 전면 2개 여닫이문과 작은 둥근 손잡이, 하부 바닥 다리 없음.",
+    "why": "PZ는 벽에 떠 있는 어두운 목재 양문형 캐비닛인데 기존 mcwfurnitures:acacia_counter는 주황 상판과 검은 나뭇결 몸체의 바닥형 카운터로 렌더된다. 벽걸이 높이·양문형 문짝·목재 색상 모두 불일치.",
+    "followup": "벽걸이 2문 목재 상부 수납장 실제 모델과 벽 부착/방향 상태를 확인."
+  },
+  {
+    "index": 227,
+    "model": "dish_rack_white",
+    "candidate": "",
+    "status": "DEFER_SIMPLE_WHITE_FLOATING_PLANK_VS_DISH_RACK",
+    "shape": "남향 1타일, 얇고 긴 흰색/옅은 회색 목재 벽걸이 선반 한 장. 아래 지지대나 접시/컵 없음.",
+    "why": "PZ는 벽에 부착하는 얇은 백색 평판 한 장이다. Decocraft dish_rack_white 기존 BBMODEL은 갈색 나무틀과 접시·컵을 여러 층에 진열하는 부피 큰 랙으로, 사물 종류와 점유 깊이가 다르다. 새 네이티브 모델 검증을 하더라도 단일 선반 대체로 승인하지 않는다.",
+    "followup": "얇은 흰색 벽 선반(plain wall shelf) 원본 Forge 모델 또는 바닐라 석영 반블록·트랩도어 조합의 외형/설치 검증."
+  },
+  {
+    "index": 228,
+    "model": "diner_table_black",
+    "candidate": "",
+    "status": "DEFER_SOLID_BLACK_LOW_CUBE_VS_TALL_DINER_TABLE",
+    "shape": "남향 1타일, 낮고 단단한 검정 직육면체 박스형 커피테이블. 뚜렷한 개방 다리나 중앙 기둥이 보이지 않음.",
+    "why": "PZ는 상판과 몸통이 거의 붙어 있는 낮은 검정 박스형 테이블인데 Decocraft diner_table_black 원본 BBMODEL은 높고 넓은 검정 상판, 은색 테두리, 긴 은색 중앙 기둥과 바닥 받침을 가진 다이너 테이블이다. 높이·지지 구조·색상 면적이 명백히 다르다.",
+    "followup": "검정 낮은 박스형 1×1 커피테이블 모델/바닐라 검정 콘크리트+슬랩 조합을 실제 렌더하고 점유 높이를 확인."
+  },
+  {
+    "index": 229,
+    "model": "bunk_bed_birch_black",
+    "candidate": "decocraft:bunk_bed_birch_black",
+    "status": "CONDITIONAL_TWO_LEVEL_BUNK_BED_BUT_FRAME_AND_BEDDING_DIFFER",
+    "shape": "동향 2타일(2×1 잠정), 붉은 짙은 목재 사다리와 4개 기둥, 위아래 2단 침상 및 밝은 아이보리 매트리스를 가진 2층 침대.",
+    "why": "PZ 원본의 'Beds/Twin'은 단일 트윈침대가 아니라 빨간 목재 2층 침대다. Decocraft bunk_bed_birch_black 기존 BBMODEL은 2단 침대·사다리·가드레일이 있다는 유형적 공통점이 있지만 프레임은 밝은 자작나무이고 매트리스/침구는 검정 패턴과 흰색이다. 색상·난간/사다리 위치·2블록 조립을 추가 검증하기 전에는 조건부.",
+    "followup": "원본 2층 침대 모델 재렌더, 붉은 목재 변형 후보 검색, 2타일 길이/회전/수면 기능과 충돌 확인."
+  },
+  {
+    "index": 230,
+    "model": "",
+    "candidate": "",
+    "status": "DEFER_DARKBLUE_UPHOLSTERED_CHAIR_VS_SINGLE_PARTIAL_POST",
+    "shape": "동향 1타일, 짙은 남색 천 좌판과 곡면 높은 등받이, 팔걸이 없는 가는 검정/회색 금속 네 다리의 모던 의자.",
+    "why": "PZ는 곡면 남색 등받이와 쿠션 좌석, 얇은 네 다리를 갖췄다. 기존 mcwfurnitures:acacia_modern_chair Blockbench 비교 화면에는 길고 어두운 나무 기둥 하나만 보이며 좌판·등받이·4개 다리가 누락된 부분 렌더다. 이전 후보를 확정 근거로 쓸 수 없다.",
+    "followup": "남색 패브릭 모던 체어 완성 모델을 네 다리·등받이 포함하여 실제 렌더하고 방향 확인."
+  }
+]
