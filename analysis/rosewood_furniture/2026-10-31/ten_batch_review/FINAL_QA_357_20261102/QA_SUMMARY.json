@@ -1,0 +1,69 @@
+{
+  "audit_date": "2026-11-02",
+  "source": "36 GitHub Draft PRs + 36 manual review CSVs + 36 manifests + latest 500 GitHub Actions runs",
+  "scope": {
+    "min": 1,
+    "max": 357,
+    "unique": 357,
+    "rows": 357,
+    "missing": [],
+    "duplicates": [],
+    "pr_count": 36,
+    "manifest_count": 36,
+    "preflight_excluded_pr": 255
+  },
+  "verdicts": {
+    "conditional": 68,
+    "deferred": 289,
+    "other": 0,
+    "approved": {
+      "exact_1to1": 0,
+      "world": 0,
+      "game": 0
+    }
+  },
+  "ci": {
+    "success": 32,
+    "no_run": [
+      {
+        "pr": 258,
+        "range": "151-160",
+        "branch": "work/rosewood-manual-batch16-151-160-20261102"
+      },
+      {
+        "pr": 264,
+        "range": "211-220",
+        "branch": "work/rosewood-manual-batch22-211-220-20261102"
+      },
+      {
+        "pr": 270,
+        "range": "271-280",
+        "branch": "work/rosewood-manual-batch28-271-280-20261102"
+      },
+      {
+        "pr": 268,
+        "range": "281-290",
+        "branch": "work/rosewood-manual-batch26-281-290-20261102"
+      }
+    ],
+    "failure": []
+  },
+  "integrity": {
+    "source_review_csv_git_blob_sha_recorded": 357,
+    "source_manifest_git_blob_sha_recorded": 36,
+    "manifest_status_discrepancies": [],
+    "binary_sha256_recomputed": false,
+    "zip_crc_independently_recomputed": false,
+    "source_files_mutated": false,
+    "prs_merged": false,
+    "binary_sample_sha256_verified": 8,
+    "binary_sample_scope": "351-357 seven comparison JPGs and one review ZIP",
+    "binary_sample_sha256_mismatches": 0
+  },
+  "issues": [],
+  "limitations": [
+    "351-357의 비교 JPG 7개 및 ZIP 1개 SHA-256은 바이너리 원문에서 직접 재계산하여 일치했다. 나머지 전체 JPG/ZIP은 이번 감사에서 전수 재계산하지 않았다.",
+    "All 36 PRs remain Draft/unmerged, so 357-row index is an external cross-branch aggregation, not a merged game mapping.",
+    "Conditional visual similarity is not a Forge 1.20.1 in-game 1:1 certification."
+  ]
+}
