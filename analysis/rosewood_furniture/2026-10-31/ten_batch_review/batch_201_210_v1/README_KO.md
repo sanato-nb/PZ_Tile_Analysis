@@ -41,7 +41,7 @@ MC 모델 SHA-256: `9ab500f2281f0c8c6a96ef3da9d65f60faab6b6c5a1c764d82cc0f64d7a1
 
 
 ### 203 Table / Large Dark
-판정: **DEFER_DARK_RECTANGULAR_TABLE_VS_TABLE_SETTING**. 후보: 보류
+판정: **DEFER_DARK_FOUR_LEG_TABLE_VS_METAL_PEDESTAL_DINER**. 후보: 보류
 
 PZ 형태: 2×1의 넓은 짙은 회갈색 직사각형 평판 상판과 네 모서리의 얇은 검정 사각 다리, 별도 식기 없음.
 
@@ -51,11 +51,11 @@ PZ 형태: 2×1의 넓은 짙은 회갈색 직사각형 평판 상판과 네 모
 
 PZ SHA-256: `53928ba8a32f9a1d356ca1519eeab6559428c77fda32e83bf5374d6b2e9cab02`
 MC 모델 SHA-256: `9be049c262802b52e979df0933aa4b93fee3a6d3bdad79d4060c747a80ce75ce`
-비교 이미지 SHA-256: `5d2dc2f31c89631b3fdd77681d40ce7789e44d97528270f19999cbb8b6b831c7`
+비교 이미지 SHA-256: `01c35aad8b4cf2b8610243b612603e33eeb2b763e721be25eb3f77e4046c7805`
 
 
 ### 204 Chair / Makeshift
-판정: **DEFER_ROUGH_PLANK_CHAIR_VS_LEATHER_ARMCHAIR_PARTIAL**. 후보: 보류
+판정: **DEFER_ROUGH_PLANK_CHAIR_VS_GRAY_METAL_SCHOOL_CHAIR**. 후보: 보류
 
 PZ 형태: 거친 갈색 목재 널빤지로 만든 낮은 임시 의자, 판자 좌판, 짧은 수직 등받이, 겹친 판재 받침대, 팔걸이 없음.
 
@@ -65,7 +65,7 @@ PZ 형태: 거친 갈색 목재 널빤지로 만든 낮은 임시 의자, 판자
 
 PZ SHA-256: `d18cd84fec5da7615c57cf4eed2a908d709168104067ee426d345ecc9fe17593`
 MC 모델 SHA-256: `10b356207b2641cf3b2ffeb46973e647c94631c85ddad80d392240464139e2d1`
-비교 이미지 SHA-256: `bed3e6222a2818e3930c53d037f8b47e0e3eb542d1ab017b63430864e803987f`
+비교 이미지 SHA-256: `699ee69c19b0857a8145efdb00f5ff0ebef07d6640a3964f08382b899eaa7fb1`
 
 
 ### 205 Shelves / Zippee Wall
@@ -83,7 +83,7 @@ MC 모델 SHA-256: `미검증`
 
 
 ### 206 Table / Lightwood Trailer
-판정: **DEFER_BEIGE_ROUNDED_TRAILER_TABLE_VS_PARTIAL_GLASS_TABLE**. 후보: 보류
+판정: **DEFER_ROUNDED_TRAILER_TABLE_VS_WHITE_TOP_FOUR_WOOD_LEGS**. 후보: 보류
 
 PZ 형태: 1×2의 연한 베이지색 길고 모서리가 둥근 직사각형 상판, 중앙 아래로 내려오는 두 개의 가느다란 회색 금속 지지 다리.
 
@@ -93,7 +93,7 @@ PZ 형태: 1×2의 연한 베이지색 길고 모서리가 둥근 직사각형 �
 
 PZ SHA-256: `e9314089eea00fce56f9dfaeb6dcf824abbbd1e900c54c6cfad5578489788c8f`
 MC 모델 SHA-256: `014cf39af640f4120c32def0d1fbb27511bc7f14dfef1be3c82fabfbe6a06deb`
-비교 이미지 SHA-256: `4c676990d630e926abf242d41e1e59ff525921a19eee5d1d50c3cfee6e3a3e8d`
+비교 이미지 SHA-256: `dd4c5f5b72d9b2a6904ac3ca38d9ca4d73e382812aac5cdb14caaf9bf6179450`
 
 
 ### 207 Barbecue / Jorge Foreguy
@@ -125,7 +125,7 @@ MC 모델 SHA-256: `미검증`
 
 
 ### 209 Chair / Yellow Modern
-판정: **DEFER_YELLOW_UPHOLSTERED_ARMCHAIR_VS_PARTIAL_FROGGY_PANEL**. 후보: 보류
+판정: **DEFER_YELLOW_CUSHION_ARMCHAIR_VS_BAMBOO_WOVEN_CHAIR**. 후보: 보류
 
 PZ 형태: 넓은 겨자색 1인 패브릭 소파/암체어, 두꺼운 양쪽 팔걸이와 둥근 쿠션 등받이, 노란 좌판, 매우 낮은 검은 네 다리.
 
@@ -135,7 +135,7 @@ PZ 형태: 넓은 겨자색 1인 패브릭 소파/암체어, 두꺼운 양쪽 �
 
 PZ SHA-256: `5a762daa58a1faeb8902b186259a59d299bfb006f2afb8fc7ac7f1998200dac6`
 MC 모델 SHA-256: `1f80d17a5abc4ef1a5d175f0532819bfd89054e414b4f1c921f0f643443dcb1b`
-비교 이미지 SHA-256: `3a349a5ab420c2e524eb025652f5edf15f5cb3aa8cf18ca8fcf2c40fa7e8dfa0`
+비교 이미지 SHA-256: `5351b9b653e88a44310517a9ac15384a113c8b5d115a736ce7a97a39324e9943`
 
 
 ### 210 Counter / Dark Corner
