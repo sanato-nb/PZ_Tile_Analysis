@@ -109,7 +109,7 @@ def main():
        "baseline_branch":"work/rosewood-manual-batch10-091-100-20261101",
        "limitations":["No fresh Blockbench model render this run.","334 and 335 are partial JSON renders; 336 has extra crib mobile and unverified footprint.","No Minecraft Forge 1.20.1 installation or collision/function testing.","Independent Draft PR; global progress not merged."]}
     (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    (OUT/"BATCH33_STANDALONE_PROGRESS.json").write_text(json.dumps({"lane":"C","scope":"331-340","batch":"30","individually_reviewed":10,"merged_into_global_progress":False,"next_lane_C_scope":"final_index_and_integrity_QA"},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    (OUT/"BATCH33_STANDALONE_PROGRESS.json").write_text(json.dumps({"lane":"C","scope":"331-340","batch":"33","individually_reviewed":10,"merged_into_global_progress":False,"next_lane_C_scope":"final_index_and_integrity_QA"},ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     readme=[
       "# 로즈우드 가구 C 레인 — 331~340 독립 시각 검수","",
       "PZ 완성형 10종과 기존 소스 기반 Minecraft 비교 이미지 10종을 직접 판독했다. 새 Blockbench 렌더는 없으며 게임 설치 인증은 0건이다.","",
