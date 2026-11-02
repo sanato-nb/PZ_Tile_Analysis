@@ -162,7 +162,7 @@ MC 모델 SHA-256: `10b356207b2641cf3b2ffeb46973e647c94631c85ddad80d392240464139
 
 - BATCH_221_230_SHA256_PROVENANCE.csv : 원본 PZ/BBMODEL/텍스처/Blockbench 캡처/카드 해시
 
-- MANIFEST.json / BATCH21_STANDALONE_PROGRESS.json : 독립 검수 범위·상태
+- MANIFEST.json / BATCH22_STANDALONE_PROGRESS.json : 독립 검수 범위·상태
 
 - INDEX.html : 10개 비교판 탐색
 
