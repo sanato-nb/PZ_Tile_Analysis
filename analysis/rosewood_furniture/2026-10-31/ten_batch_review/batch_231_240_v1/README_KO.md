@@ -6,7 +6,7 @@ PZ B42 완성형 원본 10개와 기존 비교판을 직접 육안 대조했다.
 
 기존 001~230번 및 A/C 레인의 독립 Draft PR은 병합하거나 덮어쓰지 않았다. 원본 TMX/PNG/SQLite 및 글로벌 357행 매칭표는 변경하지 않았다.
 
-검수 10종: 조건부 0, 보류 10. 네이티브 Blockbench 원본 로드 10/10, 전체 캡처 9/10 (238번 잘림), 비교 JPG 10장, 인게임 1:1 인증 0종.
+검수 10종: 조건부 0, 보류 10. 네이티브 Blockbench 원본 로드 10/10, 전체 형상 캡처 10/10 (238번 넓은 카메라 재촬영), 비교 JPG 10장, 인게임 1:1 인증 0종.
 
 Decocraft 원본 JAR SHA512: \`f32020fc64170a55afb26fa0ab8a58c6d5d957c97d9e387aa09d107a27737e90f6caafa46bf71b78c01d7b4c283042a88fcf5b8ba3465d0005f4dd6fa0580d05\` / https://modrinth.com/mod/decocraft/version/K6V6djNF
 
@@ -26,7 +26,7 @@ PZ 형태: 2×1 오렌지·붉은색 패브릭 2인 소파. 두꺼운 양팔걸�
 
 원본 MC 모델 SHA256: \`2d353c50b87de0fae4a25a97177f53e1c7f851e2044ffdbd35125802bdf71656\`
 
-비교 카드 SHA256: \`79e8e29d1ae63a6bc77de54c4c41f20fe13a680aa2edecd5b96076c4edce9434\`
+비교 카드 SHA256: \`74a9c23af56dc2907fe49379c6f8435bd86945eb0b80874507ae82486a6dd31b\`
 
 
 ### 232 Counter / Oak Floating
@@ -43,7 +43,7 @@ PZ 형태: 1×1 중간 갈색 목재 벽걸이 2문 캐비닛. 평평한 상판,
 
 원본 MC 모델 SHA256: \`eaa9c1d69c46b653df6f07f5c3e83b6076a15690539ad76707502deab6e9a7bc\`
 
-비교 카드 SHA256: \`16d377b3e1adcdb29cc26b79bc76f161d68c1d1d93ea26d40878c51e8c291e17\`
+비교 카드 SHA256: \`01da01dac652bb6c80f36214661931ae1ed95bb9f6b420d9c1131aa65eeec9b1\`
 
 
 ### 233 Lamp / Fancy Green
@@ -60,7 +60,7 @@ PZ 형태: 2×1 금색 중앙 줄기에서 3개 곡선 팔이 뻗은 천장형 �
 
 원본 MC 모델 SHA256: \`26b59a37fd0c3c9e9924be16661447f6df21d07fd9037d0bbfd7dc8829e1888b\`
 
-비교 카드 SHA256: \`c6c1b42888f731a57c77291ef30c80534f6bdbf7824c8ed1d87e2a9da754f999\`
+비교 카드 SHA256: \`ecdc098fac0c90d401dd44fe7d4696b3290aec3eec2882763d1611a6f11a74ce\`
 
 
 ### 234 Sink / Fancy Hanging
@@ -77,7 +77,7 @@ PZ 형태: 1×1 벽부착형 은색 음수대/세면대. 뒤에 직사각 금속
 
 원본 MC 모델 SHA256: \`e492edc5161e4fb8a6a36ae3ebe0e527940b47249a2a67a2c8795402f2c9eb33\`
 
-비교 카드 SHA256: \`e6dceb4a064291c24977be23d56fe9890beb17e947dc9a1bd9ab9f4ad5d7131f\`
+비교 카드 SHA256: \`230f339f8dfb5e4a7fe4a46d904596046974c0fb00366839b3616b4ad8880a2b\`
 
 
 ### 235 Table / Long Oak
@@ -94,7 +94,7 @@ PZ 형태: 3×1 긴 직사각 중간 갈색 원목 상판과 얇은 검정 금�
 
 원본 MC 모델 SHA256: \`014cf39af640f4120c32def0d1fbb27511bc7f14dfef1be3c82fabfbe6a06deb\`
 
-비교 카드 SHA256: \`22f4a5fb8d7fccb945b1bb18781f440017b4f23c90e0fa92e738f6ebef681d18\`
+비교 카드 SHA256: \`850edfe5013fdd90c13b2f755bf7f4c8ec69adcd90665dac36be6f6643e91524\`
 
 
 ### 236 Counter / Pie Store
@@ -111,7 +111,7 @@ PZ 형태: 1×1 작은 파이 가게 카운터. 밝은 흰색 세로 판재 몸�
 
 원본 MC 모델 SHA256: \`512f252cb22f035ad901daef97a208680f8e57b67f47b250318dd05151e87c1b\`
 
-비교 카드 SHA256: \`3ecd2fbb7ece4b269aeeb2ec7bbd496d61438e58e065b1167323e74ec3906fb5\`
+비교 카드 SHA256: \`d4b706bf87f3276b6b0494c67a0cbc793d08fe1448f8ee5047bb3020bbbd86f5\`
 
 
 ### 237 Bed / Hospital
@@ -128,7 +128,7 @@ PZ 형태: 1×2 단층 병원 침대. 얇은 흰 매트리스, 어두운 녹색 
 
 원본 MC 모델 SHA256: \`386e358e9cf72ead5f9e5f916b9b3f4dc9387b68aec75cba29f3a5ba8c058b13\`
 
-비교 카드 SHA256: \`2d9e6bbd008bbbd0c7de1a242a1b0d2520acdd040b2534487e7ce4f4eeb629d4\`
+비교 카드 SHA256: \`ef2be2db9e751f882bc128697a7b0a087ded3480704e58b04fcce820b63a369a\`
 
 
 ### 238 Bench / Long Wooden
@@ -137,7 +137,7 @@ PZ 형태: 1×2 단층 병원 침대. 얇은 흰 매트리스, 어두운 녹색 
 
 PZ 형태: 1×2 등받이·팔걸이 없는 긴 갈색 나무 벤치. 여러 개의 좁은 세로 목재 좌판과 양끝 사선 다리.
 
-육안 비교 및 오매칭 원인: PZ는 1×2 긴 갈색 목재 판재 좌판과 양끝 사선 다리만 있는 등받이 없는 벤치다. 기존 Handcrafted dark_oak_bench는 빨강 쿠션·등받이 있는 의자 한쪽 모듈. 새 Decocraft gym_bench 원본 BBMODEL(7 cubes)은 Blockbench에서 실제 열렸으나 캡처가 왼쪽에서 잘려 검정 금속/패드 일부만 보인다. 완성형 확인이 불가능하며 나무 좌판·사선 다리 근거도 없어 미승인 보류한다. 네이티브 로드 성공과 전체 외형 검증 성공은 다르다.
+육안 비교 및 오매칭 원인: PZ는 1×2 갈색 목재 판재 좌판과 양끝 사선 다리만 있는 등받이 없는 긴 벤치다. 기존 Handcrafted dark_oak_bench는 빨강 쿠션·등받이 있는 한쪽 좌석 모듈. 이번 Decocraft gym_bench 원본 BBMODEL(7 cubes)은 처음 Blockbench 캡처가 잘려 전체 형상을 판정할 수 없었지만, 넓은 카메라로 공식 Blockbench 5.2.2를 재실행하여 검정 패딩 상판과 검정 금속 사선 지지대가 있는 짧은 운동용 벤치임을 확인했다. PZ의 갈색 나무 긴 좌판·2칸 길이·목재 사선 다리와 재질/비율이 달라 보류.
 
 추가 확인: 2칸 연속 나무 좌판, 등받이 없는 구조, 사선 다리, 앉기 기능.
 
@@ -145,7 +145,7 @@ PZ 형태: 1×2 등받이·팔걸이 없는 긴 갈색 나무 벤치. 여러 개
 
 원본 MC 모델 SHA256: \`80de203fee5ce870e3934b0061a6fa0aff397748fc501a2131e2d913173ae632\`
 
-비교 카드 SHA256: \`5164249c1d92717fc1e9f6dbe2303c2383ac3c7affeb09fae8c958b7a5fc8f1b\`
+비교 카드 SHA256: \`820580757cbac56ca787f5b506ec3b84031f7b29bae28d04365f84c8f62f339a\`
 
 
 ### 239 Chair / Rocking
@@ -162,7 +162,7 @@ PZ 형태: 1×1 짙은 갈색 곡선 목재 프레임의 라탄 흔들의자. �
 
 원본 MC 모델 SHA256: \`ef7759d3dd1b64eadd7507536995553eaac771f210224316e807169f7c24e17e\`
 
-비교 카드 SHA256: \`a6de3c6f6102c530b706748cfb6c368c7e21fc831803c32f8b1c4ee3dcde09b7\`
+비교 카드 SHA256: \`593299ff18629c17df14b5704e2672ded92528a90730316ecfbdbe8d6b414fa0\`
 
 
 ### 240 Couch / Victorian C5
@@ -179,7 +179,7 @@ PZ 형태: 1×2 빅토리아풍 갈색 가죽 긴 셰즈/소파. 등받이와 �
 
 원본 MC 모델 SHA256: \`2d353c50b87de0fae4a25a97177f53e1c7f851e2044ffdbd35125802bdf71656\`
 
-비교 카드 SHA256: \`76ba4bea50bd2a2c56de1abc3f3d2110e4a4d991f1825e0f8d87e6ab30bbc7f8\`
+비교 카드 SHA256: \`a18c5a2e9f680470869eeb79885886cb2935fc0bdb23d75b32167da210a40d08\`
 
 
 ## 산출물
