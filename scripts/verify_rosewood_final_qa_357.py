@@ -27,10 +27,19 @@ def main() -> None:
     deferred = read_csv("DEFERRED_BACKLOG_289.csv")
     conditional = read_csv("CONDITIONAL_RECHECK_068.csv")
     batches = read_csv("BATCH_STATUS_36.csv")
+    categories = read_csv("CATEGORY_PRIORITY.csv")
     ids = [r["index"] for r in rows]
     assert ids == list(range(1, 358)), "missing, duplicate or unordered index"
     assert len(rows) == len(master) == 357
     assert len(manifests) == len(batches) == 36
+    assert sum(int(c["total"]) for c in categories) == 357
+    assert sum(int(c["deferred"]) for c in categories) == 289
+    assert sum(int(c["conditional"]) for c in categories) == 68
+    for c in categories:
+        subset = [r for r in rows if r["pz_name"] == c["category"]]
+        assert len(subset) == int(c["total"])
+        assert sum(r["status_class"] == "DEFER" for r in subset) == int(c["deferred"])
+        assert sum(r["status_class"] == "CONDITIONAL" for r in subset) == int(c["conditional"])
     assert len(set(r["pr"] for r in rows)) == 36
     assert len(set(r["source_csv_blob_sha"] for r in rows)) == 36
     assert all(len(r["source_csv_blob_sha"]) == 40 for r in rows)
