@@ -47,7 +47,7 @@ def card(idx,src,decision,proof):
    if len(xs)>40:im=im.crop((max(0,int(xs.min())-15),max(0,int(ys.min())-15),min(im.width,int(xs.max())+16),min(im.height,int(ys.max())+16)))
    im=ImageOps.contain(im,(670,430),Image.Resampling.LANCZOS)
    out.paste(im,(1125-im.width//2,326-im.height//2))
-  evidence="NATIVE_BLOCKBENCH_5_2_2_VERIFIED_SOURCE_BBMODEL"
+  evidence="NATIVE_BLOCKBENCH_5_2_2_VERIFIED_SOURCE_BBMODEL_CROPPED" if idx==238 else "NATIVE_BLOCKBENCH_5_2_2_VERIFIED_SOURCE_BBMODEL"
  elif legacy.is_file():
   with Image.open(legacy) as im:
    im=im.convert("RGB").crop((im.width//2,86,im.width,max(87,im.height-110)))
@@ -101,6 +101,7 @@ def main():
    "legacy_comparison_sha256_if_fallback":sha(legacy) if legacy else "",
    "new_comparison_card_sha256":sha(dest),"card_path":"cards/"+dest.name,
    "native_loaded_verified":"TRUE" if native else "FALSE",
+   "full_native_model_in_frame_verified":"NO" if idx==238 else ("YES" if native else "NO"),
    "exact_1_to_1_visual_match_approved":"NO",
    "approved_for_minecraft_world_replacement":"NO",
    "game_install_collision_function_verified":"NO"
@@ -129,6 +130,8 @@ def main():
   "this_batch_individual_reviews":10,"attempted_original_decocraft_models":10,
   "successful_native_blockbench_viewports":sum(x["native_loaded_verified"]=="TRUE" for x in rows),
   "new_comparison_cards":10,"conditional_candidates":len(cond),
+  "full_native_model_visible_viewports":sum(x["full_native_model_in_frame_verified"]=="YES" for x in rows),
+  "cropped_native_viewports":[238],
   "deferred_other_mods_or_vanilla":len(defer),
   "certified_1_to_1_matches":0,"minecraft_game_install_collision_verified":0,
   "source_tables_overwritten":False,"parallel_group_progress_overwritten":False,
@@ -148,7 +151,7 @@ def main():
   "PZ B42 완성형 원본 10개와 기존 비교판을 직접 육안 대조했다. 이번 후보는 Decocraft 3.0.4-1.20.1 공식 배포 JAR의 원본 BBMODEL 및 텍스처를 SHA512/SHA256 검증한 뒤 Blockbench 5.2.2에서 재렌더했다.",
   "본 결과는 10개 고유 가구에 대한 외형 판정이다. 모드 실제 게임 설치, 1:1 동일성, 충돌/상호작용/방향, PZ 멀티타일 재조립 정확성은 인증하지 않았다.",
   "기존 001~230번 및 A/C 레인의 독립 Draft PR은 병합하거나 덮어쓰지 않았다. 원본 TMX/PNG/SQLite 및 글로벌 357행 매칭표는 변경하지 않았다.",
-  f"검수 {len(rows)}종: 조건부 {len(cond)}, 보류 {len(defer)}. 네이티브 Blockbench {manifest['successful_native_blockbench_viewports']}/10, 비교 JPG 10장, 인게임 1:1 인증 0종.",
+  f"검수 {len(rows)}종: 조건부 {len(cond)}, 보류 {len(defer)}. 네이티브 Blockbench 원본 로드 {manifest['successful_native_blockbench_viewports']}/10, 전체 캡처 {manifest['full_native_model_visible_viewports']}/10 (238번 잘림), 비교 JPG 10장, 인게임 1:1 인증 0종.",
   f"Decocraft 원본 JAR SHA512: \`{mod['sha512']}\` / https://modrinth.com/mod/decocraft/version/{mod['version_id']}",
   "## 개별 검수"
  ]
