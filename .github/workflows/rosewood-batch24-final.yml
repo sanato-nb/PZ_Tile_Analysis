@@ -22,10 +22,13 @@ jobs:
             /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
             /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
             /analysis/rosewood_furniture/2026-10-31/minecraft_actual_mod_registry_v2/MOD_VERSION_SOURCES.json
-            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/24_231_240/extra_decocraft_render/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/24_231_240/extra_decocraft_render_full_frame/
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_231_240_v1/
       - name: Install image tools
         run: python3 -m pip install -q --break-system-packages pillow numpy
       - name: Compile and build ten source-backed comparison cards
+        env:
+          ROSEWOOD_BATCH24_REBUILD: "1"
         run: |
           python3 -m py_compile scripts/complete_rosewood_batch_231_240.py
           python3 -u scripts/complete_rosewood_batch_231_240.py
@@ -39,7 +42,7 @@ jobs:
           assert m['scope']=='231-240' and m['lane']=='B' and m['this_batch_individual_reviews']==10
           assert m['attempted_original_decocraft_models']==10
           assert m['successful_native_blockbench_viewports']==10
-          assert m['full_native_model_visible_viewports']==9 and m['cropped_native_viewports']==[238]
+          assert m['full_native_model_visible_viewports']==10 and m['cropped_native_viewports']==[]
           assert m['new_comparison_cards']==10
           assert m['conditional_candidates']+m['deferred_other_mods_or_vanilla']==10
           assert m['certified_1_to_1_matches']==m['minecraft_game_install_collision_verified']==0
@@ -52,7 +55,7 @@ jobs:
           assert [int(x['index']) for x in a]==list(range(231,241))
           assert len(b)==m['deferred_other_mods_or_vanilla'] and len(h)==10
           assert all(x['exact_1_to_1_visual_match_approved']=='NO' and x['approved_for_minecraft_world_replacement']=='NO' for x in a)
-          assert next(x for x in a if x['index']=='238')['full_native_model_in_frame_verified']=='NO'
+          assert all(x['full_native_model_in_frame_verified']=='YES' for x in a)
           for x in a:
            img=p/x['card_path']
            assert img.is_file() and img.stat().st_size>10000
