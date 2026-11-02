@@ -2,7 +2,7 @@ name: Rosewood batch22 — validate 221-230 manual visual decisions and ZIP
 on:
   push:
     branches: [work/rosewood-manual-batch22-221-230-20261102]
-    paths: [.github/workflows/rosewood-batch22-final.yml, scripts/rosewood_batch22_221_230_decisions.json]
+    paths: [.github/workflows/rosewood-batch22-final.yml, scripts/rosewood_batch22_221_230_decisions.json, scripts/complete_rosewood_batch_221_230.py]
   workflow_dispatch:
 permissions:
   contents: write
