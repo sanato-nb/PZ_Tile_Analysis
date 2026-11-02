@@ -23,7 +23,7 @@
     "candidate": "decocraft:jukebox",
     "status": "CONDITIONAL_VINTAGE_JUKEBOX_TYPE_BUT_SILHOUETTE_AND_PALETTE_DIFFER",
     "shape": "1×1 아치형 어두운 회색 캐비닛, 전면 초록 패널과 적·황 테두리, 좁은 선택 패널과 검정 하부 스피커.",
-    "why": "PZ 원본과 Decocraft jukebox 기존 네이티브 Blockbench 비교판 모두 빈티지 주크박스이며 상단 아치·전면 장식·하단 캐비닛이라는 핵심 유형은 일치. 그러나 Minecraft 쪽은 밝은 민트/무지개 네온, 돌출한 상단 리브와 나무 측면이 있고 PZ는 어두운 둥근 돔·녹색 전면·가느다란 색 띠. 1:1은 아니며 조건부만.",
+    "why": "PZ 완성형과 Decocraft jukebox의 원본 BBMODEL을 Blockbench 5.2.2로 재렌더한 화면(50 cubes)을 직접 대조했다. 둘 다 빈티지 주크박스이고 아치형 상단·전면 장식·하단 캐비닛이 있지만, Minecraft는 민트·노랑·빨강 네온과 나무 측면, PZ는 회색 둥근 돔과 초록색 하단/검정 전면이다. 크기·음악 재생·1:1 외형은 미검증이므로 조건부만.",
     "followup": "새 원본 BBMODEL 재렌더 및 실제 블록 높이·음악 재생·색감 조정 가능 여부 검증."
   },
   {
@@ -39,10 +39,10 @@
     "index": 195,
     "model": "bottom_cabinet_2_white",
     "candidate": "",
-    "status": "DEFER_MOTEL_DOUBLE_DOOR_CABINET_PENDING_NEW_SOURCE_COMPARISON",
+    "status": "DEFER_DOUBLE_DOOR_MOTEL_CABINET_VS_FOUR_DRAWER_CABINET",
     "shape": "1×1 크림·아이보리색 낮은 수납 카운터. 평평한 밝은 베이지 상판, 전면 이중 여닫이문과 작은 둥근 황동색 손잡이 두 개.",
-    "why": "기존 mcwfurnitures:acacia_counter는 붉은 상판·짙은 목재 몸통의 단순 상자 형태로 PZ 흰 양문 수납장과 외형·색·문 구조가 다르다. Decocraft bottom_cabinet_2_white 원본을 추가 비교 후보로 렌더하되 새 화면 확인 전 자동 승인하지 않는다.",
-    "followup": "Decocraft white double-door base cabinet의 문·손잡이·상판 색을 실제 렌더로 비교하고 1×1 배치/충돌 검증."
+    "why": "기존 mcwfurnitures:acacia_counter는 붉은 상판과 어두운 목재로 PZ 크림색 이중문 캐비닛과 다르다. 추가로 Decocraft bottom_cabinet_2_white의 실제 원본 BBMODEL 11 cubes를 Blockbench로 새로 렌더한 결과, 흰색 몸통과 밝은 상판은 비슷하나 전면에 수평 손잡이 달린 서랍 4개가 있고 PZ의 세로 여닫이문 2개·황동색 둥근 손잡이 2개가 없다. 따라서 추가 후보도 반려.",
+    "followup": "문 2개와 작은 황동 손잡이 2개를 갖춘 1×1 크림색 base cabinet 실제 모델/텍스처 확인. 4서랍형으로 대체하지 말 것."
   },
   {
     "index": 196,
@@ -59,7 +59,7 @@
     "candidate": "",
     "status": "DEFER_WEIGHT_BENCH_WITH_BAR_SUPPORTS_NO_VERIFIED_COMPLETE_MATCH",
     "shape": "2타일 1×2 헬스용 벤치프레스 기구. 긴 검정 쿠션 평판, 은회색 지지 프레임, 뒤쪽 좌우 높은 수직 바벨 거치 기둥 2개.",
-    "why": "PZ 완성형에는 긴 쿠션과 양쪽 높이 솟은 바벨 지지대가 있다. 기존 7개 모드 자동 검색에는 일치하는 Minecraft 모델이 없었고 Decocraft gym_bench는 별도 실물 후보로 새로 렌더하지만 바벨 거치대와 전체 1×2 조립을 입증하지 못하면 보류.",
+    "why": "PZ는 검정 쿠션 벤치에 높은 은회색 바벨 거치 기둥 2개가 달린 1×2 벤치프레스 기구다. Decocraft gym_bench 실제 원본 BBMODEL 7 cubes를 Blockbench 5.2.2로 새로 렌더했지만 화면에는 검은 좌판과 한쪽 지지대 일부만 보이고 바벨 거치대 2개가 확인되지 않는다. 원본 모델 전체가 캡처되었는지도 불확실하여 승인하지 않는다.",
     "followup": "1.20.1 Forge bench press with barbell stands 모델 또는 마인크래프트 스타일 신규 모델을 검증."
   },
   {
@@ -68,7 +68,7 @@
     "candidate": "",
     "status": "DEFER_FLAT_WALL_CUE_PANEL_VS_FREESTANDING_BILLIARDS_RACK",
     "shape": "1×1 좁고 평평한 벽 부착형 진갈색 나무판, 금색 장식이 있는 윗틀과 아랫틀. 스프라이트에는 큐대·공이 보이지 않는다.",
-    "why": "PZ 원본은 평평한 벽걸이 판자 형태지만 Decocraft pool_rack 기존 네이티브 비교판은 바닥에 세우는 큐대 다수·삼각대·컬러 볼이 들어 있는 넓은 진열대다. 둘 다 당구 용품과 연관되지만 크기·깊이·벽 부착·큐대 표현이 달라 기존 조건부 자동 매칭을 이번 수동 검수에서는 보류로 하향.",
+    "why": "PZ 원본은 금색 장식이 있는 얇은 갈색 벽걸이 판자형 큐 스탠드지만 Decocraft pool_rack 실제 원본 BBMODEL 59 cubes의 재렌더는 바닥형 넓은 나무 랙과 여러 큐대·삼각대·컬러 볼 진열을 보여준다. 종류는 연관되어도 폭·깊이·벽 부착 여부·물체 수가 달라 기존 조건부 판정을 보류로 하향한다.",
     "followup": "wall mounted pool cue holder flat wooden plaque model의 원본/설치 방향 확인, 필요 시 장식 판자 바닐라 조합."
   },
   {
@@ -86,7 +86,7 @@
     "candidate": "",
     "status": "DEFER_WOODEN_SPORTS_BENCH_VS_BLACK_GYM_BENCH",
     "shape": "2타일 2×1 길이의 등받이 없는 목재 스포츠 벤치. 길고 밝은 갈색 나무 판자 좌판, 아래에 은회색 금속 다리 3개와 넓은 발판.",
-    "why": "PZ는 밝은 목재 장벤치와 3개의 금속 다리지만 Decocraft gym_bench 기존 BBMODEL 캡처는 검은 체육용 벤치 일부만 보여 목재 좌판·3개 지지대·전체 2블록 길이를 재현하지 못한다. 197번 헬스 벤치와 동일한 gym_bench 자동 후보를 이 목재 벤치에 재사용하는 것은 명백한 유형 오류.",
+    "why": "PZ는 2×1 길이의 밝은 목재 좌판과 은회색 금속 다리 3개가 있는 스포츠 벤치다. Decocraft gym_bench 실제 원본 BBMODEL 7 cubes 재렌더는 검은 운동기구 좌판과 한쪽 다리 일부만 보여 목재 재질·세 지지대·2블록 길이와 맞지 않는다. 197 헬스기구와 200 목재 벤치를 같은 Minecraft gym_bench로 자동 매칭한 오류를 확인했다.",
     "followup": "2블록 길이 3개의 회색 금속 다리 + 목재 평판 좌석을 가진 sports locker room bench 원본 모델 찾기."
   }
 ]
