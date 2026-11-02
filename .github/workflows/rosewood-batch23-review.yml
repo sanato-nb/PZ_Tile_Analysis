@@ -1,0 +1,79 @@
+name: Rosewood lane A batch23 251-260 manual review
+on:
+  push:
+    branches: [work/rosewood-manual-batch23-251-260-20261102]
+    paths:
+      - .github/workflows/rosewood-batch23-review.yml
+      - scripts/complete_rosewood_batch_251_260.py
+      - scripts/rosewood_batch23_251_260_decisions.json
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: rosewood-batch23-251-260
+  cancel-in-progress: false
+jobs:
+  generate-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/complete_rosewood_batch_251_260.py
+            /scripts/rosewood_batch23_251_260_decisions.json
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/ALL_357_FULL_RENDER_MATCHING.csv
+            /analysis/rosewood_furniture/2026-10-31/all_357_complete_native_comparisons_v1/cards/
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Install Pillow
+        run: python3 -m pip install -q --break-system-packages pillow
+      - name: Compile and generate manual review files
+        run: |
+          python3 -m py_compile scripts/complete_rosewood_batch_251_260.py
+          python3 -u scripts/complete_rosewood_batch_251_260.py
+      - name: Verify ten unique rows, source hashes, cards, ZIP and no 1-to-1 claims
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_251_260_v1")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["scope"]=="251-260" and m["lane"]=="A"
+          assert m["this_batch_individual_image_reviews"]==m["new_comparison_cards"]==10
+          assert m["conditional_candidates"]==2 and m["deferred_other_mods_or_vanilla"]==8
+          assert m["fresh_native_blockbench_renders_this_run"]==0
+          assert m["certified_1_to_1_matches"]==m["minecraft_game_install_collision_verified"]==0
+          assert not m["source_tables_overwritten"] and not m["parallel_group_progress_overwritten"]
+          def read(name):
+            with (p/name).open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          a=read("BATCH_251_260_MANUAL_VISUAL_REVIEW.csv")
+          b=read("BATCH_251_260_DEFERRED_OTHER_MODS.csv")
+          h=read("BATCH_251_260_SHA256_PROVENANCE.csv")
+          assert [int(x["index"]) for x in a]==list(range(251,261))
+          assert len(b)==8 and len(h)==10
+          for r in a:
+            card=p/r["new_comparison_card_path"]
+            assert card.is_file() and card.stat().st_size>10000
+            assert hashlib.sha256(card.read_bytes()).hexdigest()==r["new_comparison_card_sha256"]
+            assert len(r["pz_preview_sha256"])==len(r["baseline_comparison_sha256"])==64
+            assert r["exact_1_to_1_visual_match_approved"]=="NO"
+            assert r["approved_for_minecraft_world_replacement"]=="NO"
+            assert r["game_install_collision_function_verified"]=="NO"
+            assert r["fresh_native_blockbench_render_this_run"]=="NO"
+          z=p/"ROSEWOOD_BATCH_251_260_MANUAL_REVIEW.zip"
+          with zipfile.ZipFile(z) as f:
+            assert f.testzip() is None
+            assert len([n for n in f.namelist() if n.startswith("cards/") and n.endswith(".jpg")])==10
+          print("ROSEWOOD_251_260_VERIFIED",len(a),len(b))
+          PY
+      - name: Commit generated evidence only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/batch_251_260_v1/
+          git diff --cached --quiet && exit 0
+          git commit -m 'review(rosewood): 251-260 visual cards, CSV, provenance and ZIP'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
