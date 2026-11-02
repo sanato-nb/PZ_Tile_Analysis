@@ -133,7 +133,7 @@ def main():
         idx=int(r["index"])
         blocks.append(f'<article><h2>{idx:03d} {html.escape(r["pz_name"])} / {html.escape(r["pz_style"])} — {r["review_status"]}</h2><img src="cards/{idx:03d}_PZ_vs_MC.jpg" loading="lazy" width="100%"><p>{html.escape(r["manual_review_reason"])}</p></article>')
     (OUT/"INDEX.html").write_text(
-        '<!doctype html><html lang="ko"><meta charset="utf-8"><title>Rosewood 311-320 manual review</title><style>body{max-width:1200px;margin:auto;font:16px sans-serif;background:#f5f7fa;color:#263444}article{background:white;padding:18px;margin:24px 0;border-radius:12px}img{height:auto}</style><h1>Rosewood 251–260 · lane A</h1><p>1 conditional, 9 deferred. Existing source render evidence only; no new native render or in-game certification.</p>'+"\n".join(blocks)+"</html>",encoding="utf-8")
+        '<!doctype html><html lang="ko"><meta charset="utf-8"><title>Rosewood 311-320 manual review</title><style>body{max-width:1200px;margin:auto;font:16px sans-serif;background:#f5f7fa;color:#263444}article{background:white;padding:18px;margin:24px 0;border-radius:12px}img{height:auto}</style><h1>Rosewood 311–320 · lane A</h1><p>1 conditional, 9 deferred. Existing source render evidence only; no new native render or in-game certification.</p>'+"\n".join(blocks)+"</html>",encoding="utf-8")
     z=OUT/"ROSEWOOD_BATCH_311_320_MANUAL_REVIEW.zip"
     with zipfile.ZipFile(z,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=7) as f:
         for p in sorted(OUT.rglob("*")):
