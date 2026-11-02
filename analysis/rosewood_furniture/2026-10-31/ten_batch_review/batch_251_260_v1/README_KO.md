@@ -14,7 +14,7 @@
 - cards/: 원본 PZ 미리보기와 기존 Minecraft 원본 소스 비교 이미지에서 새로 구성한 판정 카드 10장
 - BATCH_251_260_MANUAL_VISUAL_REVIEW.csv: 개별 외형·색상·재질·조립/기능 한계 및 후속 조건
 - BATCH_251_260_DEFERRED_OTHER_MODS.csv: 보류 8종과 대체 모드 재검색 요구
-- BATCH_251_260_SHA256_PROVENANCE.csv: 원본 PZ 이미지·기존 비교 카드·새 카드의 SHA-256
+- BATCH_251_260_SHA256_PROVENANCE.csv: 원본 PZ 이미지·기존 비교 카드·새 카드의 SHA-256 및 과거 v3에서 기록된 Decocraft 원본 BBMODEL/텍스처 SHA-256 (이번 실행에서 재해시한 값 아님)
 - MANIFEST.json, INDEX.html, ZIP: 독립 검수 결과와 검증 가능 파일 묶음
 
 기존 기준 브랜치 원본 PNG/TMX/SQLite/357종 누적표, 다른 레인 결과는 변경하지 않았다. Draft PR을 자동 병합하지 않는다.
