@@ -189,13 +189,13 @@ def main():
     style_ids="|".join(z["style_id"] for z in v),
     style_names="|".join(z["GroupName"] or "(none)" for z in v),
     do_not_auto_merge_different_styles="YES"))
- assert (len(out_styles),len(out_sheets),len(out_sources),len(out_groups),len(out_cross))==(357,362,1347,79,5),(len(out_styles),len(out_sheets),len(out_sources),len(out_groups),len(out_cross))
+ assert (len(out_styles),len(out_sheets),len(out_sources),len(out_groups),len(out_cross))==(357,363,1347,79,6),(len(out_styles),len(out_sheets),len(out_sources),len(out_groups),len(out_cross))
  save(O/"CATALOG_357_STYLES.csv",out_styles)
  save(O/"FAMILIES_79.csv",out_groups)
- save(O/"SOURCE_TILESET_VARIANTS_362.csv",out_sheets)
+ save(O/"SOURCE_TILESET_VARIANTS_363.csv",out_sheets)
  save(O/"ORIENTATION_GRID_TEMPLATES.csv",out_templates)
  save(O/"SOURCE_SPRITES_1347.csv",out_sources)
- save(O/"SAME_NAME_MULTIPLE_TILESETS_5.csv",out_cross)
+ save(O/"SAME_NAME_MULTIPLE_TILESETS_6.csv",out_cross)
  save(O/"NEEDS_IDENTITY_REVIEW.csv",out_issues)
  unmatched=[x for x in unnamed if x["zone"]=="CORE" and x["scope"]=="CORE_FURNITURE"]
  assert unmatched
@@ -210,10 +210,10 @@ def main():
  grid=Counter(r["grid_status"] for r in out_templates)
  cross=Counter(r["evidence_class"] for r in out_cross)
  manifest=dict(style_labels=357,broad_furniture_names=79,source_tile_records=1347,
-  named_source_tileset_variants=362,oriented_source_templates=len(out_templates),
+  named_source_tileset_variants=363,oriented_source_templates=len(out_templates),
   source_facing_counts=dict(sorted(orient.items())),
   representative_multitile_styles=sum(int(x["representative_sprite_parts"])>1 for x in out_styles),
-  cross_tileset_overlap_candidates=5,cross_tileset_risk_counts=dict(cross),
+  cross_tileset_overlap_candidates=6,cross_tileset_risk_counts=dict(cross),
   original_3d_binding_coverage=dict(counts),source_grid_validation=dict(grid),
   unnamed_core_asset_keys=len(unmatched),
   unnamed_core_placed_candidates=sum(int(x["placed_sprite_objects"]) for x in unmatched),
@@ -224,22 +224,22 @@ def main():
  txt=["# 로즈우드 원본 가구 정체 목록 (2026-11-03)",
  "## 357종이라는 숫자의 정확한 의미",
  "357개는 방향을 한 차례 합친 CustomName + GroupName 조합이야. 79개 CustomName은 넓은 종류이지 실제 디자인 수가 아니고, 357개도 최종 서로 다른 완성형 가구 3D 디자인 수가 아니야.",
- "원본 타일 ID 1,347개를 정의 파일·방향·SpriteGridPos·기능 속성·Viewpoint 참고 모델에 연결했고, 타일셋 출처를 보존한 스타일은 362개야.",
- "## 동일 이름·스타일이 두 타일셋에서 나타나는 5개"]
+ "원본 타일 ID 1,347개를 정의 파일·방향·SpriteGridPos·기능 속성·Viewpoint 참고 모델에 연결했고, 타일셋 출처를 보존한 스타일은 363개야.",
+ "## 동일 이름·스타일이 두 타일셋에서 나타나는 6개 (기존 집계의 5개 외 Bed / Hospital 추가)"]
  for x in out_cross:txt.append("- "+x["CustomName"]+" / "+x["GroupName"]+
   " : "+x["tileset_a"]+" ["+x["facings_a"]+"] / "+x["tileset_b"]+" ["+x["facings_b"]+"] => "+x["evidence_class"])
- txt.extend(["Counter / Wooden Corner은 같은 방향 네 가지가 두 타일셋에 존재하지만 서로 다른 Viewpoint OBJ 연결명을 갖고 있어 **잘못 합쳐졌을 가능성을 반드시 확인**해야 해. Chair / Modern White 등은 같은 3D 모델이 두 방향 그룹에 나뉘어 있으므로 방향별 자산 분리일 가능성이 높아.",
+ txt.extend(["Counter / Wooden Corner은 같은 방향 네 가지가 두 타일셋에 존재하지만 서로 다른 Viewpoint OBJ 연결명을 갖고 있어 **잘못 합쳐졌을 가능성을 반드시 확인**해야 해. Bed / Hospital도 원본 타일셋 두 곳에 같은 방향이 겹치지만 한쪽에는 Viewpoint 연결이 없어서 별도 검토가 필요해. Chair / Modern White 등은 같은 3D 모델이 두 방향 그룹에 나뉘어 있으므로 방향별 자산 분리일 가능성이 높아.",
  "## 가구 정체 계층",
- "79 family -> 357 style labels -> 362 source tileset variants -> facing N/E/S/W(or missing) -> SpriteGridPos parts.",
+ "79 family -> 357 style labels -> 363 source tileset variants -> facing N/E/S/W(or missing) -> SpriteGridPos parts.",
  "게임 맵의 가구 배치 인스턴스는 별도 층위로 유지하고, 제작용 Blockbench 모델 수는 수동 확인 전까지 확정하지 않아.",
  "Viewpoint 모델은 공개 3D모드의 참고 바인딩이지 공식 PZ 가구 identity ID가 아냐. 원본 B42.20.3과 Viewpoint 모델 기준의 버전 차이가 있으므로 그대로 동등하다고 할 수 없어.",
  "## 원본 자료와 검수 파일",
  "- CATALOG_357_STYLES.csv : 원본 스타일 357개와 방향·부품·속성·3D 연결, 위험 표시.",
  "- FAMILIES_79.csv : 큰 가구 범주 79개(스타일을 자동 통합하지 않음).",
- "- SOURCE_TILESET_VARIANTS_362.csv : 같은 이름도 출처 타일셋이 다르면 분리 보존.",
+ "- SOURCE_TILESET_VARIANTS_363.csv : 같은 이름도 출처 타일셋이 다르면 분리 보존.",
  "- ORIENTATION_GRID_TEMPLATES.csv : 타일셋별 방향·부품과 SpriteGridPos.",
  "- SOURCE_SPRITES_1347.csv : 개별 타일마다 원본 정의 전체 속성 + 3D 모드 바인딩.",
- "- SAME_NAME_MULTIPLE_TILESETS_5.csv : 중복 통합의 근거 및 예외 5개.",
+ "- SAME_NAME_MULTIPLE_TILESETS_6.csv : 중복 통합의 근거 및 예외 5개.",
  "- UNNAMED_CORE_ASSETS_NOT_IN_357.csv : 이름 없어 357종 목록에 아예 빠진 원본 후보.",
  "- FURNITURE_IDENTITY.json : 향후 Forge 가구 모드 데이터베이스용 JSON 구조.",
  "- reference_previews/ : 기존 완성형 원본 타일 이미지 357개 그대로 복사.",
@@ -279,10 +279,10 @@ def main():
  img{width:100%;height:230px;object-fit:contain;background:#e5edf2}h2{font-size:16px}
  p{font-size:12px;line-height:1.45}code{overflow-wrap:anywhere}
  </style></head><body><header><h1>좀보이드 로즈우드 가구 정체 목록</h1>
- <p>79개 가구 이름 / 357개 명명 스타일 / 362개 원본 출처별 스타일 / 1347개 원본 타일 기록.
+ <p>79개 가구 이름 / 357개 명명 스타일 / 363개 원본 출처별 스타일 / 1347개 원본 타일 기록.
  이것은 최종 고유 3D 디자인 수가 아니며, 별도로 다칸·방향·원본 3D 검증이 필요함.</p>
  <nav><input id="search" placeholder="가구 이름·스타일·타일셋 검색"><select id="family"><option value="">가구 전체</option></select>
- <select id="filter"><option value="">모든 상태</option><option value="cross">타일셋 중복 5종</option>
+ <select id="filter"><option value="">모든 상태</option><option value="cross">타일셋 중복 6종</option>
  <option value="multi">여러 타일 조립</option><option value="no3d">3D 바인딩 없음</option></select><span id="count"></span></nav></header><main id="cards"></main>
  <script>let rows=__DATA__,search=document.getElementById('search'),fam=document.getElementById('family'),filter=document.getElementById('filter'),cards=document.getElementById('cards'),count=document.getElementById('count');
  let esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
