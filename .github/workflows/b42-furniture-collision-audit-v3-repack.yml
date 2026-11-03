@@ -1,0 +1,55 @@
+name: Repack source-collision audit ZIP after manual sprite comparison notes
+on:
+  push:
+    branches: [work/pz-b42-furniture-identity-collision-audit-v3-20261103]
+    paths: [.github/workflows/b42-furniture-collision-audit-v3-repack.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  repack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/collision_review_v3/
+      - name: Regenerate archive with latest source-verified README
+        run: |
+          python3 - <<'PY'
+          import json,zipfile
+          from pathlib import Path
+          p=Path("analysis/furniture_full_b42/2026-11-03/collision_review_v3")
+          z=p/"PZ_B42_FURNITURE_COLLISION_AUDIT_V3.zip"
+          dst=p/"audit_repacked.tmp.zip"
+          note=(p/"README_KO.md").read_bytes()
+          assert b"Wooden Bench" in note
+          with zipfile.ZipFile(z,"r") as src,zipfile.ZipFile(dst,"w") as result:
+            for f in src.infolist():
+              if f.filename=="README_KO.md":
+                content=note
+              else:
+                content=src.read(f.filename)
+              result.writestr(f,content,compress_type=zipfile.ZIP_DEFLATED,compresslevel=5)
+          dst.replace(z)
+          with zipfile.ZipFile(z,"r") as check:
+            assert check.testzip() is None
+            assert check.read("README_KO.md")==note
+            assert len([x for x in check.namelist() if x.startswith("source_sprite_crops/") and x.endswith(".webp")])==758
+            assert "PZ_B42_FURNITURE_IDENTITY_AUDIT.sqlite" in check.namelist()
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["collision_groups"]==129
+          assert m["actual_original_sprite_crops"]==758
+          print("REPACK_758_ORIGINAL_SPRITES_WITH_BENCH_VISUAL_REVIEW_SUCCESS",z.stat().st_size)
+          PY
+      - name: Commit final archive with Wooden Bench direct visual review
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-03/collision_review_v3/PZ_B42_FURNITURE_COLLISION_AUDIT_V3.zip
+          git commit -m 'docs(furniture): include original Wooden Bench N/W visual evidence and 58 facing-subclass review in 129-group audit archive'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
