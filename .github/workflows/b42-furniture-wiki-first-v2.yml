@@ -1,0 +1,90 @@
+name: Build B42 all furniture wiki-first registry with exact tile source evidence
+on:
+  push:
+    branches: [work/pz-b42-wiki-first-furniture-registry-v2-20261103]
+    paths:
+      - .github/workflows/b42-furniture-wiki-first-v2.yml
+      - scripts/build_b42_wiki_first_furniture_registry.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/PZ_B42_FULL_FURNITURE_DB.zip
+            /pzwiki_furniture/2026-11-03/furniture_1268.csv
+            /scripts/build_b42_wiki_first_furniture_registry.py
+      - name: Build source-preserving wiki-first registry
+        run: |
+          python3 -m py_compile scripts/build_b42_wiki_first_furniture_registry.py
+          python3 -u scripts/build_b42_wiki_first_furniture_registry.py
+      - name: Validate entire source preservation, evidence statuses, and ZIP
+        run: |
+          python3 - <<'PY'
+          import csv,json,sqlite3,zipfile,hashlib
+          from pathlib import Path
+          root=Path("analysis/furniture_full_b42/2026-11-03/wiki_first_v2")
+          m=json.loads((root/"MANIFEST.json").read_text("utf8"))
+          assert m["wiki_list_rows"]==1268
+          assert m["source_only_groups"]==963
+          assert m["total_registry_entries"]==2231
+          assert m["wiki_items_with_original_source_id"]==1257
+          assert m["wiki_items_without_original_source_id"]==11
+          assert m["original_source_groups_linked_to_at_least_one_wiki_row"]==889
+          assert m["original_tiledef_unique_keys"]==61418
+          assert m["original_tiledef_property_rows"]==195265
+          assert m["original_furniture_candidate_tile_keys"]==8219
+          assert m["actual_in_game_loot_rules_loaded"]==0
+          assert m["same_game_object_composition_certified_count"]==0
+          assert m["minecraft_implementation_selected"] is False
+          conn=sqlite3.connect(root/"PZ_B42_FURNITURE_REGISTRY_WIKI_FIRST.sqlite")
+          assert conn.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          def count(table):return conn.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]
+          assert count("source_slots")==73644
+          assert count("source_attributes")==195265
+          assert count("wiki_furniture")==1268
+          assert count("furniture_tile")==8219
+          assert count("registry_entry")==2231
+          assert count("registry_item_rule_source")==0
+          assert count("future_minecraft_implementation")==0
+          assert count("future_item_distribution")==0
+          assert count("future_map_placement")==0
+          assert count("registry_entry WHERE source_system='WIKI'")==1268
+          assert count("registry_entry WHERE source_system='B42_SOURCE_ONLY'")==963
+          assert count("registry_entry WHERE minecraft_implementation!='UNDECIDED'")==0
+          assert count("registry_entry WHERE spatial_object_identity_verified!=0")==0
+          def read(n):
+           with (root/n).open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          reg=read("WIKI_FIRST_ALL_CATALOG_ENTRIES.csv")
+          tiles=read("FURNITURE_ENTRY_ALL_LINKED_TILE_IDS.csv")
+          assert len(reg)==2231
+          assert len(tiles)==count("registry_entry_tile")
+          assert len({x["entry_id"] for x in reg})==2231
+          assert set(x["evidence"] for x in tiles)<={
+           "EXACT_WIKI_IMAGE_SPRITE_KEY",
+           "SAME_TILEDEF_NAME_STYLE_SOURCE_GROUP_UNCONFIRMED",
+           "SOURCE_ONLY_TILEDEF_GROUP"}
+          conn.close()
+          with zipfile.ZipFile(root/"B42_WIKI_FIRST_FURNITURE_REGISTRY.zip") as z:
+           assert z.testzip() is None
+           assert "PZ_B42_FURNITURE_REGISTRY_WIKI_FIRST.sqlite" in z.namelist()
+          print("WIKI_FIRST_DATABASE_FULL_VALIDATION_SUCCESS",m)
+          PY
+      - name: Commit normalized registry database ZIP and evidence CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-03/wiki_first_v2/*.csv
+          git add --sparse analysis/furniture_full_b42/2026-11-03/wiki_first_v2/MANIFEST.json
+          git add --sparse analysis/furniture_full_b42/2026-11-03/wiki_first_v2/README_KO.md
+          git add --sparse analysis/furniture_full_b42/2026-11-03/wiki_first_v2/B42_WIKI_FIRST_FURNITURE_REGISTRY.zip
+          git commit -m 'db(b42): 1268 documented Wiki entries plus 963 source-only groups with exact/expanded tile links, parts and storage'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
