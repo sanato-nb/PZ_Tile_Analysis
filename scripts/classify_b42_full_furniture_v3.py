@@ -75,7 +75,7 @@ def main():
   gkeys[x["group_id"]].add(x["source_key"].casefold())
  assert len(bygroup)==889
  conflicts=[];ct=Counter();conflicted=set()
- for x in select(c,"SELECT group_id FROM registry_group_conflict"):
+ for x in select(c,"SELECT source_group_id AS group_id FROM registry_group_conflict"):
   g=x["group_id"];conflicted.add(g)
   members=sorted(bygroup[g])
   per={w:sorted(ids[w]&gkeys[g]) for w in members}
