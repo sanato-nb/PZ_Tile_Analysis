@@ -85,3 +85,7 @@ python3 scripts/restore_latest_unified.py PZ_Tile_Analysis_latest.sqlite
 - [AGENTS.md](AGENTS.md): AI 작업 규칙의 역사적 세부 내용. 최신 상태 판단은 **v240 매니페스트와 [PROJECT_STATE.json](PROJECT_STATE.json)** 우선.
 
 이번 저장소 정리는 **문서·최신 포인터·복원 도구를 정돈하는 비파괴 작업**입니다. 이전 검수 파일, Git 브랜치, GitHub Actions 이력은 임의 삭제하지 않습니다.
+
+## PZwiki 가구 참고 목록
+
+[2026-11-03 위키 전체 목록과 다른 채팅용 안내](pzwiki_furniture/2026-11-03/README.md): 12개 분류·48개 표·1,268행의 CSV, 정리본, 원문 추출 JSON, ZIP입니다. 위키 등재 범위이며 게임 전체 가구 또는 공식 타일 ID 매핑을 보장하지 않습니다. 기존 타일 DB와는 아직 병합하지 않았습니다.
