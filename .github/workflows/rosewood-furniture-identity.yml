@@ -1,0 +1,71 @@
+name: Build Project Zomboid Rosewood source-grounded furniture identity catalog
+on:
+  push:
+    branches: [work/rosewood-furniture-identity-catalog-20261103]
+    paths: [.github/workflows/rosewood-furniture-identity.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  catalog:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_rosewood_furniture_identity_catalog.py
+            /analysis/rosewood_furniture/2026-10-31/ALL_FURNITURE_TILE_IDS.csv
+            /analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1/FURNITURE_MODELS_DEDUP_NAME_GROUP.csv
+            /analysis/rosewood_furniture/2026-10-31/furniture_dedup_v1/UNNAMED_ASSET_KEYS_NOT_VALIDATED_MODELS.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_357_COMPLETE_FURNITURE_3D_CROSSWALK.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/ALL_SOURCE_SPRITE_TO_VIEWPOINT_3D_BINDINGS.csv
+            /analysis/rosewood_furniture/2026-10-31/complete_furniture_visual_3d_v1/previews/
+      - name: Verify source script then build furniture hierarchy without changing old files
+        run: |
+          python3 -m py_compile scripts/build_rosewood_furniture_identity_catalog.py
+          python3 -u scripts/build_rosewood_furniture_identity_catalog.py
+      - name: Assert completeness, facing template count, genuine source definitions and HTML archive
+        run: |
+          python3 - <<'PY'
+          import json,csv,zipfile
+          from pathlib import Path
+          p=Path("analysis/rosewood_furniture/2026-10-31/furniture_identity_catalog_20261103")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["style_labels"]==357
+          assert m["broad_furniture_names"]==79
+          assert m["source_tile_records"]==1347
+          assert m["named_source_tileset_variants"]==362
+          assert m["cross_tileset_overlap_candidates"]==5
+          assert m["physical_unique_designs"]=="NOT_CERTIFIED"
+          assert m["game_runtime_verified"]==0
+          assert m["source_files_overwritten"] is False
+          def read(n):
+           with (p/n).open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          names=read("CATALOG_357_STYLES.csv")
+          sources=read("SOURCE_SPRITES_1347.csv")
+          directions=read("ORIENTATION_GRID_TEMPLATES.csv")
+          cross=read("SAME_NAME_MULTIPLE_TILESETS_5.csv")
+          assert len(names)==357 and len(sources)==1347 and len(cross)==5
+          assert len(directions)==m["oriented_source_templates"]
+          assert len({x["style_id"] for x in names})==357
+          assert all(x["physical_design_identity_verified"]=="NO" for x in names)
+          assert {x["CustomName"]+"/"+x["GroupName"] for x in cross}=={
+           "Wardrobe/Oak","Counter/Wooden Corner","Table/Large Dark Oak","Bench/Sturdy","Chair/Modern White"}
+          assert len(list((p/"reference_previews").glob("*.png")))==357
+          with zipfile.ZipFile(p/"ROSEWOOD_FURNITURE_IDENTITY_CATALOG.zip") as z:
+           assert z.testzip() is None
+           assert "INDEX.html" in z.namelist()
+           assert len([n for n in z.namelist() if n.startswith("reference_previews/") and n.endswith(".png")])==357
+          print("VALID_IDENTITY_SOURCE_CATALOG",m)
+          PY
+      - name: Commit catalog CSV JSON and original image reference archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_identity_catalog_20261103/
+          git commit -m "catalog(rosewood): 79 families 357 named styles 362 tileset variants 1347 original sprites five cross-tileset exceptions"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
