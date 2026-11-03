@@ -2,7 +2,7 @@ name: Build Project Zomboid Rosewood source-grounded furniture identity catalog
 on:
   push:
     branches: [work/rosewood-furniture-identity-catalog-20261103]
-    paths: [.github/workflows/rosewood-furniture-identity.yml]
+    paths: [.github/workflows/rosewood-furniture-identity.yml, scripts/build_rosewood_furniture_identity_catalog.py]
   workflow_dispatch:
 permissions:
   contents: write
