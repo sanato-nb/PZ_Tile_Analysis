@@ -61,6 +61,10 @@ def main():
  pixel_crop_sha256 TEXT,cropped INTEGER,PRIMARY KEY(group_id,source_key));
  CREATE TABLE v6_all129_source_overlap(group_id TEXT PRIMARY KEY,overlap_class TEXT,
  png_manually_reviewed INTEGER,exact_source_ID_audited INTEGER,game_identity_confirmed INTEGER DEFAULT 0);
+ CREATE TABLE v6_manual_special_image_review(group_id TEXT PRIMARY KEY,
+  original_png_visual_class TEXT,observed_image_evidence_ko TEXT,
+  safe_furniture_handling_ko TEXT,comparison_sheet TEXT,
+  manually_viewed INTEGER NOT NULL DEFAULT 1,game_moveable_id_verified INTEGER DEFAULT 0);
  """)
  summaries=[];links=[];alias=[];pix=[];properties=[];names=Counter();seenids=set();seenkeys=set()
  for i,g in enumerate(selected,1):
@@ -167,13 +171,52 @@ def main():
  normalized_name_matches=sum(len({tidy(wiki[id]["가구명_원문"]) for id in g["wiki_ids"].split("|")})==1 for g in summaries)
  print("NORMALIZED_WIKI_NAME_GROUPS",normalized_name_matches,71-normalized_name_matches,flush=True)
  assert normalized_name_matches==64
+
+ # Independently opened and compared these seven original v6 contact sheets.
+ special=[
+  ("FUR-06E6E871342C9D52","TWO_FURNITURE_STYLE_VARIANTS",
+   "Fancy(24)와 Birch(26) Counter는 서로 다른 문양 및 전면 형태. 각 모델이 Tables/Storage에 반복 등재됨.",
+   "24와 26은 다른 외형으로 유지하고 동일 이미지 ID를 참조하는 위키 2개 카테고리만 별칭 연결."),
+  ("FUR-67816C1AB25E36E5","SAME_SPRITE_CROSS_CATEGORY",
+   "Small Drying Rack와 Small Leather Drying Rack는 원본 74번의 동일한 작은 목제 건조대 이미지.",
+   "정확한 동일 스프라이트 별칭이며 게임 내부 가구 오브젝트 ID 동일 여부는 미확정."),
+  ("FUR-6C4B8187400B2056","SAME_FOUR_PIECES_CROSS_CATEGORY",
+   "Large Drying Rack (variant 2)와 Large Plant Drying Rack는 동일한 원본 16~19 네 스프라이트를 순서대로 공유.",
+   "네 부품과 여러 시점 후보를 보존하고 두 위키 항목은 한 이미지 집합의 별칭으로 기록."),
+  ("FUR-84CF173EE6811CE1","SAME_FOUR_PIECES_CROSS_CATEGORY",
+   "Large Drying Rack와 Large Leather Drying Rack는 원본 80~83 목제 건조대 스프라이트 네 장을 공유.",
+   "원본 부품을 유지하면서 Storage/Workstations 분류를 모두 보존."),
+  ("FUR-964C3F9F2B73823D","SAME_TWO_PIECES_CROSS_CATEGORY",
+   "Medium Drying Rack와 Medium Leather Drying Rack는 두 장의 동일한 삼각 목제 프레임 이미지(108,109)를 공유.",
+   "건조대 모양 및 각도 변형을 보존하고 위키 이름 차이만 별칭 처리."),
+  ("FUR-EED56527E61B784D","IMAGE_TOO_FAINT_TO_RESOLVE_TYPE",
+   "White Fossoil Floor와 Out of Gas Sign는 원본 38번 동일 이미지이며 접촉시트에 희미한 흰색 무늬만 보여 간판인지 바닥인지 확신할 수 없음.",
+   "이름/물체 종류 충돌로 보류. 원본 Sprite ID와 픽셀 해시만 확정하고 TMX 및 원본 정의 추가 확인 필요."),
+  ("FUR-EF44D302C10F9346","SAME_TWO_PIECES_CROSS_CATEGORY",
+   "Small Drying Rack (variant 2)와 Small Plant Drying Rack는 원본 0,1 두 장의 같은 프레임 그림을 공유.",
+   "별칭 관계만 기록하며 완성 오브젝트와 방향 확정은 원본 배치 근거 보완.")
+ ]
+ assert len(special)==7
+ special_set={z[0] for z in special}
+ manual_rows=[]
+ summarymap={v["group_id"]:v for v in summaries}
+ for gid,kind,observation,safe_handling in special:
+  contact=summarymap[gid]["original_source_png_contact_sheet"]
+  c.execute("INSERT INTO v6_manual_special_image_review VALUES(?,?,?,?,?,1,0)",
+   (gid,kind,observation,safe_handling,contact))
+  manual_rows.append(dict(source_group=gid,visual_relation=kind,
+   direct_original_PNG_observation=observation,safe_map_conversion_handling=safe_handling,
+   source_contact_sheet=contact,manual_contact_image_opened="YES",
+   game_object_identity_certified="NO"))
+ save(O/"V6_7_SPECIAL_MANUAL_SOURCE_PNG_REVIEWS.csv",manual_rows)
  old={x["source_group_id"] for x in rows(c,"SELECT source_group_id FROM v5_manual_visual_group_review")}
  for g in collision:
   c.execute("INSERT INTO v6_all129_source_overlap VALUES(?,?,?,?,0)",
-   (g["group_id"],g["overlap_class"],int(g["group_id"] in old),1))
+   (g["group_id"],g["overlap_class"],int(g["group_id"] in old or g["group_id"] in special_set),1))
  c.commit()
  assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
- assert [count(c,t) for t in ("v6_shared_group","v6_wiki_alias","v6_original_image_cell","v6_all129_source_overlap","v6_wiki_listing_properties")]==[71,178,89,129,146]
+ assert [count(c,t) for t in ("v6_shared_group","v6_wiki_alias","v6_original_image_cell","v6_all129_source_overlap","v6_wiki_listing_properties","v6_manual_special_image_review")]==[71,178,89,129,146,7]
+ assert c.execute("SELECT SUM(png_manually_reviewed) FROM v6_all129_source_overlap").fetchone()[0]==65
  assert count(c,"source_attributes")==195265 and count(c,"wiki_furniture")==1268
  assert count(c,"future_item_distribution")==count(c,"future_minecraft_implementation")==0
  save(O/"V6_71_GROUP_RESULTS.csv",summaries);save(O/"V6_178_WIKI_TO_TILE_REFERENCES.csv",links)
@@ -183,7 +226,7 @@ def main():
   wiki_crosslisted_rows=146,unique_original_sprite_keys=89,exact_sprite_references=178,
   alias_keyset_clusters=len(alias),categories=dict(names),wiki_capacity_rows_in_storage=66,wiki_table_rows_without_capacity=57,
   new_PNG_contact_sheets=71,new_source_PNG_crops=89-len(missing_source_crops),missing_source_crops=len(missing_source_crops),missing_source_tile_ids=missing_source_crops,
-  direct_manual_visual_group_reviews_added_v6=0,
+  direct_manual_visual_group_reviews_added_v6=7,total_collision_groups_with_direct_PNG_visual_review=65,
   source_attributes_preserved=195265,original_wiki_rows_preserved=1268,
   game_moveable_identity_newly_verified=0,
   item_distribution_rules_imported=0,minecraft_implementation_selected=False,
@@ -194,7 +237,7 @@ def main():
  "서로 다른 Wiki 목록 146행이 정확한 원본 스프라이트 89개를 공유해 참조하는 것을 확인. 71개 그룹 모두 위키 상 분류가 둘 이상이고, 이 중 63개는 기본 이름도 같아.",
  "기존 58개 원본 PNG 직접 시각 검수 결과는 v5 DB에 계승. 이번에는 남은 71그룹의 원본 스프라이트 89개를 원본 PNG에서 실제 추출하고 각 그룹 접촉시트 71장을 생성했어.",
  "동일한 TileSet/Local ID 집합이므로 PZwiki에서 중복 등재한 항목을 여러 모델로 중복 제작하지 않도록 Wiki alias를 별도 테이블로 기록했어. 게임 내부 하나의 Moveable 오브젝트임은 미확정.",
- "White Fossoil Floor 와 Out of Gas Sign의 같은 ID 사용은 이름/분류 충돌 검토 대상으로, 자동 이름 확정하지 않음.",
+ "White Fossoil Floor 와 Out of Gas Sign의 같은 ID 사용은 이름/분류 충돌 검토 대상으로, 원본 이미지가 지나치게 희미해 자동 이름 확정하지 않음. 이번 v6 접촉시트 7그룹을 직접 열람한 별도 관찰 기록은 V6_7_SPECIAL_MANUAL_SOURCE_PNG_REVIEWS.csv 및 SQLite의 v6_manual_special_image_review 테이블에 포함.",
  "SOURCE ONLY 963그룹의 메타데이터 분류는 v3 자료를 보존하지만 이미지 전수 개별 검수는 아직 시작하지 않았어.",
  "원본 Lua의 아이템 분포와 실제 TMX 가구 인스턴스, Minecraft Block/Entity 구현 방식도 여전히 미수집/미정."
  ])+"\n",encoding="utf8")
