@@ -251,7 +251,7 @@ def main():
  "4. 이름 없는 물체는 최종 목록에 별도 추가 검증. 현재 357에 포함되지 않음.",
  "5. 확정된 디자인별로 Minecraft용 1개 모델 + facing/blockstate + 필요한 색상·재질 변형 설계.",
  "## 하지 않은 일",
- "357종을 모두 동일 디자인이라고 단정하지 않았고 3D모드 OBJ를 재배포하지 않았어. TMX, TileDef, PNG, 이전 매칭 결과의 어떤 원본도 변경하지 않았어."]
+ "357종을 모두 동일 디자인이라고 단정하지 않았고 3D모드 OBJ를 재배포하지 않았어. TMX, TileDef, PNG, 이전 매칭 결과의 어떤 원본도 변경하지 않았어."])
  (O/"README_KO.md").write_text("\n\n".join(txt)+"\n",encoding="utf8")
  md="# 좀보이드 원본 가구 357종 이미지 도감\n\n원본 PNG 조립 참고 이미지이며 Minecraft 가구 모델이 아니야. [검증 기준](README_KO.md)\n\n"
  for name in sorted(cat,key=lambda x:(-len(cat[x]),x.casefold())):
