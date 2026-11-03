@@ -1,0 +1,95 @@
+name: Build B42 wiki cross-category source tile aliases v6
+on:
+  push:
+    branches: [work/pz-b42-duplicate-wiki-sprites-v6-20261104]
+    paths:
+      - .github/workflows/b42-furniture-alias-v6.yml
+      - scripts/build_b42_furniture_alias_v6.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/full_visual_review_v5/B42_ALL_58_FURNITURE_VISUAL_REVIEW_V5.zip
+            /analysis/furniture_full_b42/2026-11-03/classification_v3/WIKI_SHARED_129_GROUP_ANALYSIS.csv
+            /pzwiki_furniture/2026-11-03/furniture_1268.csv
+            /scripts/build_b42_furniture_alias_v6.py
+            /Tiles/2x/appliances_com_01.png
+            /Tiles/2x/appliances_laundry_01.png
+            /Tiles/2x/carpentry_02.png
+            /Tiles/2x/crafted_02.png
+            /Tiles/2x/crafted_05.png
+            /Tiles/2x/fixtures_counters_01.png
+            /Tiles/2x/location_entertainment_theatre_01.png
+            /Tiles/2x/location_hospitality_sunstarmotel_02.png
+            /Tiles/2x/location_restaurant_bar_01.png
+            /Tiles/2x/location_restaurant_pie_01.png
+            /Tiles/2x/location_restaurant_seahorse_01.png
+            /Tiles/2x/location_restaurant_spiffos_01.png
+            /Tiles/2x/location_shop_fossoil_01.png
+            /Tiles/2x/location_shop_gas2go_01.png
+            /Tiles/2x/location_shop_generic_01.png
+            /Tiles/2x/location_shop_zippee_01.png
+            /Tiles/2x/location_trailer_02.png
+            /Tiles/2x/vegetation_drying_01.png
+            /Tiles/2x/vegetation_farm_01.png
+      - name: Install Pillow and compile source
+        run: |
+          python3 -m pip install --user Pillow==11.3.0
+          python3 -m py_compile scripts/build_b42_furniture_alias_v6.py
+      - name: Reconstruct 71 shared Wiki groups with source PNG pixel evidence
+        run: python3 -u scripts/build_b42_furniture_alias_v6.py
+      - name: Assert source preservation and no invented identities
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile
+          from pathlib import Path
+          d=Path("analysis/furniture_full_b42/2026-11-04/shared_wiki_v6")
+          m=json.loads((d/"MANIFEST.json").read_text(encoding="utf-8"))
+          assert m["v5_original_PNG_direct_visual_groups"]==58
+          assert m["v6_cross_category_groups_ID_audited"]==71
+          assert m["all129_collision_groups_source_ID_checked"]==129
+          assert m["wiki_crosslisted_rows"]==146
+          assert m["unique_original_sprite_keys"]==89
+          assert m["exact_sprite_references"]==178
+          assert m["new_PNG_contact_sheets"]==71
+          assert m["source_attributes_preserved"]==195265
+          assert m["original_wiki_rows_preserved"]==1268
+          assert m["direct_manual_visual_group_reviews_added_v6"]==7
+          assert m["total_collision_groups_with_direct_PNG_visual_review"]==65
+          assert m["wiki_capacity_rows_in_storage"]==66
+          assert m["wiki_table_rows_without_capacity"]==57
+          assert m["game_moveable_identity_newly_verified"]==0
+          assert not m["minecraft_implementation_selected"]
+          with sqlite3.connect(d/"B42_FURNITURE_ALIASES_V6.sqlite") as db:
+           assert db.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+           for name,size in {"wiki_furniture":1268,"v5_manual_visual_group_review":58,
+             "v6_shared_group":71,"v6_wiki_alias":178,"v6_wiki_listing_properties":146,"v6_manual_special_image_review":7,
+             "v6_original_image_cell":89,"v6_all129_source_overlap":129,
+             "source_attributes":195265,"source_slots":73644}.items():
+            found=db.execute("SELECT COUNT(*) FROM "+name).fetchone()[0]
+            assert found==size,(name,found,size)
+           assert db.execute("SELECT COUNT(*) FROM future_item_distribution").fetchone()[0]==0
+           assert db.execute("SELECT COUNT(*) FROM future_minecraft_implementation").fetchone()[0]==0
+          with zipfile.ZipFile(d/"PZ_B42_FURNITURE_WIKI_ALIASES_V6.zip") as z:
+           assert z.testzip() is None
+           assert "B42_FURNITURE_ALIASES_V6.sqlite" in z.namelist()
+           assert sum(x.startswith("ORIGINAL_71_IMAGES/") and x.endswith(".jpg") for x in z.namelist())==71
+          print("B42_WIKI_ALIASES_V6_VALIDATED",m)
+          PY
+      - name: Commit source-based SQLite and PNG evidence bundle
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/shared_wiki_v6/
+          git commit -m 'db(b42): 71 cross-category duplicate groups and 89 original sprite ID evidence'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
