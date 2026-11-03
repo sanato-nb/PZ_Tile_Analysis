@@ -6,7 +6,7 @@
 
 동일한 TileSet/Local ID 집합이므로 PZwiki에서 중복 등재한 항목을 여러 모델로 중복 제작하지 않도록 Wiki alias를 별도 테이블로 기록했어. 게임 내부 하나의 Moveable 오브젝트임은 미확정.
 
-White Fossoil Floor 와 Out of Gas Sign의 같은 ID 사용은 이름/분류 충돌 검토 대상으로, 자동 이름 확정하지 않음.
+White Fossoil Floor 와 Out of Gas Sign의 같은 ID 사용은 이름/분류 충돌 검토 대상으로, 원본 이미지가 지나치게 희미해 자동 이름 확정하지 않음. 이번 v6 접촉시트 7그룹을 직접 열람한 별도 관찰 기록은 V6_7_SPECIAL_MANUAL_SOURCE_PNG_REVIEWS.csv 및 SQLite의 v6_manual_special_image_review 테이블에 포함.
 
 SOURCE ONLY 963그룹의 메타데이터 분류는 v3 자료를 보존하지만 이미지 전수 개별 검수는 아직 시작하지 않았어.
 
