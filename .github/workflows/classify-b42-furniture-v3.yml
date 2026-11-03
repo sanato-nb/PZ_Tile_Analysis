@@ -1,0 +1,69 @@
+name: Classify source-only 963 B42 furniture groups and audit Wiki overlaps
+on:
+  push:
+    branches: [work/pz-b42-furniture-classification-v3-20261103]
+    paths:
+      - .github/workflows/classify-b42-furniture-v3.yml
+      - scripts/classify_b42_full_furniture_v3.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  classify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/wiki_first_v2/B42_WIKI_FIRST_FURNITURE_REGISTRY.zip
+            /scripts/classify_b42_full_furniture_v3.py
+      - name: Compile source and classify original database
+        run: |
+          python3 -m py_compile scripts/classify_b42_full_furniture_v3.py
+          python3 -u scripts/classify_b42_full_furniture_v3.py
+      - name: Validate complete source, collisions, and no unsupported identity claims
+        run: |
+          python3 - <<'PY'
+          import csv,sqlite3,json,zipfile
+          from pathlib import Path
+          p=Path("analysis/furniture_full_b42/2026-11-03/classification_v3")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["source_only_classified"]==963
+          assert m["wiki_shared_groups"]==129
+          assert m["tile_relations_checked"]==14195
+          assert sum(m["source_only_by_class"].values())==963
+          assert sum(m["shared_group_by_overlap"].values())==129
+          assert sum(m["relation_by_evidence"].values())==14195
+          assert m["identity_certifications_added"]==0
+          assert m["auto_merges_performed"]==0
+          assert not m["lua_loot_rules_imported"] and not m["minecraft_implementation_selected"]
+          db=sqlite3.connect(p/"FURNITURE_CLASSIFIED_V3.sqlite")
+          assert db.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          def count(t):return db.execute("SELECT COUNT(*) FROM "+t).fetchone()[0]
+          assert count("source_slots")==73644
+          assert count("source_attributes")==195265
+          assert count("registry_entry")==2231
+          assert count("wiki_furniture")==1268
+          assert count("v3_source_taxonomy")==963
+          assert count("v3_wiki_overlap")==129
+          assert count("v3_tile_link")==14195
+          assert count("future_item_distribution")==0
+          assert count("future_map_placement")==0
+          assert count("future_minecraft_implementation")==0
+          db.close()
+          with zipfile.ZipFile(p/"B42_FURNITURE_CLASSIFICATION_V3.zip") as z:
+           assert z.testzip() is None
+           assert "FURNITURE_CLASSIFIED_V3.sqlite" in z.namelist()
+          print("CLASSIFICATION_V3_VERIFIED",m)
+          PY
+      - name: Save classified SQLite archive and source evidence reports
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-03/classification_v3/
+          git commit -m 'classify(b42): audit 963 source-only groups, 129 Wiki name collisions and 14195 sprite evidence links'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
