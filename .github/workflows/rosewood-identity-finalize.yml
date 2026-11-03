@@ -1,0 +1,49 @@
+name: Finalize Rosewood furniture source identity catalog archive
+on:
+  push:
+    branches: [work/rosewood-furniture-identity-catalog-20261103]
+    paths: [.github/workflows/rosewood-identity-finalize.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/rosewood_furniture/2026-10-31/furniture_identity_catalog_20261103/
+      - name: Refresh archive after corrected six-risk review notes
+        run: |
+          python3 - <<'PY'
+          import zipfile,json,csv
+          from pathlib import Path
+          d=Path("analysis/rosewood_furniture/2026-10-31/furniture_identity_catalog_20261103")
+          assert len(list((d/"reference_previews").glob("*.png")))==357
+          m=json.loads((d/"MANIFEST.json").read_text(encoding="utf8"))
+          assert m["named_source_tileset_variants"]==363
+          assert m["cross_tileset_overlap_candidates"]==6
+          text=(d/"README_KO.md").read_text(encoding="utf8")
+          assert "6개 (기존 집계의 5개" in text
+          p=d/"ROSEWOOD_FURNITURE_IDENTITY_CATALOG.zip"
+          with zipfile.ZipFile(p,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+           for f in sorted(d.rglob("*")):
+            if f.is_file() and f!=p:z.write(f,f.relative_to(d))
+          with zipfile.ZipFile(p) as z:
+           assert z.testzip() is None
+           assert len([x for x in z.namelist() if x.startswith("reference_previews/") and x.endswith(".png")])==357
+           assert "6개 (기존 집계의 5개" in z.read("README_KO.md").decode("utf8")
+          print("FINAL_ARCHIVE_COMPLETE",p.stat().st_size)
+          PY
+      - name: Commit final reviewed source bundle
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_identity_catalog_20261103/ROSEWOOD_FURNITURE_IDENTITY_CATALOG.zip
+          git commit -m "release(rosewood): source identity catalog ZIP with 357 original previews and six source collision reviews"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
