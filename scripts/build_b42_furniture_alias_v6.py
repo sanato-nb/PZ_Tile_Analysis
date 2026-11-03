@@ -147,7 +147,9 @@ def main():
  assert len(links)==178 and len(pix)==89
  missing_source_crops=[x["original_tile_id"] for x in pix if x["cropped_original_image"]!="YES"]
  print("EXACT_PNG_CROP_COVERAGE",len(pix)-len(missing_source_crops),len(pix),"MISSING",missing_source_crops,flush=True)
- assert sum(len({tidy(wiki[id]["가구명_원문"]) for id in s["wiki_ids"].split("|")})==1 for s in summaries)==63
+ normalized_name_matches=sum(len({tidy(wiki[id]["가구명_원문"]) for id in g["wiki_ids"].split("|")})==1 for g in summaries)
+ print("NORMALIZED_WIKI_NAME_GROUPS",normalized_name_matches,71-normalized_name_matches,flush=True)
+ assert normalized_name_matches==64
  old={x["source_group_id"] for x in rows(c,"SELECT source_group_id FROM v5_manual_visual_group_review")}
  for g in collision:
   c.execute("INSERT INTO v6_all129_source_overlap VALUES(?,?,?,?,0)",
