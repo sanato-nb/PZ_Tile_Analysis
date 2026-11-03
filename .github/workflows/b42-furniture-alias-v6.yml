@@ -63,13 +63,16 @@ jobs:
           assert m["new_PNG_contact_sheets"]==71
           assert m["source_attributes_preserved"]==195265
           assert m["original_wiki_rows_preserved"]==1268
-          assert m["direct_manual_visual_group_reviews_added_v6"]==0
+          assert m["direct_manual_visual_group_reviews_added_v6"]==7
+          assert m["total_collision_groups_with_direct_PNG_visual_review"]==65
+          assert m["wiki_capacity_rows_in_storage"]==66
+          assert m["wiki_table_rows_without_capacity"]==57
           assert m["game_moveable_identity_newly_verified"]==0
           assert not m["minecraft_implementation_selected"]
           with sqlite3.connect(d/"B42_FURNITURE_ALIASES_V6.sqlite") as db:
            assert db.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
            for name,size in {"wiki_furniture":1268,"v5_manual_visual_group_review":58,
-             "v6_shared_group":71,"v6_wiki_alias":178,
+             "v6_shared_group":71,"v6_wiki_alias":178,"v6_wiki_listing_properties":146,"v6_manual_special_image_review":7,
              "v6_original_image_cell":89,"v6_all129_source_overlap":129,
              "source_attributes":195265,"source_slots":73644}.items():
             found=db.execute("SELECT COUNT(*) FROM "+name).fetchone()[0]
