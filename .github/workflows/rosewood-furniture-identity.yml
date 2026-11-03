@@ -37,8 +37,8 @@ jobs:
           assert m["style_labels"]==357
           assert m["broad_furniture_names"]==79
           assert m["source_tile_records"]==1347
-          assert m["named_source_tileset_variants"]==362
-          assert m["cross_tileset_overlap_candidates"]==5
+          assert m["named_source_tileset_variants"]==363
+          assert m["cross_tileset_overlap_candidates"]==6
           assert m["physical_unique_designs"]=="NOT_CERTIFIED"
           assert m["game_runtime_verified"]==0
           assert m["source_files_overwritten"] is False
@@ -47,13 +47,13 @@ jobs:
           names=read("CATALOG_357_STYLES.csv")
           sources=read("SOURCE_SPRITES_1347.csv")
           directions=read("ORIENTATION_GRID_TEMPLATES.csv")
-          cross=read("SAME_NAME_MULTIPLE_TILESETS_5.csv")
-          assert len(names)==357 and len(sources)==1347 and len(cross)==5
+          cross=read("SAME_NAME_MULTIPLE_TILESETS_6.csv")
+          assert len(names)==357 and len(sources)==1347 and len(cross)==6
           assert len(directions)==m["oriented_source_templates"]
           assert len({x["style_id"] for x in names})==357
           assert all(x["physical_design_identity_verified"]=="NO" for x in names)
           assert {x["CustomName"]+"/"+x["GroupName"] for x in cross}=={
-           "Wardrobe/Oak","Counter/Wooden Corner","Table/Large Dark Oak","Bench/Sturdy","Chair/Modern White"}
+           "Wardrobe/Oak","Counter/Wooden Corner","Table/Large Dark Oak","Bench/Sturdy","Chair/Modern White","Bed/Hospital"}
           assert len(list((p/"reference_previews").glob("*.png")))==357
           with zipfile.ZipFile(p/"ROSEWOOD_FURNITURE_IDENTITY_CATALOG.zip") as z:
            assert z.testzip() is None
