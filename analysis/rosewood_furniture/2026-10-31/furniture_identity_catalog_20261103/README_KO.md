@@ -42,7 +42,7 @@ Viewpoint 모델은 공개 3D모드의 참고 바인딩이지 공식 PZ 가구 i
 
 - SOURCE_SPRITES_1347.csv : 개별 타일마다 원본 정의 전체 속성 + 3D 모드 바인딩.
 
-- SAME_NAME_MULTIPLE_TILESETS_6.csv : 중복 통합의 근거 및 예외 5개.
+- SAME_NAME_MULTIPLE_TILESETS_6.csv : 중복 통합의 근거 및 예외 6개.
 
 - UNNAMED_CORE_ASSETS_NOT_IN_357.csv : 이름 없어 357종 목록에 아예 빠진 원본 후보.
 
@@ -54,7 +54,7 @@ Viewpoint 모델은 공개 3D모드의 참고 바인딩이지 공식 PZ 가구 i
 
 ## 다음 검수
 
-1. 동일 이름 다중 타일셋 5종 중 Counter Wooden Corner과 Table Large Dark Oak부터 시각 검증.
+1. 동일 이름 다중 타일셋 6종 중 Counter Wooden Corner과 Table Large Dark Oak부터 시각 검증.
 
 2. 같은 이름 다른 GroupName들이 실제 같은 형상이고 색상만 다른지 3D·PNG 대조.
 
