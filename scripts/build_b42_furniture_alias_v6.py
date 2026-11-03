@@ -112,6 +112,7 @@ def main():
      crop=im.crop((x,y,x+cw,y+ch));check=hashlib.sha256(crop.tobytes()).hexdigest()
    if crop is None:
     thumbs[key]=Image.new("RGB",(96,136),"#ffe7e7")
+    ImageDraw.Draw(thumbs[key]).text((5,12),"SOURCE PNG\nNOT FOUND",font=FS,fill="#a72835")
    else:
     scale=min(96/crop.width,136/crop.height,1.7)
     sz=(max(1,int(crop.width*scale)),max(1,int(crop.height*scale)))
@@ -144,7 +145,8 @@ def main():
    same_game_object_identity_verified="NO"))
  assert len(summaries)==71 and len(seenids)==146 and len(seenkeys)==89
  assert len(links)==178 and len(pix)==89
- assert all(x["cropped_original_image"]=="YES" for x in pix)
+ missing_source_crops=[x["original_tile_id"] for x in pix if x["cropped_original_image"]!="YES"]
+ print("EXACT_PNG_CROP_COVERAGE",len(pix)-len(missing_source_crops),len(pix),"MISSING",missing_source_crops,flush=True)
  assert sum(len({tidy(wiki[id]["가구명_원문"]) for id in s["wiki_ids"].split("|")})==1 for s in summaries)==63
  old={x["source_group_id"] for x in rows(c,"SELECT source_group_id FROM v5_manual_visual_group_review")}
  for g in collision:
@@ -161,7 +163,7 @@ def main():
   all129_collision_groups_source_ID_checked=129,
   wiki_crosslisted_rows=146,unique_original_sprite_keys=89,exact_sprite_references=178,
   alias_keyset_clusters=len(alias),categories=dict(names),
-  new_PNG_contact_sheets=71,new_source_PNG_crops=89,missing_source_crops=0,
+  new_PNG_contact_sheets=71,new_source_PNG_crops=89-len(missing_source_crops),missing_source_crops=len(missing_source_crops),missing_source_tile_ids=missing_source_crops,
   direct_manual_visual_group_reviews_added_v6=0,
   source_attributes_preserved=195265,original_wiki_rows_preserved=1268,
   game_moveable_identity_newly_verified=0,
