@@ -161,7 +161,7 @@ def main():
   multi_parts=sum(len(evid[r["wiki_id"]])>1 for r in rs)
   gridpositions=[e["SpriteGridPos"] for e in source_evidence if e["SpriteGridPos"]]
   grid="SOURCE_GRID_POS_PRESENT" if gridpositions else "NO_SOURCE_GRID_POS"
-  con.execute("INSERT INTO v5_family_review VALUES(?,?,?,?,?,?,?, ?,0)",
+  con.execute("INSERT INTO v5_family_review VALUES(?,?,?,?,?,?,?,0)",
    (fid,gid,f["family_name"],len(rs),connect(faces),grid,
     groups["functional_visual_scope"]))
   family_export.append(dict(family_id=fid,source_group_id=gid,normalized_name=f["family_name"],
