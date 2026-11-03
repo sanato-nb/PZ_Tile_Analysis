@@ -1,0 +1,91 @@
+name: Build source PNG contact sheets for 58 disjoint PZ wiki furniture groups
+on:
+  push:
+    branches: [work/pz-b42-furniture-disjoint-visual-families-v4-20261103]
+    paths:
+      - .github/workflows/b42-disjoint-visual-v4.yml
+      - scripts/build_b42_disjoint_visual_v4.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/classification_v3/B42_FURNITURE_CLASSIFICATION_V3.zip
+            /pzwiki_furniture/2026-11-03/furniture_1268.csv
+            /scripts/build_b42_disjoint_visual_v4.py
+            /Tiles/2x/carpentry_01.png
+            /Tiles/2x/carpentry_02.png
+            /Tiles/2x/crafted_01.png
+            /Tiles/2x/crafted_02.png
+            /Tiles/2x/fencing_01.png
+            /Tiles/2x/fixtures_windows_01.png
+            /Tiles/2x/floor_carpet_motif.png
+            /Tiles/2x/floors_interior_tilesandwood_01.png
+            /Tiles/2x/floors_rugs_01.png
+            /Tiles/2x/furniture_seating_indoor_03.png
+            /Tiles/2x/furniture_storage_02.png
+            /Tiles/2x/furniture_tables_high_01.png
+            /Tiles/2x/location_business_office_generic_01.png
+            /Tiles/2x/location_farm_accesories_01.png
+            /Tiles/2x/location_military_generic_01.png
+            /Tiles/2x/location_military_knox_01.png
+            /Tiles/2x/location_shop_mall_01.png
+            /Tiles/2x/rooftop_furniture.png
+            /Tiles/2x/street_decoration_01.png
+            /Tiles/2x/trash_01.png
+            /Tiles/2x/vegetation_farm_01.png
+            /Tiles/2x/vegetation_foliage_01.png
+            /Tiles/2x/vegetation_indoor_01.png
+            /Tiles/2x/vegetation_ornamental_01.png
+      - name: Install PNG crop dependency
+        run: python3 -m pip install --user Pillow==11.3.0
+      - name: Rebuild exact TileDef atlas-cell original PNG comparisons
+        run: |
+          python3 -m py_compile scripts/build_b42_disjoint_visual_v4.py
+          python3 -u scripts/build_b42_disjoint_visual_v4.py
+      - name: Validate v4 grouping and non-fabricated evidence
+        run: |
+          python3 - <<'PY'
+          import json,csv,sqlite3,zipfile
+          from pathlib import Path
+          root=Path("analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4")
+          m=json.loads((root/"MANIFEST.json").read_text("utf8"))
+          assert m["original_disjoint_groups"]==58 if "original_disjoint_groups" in m else m["disjoint_name_group_count"]==58
+          assert m["wiki_rows_in_58_groups"]==357
+          assert m["same_base_name_variant_groups"]==50
+          assert m["mixed_base_name_groups"]==8
+          assert m["normalized_wiki_name_families"]==66
+          assert m["contact_sheet_count"]==58
+          assert m["original_png_cells_rendered"]>250,m
+          assert m["physical_object_identity_newly_certified"]==0
+          assert m["original_source_attributes_preserved"]==195265
+          assert m["minecraft_implementation_selected"] is False
+          with sqlite3.connect(root/"PZ_B42_FURNITURE_DISJOINT_VISUAL_V4.sqlite") as c:
+           assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+           def n(x):return c.execute("SELECT COUNT(*) FROM "+x).fetchone()[0]
+           for table,num in {"v4_wiki_name_index":1268,"v4_disjoint_group":58,
+                            "v4_name_family":66,"v4_name_family_member":357,
+                            "source_attributes":195265,"wiki_furniture":1268}.items():
+            assert n(table)==num,(table,n(table),num)
+           assert n("future_item_distribution")==n("future_minecraft_implementation")==0
+          with zipfile.ZipFile(root/"B42_DISJOINT_VISUAL_V4_BUNDLE.zip") as z:
+           assert z.testzip() is None
+           assert len([x for x in z.namelist() if x.startswith("CONTACT_SHEETS_58/") and x.endswith(".jpg")])==58
+          print("DISJOINT_V4_VALIDATED",m)
+          PY
+      - name: Commit original screenshot evidence, full DB and CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4/
+          git commit -m 'evidence(furniture): original PNG crop atlas sheets for 58 Wiki variant families'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
