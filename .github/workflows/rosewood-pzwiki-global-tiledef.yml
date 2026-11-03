@@ -2,7 +2,7 @@ name: Verify PZwiki 1268 against full B42 TileDef master, not only Rosewood
 on:
   push:
     branches: [work/rosewood-furniture-pzwiki-crosswalk-20261103]
-    paths: [.github/workflows/rosewood-pzwiki-global-tiledef.yml]
+    paths: [.github/workflows/rosewood-pzwiki-global-tiledef.yml, scripts/pzwiki_crosswalk_full_b42_tiledef.py]
   workflow_dispatch:
 permissions:
   contents: write
