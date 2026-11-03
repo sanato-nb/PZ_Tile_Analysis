@@ -1,0 +1,79 @@
+name: Validate and package PZwiki ↔ Rosewood furniture identity and images
+on:
+  push:
+    branches: [work/rosewood-furniture-pzwiki-crosswalk-20261103]
+    paths: [.github/workflows/rosewood-pzwiki-evidence-gallery.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/rosewood_furniture/2026-10-31/furniture_pzwiki_crosswalk_20261103/
+            /pzwiki_furniture/2026-11-03/README.md
+            /pzwiki_furniture/2026-11-03/furniture_1268.csv
+            /pzwiki_furniture/2026-11-03/source_tables.json
+      - name: Verify original wiki rows and conservative mapping, build one browsing archive
+        run: |
+          python3 - <<'PY'
+          import csv,json,zipfile,hashlib
+          from pathlib import Path
+          root=Path("analysis/rosewood_furniture/2026-10-31/furniture_pzwiki_crosswalk_20261103")
+          original=Path("pzwiki_furniture/2026-11-03")
+          manifest=json.loads((root/"MANIFEST.json").read_text("utf8"))
+          def read(p):
+           with p.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          w=read(root/"WIKI_TO_ROSEWOOD_ALL_1268.csv")
+          ros=read(root/"ROSEWOOD_357_PZWIKI_ENRICHED.csv")
+          original_w=read(original/"furniture_1268.csv")
+          summary=read(root/"WIKI_CATEGORY_SUMMARY_12.csv")
+          assert len(w)==len(original_w)==1268
+          assert len(ros)==357
+          assert len(summary)==12
+          assert {x["목록ID"] for x in w}=={x["목록ID"] for x in original_w}
+          assert all(x["게임가구동일성_인증"]=="NO" for x in w)
+          assert all(x["위키_연결ID로_정체확정"]=="NO" for x in ros)
+          assert manifest["rosewood_styles_with_direct_wiki_image_id"]==267
+          assert manifest["rosewood_styles_without_direct_wiki_image_id"]==90
+          assert manifest["wiki_rows_with_any_named_style_source_id"]==308
+          assert sum(manifest["crosswalk_states"].values())==1268
+          assert manifest["crosswalk_states"]["ALL_SOURCE_IDS_ONE_NAMED_STYLE"]==306
+          assert manifest["crosswalk_states"]["MULTIPLE_STYLE_IDS_REVIEW"]==1
+          assert manifest["crosswalk_states"]["PARTIAL_SOURCE_ID_IN_ROSEWOOD_USED_4248"]==2
+          assert len(list((root/"source_previews").glob("*.png")))==357
+          for r in original_w:
+           matching=next(x for x in w if x["목록ID"]==r["목록ID"])
+           for k in r:
+            assert matching[k]==r[k],(r["목록ID"],k)
+          pages=json.loads((original/"source_tables.json").read_text("utf8"))
+          assert len(pages)==12 and sum(len(x["tables"]) for x in pages)==48
+          assert sum(len(x["rows"]) for x in pages)==1268
+          out=root/"ROSEWOOD_PZWIKI_1268_CROSSWALK_GALLERY.zip"
+          with zipfile.ZipFile(out,"w",zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+           for p in sorted(root.rglob("*")):
+            if p.is_file() and p!=out:z.write(p,p.relative_to(root))
+          with zipfile.ZipFile(out) as z:
+           assert z.testzip() is None
+           assert "INDEX.html" in z.namelist()
+           assert "VISUAL_WIKI_CROSSCHECK.md" in z.namelist()
+           assert len([x for x in z.namelist() if x.startswith("source_previews/") and x.endswith(".png")])==357
+          digest=hashlib.sha256(out.read_bytes()).hexdigest()
+          (root/"PACKAGE_SHA256.txt").write_text(digest+"  "+out.name+"\n",encoding="utf8")
+          print("WIKI_ROSEWOOD_SOURCE_ID_VALIDATED",len(w),len(ros),"ZIP",out.stat().st_size,"SHA256",digest)
+          PY
+      - name: Commit validated offline gallery and checksum to review branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_pzwiki_crosswalk_20261103/ROSEWOOD_PZWIKI_1268_CROSSWALK_GALLERY.zip
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_pzwiki_crosswalk_20261103/PACKAGE_SHA256.txt
+          git commit -m 'release(pzwiki): archive 1268-row source crosswalk, 357 original furniture previews, provenance and browsing UI'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

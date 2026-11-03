@@ -1,0 +1,55 @@
+name: Verify PZwiki 1268 against full B42 TileDef master, not only Rosewood
+on:
+  push:
+    branches: [work/rosewood-furniture-pzwiki-crosswalk-20261103]
+    paths: [.github/workflows/rosewood-pzwiki-global-tiledef.yml, scripts/pzwiki_crosswalk_full_b42_tiledef.py]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  global-source-match:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/current/v259/PZ_v259_all_png_tile_definitions.sqlite
+            /analysis/rosewood_furniture/2026-10-31/furniture_pzwiki_crosswalk_20261103/WIKI_TO_ROSEWOOD_ALL_1268.csv
+            /scripts/pzwiki_crosswalk_full_b42_tiledef.py
+      - name: Run global original TileDef + PNG association
+        run: |
+          python3 -m py_compile scripts/pzwiki_crosswalk_full_b42_tiledef.py
+          python3 -u scripts/pzwiki_crosswalk_full_b42_tiledef.py
+      - name: Validate count completeness and no 3D approval
+        run: |
+          python3 - <<'PY'
+          import json,csv
+          from pathlib import Path
+          o=Path("analysis/rosewood_furniture/2026-10-31/furniture_pzwiki_crosswalk_20261103/global_tiledef")
+          m=json.loads((o/"MANIFEST.json").read_text("utf8"))
+          assert m["wiki_rows"]==1268
+          assert m["full_original_unique_keys"]>=61000
+          assert m["original_database_integrity"]=="ok"
+          assert sum(m["all_wiki_rows_global_status_counts"].values())==1268
+          assert m["3d_geometry_verified"]==0
+          assert m["game_object_identity_certified"]==0
+          def load(p):
+           with p.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          a=load(o/"WIKI_1268_GLOBAL_ORIGINAL_TILEDEF.csv")
+          b=load(o/"WIKI_IMAGE_SPRITE_ORIGINAL_PROPERTIES.csv")
+          assert len(a)==1268 and len(b)==m["global_source_sprite_records"]
+          assert all(x["b42_game_object_identity_verified"]=="NO" for x in a)
+          assert len({x["목록ID"] for x in a})==1268
+          print("GLOBAL_CROSSWALK_VERIFIED",m)
+          PY
+      - name: Persist global original source join
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/rosewood_furniture/2026-10-31/furniture_pzwiki_crosswalk_20261103/global_tiledef/
+          git commit -m 'catalog(pzwiki): verify all 1268 wiki furniture rows against full B42 original 61418 TileDef keys and real PNG cells'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
