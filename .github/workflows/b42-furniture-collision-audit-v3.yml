@@ -1,0 +1,78 @@
+name: Audit exact Wiki furniture duplicate listings and crop source sprite evidence
+on:
+  push:
+    branches: [work/pz-b42-furniture-identity-collision-audit-v3-20261103]
+    paths:
+      - .github/workflows/b42-furniture-collision-audit-v3.yml
+      - scripts/audit_129_b42_furniture_source_collisions.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  original-evidence-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/wiki_first_v2/B42_WIKI_FIRST_FURNITURE_REGISTRY.zip
+            /scripts/audit_129_b42_furniture_source_collisions.py
+            /Tiles/2x/
+            /Tiles/vegetation_foliage_01.png
+      - name: Install Pillow for direct original image-cell crops
+        run: python3 -m pip install --break-system-packages --quiet Pillow
+      - name: Validate source Python and create independent audit DB and real PNG crops
+        run: |
+          python3 -m py_compile scripts/audit_129_b42_furniture_source_collisions.py
+          python3 -u scripts/audit_129_b42_furniture_source_collisions.py
+      - name: Verify 129 collisions and preserve all original per-tile properties
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,sqlite3,csv,zipfile
+          d=Path('analysis/furniture_full_b42/2026-11-03/collision_review_v3')
+          m=json.loads((d/'MANIFEST.json').read_text('utf8'))
+          assert m['collision_groups']==129
+          assert m['collision_types']=={
+            'SAME_IMAGE_IDS_SAME_NAME':63,
+            'SAME_IMAGE_IDS_DIFFERENT_NAMES':6,
+            'OVERLAPPING_IMAGE_IDS':2,
+            'DISJOINT_IMAGE_IDS':58}
+          assert m['original_source_attribute_rows_preserved']==195265
+          assert m['original_wiki_rows_preserved']==1268
+          assert m['original_v2_registry_rows_preserved']==2231
+          assert m['original_v2_storage_attribute_link_rows_preserved']==1855
+          assert m['actual_original_sprite_crops']>100
+          assert m['manual_game_object_identity_checks_confirmed']==0
+          assert m['original_source_data_modified'] is False
+          con=sqlite3.connect(d/'PZ_B42_FURNITURE_IDENTITY_AUDIT.sqlite')
+          assert con.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+          def count(t):return con.execute('SELECT count(*) FROM '+t).fetchone()[0]
+          assert count('audit_group_collision')==129
+          assert count('registry_entry')==2231
+          assert count('source_attributes')==195265
+          assert count('wiki_furniture')==1268
+          assert count('registry_entry_container')==1855
+          assert count('future_minecraft_implementation')==0
+          assert count('future_item_distribution')==0
+          assert count('audit_wiki_listing')==m['wiki_entries_in_collision_groups']
+          assert count('audit_repeated_wiki_listing')==m['exact_duplicate_wiki_alias_relationships']
+          con.close()
+          assert len(list((d/'source_sprite_crops').glob('*.webp')))==m['actual_original_sprite_crops']
+          with zipfile.ZipFile(d/'PZ_B42_FURNITURE_COLLISION_AUDIT_V3.zip') as z:
+            assert z.testzip() is None
+            assert 'ORIGINAL_SPRITE_COMPARE_129.html' in z.namelist()
+            assert 'PZ_B42_FURNITURE_IDENTITY_AUDIT.sqlite' in z.namelist()
+          print('AUDIT_129_WITH_NATIVE_SOURCE_CROPS_VALIDATED',m)
+          PY
+      - name: Commit final audit data, sprite image evidence and zipped database
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-03/collision_review_v3/
+          git commit -m 'audit(furniture): 129 collision groups classified with original PZ sprite crops and source-aware SQLite evidence'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
