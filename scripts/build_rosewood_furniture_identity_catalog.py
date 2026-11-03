@@ -189,7 +189,7 @@ def main():
     style_ids="|".join(z["style_id"] for z in v),
     style_names="|".join(z["GroupName"] or "(none)" for z in v),
     do_not_auto_merge_different_styles="YES"))
- assert (len(out_styles),len(out_sheets),len(out_sources),len(out_groups),len(out_cross))==(357,362,1347,79,5)
+ assert (len(out_styles),len(out_sheets),len(out_sources),len(out_groups),len(out_cross))==(357,362,1347,79,5),(len(out_styles),len(out_sheets),len(out_sources),len(out_groups),len(out_cross))
  save(O/"CATALOG_357_STYLES.csv",out_styles)
  save(O/"FAMILIES_79.csv",out_groups)
  save(O/"SOURCE_TILESET_VARIANTS_362.csv",out_sheets)
