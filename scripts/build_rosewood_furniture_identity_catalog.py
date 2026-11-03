@@ -259,8 +259,8 @@ def main():
   for r in cat[name]:
    md+="### "+str(r["index"]).zfill(3)+" · "+(r["GroupName"] or "(GroupName 없음)")+"\n\n"
    md+="!["+html.escape(r["display_name"])+"]("+r["original_preview_path"]+")\n\n"
-   md+="원본 방향: "+(r["source_facings"] or "미기록")+
-       " / 타일셋: "+r["source_tilesets"]+" / 3D: "+r["public_3d_binding"]+"\n\n"
+   md+=("원본 방향: "+(r["source_facings"] or "미기록")+
+       " / 타일셋: "+r["source_tilesets"]+" / 3D: "+r["public_3d_binding"]+"\n\n")
  (O/"FURNITURE_SOURCE_IMAGE_INDEX.md").write_text(md,encoding="utf8")
  def js(x):return json.dumps(x,ensure_ascii=False).replace("<","\\u003c")
  ui=[dict(i=r["index"],n=r["display_name"],family=r["CustomName"],
