@@ -49,6 +49,10 @@ def main():
  CREATE TABLE v6_wiki_alias(wiki_id TEXT,group_id TEXT,source_key TEXT,original_wiki_name TEXT,
  original_category TEXT,alias_cluster_id TEXT,container_type TEXT,source_capacity TEXT,
  source_facing TEXT,source_grid_pos TEXT,PRIMARY KEY(wiki_id,source_key));
+ CREATE TABLE v6_wiki_listing_properties(wiki_id TEXT PRIMARY KEY,group_id TEXT,
+  original_wiki_name TEXT,original_category TEXT,original_subcategory TEXT,
+  wiki_capacity_raw TEXT,wiki_size_raw TEXT,wiki_encumbrance_raw TEXT,
+  wiki_crafting_surface_raw TEXT,wiki_bed_quality_raw TEXT,wiki_article_url TEXT);
  CREATE TABLE v6_sprite_keyset_alias(cluster_id TEXT PRIMARY KEY,group_id TEXT,
  original_keys TEXT,original_wiki_ids TEXT,original_wiki_names TEXT,
  original_categories TEXT,game_object_identity_verified INTEGER DEFAULT 0);
@@ -58,7 +62,7 @@ def main():
  CREATE TABLE v6_all129_source_overlap(group_id TEXT PRIMARY KEY,overlap_class TEXT,
  png_manually_reviewed INTEGER,exact_source_ID_audited INTEGER,game_identity_confirmed INTEGER DEFAULT 0);
  """)
- summaries=[];links=[];alias=[];pix=[];names=Counter();seenids=set();seenkeys=set()
+ summaries=[];links=[];alias=[];pix=[];properties=[];names=Counter();seenids=set();seenkeys=set()
  for i,g in enumerate(selected,1):
   gid=g["group_id"];per=json.loads(g["wiki_exact_keys"]);ids=g["wiki_rows"].split("|")
   assert sorted(ids)==sorted(per)
@@ -86,6 +90,17 @@ def main():
     game_object_identity_verified="NO"))
   for wid in ids:
    w=wiki[wid];cc=clusterid[tuple(sorted(x.lower() for x in per[wid]))]
+   c.execute("INSERT INTO v6_wiki_listing_properties VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+    (wid,gid,w["가구명_원문"],w["대분류_원문"],w["소분류_원문"],
+     w["수납용량_원문"],w["크기_타일수"],w["운반부담_Encumbrance"],
+     w["제작표면_원문"],w["침대품질_원문"],w["개별문서_URL"]))
+   properties.append(dict(wiki_id=wid,source_group=gid,original_name=w["가구명_원문"],
+    wiki_category=w["대분류_원문"],wiki_subcategory=w["소분류_원문"],
+    wiki_capacity_raw=w["수납용량_원문"],wiki_size_raw=w["크기_타일수"],
+    wiki_encumbrance_raw=w["운반부담_Encumbrance"],
+    wiki_crafting_surface_raw=w["제작표면_원문"],
+    wiki_bed_quality_raw=w["침대품질_원문"],wiki_article=w["개별문서_URL"]))
+
    for k in per[wid]:
     key=k.lower();v=info.get(key)
     values=(v["container_type"],v["ContainerCapacity"],v["Facing"],v["SpriteGridPos"]) if v else (None,)*4
@@ -144,7 +159,9 @@ def main():
    original_source_png_contact_sheet="ORIGINAL_71_IMAGES/"+image,
    same_game_object_identity_verified="NO"))
  assert len(summaries)==71 and len(seenids)==146 and len(seenkeys)==89
- assert len(links)==178 and len(pix)==89
+ assert len(links)==178 and len(pix)==89 and len(properties)==146
+ assert sum(p["wiki_category"]=="Storage" and bool(p["wiki_capacity_raw"]) for p in properties)==66
+ assert sum(p["wiki_category"]=="Tables" and not p["wiki_capacity_raw"] for p in properties)==57
  missing_source_crops=[x["original_tile_id"] for x in pix if x["cropped_original_image"]!="YES"]
  print("EXACT_PNG_CROP_COVERAGE",len(pix)-len(missing_source_crops),len(pix),"MISSING",missing_source_crops,flush=True)
  normalized_name_matches=sum(len({tidy(wiki[id]["가구명_원문"]) for id in g["wiki_ids"].split("|")})==1 for g in summaries)
@@ -156,15 +173,15 @@ def main():
    (g["group_id"],g["overlap_class"],int(g["group_id"] in old),1))
  c.commit()
  assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
- assert [count(c,t) for t in ("v6_shared_group","v6_wiki_alias","v6_original_image_cell","v6_all129_source_overlap")]==[71,178,89,129]
+ assert [count(c,t) for t in ("v6_shared_group","v6_wiki_alias","v6_original_image_cell","v6_all129_source_overlap","v6_wiki_listing_properties")]==[71,178,89,129,146]
  assert count(c,"source_attributes")==195265 and count(c,"wiki_furniture")==1268
  assert count(c,"future_item_distribution")==count(c,"future_minecraft_implementation")==0
  save(O/"V6_71_GROUP_RESULTS.csv",summaries);save(O/"V6_178_WIKI_TO_TILE_REFERENCES.csv",links)
- save(O/"V6_ALIAS_KEYSET_CLUSTERS.csv",alias);save(O/"V6_89_PNG_EVIDENCE.csv",pix)
+ save(O/"V6_ALIAS_KEYSET_CLUSTERS.csv",alias);save(O/"V6_89_PNG_EVIDENCE.csv",pix);save(O/"V6_146_WIKI_FUNCTION_PROPERTIES.csv",properties)
  manifest=dict(v5_original_PNG_direct_visual_groups=58,v6_cross_category_groups_ID_audited=71,
   all129_collision_groups_source_ID_checked=129,
   wiki_crosslisted_rows=146,unique_original_sprite_keys=89,exact_sprite_references=178,
-  alias_keyset_clusters=len(alias),categories=dict(names),
+  alias_keyset_clusters=len(alias),categories=dict(names),wiki_capacity_rows_in_storage=66,wiki_table_rows_without_capacity=57,
   new_PNG_contact_sheets=71,new_source_PNG_crops=89-len(missing_source_crops),missing_source_crops=len(missing_source_crops),missing_source_tile_ids=missing_source_crops,
   direct_manual_visual_group_reviews_added_v6=0,
   source_attributes_preserved=195265,original_wiki_rows_preserved=1268,
