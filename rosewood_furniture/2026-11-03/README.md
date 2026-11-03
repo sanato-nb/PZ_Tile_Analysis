@@ -24,6 +24,7 @@
 ## 파일
 
 - [pzwiki_tmx_8cells_crosscheck.csv](pzwiki_tmx_8cells_crosscheck.csv): 원본 위키 CSV 22열을 보존하고 14열의 TMX 대조 기록을 추가. **1,268행 전부 포함**.
+- [rosewood_furniture_candidates_785.csv](rosewood_furniture_candidates_785.csv): 위 1,268행에서 **하나 이상 일치 타일이 확인된 785행만** 추려 핵심 19열로 정리한 실무용 후보 목록.
 - 원본 위키 자료를 수정하지 않았음. 기존 `Tiles/`, `analysis/`, `tiledef/`, `B4220.3_MapExport_256/` 불변.
 
 ## 다음 확인 과제
