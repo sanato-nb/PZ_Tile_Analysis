@@ -300,13 +300,13 @@ def main():
   derived_tables=counts,identity_status_counts=dict(sorted(entrycounts.items())),
   original_v1_tables_preserved=oldcount,
   classification_status="WIKI_LISTINGS_CONFIRMED_SOURCE_IMAGE_IDS_ONLY",
-  "per_tile_original_properties_preserved":True,
-  "wiki_does_not_cover_every_build_42_furniture":True,
-  "same_game_object_composition_certified_count":0,
-  "actual_in_game_loot_rules_loaded":0,
-  "minecraft_implementation_selected":False,
-  "no_source_file_overwritten":True,
-  "sqlite_integrity":"ok")
+  per_tile_original_properties_preserved=True,
+  wiki_does_not_cover_every_build_42_furniture=True,
+  same_game_object_composition_certified_count=0,
+  actual_in_game_loot_rules_loaded=0,
+  minecraft_implementation_selected=False,
+  no_source_file_overwritten=True,
+  sqlite_integrity="ok")
  writecsv(OUT/"WIKI_FIRST_ALL_CATALOG_ENTRIES.csv",allentries)
  writecsv(OUT/"FURNITURE_ENTRY_ALL_LINKED_TILE_IDS.csv",alltiles)
  writecsv(OUT/"FURNITURE_ENTRY_STORAGE_ATTRIBUTES.csv",container_export)
