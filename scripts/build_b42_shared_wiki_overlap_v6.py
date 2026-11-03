@@ -151,7 +151,7 @@ def main():
    elif tdefcaps:cs="TILEDEF_CAPACITY_RECORDED"
    else:cs="NOT_RECORDED_OR_NOT_APPLICABLE"
    stats[kind]+=1;capstats[cs]+=1
-   cropcount=0;misscount=0
+   cropcount=0;misscount=0;cropthumbs=[]
    for pos,key in enumerate(keys):
     t=tiles[key]
     choices=sorted(atlas.get(key,[]),key=lambda x:(x["link_status"]!="MATCHED_TILESET_AND_GRID",
@@ -176,7 +176,7 @@ def main():
      cropcount+=1;pngs+=1;thumb=thumbnail(crop)
     px=13+j*550+(pos%2)*162;py=120+(pos//2)*90
     # Image cards show at most the first 4 pieces; every part is still in DB.
-    if pos<2:canvas.paste(thumb,(px,130))
+    if pos<2:cropthumbs.append((px,thumb))
     put(con,"v6_original_tile_evidence",dict(appearance_id=aid,source_key=key,
      source_png_path=cell["png_path"] if cell else "",
      png_crop_sha256=checksum,source_Facing=t["Facing"],
@@ -212,6 +212,7 @@ def main():
     actual_game_object_identity_certified="NO"))
    left=550*j
    dr.rounded_rectangle((left+8,80,left+540,340),radius=10,fill="white",outline="#c6d5df",width=2)
+   for px,thumb in cropthumbs:canvas.paste(thumb,(px,130))
    for ind,line in enumerate([ids[0]+" and "+str(len(ids)-1)+" other Wiki ref(s)",
      names[0][:55],
      "Wiki categories:"]+categories[:2]+[
