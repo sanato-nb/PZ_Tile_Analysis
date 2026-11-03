@@ -1,0 +1,98 @@
+name: B42 furniture resolve remaining 71 Wiki original-tile overlap groups
+on:
+  push:
+    branches: [work/pz-b42-shared-wiki-overlap-resolution-v6-20261104]
+    paths:
+      - .github/workflows/b42-shared-wiki-overlaps-v6.yml
+      - scripts/build_b42_shared_wiki_overlap_v6.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/full_visual_review_v5/B42_ALL_58_FURNITURE_VISUAL_REVIEW_V5.zip
+            /pzwiki_furniture/2026-11-03/furniture_1268.csv
+            /scripts/build_b42_shared_wiki_overlap_v6.py
+            /Tiles/2x/appliances_com_01.png
+            /Tiles/2x/appliances_laundry_01.png
+            /Tiles/2x/carpentry_02.png
+            /Tiles/2x/crafted_02.png
+            /Tiles/2x/crafted_05.png
+            /Tiles/2x/fixtures_counters_01.png
+            /Tiles/2x/location_entertainment_theatre_01.png
+            /Tiles/2x/location_hospitality_sunstarmotel_02.png
+            /Tiles/2x/location_restaurant_bar_01.png
+            /Tiles/2x/location_restaurant_pie_01.png
+            /Tiles/2x/location_restaurant_seahorse_01.png
+            /Tiles/2x/location_restaurant_spiffos_01.png
+            /Tiles/2x/location_shop_fossoil_01.png
+            /Tiles/2x/location_shop_gas2go_01.png
+            /Tiles/2x/location_shop_generic_01.png
+            /Tiles/2x/location_shop_zippee_01.png
+            /Tiles/2x/location_trailer_02.png
+            /Tiles/2x/vegetation_drying_01.png
+            /Tiles/2x/vegetation_farm_01.png
+      - name: Install original PNG crop support
+        run: python3 -m pip install --user Pillow==11.3.0
+      - name: Check original Wiki/TileDef and build all remaining overlaps
+        run: |
+          python3 -m py_compile scripts/build_b42_shared_wiki_overlap_v6.py
+          python3 -u scripts/build_b42_shared_wiki_overlap_v6.py
+      - name: Validate no original properties or categories discarded
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile
+          from pathlib import Path
+          p=Path("analysis/furniture_full_b42/2026-11-04/shared_wiki_overlap_v6")
+          m=json.loads((p/"MANIFEST.json").read_text(encoding="utf-8"))
+          assert m["source_overlap_groups_reviewed"]==71
+          assert m["groups_single_exact_sprite_set"]==69
+          assert m["groups_mixed_two_sprite_sets"]==2
+          assert m["exact_sprite_sets_indexed"]==73
+          assert m["overlap_wiki_rows_mapped"]==146
+          assert m["original_wiki_rows_preserved"]==1268
+          assert m["raw_tiledef_attributes_preserved"]==195265
+          assert m["original_png_contact_sheets_created"]==71
+          assert m["original_png_sprite_crops_rendered"]>=73,m
+          assert m["original_png_sprite_crops_missing"]==0,m
+          assert sum(m["duplicate_record_kinds"].values())==73
+          assert sum(m["capacity_evidence_types"].values())==73
+          assert m["no_game_object_identity_claimed"]
+          assert m["no_minecraft_implementation_decision"]
+          assert m["no_loot_distribution_loaded"]
+          c=sqlite3.connect(p/"B42_SHARED_WIKI_OVERLAP_V6.sqlite")
+          assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          def count(t):return c.execute("SELECT COUNT(*) FROM "+t).fetchone()[0]
+          assert count("v6_overlap_group")==71
+          assert count("v6_source_appearance")==73
+          assert count("v6_original_wiki_facet")==146
+          assert count("wiki_furniture")==1268
+          assert count("source_attributes")==195265
+          assert count("v5_manual_visual_group_review")==58
+          assert count("future_item_distribution")==0
+          assert count("future_map_placement")==0
+          assert count("future_minecraft_implementation")==0
+          assert c.execute("SELECT COUNT(*) FROM v6_source_appearance WHERE verified_game_object_identity!=0").fetchone()[0]==0
+          c.close()
+          with zipfile.ZipFile(p/"B42_SHARED_WIKI_OVERLAP_V6.zip") as z:
+           assert z.testzip() is None
+           assert "B42_SHARED_WIKI_OVERLAP_V6.sqlite" in z.namelist()
+           assert len([s for s in z.namelist() if s.startswith("ORIGINAL_PNG_CONTACT_SHEETS_71/") and s.endswith(".jpg")])==71
+          print("B42_V6_71_SOURCE_GROUPS_VERIFIED",m)
+          PY
+      - name: Commit source-preserving v6 DB and images
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/shared_wiki_overlap_v6/
+          git commit -m 'db(b42): resolve all 71 shared wiki groups into 73 source appearances with 146 category and storage facets'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
