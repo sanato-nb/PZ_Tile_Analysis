@@ -170,7 +170,7 @@ def main():
    gid=link["group_id"]
    if gid.startswith("FUR-WIKI-"):continue
    linked.add(gid)
-   multiple=len(grouptowiki[gid])
+   multiple=len(grouptowiki.get(gid,()))
    if multiple>1:group_conflict=True
    con.execute("INSERT INTO registry_entry_group VALUES(?,?,?,?)",
     (entry_id,gid,"WIKI_IMAGE_FILENAME_REFERENCES_SOURCE_GROUP" if wiki_id else "TILEDEF_SOURCE_GROUP_UNLISTED",
@@ -235,7 +235,7 @@ def main():
    if len(linked)>1:review(entry_id,"WIKI_IMAGE_REFERENCES_MULTIPLE_TILEDEF_SOURCE_GROUPS",
        joined(linked),1)
    if group_conflict:review(entry_id,"DIFFERENT_WIKI_FURNITURE_ROWS_SHARE_SAME_TILEDEF_GROUP",
-       joined(g for g in linked if len(grouptowiki[g])>1),1)
+       joined(g for g in linked if len(grouptowiki.get(g,()))>1),1)
    if total_expand:review(entry_id,"SAME_NAME_GROUP_EXPANSION_NEEDS_DIRECTION_PART_VISUAL_VERIFICATION",
        str(total_expand)+" indirectly linked sprites",2)
   else:
@@ -244,7 +244,7 @@ def main():
   if any("REVIEW" in r["assembly_status"] for g in linked for r in orientations[g]):
    review(entry_id,"TILEDEF_DIRECTION_GRID_MISSING_OR_AMBIGUOUS",
       joined(r["assembly_status"] for g in linked for r in orientations[g] if "REVIEW" in r["assembly_status"]),2)
-  if any(len(grouptowiki[g])>1 for g in linked):
+  if any(len(grouptowiki.get(g,()))>1 for g in linked):
    review(entry_id,"SOURCE_NAME_NOT_UNIQUE_DESIGN_PROOF",
        "Original TileDef name+group shared by multiple Wiki rows",2)
 
@@ -265,6 +265,7 @@ def main():
   create("SOURCE:"+gid,"B42_SOURCE_ONLY",None,gid,display,
     "SOURCE_ONLY_UNCLASSIFIED",None,None,None,None,None,None,None,
     [dict(group_id=gid)])
+ assert len(grouptowiki)==889,("wiki-referenced source-group count",len(grouptowiki))
  for gid,ids in sorted(grouptowiki.items()):
   if len(ids)>1:
    con.execute("INSERT INTO registry_group_conflict VALUES(?,?,?,?)",
