@@ -1,0 +1,78 @@
+name: Integrate all 58 directly inspected B42 furniture source groups into SQLite v5
+on:
+  push:
+    branches: [work/pz-b42-all-58-original-visual-review-v5-20261103]
+    paths:
+      - .github/workflows/b42-all-58-furniture-review-v5.yml
+      - scripts/build_b42_all_58_visual_review_v5.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4/B42_DISJOINT_VISUAL_V4_BUNDLE.zip
+            /analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4/GROUPS_58_V4.csv
+            /analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4/WIKI_NAME_FAMILIES_66.csv
+            /analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4/WIKI_VARIANT_ROWS_357.csv
+            /analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4/ORIGINAL_PNG_CROP_EVIDENCE.csv
+            /analysis/furniture_full_b42/2026-11-03/disjoint_visual_v4/V4_MANUAL_VISUAL_OBSERVATIONS_11.csv
+            /analysis/furniture_full_b42/2026-11-03/full_visual_review_v5/V5_NEW_47_DIRECT_VISUAL_OBSERVATIONS.csv
+            /scripts/build_b42_all_58_visual_review_v5.py
+      - name: Compile and build 58 direct-visual source review DB
+        run: |
+          python3 -m py_compile scripts/build_b42_all_58_visual_review_v5.py
+          python3 -u scripts/build_b42_all_58_visual_review_v5.py
+      - name: Confirm every source tile and wiki entry remains unmodified
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,csv,zipfile
+          from pathlib import Path
+          base=Path("analysis/furniture_full_b42/2026-11-03/full_visual_review_v5")
+          m=json.loads((base/"MANIFEST.json").read_text(encoding="utf8"))
+          assert m["source_v4_visual_groups"]==58
+          assert m["previously_direct_inspected_groups"]==11
+          assert m["newly_direct_inspected_groups"]==47
+          assert m["total_groups_with_direct_PNG_review"]==58
+          assert m["full_wiki_rows_with_visual_group_review"]==357
+          assert m["original_wiki_list_rows_preserved"]==1268
+          assert m["original_TileDef_source_attributes_preserved"]==195265
+          assert m["visual_name_family_count"]==66
+          assert m["original_source_png_crop_evidence_rows_preserved"]==368
+          assert sum(m["source_functional_visual_classification_counts"].values())==58
+          assert m["game_moveable_object_identities_newly_certified"]==0
+          assert not m["minecraft_implementation_selected"]
+          assert m["database_integrity"]=="ok"
+          c=sqlite3.connect(base/"B42_ALL_58_VISUALLY_REVIEWED_FURNITURE.sqlite")
+          assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          counts={"v5_manual_visual_group_review":58,"v5_wiki_row_review":357,
+                  "v5_family_review":66,"v4_original_crop_evidence":368,
+                  "source_attributes":195265,"source_slots":73644,
+                  "wiki_furniture":1268,"registry_entry":2231}
+          for table,n in counts.items():
+           actual=c.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]
+           assert actual==n,(table,actual,n)
+          assert c.execute("SELECT COUNT(*) FROM v5_manual_visual_group_review WHERE same_game_moveable_object_verified!=0").fetchone()[0]==0
+          for table in ["future_item_distribution","future_map_placement","future_minecraft_implementation"]:
+           assert c.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]==0
+          c.close()
+          with zipfile.ZipFile(base/"B42_ALL_58_FURNITURE_VISUAL_REVIEW_V5.zip") as z:
+           assert z.testzip() is None
+           assert "B42_ALL_58_VISUALLY_REVIEWED_FURNITURE.sqlite" in z.namelist()
+          print("ALL_58_DIRECT_SOURCE_PNG_REVIEWS_INTEGRATED",m)
+          PY
+      - name: Save source-preserving reviewed SQLite and evidence CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-03/full_visual_review_v5/
+          git commit -m 'review(b42): complete all 58 direct source PNG visual checks and integrate 357 Wiki rows into SQLite'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
