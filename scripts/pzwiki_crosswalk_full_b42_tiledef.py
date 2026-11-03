@@ -104,7 +104,8 @@ def main():
   global_source_sprite_records=len(detail),
   multipart_images_with_different_original_names=len(inconsistent),
   original_tiledef_attributes_preserved=True,
-  3d_geometry_verified=0,game_object_identity_certified=0,original_rosewood_catalog_modified=False)
+  game_object_identity_certified=0,original_rosewood_catalog_modified=False,
+  **{"3d_geometry_verified":0})
  (OUT/"MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  text=["# PZwiki 가구 전체 목록과 B42 전체 원본 TileDef 대조",
  "이 대조는 원래 로즈우드에 사용된 4,248개 타일만 분석한 표의 한계를 보완하는 작업이야.",
