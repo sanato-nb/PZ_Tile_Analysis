@@ -1,0 +1,71 @@
+name: Package Rosewood 357 side-by-side image gallery into an offline ZIP
+on:
+  push:
+    branches: [work/rosewood-visual-comparison-gallery-357-20261103]
+    paths: [.github/workflows/rosewood-visual-gallery-package.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  gallery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout verified all-image gallery only
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/rosewood_furniture/2026-10-31/ten_batch_review/VISUAL_GALLERY_357_20261103/
+      - name: Verify 357 unique original comparison images and 36 batch pages
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,zipfile,hashlib
+          base=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/VISUAL_GALLERY_357_20261103")
+          img=sorted((base/"images").glob("*.jpg"))
+          batches=sorted((base/"batches").glob("*.md"))
+          assert len(img)==357,len(img)
+          assert len(batches)==36,len(batches)
+          nums=[int(p.name[:3]) for p in img]
+          assert nums==list(range(1,358)),nums
+          for p in img:
+            assert p.stat().st_size>10000,p
+            assert p.read_bytes()[:3]==b"\xff\xd8\xff",p
+          alltext=(base/"ALL_357_VISUAL_COMPARISONS.md").read_text(encoding="utf-8")
+          for n in range(1,358):
+            name=f"{n:03d}_PZ_vs_MC.jpg"
+            assert name in alltext,name
+          assert (base/"INDEX.html").exists()
+          print("VERIFIED_GALLERY",len(img),"IMAGE_JPG",len(batches),"BATCH_PAGES")
+          PY
+      - name: Build complete offline HTML viewer ZIP
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib
+          base=Path("analysis/rosewood_furniture/2026-10-31/ten_batch_review/VISUAL_GALLERY_357_20261103")
+          output=base/"ROSEWOOD_357_SIDE_BY_SIDE_GALLERY_OFFLINE.zip"
+          with zipfile.ZipFile(output,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+            for p in sorted(base.rglob("*")):
+              if p.is_file() and p!=output:
+                z.write(p,p.relative_to(base))
+          with zipfile.ZipFile(output) as z:
+            assert z.testzip() is None
+            assert len([n for n in z.namelist() if n.startswith("images/") and n.endswith(".jpg")])==357
+            assert "INDEX.html" in z.namelist()
+          digest=hashlib.sha256(output.read_bytes()).hexdigest()
+          print("OFFLINE_ZIP_BYTES",output.stat().st_size)
+          print("OFFLINE_ZIP_SHA256",digest)
+          (base/"ZIP_SHA256.txt").write_text(digest+"  "+output.name+"\n",encoding="utf-8")
+          PY
+      - name: Commit downloadable self-contained gallery
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/VISUAL_GALLERY_357_20261103/ROSEWOOD_357_SIDE_BY_SIDE_GALLERY_OFFLINE.zip
+          git add --sparse analysis/rosewood_furniture/2026-10-31/ten_batch_review/VISUAL_GALLERY_357_20261103/ZIP_SHA256.txt
+          git commit -m "release(rosewood): all 357 authentic side-by-side images and searchable offline gallery ZIP"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
