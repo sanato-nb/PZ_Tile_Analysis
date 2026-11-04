@@ -68,7 +68,7 @@ def init():
     original_name=s["original_name"],tileset=s["tileset"],source_key=s["original_png_tile_key"],
     png_path=a["png_path"],grid_id=a["grid_id"],column_index=a["column_index"],
     row_index=a["row_index"],cell_width=a["cell_width"],cell_height=a["cell_height"],
-    prior_v15_review_overlap=0))
+    prior_v15_v16_review_overlap=0))
  c.close()
  print("V17_NEW_SOURCE_STAGED_SELECTION",json.dumps(dict(new=160,existing=320,distinct_total=480,
    selected_atlases=len(paths),first_new_group=picks[0][0]["group_id"]),ensure_ascii=False),flush=True)
