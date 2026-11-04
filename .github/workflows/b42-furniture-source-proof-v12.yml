@@ -1,0 +1,65 @@
+name: B42 furniture original evidence proof v12
+on:
+  push:
+    branches:
+      - work/pz-b42-furniture-source-proof-v12-20261104
+    paths:
+      - .github/workflows/b42-furniture-source-proof-v12.yml
+      - scripts/build_b42_furniture_v12_source_proof.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/exact_assembly_v11/B42_EXACT_TILE_GRID_ASSEMBLY_V11.zip
+            /scripts/build_b42_furniture_v12_source_proof.py
+      - name: Compile source proof builder and copy immutable v11 SQLite
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_v12_source_proof.py
+          python3 -u scripts/build_b42_furniture_v12_source_proof.py
+      - name: Verify packaged DB and original counts
+        run: |
+          python3 - <<'PY'
+          import json, sqlite3, zipfile
+          from pathlib import Path
+          root=Path('analysis/furniture_full_b42/2026-11-04/source_proof_v12')
+          m=json.loads((root/'MANIFEST.json').read_text())
+          assert m['source_properties']==195265
+          assert m['source_tiles']==8219
+          assert m['directional_candidates']==3840
+          assert m['reproduced_warnings']==474
+          assert m['unlinked_wiki_preserved']==11
+          assert m['image_review_reference_groups']==129
+          assert m['work_individual_reviews_imported']==0
+          db=root/'B42_FURNITURE_SOURCE_PROOF_V12.sqlite'
+          with sqlite3.connect(db) as c:
+              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              for table,n in [('v12_tile_proof',8219),('v12_template_proof',3840),
+                              ('v12_warning_proof',474),('v12_wiki_unlinked_proof',11),
+                              ('v12_129_visual_reference',129),('v12_work_107_scope',1),
+                              ('source_attributes',195265),('v11_source_warning',474)]:
+                  assert c.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]==n,table
+          with zipfile.ZipFile(root/'B42_FURNITURE_SOURCE_PROOF_V12.zip') as z:
+              assert z.testzip() is None and db.name in z.namelist()
+          print('V12_SQLITE_SOURCE_PROOF_AND_ZIP_CRC_PASSED')
+          PY
+      - name: Commit complete ZIP containing DB and separate evidence CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/source_proof_v12/*.csv \
+            analysis/furniture_full_b42/2026-11-04/source_proof_v12/*.md \
+            analysis/furniture_full_b42/2026-11-04/source_proof_v12/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-04/source_proof_v12/B42_FURNITURE_SOURCE_PROOF_V12.zip
+          git commit -m 'db(b42): preserve v11 and independently prove 474 v12 source warnings'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
