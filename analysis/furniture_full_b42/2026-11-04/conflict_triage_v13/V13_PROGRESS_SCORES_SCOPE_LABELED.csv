@@ -1,0 +1,11 @@
+﻿metric_key,numerator,denominator,percent,interpretation,certification_level
+wiki_records_directly_linked,1257,1268,99.13,위키 항목 중 원본 타일 ID 링크 존재(게임 오브젝트 동일성 아님),WIKI_IMAGE_ID
+original_tile_grid_provenance,8219,8219,100.0,가구 후보 타일별 원본 SpriteGridPos 보존,SOURCE_TILE_ID
+directional_template_classification,3840,3840,100.0,방향별 후보의 기하 상태 분석 완료. 개체 확정은 별도,SOURCE_TEMPLATE
+valid_rectangle_source_candidates,843,3840,21.95,직사각형 기하를 가진 후보 비율. 실제 완성 가구 수와 다름,GEOMETRIC_CANDIDATE
+original_warning_reproduction,474,474,100.0,"경고 재현 성공, 해결 또는 인증 의미 아님",SOURCE_WARNING
+original_warning_resolved,0,474,0.0,원본 경고를 수정/해결했다고 인증한 행 없음,UNRESOLVED
+inventory_links_source_joined,1855,1855,100.0,"수납 링크 원본 대조, Lua/아이템 내용 인증 아님",SOURCE_STORAGE
+duplicate_groups_review_reference,129,129,100.0,"기존 이미지 검수 참조 범위, 동일 개체 인증 아님",VISUAL_REVIEW_REFERENCE
+work_107_groups_individual_results_imported,0,107,0.0,Work 열람 그룹 수 vs DB 개별 검수 레코드,NO_PERSISTED_REVIEW
+wiki_missing_id_auto_resolution,0,11,0.0,미연결 11건 임의 ID 확정 없음,UNRESOLVED
