@@ -1,0 +1,65 @@
+name: B42 source-only v15 160 direct visual observations with pixel provenance
+on:
+  push:
+    branches:
+      - work/pz-b42-source-only-visual-review-v15-20261104
+    paths:
+      - scripts/build_b42_v15_original_single_sprite_visual_review.py
+      - .github/workflows/b42-source-only-160-direct-review-v15.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/source_first_v14/B42_FURNITURE_SOURCE_FIRST_V14.zip
+            /scripts/build_b42_v15_original_single_sprite_visual_review.py
+      - name: Persist 160 directly inspected original-sprite broad visual observations
+        run: |
+          python3 -m py_compile scripts/build_b42_v15_original_single_sprite_visual_review.py
+          python3 -u scripts/build_b42_v15_original_single_sprite_visual_review.py
+      - name: Independently verify source preservation and review scope
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/visual_review_v15')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['original_png_tiles_directly_viewed']==160
+          assert m['source_only_registry_candidates']==963
+          assert m['reviewed_full_group_assemblies']==0
+          assert m['identities_certified']==0
+          assert sum(m['broad_visual_category_counts'].values())==160
+          assert m['unreviewed_source_only_groups']==803
+          with sqlite3.connect(p/'B42_FURNITURE_COARSE_VISUAL_REVIEW_V15.sqlite') as c:
+              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              for name,n in {'source_attributes':195265,'v13_warning_case':474,'v14_source_only_ledger':963,
+               'v15_visual_part_observation':160,'v15_source_group_review_coverage':963}.items():
+                  assert c.execute('SELECT COUNT(*) FROM '+name).fetchone()[0]==n,name
+              assert c.execute('SELECT COUNT(*) FROM v15_visual_part_observation WHERE source_image_directly_viewed=1').fetchone()[0]==160
+              assert c.execute('SELECT COUNT(*) FROM v15_visual_part_observation WHERE automatic_game_identity_match<>0').fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_COARSE_VISUAL_REVIEW_V15.zip') as z:
+              assert z.testzip() is None
+              assert 'B42_FURNITURE_COARSE_VISUAL_REVIEW_V15.sqlite' in z.namelist()
+          print('V15_REAL_160_INDIVIDUAL_VISUAL_REVIEW_ROWS_AND_FULL_SQLITE_PASSED')
+          PY
+      - name: Publish full v15 SQLite ZIP and review CSVs, not unpacked huge DB
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v15/*.csv \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v15/*.md \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v15/*.json \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v15/*.png \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v15/*.zip
+          git commit -m 'db(b42): persist 160 directly viewed original source sprites, provisional visual classes'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
