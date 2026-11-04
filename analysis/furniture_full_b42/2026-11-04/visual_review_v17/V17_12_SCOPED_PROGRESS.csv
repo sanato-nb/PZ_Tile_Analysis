@@ -1,0 +1,13 @@
+﻿metric_key,numerator,denominator,percent,evidence_basis,meaning
+known_catalog_records_registered,2231,2231,100.0,"registry 1,268 Wiki references + 963 source-only candidates","collected entries, NOT all unique furniture in game"
+wiki_references_registered,1268,1268,100.0,Wiki snapshot may be old/incomplete,reference row capture only
+wiki_image_source_id_crosswalk,1257,1268,99.13,PZwiki image source keys,crosswalk not runtime identity
+source_only_candidate_groups_captured,963,963,100.0,TileDef-only candidates lack exact Wiki image ID link,963 not necessarily distinct furniture
+source_only_one_sprite_visual_review,480,963,49.84,"v15 160 + v16 160 + v17 160, disjoint original source groups",representative 1-cell appearance only
+visual_review_unreviewed_source_only_groups,0,483,0.0,"unreviewed unique source group queue, not total item count","483 remain, review count completed 0 in subset"
+prior_duplicate_shared_group_image_reference,129,129,100.0,v8 prior direct image review reference,not in-game identity
+original_furniture_candidate_tile_ids_provenance,8219,8219,100.0,TileDef original IDs and positions,not full-game furniture completion
+directional_template_geometry_audited,3840,3840,100.0,group x facing geometry,not certified object assembly
+source_storage_original_value_crosschecked,1855,1855,100.0,source container/capacity raw linkage,not Lua item loot
+remaining_474_original_warnings_resolved,0,474,0.0,all original warning cases remain,unresolved
+in_game_furniture_identity_certified,0,0,,ground truth furniture count unknown,do not calculate total completion
