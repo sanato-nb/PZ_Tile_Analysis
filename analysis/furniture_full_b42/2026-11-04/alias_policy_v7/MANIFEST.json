@@ -1,0 +1,53 @@
+{
+  "base_commit": "85c3252fa01d12f4637d44d01430130e9760f785",
+  "source_files": {
+    "V6_71_GROUP_RESULTS.csv": "2ac814b3737104c8a85230082671b2605cc91f63a6d2661f033c46d1a382ab26",
+    "V6_178_WIKI_TO_TILE_REFERENCES.csv": "144902bc04ccf2470f6695cf81bb04ec736be483bac6ef98c61fec61303a2bd5",
+    "V6_ALIAS_KEYSET_CLUSTERS.csv": "f1e61b66610366efd6bb9bb39915a96610df14d452990f8e43334c2f22f9c18d",
+    "V6_146_WIKI_FUNCTION_PROPERTIES.csv": "4cf91c728a8da40ca2575d2f961a607f43c21b0dd305854a03881be04f94e49a",
+    "V6_7_SPECIAL_MANUAL_SOURCE_PNG_REVIEWS.csv": "596136584392a8a60753ca0bd8b6d73b4c4e922d7a8d6c63e93eebe998bdccac"
+  },
+  "audited_groups": 71,
+  "audited_clusters": 73,
+  "preserved_wiki_rows": 146,
+  "preserved_tile_references": 178,
+  "policies": {
+    "SAME_NAME_EXACT_KEYSET": 67,
+    "DIFFERENT_NAME_EXACT_KEYSET": 5,
+    "CONFLICT_KEEP_SEPARATE": 1
+  },
+  "field_states": {
+    "PARTIAL_RECORD": 66,
+    "AGREEMENT": 144,
+    "NOT_RECORDED": 153,
+    "CONFLICT": 2
+  },
+  "conflict_fields": [
+    {
+      "alias_cluster": "V6-514BD3FA712D10B9",
+      "field": "wiki_size_raw",
+      "state": "CONFLICT",
+      "recorded_values_json": "[\"1\", \"2\"]",
+      "wiki_evidence_json": "[{\"wiki_id\": \"PZW-0789\", \"value\": \"1\", \"article\": \"https://pzwiki.net/wiki/White_Fossoil_Floor\"}, {\"wiki_id\": \"PZW-0968\", \"value\": \"2\", \"article\": \"https://pzwiki.net/w/index.php?title=Out_of_Gas_Sign&action=edit&redlink=1\"}]",
+      "usable_listing_value": "",
+      "value_scope": "WIKI_LISTING_ONLY_NOT_TILEDEF_OR_RUNTIME"
+    },
+    {
+      "alias_cluster": "V6-514BD3FA712D10B9",
+      "field": "wiki_encumbrance_raw",
+      "state": "CONFLICT",
+      "recorded_values_json": "[\"1.0\", \"5.0\"]",
+      "wiki_evidence_json": "[{\"wiki_id\": \"PZW-0789\", \"value\": \"1.0\", \"article\": \"https://pzwiki.net/wiki/White_Fossoil_Floor\"}, {\"wiki_id\": \"PZW-0968\", \"value\": \"5.0\", \"article\": \"https://pzwiki.net/w/index.php?title=Out_of_Gas_Sign&action=edit&redlink=1\"}]",
+      "usable_listing_value": "",
+      "value_scope": "WIKI_LISTING_ONLY_NOT_TILEDEF_OR_RUNTIME"
+    }
+  ],
+  "query_identities": 74,
+  "pending_visual_groups": 64,
+  "new_visual_reviews": 0,
+  "inherited_reported_visual_groups": 65,
+  "runtime_identity_certified": 0,
+  "full_v6_database_modified": false,
+  "sqlite_integrity": "ok",
+  "sql_roundtrip": "ok"
+}
