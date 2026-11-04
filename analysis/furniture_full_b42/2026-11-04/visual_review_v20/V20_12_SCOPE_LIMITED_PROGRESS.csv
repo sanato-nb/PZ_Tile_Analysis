@@ -1,0 +1,13 @@
+﻿metric_key,done,total,percent,evidence_kind,meaning
+source_candidate_registry_rows,2231,2231,100.0,REGISTRY,"Registered current Wiki+TileDef candidates, not true game census"
+wiki_reference_rows,1268,1268,100.0,REFERENCE,May be stale/missing entries
+wiki_to_source_sprite_id_linked,1257,1268,99.13,DIRECT_IMAGE_ID,Does not certify actual game object identity
+source_only_candidate_group_rows,963,963,100.0,SOURCE_GROUP,No Wiki image ID match; may be non-furniture
+source_only_mapped_original_png_one_cell_seen,940,940,100.0,PIXEL_DIRECT,"All currently mapped source-only groups, only ONE representative tile each"
+source_only_any_original_one_cell_seen,940,963,97.61,VISUAL_SCOPE,23 source-only groups missing original image-cell mappings
+missing_png_mapping_resolved,0,23,0.0,OPEN_GAP,23 original tile atlas mappings not certified
+source_tile_id_preserved,8219,8219,100.0,SOURCE_RAW,TileDef original candidate tile keys and properties
+directional_group_templates_analyzed,3840,3840,100.0,GEOMETRY,Not actual full furniture assembly
+original_storage_rows_joined,1855,1855,100.0,SOURCE_RAW,"Container properties, not Lua contents"
+old_warnings_certified_resolved,0,474,0.0,OPEN_WARNING,Still unresolved source warnings
+verified_full_object_identity,0,0,,UNKNOWN_DENOMINATOR,No certified in-game game object identity
