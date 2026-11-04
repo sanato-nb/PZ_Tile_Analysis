@@ -1,0 +1,59 @@
+name: B42 v19 stage next 140 disjoint original candidate PNG cells
+on:
+  push:
+    branches:
+      - work/pz-b42-source-only-visual-review-v20-20261104
+    paths:
+      - scripts/stage_b42_v20_next_160_original_crops.py
+      - .github/workflows/b42-furniture-visual-next140-v20.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/B42_FURNITURE_MASTER_INVENTORY_V19.zip
+            /scripts/stage_b42_v20_next_160_original_crops.py
+      - name: Select 140 new original B42 groups never reviewed in v15, v16, v17 or v18
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 -m py_compile scripts/stage_b42_v20_next_160_original_crops.py
+          python3 -u scripts/stage_b42_v20_next_160_original_crops.py --select
+      - name: Checkout only original PNG atlases
+        run: |
+          wc -l analysis/furniture_full_b42/2026-11-04/visual_review_v20/_v20_required_png_atlases.txt
+          git sparse-checkout add --stdin < analysis/furniture_full_b42/2026-11-04/visual_review_v20/_v20_required_png_atlases.txt
+      - name: Crop 140 original PNG cells and prove source pixels
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 -u scripts/stage_b42_v20_next_160_original_crops.py --crop
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/visual_review_v20')
+          j=json.loads((p/'STAGING_MANIFEST.json').read_text(encoding='utf8'))
+          assert j['original_png_pixel_crops_ok']==140,j
+          assert not j['failed']
+          assert j['distinct_source_only_samples']==940
+          assert j['overlap_with_v15_v16_v17_v18_v19']==0
+          print('V20_NEW_160_ORIGINAL_SPRITE_CROPS_VERIFIED_PENDING_VISUAL_REVIEW')
+          PY
+      - name: Commit original sprite preview sheets and CSV
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/*.csv \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/*.json \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/*.png \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/STAGED_V20_CONTACT_*_BASE64.txt
+          git commit -m 'evidence(b42): 140 new original PZ sprite crops for v16 direct visual inspection'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
