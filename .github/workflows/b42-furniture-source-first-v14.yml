@@ -1,0 +1,79 @@
+name: B42 v14 source-first Wiki gaps and original PNG crop evidence
+on:
+  push:
+    branches:
+      - work/pz-b42-source-first-wiki-gaps-v14-20261104
+    paths:
+      - scripts/build_b42_furniture_v14_source_first.py
+      - scripts/render_b42_furniture_v14_original_png.py
+      - .github/workflows/b42-furniture-source-first-v14.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/B42_FURNITURE_CONFLICT_TRIAGE_V13.zip
+            /scripts/build_b42_furniture_v14_source_first.py
+            /scripts/render_b42_furniture_v14_original_png.py
+      - name: Build source-first Wiki-fallible full 963/1268/8219 relational audit
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_v14_source_first.py
+          python3 -m py_compile scripts/render_b42_furniture_v14_original_png.py
+          python3 -u scripts/build_b42_furniture_v14_source_first.py
+      - name: Retrieve only original PNG atlases needed for 160 independent tile crops
+        run: |
+          mapfile -t paths < analysis/furniture_full_b42/2026-11-04/source_first_v14/_required_original_png_paths.txt
+          echo "Original image atlases to fetch:"
+          wc -l < analysis/furniture_full_b42/2026-11-04/source_first_v14/_required_original_png_paths.txt
+          test "$(wc -l < analysis/furniture_full_b42/2026-11-04/source_first_v14/_required_original_png_paths.txt)" -ge 5
+          git sparse-checkout add "${paths[@]}"
+      - name: Render 160 original source sprite crops and publish validated full DB ZIP
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 -u scripts/render_b42_furniture_v14_original_png.py
+      - name: Verify complete package and source provenance manifest
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/source_first_v14')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['source_only_candidate_groups']==963
+          assert m['wiki_reference_rows']==1268
+          assert m['source_tile_rows']==8219
+          assert m['original_png_crop_queue_count']==160
+          assert m['original_png_crop_ok']+m['original_png_crop_empty']+m['original_png_crop_failed']==160
+          assert m['game_object_identifications_confirmed']==0
+          assert m['original_warnings_still_open']==474
+          assert m['wiki_is_authoritative'] is False
+          with sqlite3.connect(p/'B42_FURNITURE_SOURCE_FIRST_V14.sqlite') as c:
+              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              for table,n in {'source_attributes':195265,'source_slots':73644,'v14_source_only_ledger':963,'v14_wiki_reference_audit':1268,'v14_source_tile_wiki_coverage':8219,'v14_original_png_crop':160,'v13_warning_case':474}.items():
+                  assert c.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]==n,table
+          with zipfile.ZipFile(p/'B42_FURNITURE_SOURCE_FIRST_V14.zip') as z:
+              assert z.testzip() is None
+              assert 'B42_FURNITURE_SOURCE_FIRST_V14.sqlite' in z.namelist()
+          print('V14_FULL_SQLITE_963_SOURCE_ONLY_AND_160_ORIGINAL_PIXELS_VERIFIED')
+          PY
+      - name: Publish ZIP, CSV, PNG contacts and manifest; exclude unpacked SQLite
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/source_first_v14/*.csv \
+            analysis/furniture_full_b42/2026-11-04/source_first_v14/*.json \
+            analysis/furniture_full_b42/2026-11-04/source_first_v14/*.md \
+            analysis/furniture_full_b42/2026-11-04/source_first_v14/*.png \
+            analysis/furniture_full_b42/2026-11-04/source_first_v14/*.zip \
+            analysis/furniture_full_b42/2026-11-04/source_first_v14/*BASE64*.txt
+          git commit -m 'db(b42): source-first v14 full SQLite, Wiki gap cases and 160 original PNG crops'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
