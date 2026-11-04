@@ -250,12 +250,12 @@ def main():
       "Work의 107그룹/574타일 열람 보고는 개별 그룹 ID가 없어 검증된 640개와 중복 제거·합산하지 않았습니다.\n"
       "이전 중복 그룹 이미지 검수 참조 129개, 원본 경고 474개, 기존 원본 속성 195,265건을 유지합니다.\n"
       "Lua loot/TMX 배치/마인크래프트 가구 구현은 계속 보류합니다.\n",encoding="utf8")
-    with zipfile.ZipFile(PACK,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+    with zipfile.ZipFile(PACKAGE,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as z:
         for f in sorted(OUT.iterdir()):
-            if (f.is_file() and f!=PACK and not f.name.startswith("STAGED_") and
+            if (f.is_file() and f!=PACKAGE and not f.name.startswith("STAGED_") and
                 not f.name.startswith("_v18_required") and not f.name.endswith("_BASE64.txt")):
                 z.write(f,f.name)
-    with zipfile.ZipFile(PACK) as z:
+    with zipfile.ZipFile(PACKAGE) as z:
         assert z.testzip() is None and DB.name in z.namelist()
     print("V18_2231_CATALOG_640_DISJOINT_DIRECT_SPRITE_REVIEW_SQLITE_ZIP_VERIFIED",dump(manifest),flush=True)
 
