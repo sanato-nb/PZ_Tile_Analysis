@@ -1,0 +1,63 @@
+name: B42 furniture conflict triage v13 source-verified
+on:
+  push:
+    branches:
+      - work/pz-b42-furniture-conflict-triage-v13-20261104
+    paths:
+      - scripts/build_b42_furniture_v13_conflict_triage.py
+      - .github/workflows/b42-furniture-conflict-triage-v13.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/source_proof_v12/B42_FURNITURE_SOURCE_PROOF_V12.zip
+            /scripts/build_b42_furniture_v13_conflict_triage.py
+      - name: Compile and build independent v13 source worklist
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_v13_conflict_triage.py
+          python3 -u scripts/build_b42_furniture_v13_conflict_triage.py
+      - name: Validate source row preservation, new SQLite and package CRC
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile
+          from pathlib import Path
+          p=Path("analysis/furniture_full_b42/2026-11-04/conflict_triage_v13")
+          m=json.loads((p/"MANIFEST.json").read_text(encoding="utf8"))
+          assert m["original_tile_keys"]==8219 and m["original_attribute_rows"]==195265
+          assert m["source_template_count"]==3840 and m["unresolved_original_warnings"]==474
+          assert m["storage_join_rows"]==1855 and m["missing_wiki_rows"]==11
+          assert m["game_object_identifications_certified"]==0 and m["actual_image_inspections_new"]==0
+          assert sum(m["warning_type_count"].values())==474
+          assert sum(m["storage_link_evidence_counts"].values())==1855
+          with sqlite3.connect(p/"B42_FURNITURE_CONFLICT_TRIAGE_V13.sqlite") as c:
+              assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+              expected={"source_attributes":195265,"v12_tile_proof":8219,
+                        "v13_warning_case":474,"v13_storage_link":1855,
+                        "v11_source_warning":474}
+              for table,size in expected.items():
+                  assert c.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]==size,table
+                  if table in ("source_attributes","v11_source_warning"):
+                      assert c.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]==size
+          with zipfile.ZipFile(p/"B42_FURNITURE_CONFLICT_TRIAGE_V13.zip") as z:
+              assert z.testzip() is None
+              assert "B42_FURNITURE_CONFLICT_TRIAGE_V13.sqlite" in z.namelist()
+          assert (p/"V13_WARNING_REVIEW_BROWSER.html").stat().st_size>5000
+          print("V13_SOURCE_FULL_DB_CSV_AND_HTML_AUDIT_PASSED")
+          PY
+      - name: Publish immutable v13 ZIP and evidence CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/
+          git commit -m 'db(b42): add v13 conflict worklist, audited storage links and offline review browser'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
