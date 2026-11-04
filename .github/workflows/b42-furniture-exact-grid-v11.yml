@@ -1,0 +1,64 @@
+name: B42 furniture original source tile grid assembly v11
+on:
+  push:
+    branches: [work/pz-b42-exact-tile-assembly-v11-20261104]
+    paths:
+      - .github/workflows/b42-furniture-exact-grid-v11.yml
+      - scripts/build_b42_tile_assembly_v11.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/tile_reverse_index_v10/B42_FURNITURE_REVERSE_INDEX_V10.zip
+            /scripts/build_b42_tile_assembly_v11.py
+      - name: Compile and rebuild per-sprite source geometry
+        run: |
+          python3 -m py_compile scripts/build_b42_tile_assembly_v11.py
+          python3 -u scripts/build_b42_tile_assembly_v11.py
+      - name: Verify all original data and reverse links preserved
+        run: |
+          python3 - <<'PY'
+          import sqlite3,json,zipfile
+          from pathlib import Path
+          root=Path("analysis/furniture_full_b42/2026-11-04/exact_assembly_v11")
+          m=json.loads((root/"MANIFEST.json").read_text("utf8"))
+          assert m["original_source_tile_keys"]==8219
+          assert m["source_direction_templates"]==3840
+          assert m["complete_rectangular_source_templates"]==843
+          assert sum(m["source_status_counts"].values())==3840
+          assert m["original_source_attribute_rows_preserved"]==195265
+          assert m["original_wiki_rows_preserved"]==1268
+          assert not m["minecraft_implementation_decided"]
+          assert m["actual_PZ_furniture_identity_certified"]==0
+          with sqlite3.connect(root/"B42_EXACT_TILE_GRID_ASSEMBLY_V11.sqlite") as c:
+           assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+           def n(t):return c.execute("SELECT COUNT(*) FROM "+t).fetchone()[0]
+           for table,num in [("v11_direction_template",3840),("v11_tile_position",m["tile_to_position_rows"]),
+             ("furniture_tile",8219),("source_attributes",195265),
+             ("source_slots",73644),("registry_entry",2231),("wiki_furniture",1268),
+             ("v10_reverse_edge",14195),("v10_group_direction_candidate",3840)]:
+            assert n(table)==num,(table,n(table),num)
+           for t in ["future_item_distribution","future_map_placement","future_minecraft_implementation"]:
+            assert n(t)==0
+          with zipfile.ZipFile(root/"B42_EXACT_TILE_GRID_ASSEMBLY_V11.zip") as z:
+           assert z.testzip() is None
+           assert "B42_EXACT_TILE_GRID_ASSEMBLY_V11.sqlite" in z.namelist()
+          print("V11_SOURCE_GRID_SQLITE_VALIDATED")
+          PY
+      - name: Commit reviewed source-grid DB and evidence CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/exact_assembly_v11/
+          git commit -m 'db(b42): preserve 3840 source facing grid templates and exact tile-to-coordinate offsets'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

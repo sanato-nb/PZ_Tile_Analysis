@@ -1,0 +1,79 @@
+{
+  "project": "Project Zomboid B42 -> Minecraft map",
+  "date": "2026-11-04",
+  "reference_timezone": "Asia/Seoul",
+  "repository": "sanato-nb/PZ_Tile_Analysis",
+  "latest_verified_furniture": {
+    "version": "v11",
+    "pull_request": 293,
+    "merged_to_main": false,
+    "branch": "work/pz-b42-exact-tile-assembly-v11-20261104",
+    "root": "analysis/furniture_full_b42/2026-11-04/exact_assembly_v11",
+    "sqlite": "B42_EXACT_TILE_GRID_ASSEMBLY_V11.sqlite",
+    "zip": "B42_EXACT_TILE_GRID_ASSEMBLY_V11.zip",
+    "github_actions": "success",
+    "sqlite_integrity": "ok",
+    "source_tiledef_unique_keys_total": 61418,
+    "source_slots": 73644,
+    "source_attribute_rows": 195265,
+    "wiki_rows": 1268,
+    "wiki_rows_with_source_id": 1257,
+    "wiki_rows_without_source_id": 11,
+    "registry_rows": 2231,
+    "source_only_unlinked_groups": 963,
+    "original_furniture_candidate_source_keys": 8219,
+    "original_source_named_groups": 1852,
+    "entry_tile_links": 14195,
+    "container_links": 1855,
+    "source_direction_templates": 3840,
+    "source_rectangle_candidates": 843,
+    "template_status": {
+      "complete_rectangle": 843,
+      "duplicate_position": 27,
+      "incomplete_grid": 14,
+      "missing_grid": 52,
+      "multiple_no_grid": 250,
+      "single_no_grid": 2654
+    },
+    "v11_warnings": 474,
+    "source_warnings": {
+      "duplicate_position": 27,
+      "incomplete_grid": 14,
+      "missing_grid": 52,
+      "multiple_no_grid": 250,
+      "multiple_exact_wiki_rows": 125,
+      "multiple_raw_capacities": 5,
+      "multiple_container_types": 1
+    },
+    "original_game_moveable_id_certified": 0,
+    "original_lua_loot_rules_imported": 0,
+    "minecraft_implementation_selected": false,
+    "tmx_placement_instances_created": 0
+  },
+  "confirmed_prior_work": {
+    "duplicate_source_group_visual_review": 129,
+    "total_duplicate_groups": 129,
+    "work_source_only_storage_group_observed": 107,
+    "work_source_only_storage_tile_observed": 574,
+    "note": "107/574 Work observation may be outside latest v11 DB: commit and test before treating as persisted data"
+  },
+  "priorities": [
+    "read PR #293 and verify newer Work/branches",
+    "v11 474 warning source-driven audit",
+    "exact furniture identity vs named style vs sprite-part separation",
+    "v9 11 wiki missing TileDef ID audit",
+    "verify & import 107-group Work evidence only with provenance",
+    "preserve per-tile container/capacity and later import Lua RoomDefs item distribution",
+    "TMX world placement mapping",
+    "Minecraft furniture rendering implementation later"
+  ],
+  "prohibitions": [
+    "do not decide Block vs BlockEntity vs Entity yet",
+    "do not invent a unique furniture count from 2231 registry records",
+    "do not merge by CustomName+GroupName alone",
+    "do not combine container capacities without source evidence",
+    "do not treat contact sheet scan as final identity certification",
+    "do not rewrite original PNG/TileDef/TMX or erase legacy DB",
+    "do not treat open PR as merged main"
+  ]
+}
