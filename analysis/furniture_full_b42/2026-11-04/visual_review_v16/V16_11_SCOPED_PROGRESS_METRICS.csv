@@ -1,0 +1,12 @@
+﻿metric_key,numerator,denominator,percent,scope_note,status_kind
+known_entries_registered,2231,2231,100.0,"100% of currently collected candidate rows, not all game furniture",CATALOG
+wiki_reference_rows_registered,1268,1268,100.0,Wiki is potentially stale/incomplete,REFERENCE
+wiki_image_source_tile_ID_connected,1257,1268,99.13,Wiki image IDs linked to source; does not prove unique furniture,CROSSWALK
+source_only_groups_registered,963,963,100.0,"Source-only = without exact Wiki image ID crosswalk, not proven Wiki absence",CATALOG
+source_only_single_original_sprite_direct_visual_view,320,963,33.23,"160 v15 + 160 NEW v16, disjoint verified original tile crop images",SINGLE_SPRITE_VISUAL
+prior_129_shared_groups_review_reference,129,129,100.0,"Prior group-level visual reference, NOT runtime object identity",LEGACY_VISUAL
+original_furniture_candidate_tile_provenance,8219,8219,100.0,Original tile-level attributes and source positions preserved,SOURCE
+source_facing_assembly_candidate_geometry,3840,3840,100.0,"Group×Facing geometric candidates, not confirmed complete objects",GEOMETRY
+storage_tile_source_original_join,1855,1855,100.0,"Original storage attributes cross-checked, not Lua loot contents",STORAGE
+unresolved_474_original_warnings,0,474,0.0,No warning certified resolved,OPEN
+game_object_identification_verified,0,0,,Full in-game object count unknown; percent intentionally undefined,UNKNOWN_DENOMINATOR
