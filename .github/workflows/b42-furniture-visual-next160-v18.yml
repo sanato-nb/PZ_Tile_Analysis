@@ -1,11 +1,11 @@
-name: B42 v17 stage next 160 disjoint original candidate PNG cells
+name: B42 v18 stage next 160 disjoint original candidate PNG cells
 on:
   push:
     branches:
       - work/pz-b42-source-only-visual-review-v18-20261104
     paths:
       - scripts/stage_b42_v18_next_160_original_crops.py
-      - .github/workflows/b42-furniture-visual-next160-v17.yml
+      - .github/workflows/b42-furniture-visual-next160-v18.yml
   workflow_dispatch:
 permissions:
   contents: write
