@@ -1,0 +1,12 @@
+﻿metric_key,numerator,denominator,percent,meaning,evidence_grade
+registered_current_candidate_rows,2231,2231,100.0,Current source+Wiki candidate rows; NOT unique furniture found in full game,REGISTRY_ONLY
+registered_wiki_reference_rows,1268,1268,100.0,Wiki may be stale/incomplete,REFERENCE_ONLY
+wiki_source_image_ID_matched_rows,1257,1268,99.13,"Exact Wiki image ID crosswalk, not official object identity",SOURCE_ID_LINK
+registered_source_only_candidate_groups,963,963,100.0,No exact Wiki image ID crosswalk; NOT proof page missing,SOURCE_GROUP
+direct_one_original_sprite_image_reviewed,640,963,66.46,One original PNG sprite each from distinct TileDef source-only groups,DIRECT_SINGLE_SPRITE
+remaining_source_only_groups_unreviewed,0,323,0.0,323 source groups not yet single-image reviewed,PENDING
+original_tile_ID_provenance,8219,8219,100.0,TileDef tile keys preserved,SOURCE_RAW
+source_directional_geometry,3840,3840,100.0,"Candidate group×Facing geometry, not object verification",GEOMETRIC
+original_storage_evidence_links,1855,1855,100.0,"TileDef storage links, not Lua loot contents",SOURCE_RAW
+original_warning_cases_resolved,0,474,0.0,All original 474 warnings remain unverified,UNRESOLVED
+actual_game_object_identity_certified,0,0,,Ground-truth count unknown; no percent,UNVERIFIED
