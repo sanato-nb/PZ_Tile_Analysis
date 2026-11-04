@@ -5,7 +5,7 @@ on:
       - work/pz-b42-source-only-visual-review-v17-20261104
     paths:
       - scripts/stage_b42_v17_next_160_original_crops.py
-      - .github/workflows/b42-furniture-visual-next160-v16.yml
+      - .github/workflows/b42-furniture-visual-next160-v17.yml
   workflow_dispatch:
 permissions:
   contents: write
@@ -21,7 +21,7 @@ jobs:
           sparse-checkout: |
             /analysis/furniture_full_b42/2026-11-04/visual_review_v16/B42_FURNITURE_MASTER_INVENTORY_V16.zip
             /scripts/stage_b42_v17_next_160_original_crops.py
-      - name: Select 160 new original B42 groups never reviewed in v15
+      - name: Select 160 new original B42 groups never reviewed in v15 or v16
         run: |
           python3 -m pip install --quiet pillow
           python3 -m py_compile scripts/stage_b42_v17_next_160_original_crops.py
