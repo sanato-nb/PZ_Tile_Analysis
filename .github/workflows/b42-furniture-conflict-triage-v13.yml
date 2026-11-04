@@ -57,7 +57,12 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add --sparse analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/*.csv \
+            analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/*.md \
+            analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/*.html \
+            analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-04/conflict_triage_v13/B42_FURNITURE_CONFLICT_TRIAGE_V13.zip
           git commit -m 'db(b42): add v13 conflict worklist, audited storage links and offline review browser'
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push origin "HEAD:$GITHUB_REF_NAME"
