@@ -216,8 +216,8 @@ def main():
  encoding="utf8")
  with zipfile.ZipFile(PACK,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as z:
   for f in sorted(OUT.iterdir()):
-   if f.is_file() and f!=PACK and not f.name.startswith("STAGED_") and
-     not f.name.endswith("_BASE64.txt") and not f.name.startswith("_v17_required"):
+   if (f.is_file() and f!=PACK and not f.name.startswith("STAGED_") and
+     not f.name.endswith("_BASE64.txt") and not f.name.startswith("_v17_required")):
     z.write(f,f.name)
  with zipfile.ZipFile(PACK) as z:
   assert z.testzip() is None and DB.name in z.namelist()
