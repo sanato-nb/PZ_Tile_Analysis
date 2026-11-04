@@ -1,0 +1,32 @@
+name: Stage B42 v15 original contact sheets for direct evidence review
+on:
+  push:
+    branches:
+      - work/pz-b42-source-only-visual-review-v15-20261104
+    paths:
+      - scripts/stage_v15_pz_original_contact_images.py
+      - .github/workflows/b42-source-only-visual-stage-v15.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/source_first_v14/B42_FURNITURE_SOURCE_FIRST_V14.zip
+            /scripts/stage_v15_pz_original_contact_images.py
+      - name: Stage real PNG pixels from validated v14 original contact sheets
+        run: python3 -u scripts/stage_v15_pz_original_contact_images.py
+      - name: Publish review images encoded for direct inspection
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/visual_review_v15/STAGED_ORIGINAL_CONTACT_*.txt
+          git commit -m 'evidence(b42): stage three original contact sheets for independent visual inspection'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
