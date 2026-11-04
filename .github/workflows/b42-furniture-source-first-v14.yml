@@ -34,7 +34,7 @@ jobs:
           echo "Original image atlases to fetch:"
           wc -l < analysis/furniture_full_b42/2026-11-04/source_first_v14/_required_original_png_paths.txt
           test "$(wc -l < analysis/furniture_full_b42/2026-11-04/source_first_v14/_required_original_png_paths.txt)" -ge 5
-          git sparse-checkout add --no-cone "${paths[@]}"
+          git sparse-checkout add "${paths[@]}"
       - name: Render 160 original source sprite crops and publish validated full DB ZIP
         run: |
           python3 -m pip install --quiet pillow
