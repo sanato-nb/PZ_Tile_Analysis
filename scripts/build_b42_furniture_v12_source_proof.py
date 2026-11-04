@@ -10,7 +10,7 @@ R=Path(__file__).resolve().parents[1]
 SRC=R/"analysis/furniture_full_b42/2026-11-04/exact_assembly_v11/B42_EXACT_TILE_GRID_ASSEMBLY_V11.zip"
 OUT=R/"analysis/furniture_full_b42/2026-11-04/source_proof_v12"
 DB=OUT/"B42_FURNITURE_SOURCE_PROOF_V12.sqlite"
-PACK=OUT/"B42_EXACT_TILE_GRID_ASSEMBLY_V11.zip"
+PACK=OUT/"B42_FURNITURE_SOURCE_PROOF_V12.zip"
 POS=re.compile(r"^\s*(-?\d+)\s*,\s*(-?\d+)\s*$")
 def query(c,s):return [dict(x) for x in c.execute(s)]
 def n(c,t):return c.execute("SELECT COUNT(*) FROM "+t).fetchone()[0]
