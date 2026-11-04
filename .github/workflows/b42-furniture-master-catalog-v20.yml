@@ -1,0 +1,93 @@
+name: B42 v20 940 original sprite reviews and 23 atlas filename evidence gaps
+on:
+  push:
+    branches:
+      - work/pz-b42-source-only-visual-review-v20-20261104
+    paths:
+      - scripts/build_b42_furniture_master_catalog_v20.py
+      - analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_140_DIRECT_VISUAL_LABELS.csv
+      - analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_372_ORIGINAL_PNG_ASSET_FILENAME_INVENTORY.json
+      - .github/workflows/b42-furniture-master-catalog-v20.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/B42_FURNITURE_MASTER_INVENTORY_V19.zip
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_140_NEW_ORIGINAL_PNG_CROP_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_140_DIRECT_VISUAL_LABELS.csv
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_372_ORIGINAL_PNG_ASSET_FILENAME_INVENTORY.json
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_NEW_SOURCE_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_NEW_SOURCE_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_NEW_SOURCE_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_NEW_SOURCE_CONTACT_04.png
+            /scripts/build_b42_furniture_master_catalog_v20.py
+      - name: Build v20 full SQLite with all 940 mapped original one-tile PNG reviews
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_master_catalog_v20.py
+          python3 -u scripts/build_b42_furniture_master_catalog_v20.py
+      - name: Independently check original source data, 940 distinct groups and 23 atlas gaps
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile,csv
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/visual_review_v20')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['registered_source_and_wiki_candidate_rows']==2231
+          assert m['source_only_candidate_groups']==963
+          assert m['deduplicated_one_original_sprite_viewed_groups']==940
+          assert m['new_v20_one_original_sprite_directly_viewed']==140
+          assert m['known_original_png_mapped_group_visual_coverage']=='940/940'
+          assert m['source_only_without_original_png_mapping']==23
+          assert m['wiki_may_be_outdated_incomplete']
+          assert m['warning_cases_unresolved']==474
+          assert m['in_game_object_identity_certified']==0
+          assert sum(m['v20_broad_visible_class_counts'].values())==140
+          assert sum(m['all_940_one_sprite_broad_classes'].values())==940
+          with sqlite3.connect(p/'B42_FURNITURE_MASTER_INVENTORY_V20.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            for table,n in {
+              'source_attributes':195265,'source_slots':73644,'registry_entry':2231,
+              'furniture_tile':8219,'v13_warning_case':474,
+              'v15_visual_part_observation':160,'v16_visual_part_observation':160,
+              'v17_visual_part_observation':160,'v18_visual_part_observation':160,
+              'v19_visual_part_observation':160,'v20_visual_part_observation':140,
+              'v20_master_furniture_registry':2231,'v20_source_only_review_coverage':963,
+              'v20_unreviewed_source_queue':23,'v20_23_original_atlas_filename_audit':23}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]==n,table
+            source_union=c.execute('SELECT COUNT(DISTINCT entry_id) FROM (SELECT entry_id FROM v15_visual_part_observation UNION ALL SELECT entry_id FROM v16_visual_part_observation UNION ALL SELECT entry_id FROM v17_visual_part_observation UNION ALL SELECT entry_id FROM v18_visual_part_observation UNION ALL SELECT entry_id FROM v19_visual_part_observation UNION ALL SELECT entry_id FROM v20_visual_part_observation)').fetchone()[0]
+            assert source_union==940,source_union
+            assert c.execute('SELECT COUNT(*) FROM v20_master_furniture_registry WHERE exact_game_object_identity_confirmed<>0').fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_MASTER_INVENTORY_V20.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_MASTER_INVENTORY_V20.sqlite' in z.namelist()
+          with (p/'V20_2231_FULL_SOURCE_FIRST_MASTER.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==2231
+          print('V20_ALL_940_MAPPED_SOURCE_SPRITES_AND_23_ASSET_GAPS_SQLITE_ZIP_PROOF_PASS')
+          PY
+      - name: Publish v20 full SQLite ZIP and audit CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/V20_*.csv \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/README_KO.md \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v20/B42_FURNITURE_MASTER_INVENTORY_V20.zip
+          git commit -m 'db(b42): v20 full source-first registry and all 940 indexable original PNG visual reviews'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for attempt in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            echo "Transient GitHub push issue, retry $attempt"
+            sleep 4
+          done
+          exit 1
