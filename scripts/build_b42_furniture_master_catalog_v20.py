@@ -27,7 +27,8 @@ def main():
  stage=json.loads((OUT/"STAGING_MANIFEST.json").read_text(encoding="utf8"))
  assert stage["original_png_pixel_crops_ok"]==140 and stage["distinct_source_only_samples"]==940
  assert stage["overlap_with_v15_v16_v17_v18_v19"]==0
- crops=readcsv("V20_140_NEW_ORIGINAL_PNG_CROP_SHA256.csv")
+ crops=readcsv("V20_160_NEW_ORIGINAL_PNG_CROP_SHA256.csv")
+ assert len(crops)==140, "The staging file retains its historic 160 label but contains exactly 140 new crops"
  labels=readcsv("V20_140_DIRECT_VISUAL_LABELS.csv")
  assert len(crops)==140 and len(labels)==140
  bylabel={int(x["sample_index"]):x for x in labels}
@@ -231,6 +232,7 @@ def main():
  master=qr(c,"SELECT * FROM v20_master_furniture_registry ORDER BY entry_id")
  coverage=qr(c,"SELECT * FROM v20_source_only_review_coverage ORDER BY entry_id")
  c.close()
+ shutil.copy2(OUT/"V20_160_NEW_ORIGINAL_PNG_CROP_SHA256.csv", OUT/"V20_140_NEW_ORIGINAL_PNG_CROP_SHA256.csv")
  writecsv("V20_140_DIRECT_ORIGINAL_SPRITE_VISUAL_OBSERVATIONS.csv",observed)
  writecsv("V20_2231_FULL_SOURCE_FIRST_MASTER.csv",master)
  writecsv("V20_963_SOURCE_GROUP_VISUAL_COVERAGE.csv",coverage)
