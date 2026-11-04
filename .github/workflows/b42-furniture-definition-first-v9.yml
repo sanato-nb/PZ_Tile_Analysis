@@ -1,0 +1,82 @@
+name: B42 furniture definition-first source audit v9
+on:
+  push:
+    branches: [work/pz-b42-definition-first-furniture-v9-20261104]
+    paths:
+      - scripts/build_b42_definition_first_furniture_v9.py
+      - .github/workflows/b42-furniture-definition-first-v9.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/build_b42_definition_first_furniture_v9.py
+            /analysis/furniture_full_b42/2026-11-03/wiki_first_v2/B42_WIKI_FIRST_FURNITURE_REGISTRY.zip
+            /analysis/furniture_full_b42/2026-11-04/visual_completion_v8/V8_ALL_129_REVIEW_COVERAGE.csv
+      - name: Build original-definition inventory audit
+        run: |
+          python3 -m py_compile scripts/build_b42_definition_first_furniture_v9.py
+          python3 -u scripts/build_b42_definition_first_furniture_v9.py
+      - name: Verify source provenance, zero fake links and database integrity
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile,csv
+          from pathlib import Path
+          p=Path("analysis/furniture_full_b42/2026-11-04/definition_first_v9")
+          m=json.loads((p/"MANIFEST.json").read_text("utf8"))
+          assert m["wiki_rows"]==1268
+          assert m["wiki_exact_sprite_connected_rows"]==1257
+          assert m["wiki_unlinked_rows"]==11
+          assert m["source_only_groups"]==963
+          assert m["registry_entry_rows"]==2231
+          assert m["original_tile_link_rows"]==14195
+          assert m["original_container_link_rows"]==1855
+          assert m["original_tiledef_attributes"]==195265
+          assert m["v8_visually_reviewed_conflict_groups"]==129
+          assert sum(m["link_evidence"].values())==14195
+          assert sum(m["storage_evidence"].values())==1855
+          assert m["wiki_missing_record_classes"]=={
+            "COLLECTION_HEADING_NOT_SINGLE_SPRITE":3,
+            "VARIANT_IMAGE_MISSING":3,
+            "SPECIFIC_ITEM_IMAGE_MISSING":5}
+          assert m["game_object_identity_verified_new"]==0
+          assert m["new_wiki_direct_ids_verified"]==0
+          assert m["loot_rules_imported"]==0
+          assert m["minecraft_decisions"]==0
+          c=sqlite3.connect(p/"B42_FURNITURE_DEFINITION_FIRST_V9.sqlite")
+          assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          required={"v9_entry_evidence":2231,"v9_container_evidence":1855,
+                    "v9_wiki_missing_id":11,"v9_v8_image_review_reference":129,
+                    "source_attributes":195265,"source_slots":73644,
+                    "registry_entry":2231,"wiki_furniture":1268}
+          for table,n in required.items():
+           got=c.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]
+           assert got==n,(table,got,n)
+          assert c.execute("SELECT SUM(automatic_tile_link_count) FROM v9_wiki_missing_id").fetchone()[0]==0
+          for name in ["future_item_distribution","future_minecraft_implementation","future_map_placement"]:
+           assert c.execute("SELECT COUNT(*) FROM "+name).fetchone()[0]==0
+          c.close()
+          with zipfile.ZipFile(p/"B42_FURNITURE_DEFINITION_FIRST_V9.zip") as z:
+           assert z.testzip() is None
+           assert "B42_FURNITURE_DEFINITION_FIRST_V9.sqlite" in z.namelist()
+          print("DEFINITION_FIRST_V9_VERIFIED",m)
+          PY
+      - name: Save compressed SQLite and 4 evidence reports
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/definition_first_v9/*.csv
+          git add --sparse analysis/furniture_full_b42/2026-11-04/definition_first_v9/*.json
+          git add --sparse analysis/furniture_full_b42/2026-11-04/definition_first_v9/*.md
+          git add --sparse analysis/furniture_full_b42/2026-11-04/definition_first_v9/*.zip
+          git commit -m 'db(b42): original-definition evidence for all 2231 entries, 1855 storage links and 11 Wiki ID gaps'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
