@@ -1,0 +1,83 @@
+name: B42 v18 source-first 2231 candidate catalog and 640 verified single-sprite visual reviews
+on:
+  push:
+    branches:
+      - work/pz-b42-source-only-visual-review-v18-20261104
+    paths:
+      - scripts/build_b42_furniture_master_catalog_v18.py
+      - analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_160_DIRECT_VISUAL_LABELS.csv
+      - .github/workflows/b42-furniture-master-catalog-v18.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v17/B42_FURNITURE_MASTER_INVENTORY_V17.zip
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_160_NEW_ORIGINAL_PNG_CROP_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_160_DIRECT_VISUAL_LABELS.csv
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_NEW_SOURCE_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_NEW_SOURCE_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_NEW_SOURCE_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_NEW_SOURCE_CONTACT_04.png
+            /scripts/build_b42_furniture_master_catalog_v18.py
+      - name: Build v18 full original source relational master with 160 direct visual records
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_master_catalog_v18.py
+          python3 -u scripts/build_b42_furniture_master_catalog_v18.py
+      - name: Audit 2231 rows, 640 unique source group image reviews and ZIP CRC
+        run: |
+          python3 - <<'PY'
+          import sqlite3,json,zipfile,csv
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/visual_review_v18')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['currently_registered_candidate_rows']==2231
+          assert m['source_only_candidate_groups']==963
+          assert m['unique_direct_one_sprite_reviewed_source_only_groups']==640
+          assert m['source_only_groups_pending_visual_review']==323
+          assert m['v18_new_direct_one_sprite_groups']==160
+          assert m['wiki_is_fallible_reference']
+          assert m['game_object_identity_certified']==0
+          assert m['old_original_warnings_unresolved']==474
+          assert sum(m['broad_class_counts_new'].values())==160
+          assert sum(m['broad_class_counts_total'].values())==640
+          with sqlite3.connect(p/'B42_FURNITURE_MASTER_INVENTORY_V18.sqlite') as c:
+              assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+              for t,n in {'source_attributes':195265,'source_slots':73644,
+                'registry_entry':2231,'v13_warning_case':474,
+                'v15_visual_part_observation':160,'v16_visual_part_observation':160,
+                'v17_visual_part_observation':160,'v18_visual_part_observation':160,
+                'v17_master_furniture_registry':2231,'v18_master_furniture_registry':2231,
+                'v18_source_only_review_coverage':963,'v18_pending_source_only_queue':323}.items():
+                  assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,t
+              ids=c.execute('SELECT COUNT(DISTINCT entry_id) FROM (SELECT entry_id FROM v15_visual_part_observation UNION ALL SELECT entry_id FROM v16_visual_part_observation UNION ALL SELECT entry_id FROM v17_visual_part_observation UNION ALL SELECT entry_id FROM v18_visual_part_observation)').fetchone()[0]
+              assert ids==640,ids
+              assert c.execute('SELECT COUNT(*) FROM v18_master_furniture_registry WHERE exact_game_object_identity_confirmed!=0').fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_MASTER_INVENTORY_V18.zip') as z:
+              assert z.testzip() is None
+              assert 'B42_FURNITURE_MASTER_INVENTORY_V18.sqlite' in z.namelist()
+          with (p/'V18_2231_MASTER_CANDIDATE_CATALOG.csv').open(encoding='utf-8-sig') as f:
+              assert sum(1 for _ in csv.reader(f))-1==2231
+          print('V18_2231_MASTER_640_DIRECT_ORIGINAL_SPRITE_SQLITE_CRC_PASS')
+          PY
+      - name: Commit validated v18 full DB ZIP and CSVs without large unpacked SQLite
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v18/V18_*.csv \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v18/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v18/README_KO.md \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v18/B42_FURNITURE_MASTER_INVENTORY_V18.zip
+          git commit -m 'db(b42): v18 complete 2231 candidate catalog with 640 reviewed source-only sprites'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
