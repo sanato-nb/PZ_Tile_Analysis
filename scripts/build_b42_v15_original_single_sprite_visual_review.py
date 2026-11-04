@@ -99,7 +99,7 @@ def main():
  c.close()
  emit("V15_160_DIRECTLY_INSPECTED_ORIGINAL_TILE_BROAD_VISUAL_CLASSES.csv",audit)
  emit("V15_963_SOURCE_GROUP_SINGLE_CROP_VISUAL_COVERAGE.csv",coverage)
- emit("V15_14_BROAD_VISUAL_CATEGORIES.csv",[
+ emit("V15_15_BROAD_VISUAL_CATEGORIES.csv",[
   dict(broad_visual_class=k,source_sprite_samples=v,game_object_identities_certified=0,
    interpretation="appearance of 1 source tile only, not full physical furniture") for k,v in sorted(counts.items())])
  manifest=dict(version="v15",base_v14_full_sqlite_preserved=True,
