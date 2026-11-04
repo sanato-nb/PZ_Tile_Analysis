@@ -1,0 +1,71 @@
+name: B42 v17 source-first master and 480 image reviews
+on:
+  push:
+    branches:
+      - work/pz-b42-source-only-visual-review-v17-20261104
+    paths:
+      - scripts/build_b42_furniture_master_catalog_v17.py
+      - .github/workflows/b42-furniture-master-catalog-v17.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v16/B42_FURNITURE_MASTER_INVENTORY_V16.zip
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v17/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v17/V17_160_NEW_ORIGINAL_PNG_CROP_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v17/V17_NEW_SOURCE_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v17/V17_NEW_SOURCE_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v17/V17_NEW_SOURCE_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v17/V17_NEW_SOURCE_CONTACT_04.png
+            /scripts/build_b42_furniture_master_catalog_v17.py
+      - name: Build full v17 DB with 160 new direct visual reviews
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_master_catalog_v17.py
+          python3 -u scripts/build_b42_furniture_master_catalog_v17.py
+      - name: Validate complete historical data and 480 disjoint reviewed groups
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile,csv
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/visual_review_v17')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf-8'))
+          assert m['known_catalog_rows']==2231 and m['source_only_group_candidates']==963
+          assert m['verified_disjoint_unique_single_sprite_visual_groups']==480
+          assert m['source_only_groups_awaiting_single_sprite_visual_review']==483
+          assert m['wiki_is_potentially_outdated_or_incomplete']
+          assert m['unresolved_original_warnings']==474 and m['exact_game_object_identities_verified']==0
+          with sqlite3.connect(p/'B42_FURNITURE_MASTER_INVENTORY_V17.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            for t,n in {'source_attributes':195265,'registry_entry':2231,'v13_warning_case':474,
+             'v15_visual_part_observation':160,'v16_visual_part_observation':160,
+             'v17_visual_part_observation':160,'v17_master_furniture_registry':2231,
+             'v17_source_only_review_coverage':963,'v17_next_unreviewed_source_queue':483}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,t
+            assert c.execute('SELECT COUNT(DISTINCT entry_id) FROM (SELECT entry_id FROM v15_visual_part_observation UNION ALL SELECT entry_id FROM v16_visual_part_observation UNION ALL SELECT entry_id FROM v17_visual_part_observation)').fetchone()[0]==480
+          with zipfile.ZipFile(p/'B42_FURNITURE_MASTER_INVENTORY_V17.zip') as z:
+            assert z.testzip() is None and 'B42_FURNITURE_MASTER_INVENTORY_V17.sqlite' in z.namelist()
+          with (p/'V17_2231_FULL_FURNITURE_CANDIDATE_MASTER.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==2231
+          print('V17_ALL_2231_CATALOG_ROWS_AND_480_VISUAL_SOURCE_RECORDS_VALIDATED')
+          PY
+      - name: Commit verified ZIP and CSV outputs without raw huge SQLite
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v17/V17_*.csv \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v17/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v17/README_KO.md \
+            analysis/furniture_full_b42/2026-11-04/visual_review_v17/B42_FURNITURE_MASTER_INVENTORY_V17.zip
+          git commit -m 'db(b42): v17 2231-entry master and 480 unique original sprite reviews'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
