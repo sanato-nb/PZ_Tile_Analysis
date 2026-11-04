@@ -1,0 +1,79 @@
+name: B42 v19 source first 800 visual source group audit
+on:
+  push:
+    branches:
+      - work/pz-b42-source-only-visual-review-v19-20261104
+    paths:
+      - scripts/build_b42_furniture_master_catalog_v19.py
+      - .github/workflows/b42-furniture-master-catalog-v19.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v18/B42_FURNITURE_MASTER_INVENTORY_V18.zip
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/V19_160_NEW_ORIGINAL_PNG_CROP_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/V19_160_DIRECT_VISUAL_LABELS.csv
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/V19_NEW_SOURCE_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/V19_NEW_SOURCE_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/V19_NEW_SOURCE_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v19/V19_NEW_SOURCE_CONTACT_04.png
+            /scripts/build_b42_furniture_master_catalog_v19.py
+      - name: Build original source-first v19 complete SQLite
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_master_catalog_v19.py
+          python3 -u scripts/build_b42_furniture_master_catalog_v19.py
+      - name: Validate 2231 entries 800 unique reviews and 23 missing PNG mappings
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile,csv
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/visual_review_v19')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['currently_collected_candidate_registry_rows']==2231
+          assert m['source_only_candidate_groups']==963
+          assert m['original_png_direct_single_sprite_review_groups']==800
+          assert m['source_only_groups_without_one_sprite_visual_review']==163
+          assert m['remaining_original_png_mapped_groups']==140
+          assert m['remaining_png_mapping_blockers']==23
+          assert m['certified_game_object_identities']==0
+          assert m['original_source_warnings_unresolved']==474
+          assert sum(m['new_160_visual_class_counts'].values())==160
+          assert sum(m['all_800_visual_class_counts'].values())==800
+          with sqlite3.connect(p/'B42_FURNITURE_MASTER_INVENTORY_V19.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            for t,n in {'source_attributes':195265,'registry_entry':2231,'v13_warning_case':474,
+              'v15_visual_part_observation':160,'v16_visual_part_observation':160,
+              'v17_visual_part_observation':160,'v18_visual_part_observation':160,
+              'v19_visual_part_observation':160,'v19_master_furniture_registry':2231,
+              'v19_source_only_review_coverage':963,'v19_unreviewed_source_queue':163,
+              'v19_23_missing_png_group_diagnostics':23}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,t
+            assert c.execute('SELECT COUNT(DISTINCT entry_id) FROM (SELECT entry_id FROM v15_visual_part_observation UNION ALL SELECT entry_id FROM v16_visual_part_observation UNION ALL SELECT entry_id FROM v17_visual_part_observation UNION ALL SELECT entry_id FROM v18_visual_part_observation UNION ALL SELECT entry_id FROM v19_visual_part_observation)').fetchone()[0]==800
+          with zipfile.ZipFile(p/'B42_FURNITURE_MASTER_INVENTORY_V19.zip') as z:
+            assert z.testzip() is None and 'B42_FURNITURE_MASTER_INVENTORY_V19.sqlite' in z.namelist()
+          with (p/'V19_2231_FULL_MASTER_CANDIDATE_CATALOG.csv').open(encoding='utf-8-sig',newline='') as f:
+            assert sum(1 for _ in csv.reader(f))-1==2231
+          print('V19_SOURCE_PROOF_FULL_DB_CRC_PASSED')
+          PY
+      - name: Publish full v19 database ZIP and CSV
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/visual_review_v19/V19_*.csv analysis/furniture_full_b42/2026-11-04/visual_review_v19/MANIFEST.json analysis/furniture_full_b42/2026-11-04/visual_review_v19/README_KO.md analysis/furniture_full_b42/2026-11-04/visual_review_v19/B42_FURNITURE_MASTER_INVENTORY_V19.zip
+          git commit -m 'db(b42): v19 master 800 original visual source groups and 23 PNG source blockers'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for i in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 4
+          done
+          exit 1

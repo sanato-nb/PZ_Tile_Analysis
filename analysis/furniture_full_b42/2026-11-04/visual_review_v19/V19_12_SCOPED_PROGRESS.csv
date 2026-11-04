@@ -1,0 +1,13 @@
+﻿metric_key,numerator,denominator,percent,evidence_scope,description
+collected_candidate_registry_rows,2231,2231,100.0,REGISTRY,"registered known source+Wiki candidates, not complete game furniture"
+wiki_reference_rows,1268,1268,100.0,REFERENCE,Wiki may be stale or incomplete
+wiki_image_source_id_connected,1257,1268,99.13,IMAGE_ID_LINK,direct Wiki image IDs not official game object identity
+source_only_candidates_grouped,963,963,100.0,SOURCE_GROUP,exact Wiki image ID unlinked does not prove Wiki page missing
+source_only_one_original_sprite_directly_inspected,800,963,83.07,VISUAL_SHAPE,"one representative original sprite of each distinct group, not whole assembly"
+source_only_original_png_remaining_mapped,0,140,0.0,PENDING,140 image-mapped groups not yet visually inspected
+source_only_original_png_mapping_blockers,0,23,0.0,PENDING,23 groups lack valid original atlas cell mapping; detailed reasons recorded
+source_tiles_with_provenance,8219,8219,100.0,RAW_SOURCE,original TileDef source keys preserved
+source_group_direction_geometry_checked,3840,3840,100.0,GEOMETRY,candidate geometry not runtime furniture certification
+source_storage_evidence_links,1855,1855,100.0,RAW_SOURCE,raw source values not loot item content
+old_warnings_resolved,0,474,0.0,UNRESOLVED,source warnings not yet resolved
+exact_game_object_identity_certified,0,0,,UNKNOWN,ground truth game-furniture count unknown
