@@ -1,0 +1,11 @@
+﻿metric_key,numerator,denominator,percent,evidence_scope,note
+all_currently_collected_candidate_registry_rows,2231,2231,100.0,REGISTERED_ONLY,not all game furniture; Wiki may be incomplete
+source_only_single_sprite_original_image_review,940,963,97.61,ONE_PNG_CELL,23 lack mapped PNG; not full furniture identity
+directional_source_template_geometry_checked,3840,3840,100.0,SOURCE_GRID,group×Facing candidates only
+rectangle_with_grid_and_png_source,843,843,100.0,RECTANGLE_SOURCE_ONLY,includes 23 single tile rectangles; not a single object proof
+multi_part_rectangle_templates_identified,820,820,100.0,MULTI_TILE_CANDIDATES,"count only 2+ tile source grid rectangles, not certified furniture"
+direct_multisprite_grid_visual_review,80,820,9.76,DIRECT_ORIGINAL_PNG_GRID,"one facing per group, candidate not game object"
+original_parts_with_actual_pixel_sha_record,335,335,100.0,ORIGINAL_PIXEL_HASH,within 80 reviewed grids
+game_object_identifications_certified,0,0,,UNKNOWN,denominator unknown
+old_original_warnings_certified_resolved,0,474,0.0,OPEN,all remain unresolved
+source_only_original_PNG_missing_mapping_resolved,0,23,0.0,OPEN,atlas matches not repaired

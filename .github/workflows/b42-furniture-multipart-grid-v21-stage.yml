@@ -1,0 +1,73 @@
+name: B42 v21 source-driven multipart SpriteGridPos matrices and real PNG grid contact sheets
+on:
+  push:
+    branches:
+      - work/pz-b42-multipart-grid-assembly-v21-20261104
+    paths:
+      - scripts/stage_b42_v21_exact_grid_assembly.py
+      - .github/workflows/b42-furniture-multipart-grid-v21-stage.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/B42_FURNITURE_MASTER_INVENTORY_V20.zip
+            /scripts/stage_b42_v21_exact_grid_assembly.py
+      - name: Calculate 843 complete rectangle templates and per-tile source image mapping
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 -m py_compile scripts/stage_b42_v21_exact_grid_assembly.py
+          python3 -u scripts/stage_b42_v21_exact_grid_assembly.py --select
+      - name: Checkout the selected original sprite PNG atlases only
+        run: |
+          wc -l analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/_required_original_png_paths.txt
+          git sparse-checkout add --stdin < analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/_required_original_png_paths.txt
+      - name: Crop actual PNG sprites and assemble them as explicit TileDef grid matrices, not isometric objects
+        run: |
+          python3 -u scripts/stage_b42_v21_exact_grid_assembly.py --render
+      - name: Independently verify full template coverage and preview image SHA
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/multipart_grid_v21')
+          m=json.loads((p/'STAGING_MANIFEST.json').read_text(encoding='utf8'))
+          assert m['v21_rectangular_geometry_templates']==843
+          assert m['rectangle_with_all_source_png_cells']+m['rectangle_missing_any_source_png_cells']==843
+          assert m['rendered_original_multisprite_group_direction_contact_candidates']>=40
+          assert m['source_png_verified_and_cropped_parts']>=80
+          assert m['game_object_identity_certified']==0
+          assert m['full_object_assembly_certified']==0
+          with (p/'V21_843_ALL_COMPLETE_RECTANGLE_TEMPLATE_SOURCE_AUDIT.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==843
+          with (p/'V21_SELECTED_PARTS_ORIGINAL_PIXEL_SHA256.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==m['source_png_verified_and_cropped_parts']
+          for fn,sha in m['contact_sheet_sha256'].items():
+            assert hashlib.sha256((p/fn).read_bytes()).hexdigest()==sha
+          print('V21_843_ORIGINAL_TILEDEF_RECTANGLE_TEMPLATES_AND_REAL_PNG_CONTACTS_VERIFIED')
+          PY
+      - name: Publish image contacts, provenance CSVs and manifest for direct review
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/*.csv \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/*.json \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/*.png \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/STAGED_*_BASE64.txt
+          git commit -m 'evidence(b42): 843 original rectangle source proofs and real multi-sprite PNG grid contacts'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for i in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            echo "retry source evidence upload $i"
+            sleep 4
+          done
+          exit 1
