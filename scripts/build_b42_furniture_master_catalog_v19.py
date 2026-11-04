@@ -141,7 +141,7 @@ def main():
    directional_template_candidates=s["direction_templates"],
    geometric_complete_rectangle_candidates=s["geometrically_rectangular_candidates"],
    original_raw_container_types_json=s["container_types_raw_json"],
-   original_raw_capacity_values_json=s["original_capacity_raw_json"])
+   original_raw_capacity_values_json=s["capacity_raw_json"])
   insert(c,"v19_unreviewed_source_queue",o);pending.append(o)
  assert len(pending)==163
  missing=[x for x in pending if not x["original_png_cell_mapping_present"]]
