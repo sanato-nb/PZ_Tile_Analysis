@@ -71,6 +71,19 @@ def main():
  CREATE INDEX v12_warning_issue_index ON v12_warning_proof(issue);
  """)
  pieces=query(c,"SELECT * FROM v11_tile_position ORDER BY group_id,Facing,source_key")
+ original_tiles={q["source_key"]:q for q in query(c,"SELECT * FROM furniture_tile")}
+ reverse_tiles={q["source_key"]:q for q in query(c,"SELECT * FROM v10_tile_reverse")}
+ assert len(original_tiles)==len(reverse_tiles)==len(pieces)==8219
+ for p in pieces:
+  k=p["source_key"];v=reverse_tiles[k];o=original_tiles[k]
+  assert p["group_id"]==v["source_group_id"]==o["group_id"],k
+  assert p["source_grid_pos_raw"]==v["SpriteGridPos_raw"]==o["SpriteGridPos"],k
+  assert p["source_facing_raw"]==v["Facing_raw"]==o["Facing"],k
+  assert p["source_container"]==v["container_raw"],k
+  assert p["source_capacity_raw"]==v["ContainerCapacity_raw"],k
+  assert p["source_container_position_raw"]==v["ContainerPosition_raw"],k
+  assert p["exact_wiki_ids_json"]==v["direct_wiki_entries_json"],k
+  assert p["source_origin_files"]==v["original_source_files"]==o["original_source_files"],k
  grouped=defaultdict(list)
  for p in pieces:grouped[(p["group_id"],p["Facing"])].append(p)
  originals={(p["group_id"],p["Facing"],p["warning_code"]):p["description"] for p in query(c,"SELECT * FROM v11_source_warning")}
@@ -176,7 +189,7 @@ def main():
  csvout("V12_129_VISUAL_REFERENCE_PRESERVED.csv",query(c,"SELECT * FROM v12_129_visual_reference ORDER BY group_id"))
  csvout("V12_WORK_107_GROUPS_574_TILES_NOT_CONFIRMED_SAVED.csv",query(c,"SELECT * FROM v12_work_107_scope"))
  manifest=dict(version="v12",input_v11_PR=293,input_sha256=source_sha,
-  source_properties=195265,source_slots=73644,source_tiles=8219,source_edges=14195,
+  source_properties=195265,source_slots=73644,source_tiles=8219,source_edges=14195,per_tile_three_stage_raw_copy_checks=8219,
   directional_candidates=3840,reproduced_warnings=474,warning_types=dict(wc),
   status_counts=dict(tc),unlinked_wiki_preserved=11,image_review_reference_groups=129,
   work_reported_groups=107,work_reported_tiles=574,work_individual_reviews_imported=0,
