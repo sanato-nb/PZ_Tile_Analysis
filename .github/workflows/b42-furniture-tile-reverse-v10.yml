@@ -1,0 +1,68 @@
+name: B42 furniture TileDef to furniture reverse index v10
+on:
+  push:
+    branches: [work/pz-b42-tile-to-furniture-index-v10-20261104]
+    paths:
+      - .github/workflows/b42-furniture-tile-reverse-v10.yml
+      - scripts/build_b42_tile_reverse_index_v10.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/definition_first_v9/B42_FURNITURE_DEFINITION_FIRST_V9.zip
+            /scripts/build_b42_tile_reverse_index_v10.py
+      - name: Build exact sprite to furniture reverse lookup
+        run: |
+          python3 -m py_compile scripts/build_b42_tile_reverse_index_v10.py
+          python3 -u scripts/build_b42_tile_reverse_index_v10.py
+      - name: Verify source fidelity, relationships and SQLite integrity
+        run: |
+          python3 - <<'PY'
+          import json,sqlite3,zipfile
+          from pathlib import Path
+          p=Path("analysis/furniture_full_b42/2026-11-04/tile_reverse_index_v10")
+          m=json.loads((p/"MANIFEST.json").read_text(encoding="utf8"))
+          assert m["original_wiki_rows"]==1268
+          assert m["original_registry_records"]==2231
+          assert m["unique_source_sprite_keys"]==8219
+          assert m["reverse_index_rows"]==8219
+          assert m["reverse_evidence_edges"]==14195
+          assert m["source_group_function_rows"]==1852
+          assert m["source_attribute_records_preserved"]==195265
+          assert m["source_slots_preserved"]==73644
+          assert m["original_container_edges_preserved"]==1855
+          assert sum(m["reverse_index_classes"].values())==8219
+          assert sum(m["reverse_evidence_classes"].values())==14195
+          assert m["new_game_object_identity_certified"]==0
+          assert not m["minecraft_block_entity_decided"]
+          c=sqlite3.connect(p/"B42_FURNITURE_REVERSE_INDEX_V10.sqlite")
+          assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+          assert c.execute("SELECT COUNT(*) FROM v10_tile_reverse").fetchone()[0]==8219
+          assert c.execute("SELECT COUNT(*) FROM v10_reverse_edge").fetchone()[0]==14195
+          assert c.execute("SELECT COUNT(*) FROM v10_group_function_summary").fetchone()[0]==1852
+          assert c.execute("SELECT COUNT(*) FROM v10_tile_reverse WHERE same_game_object_verified!=0").fetchone()[0]==0
+          for table in ["future_item_distribution","future_map_placement","future_minecraft_implementation"]:
+           assert c.execute("SELECT COUNT(*) FROM "+table).fetchone()[0]==0
+          c.close()
+          with zipfile.ZipFile(p/"B42_FURNITURE_REVERSE_INDEX_V10.zip") as z:
+           assert z.testzip() is None
+           assert "B42_FURNITURE_REVERSE_INDEX_V10.sqlite" in z.namelist()
+          print("FURNITURE_V10_SOURCE_REVERSE_VERIFIED",m)
+          PY
+      - name: Publish v10 verified SQLite, CSVs and manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-04/tile_reverse_index_v10/
+          git commit -m 'db(b42): source-faithful reverse lookup of 8219 furniture tile IDs and 14195 evidence edges'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
