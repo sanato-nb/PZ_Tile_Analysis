@@ -48,7 +48,7 @@ def select():
  groups=[];partrows=[];eligible=[]
  for row in complete:
   g=row["group_id"];f=row["Facing"];pp=allpieces[(g,f)]
-  assert len(pp)==row["pieces"] and len(pp)>=2,(g,f,len(pp),row["pieces"])
+  assert len(pp)==row["pieces"] and len(pp)>=1,(g,f,len(pp),row["pieces"])
   width,height=row["grid_w"],row["grid_h"]
   assert width and height and width*height==len(pp),(g,f,width,height)
   keys=json.loads(row["source_keys_json"])
@@ -90,7 +90,7 @@ def select():
    original_source_keys_json=j(keys),assembly_geometry="COMPLETE_RECTANGLE_TILEDEF_ONLY",
    orientation_exact_in_game_verified=0,whole_game_object_identity_certified=0)
   groups.append(obj)
-  if mapped==len(pp) and width<=4 and height<=4 and len(pp)<=10:
+  if len(pp)>=2 and mapped==len(pp) and width<=4 and height<=4 and len(pp)<=10:
    score=100*only+24*min(len(pp),5)+15*min(width*height,8)+min(len(v9wiki.get(g,())),4)
    eligible.append((score,obj))
  assert len(groups)==843
@@ -125,6 +125,8 @@ def select():
   rectangle_with_all_source_png_cells=sum(x["image_cell_grid_fully_mapped"] for x in groups),
   rectangle_missing_any_source_png_cells=sum(x["png_missing_part_count"]>0 for x in groups),
   source_only_rectangles=sum(x["source_only_group"] for x in groups),
+  source_geometry_single_tile_rectangles=sum(x["original_tile_count"]==1 for x in groups),
+  source_geometry_actual_multi_tile_rectangles=sum(x["original_tile_count"]>=2 for x in groups),
   inspected_group_direction_previews=0,
   selected_preview_groups=len(selectedrows),selected_preview_parts=len(selectedparts),
   selected_atlas_pngs=len(paths),game_object_identity_certified=0,
