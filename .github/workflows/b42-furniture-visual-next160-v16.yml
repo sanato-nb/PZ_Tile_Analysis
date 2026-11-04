@@ -23,6 +23,7 @@ jobs:
             /scripts/stage_b42_v16_next_160_original_crops.py
       - name: Select 160 new original B42 groups never reviewed in v15
         run: |
+          python3 -m pip install --quiet pillow
           python3 -m py_compile scripts/stage_b42_v16_next_160_original_crops.py
           python3 -u scripts/stage_b42_v16_next_160_original_crops.py --select
       - name: Checkout only original PNG atlases
