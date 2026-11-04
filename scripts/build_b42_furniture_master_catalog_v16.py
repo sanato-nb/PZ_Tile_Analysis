@@ -253,8 +253,8 @@ def main():
  encoding="utf8")
  with zipfile.ZipFile(PACK,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as z:
   for file in sorted(OUT.iterdir()):
-   if file.is_file() and file!=PACK and not file.name.startswith("STAGED_") and
-     file.name not in ("_v16_required_png_atlases.txt",) and not file.name.endswith("_BASE64.txt"):
+   if (file.is_file() and file!=PACK and not file.name.startswith("STAGED_") and
+     file.name not in ("_v16_required_png_atlases.txt",) and not file.name.endswith("_BASE64.txt")):
     z.write(file,file.name)
   with zipfile.ZipFile(INZIP) as oldzip:
    for i in range(1,5):
