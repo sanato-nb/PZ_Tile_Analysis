@@ -1,0 +1,95 @@
+name: B42 v21 complete source first multi part grid audit full SQLite
+on:
+  push:
+    branches:
+      - work/pz-b42-multipart-grid-assembly-v21-20261104
+    paths:
+      - scripts/build_b42_furniture_multisprite_grid_v21.py
+      - analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_80_DIRECT_GRID_CONTACT_VISUAL_OBSERVATIONS.csv
+      - .github/workflows/b42-furniture-multipart-grid-v21-full-db.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/visual_review_v20/B42_FURNITURE_MASTER_INVENTORY_V20.zip
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_843_ALL_COMPLETE_RECTANGLE_TEMPLATE_SOURCE_AUDIT.csv
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_ALL_RECTANGLE_EXACT_SOURCE_TILE_POSITION_AND_PNG_MAP.csv
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_SELECTED_ORIGINAL_MULTIPART_PREVIEW_QUEUE.csv
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_SELECTED_PARTS_ORIGINAL_PIXEL_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_80_DIRECT_GRID_CONTACT_VISUAL_OBSERVATIONS.csv
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_04.png
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_05.png
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_06.png
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_07.png
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_MULTIPART_ORIGINAL_SPRITES_GRID_CONTACT_08.png
+            /scripts/build_b42_furniture_multisprite_grid_v21.py
+      - name: Build full SQLite from source and validate all 843 rectangles + real 335 source pixel maps
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_multisprite_grid_v21.py
+          python3 -u scripts/build_b42_furniture_multisprite_grid_v21.py
+      - name: Independent integrity test, exact tile source join and ZIP CRC
+        run: |
+          python3 - <<'PY'
+          import sqlite3,json,csv,zipfile
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-04/multipart_grid_v21')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['current_candidate_registry_rows']==2231
+          assert m['source_complete_rectangle_direction_candidates']==843
+          assert m['source_single_tile_rectangle_direction_candidates']==23
+          assert m['source_multitile_rectangle_direction_candidates']==820
+          assert m['geometry_png_index_mapped_rectangles']==843
+          assert m['first_direct_grid_visual_review_group_direction_count']==80
+          assert m['reviewed_source_only_groups']==74
+          assert m['reviewed_direct_grid_source_parts']==335
+          assert m['certified_game_object_identity']==0
+          assert m['existing_474_original_warnings_unresolved']
+          with sqlite3.connect(p/'B42_FURNITURE_MULTIPART_GRID_V21.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            for table,n in {'source_attributes':195265,'source_slots':73644,'furniture_tile':8219,'registry_entry':2231,
+              'v12_template_proof':3840,'v13_warning_case':474,
+              'v14_source_only_ledger':963,'v20_master_furniture_registry':2231,
+              'v21_all_source_rectangle_template':843,'v21_direct_multisprite_grid_visual_observation':80,
+              'v21_reviewed_multisprite_pixel_sha':335}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]==n,table
+            assert c.execute('SELECT COUNT(*) FROM v21_all_source_rectangle_template WHERE raw_sprite_part_count>=2').fetchone()[0]==820
+            assert c.execute('SELECT COUNT(*) FROM v21_all_source_rectangle_template WHERE raw_sprite_part_count=1').fetchone()[0]==23
+            assert c.execute('SELECT COUNT(DISTINCT group_id) FROM v21_direct_multisprite_grid_visual_observation').fetchone()[0]==80
+            assert c.execute('SELECT COUNT(*) FROM v21_direct_multisprite_grid_visual_observation WHERE exact_game_object_identity_certified<>0').fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_MULTIPART_GRID_V21.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_MULTIPART_GRID_V21.sqlite' in z.namelist()
+          with (p/'V21_820_ACTUAL_MULTITILE_GEOMETRY_CANDIDATES.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==820
+          print('V21_843_ALL_SOURCE_RECTANGLE_23_SINGLE_820_MULTITILE_80_DIRECT_GRIDS_335_REAL_PNG_SQLITE_ZIP_CRC_PASS')
+          PY
+      - name: Publish versioned v21 full SQLite ZIP, source CSVs and visual evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/V21_*.csv \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/README_KO.md \
+            analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/B42_FURNITURE_MULTIPART_GRID_V21.zip
+          git commit -m 'db(b42): v21 843 source rectangle audits 80 direct multi sprite visual grids 335 original pixels'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for i in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            echo "Transient GitHub push issue; retry $i"
+            sleep 4
+          done
+          exit 1
