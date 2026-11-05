@@ -1,0 +1,74 @@
+name: B42 v26 all 235 remaining original source image grids and SHA
+on:
+  push:
+    branches:
+      - work/pz-b42-all-remaining-multitile-visual-v26-20261105
+    paths:
+      - scripts/stage_b42_v26_all_remaining_multitile.py
+      - .github/workflows/b42-furniture-v26-all-source-crop-stage.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  crop:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/B42_FURNITURE_CROSS_FACING_REVIEW_V25.zip
+            /scripts/stage_b42_v26_all_remaining_multitile.py
+      - name: Source selection for every previously unreviewed group-facing
+        run: |
+          python3 -m pip install --quiet Pillow
+          python3 -m py_compile scripts/stage_b42_v26_all_remaining_multitile.py
+          python3 -u scripts/stage_b42_v26_all_remaining_multitile.py --select
+      - name: Sparse checkout exactly necessary original PZ source PNG atlases
+        run: |
+          wc -l analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/_required_original_png_paths.txt
+          git sparse-checkout add --stdin < analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/_required_original_png_paths.txt
+      - name: Extract original per-tile pixels and build all source grid visual contacts
+        run: |
+          python3 -u scripts/stage_b42_v26_all_remaining_multitile.py --render
+      - name: Independent 235 source grids, distinctness and pixel checks
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26')
+          m=json.loads((p/'STAGING_MANIFEST.json').read_text(encoding='utf8'))
+          assert m['original_multitile_source_grid_facing_candidates']==820
+          assert m['old_directly_viewed_facing_grids']==585
+          assert m['new_unreviewed_unique_source_facing_grid_count']==235
+          assert m['source_pixel_crops_completed']==m['source_grid_original_parts']
+          assert m['all_235_source_png_cells_mapped']
+          assert m['indexed_facing_grid_original_png_visual_evidence']==235
+          assert m['contact_sheet_count']==24
+          assert m['confirmed_runtime_game_furniture_identity']==0
+          for fn,sha in m['original_contact_sheet_sha256'].items():
+            assert hashlib.sha256((p/fn).read_bytes()).hexdigest()==sha
+          with (p/'V26_235_SOURCE_FACING_TO_VISUALLY_REVIEW.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==235
+          with (p/'V26_ALL_NEW_SPRITE_PIXEL_SHA256.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==m['source_pixel_crops_completed']
+          print('V26_235_PENDING_FACING_GRIDS_ALL_EXACT_ORIGINAL_SPRITE_PIXELS_AND_24_CONTACTS_PASSED')
+          PY
+      - name: Commit original PNG contact evidence for direct inspection
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_*.csv \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/STAGING_MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_*.png \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/STAGED_V26_CONTACT_*_BASE64.txt
+          git commit -m 'evidence(b42): extract last 235 source PNG grid direction candidates for visual review'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for attempt in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 5
+          done
+          exit 1
