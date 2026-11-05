@@ -1,0 +1,126 @@
+name: B42 v25 full source evidence SQLite completed cross facing group review
+on:
+  push:
+    branches:
+      - work/pz-b42-complete-cross-facing-pairs-v25-20261105
+    paths:
+      - scripts/build_b42_furniture_all_multifacing_pairs_v25.py
+      - analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_DIRECT_PAIRED_VISUAL_CLASSIFICATIONS.csv
+      - .github/workflows/b42-furniture-v25-all-multiface-full-db.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  full-db:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v24/B42_FURNITURE_CROSS_FACING_REVIEW_V24.zip
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_SOURCE_FACING_PAIR_PLANS.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_148_DIRECTION_GRIDS_AND_PRIOR_REUSE_FLAGS.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_148_DIRECTION_ORIGINAL_PART_SOURCE_COORDINATES.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_ALL_PAIRED_SOURCE_PNG_PIXEL_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_DIRECT_PAIRED_VISUAL_CLASSIFICATIONS.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_04.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_05.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_06.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_07.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_08.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_09.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_74_REMAINING_FACING_PAIRS_SOURCE_CONTACT_10.png
+            /scripts/build_b42_furniture_all_multifacing_pairs_v25.py
+      - name: Build all-original source v25 SQLite and verify original geometry/pixel rows
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_all_multifacing_pairs_v25.py
+          python3 -u scripts/build_b42_furniture_all_multifacing_pairs_v25.py
+      - name: Independently audit complete original DB and reused-facing non-double-counting
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import sqlite3,csv,zipfile,json
+          p=Path('analysis/furniture_full_b42/2026-11-05/cross_facing_v25')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['current_registered_candidate_rows']==2231
+          assert m['original_TileDef_raw_property_rows']==195265
+          assert m['multitile_source_group_facing_candidates']==820
+          assert m['source_multitile_unique_groups']==346
+          assert m['eligible_two_plus_facing_source_groups']==274
+          assert m['previous_directly_viewed_group_facing_candidates']==480
+          assert m['v25_new_distinct_group_facing_views']==105
+          assert m['v25_previous_views_reused_for_pair_comparison']==43
+          assert m['v25_total_pair_contact_source_grid_views']==148
+          assert m['v25_new_source_group_pairs']==74
+          assert m['v25_directly_cropped_original_png_tile_cells']==476
+          assert m['v25_original_png_tile_cells_from_newly_reviewed_facing_grids']==300
+          assert m['v25_original_png_tile_cells_from_reused_previous_facing_grids']==176
+          assert m['cumulative_directly_reviewed_multitile_group_facing_candidates']==585
+          assert m['source_multitile_direction_candidates_remaining']==235
+          assert m['source_multitile_unique_groups_at_least_one_facing_reviewed']==311
+          assert m['multi_facing_source_groups_with_two_directions_compared']==274
+          assert m['multi_facing_source_group_pair_visual_review_percent']==100.0
+          assert m['first_party_game_object_identification_certified']==0
+          assert m['old_474_raw_warnings_unresolved']
+          assert m['old_23_png_mapping_gaps_unresolved']
+          assert sum(m['v25_broad_visual_subject_counts'].values())==74
+          with sqlite3.connect(p/'B42_FURNITURE_CROSS_FACING_REVIEW_V25.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            for t,n in {
+             'source_attributes':195265,'source_slots':73644,'furniture_tile':8219,
+             'registry_entry':2231,'v12_template_proof':3840,'v13_warning_case':474,
+             'v20_master_furniture_registry':2231,'v21_all_source_rectangle_template':843,
+             'v21_source_tile_positioned_png':2221,
+             'v21_direct_multisprite_grid_visual_observation':80,
+             'v22_new_facing_original_grid':120,'v23_new_facing_original_source':120,
+             'v24_new_facing_original_source':160,
+             'v25_direct_paired_visual_observation':74,
+             'v25_pair_facing_source_grid':148,
+             'v25_per_sprite_original_png_sha256':476,
+             'v25_all_820_multitile_direction_visual_ledger':820,
+             'v25_235_remaining_direction_queue':235,
+             'v25_all_274_multifacing_group_pair_coverage':274}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,t
+            seen=[set(c.execute('SELECT group_id,Facing FROM '+t)) for t in (
+              'v21_direct_multisprite_grid_visual_observation','v22_new_facing_original_grid',
+              'v23_new_facing_original_source','v24_new_facing_original_source')]
+            new=set(c.execute('SELECT group_id,Facing FROM v25_pair_facing_source_grid WHERE newly_viewed_v25=1'))
+            reused=set(c.execute('SELECT group_id,Facing FROM v25_pair_facing_source_grid WHERE previously_directly_viewed=1'))
+            assert list(map(len,seen))==[80,120,120,160]
+            assert len(new)==105 and len(reused)==43
+            assert len(set.union(*seen))==480
+            assert new.isdisjoint(set.union(*seen)) and reused.issubset(set.union(*seen))
+            assert len(set.union(*seen)|new)==585
+            assert c.execute('SELECT SUM(source_grid_pixels_visually_checked) FROM v25_all_820_multitile_direction_visual_ledger').fetchone()[0]==585
+            assert c.execute('SELECT COUNT(DISTINCT group_id) FROM v25_all_274_multifacing_group_pair_coverage').fetchone()[0]==274
+            assert c.execute('SELECT COUNT(*) FROM v25_direct_paired_visual_observation WHERE official_runtime_game_furniture_ID_certified<>0').fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_CROSS_FACING_REVIEW_V25.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_CROSS_FACING_REVIEW_V25.sqlite' in z.namelist()
+          with (p/'V25_235_UNREVIEWED_DIRECTION_QUEUE.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==235
+          print('V25_ALL_274_PAIRED_SOURCE_GROUPS_105_NEW_FACINGS_585_OF_820_AND_FULL_SQLITE_CRC_PASS')
+          PY
+      - name: Commit new versioned full SQLite ZIP and all v25 review audit CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_*.csv \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/README_KO.md \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/B42_FURNITURE_CROSS_FACING_REVIEW_V25.zip
+          git commit -m 'db(b42): v25 all 274 source group pairs inspected; 105 new grid facings 585 of 820'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for attempt in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 5
+          done
+          exit 1
