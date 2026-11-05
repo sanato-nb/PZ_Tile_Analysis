@@ -1,0 +1,82 @@
+name: B42 furniture v30 exact source coordinate conflicts and holes
+on:
+  push:
+    branches:
+      - work/pz-b42-coordinate-conflict-evidence-v30-20261106
+    paths:
+      - scripts/audit_b42_furniture_v30_exact_geometry.py
+      - .github/workflows/b42-furniture-v30-exact-geometry.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-06/container_source_v29/B42_FURNITURE_CONTAINER_SOURCE_V29.zip
+            /scripts/audit_b42_furniture_v30_exact_geometry.py
+      - name: Generate full v30 SQLite with precise 41 warning coordinate layouts
+        run: |
+          python3 -m py_compile scripts/audit_b42_furniture_v30_exact_geometry.py
+          python3 -u scripts/audit_b42_furniture_v30_exact_geometry.py
+      - name: Independently verify v29 lineage, geometry and unresolved status
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import sqlite3,json,csv,zipfile
+          p=Path('analysis/furniture_full_b42/2026-11-06/geometry_warning_v30')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['preserved_raw_properties']==195265
+          assert m['preserved_raw_furniture_tile_keys']==8219
+          assert m['previously_directly_screened_multitile_grid_views']==820
+          assert m['previous_storage_metadata_variation_groups']==12
+          assert m['total_original_warning_cases']==474
+          assert m['newly_detailed_raw_geometry_warning_cases']==41
+          assert m['raw_grid_position_collision_cases']==27
+          assert m['raw_grid_rectangle_hole_cases']==14
+          assert m['source_warning_cases_still_unresolved']==474
+          assert m['new_direct_image_reviews']==0
+          assert m['game_object_identity_certifications']==0
+          with sqlite3.connect(p/'B42_FURNITURE_GEOMETRY_WARNINGS_V30.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert c.execute('PRAGMA foreign_key_check').fetchall()==[]
+            assert c.execute('SELECT COUNT(*) FROM source_attributes').fetchone()[0]==195265
+            assert c.execute('SELECT COUNT(*) FROM v27_warning_source_recheck').fetchone()[0]==474
+            assert c.execute('SELECT COUNT(*) FROM v29_274_storage_completeness').fetchone()[0]==274
+            assert c.execute('SELECT COUNT(*) FROM v30_exact_41_case_topology').fetchone()[0]==41
+            assert c.execute("SELECT COUNT(*) FROM v30_exact_41_case_topology WHERE warning_code='DUPLICATE_POSITION' AND collision_cell_count>0").fetchone()[0]==27
+            assert c.execute("SELECT COUNT(*) FROM v30_exact_41_case_topology WHERE warning_code='INCOMPLETE_GRID' AND empty_cell_count>0").fetchone()[0]==14
+            assert c.execute('SELECT COUNT(*) FROM v30_exact_source_part_ledger').fetchone()[0]==m['source_part_records']
+            assert c.execute('SELECT COUNT(*) FROM v30_source_coordinate_cells').fetchone()[0]==m['position_occupancy_records']
+            assert c.execute('SELECT COUNT(*) FROM v30_original_474_warning_action_ledger').fetchone()[0]==474
+            assert c.execute("SELECT COUNT(*) FROM v30_original_474_warning_action_ledger WHERE status!='UNRESOLVED'").fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_GEOMETRY_WARNINGS_V30.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_GEOMETRY_WARNINGS_V30.sqlite' in z.namelist()
+          for name,num in [('V30_41_EXACT_GEOMETRY_CASES.csv',41),('V30_474_WARNING_NEXT_EVIDENCE_QUEUE.csv',474)]:
+            with (p/name).open(encoding='utf-8-sig') as f:
+              assert sum(1 for _ in csv.reader(f))-1==num
+          print('PASS_V30_41_EXACT_POSITION_TOPOLOGIES_FULL_SOURCE_DB_474_UNRESOLVED')
+          PY
+      - name: Commit versioned v30 ZIP, source evidence, manifest and README
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-06/geometry_warning_v30/V30_*.csv \
+            analysis/furniture_full_b42/2026-11-06/geometry_warning_v30/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-06/geometry_warning_v30/README_KO.md \
+            analysis/furniture_full_b42/2026-11-06/geometry_warning_v30/B42_FURNITURE_GEOMETRY_WARNINGS_V30.zip
+          git commit -m 'db(b42): v30 original position collision/hole topology for 41 warnings, all 474 retained'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for a in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 5
+          done
+          exit 1
