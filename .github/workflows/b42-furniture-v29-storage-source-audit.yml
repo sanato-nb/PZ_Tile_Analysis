@@ -1,0 +1,87 @@
+name: B42 furniture v29 exact storage metadata and warning overlap
+on:
+  push:
+    branches:
+      - work/pz-b42-container-metadata-evidence-v29-20261106
+    paths:
+      - scripts/audit_b42_furniture_v29_storage_presence.py
+      - .github/workflows/b42-furniture-v29-storage-source-audit.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/audit_b42_furniture_v29_storage_presence.py
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_structure_v28/B42_FURNITURE_CROSS_FACING_STRUCTURE_V28.zip
+      - name: Build full independent v29 SQLite from exact v28 source
+        run: |
+          python3 -m py_compile scripts/audit_b42_furniture_v29_storage_presence.py
+          python3 -u scripts/audit_b42_furniture_v29_storage_presence.py
+      - name: Independently verify input conservation, variation coverage and zip
+        run: |
+          python3 - <<'PY'
+          import sqlite3,zipfile,json,csv
+          from pathlib import Path
+          p=Path("analysis/furniture_full_b42/2026-11-06/container_source_v29")
+          m=json.loads((p/"MANIFEST.json").read_text(encoding="utf8"))
+          assert m["version"]=="v29"
+          assert m["multi_facing_source_groups_audited"]==274
+          assert sum(m["source_storage_evidence_classification"].values())==274
+          assert m["varying_original_storage_groups"]==12
+          assert m["verified_original_direction_rows_for_12"]==48
+          assert m["exact_source_part_rows_in_12_variations"]>=96
+          assert m["original_warning_rows_crosschecked"]==474
+          assert m["original_absent_png_groups_crosschecked"]==23
+          assert m["prior_direct_source_image_grid_reviews_inherited"]==820
+          assert m["new_direct_image_reviews"]==0
+          assert m["game_runtime_furniture_identifications"]==0
+          assert m["source_original_warnings_resolved"]==0
+          assert m["source_original_png_gaps_resolved"]==0
+          with sqlite3.connect(p/"B42_FURNITURE_CONTAINER_SOURCE_V29.sqlite") as c:
+            assert c.execute("PRAGMA integrity_check").fetchone()[0]=="ok"
+            assert not c.execute("PRAGMA foreign_key_check").fetchall()
+            for t,n in {
+              "source_attributes":195265,"source_slots":73644,"furniture_tile":8219,
+              "registry_entry":2231,"v13_warning_case":474,"v13_storage_link":1855,
+              "v27_warning_source_recheck":474,"v27_missing_atlas_group":23,
+              "v28_820_source_facing_structure":820,"v28_274_cross_facing_source_metadata":274,
+              "v29_274_storage_completeness":274,"v29_12_variation_per_facing":48,
+              "v29_474_warning_overlap_index":474,"v29_23_missing_png_overlap_index":23,
+            }.items():
+              assert c.execute("SELECT COUNT(*) FROM "+t).fetchone()[0]==n,t
+            assert c.execute("SELECT COUNT(*) FROM v29_12_variation_per_part").fetchone()[0]==m["exact_source_part_rows_in_12_variations"]
+            assert c.execute("SELECT COUNT(*) FROM v29_274_storage_completeness WHERE inherited_v28_cross_facing_variation=1").fetchone()[0]==12
+            assert c.execute("SELECT COUNT(*) FROM v29_274_storage_completeness WHERE game_object_identity_certified<>0").fetchone()[0]==0
+            assert c.execute("SELECT COUNT(*) FROM v29_474_warning_overlap_index WHERE original_source_warning_resolved<>0").fetchone()[0]==0
+          with zipfile.ZipFile(p/"B42_FURNITURE_CONTAINER_SOURCE_V29.zip") as z:
+            assert z.testzip() is None
+            assert "B42_FURNITURE_CONTAINER_SOURCE_V29.sqlite" in z.namelist()
+          for file,n in [("V29_274_GROUP_STORAGE_EVIDENCE_COVERAGE.csv",274),
+                          ("V29_48_VARIATION_FACING_STORAGE_SOURCE.csv",48),
+                          ("V29_474_WARNINGS_STORAGE_GROUP_CROSSWALK.csv",474),
+                          ("V29_23_MISSING_ATLAS_STORAGE_GROUP_CROSSWALK.csv",23)]:
+            with (p/file).open(encoding="utf-8-sig") as f:
+              assert sum(1 for _ in csv.reader(f))-1==n,file
+          print("V29_SOURCE_STORAGE_274_12_VARIATIONS_48_FACINGS_ALL_WARNINGS_UNRESOLVED_SQLITE_ZIP_CRC_PASS")
+          PY
+      - name: Publish only compressed full SQLite and source evidence CSV
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          dir=analysis/furniture_full_b42/2026-11-06/container_source_v29
+          git add --sparse "$dir"/B42_FURNITURE_CONTAINER_SOURCE_V29.zip "$dir"/V29_*.csv "$dir"/MANIFEST.json "$dir"/README_KO.md
+          git commit -m "db(b42): v29 crosswalk exact TileDef storage fields and 12 source-facing variations"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for i in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 5
+          done
+          exit 1
