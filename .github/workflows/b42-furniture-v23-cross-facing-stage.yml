@@ -19,7 +19,7 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /analysis/furniture_full_b42/2026-11-04/cross_facing_v22/B42_FURNITURE_CROSS_FACING_REVIEW_V22.zip
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v22/B42_FURNITURE_CROSS_FACING_REVIEW_V22.zip
             /scripts/stage_b42_v23_paired_original_grid.py
       - name: Select 60 disjoint original furniture group pairs with 2 distinct facing grids
         run: |
