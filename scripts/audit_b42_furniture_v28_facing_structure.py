@@ -39,7 +39,7 @@ def main():
  for t,n in {'source_attributes':195265,'source_slots':73644,'registry_entry':2231,
  'furniture_tile':8219,'v13_warning_case':474,'v27_missing_atlas_group':23,
  'v27_missing_atlas_source_key':89,'v27_three_absent_atlas_filenames':3,
- 'v27_warning_source_proof':474,'v21_source_tile_positioned_png':2221,
+ 'v27_warning_source_recheck':474,'v21_source_tile_positioned_png':2221,
  'v25_all_274_multifacing_group_pair_coverage':274,
  'v26_all_820_source_direction_grid_visual_evidence':820,
  'v26_all_346_source_multitile_group_coverage':346}.items():
@@ -120,7 +120,7 @@ def main():
  assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
  assert not c.execute('PRAGMA foreign_key_check').fetchall()
  for t,n in {'v28_820_source_facing_structure':820,'v28_274_cross_facing_source_metadata':274,
- 'v27_warning_source_proof':474,'v27_missing_atlas_group':23}.items():
+ 'v27_warning_source_recheck':474,'v27_missing_atlas_group':23}.items():
   assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,(t,n)
  c.close()
  csvw('V28_820_SOURCE_FACING_STRUCTURE_CHECKS.csv',face_out)
