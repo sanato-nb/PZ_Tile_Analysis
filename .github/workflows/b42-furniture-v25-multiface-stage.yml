@@ -1,0 +1,78 @@
+name: B42 v25 review all source multitile groups lacking a two-facing comparison
+on:
+  push:
+    branches:
+      - work/pz-b42-complete-cross-facing-pairs-v25-20261105
+    paths:
+      - scripts/stage_b42_v25_remaining_multifacing_pairs.py
+      - .github/workflows/b42-furniture-v25-multiface-stage.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  source-stage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v24/B42_FURNITURE_CROSS_FACING_REVIEW_V24.zip
+            /scripts/stage_b42_v25_remaining_multifacing_pairs.py
+      - name: Select all 74 source groups not previously compared on two facings
+        run: |
+          python3 -m pip install --quiet Pillow
+          python3 -m py_compile scripts/stage_b42_v25_remaining_multifacing_pairs.py
+          python3 -u scripts/stage_b42_v25_remaining_multifacing_pairs.py --select
+      - name: Fetch only original sprite PNG atlases referenced by the chosen tiles
+        run: |
+          wc -l analysis/furniture_full_b42/2026-11-05/cross_facing_v25/_required_original_png_paths.txt
+          git sparse-checkout add --stdin < analysis/furniture_full_b42/2026-11-05/cross_facing_v25/_required_original_png_paths.txt
+      - name: Extract real per-tile PNG pixels and render 74 original grid-facing comparisons
+        run: |
+          python3 -u scripts/stage_b42_v25_remaining_multifacing_pairs.py --render
+      - name: Independently verify exact 74 pairs, new vs reused facings and original sprite checksums
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-05/cross_facing_v25')
+          m=json.loads((p/'STAGING_MANIFEST.json').read_text(encoding='utf8'))
+          assert m['v25_pair_groups']==74
+          assert m['new_group_facing_views']>70
+          assert m['total_grids_displayed_in_comparisons']==148
+          assert m['new_source_groups_with_no_prior_facing_views']+m['existing_once_viewed_source_groups']==74
+          assert m['previous_facing_reused_count']==m['existing_once_viewed_source_groups']
+          assert m['new_group_facing_views']==2*m['new_source_groups_with_no_prior_facing_views']+m['existing_once_viewed_source_groups']
+          assert m['new_after_v25_direct_visual_total']==480+m['new_group_facing_views']
+          assert m['new_after_v25_direct_visual_total']<=820
+          assert m['original_png_sprites_reextracted']>=m['new_group_facing_views']*2
+          assert m['game_object_runtime_identity_certified']==0
+          assert len(m['contact_sheet_original_png_sha256'])==m['contact_pages']==10
+          for fn,sha in m['contact_sheet_original_png_sha256'].items():
+            assert hashlib.sha256((p/fn).read_bytes()).hexdigest()==sha
+          with (p/'V25_74_SOURCE_FACING_PAIR_PLANS.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==74
+          with (p/'V25_148_DIRECTION_GRIDS_AND_PRIOR_REUSE_FLAGS.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==148
+          print('V25_ALL_UNPAIRED_SOURCE_GROUPS_STAGED_WITH_NO_DOUBLE_COUNTING')
+          PY
+      - name: Publish cropped original source tile evidence for independent direct inspection
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/V25_*.csv \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/STAGING_MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/*.png \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v25/STAGED_*_BASE64.txt
+          git commit -m 'evidence(b42): v25 all 74 remaining unpaired source group facings original PNG screenshots'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for attempt in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            echo "retry transient push failure $attempt"
+            sleep 5
+          done
+          exit 1
