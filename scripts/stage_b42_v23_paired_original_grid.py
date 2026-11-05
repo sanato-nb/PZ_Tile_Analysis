@@ -7,7 +7,7 @@ from pathlib import Path
 from collections import defaultdict,Counter
 from PIL import Image,ImageDraw,ImageFont
 ROOT=Path(__file__).resolve().parents[1]
-SRC=ROOT/"analysis/furniture_full_b42/2026-11-04/cross_facing_v22/B42_FURNITURE_CROSS_FACING_REVIEW_V22.zip"
+SRC=ROOT/"analysis/furniture_full_b42/2026-11-05/cross_facing_v22/B42_FURNITURE_CROSS_FACING_REVIEW_V22.zip"
 OUT=ROOT/"analysis/furniture_full_b42/2026-11-05/cross_facing_v23"
 DBTMP=Path("/tmp/b42_v23_stage.sqlite")
 N=60
