@@ -1,0 +1,108 @@
+name: B42 v23 source-first 320 of 820 multi-tile facing visual reviews
+on:
+  push:
+    branches:
+      - work/pz-b42-cross-facing-pair-review-v23-20261105
+    paths:
+      - scripts/build_b42_furniture_cross_facing_v23.py
+      - analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_DIRECT_PAIRED_VISUAL_CLASSIFICATIONS.csv
+      - .github/workflows/b42-furniture-v23-cross-facing-full-db.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v22/B42_FURNITURE_CROSS_FACING_REVIEW_V22.zip
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_PAIR_SELECTION_SOURCE_ONLY.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_120_FACING_GRID_CANDIDATES.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_SELECTED_ORIGINAL_PART_POSITIONS.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_DIRECT_ORIGINAL_SOURCE_PIXEL_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_DIRECT_PAIRED_VISUAL_CLASSIFICATIONS.csv
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_PAIRS_FACING_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_PAIRS_FACING_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_PAIRS_FACING_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_PAIRS_FACING_CONTACT_04.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_PAIRS_FACING_CONTACT_05.png
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_60_PAIRS_FACING_CONTACT_06.png
+            /scripts/build_b42_furniture_cross_facing_v23.py
+      - name: Build full v23 SQLite with 60 new visually compared E/S source groups
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_cross_facing_v23.py
+          python3 -u scripts/build_b42_furniture_cross_facing_v23.py
+      - name: Independent 320/820 original source grid and 256 individual sprite hash verification
+        run: |
+          python3 - <<'PY'
+          import json,csv,sqlite3,zipfile
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-05/cross_facing_v23')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['source_and_wiki_registry_candidate_rows']==2231
+          assert m['preserved_raw_property_rows']==195265
+          assert m['actual_multitile_geometry_candidates']==820
+          assert m['new_120_direct_source_grid_views']==120
+          assert m['cumulative_direct_multitile_facing_views']==320
+          assert m['remaining_unreviewed_multitile_direction_candidates']==500
+          assert m['v23_new_pair_groups']==60
+          assert m['pair_reviewed_groups_cumulative']==120
+          assert m['original_PNG_sprite_pixel_CRC_verified']==256
+          assert sum(m['v23_new_visual_subject_counts'].values())==60
+          assert m['game_object_identity_certified']==0
+          assert m['inherited_474_unresolved_source_warnings']
+          with sqlite3.connect(p/'B42_FURNITURE_CROSS_FACING_REVIEW_V23.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            for t,n in {'source_attributes':195265,'source_slots':73644,
+              'furniture_tile':8219,'registry_entry':2231,
+              'v13_warning_case':474,
+              'v21_all_source_rectangle_template':843,
+              'v21_source_tile_positioned_png':2221,
+              'v21_direct_multisprite_grid_visual_observation':80,
+              'v22_direct_two_facing_visual_comparison':60,
+              'v22_new_facing_original_grid':120,
+              'v22_original_sprite_pixel_sha':258,
+              'v23_direct_two_facing_visual_comparison':60,
+              'v23_new_facing_original_source':120,
+              'v23_source_original_pixel_proof':256,
+              'v23_entire_820_multitile_candidate_coverage':820,
+              'v23_remaining_500_multitile_candidate_queue':500}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,t
+            assert c.execute('SELECT SUM(directly_viewed_grid) FROM v23_entire_820_multitile_candidate_coverage').fetchone()[0]==320
+            assert c.execute('SELECT SUM(visual_two_facing_comparison_available) FROM v23_entire_820_multitile_candidate_coverage').fetchone()[0]==240
+            x=set(c.execute('SELECT group_id,Facing FROM v23_new_facing_original_source'))
+            a=set(c.execute('SELECT group_id,Facing FROM v21_direct_multisprite_grid_visual_observation'))
+            b=set(c.execute('SELECT group_id,Facing FROM v22_new_facing_original_grid'))
+            assert len(x)==120 and len(a)==80 and len(b)==120
+            assert not x.intersection(a|b) and not a.intersection(b)
+            assert len(a|b|x)==320
+            assert c.execute('SELECT COUNT(*) FROM v23_direct_two_facing_visual_comparison WHERE exact_runtime_game_object_ID_certified!=0').fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_CROSS_FACING_REVIEW_V23.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_CROSS_FACING_REVIEW_V23.sqlite' in z.namelist()
+          with (p/'V23_500_UNREVIEWED_DIRECTION_QUEUE.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==500
+          print('V23_SOURCE_FIRST_320_OF_820_DIRECT_FACING_GRID_120_PAIRS_256_PIXEL_SHA_SQLITE_ZIP_CRC_PASS')
+          PY
+      - name: Commit v23 complete SQLite ZIP and original 820-facing audit CSVs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v23/V23_*.csv \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v23/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v23/README_KO.md \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v23/B42_FURNITURE_CROSS_FACING_REVIEW_V23.zip
+          git commit -m 'db(b42): v23 320 original source facing views with 120 group pair comparisons'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for i in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 4
+          done
+          exit 1
