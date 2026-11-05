@@ -1,0 +1,65 @@
+name: B42 furniture v28 cross-facing source structure
+on:
+  push:
+    branches:
+      - work/pz-b42-furniture-cross-facing-metadata-v28-20261105
+    paths:
+      - scripts/audit_b42_furniture_v28_facing_structure.py
+      - .github/workflows/b42-furniture-v28-source-facing.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/audit_b42_furniture_v28_facing_structure.py
+            /analysis/furniture_full_b42/2026-11-05/missing_atlas_warning_v27/B42_FURNITURE_SOURCE_AUDIT_V27.zip
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_structure_v28/
+      - name: Audit v27 original source and all 820 facing grids
+        run: |
+          python3 -m py_compile scripts/audit_b42_furniture_v28_facing_structure.py
+          python3 -u scripts/audit_b42_furniture_v28_facing_structure.py
+      - name: Independently verify v28 ZIP CRC, DB and CSV
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import sqlite3,zipfile,csv,json
+          p=Path('analysis/furniture_full_b42/2026-11-05/cross_facing_structure_v28')
+          m=json.loads((p/'MANIFEST.json').read_text())
+          assert m['original_source_face_rectangles_rechecked']==820
+          assert m['original_source_multifacing_groups_metadata_compared']==274
+          assert m['newly_directly_visually_observed_facings']==0
+          with sqlite3.connect(p/'B42_FURNITURE_CROSS_FACING_STRUCTURE_V28.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert not c.execute('PRAGMA foreign_key_check').fetchall()
+            for name,n in [('v28_820_source_facing_structure',820),
+                           ('v28_274_cross_facing_source_metadata',274),
+                           ('v27_warning_source_recheck',474),
+                           ('v27_missing_atlas_group',23)]:
+              assert c.execute('SELECT COUNT(*) FROM '+name).fetchone()[0]==n
+          for f,n in [('V28_820_SOURCE_FACING_STRUCTURE_CHECKS.csv',820),
+                      ('V28_274_GROUP_SOURCE_FACING_COMPARISONS.csv',274)]:
+            with (p/f).open(encoding='utf-8-sig') as src:
+              assert sum(1 for _ in csv.reader(src))-1==n
+          with zipfile.ZipFile(p/'B42_FURNITURE_CROSS_FACING_STRUCTURE_V28.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_CROSS_FACING_STRUCTURE_V28.sqlite' in z.namelist()
+          print('V28_INDEPENDENT_VERIFICATION_OK')
+          PY
+      - name: Publish compressed SQLite evidence, never raw 100MB plus DB
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          dir=analysis/furniture_full_b42/2026-11-05/cross_facing_structure_v28
+          git add --sparse "$dir"/B42_FURNITURE_CROSS_FACING_STRUCTURE_V28.zip "$dir"/V28_*.csv "$dir"/MANIFEST.json "$dir"/README_KO.md
+          git diff --cached --stat
+          git commit -m 'db(b42): v28 audit 820 source-facing geometry rows and 274 source groups'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
