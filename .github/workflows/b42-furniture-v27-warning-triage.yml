@@ -1,0 +1,60 @@
+name: B42 furniture v27 original PNG and warning triage
+on:
+  push:
+    branches:
+      - work/pz-b42-furniture-v27-source-warning-triage-20261105
+    paths:
+      - scripts/audit_b42_furniture_v27_source_warnings.py
+      - .github/workflows/b42-furniture-v27-warning-triage.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/audit_b42_furniture_v27_source_warnings.py
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/B42_FURNITURE_SOURCE_GRID_VISUAL_V26.zip
+            /analysis/furniture_full_b42/2026-11-05/source_warning_triage_v27/
+      - name: Verify original ZIP, recover full SQLite, audit missing PNG and original warnings
+        run: |
+          python3 -m py_compile scripts/audit_b42_furniture_v27_source_warnings.py
+          python3 -u scripts/audit_b42_furniture_v27_source_warnings.py
+      - name: Independently verify new CSV and SQLite outputs
+        run: |
+          python3 - <<'PY'
+          import csv,sqlite3,zipfile,json
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-05/source_warning_triage_v27')
+          j=json.loads((p/'MANIFEST.json').read_text())
+          assert j['png_unlinked_groups_examined']==23
+          assert j['warning_cases_source_proof_rechecked']==474
+          assert j['multifacing_source_geometries_rechecked']==274
+          assert j['warnings_certified_resolved']==j['png_cell_links_certified_resolved']==0
+          with sqlite3.connect(p/'B42_FURNITURE_SOURCE_DIAGNOSTICS_V27.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert not c.execute('PRAGMA foreign_key_check').fetchall()
+            for t,n in [('v27_unlinked_png_triage',23),('v27_warning_triage',474),('v27_multifacing_geometry_recheck',274)]:
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n
+          for name,n in [('V27_23_PNG_UNLINKED.csv',23),('V27_474_SOURCE_WARNINGS.csv',474),('V27_7_WARNING_TYPE_COUNTS.csv',7),('V27_274_MULTIFACING_SOURCE_RECHECK.csv',274)]:
+            with (p/name).open(encoding='utf-8-sig') as f:
+              assert sum(1 for _ in csv.reader(f))-1==n
+          with zipfile.ZipFile(p/'B42_FURNITURE_SOURCE_DIAGNOSTICS_V27.zip') as z:
+            assert z.testzip() is None
+          print('V27_INDEPENDENT_INTEGRITY_OK')
+          PY
+      - name: Publish v27 derived evidence to isolated work branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-05/source_warning_triage_v27/
+          git diff --cached --stat
+          git commit -m 'db(b42): v27 23 PNG and 474 warning source triage, 274 facing rechecks'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
