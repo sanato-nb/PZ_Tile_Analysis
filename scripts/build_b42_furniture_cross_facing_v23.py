@@ -169,7 +169,7 @@ def main():
   assert int(part["original_cell_w"])==ref["original_cell_w"]
   assert int(part["original_cell_h"])==ref["original_cell_h"]
   assert source["group_id"]==g
-  assert loc not in expected_part_keys[(g,f)]
+  assert key not in expected_part_keys[(g,f)]
   expected_part_keys[(g,f)].add(key)
  assert len(expected_part_keys)==120
  for f in facing:
