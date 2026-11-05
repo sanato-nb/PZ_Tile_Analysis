@@ -1,0 +1,93 @@
+name: B42 v27 missing PNG atlas and all original warning source proofs
+on:
+  push:
+    branches:
+      - work/pz-b42-missing-atlas-warning-source-audit-v27-20261105
+    paths:
+      - scripts/build_b42_v27_missing_png_source_proof.py
+      - scripts/build_b42_v27_warning_source_recheck.py
+      - .github/workflows/b42-furniture-v27-23-missing-474-warnings-full-db.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  source-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/B42_FURNITURE_SOURCE_GRID_VISUAL_V26.zip
+            /scripts/build_b42_v27_missing_png_source_proof.py
+            /scripts/build_b42_v27_warning_source_recheck.py
+      - name: Check actual source Git atlas filenames and produce source-only missing group ledger
+        run: |
+          python3 -m py_compile scripts/build_b42_v27_missing_png_source_proof.py
+          python3 -u scripts/build_b42_v27_missing_png_source_proof.py
+      - name: Independently recheck 474 warning cases against TileDef and source image index
+        run: |
+          python3 -m py_compile scripts/build_b42_v27_warning_source_recheck.py
+          python3 -u scripts/build_b42_v27_warning_source_recheck.py
+      - name: Independent SQLite counts, missing 23+89 and warning 474 evidence; ZIP CRC
+        run: |
+          python3 - <<'PY'
+          import sqlite3,csv,zipfile,json
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-05/missing_atlas_warning_v27')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['source_only_one_original_png_sprite_reviewed']==940
+          assert m['all_multitile_source_group_facing_visual_reviews']==820
+          assert m['missing_source_png_groups']==23
+          assert m['missing_exact_atlas_filenames']==3
+          assert m['affected_source_tile_keys']==89
+          assert m['original_warning_cases_independently_crosschecked']==474
+          assert m['original_warning_cases_resolved']==0
+          assert m['runtime_object_identity_certified']==0
+          assert m['missing_by_atlas']=={'crafted_03':17,'lighting_indoor_01_on':5,'e_newsnow_ground_1':1}
+          assert m['missing_source_tile_keys_by_atlas']=={'crafted_03':17,'lighting_indoor_01_on':24,'e_newsnow_ground_1':48}
+          assert sum(m['original_warning_cases_by_code'].values())==474
+          assert sum([m['warning_cases_with_every_part_image_indexed'],
+           m['warning_cases_with_no_parts_image_indexed'],
+           m['warning_cases_with_partial_image_index']])==474
+          with sqlite3.connect(p/'B42_FURNITURE_SOURCE_AUDIT_V27.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert not c.execute('PRAGMA foreign_key_check').fetchall()
+            for t,n in {'source_attributes':195265,'source_slots':73644,'furniture_tile':8219,
+              'registry_entry':2231,'wiki_furniture':1268,
+              'v12_tile_proof':8219,'v13_warning_case':474,
+              'v14_source_only_ledger':963,'v20_23_original_atlas_filename_audit':23,
+              'v26_all_820_source_direction_grid_visual_evidence':820,
+              'v27_missing_atlas_group':23,'v27_missing_atlas_source_key':89,
+              'v27_three_absent_atlas_filenames':3,
+              'v27_warning_source_recheck':474,
+              'v27_warning_type_evidence_matrix':7,
+              'v27_source_scoped_progress':8}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,(t,n)
+            assert c.execute("SELECT COUNT(*) FROM v27_missing_atlas_group WHERE original_png_mapping_resolved!=0").fetchone()[0]==0
+            assert c.execute("SELECT COUNT(*) FROM v27_warning_source_recheck WHERE original_warning_status!='UNRESOLVED'").fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_SOURCE_AUDIT_V27.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_SOURCE_AUDIT_V27.sqlite' in z.namelist()
+          with (p/'V27_474_UNRESOLVED_WARNING_SOURCE_PROOFS.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==474
+          print('V27_23_MISSING_SOURCE_GROUPS_89_TILE_KEYS_AND_474_INDIVIDUALLY_CHECKED_WARNINGS_FULL_SQLITE_SUCCESS')
+          PY
+      - name: Commit new complete v27 source SQLite ZIP, evidential CSV and manifests
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-05/missing_atlas_warning_v27/V27_*.csv \
+            analysis/furniture_full_b42/2026-11-05/missing_atlas_warning_v27/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-05/missing_atlas_warning_v27/README_KO.md \
+            analysis/furniture_full_b42/2026-11-05/missing_atlas_warning_v27/B42_FURNITURE_SOURCE_AUDIT_V27.zip
+          git commit -m 'db(b42): v27 source proofs 23 absent atlas groups and 474 warnings across source tile properties'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for i in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 5
+          done
+          exit 1
