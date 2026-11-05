@@ -1,0 +1,137 @@
+name: B42 v26 full furniture source-first grid direct visual database
+on:
+  push:
+    branches:
+      - work/pz-b42-all-remaining-multitile-visual-v26-20261105
+    paths:
+      - scripts/build_b42_furniture_source_grid_v26.py
+      - analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_235_DIRECT_VISUAL_GROUP_SHAPE_OBSERVATIONS.csv
+      - .github/workflows/b42-furniture-v26-full-db.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  full-db:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-05/cross_facing_v25/B42_FURNITURE_CROSS_FACING_REVIEW_V25.zip
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/STAGING_MANIFEST.json
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_235_SOURCE_FACING_TO_VISUALLY_REVIEW.csv
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ALL_RAW_SOURCE_PARTS_POSITION_AND_ATLAS_MAP.csv
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ALL_NEW_SPRITE_PIXEL_SHA256.csv
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_235_DIRECT_VISUAL_GROUP_SHAPE_OBSERVATIONS.csv
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_01.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_02.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_03.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_04.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_05.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_06.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_07.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_08.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_09.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_10.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_11.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_12.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_13.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_14.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_15.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_16.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_17.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_18.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_19.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_20.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_21.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_22.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_23.png
+            /analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_ORIGINAL_MULTITILE_SOURCE_CONTACT_24.png
+            /scripts/build_b42_furniture_source_grid_v26.py
+      - name: Build original full v26 SQLite verifying 235 previously unseen grids and 583 PNG cell source keys
+        run: |
+          python3 -m py_compile scripts/build_b42_furniture_source_grid_v26.py
+          python3 -u scripts/build_b42_furniture_source_grid_v26.py
+      - name: Independently verify 820 source-facing visual coverage, source identity limits and full ZIP CRC
+        run: |
+          python3 - <<'PY'
+          import csv,json,sqlite3,zipfile,hashlib
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26')
+          m=json.loads((p/'MANIFEST.json').read_text(encoding='utf8'))
+          assert m['current_registered_Wiki_and_source_candidates']==2231
+          assert m['preserved_TileDef_original_property_rows']==195265
+          assert m['preserved_source_raw_slots']==73644
+          assert m['eligible_multitile_original_complete_rectangular_group_facing_candidates']==820
+          assert m['prior_direct_original_grid_image_views']==585
+          assert m['newly_directly_visually_reviewed_group_facing_grids']==235
+          assert m['v26_new_original_source_sprite_crop_SHA256_rows']==583
+          assert m['all_original_contact_sheets_directly_inspected']==24
+          assert m['all_multitile_group_facing_source_grid_images_directly_reviewed']==820
+          assert m['multi_tile_directional_original_png_visual_coverage_pct']==100.0
+          assert m['remaining_multitile_original_grid_direction_visual_queue']==0
+          assert m['source_multitile_unique_groups_with_at_least_one_direct_image']==346
+          assert m['source_groups_with_two_facing_comparison_directly_viewed']==274
+          assert sum(m['v26_broad_shape_classification_counts'].values())==235
+          assert m['certified_runtime_furniture_object_identity']==0
+          assert m['original_474_warnings_unresolved']
+          assert m['original_23_png_unlinked_source_groups_unresolved']
+          with sqlite3.connect(p/'B42_FURNITURE_SOURCE_GRID_VISUAL_V26.sqlite') as c:
+            assert c.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+            assert not c.execute('PRAGMA foreign_key_check').fetchall()
+            for t,n in {
+              'source_attributes':195265,'source_slots':73644,
+              'furniture_tile':8219,'registry_entry':2231,'wiki_furniture':1268,
+              'v12_template_proof':3840,'v13_warning_case':474,'v13_storage_link':1855,
+              'v14_source_only_ledger':963,
+              'v21_all_source_rectangle_template':843,
+              'v21_source_tile_positioned_png':2221,
+              'v21_direct_multisprite_grid_visual_observation':80,
+              'v22_new_facing_original_grid':120,
+              'v23_new_facing_original_source':120,
+              'v24_new_facing_original_source':160,
+              'v25_pair_facing_source_grid':148,
+              'v25_all_820_multitile_direction_visual_ledger':820,
+              'v26_new_direct_original_png_grid_visual':235,
+              'v26_direct_original_sprite_pixels':583,
+              'v26_all_820_source_direction_grid_visual_evidence':820,
+              'v26_all_346_source_multitile_group_coverage':346,
+              'v26_unreviewed_multitile_direction_candidates':0}.items():
+              assert c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0]==n,(t,n)
+            old=set(c.execute('SELECT group_id,Facing FROM v25_all_820_multitile_direction_visual_ledger WHERE source_grid_pixels_visually_checked=1'))
+            new=set(c.execute('SELECT group_id,Facing FROM v26_new_direct_original_png_grid_visual'))
+            allviews=set(c.execute('SELECT group_id,Facing FROM v26_all_820_source_direction_grid_visual_evidence'))
+            assert len(old)==585 and len(new)==235 and not old.intersection(new)
+            assert len(old|new)==len(allviews)==820 and old|new==allviews
+            assert c.execute('SELECT SUM(direct_png_contact_grid_visually_reviewed) FROM v26_all_820_source_direction_grid_visual_evidence').fetchone()[0]==820
+            assert c.execute('SELECT COUNT(DISTINCT group_id) FROM v26_all_820_source_direction_grid_visual_evidence').fetchone()[0]==346
+            assert c.execute('SELECT SUM(direct_viewed_facing_grid_count) FROM v26_all_346_source_multitile_group_coverage').fetchone()[0]==820
+            assert c.execute('SELECT COUNT(*) FROM v26_new_direct_original_png_grid_visual WHERE runtime_game_object_identity_certified<>0').fetchone()[0]==0
+          with zipfile.ZipFile(p/'B42_FURNITURE_SOURCE_GRID_VISUAL_V26.zip') as z:
+            assert z.testzip() is None
+            assert 'B42_FURNITURE_SOURCE_GRID_VISUAL_V26.sqlite' in z.namelist()
+          with (p/'V26_ALL_820_DIRECT_SOURCE_GRID_VISUAL_LEDGER.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==820
+          with (p/'V26_0_UNREVIEWED_MULTITILE_SOURCE_GRID_QUEUE.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==0
+          print('V26_ALL_820_OF_820_SOURCE_MULTITILE_GRID_IMAGES_DIRECTLY_VIEWED_FULL_SQLITE_ZIP_CRC_PASSED')
+          PY
+      - name: Publish original evidence preserving full source SQLite, CSVs and visual inspection manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/V26_*.csv \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/MANIFEST.json \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/README_KO.md \
+            analysis/furniture_full_b42/2026-11-05/all_multitile_visual_v26/B42_FURNITURE_SOURCE_GRID_VISUAL_V26.zip
+          git commit -m 'db(b42): v26 all 820 source multi-tile facing images visually reviewed, 235 new, 583 source pixels'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for attempt in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 5
+          done
+          exit 1
