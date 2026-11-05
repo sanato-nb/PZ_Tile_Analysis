@@ -1,0 +1,73 @@
+name: B42 v22 compare 60 source group pairs across two original sprite facings
+on:
+  push:
+    branches:
+      - work/pz-b42-cross-facing-pair-review-v22-20261105
+    paths:
+      - scripts/stage_b42_v22_paired_original_grid.py
+      - .github/workflows/b42-furniture-v22-cross-facing-stage.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /analysis/furniture_full_b42/2026-11-04/multipart_grid_v21/B42_FURNITURE_MULTIPART_GRID_V21.zip
+            /scripts/stage_b42_v22_paired_original_grid.py
+      - name: Select 60 disjoint original furniture group pairs with 2 distinct facing grids
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 -m py_compile scripts/stage_b42_v22_paired_original_grid.py
+          python3 -u scripts/stage_b42_v22_paired_original_grid.py --select
+      - name: Checkout precisely referenced original PZ sprite PNG atlases
+        run: |
+          wc -l analysis/furniture_full_b42/2026-11-05/cross_facing_v22/_required_original_png_paths.txt
+          git sparse-checkout add --stdin < analysis/furniture_full_b42/2026-11-05/cross_facing_v22/_required_original_png_paths.txt
+      - name: Render 120 source SpriteGridPos facing matrices in 60 image pairs
+        run: |
+          python3 -u scripts/stage_b42_v22_paired_original_grid.py --render
+      - name: Verify 60 pairs 120 distinct group facing keys and pixel-backed comparison pages
+        run: |
+          python3 - <<'PY'
+          import csv,json,hashlib
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-05/cross_facing_v22')
+          m=json.loads((p/'STAGING_MANIFEST.json').read_text(encoding='utf8'))
+          assert m['new_distinct_pair_groups']==60 and m['new_direction_candidates']==120
+          assert m['new_direction_overlaps_with_v21']==0
+          assert m['new_group_overlaps_with_v21']==0
+          assert m['actual_pair_contact_page_count']==6
+          assert m['all_new_source_tile_crops_verified']>=240
+          assert m['actual_game_object_identity_certified']==0
+          assert len(m['original_pair_contact_sha256'])==6
+          for file,h in m['original_pair_contact_sha256'].items():
+            assert hashlib.sha256((p/file).read_bytes()).hexdigest()==h
+          with (p/'V22_60_PAIR_SELECTION_SOURCE_ONLY.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==60
+          with (p/'V22_120_FACING_GRID_CANDIDATES.csv').open(encoding='utf-8-sig') as f:
+            assert sum(1 for _ in csv.reader(f))-1==120
+          print('V22_60_PAIRS_120_NEW_FACING_GRIDS_ORIGINAL_PIXEL_HASH_CONTACT_PASS')
+          PY
+      - name: Commit extracted original source PNG contact sheets and exact coordinate sources
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v22/*.csv \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v22/*.json \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v22/*.png \
+            analysis/furniture_full_b42/2026-11-05/cross_facing_v22/STAGED_*_BASE64.txt
+          git commit -m 'evidence(b42): sixty paired facing source grids and exact original sprite SHA'
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          for i in 1 2 3 4; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
+            sleep 4
+          done
+          exit 1

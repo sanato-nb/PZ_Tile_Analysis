@@ -1,0 +1,13 @@
+﻿metric_key,numerator,denominator,percent,evidence_level,scope_limit
+known_source_and_wiki_candidate_rows,2231,2231,100.0,REGISTERED_NOT_UNIQUE_FURNITURE,Wiki may be incomplete
+single_sprite_source_only_direct_visual_review,940,963,97.61,ONE_ORIGINAL_SPRITE,23 source groups have missing PNG mapping
+source_directional_geometry_candidates,3840,3840,100.0,SOURCE_GEOMETRY,Not full object identification
+real_multitile_rectangle_source_candidates,820,820,100.0,SOURCE_ONLY_RECTANGLES,820 group×Facing not unique game objects
+previous_v21_multipart_single_facing_visual,80,820,9.76,DIRECT_SOURCE_GRID,80 prior distinct group×Facing image grids
+new_v22_cross_facing_grid_visual,120,820,14.63,DIRECT_PAIRED_SOURCE_GRIDS,Two facings from each of 60 unique groups
+cumulative_distinct_multitile_direction_grid_visual,200,820,24.39,DIRECT_SOURCE_GRID,80 v21 +120 v22; no overlap
+new_two_facing_group_comparisons,60,274,21.9,VISUAL_COMPARISON_ONLY,"Visual relatives, no game object identity"
+new_original_sprite_pixels_sha_checked,258,258,100.0,ORIGINAL_PIXEL_HASH,Per source tile in newly reviewed 120 grid candidates
+original_warning_cases_resolved,0,474,0.0,UNRESOLVED,No warning certified resolved
+source_only_png_mapping_blockers_resolved,0,23,0.0,UNRESOLVED,23 original TileDef PNG atlas mappings missing
+actual_same_game_object_verified,0,0,,UNKNOWN_TOTAL,Runtime identity currently uncertified
