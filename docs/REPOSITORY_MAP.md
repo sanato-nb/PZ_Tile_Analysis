@@ -6,6 +6,8 @@
 
 | 목적 | 현재 바로 사용할 위치 |
 |---|---|
+| B42 가구를 종류별로 찾기 | [2,197개 검색 목록과 사용법](../analysis/furniture_b42/current/README.md) · [전체 CSV](../analysis/furniture_b42/current/catalog.csv) |
+| 가구의 저장 기능 및 이미지 검수 근거 | [타일별 저장소 속성](../analysis/furniture_b42/current/storage_tiles.csv) · [이미지 검수 46개](../analysis/furniture_b42/current/image_review_46.html) · [보류 34개](../analysis/furniture_b42/current/held_34.csv) |
 | 타일 10,042종 전체 | [v240 전체 CSV](../review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv) |
 | 비활성 제외 후 9,587종 | [v240 활성 CSV](../review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv) |
 | 439 보류 + 16 사용자 제외 | [v240 별도 보관 CSV](../review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv) |
