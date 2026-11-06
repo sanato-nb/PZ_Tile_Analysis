@@ -1,5 +1,9 @@
 # 프로젝트 현재 상태
 
+## 최신 통합 데이터베이스 v258
+
+[복원 방법과 SQL 예시](../analysis/current/v258/README.md) · [검증 기록](../analysis/current/v258/MANIFEST.json). 가구 후보 1,461개가 v257 타일 키와 하나 이상 일치한다.
+
 ## B42 가구·설치물 1차 목록 (2026-11-06)
 
 [검색 가능한 전체 목록과 사용법](../analysis/furniture_b42/current/README.md) · [전체 CSV](../analysis/furniture_b42/current/catalog.csv) · [보류 34개](../analysis/furniture_b42/current/held_34.csv)

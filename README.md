@@ -1,21 +1,23 @@
 # 프로젝트 좀보이드 B42 → Minecraft 맵 변환을 위한 타일 분석
 
+**최신 통합 DB · v258 (2026-11-06)**　[복원 및 조회](analysis/current/v258/README.md) · [검증 기록](analysis/current/v258/MANIFEST.json). v257 타일 10,042종과 가구 후보 2,197개를 한 SQLite에서 조회할 수 있다.
+
 **B42 가구 목록 · 1차 정리 (2026-11-06)**　[목록과 사용법](analysis/furniture_b42/current/README.md) · [2,197개 목록 CSV](analysis/furniture_b42/current/catalog.csv) · [보류 34개](analysis/furniture_b42/current/held_34.csv)
 
 > **v257 타일 원본 속성 물리 병합 (2026-10-31):** [v257 출처·검증 매니페스트](analysis/current/v257/MANIFEST.json) · [SHA 검증 복원 도구](scripts/restore_v257_master.py) · [주의사항](analysis/current/v257/README.md). v255 260개 테이블을 유지하고 B42 `.tiles` 원본 속성을 새 테이블에 연결함. 10,042개 중 10,003개 대응, 39개 미대응. **이 릴리스는 GitHub에 있던 메인+레거시 두 파일 기준(잠정)이며, 사용자가 업로드한 정확한 7개 파일 ZIP 전체를 합친 정식 완료본은 아님.** 사용자68·보류439·활성9587/제외455 보존, 새 공식 정체 인증0. v256 평면도와 기존 판정은 그대로 유지.
 
 > **실행 가능한 최신 평면도 v256 (2026-10-30):** [단독 HTML 파일](floorplan/current/v256_floorplan_unified_10042.html) · [사용 방법](floorplan/README_V256.md). v255 통합 10,042종·사용자68 우선·보류439 표시를 실제 TMX 레이어/좌표 조회·검색·PNG/CSV 출력에 연결. 비활성455는 잠정 후보 위치만 점선 표시, 구조로 자동 활성화 금지. 본문 v255 DB 및 검수 기록은 원본 유지.
 
-> **최신 상태 v255 (2026-10-30):** [최신 타일 통합 정의 10,042종 및 보류439·사용자68](review/v255_latest_integrated_10042_2026-10-30/README.md) · [최신 평면도 HTML](floorplan/current/v255_floorplan_latest_user_priority.html) · [실물 SQLite 260테이블/복원](analysis/current/v255/MANIFEST.json). 원본 9587 활성 / 455 비활성 보존, 사용자 동의/잠정 관찰과 공식 TileZed 인증을 구분(최종인증0).
+> **이전 상태 v255 (2026-10-30):** [최신 타일 통합 정의 10,042종 및 보류439·사용자68](review/v255_latest_integrated_10042_2026-10-30/README.md) · [최신 평면도 HTML](floorplan/current/v255_floorplan_latest_user_priority.html) · [실물 SQLite 260테이블/복원](analysis/current/v255/MANIFEST.json). 원본 9587 활성 / 455 비활성 보존, 사용자 동의/잠정 관찰과 공식 TileZed 인증을 구분(최종인증0).
 
-**현재 기준: v240 통합 데이터베이스 (2026-10-30)** · 원본 PNG/TMX로 개별 타일의 사물·부품·연결·방향을 분석하고, 나중에 Minecraft 월드로 재현하기 위한 프로젝트입니다.
+**이전 기준: v240 통합 데이터베이스 (2026-10-30)** · 원본 PNG/TMX로 개별 타일의 사물·부품·연결·방향을 분석하고, 나중에 Minecraft 월드로 재현하기 위한 프로젝트입니다.
 
 > **빠른 시작:** [현재 상태](docs/CURRENT_STATUS.md) · [저장소 안내](docs/REPOSITORY_MAP.md) · **[v242 이미지/스프라이트 분석 매뉴얼](docs/SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md)** · [빠른 판정표](docs/SPRITE_ANALYSIS_QUICK_REFERENCE.md) · [새 채팅/작업 이어가기](docs/NEXT_CHAT_PROMPT.md)
 
 ## 최신 기준 데이터
 
 <!-- AUTO_README_START -->
-> **최신 통합: v255 (2026-10-30)** — 타일 정체 후보를 최신 자료로 통합했으며 공식 정체 인증과는 다릅니다.
+> **v255 당시 통합 (2026-10-30)** — 타일 정체 후보를 최신 자료로 통합했으며 공식 정체 인증과는 다릅니다.
 
 | 항목 | 최신 기준 |
 |---|---:|
