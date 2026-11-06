@@ -1,0 +1,44 @@
+name: B42 v38 desk neighbors and layout atlas
+on:
+  push:
+    branches: ['work/pz-b42-residual-and-layouts-v38-20261106']
+    paths: ['scripts/audit_b42_map_layouts_v38.py', '.github/workflows/b42-v38-map-layouts.yml']
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/audit_b42_map_layouts_v38.py
+            /analysis/furniture_full_b42/2026-11-06/office_subsets_v37/*.csv
+            /analysis/furniture_full_b42/2026-11-06/warning_layouts_v36/V36_COMPONENTS.csv
+            /analysis/furniture_full_b42/2026-11-06/warning_layouts_v36/V36_DIRECTION_SUMMARY.csv
+      - name: Fetch only required map cells and sprite atlases
+        run: |
+          python3 - <<'PY' | git sparse-checkout add --stdin
+          import csv
+          from pathlib import Path
+          p=Path('analysis/furniture_full_b42/2026-11-06')
+          maps=set()
+          for r in csv.DictReader((p/'office_subsets_v37/V37_UNMATCHED.csv').open()):
+              x,y=int(r['world_x']),int(r['world_y'])
+              for dx,dy in [(0,0),(1,0),(-1,0),(0,1),(0,-1),(2,0),(-2,0),(0,2),(0,-2)]:
+                  maps.add(f'/B4220.3_MapExport_256/tmx/{(x+dx)//256}_{(y+dy)//256}.tmx')
+          print('\n'.join(sorted(maps)))
+          for a in sorted({r['atlas'] for r in csv.DictReader((p/'warning_layouts_v36/V36_DIRECTION_SUMMARY.csv').open())}):
+              print('/Tiles/2x/'+a+'.png')
+          PY
+      - run: python3 -m pip install Pillow numpy
+      - run: python3 scripts/audit_b42_map_layouts_v38.py
+      - name: Save verified map observations
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-06/map_review_v38/
+          git commit -m 'Save all residual partner cells, repeated layouts and source sprite panels'
+          git push origin HEAD:"$GITHUB_REF_NAME"
