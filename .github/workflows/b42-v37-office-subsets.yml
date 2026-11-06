@@ -1,0 +1,43 @@
+name: B42 v37 office desk subsets
+on:
+  push:
+    branches: ['work/pz-b42-office-desk-subsets-v37-20261106']
+    paths: ['scripts/review_office_subsets_v37.py', '.github/workflows/b42-v37-office-subsets.yml']
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          filter: blob:none
+          sparse-checkout: |
+            /scripts/review_office_subsets_v37.py
+            /Tiles/2x/location_business_office_generic_01.png
+            /analysis/furniture_full_b42/2026-11-06/warning_layouts_v36/V36_COMPONENTS.csv
+      - run: python3 -m pip install Pillow
+      - run: python3 scripts/review_office_subsets_v37.py
+      - name: Check all four facings and original placement totals
+        run: |
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+          root = Path('analysis/furniture_full_b42/2026-11-06/office_subsets_v37')
+          def rows(name):
+              with (root / name).open() as f:
+                  return list(csv.DictReader(f))
+          variants = rows('V37_SUBSETS.csv')
+          assert len({(r['style'], r['facing']) for r in variants}) == 12
+          assert sum(int(r['total']) for r in variants) == 6001
+          assert sum(int(r['copies']) for r in rows('V37_OCCURRENCES.csv')) == 6001
+          assert sum(int(r['copies']) for r in rows('V37_UNMATCHED.csv')) == 174
+          PY
+      - name: Save counts, coordinates and source sprite reconstructions
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-06/office_subsets_v37/*.csv analysis/furniture_full_b42/2026-11-06/office_subsets_v37/*.png
+          git commit -m 'Record 6001 observed desk layouts and 174 residual placements'
+          git push origin HEAD:"$GITHUB_REF_NAME"
