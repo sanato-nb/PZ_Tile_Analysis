@@ -88,6 +88,42 @@ with tempfile.TemporaryDirectory() as tmp:
                 if data:e['images'].append(dict(name=k,data=data,source=p,kind='tile'))
     with ThreadPoolExecutor(max_workers=6) as pool:
         records=list(pool.map(review,records))
+    # Compare exact atlas names in the official mapping pack when local assets are absent.
+    import re
+    from html import unescape
+    official='https://projectzomboid.com/tools/Tiles-August-28-2026.zip'
+    missing_sheets={k.split('/')[0] for e in records if not e['images'] for k in e['keys']}
+    if missing_sheets:
+        try:
+            from remotezip import RemoteZip
+            with RemoteZip(official,timeout=12) as archive:
+                for member in archive.namelist():
+                    leaf=Path(member)
+                    if leaf.stem not in missing_sheets or leaf.suffix!='.png' or '/2x/' not in '/'+member: continue
+                    atlas=Image.open(io.BytesIO(archive.read(member))).convert('RGBA')
+                    for e in records:
+                        for k in e['keys']:
+                            sh,n=k.split('/')
+                            if sh!=leaf.stem: continue
+                            x=int(n)%(atlas.width//128)*128;y=int(n)//(atlas.width//128)*256
+                            data=encoded(atlas.crop((x,y,x+128,y+256)))
+                            if data:e['images'].append(dict(name=k,data=data,source=official+'#'+member,kind='official'))
+        except Exception as exc:
+            print('optional official archive',type(exc).__name__)
+    def article_ref(e):
+        if e['images'] or not e['article'] or '/wiki/' not in e['article']:return
+        if e['name'] in ('Decorations','Signs','Painting'):return
+        try:
+            html=requests.get(e['article'],timeout=10).text
+            from bs4 import BeautifulSoup
+            soup=BeautifulSoup(html,'html.parser')
+            image=soup.select_one('table.infobox img, .infobox img')
+            if image:
+                url=urljoin(e['article'],image.get('src',''))
+                data=wiki(url)
+                if data:e['images'].append(dict(name='관련 문서의 대표 그림',source=url,kind='article',data=data))
+        except (ValueError,requests.RequestException):pass
+    with ThreadPoolExecutor(max_workers=6) as pool:list(pool.map(article_ref,records))
     assert len(records)==len({e['id'] for e in records})==80
     for i in range(0,80,5):
         (OUT/f'cards_{i//5:02}.json').write_text(json.dumps(records[i:i+5],ensure_ascii=False))
