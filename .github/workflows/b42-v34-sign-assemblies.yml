@@ -1,0 +1,42 @@
+name: B42 v34 restaurant sign assemblies
+on:
+  push:
+    branches: ['work/pz-b42-restaurant-assemblies-v34-20261106']
+    paths: ['scripts/audit_b42_restaurant_assemblies_v34.py', '.github/workflows/b42-v34-sign-assemblies.yml']
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/audit_b42_restaurant_assemblies_v34.py
+            /analysis/furniture_full_b42/2026-11-06/restaurant_signs_v33/V33_PLACEMENTS.csv
+            /B4220.3_MapExport_256/tmx/13_42.tmx
+            /B4220.3_MapExport_256/tmx/23_20.tmx
+            /B4220.3_MapExport_256/tmx/25_20.tmx
+            /B4220.3_MapExport_256/tmx/41_36.tmx
+            /B4220.3_MapExport_256/tmx/47_27.tmx
+            /B4220.3_MapExport_256/tmx/48_15.tmx
+            /B4220.3_MapExport_256/tmx/48_6.tmx
+            /B4220.3_MapExport_256/tmx/49_20.tmx
+            /B4220.3_MapExport_256/tmx/4_50.tmx
+            /B4220.3_MapExport_256/tmx/51_21.tmx
+            /B4220.3_MapExport_256/tmx/51_5.tmx
+            /B4220.3_MapExport_256/tmx/52_8.tmx
+            /B4220.3_MapExport_256/tmx/53_7.tmx
+            /B4220.3_MapExport_256/tmx/54_19.tmx
+            /B4220.3_MapExport_256/tmx/58_1.tmx
+            /B4220.3_MapExport_256/tmx/59_1.tmx
+      - run: python3 scripts/audit_b42_restaurant_assemblies_v34.py
+      - name: Save verified placements
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-06/restaurant_signs_v34/*.csv
+          git commit -m 'Save floor and layer evidence for restaurant sign assemblies'
+          git push origin HEAD:"$GITHUB_REF_NAME"
