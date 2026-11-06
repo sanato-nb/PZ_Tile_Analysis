@@ -1,0 +1,29 @@
+name: B42 v39 cumulative map inventory
+on:
+  push:
+    branches: ['work/pz-b42-cumulative-registry-map-v39-20261106']
+    paths: ['scripts/merge_b42_registry_maps_v39.py', '.github/workflows/b42-v39-map-inventory.yml']
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /B4220.3_MapExport_256/tmx/*.tmx
+            /analysis/furniture_full_b42/2026-11-06/geometry_warning_v30/B42_FURNITURE_GEOMETRY_WARNINGS_V30.zip
+            /analysis/furniture_full_b42/2026-11-06/*/V3[1-8]_*.csv
+            /scripts/merge_b42_registry_maps_v39.py
+      - run: python3 -m pip install numpy
+      - run: python3 scripts/merge_b42_registry_maps_v39.py
+      - name: Save verified database and inventory
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-06/registry_map_v39/
+          git commit -m 'Store cumulative SQLite, 2231 registry rows and full map-presence inventory'
+          git push origin HEAD:"$GITHUB_REF_NAME"
