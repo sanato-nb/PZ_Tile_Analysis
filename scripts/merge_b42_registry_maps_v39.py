@@ -101,6 +101,30 @@ def run(db):
         found=sum(by_group[g]>0 for g in gs)
         status='direct_group_map_presence' if found else ('direct_group_no_map_hit' if gs else 'no_direct_group_field_link')
         db.execute('insert into v39_registry_progress values(?,?,?,?,?,?)',(i,row['entry_id'],json.dumps(links),json.dumps(gs),found,status))
+    # The wiki registry stores exact sprite links and group expansions in a bridge table.
+    # Separate those evidence types so shared groups cannot inflate direct matches.
+    db.executescript("""
+    CREATE TABLE v39_candidate_map_status AS
+    WITH counts AS (
+        SELECT e.entry_id, e.display_name, e.source_system,
+               count(t.source_key) AS linked_keys,
+               sum(CASE WHEN m.placements>0 AND t.evidence='EXACT_WIKI_IMAGE_SPRITE_KEY' THEN 1 ELSE 0 END) AS exact_wiki_keys_seen,
+               sum(CASE WHEN m.placements>0 AND t.evidence='SOURCE_ONLY_TILEDEF_GROUP' THEN 1 ELSE 0 END) AS source_only_keys_seen,
+               sum(CASE WHEN m.placements>0 AND t.evidence='SAME_TILEDEF_NAME_STYLE_SOURCE_GROUP_UNCONFIRMED' THEN 1 ELSE 0 END) AS expanded_keys_seen
+        FROM registry_entry e LEFT JOIN registry_entry_tile t USING(entry_id)
+        LEFT JOIN v39_source_tile_map m USING(source_key)
+        GROUP BY e.entry_id,e.display_name,e.source_system
+    )
+    SELECT *, CASE WHEN exact_wiki_keys_seen>0 THEN 'wiki_exact_sprite_seen'
+                   WHEN source_only_keys_seen>0 THEN 'source_group_tile_seen'
+                   WHEN expanded_keys_seen>0 THEN 'expanded_group_only_seen'
+                   WHEN linked_keys>0 THEN 'linked_but_no_map_hit'
+                   ELSE 'no_source_tile_link' END AS map_evidence FROM counts;
+    CREATE UNIQUE INDEX v39_candidate_map_id ON v39_candidate_map_status(entry_id);
+    """)
+    assert db.execute("select count(*) from v39_candidate_map_status").fetchone()[0]==2231
+    assert db.execute("select count(*) from registry_entry_tile t left join v39_source_tile_map m using(source_key) where m.source_key is null").fetchone()[0]==0
+    export(db,"V39_CANDIDATE_MAP_STATUS","select * from v39_candidate_map_status order by entry_id")
     for path in sorted(ROOT.glob('*/*.csv')):
         if path==OUT or path.parent==OUT or not any(path.name.startswith('V'+str(v)+'_') for v in range(31,39)):
             continue
@@ -116,7 +140,7 @@ def run(db):
     manifest={'map_files':len(coverage),'map_files_with_hits':sum(x[-1]>0 for x in coverage),'placements':sum(by_tile.values()),
         'source_keys':len(keys),'source_keys_seen':len(by_tile),'source_groups':len(groups),'source_groups_seen':len(by_group),
         'registry_columns':registry[0].keys(),'registry_status_counts':dict(db.execute('select evidence_status,count(*) from v39_registry_progress group by evidence_status')),
-        'registry_rows':len(registry),'imported_evidence_tables':db.execute("select count(*) from sqlite_master where type='table' and name like 'evidence_%'").fetchone()[0]}
+        'candidate_map_counts':dict(db.execute('select map_evidence,count(*) from v39_candidate_map_status group by map_evidence')), 'registry_rows':len(registry),'imported_evidence_tables':db.execute("select count(*) from sqlite_master where type='table' and name like 'evidence_%'").fetchone()[0]}
     db.commit()
     assert db.execute('pragma integrity_check').fetchone()[0]=='ok' and not db.execute('pragma foreign_key_check').fetchall()
     with (OUT/'MANIFEST.json').open('w') as f:
