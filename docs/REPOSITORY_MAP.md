@@ -6,6 +6,7 @@
 
 | 목적 | 현재 바로 사용할 위치 |
 |---|---|
+| 최신 2D 평면도 열기 | [v259 평면도 HTML](../floorplan/current/v259_floorplan.html) · [사용법과 재생성 방법](../floorplan/v259/README.md) |
 | 최신 통합 SQLite 복원·조회 | [v258 복원 및 SQL 예시](../analysis/current/v258/README.md) |
 | B42 가구를 종류별로 찾기 | [2,197개 검색 목록과 사용법](../analysis/furniture_b42/current/README.md) · [전체 CSV](../analysis/furniture_b42/current/catalog.csv) |
 | 가구의 저장 기능 및 이미지 검수 근거 | [타일별 저장소 속성](../analysis/furniture_b42/current/storage_tiles.csv) · [이미지 검수 46개](../analysis/furniture_b42/current/image_review_46.html) · [보류 34개](../analysis/furniture_b42/current/held_34.csv) |

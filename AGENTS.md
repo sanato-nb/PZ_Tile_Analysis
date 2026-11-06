@@ -1,6 +1,8 @@
 # 좀보이드 B42 타일 정체 분석 — 중앙 AI 작업 지침 (버전별 기록 · 현재 상태는 PROJECT_STATE.json)
 
-> **v256 최신 평면도 (2026-10-30):** [단독 HTML](floorplan/current/v256_floorplan_unified_10042.html) · [설명서](floorplan/README_V256.md) · [매니페스트](floorplan/current/MANIFEST_V256.json). v255 최신 마스터 **10,042종 전부** 실제 코드에 압축 내장; v254 사용자68 우선. 원본 TMX 층/레이어·좌표 이동, 키/사물 검색, PNG/층별 CSV, 비활성455 점선 미리보기 추가. v240/v255 데이터베이스 및 모든 원본/과거 HTML은 불변. **439보류+16기존제외는 자동 벽/가구 활성화 금지; 공식 정체 인증0**. 다음 평면도 작업은 v256 사용.
+**최신 2D 평면도 엔진은 v259이며 통합 DB는 v258이다.** [v259 평면도 HTML](floorplan/current/v259_floorplan.html) · [사용법과 재생성 방법](floorplan/v259/README.md). HTML을 다운로드해 Chrome 또는 Edge에서 열고 **실제 맵 31_46 열기**를 선택하면 내장 지도를 볼 수 있다.
+
+> **v256 당시 평면도 (2026-10-30):** [단독 HTML](floorplan/current/v256_floorplan_unified_10042.html) · [설명서](floorplan/README_V256.md) · [매니페스트](floorplan/current/MANIFEST_V256.json). v255 최신 마스터 **10,042종 전부** 실제 코드에 압축 내장; v254 사용자68 우선. 원본 TMX 층/레이어·좌표 이동, 키/사물 검색, PNG/층별 CSV, 비활성455 점선 미리보기 추가. v240/v255 데이터베이스 및 모든 원본/과거 HTML은 불변. **439보류+16기존제외는 자동 벽/가구 활성화 금지; 공식 정체 인증0**. v256 당시 작업 기준.
 
 > **v255 최신 실제 통합 (2026-10-30):** [10,042종 전수 마스터+보류439 최신 이미지 정의+사용자68 우선판정](review/v255_latest_integrated_10042_2026-10-30/README.md) · [실물 SQLite 260테이블](analysis/current/v255/MANIFEST.json) · [최신 2D 평면도](floorplan/current/v255_floorplan_latest_user_priority.html). **우선순위 명시 사용자판정16 > 미선택 동의52의 기존 v252/v251 후보 > v252 > v251 / v250 > v249 > v248.** 활성9587/비활성455 불변, 439종은 시각 잠정값만 인스펙터에 표시, 게임 정체 최종 인증0. v240/v243 원본과 모든 PNG/TMX/사용자 CSV/SQLite 보존. 차기 채팅은 v255 우선 사용.
 

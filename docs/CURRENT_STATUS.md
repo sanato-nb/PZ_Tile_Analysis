@@ -1,5 +1,7 @@
 # 프로젝트 현재 상태
 
+**최신 2D 평면도 엔진은 v259이며 통합 DB는 v258이다.** [v259 평면도 HTML](../floorplan/current/v259_floorplan.html) · [사용법과 재생성 방법](../floorplan/v259/README.md). HTML을 다운로드해 Chrome 또는 Edge에서 열고 **실제 맵 31_46 열기**를 선택하면 내장 지도를 볼 수 있다.
+
 ## 최신 통합 데이터베이스 v258
 
 [복원 방법과 SQL 예시](../analysis/current/v258/README.md) · [검증 기록](../analysis/current/v258/MANIFEST.json). 가구 후보 1,461개가 v257 타일 키와 하나 이상 일치한다.

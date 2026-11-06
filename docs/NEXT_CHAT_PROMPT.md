@@ -1,4 +1,6 @@
-# 다음 채팅에서 프로젝트 이어가기 — v240 최신 기준
+# 다음 채팅에서 프로젝트 이어가기
+
+**최신 2D 평면도 엔진은 v259이며 통합 DB는 v258이다.** [v259 평면도 HTML](../floorplan/current/v259_floorplan.html) · [사용법과 재생성 방법](../floorplan/v259/README.md). HTML을 다운로드해 Chrome 또는 Edge에서 열고 **실제 맵 31_46 열기**를 선택하면 내장 지도를 볼 수 있다.
 
 > **이미지/스프라이트 새 분석을 수행할 때**는 [v242 분석 매뉴얼](SPRITE_VISUAL_ANALYSIS_PLAYBOOK.md), [1분 빠른 판정표](SPRITE_ANALYSIS_QUICK_REFERENCE.md), [레코드 템플릿](SPRITE_REVIEW_RECORD_TEMPLATE.json)을 먼저 확인하세요. [이미지 분석 시작 전문](SPRITE_VISUAL_NEXT_CHAT_PROMPT.md)을 복사해 사용할 수도 있습니다.
 
@@ -7,7 +9,7 @@
 ## 시작 시 우선 확인할 파일
 
 1. [현재 상태](CURRENT_STATUS.md), [파일/폴더 안내](REPOSITORY_MAP.md).
-2. [PROJECT_STATE.json](../PROJECT_STATE.json) (최신 `v240`; 과거 버전 스냅샷은 별도 필드에 보존).
+2. [PROJECT_STATE.json](../PROJECT_STATE.json) (최신 엔진 `v259`, 통합 DB `v258`; 과거 버전 스냅샷은 별도 필드에 보존).
 3. [v240 전체10,042종 CSV](../review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv), [활성9,587 CSV](../review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv), [비활성455 CSV](../review/v240_unified_10042_2026-10-30/EXCLUDED_ARCHIVE_455.csv).
 4. [v240 물리DB](../analysis/current/v240/MANIFEST.json), [복원 스크립트](../scripts/restore_v240_master.py).
 5. [ANALYSIS_RULES.md](ANALYSIS_RULES.md), [AGENTS.md](../AGENTS.md), [v238 신규키 증거](../review/v238_integrated_master_2026-10-29/), [v239 보류439 감사](../review/v239_held439_independent_source_crosscheck_2026-10-30/).
