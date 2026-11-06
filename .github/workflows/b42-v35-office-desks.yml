@@ -1,0 +1,28 @@
+name: B42 v35 office desk coordinate evidence
+on:
+  push:
+    branches: ['work/pz-b42-office-desks-v35-20261106']
+    paths: ['scripts/audit_b42_office_desks_v35.py', '.github/workflows/b42-v35-office-desks.yml']
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            *.tmx
+            /analysis/furniture_full_b42/2026-11-06/geometry_warning_v30/V30_EXACT_SOURCE_KEY_POSITION_PNG_INDEX.csv
+            /scripts/audit_b42_office_desks_v35.py
+      - run: python3 -m pip install numpy
+      - run: python3 scripts/audit_b42_office_desks_v35.py
+      - name: Record verified layout evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-06/office_desks_v35/*.csv
+          git commit -m 'Record B42 office desk map evidence for eight facing groups'
+          git push origin HEAD:"$GITHUB_REF_NAME"
