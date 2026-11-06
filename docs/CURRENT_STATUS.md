@@ -1,6 +1,16 @@
-# 현재 작업 상태 — v240 (2026-10-30)
+# 프로젝트 현재 상태
 
-**이 문서는 최신 통합본의 기준**입니다. 역사적 검수 결과가 아닌 현재 통합 현황을 보려면 [v240 실제 매니페스트](../review/v240_unified_10042_2026-10-30/MANIFEST.json)와 [물리 SQLite 매니페스트](../analysis/current/v240/MANIFEST.json)를 사용하세요.
+## B42 가구·설치물 1차 목록 (2026-11-06)
+
+[검색 가능한 전체 목록과 사용법](../analysis/furniture_b42/current/README.md) · [전체 CSV](../analysis/furniture_b42/current/catalog.csv) · [보류 34개](../analysis/furniture_b42/current/held_34.csv)
+
+후보 2,231개 중 2,197개를 21개 분류로 수록했다. 2,151개는 조사한 맵에서 연결된 타일을 확인했고 46개는 이미지로 검수했다. 수록 단위는 후보 ID이며, 같은 가구의 방향과 부품이 별도 항목일 수 있다.
+
+저장 기능은 원본 타일에 유형이 명시된 418개, 용량만 명시된 2개, 간접 근거만 있는 17개, 미확인 1,760개로 구분한다. [타일별 저장소 근거](../analysis/furniture_b42/current/storage_tiles.csv)
+
+## 전체 타일 v240 검수 기록 (2026-10-30)
+
+[v240 실제 매니페스트](../review/v240_unified_10042_2026-10-30/MANIFEST.json)와 [물리 SQLite 매니페스트](../analysis/current/v240/MANIFEST.json)에서 당시 기준을 확인할 수 있다.
 
 | 항목 | 개수 / 상태 |
 |---|---:|
@@ -19,7 +29,7 @@
 
 **주의:** 9,587종을 정확한 사물명/마크 블록으로 확정한 것이 아닙니다. 기존 A 우선 QA 4,185종 가운데 일부는 계열 설명만 있고 독립적인 타일별 상세 형태가 부족합니다. 비활성 439종은 사용자가 다른 방법으로 검수할 때까지 제외하며, 과거 사유는 보존합니다.
 
-## 최신 파일
+## v240 파일
 
 - [전체 10,042종 CSV](../review/v240_unified_10042_2026-10-30/MASTER_ALL_10042.csv)
 - [활성 9,587종 CSV](../review/v240_unified_10042_2026-10-30/ACTIVE_9587_EXCLUDING_HELD_AND_MANUAL.csv)
