@@ -1,0 +1,28 @@
+name: B42 v33 restaurant sign placements
+on:
+  push:
+    branches: [work/pz-b42-restaurant-signs-v33-20261106]
+    paths: ['scripts/audit_b42_restaurant_signs_v33.py', '.github/workflows/b42-v33-restaurant-signs.yml']
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            *.tmx
+            *.tsx
+            /scripts/audit_b42_restaurant_signs_v33.py
+            /analysis/furniture_full_b42/2026-11-06/geometry_warning_v30/B42_FURNITURE_GEOMETRY_WARNINGS_V30.zip
+      - run: python3 scripts/audit_b42_restaurant_signs_v33.py
+      - name: Store results
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --sparse analysis/furniture_full_b42/2026-11-06/restaurant_signs_v33/V33_*
+          git commit -m 'Record map coverage, sign placements, and source attributes'
+          git push origin HEAD:"$GITHUB_REF_NAME"
