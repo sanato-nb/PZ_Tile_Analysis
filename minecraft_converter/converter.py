@@ -1,0 +1,276 @@
+#!/usr/bin/env python3
+"""B42 TMX -> conservative Minecraft Java preview. No external pip dependencies.
+World is a temporary 1.20.1 compatibility preview, NOT a verified final conversion.
+Original map and v259 are read-only. Every nonzero source tile is preserved.
+"""
+import argparse, base64, bisect, collections, csv, gzip, hashlib, json, re, shutil, struct, zipfile, zlib
+from pathlib import Path
+import xml.etree.ElementTree as ET
+
+SURFACE={
+ "blends_natural_01":"minecraft:grass_block",
+ "blends_street_01":"minecraft:gray_concrete",
+ "floors_exterior_street_01":"minecraft:stone",
+ "floors_interior_tilesandwood_01":"minecraft:oak_planks",
+ "floors_interior_carpet_01":"minecraft:light_gray_wool",
+}
+# ONLY a provisional family-level appearance. Individual sprite identities unverified.
+def tag(name,t,data):
+    raw=name.encode("utf-8")
+    return bytes([t])+struct.pack(">H",len(raw))+raw+value(t,data)
+def value(t,x):
+    if t==1:return struct.pack(">b",int(x))
+    if t==3:return struct.pack(">i",int(x))
+    if t==4:return struct.pack(">q",int(x))
+    if t==8:
+        x=x.encode("utf-8")
+        return struct.pack(">H",len(x))+x
+    if t==10:return b"".join(tag(k,*v) for k,v in x.items())+b"\0"
+    if t==9:
+        sub,items=x
+        return bytes([sub])+struct.pack(">i",len(items))+b"".join(value(sub,i) for i in items)
+    if t==12:
+        return struct.pack(">i",len(x))+b"".join(struct.pack(">Q",i&((1<<64)-1)) for i in x)
+    raise ValueError("NBT kind "+str(t))
+def root(x):return tag("",10,x)
+def section_blocks(blocks):
+    palette=sorted(set(blocks))
+    if not palette:palette=["minecraft:air"]
+    pal={name:i for i,name in enumerate(palette)}
+    state={"palette":(9,(10,[{"Name":(8,name)} for name in palette]))}
+    if len(palette)>1:
+        bits=max(4,(len(palette)-1).bit_length())
+        slots=64//bits
+        longs=[]
+        for start in range(0,4096,slots):
+            n=0
+            for offset in range(min(slots,4096-start)):
+                n |= pal[blocks[start+offset]] << (offset*bits)
+            longs.append(n)
+        state["data"]=(12,longs)
+    return state
+def chunk(cx,cz,placed,data_version):
+    syblocks={}
+    for (x,y,z),name in placed.items():
+        assert x//16==cx and z//16==cz and -64<=y<=319
+        sy=y//16
+        if sy not in syblocks:syblocks[sy]=["minecraft:air"]*4096
+        syblocks[sy][(y%16)*256+(z%16)*16+x%16]=name
+    sections=[]
+    for sy in range(-4,20):
+        blocks=syblocks.get(sy,["minecraft:air"]*4096)
+        sections.append({
+            "Y":(1,sy),"block_states":(10,section_blocks(blocks)),
+            "biomes":(10,{"palette":(9,(8,["minecraft:plains"]))}),
+        })
+    return root({
+        "DataVersion":(3,data_version),"xPos":(3,cx),"yPos":(3,-4),"zPos":(3,cz),
+        "Status":(8,"minecraft:full"),"LastUpdate":(4,0),
+        "InhabitedTime":(4,0),"isLightOn":(1,0),
+        "sections":(9,(10,sections)),
+        "block_entities":(9,(10,[])),
+        "fluid_ticks":(9,(10,[])),
+        "block_ticks":(9,(10,[])),
+        "PostProcessing":(9,(9,[])),
+        "structures":(10,{"starts":(10,{}),"References":(10,{})}),
+    })
+def region_merge(path,new):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    existing={};times=bytes(4096)
+    if path.exists():
+        raw=path.read_bytes()
+        if len(raw)<8192:raise ValueError("Corrupt region")
+        times=raw[4096:8192]
+        for slot in range(1024):
+            ent=int.from_bytes(raw[4*slot:4*slot+4],"big")
+            sector,number=ent>>8,ent&255
+            if not sector or not number:continue
+            at=sector*4096
+            length=int.from_bytes(raw[at:at+4],"big")
+            if length<1 or at+4+length>len(raw):raise ValueError("Bad region slot")
+            existing[slot]=raw[at:at+4+length]
+    for (cx,cz),nbt in new.items():
+        rec=b"\x02"+zlib.compress(nbt,6)
+        existing[(cx%32)+(cz%32)*32]=struct.pack(">I",len(rec))+rec
+    header=bytearray(8192);header[4096:]=times
+    buffer=bytearray(8192);sector=2
+    for slot in sorted(existing):
+        rec=existing[slot];count=(len(rec)+4095)//4096
+        if count>255:raise ValueError("Chunk exceeds region sector capacity")
+        header[4*slot:4*slot+4]=(sector*256+count).to_bytes(4,"big")
+        buffer.extend(rec);buffer.extend(bytes(count*4096-len(rec)));sector+=count
+    buffer[:8192]=header
+    tmp=path.with_suffix(".mca.tmp")
+    tmp.write_bytes(buffer);tmp.replace(path)
+
+def level_dat(world,seed,spawn_x,spawn_z,data_version):
+    flat={"type":(8,"minecraft:flat"),
+          "settings":(10,{"biome":(8,"minecraft:plains"),"features":(1,0),"lakes":(1,0),
+          "layers":(9,(10,[{"height":(3,1),"block":(8,"minecraft:air")}]))})}
+    worldgen={"bonus_chest":(1,0),"generate_features":(1,0),"seed":(4,seed),
+              "dimensions":(10,{"minecraft:overworld":(10,{
+                   "type":(8,"minecraft:overworld"),"generator":(10,flat)})})}
+    data={
+       "DataVersion":(3,data_version),"version":(3,19133),
+       "LevelName":(8,"PZ B42 31_46 PREVIEW"),"GameType":(3,1),
+       "hardcore":(1,0),"allowCommands":(1,1),"initialized":(1,1),
+       "SpawnX":(3,spawn_x),"SpawnY":(3,65),"SpawnZ":(3,spawn_z),
+       "Time":(4,6000),"DayTime":(4,6000),"raining":(1,0),
+       "thundering":(1,0),"clearWeatherTime":(3,999999),
+       "Difficulty":(1,1),"DifficultyLocked":(1,1),
+       "WorldGenSettings":(10,worldgen),
+       "DataPacks":(10,{"Enabled":(9,(8,["vanilla"])),"Disabled":(9,(8,[]))}),
+       "GameRules":(10,{"doMobSpawning":(8,"false"),
+         "doDaylightCycle":(8,"false"),"doWeatherCycle":(8,"false"),
+         "doPatrolSpawning":(8,"false"),"doTraderSpawning":(8,"false")}),
+    }
+    (world/"level.dat").write_bytes(gzip.compress(root({"Data":(10,data)}),mtime=0))
+    (world/"session.lock").write_bytes(struct.pack(">q",0))
+
+def load_v259(path):
+    if path is None:return {"defs":{},"tiles":{},"candidates":{}}
+    raw=path.read_text(encoding="utf-8")
+    m=re.search(r'const FURNITURE_B64="([A-Za-z0-9+/=]+)";',raw)
+    if not m:raise ValueError("Missing v259 candidate catalog")
+    obj=json.loads(gzip.decompress(base64.b64decode(m.group(1))))
+    if len(obj["defs"])!=10042 or len(obj["candidates"])!=2197:
+        raise ValueError("Unexpected v259 catalog size")
+    return obj
+
+def original_origin(pzw,filename):
+    r=ET.parse(pzw).getroot()
+    origin=r.find(".//GenerateLots/worldOrigin")
+    if r.get("cellFormat")!="native-256" or origin is None or origin.get("origin")!="0,0":
+        raise ValueError("Global coordinate system must be independently verified")
+    cells=[x for x in r.findall(".//cell") if Path(x.get("map","")).name==filename]
+    if len(cells)!=1:raise ValueError("TMX must correspond to one PZW cell")
+    x=int(cells[0].get("x"));z=int(cells[0].get("y"))
+    return x*256,z*256,{"x":x,"y":z,"origin":"0,0","format":"native-256"}
+
+def parse_tmx(path,gx,gz,catalog):
+    raw=path.read_bytes()
+    tree=ET.fromstring(raw)
+    if (tree.get("width"),tree.get("height"),tree.get("orientation"))!=("256","256","levelisometric"):
+        raise ValueError("Unsupported TMX dimensions/orientation")
+    tilesets=sorted((int(n.get("firstgid")),n.get("name")) for n in tree.findall("tileset"))
+    first=[x[0] for x in tilesets]
+    records=[];layers=[];floor={};furniture=[];warnings=[]
+    for layer in tree.iter("layer"):
+        lvl=int(layer.get("level",layer.get("z","0")))
+        name=layer.get("name","")
+        data=layer.find("data")
+        if data is None or data.get("encoding")!="csv":raise ValueError("Expected CSV layer")
+        values=[int(n) for n in (data.text or "").replace("\r","").replace("\n","").split(",") if n.strip()]
+        if len(values)!=65536:raise ValueError("Layer length invalid: "+name)
+        used=0
+        for i,rawgid in enumerate(values):
+            gid=rawgid&0x1fffffff
+            if not gid:continue
+            ix=bisect.bisect_right(first,gid)-1
+            if ix<0:raise ValueError("Unknown GID "+str(gid))
+            family=tilesets[ix][1]
+            key=family+"/"+str(gid-first[ix])
+            lx,lz=i%256,i//256
+            x,z=gx+lx,gz+lz
+            ids=catalog["tiles"].get(key,[])
+            prop=catalog["defs"].get(key,{})
+            record={"x":x,"z":z,"local_x":lx,"local_y":lz,
+                "level":lvl,"floor_y":64+4*lvl,"layer":name,
+                "gid":gid,"flip":rawgid&~0x1fffffff,"source_key":key,
+                "candidate_ids":ids,"tile_properties":prop}
+            records.append(record);used+=1
+            if lvl==0 and name=="Floor":
+                if (lx,lz) in floor:raise ValueError("Duplicate floor cell")
+                floor[lx,lz]=(key,family)
+                if family not in SURFACE:
+                    warnings.append({"severity":"warning","reason":"unverified_ground","x":x,"z":z,
+                                      "level":lvl,"layer":name,"source_key":key})
+            elif ids:
+                furniture.append(record)
+                if len(ids)>1:
+                    warnings.append({"severity":"warning","reason":"ambiguous_furniture",
+                     "x":x,"z":z,"level":lvl,"layer":name,"source_key":key})
+        layers.append({"name":name,"level":lvl,"nonzero":used})
+    return raw,tilesets,records,layers,floor,furniture,warnings
+
+def execute(args):
+    out=args.output;out.mkdir(parents=True,exist_ok=True)
+    gx,gz,cell=original_origin(args.pzw,args.tmx.name)
+    catalog=load_v259(args.v259_html)
+    raw,tilesets,records,layers,floor,furniture,warnings=parse_tmx(args.tmx,gx,gz,catalog)
+    with (out/"source_placements.jsonl.gz").open("wb") as fd:
+        with gzip.GzipFile(fileobj=fd,mode="wb",mtime=0) as comp:
+            for row in records:
+                comp.write((json.dumps(row,ensure_ascii=False,separators=(",",":"))+"\n").encode("utf-8"))
+    (out/"furniture_parts.json").write_text(json.dumps(furniture,ensure_ascii=False,indent=2),encoding="utf-8")
+    with (out/"warnings.csv").open("w",encoding="utf-8-sig",newline="") as fd:
+        fields=["severity","reason","x","z","level","layer","source_key"]
+        writer=csv.DictWriter(fd,fieldnames=fields);writer.writeheader();writer.writerows(warnings)
+    edges={n:[] for n in ["north","south","west","east"]}
+    for (lx,lz),(key,fam) in floor.items():
+        if lz==0:edges["north"].append({"offset":lx,"key":key})
+        if lz==255:edges["south"].append({"offset":lx,"key":key})
+        if lx==0:edges["west"].append({"offset":lz,"key":key})
+        if lx==255:edges["east"].append({"offset":lz,"key":key})
+    (out/"edges.json").write_text(json.dumps(edges,ensure_ascii=False,indent=2),encoding="utf-8")
+    report={"source":args.tmx.name,"sha256":hashlib.sha256(raw).hexdigest(),
+       "global_origin":{"x":gx,"z":gz},"cell":cell,
+       "tileset_count":len(tilesets),"layers":layers,
+       "placed_tiles":len(records),"floor_cells":len(floor),
+       "furniture_source_parts":len(furniture),"warnings":len(warnings),
+       "preview_materials":SURFACE,
+       "limitations":["Preview floor families are not certified sprite-level identities",
+          "Furniture model grouping not inferred from per-part matches",
+          "Water, road markings, multi-floor floors, stairs, vegetation and walls retained but not generated",
+          "This is a disposable Java preview, not the final mod/loader version"]}
+    if args.preview_world:
+        # Java 1.20.1 disposable compatibility target ONLY. No final version selected.
+        world=out/"31_46_preview_world"
+        chunkmap=collections.defaultdict(dict)
+        for (lx,lz),(key,family) in floor.items():
+            x,z=gx+lx,gz+lz
+            top=SURFACE.get(family,"minecraft:magenta_concrete")
+            for y,material in [(64,top),(63,"minecraft:dirt"),(62,"minecraft:dirt"),
+              (61,"minecraft:stone"),(60,"minecraft:stone"),(59,"minecraft:stone"),
+              (58,"minecraft:stone"),(57,"minecraft:stone")]:
+                chunkmap[(x//16,z//16)][x,y,z]=material
+        markers=0
+        for item in furniture:
+            if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
+            x,z,y=item["x"],item["z"],item["floor_y"]+1
+            if not (-64<=y<=319):continue
+            solid=str(item["tile_properties"].get("solid","")).lower()
+            marker="minecraft:light_blue_carpet" if solid in ("false","0","no") else "minecraft:light_blue_stained_glass"
+            blocks=chunkmap[(x//16,z//16)]
+            if (x,y,z) not in blocks:blocks[(x,y,z)]=marker;markers+=1
+        groups=collections.defaultdict(dict)
+        for (cx,cz),blocks in sorted(chunkmap.items()):
+            groups[(cx//32,cz//32)][cx,cz]=chunk(cx,cz,blocks,args.data_version)
+        for (rx,rz),chunks in groups.items():
+            region_merge(world/"region"/("r."+str(rx)+"."+str(rz)+".mca"),chunks)
+        blocked={(x["local_x"],x["local_y"]) for x in furniture}
+        walkable=[c for c in floor if c not in blocked]
+        if not walkable:raise ValueError("Cannot find safe spawn")
+        lx,lz=min(walkable,key=lambda p:(p[0]-128)**2+(p[1]-128)**2)
+        level_dat(world,args.seed,gx+lx,gz+lz,args.data_version)
+        archive=out/"31_46_preview_world.zip"
+        with zipfile.ZipFile(archive,"w",zipfile.ZIP_DEFLATED) as zf:
+            for path in sorted(world.rglob("*")):
+                if path.is_file():zf.write(path,world.name+"/"+str(path.relative_to(world)))
+        report.update({"world_archive":str(archive.name),"chunks":len(chunkmap),
+                       "placeholder_parts":markers,"data_version":args.data_version})
+    (out/"report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
+    print(json.dumps({k:v for k,v in report.items() if k in
+        ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts","world_archive")},indent=2))
+
+def main():
+    p=argparse.ArgumentParser()
+    p.add_argument("--tmx",type=Path,required=True)
+    p.add_argument("--pzw",type=Path,required=True)
+    p.add_argument("--v259-html",type=Path)
+    p.add_argument("--output",type=Path,required=True)
+    p.add_argument("--seed",type=int,default=310046)
+    p.add_argument("--data-version",type=int,default=3465)
+    p.add_argument("--preview-world",action="store_true")
+    execute(p.parse_args())
+if __name__=="__main__":main()
