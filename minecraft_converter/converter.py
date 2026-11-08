@@ -186,10 +186,15 @@ def parse_tmx(path,gx,gz,catalog):
                     warnings.append({"severity":"warning","reason":"unverified_ground","x":x,"z":z,
                                       "level":lvl,"layer":name,"source_key":key})
             elif ids:
-                furniture.append(record)
-                if len(ids)>1:
-                    warnings.append({"severity":"warning","reason":"ambiguous_furniture",
-                     "x":x,"z":z,"level":lvl,"layer":name,"source_key":key})
+                # v259 candidates also include vegetation, outdoor installations and openings.
+                # Furniture markers are restricted to known furniture/appliance tile families.
+                # Every excluded source record remains in the lossless source archive.
+                if family.startswith(("furniture_","appliances_","fixtures_counters_",
+                                      "fixtures_bathroom_","fixtures_sinks_")):
+                    furniture.append(record)
+                    if len(ids)>1:
+                        warnings.append({"severity":"warning","reason":"ambiguous_furniture",
+                         "x":x,"z":z,"level":lvl,"layer":name,"source_key":key})
         layers.append({"name":name,"level":lvl,"nonzero":used})
     return raw,tilesets,records,layers,floor,furniture,warnings
 
