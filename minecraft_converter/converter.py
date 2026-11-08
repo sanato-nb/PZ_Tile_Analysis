@@ -14,7 +14,32 @@ SURFACE={
  "floors_interior_tilesandwood_01":"minecraft:oak_planks",
  "floors_interior_carpet_01":"minecraft:light_gray_wool",
 }
-# ONLY a provisional family-level appearance. Individual sprite identities unverified.
+# Tile-index mappings below were confirmed by inspecting the repository's
+# original Tiles/2x/blends_natural_01.png, blends_street_01.png,
+# and vegetation_farm_01.png, not inferred from tileset names.
+def surface_block(key,family):
+    ix=int(key.split("/")[-1])
+    if family=="blends_natural_01":
+        if 16<=ix<=23:return "minecraft:grass_block"
+        if 32<=ix<=39:return "minecraft:moss_block"  # darker green ground
+        if 48<=ix<=55:return "minecraft:podzol"  # yellow/olive dry grass proxy
+        if 64<=ix<=71:return "minecraft:coarse_dirt"  # exposed dark brown soil
+        if 80<=ix<=87:return "minecraft:farmland[moisture=7]" # furrowed dirt
+    if family=="blends_street_01":
+        if 16<=ix<=23:return "minecraft:gravel"  # gravel/beige
+        if 32<=ix<=39:return "minecraft:andesite" # gray paving
+        if 48<=ix<=55:return "minecraft:smooth_sandstone" # beige paving
+        if 64<=ix<=87:return "minecraft:gray_concrete" # asphalt
+    return SURFACE.get(family,"minecraft:magenta_concrete")
+
+def crop_kind(key):
+    if not key.startswith("vegetation_farm_01/"):return None
+    ix=int(key.split("/")[-1])
+    if 0<=ix<=5:return "ripe_wheat"
+    if 32<=ix<=39:return "dry_stalk"
+    return None
+
+# Floor material choices are proxies; original TMX sprite IDs remain in raw log.
 def tag(name,t,data):
     raw=name.encode("utf-8")
     return bytes([t])+struct.pack(">H",len(raw))+raw+value(t,data)
@@ -37,7 +62,13 @@ def section_blocks(blocks):
     palette=sorted(set(blocks))
     if not palette:palette=["minecraft:air"]
     pal={name:i for i,name in enumerate(palette)}
-    state={"palette":(9,(10,[{"Name":(8,name)} for name in palette]))}
+    def entry(blockstate):
+        if "[" not in blockstate:return {"Name":(8,blockstate)}
+        block,properties=blockstate.rstrip("]").split("[",1)
+        return {"Name":(8,block),
+                "Properties":(10,{k:(8,v) for k,v in
+                    (piece.split("=",1) for piece in properties.split(","))})}
+    state={"palette":(9,(10,[entry(name) for name in palette]))}
     if len(palette)>1:
         bits=max(4,(len(palette)-1).bit_length())
         slots=64//bits
@@ -122,7 +153,8 @@ def level_dat(world,seed,spawn_x,spawn_z,data_version):
        "DataPacks":(10,{"Enabled":(9,(8,["vanilla"])),"Disabled":(9,(8,[]))}),
        "GameRules":(10,{"doMobSpawning":(8,"false"),
          "doDaylightCycle":(8,"false"),"doWeatherCycle":(8,"false"),
-         "doPatrolSpawning":(8,"false"),"doTraderSpawning":(8,"false")}),
+         "doPatrolSpawning":(8,"false"),"doTraderSpawning":(8,"false"),
+         "randomTickSpeed":(8,"0")}),
     }
     (world/"level.dat").write_bytes(gzip.compress(root({"Data":(10,data)}),mtime=0))
     (world/"session.lock").write_bytes(struct.pack(">q",0))
@@ -203,6 +235,16 @@ def execute(args):
     gx,gz,cell=original_origin(args.pzw,args.tmx.name)
     catalog=load_v259(args.v259_html)
     raw,tilesets,records,layers,floor,furniture,warnings=parse_tmx(args.tmx,gx,gz,catalog)
+    crop_points={}
+    for rec in records:
+        if rec["level"]!=0:continue
+        kind=crop_kind(rec["source_key"])
+        if kind is None:continue
+        position=(rec["local_x"],rec["local_y"])
+        if position in crop_points:
+            raise ValueError("Overlapping crop at "+str(position))
+        crop_points[position]=kind
+    crop_counts=dict(collections.Counter(crop_points.values()))
     with (out/"source_placements.jsonl.gz").open("wb") as fd:
         with gzip.GzipFile(fileobj=fd,mode="wb",mtime=0) as comp:
             for row in records:
@@ -223,10 +265,10 @@ def execute(args):
        "tileset_count":len(tilesets),"layers":layers,
        "placed_tiles":len(records),"floor_cells":len(floor),
        "furniture_source_parts":len(furniture),"warnings":len(warnings),
-       "preview_materials":SURFACE,
+       "verified_crop_positions":crop_counts,"preview_materials":SURFACE,
        "limitations":["Preview floor families are not certified sprite-level identities",
           "Furniture model grouping not inferred from per-part matches",
-          "Water, road markings, multi-floor floors, stairs, vegetation and walls retained but not generated",
+          "Water, road markings, multi-floor floors, stairs, trees and walls retained but not generated",
           "This is a disposable Java preview, not the final mod/loader version"]}
     if args.preview_world:
         # Java 1.20.1 disposable compatibility target ONLY. No final version selected.
@@ -234,11 +276,20 @@ def execute(args):
         chunkmap=collections.defaultdict(dict)
         for (lx,lz),(key,family) in floor.items():
             x,z=gx+lx,gz+lz
-            top=SURFACE.get(family,"minecraft:magenta_concrete")
+            top=surface_block(key,family)
+            crop=crop_points.get((lx,lz))
+            if crop=="ripe_wheat":
+                top="minecraft:farmland[moisture=7]"
+            if crop=="dry_stalk":
+                top="minecraft:coarse_dirt"
             for y,material in [(64,top),(63,"minecraft:dirt"),(62,"minecraft:dirt"),
               (61,"minecraft:stone"),(60,"minecraft:stone"),(59,"minecraft:stone"),
               (58,"minecraft:stone"),(57,"minecraft:stone")]:
                 chunkmap[(x//16,z//16)][x,y,z]=material
+            if crop=="ripe_wheat":
+                chunkmap[(x//16,z//16)][x,65,z]="minecraft:wheat[age=7]"
+            elif crop=="dry_stalk":
+                chunkmap[(x//16,z//16)][x,65,z]="minecraft:dead_bush"
         markers=0
         for item in furniture:
             if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
@@ -254,6 +305,7 @@ def execute(args):
         for (rx,rz),chunks in groups.items():
             region_merge(world/"region"/("r."+str(rx)+"."+str(rz)+".mca"),chunks)
         blocked={(x["local_x"],x["local_y"]) for x in furniture}
+        blocked.update(crop_points)
         walkable=[c for c in floor if c not in blocked]
         if not walkable:raise ValueError("Cannot find safe spawn")
         lx,lz=min(walkable,key=lambda p:(p[0]-128)**2+(p[1]-128)**2)
@@ -263,10 +315,11 @@ def execute(args):
             for path in sorted(world.rglob("*")):
                 if path.is_file():zf.write(path,world.name+"/"+str(path.relative_to(world)))
         report.update({"world_archive":str(archive.name),"chunks":len(chunkmap),
-                       "placeholder_parts":markers,"data_version":args.data_version})
+                       "placeholder_parts":markers,"crop_blocks":sum(crop_counts.values()),
+                       "data_version":args.data_version})
     (out/"report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps({k:v for k,v in report.items() if k in
-        ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts","world_archive")},indent=2))
+        ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts","crop_blocks","world_archive")},indent=2))
 
 def main():
     p=argparse.ArgumentParser()
