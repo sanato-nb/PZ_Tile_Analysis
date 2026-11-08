@@ -5,6 +5,7 @@ on:
       - work/minecraft-31-46-preview-20261108
     paths:
       - minecraft_converter/converter.py
+      - minecraft_converter/tile_visual_audit.py
       - minecraft_converter/README.md
       - .github/workflows/pz-minecraft-31-46-preview.yml
   workflow_dispatch:
@@ -24,6 +25,10 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /minecraft_converter/
+            /Tiles/2x/blends_natural_01.png
+            /Tiles/2x/vegetation_farm_01.png
+            /Tiles/2x/blends_street_01.png
+            /Tiles/2x/blends_grassoverlays_01.png
             /B4220.3_MapExport_256/Kentucky.pzw
             /B4220.3_MapExport_256/tmx/31_46.tmx
             /floorplan/current/v259_floorplan.html
@@ -43,6 +48,16 @@ jobs:
             --output minecraft_converter/output \
             --preview-world \
             --data-version 3465
+      - name: Visually audit original 2x tiles
+        run: |
+          python -m pip install Pillow
+          python minecraft_converter/tile_visual_audit.py --tiles Tiles/2x --output minecraft_converter/contact_sheets
+      - name: Upload source tile contact sheets
+        uses: actions/upload-artifact@v4
+        with:
+          name: pz-b42-31-46-original-tiles-contact-sheets
+          path: minecraft_converter/contact_sheets/*.png
+          retention-days: 14
       - name: Verify real TMX counts and world archive structure
         run: |
           python - <<'PY'
