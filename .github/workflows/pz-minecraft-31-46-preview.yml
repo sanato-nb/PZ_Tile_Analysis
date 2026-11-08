@@ -1,0 +1,76 @@
+name: "PZ B42 → Minecraft 31_46 preview"
+on:
+  push:
+    branches:
+      - work/minecraft-31-46-preview-20261108
+    paths:
+      - minecraft_converter/**
+      - .github/workflows/pz-minecraft-31-46-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Read only required source paths
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /minecraft_converter/
+            /B4220.3_MapExport_256/Kentucky.pzw
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /floorplan/current/v259_floorplan.html
+      - name: Verify Python and source files
+        run: |
+          python --version
+          python -m py_compile minecraft_converter/converter.py
+          test -s B4220.3_MapExport_256/tmx/31_46.tmx
+          test -s B4220.3_MapExport_256/Kentucky.pzw
+          test -s floorplan/current/v259_floorplan.html
+      - name: Build source audit and disposable Java preview world
+        run: |
+          python minecraft_converter/converter.py \
+            --tmx B4220.3_MapExport_256/tmx/31_46.tmx \
+            --pzw B4220.3_MapExport_256/Kentucky.pzw \
+            --v259-html floorplan/current/v259_floorplan.html \
+            --output minecraft_converter/output \
+            --preview-world \
+            --data-version 3465
+      - name: Verify real TMX counts and world archive structure
+        run: |
+          python - <<'PY'
+          import json, zipfile
+          from pathlib import Path
+          out=Path("minecraft_converter/output")
+          d=json.loads((out/"report.json").read_text())
+          assert d["placed_tiles"] == 131341, d["placed_tiles"]
+          assert d["floor_cells"] == 65536, d["floor_cells"]
+          assert d["chunks"] == 256, d["chunks"]
+          assert d["global_origin"] == {"x":7936,"z":11776}, d["global_origin"]
+          archive=out/"31_46_preview_world.zip"
+          assert archive.is_file()
+          with zipfile.ZipFile(archive) as z:
+              assert z.testzip() is None
+              names=z.namelist()
+              assert "31_46_preview_world/level.dat" in names
+              assert "31_46_preview_world/region/r.15.23.mca" in names
+          print("PASS: real TMX parsed, 256 actual Anvil chunks, zipped Java preview created")
+          PY
+      - name: Upload preview world and audits
+        uses: actions/upload-artifact@v4
+        with:
+          name: pz-b42-31-46-world-preview-and-audit
+          path: |
+            minecraft_converter/output/31_46_preview_world.zip
+            minecraft_converter/output/report.json
+            minecraft_converter/output/edges.json
+            minecraft_converter/output/warnings.csv
+            minecraft_converter/output/source_placements.jsonl.gz
+            minecraft_converter/output/furniture_parts.json
+          retention-days: 14
