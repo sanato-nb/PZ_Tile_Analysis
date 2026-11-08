@@ -4,12 +4,13 @@ on:
     branches:
       - work/minecraft-31-46-preview-20261108
     paths:
-      - minecraft_converter/**
+      - minecraft_converter/converter.py
+      - minecraft_converter/README.md
       - .github/workflows/pz-minecraft-31-46-preview.yml
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-preview:
@@ -74,3 +75,17 @@ jobs:
             minecraft_converter/output/source_placements.jsonl.gz
             minecraft_converter/output/furniture_parts.json
           retention-days: 14
+
+      - name: Save verified preview world on the work branch
+        run: |
+          mkdir -p minecraft_converter/previews
+          cp minecraft_converter/output/31_46_preview_world.zip minecraft_converter/previews/31_46_preview_world.zip
+          cp minecraft_converter/output/report.json minecraft_converter/previews/31_46_report.json
+          cp minecraft_converter/output/warnings.csv minecraft_converter/previews/31_46_warnings.csv
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add minecraft_converter/previews/
+          if ! git diff --cached --quiet; then
+            git commit -m "검수용 31_46 마인크래프트 월드와 분석 보고서 보존"
+            git push origin HEAD:work/minecraft-31-46-preview-20261108
+          fi
