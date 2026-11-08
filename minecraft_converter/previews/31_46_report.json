@@ -128,6 +128,10 @@
   "floor_cells": 65536,
   "furniture_source_parts": 164,
   "warnings": 24,
+  "verified_crop_positions": {
+    "dry_stalk": 7034,
+    "ripe_wheat": 17571
+  },
   "preview_materials": {
     "blends_natural_01": "minecraft:grass_block",
     "blends_street_01": "minecraft:gray_concrete",
@@ -138,11 +142,12 @@
   "limitations": [
     "Preview floor families are not certified sprite-level identities",
     "Furniture model grouping not inferred from per-part matches",
-    "Water, road markings, multi-floor floors, stairs, vegetation and walls retained but not generated",
+    "Water, road markings, multi-floor floors, stairs, trees and walls retained but not generated",
     "This is a disposable Java preview, not the final mod/loader version"
   ],
   "world_archive": "31_46_preview_world.zip",
   "chunks": 256,
   "placeholder_parts": 133,
+  "crop_blocks": 24605,
   "data_version": 3465
 }
