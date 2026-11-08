@@ -8,6 +8,9 @@ SHEETS={
  "vegetation_farm_01":[0,1,2,3,4,5,6,7,8,9,16,17,18,19,24,25,26,27,32,33,34,35,36,37,38,39],
  "blends_street_01":[8,9,10,16,21,32,37,48,53,54,55,64,69,70,71,80,85,86,87],
  "blends_grassoverlays_01":[0,1,2,3,4,5,16,17,18,19,24,25,26,27,28,29,32,33,34,35,40,41,42,43,48,49,56,57,64,65],
+ "vegetation_trees_01":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+ "vegetation_foliage_01":[8,9,10,11,12,13,14],
+ "jumbo_tree_01":[0,1,2,3,4,5,6,7],
 }
 def main():
  p=argparse.ArgumentParser();p.add_argument("--tiles",type=Path,required=True);p.add_argument("--output",type=Path,required=True)
