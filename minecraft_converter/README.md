@@ -1,5 +1,8 @@
 # Project Zomboid B42 → Minecraft: 31_46 preview converter
 
+> **ROAD / GROUND DETAIL UPDATE — 2026-11-09:** The work-branch converter now emits **788 ground-flush road-marked cells** (695 lane, 93 curb) and **12,754 low-vegetation blocks** (10,336 green grass, 1,485 dry grass, 933 groundcover) from observed original TMX/PNG indices. Java 1.20.1 uses `minecraft:grass` (not `minecraft:short_grass`). The world ZIP includes a local `resources.zip` with approximate yellow road paint textures. Source SHA256 unchanged. [GitHub Actions #42560863076](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/42560863076) ran **10 passing tests**, rebuilt the 256-chunk ZIP, and checked the resource pack. Read [ROAD_TERRAIN_STAGE_2026-11-09_KO.md](ROAD_TERRAIN_STAGE_2026-11-09_KO.md) and [road terrain audit](previews/31_46_road_terrain_audit.json). Earlier descriptions below are historical; accurate painted-line projection, all natural transitions and in-game pack rendering are **not** yet certified.
+
+
 > **2026-11-09 인수인계:** [한국어 작업 안내](INDEX_KO.md) · [현재 상태](PROJECT_STATUS_KO.md) · [확정 사양](DECISIONS_KO.md) · [상세 인수인계](HANDOFF_2026-11-09_KO.md) · [새 채팅 프롬프트](NEXT_CHAT_PROMPT_KO.txt).
 >
 > **주의:** 생성된 월드는 아직 지형·식생·농경지·일부 바닥/가구 임시 표시 수준이다. 계단 테스트는 별도의 합성 월드이며, 실제 31_46에 계단이나 검증된 위층 바닥을 만들어 넣지 않았다.

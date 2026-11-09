@@ -1,5 +1,8 @@
 # PZ B42 → Minecraft 맵 변환: 작업 안내 (2026-11-09)
 
+> **최신 후속 작업 (2026-11-09):** 도로선 695 + 노란 연석 93 = **788칸**, 저층 식생 **12,754칸**을 실제 원본 TMX/PNG 기준으로 추가했다. [검수 문서](ROAD_TERRAIN_STAGE_2026-11-09_KO.md) · [실측 감사 JSON](previews/31_46_road_terrain_audit.json) · [새 변환 모듈](road_terrain_stage.py) · [성공한 CI #42560863076](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/42560863076). 이후의 과거 요약에서 '도로 표시 미완성'은 정밀 재현/게임 내 검수의 미완성을 뜻한다. 최신 월드에는 간이 도로 표시가 포함된다.
+
+
 **여기부터 읽기.** 이 폴더는 Project Zomboid B42의 TMX를 Minecraft Java 월드로 옮기는 **실제 변환기 프로젝트**다. 타일 전체 시각 분류(v31 등) 및 가구 모델링 프로젝트의 모든 결과가 이 폴더에 포함된 것은 아니다.
 
 - **현재 상태·검증·제약:** [PROJECT_STATUS_KO.md](PROJECT_STATUS_KO.md)

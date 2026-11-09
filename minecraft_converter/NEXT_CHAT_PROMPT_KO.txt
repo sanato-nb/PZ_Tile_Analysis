@@ -1,5 +1,9 @@
 프로젝트: Project Zomboid B42 → Minecraft Java 월드 변환. 이전 작업을 처음부터 다시 시작하지 말고 아래 GitHub의 실제 코드를 이어서 작업해 줘.
 
+최신 2026-11-09 후속 현황 (아래 기존 인수인계 앞에 적용):
+작업 브랜치 work/minecraft-31-46-preview-20261108. CI #42560863076 성공 (단위 테스트 10/10). 원본 TMX/PNG 직접 대조 후 도로선 695칸·연석 93칸(합계 788), 추가 저층 식생 12,754칸(녹색 풀 10,336·마른 풀 1,485·지피식생 933) 구현. 원본/층/256청크 및 기존 작물/나무/가구 보존. 월드 ZIP minecraft_converter/previews/31_46_preview_world.zip (내부 resources.zip 간이 도로 텍스처), 감사 minecraft_converter/previews/31_46_road_terrain_audit.json. 새 코드 road_terrain_stage.py와 ROAD_TERRAIN_STAGE_2026-11-09_KO.md 참조. 아래 '도로선·저층 식생 미구현'은 이전 과제이며 구현됨. 이어서 자연 경계/흙길/교차로·횡단보도·정밀 방향, 45건 대형 나무 근거 확보 및 실제 Minecraft 텍스처 표시를 확인해야 함. CI 성공은 인게임 검증 아님. main 및 원본 데이터 변경 금지.
+
+
 저장소: https://github.com/sanato-nb/PZ_Tile_Analysis
 기준 브랜치: work/minecraft-31-46-preview-20261108
 Draft PR: https://github.com/sanato-nb/PZ_Tile_Analysis/pull/322
