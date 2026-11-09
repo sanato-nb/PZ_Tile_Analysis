@@ -92,3 +92,53 @@ Vanilla Java crops and foliage are **visual proxies**, not exact imported
 Zomboid models. randomTickSpeed is disabled to keep the preview stable.
 The changes to surface mapping and world generation are automatically exercised
 by the GitHub Actions workflow; a Minecraft client gameplay test is still needed.
+
+## Stage 2 & 3: floors and stairs (2026-11-09)
+
+The source was inspected against the actual original PNG atlases. Level 0
+interior floor mapping now distinguishes individual source sprite IDs:
+- `floors_interior_tilesandwood_01/5`: white checkered tiles → polished diorite proxy
+- `.../12`: pale tiles → smooth sandstone
+- `.../41`: dark wood → dark oak planks
+- `.../42`: light wood → birch planks
+- `.../43`: brown wood → spruce planks
+- `.../50`: golden wood tile → oak planks
+- `floors_interior_carpet_01/2`: dark gray carpet → gray wool
+- `.../47`: brown carpet → brown wool
+
+**Actual TMX audit:** this 31_46 has 65,536 ground-level Floor cells,
+but **zero proven floor tiles on Level 1–6**. Level 1 primarily contains
+ceilings and roofs, not a confirmed second-story floor. There are also
+**zero** `fixtures_stairs_01` or escalator placements in the source TMX.
+Do not fabricate upper floors from ceilings or roof pixels.
+
+The original `Kentucky.pzw` has a **Basement** metadata region:
+local rectangle (72,119), width 12 and depth 10, corresponding to global
+X=8008, Z=11895; it stores StairDirection=W, StairX=1, StairY=0,
+Access=ba_exterior_west_northside_06. This alone does NOT supply any
+negative-level basement floor tiles or reliable 3D stair geometry.
+Its reference is saved verbatim in `floor_stair_audit.json`; nothing
+is carved out of the ground until the actual basement building is verified.
+
+A safe stair builder has been added to `floor_stair_stage.py`:
+it requires three actual source stair parts, a confirmed landing floor
+one level above and no obstructing upper floor at the stairwell. Only then
+can it write three vanilla stair blocks at Y+1, Y+2, Y+3, with the landing
+at Y+4. It rejects absent or conflicting inputs; it does NOT force any
+stairs onto the real 31_46 world.
+
+For physical testing without inventing map geography, a wholly separate
+`stairs_3plus1_walkability_demo.zip` world was generated. This demo is
+synthetic and **not part of the Zomboid map**. Its ZIP and chunk NBT
+pass automated checks, but Minecraft player movement remains to be
+checked manually in-game.
+
+Artifacts:
+- `previews/31_46_preview_world.zip`: corrected real-world Level-0 flooring.
+- `previews/31_46_floor_stair_audit.json`: source-backed level/roof/stair/basement report.
+- `previews/stairs_3plus1_walkability_demo.zip`: separate 3+1 stair demo world.
+- Automated tests: `tests/test_floor_stair_stage.py` (six cases).
+
+Still to do: obtain original negative-level basement building geometry,
+actual above-ground stair sprites and Codex models in later TMX regions,
+before staircase/upper-floor placement can be validated in the real map.
