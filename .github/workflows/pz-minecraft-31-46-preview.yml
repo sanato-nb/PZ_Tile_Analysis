@@ -6,6 +6,7 @@ on:
     paths:
       - minecraft_converter/converter.py
       - minecraft_converter/floor_stair_stage.py
+      - minecraft_converter/stair_walkability_demo.py
       - minecraft_converter/tests/test_floor_stair_stage.py
       - minecraft_converter/tile_visual_audit.py
       - minecraft_converter/README.md
@@ -68,6 +69,10 @@ jobs:
           name: pz-b42-31-46-original-tiles-contact-sheets
           path: minecraft_converter/contact_sheets/*.png
           retention-days: 14
+      - name: Produce separate three-step + landing walkability demo
+        run: |
+          python minecraft_converter/stair_walkability_demo.py --output minecraft_converter/output
+          unzip -t minecraft_converter/output/stairs_3plus1_walkability_demo.zip
       - name: Verify real TMX counts and world archive structure
         run: |
           python - <<'PY'
@@ -109,6 +114,7 @@ jobs:
           name: pz-b42-31-46-world-preview-and-audit
           path: |
             minecraft_converter/output/31_46_preview_world.zip
+            minecraft_converter/output/stairs_3plus1_walkability_demo.zip
             minecraft_converter/output/report.json
             minecraft_converter/output/floor_stair_audit.json
             minecraft_converter/output/edges.json
@@ -121,6 +127,7 @@ jobs:
         run: |
           mkdir -p minecraft_converter/previews
           cp minecraft_converter/output/31_46_preview_world.zip minecraft_converter/previews/31_46_preview_world.zip
+          cp minecraft_converter/output/stairs_3plus1_walkability_demo.zip minecraft_converter/previews/stairs_3plus1_walkability_demo.zip
           cp minecraft_converter/output/report.json minecraft_converter/previews/31_46_report.json
           cp minecraft_converter/output/floor_stair_audit.json minecraft_converter/previews/31_46_floor_stair_audit.json
           cp minecraft_converter/output/warnings.csv minecraft_converter/previews/31_46_warnings.csv
