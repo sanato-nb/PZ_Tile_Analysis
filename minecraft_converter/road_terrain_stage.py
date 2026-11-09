@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Source-indexed road/low-vegetation preview stage for the 31_46 Java world.
+"""Source-indexed road/low-vegetation preview stage for 31_45 / 31_46.
 
 The identities below were checked against original B42 sprite PNGs and the
 actual TMX key occurrences. Minecraft blocks/textures are visual PROXIES.
@@ -11,10 +11,14 @@ import struct
 import zipfile
 import zlib
 
-# Original 2x/street_trafficlines_01.png: these four tiles contain thin
-# YELLOW paint; other atlas indices have different forms and are excluded.
+# Original 2x/street_trafficlines_01.png shows gray strokes in IDs 0/2/4/6
+# and yellow paint in IDs 16/18/20/22. ID 32 and unlisted tiles are withheld.
 # Orientation is a deliberately provisional Minecraft top-down approximation.
 ROAD_LANE = {
+    0: "minecraft:white_concrete",
+    2: "minecraft:light_gray_concrete",
+    4: "minecraft:white_terracotta",
+    6: "minecraft:light_gray_terracotta",
     16: "minecraft:yellow_concrete",
     18: "minecraft:yellow_terracotta",
     20: "minecraft:orange_concrete",
@@ -23,7 +27,8 @@ ROAD_LANE = {
 # 2x/street_trafficlines_curb_yellow_faded.png: only IDs present in 31_46.
 # Multiple source pieces can share one road cell: emit one flush surface block,
 # while preserving ALL raw source entries in source_placements.jsonl.gz.
-CURB_IDS = frozenset((3, 4, 5, 24, 60, 101, 136, 137, 138, 145, 146))
+CURB_IDS = frozenset((3, 4, 5, 8, 9, 10, 11, 12, 13, 24, 60, 96, 97,
+                      101, 104, 105, 106, 108, 109, 113, 114, 136, 137, 138, 145, 146))
 CURB_VERTICAL = frozenset((60, 101, 24, 145, 146))
 GRASS_LIVE = frozenset(
     i for start in (0, 8, 16, 24, 32, 40) for i in range(start, start + 6)
@@ -50,6 +55,10 @@ ROAD_PACK_TEXTURES = {
     "orange_terracotta": ("horizontal", True),
     "brown_concrete": ("curb_vertical", True),
     "brown_terracotta": ("curb_horizontal", True),
+    "white_concrete": ("vertical", False),
+    "light_gray_concrete": ("horizontal", False),
+    "white_terracotta": ("vertical", True),
+    "light_gray_terracotta": ("horizontal", True),
 }
 
 def _split_key(source_key):
@@ -135,8 +144,8 @@ def _png_chunk(kind, body):
     return (struct.pack(">I", len(body)) + kind + body
             + struct.pack(">I", zlib.crc32(kind + body) & 0xffffffff))
 
-def road_texture_png(orientation, faded):
-    """Produce a deterministic 16x16 RGB PNG (asphalt and thin yellow paint)."""
+def road_texture_png(orientation, faded, paint_color="yellow"):
+    """Produce a deterministic 16x16 asphalt paint approximation."""
     scanlines = []
     for z in range(16):
         pixels = bytearray()
@@ -156,9 +165,9 @@ def road_texture_png(orientation, faded):
                 raise ValueError("Invalid road texture orientation")
             if mark:
                 if faded and (x * 3 + z * 5) % 7 < 3:
-                    rgb = (163, 153, 77)
+                    rgb = (163, 153, 77) if paint_color=="yellow" else (145,149,149)
                 else:
-                    rgb = (236, 200, 42)
+                    rgb = (236, 200, 42) if paint_color=="yellow" else (218,221,220)
             pixels.extend(rgb)
         scanlines.append(b"\x00" + bytes(pixels))
     ihdr = struct.pack(">IIBBBBB", 16, 16, 8, 2, 0, 0, 0)
@@ -174,13 +183,14 @@ def write_world_road_resource_pack(world):
         archive.writestr("pack.mcmeta", json.dumps({
             "pack": {
                 "pack_format": 15,
-                "description": "PZ B42 31_46 preview: flush yellow-road-line proxies"
+                "description": "PZ B42 preview: flush lane/curb paint proxies"
             }
         }, sort_keys=True))
         for name, (orientation, faded) in sorted(ROAD_PACK_TEXTURES.items()):
             archive.writestr(
                 "assets/minecraft/textures/block/" + name + ".png",
-                road_texture_png(orientation, faded)
+                road_texture_png(orientation, faded,
+                                 "white" if name.startswith(("white_","light_gray_")) else "yellow")
             )
     with zipfile.ZipFile(path) as archive:
         assert archive.testzip() is None

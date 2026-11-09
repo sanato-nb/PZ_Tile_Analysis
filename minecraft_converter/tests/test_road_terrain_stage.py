@@ -23,11 +23,11 @@ def surface(key, family):
     }[family]
 
 class SourceMappingTests(unittest.TestCase):
-    def test_only_four_road_lane_ids(self):
+    def test_only_verified_road_lane_ids(self):
         self.assertEqual([n for n in range(128)
                           if road_overlay(f"street_trafficlines_01/{n}")],
-                         [16, 18, 20, 22])
-        self.assertIsNone(road_overlay("street_trafficlines_01/0"))
+                         [0, 2, 4, 6, 16, 18, 20, 22])
+        self.assertIsNone(road_overlay("street_trafficlines_01/32"))
         self.assertIsNone(road_overlay("fixtures_doors_01/16"))
 
     def test_grass_and_groundcover_are_positively_whitelisted(self):
