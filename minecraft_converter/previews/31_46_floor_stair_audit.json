@@ -1,0 +1,70 @@
+{
+  "confirmed_nonzero_floor_tiles_by_level": {},
+  "confirmed_upper_lower_floor_total": 0,
+  "upper_tiles_by_family": {},
+  "nonfloor_tiles_by_level": {
+    "1": {
+      "ceiling": 546,
+      "other": 163,
+      "roof": 384
+    },
+    "2": {
+      "other": 120,
+      "roof": 189
+    },
+    "3": {
+      "other": 8
+    },
+    "4": {
+      "other": 12
+    },
+    "5": {
+      "other": 5
+    },
+    "6": {
+      "other": 6
+    }
+  },
+  "stair_sprite_parts": 0,
+  "level0_base_floor_is_separate": true,
+  "policy": "Structural floors only: never promote roofs, ceilings, grime, or rugs to upper floors.",
+  "level0_original_floor_count": 65536,
+  "basement_metadata_objects": [
+    {
+      "local_rect": {
+        "x": 72,
+        "z": 119,
+        "width": 12,
+        "depth": 10
+      },
+      "world_rect": {
+        "x": 8008,
+        "z": 11895,
+        "width": 12,
+        "depth": 10
+      },
+      "stair_hint_global": {
+        "x": 8009,
+        "z": 11895,
+        "direction": "W",
+        "access": "ba_exterior_west_northside_06"
+      },
+      "source_properties": {
+        "StairDirection": "W",
+        "StairX": "1",
+        "StairY": "0",
+        "Access": "ba_exterior_west_northside_06"
+      },
+      "status": "metadata_only_no_negative_tmx_floor",
+      "is_verified_physical_basement": false
+    }
+  ],
+  "basement_physical_floor_generated": 0,
+  "converted_stair_runs": 0,
+  "stair_action": "No fixture stair sprites or connected source-backed upper landing; build none",
+  "unresolved_geometry": [
+    "PZW basement zone is not a rendered underground TMX floor",
+    "Upper-level ceiling/roof tiles do not authorize walkable floors",
+    "Stairwell headroom requires a verified connected pair of floor levels"
+  ]
+}
