@@ -171,7 +171,7 @@
   "converted_stair_runs": 0,
   "stair_action": "Source stair sprites present, but connected 3+1 run geometry and facing/clearance are not verified; build none",
   "unresolved_geometry": [
-    "PZW basement zone is not a rendered underground TMX floor",
+    "PZW basement metadata alone is not physical geometry; negative-level floors require independent TMX evidence",
     "Upper-level ceiling/roof tiles do not authorize walkable floors",
     "Stairwell headroom requires a verified connected pair of floor levels"
   ]
