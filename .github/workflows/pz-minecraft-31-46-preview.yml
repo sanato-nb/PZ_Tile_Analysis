@@ -70,6 +70,12 @@ jobs:
           assert d["placed_tiles"] == 131341, d["placed_tiles"]
           assert d["floor_cells"] == 65536, d["floor_cells"]
           assert d["chunks"] == 256, d["chunks"]
+          assert d["verified_crop_positions"] == {"ripe_wheat":17571,"dry_stalk":7034}
+          assert d["crop_blocks"] == 24605
+          assert d["verified_small_tree_sprites"] == 172
+          assert d["verified_shrub_sprites"] == 261
+          assert d["tree_trunk_blocks"] > 0
+          assert d["shrub_blocks"] == 261
           assert d["global_origin"] == {"x":7936,"z":11776}, d["global_origin"]
           archive=out/"31_46_preview_world.zip"
           assert archive.is_file()
