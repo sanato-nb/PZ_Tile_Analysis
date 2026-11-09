@@ -131,6 +131,9 @@ jobs:
           cp minecraft_converter/output/report.json minecraft_converter/previews/31_46_report.json
           cp minecraft_converter/output/floor_stair_audit.json minecraft_converter/previews/31_46_floor_stair_audit.json
           cp minecraft_converter/output/warnings.csv minecraft_converter/previews/31_46_warnings.csv
+          cp minecraft_converter/output/edges.json minecraft_converter/previews/31_46_edges.json
+          cp minecraft_converter/output/furniture_parts.json minecraft_converter/previews/31_46_furniture_parts.json
+          cp minecraft_converter/output/source_placements.jsonl.gz minecraft_converter/previews/31_46_source_placements.jsonl.gz
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add minecraft_converter/previews/
