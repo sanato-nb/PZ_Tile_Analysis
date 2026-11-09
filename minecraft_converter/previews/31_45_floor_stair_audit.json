@@ -1,0 +1,178 @@
+{
+  "confirmed_nonzero_floor_tiles_by_level": {
+    "-1": 1162,
+    "1": 6020,
+    "2": 3629,
+    "3": 1320,
+    "4": 29
+  },
+  "confirmed_upper_lower_floor_total": 12160,
+  "upper_tiles_by_family": {
+    "blends_natural_01": 163,
+    "floors_exterior_natural_01": 76,
+    "floors_exterior_street_01": 2388,
+    "floors_exterior_tilesandstone_01": 775,
+    "floors_interior_carpet_01": 2747,
+    "floors_interior_tilesandwood_01": 6011
+  },
+  "nonfloor_tiles_by_level": {
+    "-1": {
+      "other": 2558,
+      "roof": 9
+    },
+    "1": {
+      "ceiling": 812,
+      "other": 14174,
+      "roof": 2685
+    },
+    "2": {
+      "ceiling": 461,
+      "other": 9532,
+      "roof": 1199
+    },
+    "3": {
+      "ceiling": 448,
+      "other": 2671,
+      "roof": 816
+    },
+    "4": {
+      "ceiling": 282,
+      "other": 115,
+      "roof": 401
+    },
+    "5": {
+      "other": 79
+    },
+    "6": {
+      "other": 14
+    },
+    "7": {
+      "roof": 8
+    }
+  },
+  "stair_sprite_parts": 273,
+  "level0_base_floor_is_separate": true,
+  "policy": "Structural floors only: never promote roofs, ceilings, grime, or rugs to upper floors.",
+  "level0_original_floor_count": 65536,
+  "basement_metadata_objects": [
+    {
+      "local_rect": {
+        "x": 99,
+        "z": 9,
+        "width": 10,
+        "depth": 7
+      },
+      "world_rect": {
+        "x": 8035,
+        "z": 11529,
+        "width": 10,
+        "depth": 7
+      },
+      "stair_hint_global": {
+        "x": 8037,
+        "z": 11531,
+        "direction": "N",
+        "access": null
+      },
+      "source_properties": {
+        "StairDirection": "N",
+        "StairX": "2",
+        "StairY": "2"
+      },
+      "status": "metadata_unlinked_to_source_negative_level_geometry",
+      "is_verified_physical_basement": false
+    },
+    {
+      "local_rect": {
+        "x": 239,
+        "z": 111,
+        "width": 6,
+        "depth": 10
+      },
+      "world_rect": {
+        "x": 8175,
+        "z": 11631,
+        "width": 6,
+        "depth": 10
+      },
+      "stair_hint_global": {
+        "x": 8175,
+        "z": 11632,
+        "direction": "N",
+        "access": "ba_exterior_north_westside_14"
+      },
+      "source_properties": {
+        "StairDirection": "N",
+        "StairX": "0",
+        "StairY": "1",
+        "Access": "ba_exterior_north_westside_14"
+      },
+      "status": "metadata_unlinked_to_source_negative_level_geometry",
+      "is_verified_physical_basement": false
+    },
+    {
+      "local_rect": {
+        "x": 239,
+        "z": 153,
+        "width": 10,
+        "depth": 12
+      },
+      "world_rect": {
+        "x": 8175,
+        "z": 11673,
+        "width": 10,
+        "depth": 12
+      },
+      "stair_hint_global": {
+        "x": 8176,
+        "z": 11676,
+        "direction": "S",
+        "access": null
+      },
+      "source_properties": {
+        "StairDirection": "S",
+        "StairX": "1",
+        "StairY": "3"
+      },
+      "status": "metadata_unlinked_to_source_negative_level_geometry",
+      "is_verified_physical_basement": false
+    },
+    {
+      "local_rect": {
+        "x": 251,
+        "z": 85,
+        "width": 6,
+        "depth": 8
+      },
+      "world_rect": {
+        "x": 8187,
+        "z": 11605,
+        "width": 6,
+        "depth": 8
+      },
+      "stair_hint_global": {
+        "x": 8187,
+        "z": 11608,
+        "direction": "N",
+        "access": "ba_exterior_north_westside_05"
+      },
+      "source_properties": {
+        "StairDirection": "N",
+        "StairX": "0",
+        "StairY": "3",
+        "Access": "ba_exterior_north_westside_05"
+      },
+      "status": "metadata_unlinked_to_source_negative_level_geometry",
+      "is_verified_physical_basement": false
+    }
+  ],
+  "basement_physical_floor_generated": 1162,
+  "negative_floor_source_evidence": 1162,
+  "converted_stair_runs": 0,
+  "stair_action": "Source stair sprites present, but connected 3+1 run geometry and facing/clearance are not verified; build none",
+  "unresolved_geometry": [
+    "PZW basement zone is not a rendered underground TMX floor",
+    "Upper-level ceiling/roof tiles do not authorize walkable floors",
+    "Stairwell headroom requires a verified connected pair of floor levels"
+  ]
+}

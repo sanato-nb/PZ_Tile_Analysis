@@ -1,0 +1,29 @@
+{
+  "source": "31_45.tmx",
+  "source_sha256": "1f2799a831d884a4960c58d40ee48cd79d36c1e6b06383648aafd3973af1e936",
+  "source_counters": {
+    "curb_cells": 27,
+    "lane_cells": 1593,
+    "low_vegetation_eligible_cells": 10911,
+    "low_vegetation_source_records": 10911,
+    "road_source_records": 1631,
+    "road_unique_cells": 1620
+  },
+  "world_preview": {
+    "road_marked_blocks": 1620,
+    "low_vegetation_blocks": 10910,
+    "low_vegetation_counts": {
+      "dry_grass": 514,
+      "green_grass": 9942,
+      "groundcover": 454
+    },
+    "low_vegetation_skipped_occupied": 1,
+    "world_local_road_resource_pack": "resources.zip"
+  },
+  "notes": [
+    "Original Level 0 TMX keys and PNG sprite shapes checked",
+    "Top-down road paint is an approximation, not exact sprite projection",
+    "Enable world-local resources.zip to see the road markings correctly",
+    "Unmapped natural transitions, water, and 45 jumbo trees are deferred"
+  ]
+}
