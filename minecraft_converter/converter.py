@@ -7,6 +7,7 @@ import argparse, base64, bisect, collections, csv, gzip, hashlib, json, re, shut
 from pathlib import Path
 import xml.etree.ElementTree as ET
 from floor_stair_stage import audit_source_floors, audit_pzw_basements, BASE_FLOOR_Y, LEVEL_HEIGHT
+from road_terrain_stage import collect_surface_overlays, write_world_road_resource_pack
 
 SURFACE={
  "blends_natural_01":"minecraft:grass_block",
@@ -276,6 +277,10 @@ def execute(args):
             raise ValueError("Overlapping crop at "+str(position))
         crop_points[position]=kind
     crop_counts=dict(collections.Counter(crop_points.values()))
+    # Original Level-0 overlays and sprite-index evidence. Roof and upper-level
+    # pieces never imply ground surfaces or low vegetation.
+    road_decals, small_plants, terrain_source_audit = collect_surface_overlays(
+        records, floor, surface_block)
     # Original PNG confirms vegetation_trees_01/8..11 are conifer sprites,
     # vegetation_foliage_01/8..14 are bushes.
     tree_records=[r for r in records if r["level"]==0 and
@@ -315,9 +320,11 @@ def execute(args):
        "verified_shrub_sprites":len(shrub_records),
        "jumbo_tree_unrendered":len(jumbo_records),
        "preview_materials":SURFACE,
+       "road_terrain_stage":{"source":terrain_source_audit},
        "limitations":["Preview floor families are not certified sprite-level identities",
           "Furniture model grouping not inferred from per-part matches",
-          "Water, road markings, multi-floor floors, stairs, unidentified jumbo trees and walls retained but not generated",
+          "Water, exact road-marking contours, multi-floor floors, stairs, unidentified jumbo trees and walls remain unverified",
+          "World-local road texture pack is a top-down 1.20.1 preview; vanilla fallback blocks remain visible without it",
           "This is a disposable Java preview, not the final mod/loader version"]}
     if args.preview_world:
         # Java 1.20.1 disposable compatibility target ONLY. No final version selected.
@@ -355,6 +362,15 @@ def execute(args):
             blocks[(x,floor_y,z)]=surface_block(
                 r["source_key"],r["source_key"].split("/")[0])
             additional_floor_blocks+=1
+        # Road paint replaces ONLY the Level-0 ground Y=64 block, so the
+        # roadway remains flush. World-local resources.zip paints thin lines
+        # on dedicated unused vanilla block aliases.
+        road_marked_blocks=0
+        for (lx,lz),(block,source_key) in sorted(road_decals.items()):
+            x,z=gx+lx,gz+lz
+            chunkmap[(x//16,z//16)][x,64,z]=block
+            road_marked_blocks+=1
+        write_world_road_resource_pack(world)
         markers=0
         for item in furniture:
             if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
@@ -422,6 +438,19 @@ def execute(args):
             if p not in blocks:
                 blocks[p]="minecraft:oak_leaves[persistent=true]"
                 bush_blocks+=1
+        # Place source-backed low grasses only AFTER furniture/crops/trees/
+        # bushes; occupied Y65 cells must never be overwritten.
+        small_plant_counts=collections.Counter()
+        small_plant_occupied=0
+        for (lx,lz),(block,source_key,kind) in sorted(small_plants.items()):
+            x,z=gx+lx,gz+lz
+            dest=chunkmap[(x//16,z//16)]
+            pos=(x,65,z)
+            if pos in dest:
+                small_plant_occupied+=1
+                continue
+            dest[pos]=block
+            small_plant_counts[kind]+=1
         groups=collections.defaultdict(dict)
         for (cx,cz),blocks in sorted(chunkmap.items()):
             groups[(cx//32,cz//32)][cx,cz]=chunk(cx,cz,blocks,args.data_version)
@@ -448,9 +477,30 @@ def execute(args):
                        "tree_trunk_blocks":tree_trunks,
                        "tree_leaves_blocks":tree_leaves,
                        "shrub_blocks":bush_blocks,
+                       "road_marked_blocks":road_marked_blocks,
+                       "low_vegetation_blocks":sum(small_plant_counts.values()),
+                       "low_vegetation_counts":dict(sorted(small_plant_counts.items())),
+                       "low_vegetation_skipped_occupied":small_plant_occupied,
+                       "world_local_road_resource_pack":"resources.zip",
                        "tree_conflicts":tree_conflicts,
                        "clipped_leaves":leaf_clipped,
                        "data_version":args.data_version})
+    terrain_world = {k:report.get(k) for k in (
+        "road_marked_blocks","low_vegetation_blocks",
+        "low_vegetation_counts","low_vegetation_skipped_occupied",
+        "world_local_road_resource_pack") if k in report}
+    (out/"road_terrain_audit.json").write_text(json.dumps({
+        "source":args.tmx.name,
+        "source_sha256":report["sha256"],
+        "source_counters":terrain_source_audit,
+        "world_preview":terrain_world,
+        "notes":[
+            "Original Level 0 TMX keys and PNG sprite shapes checked",
+            "Top-down road paint is an approximation, not exact sprite projection",
+            "Enable world-local resources.zip to see the road markings correctly",
+            "Unmapped natural transitions, water, and 45 jumbo trees are deferred",
+        ],
+    },ensure_ascii=False,indent=2),encoding="utf-8")
     (out/"report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps({k:v for k,v in report.items() if k in
         ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts",

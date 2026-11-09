@@ -9,6 +9,8 @@ on:
       - minecraft_converter/stair_walkability_demo.py
       - minecraft_converter/tests/test_floor_stair_stage.py
       - minecraft_converter/tile_visual_audit.py
+      - minecraft_converter/road_terrain_stage.py
+      - minecraft_converter/tests/test_road_terrain_stage.py
       - .github/workflows/pz-minecraft-31-46-preview.yml
   workflow_dispatch:
 
@@ -49,7 +51,7 @@ jobs:
       - name: Verify Python and source files
         run: |
           python --version
-          python -m py_compile minecraft_converter/converter.py minecraft_converter/floor_stair_stage.py
+          python -m py_compile minecraft_converter/converter.py minecraft_converter/floor_stair_stage.py minecraft_converter/road_terrain_stage.py
           python -m unittest discover -s minecraft_converter/tests -v
           test -s B4220.3_MapExport_256/tmx/31_46.tmx
           test -s B4220.3_MapExport_256/Kentucky.pzw
@@ -102,6 +104,16 @@ jobs:
           assert d["verified_shrub_sprites"] == 261
           assert d["tree_trunk_blocks"] > 0
           assert d["shrub_blocks"] == 261
+          sources=d["road_terrain_stage"]["source"]
+          assert sources["road_source_records"] == 865, sources
+          assert sources["lane_cells"] == 695, sources
+          assert sources["curb_cells"] >= 90, sources
+          assert sources["low_vegetation_source_records"] == 12754, sources
+          assert d["road_marked_blocks"] == sources["road_unique_cells"], d
+          assert d["low_vegetation_blocks"] > 9000, d
+          assert d["low_vegetation_blocks"] <= sources["low_vegetation_eligible_cells"], d
+          stage_road=json.loads((out/"road_terrain_audit.json").read_text())
+          assert stage_road["source_sha256"] == d["sha256"]
           assert d["global_origin"] == {"x":7936,"z":11776}, d["global_origin"]
           archive=out/"31_46_preview_world.zip"
           assert archive.is_file()
@@ -109,6 +121,12 @@ jobs:
               assert z.testzip() is None
               names=z.namelist()
               assert "31_46_preview_world/level.dat" in names
+              from io import BytesIO
+              pack=z.read("31_46_preview_world/resources.zip")
+              with zipfile.ZipFile(BytesIO(pack)) as resources:
+                  assert resources.testzip() is None
+                  assert json.loads(resources.read("pack.mcmeta"))["pack"]["pack_format"] == 15
+                  assert len(resources.namelist()) == 7
               assert "31_46_preview_world/region/r.15.23.mca" in names
           print("PASS: real TMX parsed, 256 actual Anvil chunks, zipped Java preview created")
           PY
@@ -120,6 +138,7 @@ jobs:
             minecraft_converter/output/31_46_preview_world.zip
             minecraft_converter/output/stairs_3plus1_walkability_demo.zip
             minecraft_converter/output/report.json
+            minecraft_converter/output/road_terrain_audit.json
             minecraft_converter/output/floor_stair_audit.json
             minecraft_converter/output/edges.json
             minecraft_converter/output/warnings.csv
@@ -133,6 +152,7 @@ jobs:
           cp minecraft_converter/output/31_46_preview_world.zip minecraft_converter/previews/31_46_preview_world.zip
           cp minecraft_converter/output/stairs_3plus1_walkability_demo.zip minecraft_converter/previews/stairs_3plus1_walkability_demo.zip
           cp minecraft_converter/output/report.json minecraft_converter/previews/31_46_report.json
+          cp minecraft_converter/output/road_terrain_audit.json minecraft_converter/previews/31_46_road_terrain_audit.json
           cp minecraft_converter/output/floor_stair_audit.json minecraft_converter/previews/31_46_floor_stair_audit.json
           cp minecraft_converter/output/warnings.csv minecraft_converter/previews/31_46_warnings.csv
           cp minecraft_converter/output/edges.json minecraft_converter/previews/31_46_edges.json
