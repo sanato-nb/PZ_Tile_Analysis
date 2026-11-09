@@ -294,7 +294,7 @@ def execute(args):
                        if structures["source_stair_parts"] else
                        "No fixture stair sprites or verified 3+1 run; build none"),
        "unresolved_geometry":[
-        "PZW basement zone is not a rendered underground TMX floor",
+        "PZW basement metadata alone is not physical geometry; negative-level floors require independent TMX evidence",
         "Upper-level ceiling/roof tiles do not authorize walkable floors",
         "Stairwell headroom requires a verified connected pair of floor levels",
        ],
