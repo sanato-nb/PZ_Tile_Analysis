@@ -22,4 +22,4 @@
 ## 실행 파일 구분
 `previews/31_46_preview_world.zip`은 **실제 31_46 지형 기반 검수용 월드**, `previews/stairs_3plus1_walkability_demo.zip`은 **원본에 없는 합성 계단 시험 월드**다. 절대 혼합하거나 계단을 실제 TMX 배치로 주장하지 말 것.
 
-자동화 산출물 `source_placements.jsonl.gz`, `edges.json`, `furniture_parts.json` 등은 GitHub Actions 아티팩트에 보관될 수 있으며 보존 기간이 제한된다. 재구성에는 원본 TMX/PZW와 `converter.py`를 사용한다.
+원본 전체 배치 로그 `previews/31_46_source_placements.jsonl.gz`, 구역 경계 `previews/31_46_edges.json`, 가구 타일 부품 `previews/31_46_furniture_parts.json`은 **작업 브랜치에 계속 보존**한다. CI 아티팩트도 별도로 생성되지만 14일 후 만료될 수 있다. 재구성에는 원본 TMX/PZW와 `converter.py`를 사용한다.
