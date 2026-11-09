@@ -1,0 +1,189 @@
+{
+  "source": "31_46.tmx",
+  "sha256": "5eb55362bafb6235e6f609a65675f083189ebb8a706829d12bb9da0abcd39603",
+  "global_origin": {
+    "x": 7936,
+    "z": 11776
+  },
+  "cell": {
+    "x": 31,
+    "y": 46,
+    "origin": "0,0",
+    "format": "native-256"
+  },
+  "tileset_count": 413,
+  "layers": [
+    {
+      "name": "Floor",
+      "level": 0,
+      "nonzero": 65536
+    },
+    {
+      "name": "FloorOverlay",
+      "level": 0,
+      "nonzero": 51927
+    },
+    {
+      "name": "FloorOverlay2",
+      "level": 0,
+      "nonzero": 10926
+    },
+    {
+      "name": "FloorOverlay3",
+      "level": 0,
+      "nonzero": 996
+    },
+    {
+      "name": "FloorOverlay4",
+      "level": 0,
+      "nonzero": 316
+    },
+    {
+      "name": "Vegetation",
+      "level": 0,
+      "nonzero": 139
+    },
+    {
+      "name": "FloorOverlay6",
+      "level": 0,
+      "nonzero": 47
+    },
+    {
+      "name": "FloorOverlay7",
+      "level": 0,
+      "nonzero": 18
+    },
+    {
+      "name": "FloorOverlay8",
+      "level": 0,
+      "nonzero": 3
+    },
+    {
+      "name": "FloorOverlay",
+      "level": 1,
+      "nonzero": 719
+    },
+    {
+      "name": "FloorOverlay1",
+      "level": 1,
+      "nonzero": 338
+    },
+    {
+      "name": "FloorOverlay2",
+      "level": 1,
+      "nonzero": 27
+    },
+    {
+      "name": "FloorOverlay3",
+      "level": 1,
+      "nonzero": 9
+    },
+    {
+      "name": "FloorOverlay",
+      "level": 2,
+      "nonzero": 216
+    },
+    {
+      "name": "FloorOverlay1",
+      "level": 2,
+      "nonzero": 81
+    },
+    {
+      "name": "FloorOverlay2",
+      "level": 2,
+      "nonzero": 11
+    },
+    {
+      "name": "FloorOverlay3",
+      "level": 2,
+      "nonzero": 1
+    },
+    {
+      "name": "FloorOverlay",
+      "level": 3,
+      "nonzero": 8
+    },
+    {
+      "name": "FloorOverlay",
+      "level": 4,
+      "nonzero": 8
+    },
+    {
+      "name": "FloorOverlay1",
+      "level": 4,
+      "nonzero": 4
+    },
+    {
+      "name": "FloorOverlay",
+      "level": 5,
+      "nonzero": 5
+    },
+    {
+      "name": "FloorOverlay",
+      "level": 6,
+      "nonzero": 6
+    }
+  ],
+  "placed_tiles": 131341,
+  "floor_cells": 65536,
+  "furniture_source_parts": 164,
+  "warnings": 24,
+  "floor_stair_stage": {
+    "confirmed_upper_lower_floor_positions": 0,
+    "physical_stair_sprite_parts": 0,
+    "pzw_basement_metadata_regions": 1
+  },
+  "verified_crop_positions": {
+    "dry_stalk": 7034,
+    "ripe_wheat": 17571
+  },
+  "verified_small_tree_sprites": 172,
+  "verified_shrub_sprites": 261,
+  "jumbo_tree_unrendered": 45,
+  "preview_materials": {
+    "blends_natural_01": "minecraft:grass_block",
+    "blends_street_01": "minecraft:gray_concrete",
+    "floors_exterior_street_01": "minecraft:stone",
+    "floors_interior_tilesandwood_01": "minecraft:oak_planks",
+    "floors_interior_carpet_01": "minecraft:light_gray_wool"
+  },
+  "road_terrain_stage": {
+    "source": {
+      "curb_cells": 93,
+      "lane_cells": 695,
+      "low_vegetation_eligible_cells": 12754,
+      "low_vegetation_source_records": 12754,
+      "road_source_records": 865,
+      "road_unique_cells": 788
+    }
+  },
+  "limitations": [
+    "Preview floor families are not certified sprite-level identities",
+    "Furniture model grouping not inferred from per-part matches",
+    "Water, exact road-marking contours, multi-floor floors, stairs, unidentified jumbo trees and walls remain unverified",
+    "World-local road texture pack is a top-down 1.20.1 preview; vanilla fallback blocks remain visible without it",
+    "This is a disposable Java preview, not the final mod/loader version"
+  ],
+  "world_archive": "31_46_preview_world.zip",
+  "chunks": 256,
+  "placeholder_parts": 133,
+  "confirmed_upper_lower_floor_blocks": 0,
+  "source_stair_parts": 0,
+  "pzw_basement_regions": 1,
+  "crop_blocks": 24605,
+  "tree_trunk_blocks": 1122,
+  "tree_leaves_blocks": 6130,
+  "shrub_blocks": 261,
+  "road_marked_blocks": 788,
+  "low_vegetation_blocks": 12754,
+  "low_vegetation_counts": {
+    "dry_grass": 1485,
+    "green_grass": 10336,
+    "groundcover": 933
+  },
+  "low_vegetation_skipped_occupied": 0,
+  "world_local_road_resource_pack": "resources.zip",
+  "tree_conflicts": 0,
+  "clipped_leaves": 193,
+  "data_version": 3465
+}

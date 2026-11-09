@@ -1,0 +1,167 @@
+name: "PZ B42 → Minecraft 31_46 preview"
+on:
+  push:
+    branches:
+      - work/minecraft-31-46-preview-20261108
+    paths:
+      - minecraft_converter/converter.py
+      - minecraft_converter/floor_stair_stage.py
+      - minecraft_converter/stair_walkability_demo.py
+      - minecraft_converter/tests/test_floor_stair_stage.py
+      - minecraft_converter/tile_visual_audit.py
+      - minecraft_converter/road_terrain_stage.py
+      - minecraft_converter/tests/test_road_terrain_stage.py
+      - .github/workflows/pz-minecraft-31-46-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Avoid concurrent builds trying to push the same preview files.
+concurrency:
+  group: pz31-46-preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Read only required source paths
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /minecraft_converter/
+            /Tiles/2x/blends_natural_01.png
+            /Tiles/2x/vegetation_farm_01.png
+            /Tiles/2x/floors_interior_tilesandwood_01.png
+            /Tiles/2x/floors_interior_carpet_01.png
+            /Tiles/2x/floors_exterior_street_01.png
+            /Tiles/2x/fixtures_stairs_01.png
+            /Tiles/2x/ceilings_01.png
+            /Tiles/2x/blends_street_01.png
+            /Tiles/vegetation_trees_01.png
+            /Tiles/2x/vegetation_foliage_01.png
+            /Tiles/2x/blends_grassoverlays_01.png
+            /B4220.3_MapExport_256/Kentucky.pzw
+            /B4220.3_MapExport_256/tmx/31_46.tmx
+            /floorplan/current/v259_floorplan.html
+      - name: Verify Python and source files
+        run: |
+          python --version
+          python -m py_compile minecraft_converter/converter.py minecraft_converter/floor_stair_stage.py minecraft_converter/road_terrain_stage.py
+          python -m unittest discover -s minecraft_converter/tests -v
+          test -s B4220.3_MapExport_256/tmx/31_46.tmx
+          test -s B4220.3_MapExport_256/Kentucky.pzw
+          test -s floorplan/current/v259_floorplan.html
+      - name: Build source audit and disposable Java preview world
+        run: |
+          python minecraft_converter/converter.py \
+            --tmx B4220.3_MapExport_256/tmx/31_46.tmx \
+            --pzw B4220.3_MapExport_256/Kentucky.pzw \
+            --v259-html floorplan/current/v259_floorplan.html \
+            --output minecraft_converter/output \
+            --preview-world \
+            --data-version 3465
+      - name: Visually audit original 2x tiles
+        run: |
+          python -m pip install Pillow
+          python minecraft_converter/tile_visual_audit.py --tiles Tiles/2x --output minecraft_converter/contact_sheets
+      - name: Upload source tile contact sheets
+        uses: actions/upload-artifact@v4
+        with:
+          name: pz-b42-31-46-original-tiles-contact-sheets
+          path: minecraft_converter/contact_sheets/*.png
+          retention-days: 14
+      - name: Produce separate three-step + landing walkability demo
+        run: |
+          python minecraft_converter/stair_walkability_demo.py --output minecraft_converter/output
+          unzip -t minecraft_converter/output/stairs_3plus1_walkability_demo.zip
+      - name: Verify real TMX counts and world archive structure
+        run: |
+          python - <<'PY'
+          import json, zipfile
+          from pathlib import Path
+          out=Path("minecraft_converter/output")
+          d=json.loads((out/"report.json").read_text())
+          assert d["placed_tiles"] == 131341, d["placed_tiles"]
+          assert d["floor_cells"] == 65536, d["floor_cells"]
+          assert d["chunks"] == 256, d["chunks"]
+          stage=json.loads((out/"floor_stair_audit.json").read_text())
+          assert stage["confirmed_upper_lower_floor_total"] == 0, stage
+          assert stage["stair_sprite_parts"] == 0, stage
+          assert stage["nonfloor_tiles_by_level"]["1"]["ceiling"] == 546, stage
+          assert len(stage["basement_metadata_objects"]) == 1, stage
+          assert stage["basement_metadata_objects"][0]["stair_hint_global"]["direction"] == "W"
+          assert d["confirmed_upper_lower_floor_blocks"] == 0, d
+          assert d["source_stair_parts"] == 0, d
+          assert d["pzw_basement_regions"] == 1, d
+          assert d["verified_crop_positions"] == {"ripe_wheat":17571,"dry_stalk":7034}
+          assert d["crop_blocks"] == 24605
+          assert d["verified_small_tree_sprites"] == 172
+          assert d["verified_shrub_sprites"] == 261
+          assert d["tree_trunk_blocks"] > 0
+          assert d["shrub_blocks"] == 261
+          sources=d["road_terrain_stage"]["source"]
+          assert sources["road_source_records"] == 865, sources
+          assert sources["lane_cells"] == 695, sources
+          assert sources["curb_cells"] >= 90, sources
+          assert sources["low_vegetation_source_records"] == 12754, sources
+          assert d["road_marked_blocks"] == sources["road_unique_cells"], d
+          assert d["low_vegetation_blocks"] > 9000, d
+          assert d["low_vegetation_blocks"] <= sources["low_vegetation_eligible_cells"], d
+          stage_road=json.loads((out/"road_terrain_audit.json").read_text())
+          assert stage_road["source_sha256"] == d["sha256"]
+          assert d["global_origin"] == {"x":7936,"z":11776}, d["global_origin"]
+          archive=out/"31_46_preview_world.zip"
+          assert archive.is_file()
+          with zipfile.ZipFile(archive) as z:
+              assert z.testzip() is None
+              names=z.namelist()
+              assert "31_46_preview_world/level.dat" in names
+              from io import BytesIO
+              pack=z.read("31_46_preview_world/resources.zip")
+              with zipfile.ZipFile(BytesIO(pack)) as resources:
+                  assert resources.testzip() is None
+                  assert json.loads(resources.read("pack.mcmeta"))["pack"]["pack_format"] == 15
+                  assert len(resources.namelist()) == 7
+              assert "31_46_preview_world/region/r.15.23.mca" in names
+          print("PASS: real TMX parsed, 256 actual Anvil chunks, zipped Java preview created")
+          PY
+      - name: Upload preview world and audits
+        uses: actions/upload-artifact@v4
+        with:
+          name: pz-b42-31-46-world-preview-and-audit
+          path: |
+            minecraft_converter/output/31_46_preview_world.zip
+            minecraft_converter/output/stairs_3plus1_walkability_demo.zip
+            minecraft_converter/output/report.json
+            minecraft_converter/output/road_terrain_audit.json
+            minecraft_converter/output/floor_stair_audit.json
+            minecraft_converter/output/edges.json
+            minecraft_converter/output/warnings.csv
+            minecraft_converter/output/source_placements.jsonl.gz
+            minecraft_converter/output/furniture_parts.json
+          retention-days: 14
+
+      - name: Save verified preview world on the work branch
+        run: |
+          mkdir -p minecraft_converter/previews
+          cp minecraft_converter/output/31_46_preview_world.zip minecraft_converter/previews/31_46_preview_world.zip
+          cp minecraft_converter/output/stairs_3plus1_walkability_demo.zip minecraft_converter/previews/stairs_3plus1_walkability_demo.zip
+          cp minecraft_converter/output/report.json minecraft_converter/previews/31_46_report.json
+          cp minecraft_converter/output/road_terrain_audit.json minecraft_converter/previews/31_46_road_terrain_audit.json
+          cp minecraft_converter/output/floor_stair_audit.json minecraft_converter/previews/31_46_floor_stair_audit.json
+          cp minecraft_converter/output/warnings.csv minecraft_converter/previews/31_46_warnings.csv
+          cp minecraft_converter/output/edges.json minecraft_converter/previews/31_46_edges.json
+          cp minecraft_converter/output/furniture_parts.json minecraft_converter/previews/31_46_furniture_parts.json
+          cp minecraft_converter/output/source_placements.jsonl.gz minecraft_converter/previews/31_46_source_placements.jsonl.gz
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add minecraft_converter/previews/
+          if ! git diff --cached --quiet; then
+            git commit -m "검수용 31_46 마인크래프트 월드와 분석 보고서 보존"
+            git push origin HEAD:work/minecraft-31-46-preview-20261108
+          fi
