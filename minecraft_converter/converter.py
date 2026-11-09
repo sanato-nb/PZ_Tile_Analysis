@@ -146,7 +146,7 @@ def region_merge(path,new):
     tmp=path.with_suffix(".mca.tmp")
     tmp.write_bytes(buffer);tmp.replace(path)
 
-def level_dat(world,seed,spawn_x,spawn_z,data_version):
+def level_dat(world,seed,spawn_x,spawn_z,data_version,level_name="PZ B42 31_46 PREVIEW"):
     flat={"type":(8,"minecraft:flat"),
           "settings":(10,{"biome":(8,"minecraft:plains"),"features":(1,0),"lakes":(1,0),
           "layers":(9,(10,[{"height":(3,1),"block":(8,"minecraft:air")}]))})}
@@ -155,7 +155,7 @@ def level_dat(world,seed,spawn_x,spawn_z,data_version):
                    "type":(8,"minecraft:overworld"),"generator":(10,flat)})})}
     data={
        "DataVersion":(3,data_version),"version":(3,19133),
-       "LevelName":(8,"PZ B42 31_46 PREVIEW"),"GameType":(3,1),
+       "LevelName":(8,level_name),"GameType":(3,1),
        "hardcore":(1,0),"allowCommands":(1,1),"initialized":(1,1),
        "SpawnX":(3,spawn_x),"SpawnY":(3,65),"SpawnZ":(3,spawn_z),
        "Time":(4,6000),"DayTime":(4,6000),"raining":(1,0),
