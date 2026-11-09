@@ -82,7 +82,7 @@ python minecraft_converter/converter.py \
 - `output/source_placements.jsonl.gz`, `output/edges.json`, `output/furniture_parts.json`
 - `output/stairs_3plus1_walkability_demo.zip`: **합성 테스트 월드**
 
-CI 업로드 아티팩트는 기본 **14일 보존**, 반면 `previews/`의 월드 ZIP/보고서/별도 계단 데모는 작업 브랜치에 남는다. 원본 보존이 최우선이며, ZIP과 `report.json`의 숫자는 재생성 시 다시 확인한다.
+CI 업로드 아티팩트는 기본 **14일 보존**, 반면 `previews/`에 저장된 월드 ZIP·리포트·계단 데모·전체 배치 압축 로그·경계 JSON·가구 부품 JSON은 작업 브랜치에 지속 보존한다. 원본 보존이 최우선이며, ZIP과 `report.json`의 숫자는 재생성 시 다시 확인한다.
 
 ## 7. 실제 작업 우선순위
 
