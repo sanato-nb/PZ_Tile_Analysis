@@ -1,5 +1,9 @@
 # Project Zomboid B42 → Minecraft: 31_46 preview converter
 
+> **2026-11-09 인수인계:** [한국어 작업 안내](INDEX_KO.md) · [현재 상태](PROJECT_STATUS_KO.md) · [확정 사양](DECISIONS_KO.md) · [상세 인수인계](HANDOFF_2026-11-09_KO.md) · [새 채팅 프롬프트](NEXT_CHAT_PROMPT_KO.txt).
+>
+> **주의:** 생성된 월드는 아직 지형·식생·농경지·일부 바닥/가구 임시 표시 수준이다. 계단 테스트는 별도의 합성 월드이며, 실제 31_46에 계단이나 검증된 위층 바닥을 만들어 넣지 않았다.
+
 **Status: photo-audited farm/vegetation preview, NOT a completed reconstruction.**
 The source geometry is real. Several frequently used terrain/crop indices are now matched against the actual PNG atlas;
 other floor families remain provisional, not certified per-sprite mappings. Do not merge with a playthrough save.
