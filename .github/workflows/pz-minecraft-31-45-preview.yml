@@ -1,0 +1,173 @@
+name: "PZ B42 → Minecraft 31_45 preview"
+on:
+  push:
+    branches: [work/minecraft-31-45-preview-20261109]
+    paths:
+      - minecraft_converter/converter.py
+      - minecraft_converter/floor_stair_stage.py
+      - minecraft_converter/road_terrain_stage.py
+      - minecraft_converter/tests/**
+      - .github/workflows/pz-minecraft-31-45-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pz31-45-preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-31-45:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Sparse checkout source, converter and original evidence images
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /minecraft_converter/
+            /Tiles/2x/blends_natural_01.png
+            /Tiles/2x/blends_natural_02.png
+            /Tiles/2x/blends_street_01.png
+            /Tiles/2x/floors_exterior_tilesandstone_01.png
+            /Tiles/2x/floors_interior_tilesandwood_01.png
+            /Tiles/2x/floors_interior_carpet_01.png
+            /Tiles/2x/floor_carpet_motif.png
+            /Tiles/2x/location_shop_mall_01.png
+            /Tiles/2x/street_trafficlines_01.png
+            /Tiles/2x/street_trafficlines_curb_yellow_faded.png
+            /Tiles/2x/vegetation_farm_01.png
+            /Tiles/2x/vegetation_foliage_01.png
+            /Tiles/2x/blends_grassoverlays_01.png
+            /Tiles/vegetation_trees_01.png
+            /Tiles/vegetation_groundcover_01.png
+            /B4220.3_MapExport_256/Kentucky.pzw
+            /B4220.3_MapExport_256/tmx/31_45.tmx
+            /floorplan/current/v259_floorplan.html
+      - name: Python syntax, unit tests and read-only source presence
+        run: |
+          python --version
+          python -m py_compile minecraft_converter/converter.py minecraft_converter/floor_stair_stage.py minecraft_converter/road_terrain_stage.py
+          python -m unittest discover -s minecraft_converter/tests -v
+          test -s B4220.3_MapExport_256/tmx/31_45.tmx
+          test -s B4220.3_MapExport_256/Kentucky.pzw
+          test -s floorplan/current/v259_floorplan.html
+      - name: Generate 31_45 world without changing original TMX or 31_46 preview
+        run: |
+          python minecraft_converter/converter.py \
+            --tmx B4220.3_MapExport_256/tmx/31_45.tmx \
+            --pzw B4220.3_MapExport_256/Kentucky.pzw \
+            --v259-html floorplan/current/v259_floorplan.html \
+            --output minecraft_converter/output_31_45 \
+            --preview-world --terrain-only --data-version 3465
+      - name: Verify original counts, basement construction and independent preview ZIP
+        run: |
+          python - <<'PY'
+          import hashlib, io, json, zipfile
+          from pathlib import Path
+          src=Path("B4220.3_MapExport_256/tmx/31_45.tmx")
+          out=Path("minecraft_converter/output_31_45")
+          report=json.loads((out/"report.json").read_text())
+          audit=json.loads((out/"floor_stair_audit.json").read_text())
+          terrain=json.loads((out/"road_terrain_audit.json").read_text())
+          assert report["sha256"]==hashlib.sha256(src.read_bytes()).hexdigest()
+          assert report["tileset_count"]==413, report
+          assert len(report["layers"])==67, len(report["layers"])
+          assert report["placed_tiles"]==170836, report["placed_tiles"]
+          assert report["floor_cells"]==65536, report["floor_cells"]
+          assert report["chunks"]==256, report["chunks"]
+          assert report["preview_scope"]=="terrain_floors_trees_vegetation",report
+          assert report["placeholder_parts"]==0,report
+          assert report["object_blocks_generated"]==0,report
+          assert report["furniture_source_parts"]>0,"source furniture metadata missing"
+          assert len(report["excluded_physical_objects"])>=10,report
+          assert "power_poles" in report["excluded_physical_objects"]
+          assert "walls" in report["excluded_physical_objects"]
+          assert report["global_origin"]=={"x":7936,"z":11520},report["global_origin"]
+          assert report["confirmed_upper_lower_floor_blocks"]>10000,report
+          assert report["generated_negative_floor_blocks"]>1000,report
+          assert audit["negative_floor_source_evidence"]==report["generated_negative_floor_blocks"]
+          assert audit["basement_physical_floor_generated"]==report["generated_negative_floor_blocks"]
+          assert audit["stair_sprite_parts"]>0, audit
+          assert report["source_stair_parts"]>0
+          assert report["road_marked_blocks"]>1000,report
+          assert report["low_vegetation_blocks"]>7000,report
+          assert terrain["source_sha256"]==report["sha256"]
+          archive=out/"31_45_preview_world.zip"
+          assert archive.is_file(), archive
+          with zipfile.ZipFile(archive) as z:
+              assert z.testzip() is None
+              names=set(z.namelist())
+              assert "31_45_preview_world/level.dat" in names
+              assert "31_45_preview_world/region/r.15.22.mca" in names
+              with zipfile.ZipFile(io.BytesIO(z.read("31_45_preview_world/resources.zip"))) as pack:
+                  assert pack.testzip() is None
+                  assert json.loads(pack.read("pack.mcmeta"))["pack"]["pack_format"]==15
+                  assert len(pack.namelist())==11
+          # Read every actual Anvil chunk in the ZIP. All physically written
+          # palette block names must belong to the terrain/floor/plant whitelist,
+          # not furniture, wall, door, light, car or electric-pole blocks.
+          import sys
+          sys.path.insert(0,str(Path("minecraft_converter").resolve()))
+          from converter import terrain_only_material
+          import re, struct, zlib
+          actual_chunks=0
+          with zipfile.ZipFile(archive) as z:
+              for name in z.namelist():
+                  if not name.endswith(".mca"):continue
+                  raw=z.read(name)
+                  for slot in range(1024):
+                      ent=int.from_bytes(raw[4*slot:4*slot+4],"big")
+                      sector,count=ent>>8,ent&255
+                      if not sector:continue
+                      assert count>=1
+                      off=sector*4096
+                      length=struct.unpack_from(">I",raw,off)[0]
+                      assert raw[off+4]==2, "Unsupported chunk compression"
+                      nbt=zlib.decompress(raw[off+5:off+4+length])
+                      actual_chunks+=1
+                      for found in re.findall(b"minecraft:[a-z0-9_]+",nbt):
+                          value=found.decode("ascii")
+                          if value=="minecraft:plains" or value=="minecraft:full":
+                              continue
+                          assert terrain_only_material(value),(name,slot,value)
+          assert actual_chunks==256,actual_chunks
+          assert not (out/"31_46_preview_world.zip").exists()
+          print("PASS 31_45 source=",report["sha256"])
+          print("PASS 31_45 terrain-only: 256 Anvil chunks, ZERO furniture/wall/pole objects, all serialized palettes allowlisted")
+          PY
+      - name: Archive 31_45 test results and full original source placement log
+        uses: actions/upload-artifact@v4
+        with:
+          name: pz-b42-31-45-terrain-only-preview-and-audit
+          path: |
+            minecraft_converter/output_31_45/31_45_preview_world.zip
+            minecraft_converter/output_31_45/report.json
+            minecraft_converter/output_31_45/floor_stair_audit.json
+            minecraft_converter/output_31_45/road_terrain_audit.json
+            minecraft_converter/output_31_45/edges.json
+            minecraft_converter/output_31_45/warnings.csv
+            minecraft_converter/output_31_45/source_placements.jsonl.gz
+            minecraft_converter/output_31_45/furniture_parts.json
+          retention-days: 14
+      - name: Store verified 31_45 world and audits on this dedicated branch
+        run: |
+          mkdir -p minecraft_converter/previews
+          cp minecraft_converter/output_31_45/31_45_preview_world.zip minecraft_converter/previews/31_45_preview_world.zip
+          cp minecraft_converter/output_31_45/report.json minecraft_converter/previews/31_45_report.json
+          cp minecraft_converter/output_31_45/floor_stair_audit.json minecraft_converter/previews/31_45_floor_stair_audit.json
+          cp minecraft_converter/output_31_45/road_terrain_audit.json minecraft_converter/previews/31_45_road_terrain_audit.json
+          cp minecraft_converter/output_31_45/edges.json minecraft_converter/previews/31_45_edges.json
+          cp minecraft_converter/output_31_45/warnings.csv minecraft_converter/previews/31_45_warnings.csv
+          cp minecraft_converter/output_31_45/source_placements.jsonl.gz minecraft_converter/previews/31_45_source_placements.jsonl.gz
+          cp minecraft_converter/output_31_45/furniture_parts.json minecraft_converter/previews/31_45_furniture_parts.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add minecraft_converter/previews/31_45_*
+          if ! git diff --cached --quiet; then
+            git commit -m "31_45 바닥·층·나무·식생 전용 월드 ZIP과 감사 기록 보존"
+            git push origin HEAD:work/minecraft-31-45-preview-20261109
+          fi

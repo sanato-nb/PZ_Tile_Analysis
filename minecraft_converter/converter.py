@@ -15,6 +15,10 @@ SURFACE={
  "floors_exterior_street_01":"minecraft:stone",
  "floors_interior_tilesandwood_01":"minecraft:oak_planks",
  "floors_interior_carpet_01":"minecraft:light_gray_wool",
+ "floors_exterior_tilesandstone_01":"minecraft:smooth_stone",
+ "blends_natural_02":"minecraft:gravel",
+ "floor_carpet_motif":"minecraft:brown_wool",
+
 }
 # Tile-index mappings below were confirmed by inspecting the repository's
 # original Tiles/2x/blends_natural_01.png, blends_street_01.png,
@@ -32,6 +36,31 @@ def surface_block(key,family):
     if family=="floors_interior_carpet_01":
         if ix==2:return "minecraft:gray_wool"
         if ix==47:return "minecraft:brown_wool"
+    if family=="floor_carpet_motif":
+        # Tiles/2x/floor_carpet_motif.png: 0-15 are textile patterns.
+        return {
+            0:"minecraft:red_wool", 1:"minecraft:black_wool",
+            2:"minecraft:yellow_wool", 3:"minecraft:brown_wool",
+            4:"minecraft:gray_wool", 5:"minecraft:blue_wool",
+            6:"minecraft:blue_wool", 7:"minecraft:blue_wool",
+            8:"minecraft:brown_wool", 9:"minecraft:yellow_wool",
+            10:"minecraft:green_wool", 11:"minecraft:gray_wool",
+            12:"minecraft:blue_wool", 13:"minecraft:red_wool",
+            14:"minecraft:blue_wool", 15:"minecraft:white_wool",
+        }.get(ix,"minecraft:magenta_concrete")
+    if family=="floors_exterior_tilesandstone_01":
+        # Original atlas: beige, brick and gray flagstone.
+        if ix in (0,80):return "minecraft:smooth_sandstone"
+        if ix in (1,2,8,9,10,11):return "minecraft:bricks"
+        if ix in (3,4,5):return "minecraft:smooth_stone"
+        if ix in (6,7):return "minecraft:stone_bricks"
+        return "minecraft:stone"
+    if family=="location_shop_mall_01" and ix==22:
+        # Original source sprite is a mall paving tile, not a mall wall.
+        return "minecraft:polished_andesite"
+    if family=="blends_natural_02":
+        # Gray rocky natural blend; not a verified water surface.
+        return "minecraft:gravel"
     if family=="blends_natural_01":
         if 16<=ix<=23:return "minecraft:grass_block"
         if 32<=ix<=39:return "minecraft:moss_block"  # darker green ground
@@ -44,6 +73,44 @@ def surface_block(key,family):
         if 48<=ix<=55:return "minecraft:smooth_sandstone" # beige paving
         if 64<=ix<=87:return "minecraft:gray_concrete" # asphalt
     return SURFACE.get(family,"minecraft:magenta_concrete")
+
+# Only material categories allowed to create physical blocks in terrain-only
+# mode. Every other source tile is archived but not rendered.
+TERRAIN_ONLY_MATERIALS = frozenset({
+    "air", "dirt", "stone", "grass_block", "moss_block", "podzol",
+    "coarse_dirt", "gravel", "andesite", "polished_andesite",
+    "smooth_stone", "smooth_sandstone", "stone_bricks", "bricks",
+    "farmland", "polished_diorite", "oak_planks", "birch_planks",
+    "spruce_planks", "dark_oak_planks", "gray_concrete",
+    "light_gray_concrete", "white_concrete", "yellow_concrete",
+    "orange_concrete", "brown_concrete", "white_terracotta",
+    "light_gray_terracotta", "yellow_terracotta", "orange_terracotta",
+    "brown_terracotta", "red_wool", "black_wool", "yellow_wool",
+    "brown_wool", "gray_wool", "blue_wool", "green_wool",
+    "white_wool", "light_gray_wool", "wheat", "dead_bush",
+    "grass", "spruce_log", "spruce_leaves", "oak_leaves",
+})
+
+def terrain_only_material(material):
+    """Reject any physical block not belonging to ground, floor, or vegetation."""
+    base=material.split("[",1)[0]
+    return base.startswith("minecraft:") and base[10:] in TERRAIN_ONLY_MATERIALS
+
+def enforce_terrain_only_world(chunkmap):
+    """Check the actual block grid before Anvil serialization.
+
+    Tests and CI also inspect the saved world ZIP, so a later regression
+    cannot silently add furniture, walls, power poles or other fixtures.
+    """
+    invalid=collections.Counter()
+    for blocks in chunkmap.values():
+        for state in blocks.values():
+            if not terrain_only_material(state):
+                invalid[state]+=1
+    if invalid:
+        sample=sorted(invalid.items(),key=lambda p:(-p[1],p[0]))[:8]
+        raise ValueError("Terrain-only preview contains non-terrain blocks: "+str(sample))
+    return True
 
 def crop_kind(key):
     if not key.startswith("vegetation_farm_01/"):return None
@@ -252,21 +319,29 @@ def execute(args):
     basements=audit_pzw_basements(args.pzw,cell["x"],cell["y"],gx,gz)
     # Only source-confirmed floors become physical blocks. In this sample,
     # Levels 1–6 are roofs/ceiling/tower/tank pieces, NOT second stories.
+    negative_floor_evidence=sum(lev < 0 for lev,x,z in structures["floors"])
     structure_audit={
        **structures["audit"],
        "level0_original_floor_count":len(floor),
        "basement_metadata_objects":basements,
        "basement_physical_floor_generated":0,
+       "negative_floor_source_evidence":negative_floor_evidence,
        "converted_stair_runs":0,
-       "stair_action":"No fixture stair sprites or connected source-backed upper landing; build none",
+       "stair_action":("Source stair sprites present, but connected 3+1 run geometry "
+                       "and facing/clearance are not verified; build none"
+                       if structures["source_stair_parts"] else
+                       "No fixture stair sprites or verified 3+1 run; build none"),
        "unresolved_geometry":[
-        "PZW basement zone is not a rendered underground TMX floor",
+        "PZW basement metadata alone is not physical geometry; negative-level floors require independent TMX evidence",
         "Upper-level ceiling/roof tiles do not authorize walkable floors",
         "Stairwell headroom requires a verified connected pair of floor levels",
        ],
     }
-    (out/"floor_stair_audit.json").write_text(
-        json.dumps(structure_audit,ensure_ascii=False,indent=2),encoding="utf-8")
+    if negative_floor_evidence:
+        for meta in structure_audit["basement_metadata_objects"]:
+            meta["status"]="metadata_unlinked_to_source_negative_level_geometry"
+            meta["is_verified_physical_basement"]=False
+    # Floor audit is written below, after world blocks are counted.
     crop_points={}
     for rec in records:
         if rec["level"]!=0:continue
@@ -326,13 +401,25 @@ def execute(args):
           "Water, exact road-marking contours, multi-floor floors, stairs, unidentified jumbo trees and walls remain unverified",
           "World-local road texture pack is a top-down 1.20.1 preview; vanilla fallback blocks remain visible without it",
           "This is a disposable Java preview, not the final mod/loader version"]}
+    report["preview_scope"] = ("terrain_floors_trees_vegetation" if args.terrain_only
+                               else "legacy_with_furniture_placeholders")
+    report["excluded_physical_objects"] = ([
+        "furniture", "appliances", "walls", "doors", "windows", "roofs",
+        "power_poles", "street_furniture", "cars", "stairs",
+        "lighting", "fences", "railings"] if args.terrain_only else [])
     if args.preview_world:
         # Java 1.20.1 disposable compatibility target ONLY. No final version selected.
-        world=out/"31_46_preview_world"
+        world=out/(args.tmx.stem+"_preview_world")
         chunkmap=collections.defaultdict(dict)
         for (lx,lz),(key,family) in floor.items():
             x,z=gx+lx,gz+lz
             top=surface_block(key,family)
+            # Generic family-shaped decorations in Floor are not safe ground
+            # material identities. Preserve all such keys in the source log,
+            # but use a neutral *surface* placeholder in the terrain preview,
+            # never a magenta "unconverted object" marker.
+            if args.terrain_only and top=="minecraft:magenta_concrete":
+                top="minecraft:light_gray_concrete"
             crop=crop_points.get((lx,lz))
             if crop=="ripe_wheat":
                 top="minecraft:farmland[moisture=7]"
@@ -353,14 +440,20 @@ def execute(args):
                 raise ValueError("Floor beyond Minecraft build height")
             blocks=chunkmap[(x//16,z//16)]
             if level<0:
-                # Preserve the original underground space instead of filling
-                # two dirt + five stone blocks through confirmed basement cells.
+                # Verified negative-floor geometry replaces only default stone
+                # in its own cell; carve its three blocks of headroom.
                 for clear_y in range(floor_y+1,min(floor_y+4,64)):
                     blocks.pop((x,clear_y,z),None)
-            if (x,floor_y,z) in blocks and blocks[(x,floor_y,z)]!= "minecraft:air":
+                existing=blocks.get((x,floor_y,z))
+                if existing not in (None,"minecraft:air","minecraft:stone"):
+                    raise ValueError("Basement floor intersects non-default structure")
+            elif (x,floor_y,z) in blocks and blocks[(x,floor_y,z)] != "minecraft:air":
                 raise ValueError("Confirmed structural floors collide with existing blocks")
-            blocks[(x,floor_y,z)]=surface_block(
+            source_mat=surface_block(
                 r["source_key"],r["source_key"].split("/")[0])
+            if args.terrain_only and source_mat=="minecraft:magenta_concrete":
+                source_mat="minecraft:light_gray_concrete"
+            blocks[(x,floor_y,z)]=source_mat
             additional_floor_blocks+=1
         # Road paint replaces ONLY the Level-0 ground Y=64 block, so the
         # roadway remains flush. World-local resources.zip paints thin lines
@@ -371,15 +464,22 @@ def execute(args):
             chunkmap[(x//16,z//16)][x,64,z]=block
             road_marked_blocks+=1
         write_world_road_resource_pack(world)
+        # Furniture/appliances and all other man-made objects remain only in
+        # the original lossless source log and furniture_parts.json.
+        # Terrain-only output deliberately places ZERO object markers.
         markers=0
-        for item in furniture:
-            if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
-            x,z,y=item["x"],item["z"],item["floor_y"]+1
-            if not (-64<=y<=319):continue
-            solid=str(item["tile_properties"].get("solid","")).lower()
-            marker="minecraft:light_blue_carpet" if solid in ("false","0","no") else "minecraft:light_blue_stained_glass"
-            blocks=chunkmap[(x//16,z//16)]
-            if (x,y,z) not in blocks:blocks[(x,y,z)]=marker;markers+=1
+        if not args.terrain_only:
+            for item in furniture:
+                if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
+                x,z,y=item["x"],item["z"],item["floor_y"]+1
+                if not (-64<=y<=319):continue
+                solid=str(item["tile_properties"].get("solid","")).lower()
+                marker=("minecraft:light_blue_carpet" if solid in ("false","0","no")
+                        else "minecraft:light_blue_stained_glass")
+                blocks=chunkmap[(x//16,z//16)]
+                if (x,y,z) not in blocks:
+                    blocks[(x,y,z)]=marker
+                    markers+=1
         tree_trunks=0
         tree_leaves=0
         bush_blocks=0
@@ -451,26 +551,32 @@ def execute(args):
                 continue
             dest[pos]=block
             small_plant_counts[kind]+=1
+        if args.terrain_only:
+            enforce_terrain_only_world(chunkmap)
         groups=collections.defaultdict(dict)
         for (cx,cz),blocks in sorted(chunkmap.items()):
             groups[(cx//32,cz//32)][cx,cz]=chunk(cx,cz,blocks,args.data_version)
         for (rx,rz),chunks in groups.items():
             region_merge(world/"region"/("r."+str(rx)+"."+str(rz)+".mca"),chunks)
-        blocked={(x["local_x"],x["local_y"]) for x in furniture}
+        blocked=({(x["local_x"],x["local_y"]) for x in furniture}
+                 if not args.terrain_only else set())
         blocked.update(crop_points)
         blocked.update(valid_tree_locations)
         blocked.update((r["local_x"],r["local_y"]) for r in shrub_records)
         walkable=[c for c in floor if c not in blocked]
         if not walkable:raise ValueError("Cannot find safe spawn")
         lx,lz=min(walkable,key=lambda p:(p[0]-128)**2+(p[1]-128)**2)
-        level_dat(world,args.seed,gx+lx,gz+lz,args.data_version)
-        archive=out/"31_46_preview_world.zip"
+        level_dat(world,args.seed,gx+lx,gz+lz,args.data_version,
+                  level_name="PZ B42 "+args.tmx.stem+" PREVIEW")
+        archive=out/(args.tmx.stem+"_preview_world.zip")
         with zipfile.ZipFile(archive,"w",zipfile.ZIP_DEFLATED) as zf:
             for path in sorted(world.rglob("*")):
                 if path.is_file():zf.write(path,world.name+"/"+str(path.relative_to(world)))
         report.update({"world_archive":str(archive.name),"chunks":len(chunkmap),
                        "placeholder_parts":markers,
+                       "object_blocks_generated":markers,
                        "confirmed_upper_lower_floor_blocks":additional_floor_blocks,
+                       "generated_negative_floor_blocks":negative_floor_evidence,
                        "source_stair_parts":len(structures["source_stair_parts"]),
                        "pzw_basement_regions":len(basements),
                        "crop_blocks":sum(crop_counts.values()),
@@ -485,6 +591,10 @@ def execute(args):
                        "tree_conflicts":tree_conflicts,
                        "clipped_leaves":leaf_clipped,
                        "data_version":args.data_version})
+    structure_audit["basement_physical_floor_generated"] = (
+        report.get("generated_negative_floor_blocks",0))
+    (out/"floor_stair_audit.json").write_text(json.dumps(
+        structure_audit,ensure_ascii=False,indent=2),encoding="utf-8")
     terrain_world = {k:report.get(k) for k in (
         "road_marked_blocks","low_vegetation_blocks",
         "low_vegetation_counts","low_vegetation_skipped_occupied",
@@ -516,5 +626,7 @@ def main():
     p.add_argument("--seed",type=int,default=310046)
     p.add_argument("--data-version",type=int,default=3465)
     p.add_argument("--preview-world",action="store_true")
+    p.add_argument("--terrain-only",action="store_true",
+                   help="Only build base ground, source-backed floors, roads, crops, trees and low vegetation; no furniture/structure object markers")
     execute(p.parse_args())
 if __name__=="__main__":main()
