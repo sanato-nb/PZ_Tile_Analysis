@@ -1,0 +1,23 @@
+프로젝트: Project Zomboid B42 → Minecraft Java 월드 변환. 이전 작업을 처음부터 다시 시작하지 말고 아래 GitHub의 실제 코드를 이어서 작업해 줘.
+
+저장소: https://github.com/sanato-nb/PZ_Tile_Analysis
+기준 브랜치: work/minecraft-31-46-preview-20261108
+Draft PR: https://github.com/sanato-nb/PZ_Tile_Analysis/pull/322
+반드시 먼저 읽을 파일:
+1) minecraft_converter/INDEX_KO.md
+2) minecraft_converter/HANDOFF_2026-11-09_KO.md
+3) minecraft_converter/PROJECT_STATUS_KO.md
+4) minecraft_converter/DECISIONS_KO.md
+5) minecraft_converter/README.md 및 converter.py
+6) minecraft_converter/previews/31_46_report.json
+7) minecraft_converter/previews/31_46_floor_stair_audit.json
+
+목표: 첫 테스트 31_46.tmx 256×256 구역을 원본에 가깝게 재현. 현재 이미 실제 TMX로 Java Anvil 월드 256 청크를 생성하고 사용자 스크린샷으로 농경지·도로·나무 배치를 비교했으며, GitHub Actions로 검수 중이다. 기준 좌표는 X=7936..8191, Z=11776..12031, 지표 Y64. 완성본이라고 주장하지 말 것.
+
+현재 데이터: 413 타일셋, 22 레이어, Level 0..6에 배치 기록 131,341건. Level0 명시 Floor 65,536칸. 농경지 익은 밀 17,571칸/마른 줄기 7,034칸. 원본 침엽수 스프라이트 172, 관목 261. 가구/가전 관련 부품 164건, 유리/카펫 플레이스홀더 133칸. 45개 대형 나무 스프라이트는 미해결. 이 구역의 실제 계단 스프라이트는 0건, 검증된 위층 바닥도 0칸이며 PZW 지하실 메타데이터 1개는 물리 지하실 구조가 아니다. 별도의 stairs_3plus1_walkability_demo.zip은 오직 합성 실험 월드다.
+
+중요한 결정: 1 PZ 타일 = 마크 1×1, 층높이 4(바닥1+실내3), 지면 Y64, 지면 아래 흙2·돌5. 1차 벽/문/창/지붕/울타리/도로 시설/차량/오염 제외 및 원본 기록 보존. 실제 계단은 원본 3칸+착지1칸만. 나무는 바닐라 모델 사용. Codex 가구 모델은 임의 변형 없이 그대로 배치하고 문제 발견 시 모델을 수정. 미제작 가구는 원본 ID/점유/방향을 보존한 임시 표시. 바닥·층·방향 등은 원본 확증 우선, 추측 금지. 정식 Minecraft 모드 버전 미정, 프리뷰만 1.20.1.
+
+바로 다음 작업: 도로 차선/표시와 누락된 지형·작은 식생을 원본 TMX와 PNG를 대조하여 정확히 복원. 근거 있는 GID/Local ID 변환표를 추가하고 기존 엔진에 통합해 테스트/CI를 통과시킨 뒤 변경된 프리뷰 월드 ZIP/검수 보고서를 저장해 줘. 이후 정확한 층별 바닥, 다른 TMX의 실제 계단, Codex 가구 모델 연결 순서로 진행.
+
+진행 방식: 추가 선택지/설정 질문을 연속해서 내지 말고 실제 파일을 읽어 코드를 수정하고, 테스트 결과와 다운로드 가능한 산출물, 남은 오류를 보여줘. 원본 TMX/PZW, v259, 타일 분석 DB, Codex 가구 작업을 덮어쓰지 말고 작업 브랜치에서 계속 작업. 자동 테스트와 실제 게임 플레이 검수를 구분해 보고해 줘. main 병합은 승인 전까지 하지 말 것.
