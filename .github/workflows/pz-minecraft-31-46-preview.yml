@@ -9,12 +9,16 @@ on:
       - minecraft_converter/stair_walkability_demo.py
       - minecraft_converter/tests/test_floor_stair_stage.py
       - minecraft_converter/tile_visual_audit.py
-      - minecraft_converter/README.md
       - .github/workflows/pz-minecraft-31-46-preview.yml
   workflow_dispatch:
 
 permissions:
   contents: write
+
+# Avoid concurrent builds trying to push the same preview files.
+concurrency:
+  group: pz31-46-preview-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-preview:
