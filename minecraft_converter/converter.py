@@ -245,6 +245,16 @@ def execute(args):
             raise ValueError("Overlapping crop at "+str(position))
         crop_points[position]=kind
     crop_counts=dict(collections.Counter(crop_points.values()))
+    # Original PNG confirms vegetation_trees_01/8..11 are conifer sprites,
+    # vegetation_foliage_01/8..14 are bushes.
+    tree_records=[r for r in records if r["level"]==0 and
+                  r["source_key"] in {f"vegetation_trees_01/{k}" for k in range(8,12)}]
+    shrub_records=[r for r in records if r["level"]==0 and
+                   r["source_key"] in {f"vegetation_foliage_01/{k}" for k in range(8,15)}]
+    # No jumbo_tree_01 original PNG is available in this repository snapshot;
+    # preserve these coordinates, but never guess their geometry.
+    jumbo_records=[r for r in records if r["level"]==0 and
+                   r["source_key"].startswith("jumbo_tree_01/")]
     with (out/"source_placements.jsonl.gz").open("wb") as fd:
         with gzip.GzipFile(fileobj=fd,mode="wb",mtime=0) as comp:
             for row in records:
@@ -265,10 +275,14 @@ def execute(args):
        "tileset_count":len(tilesets),"layers":layers,
        "placed_tiles":len(records),"floor_cells":len(floor),
        "furniture_source_parts":len(furniture),"warnings":len(warnings),
-       "verified_crop_positions":crop_counts,"preview_materials":SURFACE,
+       "verified_crop_positions":crop_counts,
+       "verified_small_tree_sprites":len(tree_records),
+       "verified_shrub_sprites":len(shrub_records),
+       "jumbo_tree_unrendered":len(jumbo_records),
+       "preview_materials":SURFACE,
        "limitations":["Preview floor families are not certified sprite-level identities",
           "Furniture model grouping not inferred from per-part matches",
-          "Water, road markings, multi-floor floors, stairs, trees and walls retained but not generated",
+          "Water, road markings, multi-floor floors, stairs, unidentified jumbo trees and walls retained but not generated",
           "This is a disposable Java preview, not the final mod/loader version"]}
     if args.preview_world:
         # Java 1.20.1 disposable compatibility target ONLY. No final version selected.
@@ -299,6 +313,64 @@ def execute(args):
             marker="minecraft:light_blue_carpet" if solid in ("false","0","no") else "minecraft:light_blue_stained_glass"
             blocks=chunkmap[(x//16,z//16)]
             if (x,y,z) not in blocks:blocks[(x,y,z)]=marker;markers+=1
+        tree_trunks=0
+        tree_leaves=0
+        bush_blocks=0
+        tree_conflicts=0
+        leaf_clipped=0
+        valid_tree_locations={}
+        for item in tree_records:
+            lx,lz=item["local_x"],item["local_y"]
+            location=(lx,lz)
+            base=floor.get(location)
+            if base is None or base[1]!="blends_natural_01" or location in crop_points:
+                tree_conflicts+=1
+                continue
+            x,z=item["x"],item["z"]
+            if (x,65,z) in chunkmap[(x//16,z//16)]:
+                tree_conflicts+=1
+                continue
+            sprite=int(item["source_key"].split("/")[-1])
+            height=5 if sprite==10 else 7
+            valid_tree_locations[location]=(height,x,z)
+        # Write trunks first so leaves from neighboring trees cannot overwrite them.
+        for (lx,lz),(height,x,z) in sorted(valid_tree_locations.items()):
+            for j in range(height):
+                p=(x,65+j,z)
+                if p not in chunkmap[(x//16,z//16)]:
+                    chunkmap[(x//16,z//16)][p]="minecraft:spruce_log"
+                    tree_trunks+=1
+        for (lx,lz),(height,x,z) in sorted(valid_tree_locations.items()):
+            for y_offset in range(1,height+1):
+                if y_offset==height:radius=0
+                elif y_offset>=height-2:radius=1
+                else:radius=2 if y_offset%2==0 else 1
+                for dx in range(-radius,radius+1):
+                    for dz in range(-radius,radius+1):
+                        if radius and abs(dx)==radius and abs(dz)==radius:continue
+                        tx,tz=x+dx,z+dz
+                        txlocal,tzlocal=lx+dx,lz+dz
+                        ground=floor.get((txlocal,tzlocal))
+                        # Respect map boundary, roads, indoor floors and wheat fields.
+                        if ground is None or ground[1]!="blends_natural_01" or (txlocal,tzlocal) in crop_points:
+                            leaf_clipped+=1
+                            continue
+                        p=(tx,65+y_offset,tz)
+                        chunk_blocks=chunkmap[(tx//16,tz//16)]
+                        if p not in chunk_blocks:
+                            chunk_blocks[p]="minecraft:spruce_leaves[persistent=true]"
+                            tree_leaves+=1
+        for item in shrub_records:
+            lx,lz=item["local_x"],item["local_y"]
+            ground=floor.get((lx,lz))
+            if ground is None or ground[1]!="blends_natural_01" or (lx,lz) in crop_points:
+                continue
+            x,z=item["x"],item["z"]
+            p=(x,65,z)
+            blocks=chunkmap[(x//16,z//16)]
+            if p not in blocks:
+                blocks[p]="minecraft:oak_leaves[persistent=true]"
+                bush_blocks+=1
         groups=collections.defaultdict(dict)
         for (cx,cz),blocks in sorted(chunkmap.items()):
             groups[(cx//32,cz//32)][cx,cz]=chunk(cx,cz,blocks,args.data_version)
@@ -306,6 +378,8 @@ def execute(args):
             region_merge(world/"region"/("r."+str(rx)+"."+str(rz)+".mca"),chunks)
         blocked={(x["local_x"],x["local_y"]) for x in furniture}
         blocked.update(crop_points)
+        blocked.update(valid_tree_locations)
+        blocked.update((r["local_x"],r["local_y"]) for r in shrub_records)
         walkable=[c for c in floor if c not in blocked]
         if not walkable:raise ValueError("Cannot find safe spawn")
         lx,lz=min(walkable,key=lambda p:(p[0]-128)**2+(p[1]-128)**2)
@@ -316,10 +390,15 @@ def execute(args):
                 if path.is_file():zf.write(path,world.name+"/"+str(path.relative_to(world)))
         report.update({"world_archive":str(archive.name),"chunks":len(chunkmap),
                        "placeholder_parts":markers,"crop_blocks":sum(crop_counts.values()),
+                       "tree_trunk_blocks":tree_trunks,
+                       "tree_leaves_blocks":tree_leaves,
+                       "shrub_blocks":bush_blocks,
+                       "tree_conflicts":tree_conflicts,
+                       "clipped_leaves":leaf_clipped,
                        "data_version":args.data_version})
     (out/"report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps({k:v for k,v in report.items() if k in
-        ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts","crop_blocks","world_archive")},indent=2))
+        ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts","crop_blocks","tree_trunk_blocks","shrub_blocks","world_archive")},indent=2))
 
 def main():
     p=argparse.ArgumentParser()
