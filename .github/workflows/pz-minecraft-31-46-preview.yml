@@ -5,6 +5,8 @@ on:
       - work/minecraft-31-46-preview-20261108
     paths:
       - minecraft_converter/converter.py
+      - minecraft_converter/floor_stair_stage.py
+      - minecraft_converter/tests/test_floor_stair_stage.py
       - minecraft_converter/tile_visual_audit.py
       - minecraft_converter/README.md
       - .github/workflows/pz-minecraft-31-46-preview.yml
@@ -42,7 +44,8 @@ jobs:
       - name: Verify Python and source files
         run: |
           python --version
-          python -m py_compile minecraft_converter/converter.py
+          python -m py_compile minecraft_converter/converter.py minecraft_converter/floor_stair_stage.py
+          python -m unittest discover -s minecraft_converter/tests -v
           test -s B4220.3_MapExport_256/tmx/31_46.tmx
           test -s B4220.3_MapExport_256/Kentucky.pzw
           test -s floorplan/current/v259_floorplan.html
@@ -75,6 +78,15 @@ jobs:
           assert d["placed_tiles"] == 131341, d["placed_tiles"]
           assert d["floor_cells"] == 65536, d["floor_cells"]
           assert d["chunks"] == 256, d["chunks"]
+          stage=json.loads((out/"floor_stair_audit.json").read_text())
+          assert stage["confirmed_upper_lower_floor_total"] == 0, stage
+          assert stage["stair_sprite_parts"] == 0, stage
+          assert stage["nonfloor_tiles_by_level"]["1"]["ceiling"] == 546, stage
+          assert len(stage["basement_metadata_objects"]) == 1, stage
+          assert stage["basement_metadata_objects"][0]["stair_hint_global"]["direction"] == "W"
+          assert d["confirmed_upper_lower_floor_blocks"] == 0, d
+          assert d["source_stair_parts"] == 0, d
+          assert d["pzw_basement_regions"] == 1, d
           assert d["verified_crop_positions"] == {"ripe_wheat":17571,"dry_stalk":7034}
           assert d["crop_blocks"] == 24605
           assert d["verified_small_tree_sprites"] == 172
@@ -98,6 +110,7 @@ jobs:
           path: |
             minecraft_converter/output/31_46_preview_world.zip
             minecraft_converter/output/report.json
+            minecraft_converter/output/floor_stair_audit.json
             minecraft_converter/output/edges.json
             minecraft_converter/output/warnings.csv
             minecraft_converter/output/source_placements.jsonl.gz
@@ -109,6 +122,7 @@ jobs:
           mkdir -p minecraft_converter/previews
           cp minecraft_converter/output/31_46_preview_world.zip minecraft_converter/previews/31_46_preview_world.zip
           cp minecraft_converter/output/report.json minecraft_converter/previews/31_46_report.json
+          cp minecraft_converter/output/floor_stair_audit.json minecraft_converter/previews/31_46_floor_stair_audit.json
           cp minecraft_converter/output/warnings.csv minecraft_converter/previews/31_46_warnings.csv
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
