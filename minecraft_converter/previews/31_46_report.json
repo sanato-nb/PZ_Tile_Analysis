@@ -147,10 +147,21 @@
     "floors_interior_tilesandwood_01": "minecraft:oak_planks",
     "floors_interior_carpet_01": "minecraft:light_gray_wool"
   },
+  "road_terrain_stage": {
+    "source": {
+      "curb_cells": 93,
+      "lane_cells": 695,
+      "low_vegetation_eligible_cells": 12754,
+      "low_vegetation_source_records": 12754,
+      "road_source_records": 865,
+      "road_unique_cells": 788
+    }
+  },
   "limitations": [
     "Preview floor families are not certified sprite-level identities",
     "Furniture model grouping not inferred from per-part matches",
-    "Water, road markings, multi-floor floors, stairs, unidentified jumbo trees and walls retained but not generated",
+    "Water, exact road-marking contours, multi-floor floors, stairs, unidentified jumbo trees and walls remain unverified",
+    "World-local road texture pack is a top-down 1.20.1 preview; vanilla fallback blocks remain visible without it",
     "This is a disposable Java preview, not the final mod/loader version"
   ],
   "world_archive": "31_46_preview_world.zip",
@@ -163,6 +174,15 @@
   "tree_trunk_blocks": 1122,
   "tree_leaves_blocks": 6130,
   "shrub_blocks": 261,
+  "road_marked_blocks": 788,
+  "low_vegetation_blocks": 12754,
+  "low_vegetation_counts": {
+    "dry_grass": 1485,
+    "green_grass": 10336,
+    "groundcover": 933
+  },
+  "low_vegetation_skipped_occupied": 0,
+  "world_local_road_resource_pack": "resources.zip",
   "tree_conflicts": 0,
   "clipped_leaves": 193,
   "data_version": 3465
