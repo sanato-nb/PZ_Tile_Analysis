@@ -1,5 +1,8 @@
 # PZ B42 → Minecraft 맵 변환: 작업 안내 (2026-11-09)
 
+> **31_45 신규 지형 전용 프리뷰:** [TERRAIN_ONLY_31_45_KO.md](TERRAIN_ONLY_31_45_KO.md)에서 가구/벽/전봇대 등 오브젝트 제외 규칙과 실제 검증 범위를 확인. `--terrain-only`를 사용하고 `31_46` 결과는 유지한다.
+
+
 > **31_45 추가 시범 월드 (별도 브랜치):** [31_45 작업 상태](31_45_STATUS_KO.md) · [31_45 Java 월드 ZIP](previews/31_45_preview_world.zip) · [GitHub Actions #42568702826](https://github.com/sanato-nb/PZ_Tile_Analysis/actions/runs/42568702826). 본 브랜치의 31_45 결과는 기존 31_46 결과와 분리하여 보존한다.
 
 

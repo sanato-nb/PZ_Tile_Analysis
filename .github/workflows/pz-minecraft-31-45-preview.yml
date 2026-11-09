@@ -62,7 +62,7 @@ jobs:
             --pzw B4220.3_MapExport_256/Kentucky.pzw \
             --v259-html floorplan/current/v259_floorplan.html \
             --output minecraft_converter/output_31_45 \
-            --preview-world --data-version 3465
+            --preview-world --terrain-only --data-version 3465
       - name: Verify original counts, basement construction and independent preview ZIP
         run: |
           python - <<'PY'
@@ -79,6 +79,13 @@ jobs:
           assert report["placed_tiles"]==170836, report["placed_tiles"]
           assert report["floor_cells"]==65536, report["floor_cells"]
           assert report["chunks"]==256, report["chunks"]
+          assert report["preview_scope"]=="terrain_floors_trees_vegetation",report
+          assert report["placeholder_parts"]==0,report
+          assert report["object_blocks_generated"]==0,report
+          assert report["furniture_source_parts"]>0,"source furniture metadata missing"
+          assert len(report["excluded_physical_objects"])>=10,report
+          assert "power_poles" in report["excluded_physical_objects"]
+          assert "walls" in report["excluded_physical_objects"]
           assert report["global_origin"]=={"x":7936,"z":11520},report["global_origin"]
           assert report["confirmed_upper_lower_floor_blocks"]>10000,report
           assert report["generated_negative_floor_blocks"]>1000,report
@@ -100,14 +107,42 @@ jobs:
                   assert pack.testzip() is None
                   assert json.loads(pack.read("pack.mcmeta"))["pack"]["pack_format"]==15
                   assert len(pack.namelist())==11
+          # Read every actual Anvil chunk in the ZIP. All physically written
+          # palette block names must belong to the terrain/floor/plant whitelist,
+          # not furniture, wall, door, light, car or electric-pole blocks.
+          import sys
+          sys.path.insert(0,str(Path("minecraft_converter").resolve()))
+          from converter import terrain_only_material
+          import re, struct, zlib
+          actual_chunks=0
+          with zipfile.ZipFile(archive) as z:
+              for name in z.namelist():
+                  if not name.endswith(".mca"):continue
+                  raw=z.read(name)
+                  for slot in range(1024):
+                      ent=int.from_bytes(raw[4*slot:4*slot+4],"big")
+                      sector,count=ent>>8,ent&255
+                      if not sector:continue
+                      assert count>=1
+                      off=sector*4096
+                      length=struct.unpack_from(">I",raw,off)[0]
+                      assert raw[off+4]==2, "Unsupported chunk compression"
+                      nbt=zlib.decompress(raw[off+5:off+4+length])
+                      actual_chunks+=1
+                      for found in re.findall(b"minecraft:[a-z0-9_]+",nbt):
+                          value=found.decode("ascii")
+                          if value=="minecraft:plains" or value=="minecraft:full":
+                              continue
+                          assert terrain_only_material(value),(name,slot,value)
+          assert actual_chunks==256,actual_chunks
           assert not (out/"31_46_preview_world.zip").exists()
           print("PASS 31_45 source=",report["sha256"])
-          print("PASS 31_45 real world: 256 Anvil chunks, negative/upper floors, road/plant preview, ZIP")
+          print("PASS 31_45 terrain-only: 256 Anvil chunks, ZERO furniture/wall/pole objects, all serialized palettes allowlisted")
           PY
       - name: Archive 31_45 test results and full original source placement log
         uses: actions/upload-artifact@v4
         with:
-          name: pz-b42-31-45-preview-and-audit
+          name: pz-b42-31-45-terrain-only-preview-and-audit
           path: |
             minecraft_converter/output_31_45/31_45_preview_world.zip
             minecraft_converter/output_31_45/report.json
@@ -133,6 +168,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add minecraft_converter/previews/31_45_*
           if ! git diff --cached --quiet; then
-            git commit -m "31_45 실제 Java 월드 ZIP과 원본 감사 기록 보존"
+            git commit -m "31_45 바닥·층·나무·식생 전용 월드 ZIP과 감사 기록 보존"
             git push origin HEAD:work/minecraft-31-45-preview-20261109
           fi

@@ -74,6 +74,44 @@ def surface_block(key,family):
         if 64<=ix<=87:return "minecraft:gray_concrete" # asphalt
     return SURFACE.get(family,"minecraft:magenta_concrete")
 
+# Only material categories allowed to create physical blocks in terrain-only
+# mode. Every other source tile is archived but not rendered.
+TERRAIN_ONLY_MATERIALS = frozenset({
+    "air", "dirt", "stone", "grass_block", "moss_block", "podzol",
+    "coarse_dirt", "gravel", "andesite", "polished_andesite",
+    "smooth_stone", "smooth_sandstone", "stone_bricks", "bricks",
+    "farmland", "polished_diorite", "oak_planks", "birch_planks",
+    "spruce_planks", "dark_oak_planks", "gray_concrete",
+    "light_gray_concrete", "white_concrete", "yellow_concrete",
+    "orange_concrete", "brown_concrete", "white_terracotta",
+    "light_gray_terracotta", "yellow_terracotta", "orange_terracotta",
+    "brown_terracotta", "red_wool", "black_wool", "yellow_wool",
+    "brown_wool", "gray_wool", "blue_wool", "green_wool",
+    "white_wool", "light_gray_wool", "wheat", "dead_bush",
+    "grass", "spruce_log", "spruce_leaves", "oak_leaves",
+})
+
+def terrain_only_material(material):
+    """Reject any physical block not belonging to ground, floor, or vegetation."""
+    base=material.split("[",1)[0]
+    return base.startswith("minecraft:") and base[10:] in TERRAIN_ONLY_MATERIALS
+
+def enforce_terrain_only_world(chunkmap):
+    """Check the actual block grid before Anvil serialization.
+
+    Tests and CI also inspect the saved world ZIP, so a later regression
+    cannot silently add furniture, walls, power poles or other fixtures.
+    """
+    invalid=collections.Counter()
+    for blocks in chunkmap.values():
+        for state in blocks.values():
+            if not terrain_only_material(state):
+                invalid[state]+=1
+    if invalid:
+        sample=sorted(invalid.items(),key=lambda p:(-p[1],p[0]))[:8]
+        raise ValueError("Terrain-only preview contains non-terrain blocks: "+str(sample))
+    return True
+
 def crop_kind(key):
     if not key.startswith("vegetation_farm_01/"):return None
     ix=int(key.split("/")[-1])
@@ -363,6 +401,12 @@ def execute(args):
           "Water, exact road-marking contours, multi-floor floors, stairs, unidentified jumbo trees and walls remain unverified",
           "World-local road texture pack is a top-down 1.20.1 preview; vanilla fallback blocks remain visible without it",
           "This is a disposable Java preview, not the final mod/loader version"]}
+    report["preview_scope"] = ("terrain_floors_trees_vegetation" if args.terrain_only
+                               else "legacy_with_furniture_placeholders")
+    report["excluded_physical_objects"] = ([
+        "furniture", "appliances", "walls", "doors", "windows", "roofs",
+        "power_poles", "street_furniture", "cars", "stairs",
+        "lighting", "fences", "railings"] if args.terrain_only else [])
     if args.preview_world:
         # Java 1.20.1 disposable compatibility target ONLY. No final version selected.
         world=out/(args.tmx.stem+"_preview_world")
@@ -370,6 +414,12 @@ def execute(args):
         for (lx,lz),(key,family) in floor.items():
             x,z=gx+lx,gz+lz
             top=surface_block(key,family)
+            # Generic family-shaped decorations in Floor are not safe ground
+            # material identities. Preserve all such keys in the source log,
+            # but use a neutral *surface* placeholder in the terrain preview,
+            # never a magenta "unconverted object" marker.
+            if args.terrain_only and top=="minecraft:magenta_concrete":
+                top="minecraft:light_gray_concrete"
             crop=crop_points.get((lx,lz))
             if crop=="ripe_wheat":
                 top="minecraft:farmland[moisture=7]"
@@ -399,8 +449,11 @@ def execute(args):
                     raise ValueError("Basement floor intersects non-default structure")
             elif (x,floor_y,z) in blocks and blocks[(x,floor_y,z)] != "minecraft:air":
                 raise ValueError("Confirmed structural floors collide with existing blocks")
-            blocks[(x,floor_y,z)]=surface_block(
+            source_mat=surface_block(
                 r["source_key"],r["source_key"].split("/")[0])
+            if args.terrain_only and source_mat=="minecraft:magenta_concrete":
+                source_mat="minecraft:light_gray_concrete"
+            blocks[(x,floor_y,z)]=source_mat
             additional_floor_blocks+=1
         # Road paint replaces ONLY the Level-0 ground Y=64 block, so the
         # roadway remains flush. World-local resources.zip paints thin lines
@@ -411,15 +464,22 @@ def execute(args):
             chunkmap[(x//16,z//16)][x,64,z]=block
             road_marked_blocks+=1
         write_world_road_resource_pack(world)
+        # Furniture/appliances and all other man-made objects remain only in
+        # the original lossless source log and furniture_parts.json.
+        # Terrain-only output deliberately places ZERO object markers.
         markers=0
-        for item in furniture:
-            if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
-            x,z,y=item["x"],item["z"],item["floor_y"]+1
-            if not (-64<=y<=319):continue
-            solid=str(item["tile_properties"].get("solid","")).lower()
-            marker="minecraft:light_blue_carpet" if solid in ("false","0","no") else "minecraft:light_blue_stained_glass"
-            blocks=chunkmap[(x//16,z//16)]
-            if (x,y,z) not in blocks:blocks[(x,y,z)]=marker;markers+=1
+        if not args.terrain_only:
+            for item in furniture:
+                if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
+                x,z,y=item["x"],item["z"],item["floor_y"]+1
+                if not (-64<=y<=319):continue
+                solid=str(item["tile_properties"].get("solid","")).lower()
+                marker=("minecraft:light_blue_carpet" if solid in ("false","0","no")
+                        else "minecraft:light_blue_stained_glass")
+                blocks=chunkmap[(x//16,z//16)]
+                if (x,y,z) not in blocks:
+                    blocks[(x,y,z)]=marker
+                    markers+=1
         tree_trunks=0
         tree_leaves=0
         bush_blocks=0
@@ -491,12 +551,15 @@ def execute(args):
                 continue
             dest[pos]=block
             small_plant_counts[kind]+=1
+        if args.terrain_only:
+            enforce_terrain_only_world(chunkmap)
         groups=collections.defaultdict(dict)
         for (cx,cz),blocks in sorted(chunkmap.items()):
             groups[(cx//32,cz//32)][cx,cz]=chunk(cx,cz,blocks,args.data_version)
         for (rx,rz),chunks in groups.items():
             region_merge(world/"region"/("r."+str(rx)+"."+str(rz)+".mca"),chunks)
-        blocked={(x["local_x"],x["local_y"]) for x in furniture}
+        blocked=({(x["local_x"],x["local_y"]) for x in furniture}
+                 if not args.terrain_only else set())
         blocked.update(crop_points)
         blocked.update(valid_tree_locations)
         blocked.update((r["local_x"],r["local_y"]) for r in shrub_records)
@@ -511,6 +574,7 @@ def execute(args):
                 if path.is_file():zf.write(path,world.name+"/"+str(path.relative_to(world)))
         report.update({"world_archive":str(archive.name),"chunks":len(chunkmap),
                        "placeholder_parts":markers,
+                       "object_blocks_generated":markers,
                        "confirmed_upper_lower_floor_blocks":additional_floor_blocks,
                        "generated_negative_floor_blocks":negative_floor_evidence,
                        "source_stair_parts":len(structures["source_stair_parts"]),
@@ -562,5 +626,7 @@ def main():
     p.add_argument("--seed",type=int,default=310046)
     p.add_argument("--data-version",type=int,default=3465)
     p.add_argument("--preview-world",action="store_true")
+    p.add_argument("--terrain-only",action="store_true",
+                   help="Only build base ground, source-backed floors, roads, crops, trees and low vegetation; no furniture/structure object markers")
     execute(p.parse_args())
 if __name__=="__main__":main()
