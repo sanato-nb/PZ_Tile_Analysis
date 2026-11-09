@@ -39,6 +39,9 @@
 - `previews/31_46_report.json`: 실측 기반 결과
 - `previews/31_46_floor_stair_audit.json`: 계단·위층/지하실 근거
 - `previews/31_46_warnings.csv`: 미확정 매핑
+- `previews/31_46_source_placements.jsonl.gz`: 전체 원본 배치 기록 (GitHub에 지속 보존)
+- `previews/31_46_edges.json`: 인접 구역 경계 메타데이터
+- `previews/31_46_furniture_parts.json`: 가구/가전 관련 타일 부품 후보
 - `previews/stairs_3plus1_walkability_demo.zip`: **합성 계단** 실험
 - `31_46_source_audit.json`: 원본 감사
 - `converter.py`, `floor_stair_stage.py`, `tests/test_floor_stair_stage.py`: 코드/테스트
