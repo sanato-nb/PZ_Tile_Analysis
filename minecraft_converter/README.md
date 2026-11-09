@@ -44,6 +44,10 @@ The final game version and mod loader are still undecided.
 * edges.json — four boundary strips, for future neighboring TMX comparison.
 * warnings.csv — unresolved ground identities and ambiguous furniture candidates.
 
+The latest preview ZIP, compressed full source-placement record, furniture-parts
+JSON, and boundary edges JSON are also committed to `previews/` on the work
+branch (not only held as expiring Actions artifacts).
+
 The GitHub Actions workflow pz-minecraft-31-46-preview.yml validates
 the original tile counts, 256 chunks, and ZIP contents, then uploads the result.
 
