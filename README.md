@@ -1,5 +1,7 @@
 # 프로젝트 좀보이드 B42 → Minecraft 맵 변환을 위한 타일 분석
 
+> **Minecraft 실제 월드 변환 작업 (2026-11-09):** [작업 안내](minecraft_converter/INDEX_KO.md) · [검수용 월드](minecraft_converter/previews/31_46_preview_world.zip) · [상세 인수인계](minecraft_converter/HANDOFF_2026-11-09_KO.md) · [새 채팅 시작 프롬프트](minecraft_converter/NEXT_CHAT_PROMPT_KO.txt) · [Draft PR #322](https://github.com/sanato-nb/PZ_Tile_Analysis/pull/322). `31_46.tmx` 실제 256청크 임시 Java 월드를 생성했으며 **완성본은 아님**. 타일 분석 v258/v259와 월드 변환 결과는 별도 진행 상태로 관리한다.
+
 **최신 2D 평면도 엔진은 v259이며 통합 DB는 v258이다.** [v259 평면도 HTML](floorplan/current/v259_floorplan.html) · [사용법과 재생성 방법](floorplan/v259/README.md). HTML을 다운로드해 Chrome 또는 Edge에서 열고 **실제 맵 31_46 열기**를 선택하면 내장 지도를 볼 수 있다.
 
 **최신 통합 DB · v258 (2026-11-06)**　[복원 및 조회](analysis/current/v258/README.md) · [검증 기록](analysis/current/v258/MANIFEST.json). v257 타일 10,042종과 가구 후보 2,197개를 한 SQLite에서 조회할 수 있다.
