@@ -1,8 +1,8 @@
 # Project Zomboid B42 → Minecraft: 31_46 preview converter
 
-**Status: first real-file preview, NOT a completed reconstruction.**
-The source geometry is real. Preview floor materials are provisional family-level
-colors, not verified per-sprite identities. Do not merge with a playthrough save.
+**Status: photo-audited farm/vegetation preview, NOT a completed reconstruction.**
+The source geometry is real. Several frequently used terrain/crop indices are now matched against the actual PNG atlas;
+other floor families remain provisional, not certified per-sprite mappings. Do not merge with a playthrough save.
 
 ## Verified original
 
@@ -47,14 +47,18 @@ the original tile counts, 256 chunks, and ZIP contents, then uploads the result.
 
 Verified global coordinates, original TMX CSV layer parsing, lossless placement
 logging, v259 candidate metadata, conservative Level 0 surface preview,
-2 dirt + 5 stone below surface, family-whitelisted furniture placeholders,
+2 dirt + 5 stone below surface, visually verified dirt/furrow/green terrain indices,
+17,571 mature wheat plants and 7,034 dry stalks at their original source coordinates,
+172 conifer sprites converted to vanilla spruce and 261 shrubs rendered with vanilla leaves,
+road/field boundary leaf clipping, family-whitelisted furniture placeholders,
 void world / plains biome / fixed daytime / clear weather / creative mode /
 disabled natural mob spawning, and real Java Anvil chunks.
 
 ## Still deferred, NOT presented as complete
 
-Original sprite-level material certification; water and underwater geometry;
-road textures; trees, farmland and vegetation shapes; verified upper-floor
+Full original sprite-level material certification; water and underwater geometry;
+road textures; 45 unverified jumbo tree sprites (missing source PNG);
+fully modeled trees/crops; verified upper-floor
 surfaces and walkable stairs; exact full-model furniture instance matching;
 collision model geometry; review-map UI; chunk checkpoints; protected world
 replacement; in-game launch verification.
@@ -67,3 +71,24 @@ furniture markers. Every excluded record is still in the source archive.
 
 This work is isolated on branch work/minecraft-31-46-preview-20261108.
 Neither original TMX/PZW data nor the v259 source is modified.
+
+## Screenshot comparison correction (2026-11-09)
+
+The first preview had mapped the entire blends_natural_01 family to grass,
+erasing large brown plowed fields and golden wheat fields seen in the TileZed
+screenshot. Inspecting the repository's original 2x PNG atlases established:
+
+* blends_natural_01/16–23: green ground; /32–39: dark green ground;
+  /48–55: dried yellow/olive ground; /64–71: exposed soil;
+  /80–87: cultivated furrowed soil.
+* vegetation_farm_01/0–5: mature wheat, 17,571 unique Level-0 coordinates;
+  /32–39: dried stalks, 7,034 unique Level-0 coordinates.
+* vegetation_trees_01/8–11: conifers, 172 placements; vegetation_foliage_01/8–14:
+  shrubs, 261 placements. Canopies are clipped at mapped roads/buildings/crops.
+* jumbo_tree_01 has 45 occurrences but the corresponding source PNG has not
+  been verified in the stored tiles, so models are intentionally deferred.
+
+Vanilla Java crops and foliage are **visual proxies**, not exact imported
+Zomboid models. randomTickSpeed is disabled to keep the preview stable.
+The changes to surface mapping and world generation are automatically exercised
+by the GitHub Actions workflow; a Minecraft client gameplay test is still needed.
