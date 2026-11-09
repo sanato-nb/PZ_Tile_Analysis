@@ -132,6 +132,9 @@
     "dry_stalk": 7034,
     "ripe_wheat": 17571
   },
+  "verified_small_tree_sprites": 172,
+  "verified_shrub_sprites": 261,
+  "jumbo_tree_unrendered": 45,
   "preview_materials": {
     "blends_natural_01": "minecraft:grass_block",
     "blends_street_01": "minecraft:gray_concrete",
@@ -142,12 +145,17 @@
   "limitations": [
     "Preview floor families are not certified sprite-level identities",
     "Furniture model grouping not inferred from per-part matches",
-    "Water, road markings, multi-floor floors, stairs, trees and walls retained but not generated",
+    "Water, road markings, multi-floor floors, stairs, unidentified jumbo trees and walls retained but not generated",
     "This is a disposable Java preview, not the final mod/loader version"
   ],
   "world_archive": "31_46_preview_world.zip",
   "chunks": 256,
   "placeholder_parts": 133,
   "crop_blocks": 24605,
+  "tree_trunk_blocks": 1122,
+  "tree_leaves_blocks": 6130,
+  "shrub_blocks": 261,
+  "tree_conflicts": 0,
+  "clipped_leaves": 193,
   "data_version": 3465
 }
