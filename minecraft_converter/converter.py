@@ -6,6 +6,7 @@ Original map and v259 are read-only. Every nonzero source tile is preserved.
 import argparse, base64, bisect, collections, csv, gzip, hashlib, json, re, shutil, struct, zipfile, zlib
 from pathlib import Path
 import xml.etree.ElementTree as ET
+from floor_stair_stage import audit_source_floors, audit_pzw_basements, BASE_FLOOR_Y, LEVEL_HEIGHT
 
 SURFACE={
  "blends_natural_01":"minecraft:grass_block",
@@ -19,6 +20,17 @@ SURFACE={
 # and vegetation_farm_01.png, not inferred from tileset names.
 def surface_block(key,family):
     ix=int(key.split("/")[-1])
+    # Source tile PNG was examined for these exact IDs. Preview vanilla materials.
+    if family=="floors_interior_tilesandwood_01":
+        if ix==5:return "minecraft:polished_diorite"  # white checkered
+        if ix==12:return "minecraft:smooth_sandstone"  # pale tiled
+        if ix==41:return "minecraft:dark_oak_planks"
+        if ix==42:return "minecraft:birch_planks"
+        if ix==43:return "minecraft:spruce_planks"
+        if ix==50:return "minecraft:oak_planks"
+    if family=="floors_interior_carpet_01":
+        if ix==2:return "minecraft:gray_wool"
+        if ix==47:return "minecraft:brown_wool"
     if family=="blends_natural_01":
         if 16<=ix<=23:return "minecraft:grass_block"
         if 32<=ix<=39:return "minecraft:moss_block"  # darker green ground
@@ -235,6 +247,25 @@ def execute(args):
     gx,gz,cell=original_origin(args.pzw,args.tmx.name)
     catalog=load_v259(args.v259_html)
     raw,tilesets,records,layers,floor,furniture,warnings=parse_tmx(args.tmx,gx,gz,catalog)
+    structures=audit_source_floors(records)
+    basements=audit_pzw_basements(args.pzw,cell["x"],cell["y"],gx,gz)
+    # Only source-confirmed floors become physical blocks. In this sample,
+    # Levels 1–6 are roofs/ceiling/tower/tank pieces, NOT second stories.
+    structure_audit={
+       **structures["audit"],
+       "level0_original_floor_count":len(floor),
+       "basement_metadata_objects":basements,
+       "basement_physical_floor_generated":0,
+       "converted_stair_runs":0,
+       "stair_action":"No fixture stair sprites or connected source-backed upper landing; build none",
+       "unresolved_geometry":[
+        "PZW basement zone is not a rendered underground TMX floor",
+        "Upper-level ceiling/roof tiles do not authorize walkable floors",
+        "Stairwell headroom requires a verified connected pair of floor levels",
+       ],
+    }
+    (out/"floor_stair_audit.json").write_text(
+        json.dumps(structure_audit,ensure_ascii=False,indent=2),encoding="utf-8")
     crop_points={}
     for rec in records:
         if rec["level"]!=0:continue
@@ -275,6 +306,10 @@ def execute(args):
        "tileset_count":len(tilesets),"layers":layers,
        "placed_tiles":len(records),"floor_cells":len(floor),
        "furniture_source_parts":len(furniture),"warnings":len(warnings),
+       "floor_stair_stage":{"confirmed_upper_lower_floor_positions":
+          structures["audit"]["confirmed_upper_lower_floor_total"],
+          "physical_stair_sprite_parts":len(structures["source_stair_parts"]),
+          "pzw_basement_metadata_regions":len(basements)},
        "verified_crop_positions":crop_counts,
        "verified_small_tree_sprites":len(tree_records),
        "verified_shrub_sprites":len(shrub_records),
@@ -304,6 +339,22 @@ def execute(args):
                 chunkmap[(x//16,z//16)][x,65,z]="minecraft:wheat[age=7]"
             elif crop=="dry_stalk":
                 chunkmap[(x//16,z//16)][x,65,z]="minecraft:dead_bush"
+        additional_floor_blocks=0
+        for (level,x,z),r in sorted(structures["floors"].items()):
+            floor_y=BASE_FLOOR_Y+LEVEL_HEIGHT*level
+            if not -64<=floor_y<=319:
+                raise ValueError("Floor beyond Minecraft build height")
+            blocks=chunkmap[(x//16,z//16)]
+            if level<0:
+                # Preserve the original underground space instead of filling
+                # two dirt + five stone blocks through confirmed basement cells.
+                for clear_y in range(floor_y+1,min(floor_y+4,64)):
+                    blocks.pop((x,clear_y,z),None)
+            if (x,floor_y,z) in blocks and blocks[(x,floor_y,z)]!= "minecraft:air":
+                raise ValueError("Confirmed structural floors collide with existing blocks")
+            blocks[(x,floor_y,z)]=surface_block(
+                r["source_key"],r["source_key"].split("/")[0])
+            additional_floor_blocks+=1
         markers=0
         for item in furniture:
             if item["layer"]=="Floor" or len(item["candidate_ids"])!=1:continue
@@ -389,7 +440,11 @@ def execute(args):
             for path in sorted(world.rglob("*")):
                 if path.is_file():zf.write(path,world.name+"/"+str(path.relative_to(world)))
         report.update({"world_archive":str(archive.name),"chunks":len(chunkmap),
-                       "placeholder_parts":markers,"crop_blocks":sum(crop_counts.values()),
+                       "placeholder_parts":markers,
+                       "confirmed_upper_lower_floor_blocks":additional_floor_blocks,
+                       "source_stair_parts":len(structures["source_stair_parts"]),
+                       "pzw_basement_regions":len(basements),
+                       "crop_blocks":sum(crop_counts.values()),
                        "tree_trunk_blocks":tree_trunks,
                        "tree_leaves_blocks":tree_leaves,
                        "shrub_blocks":bush_blocks,
@@ -398,7 +453,9 @@ def execute(args):
                        "data_version":args.data_version})
     (out/"report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
     print(json.dumps({k:v for k,v in report.items() if k in
-        ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts","crop_blocks","tree_trunk_blocks","shrub_blocks","world_archive")},indent=2))
+        ("placed_tiles","floor_cells","warnings","chunks","placeholder_parts",
+         "confirmed_upper_lower_floor_blocks","source_stair_parts","pzw_basement_regions",
+         "crop_blocks","tree_trunk_blocks","shrub_blocks","world_archive")},indent=2))
 
 def main():
     p=argparse.ArgumentParser()
